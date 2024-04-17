@@ -138,11 +138,7 @@ namespace Abilities.SecondEdition
                 (
                     HostShip.PilotInfo.PilotName,
                     AlwaysUseByDefault,
-                    delegate
-                    {
-                        DecisionSubPhase.ConfirmDecisionNoCallback();
-                        DoGetFocusTokens(count);
-                    },
+                    delegate { DoGetFocusTokens(count);},
                     showAlwaysUseOption: true,
                     descriptionLong: $"Do you want to get {count} Focus Token(s)?",
                     imageHolder: HostShip,
@@ -154,7 +150,7 @@ namespace Abilities.SecondEdition
         private void DoGetFocusTokens(int count)
         {
             DecisionSubPhase.ConfirmDecisionNoCallback();
-            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} gains {count} Focus Token(s)");
+            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} gains {count} Focus Token{(count > 1 ? "s": "")}");
             HostShip.Tokens.AssignTokens(CreateFocusToken, count, Triggers.FinishTrigger);
         }
 
