@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Upgrade;
-using Ship;
-using System.Linq;
+﻿using BoardTools;
 using Bombs;
 using Obstacles;
-using BoardTools;
+using Ship;
 using SubPhases;
+using System;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -26,6 +23,8 @@ namespace UpgradesList.SecondEdition
                 subType: UpgradeSubType.Bomb,
                 seImageNumber: 67
             );
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/seismiccharges.png";
 
             bombPrefabPath = "Prefabs/Bombs/SeismicCharge";
         }

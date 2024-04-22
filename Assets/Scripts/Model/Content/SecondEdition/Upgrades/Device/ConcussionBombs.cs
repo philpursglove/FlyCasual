@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Bombs;
+using Ship;
+using SubPhases;
+using System;
+using System.Linq;
 using UnityEngine;
 using Upgrade;
-using Ship;
-using System.Linq;
-using Bombs;
-using SubPhases;
 
 namespace UpgradesList.SecondEdition
 {
@@ -21,10 +19,11 @@ namespace UpgradesList.SecondEdition
                 type: UpgradeType.Device,
                 cost: 4,
                 charges: 3,
+                subType: UpgradeSubType.Bomb,
                 abilityType: typeof(Abilities.SecondEdition.ConcussionBombsAbility)
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/00/c6/00c65f3f-e738-4a5d-80a8-6b3aef6e8074/swz71_upgrade_concussion-bomb.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/concussionbombs.png";
 
             bombPrefabPath = "Prefabs/Bombs/ConcussionBomb";
         }

@@ -1,8 +1,6 @@
-﻿using System;
-using ActionsList;
-using Bombs;
-using Ship;
+﻿using Bombs;
 using SubPhases;
+using System;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -16,7 +14,8 @@ namespace UpgradesList.SecondEdition
                 cost: 1,
                 abilityType: typeof(Abilities.SecondEdition.DelayedFusesAbility),
                 seImageNumber: 74);
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/93/70/93702f17-5771-4460-8d22-b99566061306/swz41_delayed-fuses.png";
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/delayedfuses.png";
         }
         
     }
