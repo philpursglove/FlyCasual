@@ -9,3 +9,10 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 129321
+  packageName: Mirror
+  packageVersion: 89.0.0
+  assetPath: Assets/ImportedAssets/Mirror/Transports/Middleware/MiddlewareTransport.cs
+  uploadId: 648641

@@ -5,3 +5,10 @@ TextScriptImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 129321
+  packageName: Mirror
+  packageVersion: 89.0.0
+  assetPath: Assets/ImportedAssets/Mirror/Plugins/Mono.Cecil/License.txt
+  uploadId: 648641

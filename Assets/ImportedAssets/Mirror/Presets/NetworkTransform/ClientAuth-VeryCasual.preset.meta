@@ -6,3 +6,10 @@ NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 129321
+  packageName: Mirror
+  packageVersion: 89.0.0
+  assetPath: Assets/ImportedAssets/Mirror/Presets/NetworkTransform/ClientAuth-VeryCasual.preset
+  uploadId: 648641
