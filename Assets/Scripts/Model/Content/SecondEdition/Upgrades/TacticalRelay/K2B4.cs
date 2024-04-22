@@ -58,7 +58,7 @@ namespace Abilities.SecondEdition
                             ImageUrl = HostUpgrade.ImageUrl,
                             UpgradeSource = HostUpgrade
                         },
-                        HostShip
+                        ship
                     );
                 }
             }
