@@ -16,12 +16,12 @@ namespace UpgradesList.SecondEdition
                 "Beskar Reinforced Plating",
                 UpgradeType.Modification,
                 cost: 3,
+                charges: 2,
                 restriction: new TagRestriction(Tags.Mandalorian),
-                abilityType: typeof(Abilities.SecondEdition.BeskarReinforcedPlatingAbility),
-                charges: 2
+                abilityType: typeof(Abilities.SecondEdition.BeskarReinforcedPlatingAbility)                
             );
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/2/2b/Beskarreinforcedplating.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/beskarreinforcedplating.png";
         }
     }
 }
@@ -43,10 +43,10 @@ namespace Abilities.SecondEdition
         private void RegisterBeskarTrigger(GenericShip ship)
         {
             if (Combat.CurrentCriticalHitCard.IsFaceup
-                && HostShip.State.Charges > 0
+                && this.HostUpgrade.State.Charges > 0
                 && IsFaceToFaceDefense())
             {
-                RegisterAbilityTrigger(TriggerTypes.OnDamageCardIsDealt, AskUseChewbaccaAbility);
+                RegisterAbilityTrigger(TriggerTypes.OnDamageCardIsDealt, AskUseBeskarReinforcedPlatingAbility);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Abilities.SecondEdition
             return shotInfo.InArcByType(ArcType.Front);
         }
 
-        private void AskUseChewbaccaAbility(object sender, System.EventArgs e)
+        private void AskUseBeskarReinforcedPlatingAbility(object sender, System.EventArgs e)
         {
             BeskarDecisionSubPhase subphase = Phases.StartTemporarySubPhaseNew<BeskarDecisionSubPhase>("Beskar Decision Subphase", Triggers.FinishTrigger);
 
