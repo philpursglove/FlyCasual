@@ -46,7 +46,7 @@ namespace Ship
                     "Red",
                     new Vector3(-3.62f, 7.62f, 5.55f),
                     1.5f,
-                    wingsPositions: WingsPositions.Opened
+                    wingsPositions: WingsPositions.Closed
                 );
 
                 DialInfo = new ShipDialInfo
