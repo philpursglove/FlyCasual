@@ -54,7 +54,7 @@ namespace Abilities.SecondEdition
 
                 ShotInfo shotInfo = new ShotInfo(Combat.Defender, anotherFriendlyShip, Combat.Defender.PrimaryWeapons);
                 DistanceInfo distanceInfo = new DistanceInfo(HostShip, Combat.Defender);
-                if (shotInfo.InArc && distanceInfo.Range > 0)
+                if (shotInfo.InArc && distanceInfo.Range > 0 && Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon)
                 {
                     WedgeAntillesCondition condition = new WedgeAntillesCondition(Combat.Defender, HostShip);
                     Combat.Defender.Tokens.AssignCondition(condition);
