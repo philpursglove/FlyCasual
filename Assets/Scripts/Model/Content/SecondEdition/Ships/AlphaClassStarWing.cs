@@ -32,8 +32,7 @@ namespace Ship
                         new ActionInfo(typeof(SlamAction)),
                         new ActionInfo(typeof(ReloadAction))
                     ),
-                    new ShipUpgradesInfo(),
-                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal }
+                    new ShipUpgradesInfo()
                 );
 
                 ModelInfo = new ShipModelInfo(
