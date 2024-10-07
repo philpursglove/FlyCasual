@@ -58,7 +58,9 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship)
         {
-            if (ship.AssignedManeuver.GrantedBy == "Ailerons")
+            if (ship.AssignedManeuver.GrantedBy == "Ailerons" &&
+                !ship.IsBumped &&
+                !ship.IsLandedOnObstacle)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, AskToPerformCoordinate);
             }
