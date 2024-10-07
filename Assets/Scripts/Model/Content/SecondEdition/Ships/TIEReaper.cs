@@ -10,6 +10,7 @@ using Ship;
 using Tokens;
 using System.Linq;
 using SubPhases;
+using UnityEngine;
 
 namespace Ship
 {
@@ -103,6 +104,7 @@ namespace Abilities.SecondEdition
         private static readonly List<string> ChangedManeuversCodes = new List<string>() { "1.L.B", "1.F.S", "1.R.B" };
         private Dictionary<string, MovementComplexity> SavedManeuverColors;
         bool doAilerons = false;
+        private Vector3 preAileronsPosition;
 
         public override void ActivateAbility()
         {
@@ -201,6 +203,8 @@ namespace Abilities.SecondEdition
 
         private void ExecuteSelectedManeuver()
         {
+            preAileronsPosition = HostShip.GetPosition();
+
             if (doAilerons)
             {
                 HostShip.AssignedManeuver.IsRevealDial = false;
@@ -217,6 +221,13 @@ namespace Abilities.SecondEdition
 
         private void FinishAdaptiveAileronsAbility()
         {
+            if (HostShip.IsBumped || HostShip.IsLandedOnObstacle || HostShip.IsHitObstacles)
+            {
+
+
+                HostShip.SetPosition(preAileronsPosition);
+            }
+
             doAilerons = false;
             HostShip.CanPerformActionsWhenBumped = false;
             HostShip.CanPerformActionsWhenOverlapping = false;
