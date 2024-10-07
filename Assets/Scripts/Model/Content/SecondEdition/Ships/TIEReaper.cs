@@ -223,7 +223,7 @@ namespace Abilities.SecondEdition
         {
             if (HostShip.IsBumped || HostShip.IsLandedOnObstacle || HostShip.IsHitObstacles)
             {
-
+                Messages.ShowErrorToHuman("Controlled Ailerons boost fails");
 
                 HostShip.SetPosition(preAileronsPosition);
             }
