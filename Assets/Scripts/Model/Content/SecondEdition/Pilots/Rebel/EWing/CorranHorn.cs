@@ -48,7 +48,7 @@ namespace Abilities.SecondEdition
     //At initiative 0, you may perform a bonus primary attack against an enemy ship in your bullseye firing arc. 
     //If you do, at the start of the next Planning Phase, gain 1 disarm token.
 
-    public abstract class CorranHornAbility : GenericAbility
+    public class CorranHornAbility : GenericAbility
     {
         public override void ActivateAbility()
         {
