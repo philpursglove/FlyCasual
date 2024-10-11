@@ -63,7 +63,8 @@ namespace Abilities.SecondEdition
             GenericShip activeShip = Combat.AttackStep == CombatStep.Attack ? Combat.Attacker : Combat.Defender;
             return activeShip.Owner == HostShip.Owner
                 && activeShip != HostShip                
-                && HostShip.State.Force > 0;
+                && HostShip.State.Force > 0
+                && Combat.CurrentDiceRoll.Focuses > 0;
         }
 
         private void PayAbilityCost(Action<bool> callback)
