@@ -42,7 +42,7 @@ namespace Ship
                     }
                 );
 
-                PilotNameCanonical = "cadbanescum-rogueclassstarfighter";
+                PilotNameCanonical = "cadbane";
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/cadbane.png";
             }
