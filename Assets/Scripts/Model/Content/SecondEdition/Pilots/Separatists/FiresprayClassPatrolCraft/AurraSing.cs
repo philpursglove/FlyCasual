@@ -56,12 +56,7 @@ namespace Abilities.SecondEdition
     public class AurraSingAbility : GenericAbility
     {
         public List<GenericShip> SelectedShips = new List<GenericShip>();
-
-        public List<GenericToken> ShipOneTokens = new List<GenericToken>();
-
-        public List<GenericToken> ShipTwoTokens = new List<GenericToken>();
-
-        public int ShipIndex = 0;
+        public List<GenericToken> ShipTokens = new List<GenericToken>();
 
         public int TokenIndex = 0;
 
@@ -128,26 +123,27 @@ namespace Abilities.SecondEdition
             else
             {
                 SelectedShips.AddRange(Selection.MultiSelectedShips);
-                ShipOneTokens.AddRange(SelectedShips[0].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange));
-                ShipTwoTokens.AddRange(SelectedShips[1].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange));
-                AskTransferToken(ShipIndex, TokenIndex, callback);
+                ShipTokens.AddRange(SelectedShips[0].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange));
+                ShipTokens.AddRange(SelectedShips[1].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange));
+                if(ShipTokens.Count() > 0)
+                {
+                    AskTransferToken(TokenIndex, callback);
+                }
+                else
+                {
+                    Messages.ShowError("No applicable tokens to transfer.");
+                    callback();
+                }
+                
             }
         }
 
-        private void AskTransferToken(int shipIndex, int tokenIndex, Action callback)
+        private void AskTransferToken(int tokenIndex, Action callback)
         {
-            GenericShip ship = SelectedShips[shipIndex];
-            GenericShip otherShip = shipIndex == 0 ? SelectedShips[1] : SelectedShips[0];
+            GenericToken token = ShipTokens[TokenIndex];
 
-            GenericToken token;
-            if (shipIndex == 0)
-            {
-                token = ShipOneTokens[tokenIndex];
-            }
-            else
-            {
-                token = ShipTwoTokens[tokenIndex];
-            }
+            GenericShip ship = SelectedShips[0].Equals(token.Host) ? SelectedShips[0] : SelectedShips[1];
+            GenericShip target = SelectedShips[0].Equals(token.Host) ? SelectedShips[1] : SelectedShips[0];
 
             AuraSingDecisonSubphase subphase = Phases.StartTemporarySubPhaseNew<AuraSingDecisonSubphase>(
                 "Aura Sing token decision",
@@ -155,62 +151,32 @@ namespace Abilities.SecondEdition
             );
 
             subphase.DescriptionShort = HostShip.PilotInfo.PilotName;
-            subphase.DescriptionLong = "You may transfer this token from " + ship.PilotInfo.PilotName + " to " + otherShip.PilotInfo.PilotName;
+            subphase.DescriptionLong = "You may transfer this token from " + ship.PilotInfo.PilotName + " to " + target.PilotInfo.PilotName;
             subphase.ImageSource = HostShip;
 
             string tokenName = (token is RedTargetLockToken) ? $"Lock \"{(token as RedTargetLockToken).Letter}\"" : token.Name;
-            subphase.AddDecision("Transfer: " + tokenName, delegate { TransferTokens(true, callback); });
-            subphase.AddDecision("Do Not Transfer: " + tokenName, delegate { TransferTokens(false, callback); });
+            subphase.AddDecision("Transfer: " + tokenName, delegate { TransferTokens(true, token, ship, target, callback); });
+            subphase.AddDecision("Do Not Transfer: " + tokenName, delegate { TransferTokens(false, token, ship, target, callback); });
             subphase.DefaultDecisionName = subphase.GetDecisions().First().Name;
             subphase.DecisionOwner = HostShip.Owner;
 
             subphase.Start();
         }
 
-        private void TransferTokens(bool transfer, Action callback)
+        private void TransferTokens(bool transfer, GenericToken token, GenericShip ship, GenericShip target, Action callback)
         {
             DecisionSubPhase.ConfirmDecision();
-            bool callAgain = true;
-
-            GenericShip ship = SelectedShips[ShipIndex];
-            GenericShip otherShip = ShipIndex == 0 ? SelectedShips[1] : SelectedShips[0];
-            GenericToken token;
-
-            if (ShipIndex == 0)
-            {
-                token = ShipOneTokens[TokenIndex];
-                if (TokenIndex == ShipOneTokens.Count - 1)
-                {
-                    ShipIndex++;
-                    TokenIndex = 0;
-                }
-                else
-                {
-                    TokenIndex++;
-                }
-            }
-            else
-            {
-                token = ShipTwoTokens[TokenIndex];
-                if (TokenIndex == ShipTwoTokens.Count - 1)
-                {
-                    callAgain = false;
-                }
-                else
-                {
-                    TokenIndex++;
-                }
-            }
 
             if (transfer)
             {
-                ActionsHolder.ReassignToken(token, ship, otherShip, delegate { });
-                Messages.ShowInfo("Token: " + token.Name + " transfered from " + ship.PilotInfo.PilotName + " to " + otherShip.PilotInfo.PilotName);
+                ActionsHolder.ReassignToken(token, ship, target, delegate { });
+                Messages.ShowInfo("Token: " + token.Name + " transfered from " + ship.PilotInfo.PilotName + " to " + target.PilotInfo.PilotName);
             }
 
-            if (callAgain)
+            TokenIndex++;
+            if (TokenIndex < ShipTokens.Count())
             {
-                AskTransferToken(ShipIndex, TokenIndex, callback);
+                AskTransferToken(TokenIndex, callback);
             }
             else
             {
