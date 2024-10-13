@@ -55,13 +55,15 @@ namespace Abilities.SecondEdition
 {
     public class AurraSingAbility : GenericAbility
     {
-        private List<GenericShip> SelectedShips = new List<GenericShip>();
+        public List<GenericShip> SelectedShips = new List<GenericShip>();
 
-        private List<TokenReference> Tokens = new List<TokenReference>();
+        public List<GenericToken> ShipOneTokens = new List<GenericToken>();
 
-        private int ShipIndex = 0;
+        public List<GenericToken> ShipTwoTokens = new List<GenericToken>();
 
-        private int TokenIndex = 0;
+        public int ShipIndex = 0;
+
+        public int TokenIndex = 0;
 
         public override void ActivateAbility()
         {
@@ -75,7 +77,7 @@ namespace Abilities.SecondEdition
 
         private void TryRegisterAbility(GenericShip ship)
         {
-            if (HostShip.State.Force > 0 && HasEnoughTargets())
+            if (HasEnoughTargets() && HostShip.State.Force > 0)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnCombatActivation, AskToUseOwnAbility);
             }
@@ -83,7 +85,7 @@ namespace Abilities.SecondEdition
 
         private bool HasEnoughTargets()
         {
-            return Board.GetShipsAtRange(HostShip, new UnityEngine.Vector2(0, 1), Team.Type.Enemy)
+            return BoardTools.Board.GetShipsAtRange(HostShip, new UnityEngine.Vector2(0, 1), Team.Type.Enemy)
                 .Count() >= 2;
         }
 
@@ -126,29 +128,9 @@ namespace Abilities.SecondEdition
             else
             {
                 SelectedShips.AddRange(Selection.MultiSelectedShips);
-                
-                List<GenericToken> ShipOneTokens = SelectedShips[0].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange);
-                List<GenericToken> ShipTwoTokens = SelectedShips[1].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange);
-
-                foreach (GenericToken token in ShipOneTokens)
-                {
-                    Tokens.Add(new TokenReference(token, SelectedShips[0]));
-                }
-
-                foreach (GenericToken token in ShipTwoTokens)
-                {
-                    Tokens.Add(new TokenReference(token, SelectedShips[1]));
-                }
-
-                if (Tokens.Count() > 0)
-                {
-                    AskTransferToken(ShipIndex, TokenIndex, callback); 
-                }
-                else
-                {
-                    Messages.ShowInfo("Selected pilots do not have applicable tokens to transfer.");
-                }
-
+                ShipOneTokens.AddRange(SelectedShips[0].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange));
+                ShipTwoTokens.AddRange(SelectedShips[1].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange));
+                AskTransferToken(ShipIndex, TokenIndex, callback);
             }
         }
 
@@ -157,13 +139,23 @@ namespace Abilities.SecondEdition
             GenericShip ship = SelectedShips[shipIndex];
             GenericShip otherShip = shipIndex == 0 ? SelectedShips[1] : SelectedShips[0];
 
+            GenericToken token;
+            if (shipIndex == 0)
+            {
+                token = ShipOneTokens[tokenIndex];
+            }
+            else
+            {
+                token = ShipTwoTokens[tokenIndex];
+            }
+
             AuraSingDecisonSubphase subphase = Phases.StartTemporarySubPhaseNew<AuraSingDecisonSubphase>(
                 "Aura Sing token decision",
                 Phases.CurrentSubPhase.CallBack
             );
 
             subphase.DescriptionShort = HostShip.PilotInfo.PilotName;
-            subphase.DescriptionLong = $"You may transfer this token from " + ship.PilotInfo.PilotName + " to " + otherShip.PilotInfo.PilotName;
+            subphase.DescriptionLong = "You may transfer this token from " + ship.PilotInfo.PilotName + " to " + otherShip.PilotInfo.PilotName;
             subphase.ImageSource = HostShip;
 
             string tokenName = (token is RedTargetLockToken) ? $"Lock \"{(token as RedTargetLockToken).Letter}\"" : token.Name;
@@ -238,17 +230,5 @@ namespace Abilities.SecondEdition
         }
 
         private class AuraSingDecisonSubphase : DecisionSubPhase { }
-
-        public class TokenReference
-        {
-            protected GenericToken token;
-            protected GenericShip host;
-
-            public TokenReference(GenericToken token, GenericShip ship)
-            {
-                this.token = token;
-                this.host = ship;
-            }
-        }
     }
 }
