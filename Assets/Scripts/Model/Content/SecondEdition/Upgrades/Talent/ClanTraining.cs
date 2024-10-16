@@ -55,7 +55,8 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship)
         {
-            if (HostUpgrade.State.Charges > 0 && !HostShip.Tokens.HasToken(typeof(FocusToken)) && BoardTools.Board.GetShipsInArcAtRange(HostShip, Arcs.ArcType.Front, new UnityEngine.Vector2(1,1), Team.Type.Enemy).Count > 0)
+            if (HostUpgrade.State.Charges > 0 && !HostShip.Tokens.HasToken(typeof(FocusToken)) && 
+                BoardTools.Board.GetShipsInArcAtRange(HostShip, Arcs.ArcType.Front, new UnityEngine.Vector2(1,1), Team.Type.Enemy).Count > 0)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnCombatActivation, UseAbility);
             }            
@@ -68,7 +69,7 @@ namespace Abilities.SecondEdition
                 new FocusAction() { Color = ActionColor.Red },
                 CleanUp,
                 HostUpgrade.UpgradeInfo.Name,
-                "Before you engage, if you are not foucused and there is an enemy ship in your Front Arc at range 1, you may spend 1 Charge to perform a red Focus action.",
+                "Before you engage, if you are not focused and there is an enemy ship in your Front Arc at range 1, you may spend 1 Charge to perform a red Focus action.",
                 HostUpgrade
             );
         }
