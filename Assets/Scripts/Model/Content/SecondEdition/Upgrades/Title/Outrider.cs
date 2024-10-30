@@ -1,18 +1,13 @@
 ﻿using ActionsList;
 using BoardTools;
 using Ship;
-using SubPhases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
     public class Outrider : GenericUpgrade
     {
-        public Outrider() : base()
+        public Outrider()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Outrider",
@@ -66,7 +61,6 @@ namespace Abilities.SecondEdition
                 result++;
             }
         }
-
     }
 }
 
@@ -74,7 +68,6 @@ namespace ActionsList
 {
     public class OutriderJukeEffect : GenericAction
     {
-
         public OutriderJukeEffect()
         {
             Name = DiceModificationName = "Outrider";
@@ -83,25 +76,14 @@ namespace ActionsList
 
         public override int GetDiceModificationPriority()
         {
-            int result = 0;
-
-            result = 100;
-
-            return result;
+            return 100;
         }
 
         public override bool IsDiceModificationAvailable()
         {
-            bool result = false;
-
-            if (Combat.AttackStep == CombatStep.Defence &&
-                Combat.DiceRollDefence.RegularSuccesses > 0 &&
-                Combat.ShotInfo.IsObstructedByObstacle)
-            {
-                result = true;
-            }
-
-            return result;
+            return Combat.AttackStep == CombatStep.Defence &&
+                          Combat.DiceRollDefence.RegularSuccesses > 0 &&
+                          Combat.ShotInfo.IsObstructedByObstacle;
         }
 
         public override void ActionEffect(System.Action callBack)
