@@ -1,4 +1,6 @@
-﻿using Ship;
+﻿using ActionsList;
+using BoardTools;
+using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,7 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restrictions: new UpgradeCardRestrictions
                 (
-                    new FactionRestriction(Faction.Rebel),
+                    new FactionRestriction(Faction.Rebel, Faction.Scum),
                     new ShipRestriction(typeof(Ship.SecondEdition.YT2400LightFreighter.YT2400LightFreighter))
                 ),
                 abilityType: typeof(Abilities.SecondEdition.OutriderAbility),
@@ -35,68 +37,77 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            GenericShip.AfterGotNumberOfDefenceDiceGlobal += CheckOutriderDiceChange;
-            HostShip.OnMovementFinishSuccessfully += CheckOutriderTokensAbility;
+            HostShip.AfterGotNumberOfAttackDice += CheckOutriderDiceChange;
+            HostShip.OnGenerateDiceModificationsOpposite += OutriderJukeEffect;
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.AfterGotNumberOfDefenceDiceGlobal -= CheckOutriderDiceChange;
-            HostShip.OnMovementFinishSuccessfully -= CheckOutriderTokensAbility;
+            HostShip.AfterGotNumberOfAttackDice -= CheckOutriderDiceChange;
+            HostShip.OnGenerateDiceModificationsOpposite -= OutriderJukeEffect;
         }
 
-        private void CheckOutriderDiceChange(ref int count)
+        private void OutriderJukeEffect(GenericShip host)
         {
-            if (Combat.Attacker == HostShip && Combat.ShotInfo.IsObstructedByObstacle)
+            GenericAction newAction = new OutriderJukeEffect()
             {
-                Messages.ShowInfo("Outrider: attack is obstructed,\n the defender rolls 1 fewer defense die");
-                count--;
+                ImageUrl = HostUpgrade.ImageUrl,
+                HostShip = host
+            };
+            host.AddAvailableDiceModificationOwn(newAction);
+        }
+
+        private void CheckOutriderDiceChange(ref int result)
+        {
+            ShotInfo shotInformation = new ShotInfo(Combat.Attacker, Combat.Defender, Combat.ChosenWeapon);
+            if (shotInformation.Range == 3)
+            {
+                Messages.ShowInfo(HostShip.PilotInfo.PilotName + " is attacking at range 3 and gains +1 attack die");
+                result++;
             }
         }
 
-        private void CheckOutriderTokensAbility(GenericShip ship)
-        {
-            //to see if host ship moved thru obstacles, use HostShip.ObstaclesHit instead of HostShip.IsHitObstacles
-            //because HostShip.IsHitObstacles always returns false when HostShip.IsIgnoreObstacles = true (ex. Dash Rendar)
-            if (HostShip.ObstaclesHit.Count > 0 || HostShip.IsLandedOnObstacle)
-            {
-                RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, CheckAbility);
-            }
-        }
-
-        private void CheckAbility(object sender, EventArgs e)
-        {
-            if (HostShip.Tokens.HasTokenByColor(TokenColors.Orange) || HostShip.Tokens.HasTokenByColor(TokenColors.Red))
-            {
-                OutriderAbilityDecisionSubPhase subphase = Phases.StartTemporarySubPhaseNew<OutriderAbilityDecisionSubPhase>(
-                    "Outrider: Select token to remove",
-                    Triggers.FinishTrigger
-                );
-                subphase.SourceUpgrade = HostUpgrade;
-                subphase.Start();
-            }
-            else
-            {
-                Triggers.FinishTrigger();
-            }
-        }
     }
 }
 
-namespace SubPhases
+namespace ActionsList
 {
-    public class OutriderAbilityDecisionSubPhase : RemoveBadTokenDecisionSubPhase
+    public class OutriderJukeEffect : GenericAction
     {
-        public GenericUpgrade SourceUpgrade;
 
-        public override void PrepareCustomDecisions()
+        public OutriderJukeEffect()
         {
-            DescriptionShort = "Outrider";
-            DescriptionLong = "Select a token to remove";
-            ImageSource = SourceUpgrade;
+            Name = DiceModificationName = "Outrider";
+            DiceModificationTiming = DiceModificationTimingType.Opposite;
+        }
 
-            DecisionOwner = Selection.ThisShip.Owner;
-            DefaultDecisionName = decisions.First().Name;
+        public override int GetDiceModificationPriority()
+        {
+            int result = 0;
+
+            result = 100;
+
+            return result;
+        }
+
+        public override bool IsDiceModificationAvailable()
+        {
+            bool result = false;
+
+            if (Combat.AttackStep == CombatStep.Defence &&
+                Combat.DiceRollDefence.RegularSuccesses > 0 &&
+                Combat.ShotInfo.IsObstructedByObstacle)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        public override void ActionEffect(System.Action callBack)
+        {
+            Combat.DiceRollDefence.ChangeOne(DieSide.Success, DieSide.Focus, false);
+            callBack();
         }
     }
 }
