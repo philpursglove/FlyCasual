@@ -126,9 +126,6 @@ namespace Conditions
     {
         public GenericUpgrade SourceUpgrade;
 
-        private GenericShip CachedAttacker;
-        private GenericShip CachedDefender;
-
         public PrimedForSpeed(GenericShip host) : base(host)
         {
             Name = ImageName = "Primed For Speed Condition";
