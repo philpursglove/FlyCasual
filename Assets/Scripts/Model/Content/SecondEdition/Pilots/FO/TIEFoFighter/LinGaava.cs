@@ -66,7 +66,7 @@ namespace Abilities.SecondEdition
             );
             Triggers.RegisterTrigger(new Trigger()
             {
-                Name = HostShip.ShipId + ": Assign Primed for Speed condition",
+                Name = $"{HostShip.ShipId}: Assign Primed for Speed condition",
                 TriggerType = TriggerTypes.OnSetupEnd,
                 TriggerOwner = HostShip.Owner.PlayerNo,
                 EventHandler = SelectLinGaavaTargets,
