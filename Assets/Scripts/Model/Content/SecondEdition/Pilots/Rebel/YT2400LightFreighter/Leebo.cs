@@ -1,6 +1,5 @@
 ﻿using Content;
 using Ship;
-using System.Collections;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
@@ -16,10 +15,10 @@ namespace Ship
                 PilotInfo = new PilotCardInfo25
                 (
                     "Leebo",
-                    "Dry-Witted Droid",
+                    "Wisdom of Ages",
                     Faction.Rebel,
                     3,
-                    8,
+                    6,
                     16,
                     isLimited: true,
                     abilityType: typeof(Abilities.SecondEdition.LeeboAbility),
@@ -37,9 +36,9 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Title
                     },
-                    seImageNumber: 78,
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
+                    legality: new List<Legality>() { Legality.ExtendedLegal, Legality.StandardLegal }
                 );
+                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/leebo-wisdomofages.png";
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
             }
@@ -51,7 +50,7 @@ namespace Abilities.SecondEdition
 {
     public class LeeboAbility : GenericAbility
     {
-        bool spentCalculate = false;
+        private bool _spentCalculate;
 
         public override void ActivateAbility()
         {
@@ -76,14 +75,14 @@ namespace Abilities.SecondEdition
             if (!(token is CalculateToken))
                 return;
 
-            spentCalculate = true;
+            _spentCalculate = true;
         }
 
         private void CheckAssignCalculate(GenericShip ship)
         {
-            if (spentCalculate)
+            if (_spentCalculate)
             {
-                spentCalculate = false;
+                _spentCalculate = false;
                 Triggers.RegisterTrigger(new Trigger()
                 {
                     Name = "Assign calculate to Leebo.",
