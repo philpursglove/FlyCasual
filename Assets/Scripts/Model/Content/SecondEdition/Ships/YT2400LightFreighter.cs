@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Actions;
 using ActionsList;
 using Arcs;
+using Content;
 using Movement;
 using Ship.CardInfo;
 using UnityEngine;
-using Upgrade;
 
 namespace Ship.SecondEdition.YT2400LightFreighter
 {
@@ -25,7 +24,7 @@ namespace Ship.SecondEdition.YT2400LightFreighter
                         { Faction.Rebel, typeof(DashRendar) }
                     }
                 ),
-                new ShipArcsInfo(ArcType.DoubleTurret, 4), 2, 6, 4,
+                new ShipArcsInfo(ArcType.DoubleTurret, 3), 2, 6, 4,
                 new ShipActionsInfo
                 (
                     new ActionInfo(typeof(FocusAction)),
@@ -34,7 +33,7 @@ namespace Ship.SecondEdition.YT2400LightFreighter
                     new ActionInfo(typeof(RotateArcAction))
                 ),
                 new ShipUpgradesInfo(),
-                legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal }
+                legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal, Legality.StandardLegal }
             );
 
             ModelInfo = new ShipModelInfo
@@ -82,30 +81,38 @@ namespace Ship.SecondEdition.YT2400LightFreighter
 
             ShipIconLetter = 'o';
 
-            ShipAbilities.Add(new Abilities.SecondEdition.SensorBlindspot());
+            ShipAbilities.Add(new Abilities.SecondEdition.SensorBlackout());
         }
     }
 }
 
 namespace Abilities.SecondEdition
 {
-    public class SensorBlindspot : GenericAbility
+    public class SensorBlackout : GenericAbility
     {
-        public override string Name { get { return "Sensor Blindspot"; } }
+        public override string Name { get { return "Sensor Blackout"; } }
 
         public override void ActivateAbility()
         {
-            HostShip.AfterGotNumberOfAttackDice += CheckSensorBlindspot;
+            HostShip.AfterGotNumberOfAttackDice += CheckSensorBlackout;
+            HostShip.AfterGotNumberOfDefenceDice += CheckSensorBlackoutDefense;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.AfterGotNumberOfAttackDice -= CheckSensorBlindspot;
+            HostShip.AfterGotNumberOfAttackDice -= CheckSensorBlackout;
+            HostShip.AfterGotNumberOfDefenceDice -= CheckSensorBlackoutDefense;
         }
 
-        private void CheckSensorBlindspot(ref int count)
+        private void CheckSensorBlackout(ref int count)
         {
             if (Combat.ChosenWeapon.WeaponType == Ship.WeaponTypes.PrimaryWeapon && Combat.ShotInfo.Range < 2) count -= 2;
         }
+
+        private void CheckSensorBlackoutDefense(ref int count)
+        {
+            if (Combat.ShotInfo.Range < 2) count -= 1;
+        }
+
     }
 }
