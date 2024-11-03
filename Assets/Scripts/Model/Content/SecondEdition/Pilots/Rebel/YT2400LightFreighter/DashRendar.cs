@@ -35,8 +35,7 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Title
-                    },
-                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+                    }
                 );
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dashrendar-freighterforhire.png";

@@ -35,8 +35,7 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Title
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal, Legality.StandardLegal }
+                    }
                 );
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/leebo-wisdomofages.png";
 
