@@ -19,10 +19,11 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.Rebel, Faction.Scum),
                     new ShipRestriction(typeof(Ship.SecondEdition.YT2400LightFreighter.YT2400LightFreighter))
                 ),
-                abilityType: typeof(Abilities.SecondEdition.OutriderAbility),
-                seImageNumber: 105
+                abilityType: typeof(Abilities.SecondEdition.OutriderAbility)
             );
-        }        
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/outrider-swz103.png";
+
+        }
     }
 }
 
@@ -70,9 +71,11 @@ namespace ActionsList
     {
         public OutriderJukeEffect()
         {
-            Name = DiceModificationName = "Outrider";
             DiceModificationTiming = DiceModificationTimingType.Opposite;
         }
+
+        public override string Name => "Outrider";
+        public override string DiceModificationName => "Outrider";
 
         public override int GetDiceModificationPriority()
         {
@@ -88,7 +91,7 @@ namespace ActionsList
 
         public override void ActionEffect(System.Action callBack)
         {
-            Combat.DiceRollDefence.ChangeOne(DieSide.Success, DieSide.Focus, false);
+            Combat.DiceRollDefence.ChangeOne(DieSide.Success, DieSide.Focus);
             callBack();
         }
     }
