@@ -1,10 +1,8 @@
 ﻿using Abilities;
 using ActionsList;
-using Arcs;
 using BoardTools;
 using Movement;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
@@ -34,7 +32,7 @@ namespace Ship
 
         public bool IsCannotAttackSecondTime { get; set; }
         public bool CanAttackBumpedTargetAlways { get; set; }
-        public bool IgnoressBombDetonationEffect { get; set; }
+        public bool IgnoresBombDetonationEffect { get; set; }
         public bool AttackIsAlwaysConsideredHit { get; set; }
         public int DiceRolledLastAttack { get; set; }
 
@@ -150,6 +148,7 @@ namespace Ship
         public event EventHandlerBool2Ships OnCanAttackBumpedTarget;
         public static event EventHandlerBool2Ships OnCanAttackBumpedTargetGlobal;
 
+        public event EventHandlerShipRefBool OnCanAttackWhileLandedOnObstacle;
         public static event EventHandlerShipRefBool OnCanAttackWhileLandedOnObstacleGlobal;
 
         public event EventHandlerShip OnCombatActivation;
@@ -435,9 +434,7 @@ namespace Ship
 
         public int GetNumberOfAttackDice(GenericShip targetShip)
         {
-            int result = 0;
-
-            result = Combat.ChosenWeapon.WeaponInfo.AttackValue;
+            var result = Combat.ChosenWeapon.WeaponInfo.AttackValue;
 
             AfterGotNumberOfAttackDice?.Invoke(ref result);
             if (Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon)
@@ -526,12 +523,12 @@ namespace Ship
 
                 if (!skipSufferDamage)
                 {
-                    SufferDamageByType(sender, e, isCritical);
+                    SufferDamageByType(sender, e, true);
                 }
             }
             else
             {
-                SufferDamageByType(sender, e, isCritical);
+                SufferDamageByType(sender, e, false);
             }
         }
 
@@ -869,9 +866,7 @@ namespace Ship
 
         public bool CanAttackBumpedTarget(GenericShip defender)
         {
-            bool result = false;
-
-            if (CanAttackBumpedTargetAlways) result = true;
+            bool result = CanAttackBumpedTargetAlways;
 
             if (OnCanAttackBumpedTarget != null) OnCanAttackBumpedTarget(ref result, this, defender);
 
@@ -884,10 +879,13 @@ namespace Ship
         {
             bool result = false;
 
+            if (OnCanAttackWhileLandedOnObstacle != null) OnCanAttackWhileLandedOnObstacle(this, ref result);
+
             if (OnCanAttackWhileLandedOnObstacleGlobal != null) OnCanAttackWhileLandedOnObstacleGlobal(this, ref result);
 
             return result;
         }
+
 
         public List<IShipWeapon> GetAllWeapons()
         {
@@ -908,7 +906,7 @@ namespace Ship
 
         public void CallCheckSufferBombDetonation(Action callback)
         {
-            IgnoressBombDetonationEffect = false;
+            IgnoresBombDetonationEffect = false;
 
             if (OnCheckSufferBombDetonation != null) OnCheckSufferBombDetonation(this);
             Triggers.ResolveTriggers(TriggerTypes.OnCheckSufferBombDetonation, callback);
@@ -1057,5 +1055,4 @@ namespace Ship
             return isForbidden;
         }
     }
-
 }

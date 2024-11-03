@@ -1,4 +1,6 @@
 ﻿using Content;
+using Ship;
+using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -13,11 +15,11 @@ namespace Ship
                 PilotInfo = new PilotCardInfo25
                 (
                     "Dash Rendar",
-                    "Hotshot Mercenary",
+                    "Freighter for Hire",
                     Faction.Rebel,
                     5,
-                    10,
-                    22,
+                    7,
+                    20,
                     isLimited: true,
                     abilityType: typeof(Abilities.SecondEdition.DashRendarAbility),
                     tags: new List<Tags>
@@ -33,10 +35,10 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Title
-                    },
-                    seImageNumber: 77,
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
+                    }
                 );
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dashrendar-freighterforhire.png";
             }
         }
     }
@@ -48,12 +50,37 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.IsIgnoreObstacles = true;
+            HostShip.OnCombatActivation += RegisterTriggerCombatPhase;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.IsIgnoreObstacles = false;
+            HostShip.OnCombatActivation -= RegisterTriggerCombatPhase;
+        }
+
+        public void RegisterTriggerCombatPhase(GenericShip host)
+        {
+            RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, UseAbilityCombatPhase);
+        }
+
+        private void UseAbilityCombatPhase(object sender, EventArgs e)
+        {
+            HostShip.IgnoreObstaclesList.AddRange(HostShip.ObstaclesLanded);
+            HostShip.OnCanAttackWhileLandedOnObstacle += CanAttack;
+            Phases.Events.OnCombatPhaseEnd_NoTriggers += TurnOffIgnoreObstaclesCombatPhase;
+            Triggers.FinishTrigger();
+        }
+
+        private void TurnOffIgnoreObstaclesCombatPhase()
+        {
+            GenericShip.OnCanAttackWhileLandedOnObstacleGlobal -= CanAttack;
+            HostShip.IgnoreObstaclesList.Clear();
+            Phases.Events.OnCombatPhaseEnd_NoTriggers -= TurnOffIgnoreObstaclesCombatPhase;
+        }
+
+        private void CanAttack(GenericShip ship, ref bool canAttack)
+        {
+            canAttack = true;
         }
     }
 }

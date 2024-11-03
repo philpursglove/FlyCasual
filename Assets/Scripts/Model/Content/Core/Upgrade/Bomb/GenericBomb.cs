@@ -96,7 +96,7 @@ namespace Upgrade
 
         private void AfterCheckIgnoreExplosionEffect(GenericShip ship, Action callBack)
         {
-            if (!ship.IgnoressBombDetonationEffect)
+            if (!ship.IgnoresBombDetonationEffect)
             {
                 ExplosionEffect(
                     ship, 
