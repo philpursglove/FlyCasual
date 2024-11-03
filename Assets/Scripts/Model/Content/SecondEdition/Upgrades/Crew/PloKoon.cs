@@ -1,12 +1,12 @@
-﻿using Ship;
-using Upgrade;
+﻿using Actions;
 using ActionsList;
-using Actions;
-using System;
-using SubPhases;
 using BoardTools;
+using Ship;
+using SubPhases;
+using System;
 using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -132,7 +132,7 @@ namespace Abilities.SecondEdition
 
         private bool FilterTargets(GenericShip ship)
         {
-            if (!Tools.IsSameTeam(HostShip, ship)) return false;
+            if (!Tools.IsFriendly(HostShip, ship)) return false;
 
             DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
             if (distInfo.Range == 0

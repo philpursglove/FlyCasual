@@ -1,9 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System.Collections.Generic;
-using System;
-using BoardTools;
+﻿using BoardTools;
+using Ship;
 using SquadBuilderNS;
+using System;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -88,7 +88,7 @@ namespace Abilities.SecondEdition
         {
             DistanceInfo distInfo = new DistanceInfo(Combat.Attacker, HostShip);
 
-            return Tools.IsSameTeam(Combat.Attacker, HostShip)
+            return Tools.IsFriendly(Combat.Attacker, HostShip)
                 && distInfo.Range <= 3
                 && IsSpecialMissileAttack()
                 && HostUpgrade.State.Charges > 0

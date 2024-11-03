@@ -100,7 +100,7 @@ namespace Abilities.SecondEdition
         private void CanPerformJam(ref List<JamIsNotAllowedReasons> blockers, GenericShip jamSource, ITargetLockable jamTarget)
         {
             if (blockers.Contains(JamIsNotAllowedReasons.NotInRange)
-                && Tools.IsSameTeam(jamSource, HostShip)
+                && Tools.IsFriendly(jamSource, HostShip)
                 && jamTarget.GetRangeToShip(HostShip) < 2)
             {
                 blockers.Remove(JamIsNotAllowedReasons.NotInRange);

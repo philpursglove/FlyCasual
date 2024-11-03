@@ -1,11 +1,8 @@
 ﻿using ActionsList;
 using BoardTools;
 using Ship;
-using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -46,7 +43,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship, bool flag)
         {
-            if (!Tools.IsSameTeam(HostShip, ship) || Tools.IsSameShip(HostShip, ship)) return;
+            if (!Tools.IsAnotherFriendly(HostShip, ship)) return;
             if (!ship.PilotInfo.IsLimited && !ship.UpgradeBar.HasUpgradeInstalled(typeof(Hopeful))) return;
             
             DistanceInfo distanceInfo = new DistanceInfo(HostShip, ship);
