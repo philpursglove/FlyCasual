@@ -115,7 +115,7 @@ namespace Abilities.SecondEdition
         private bool FilterTargets(GenericShip ship)
         {
             DistanceInfo distanceInfo = new DistanceInfo(ship, Combat.Defender);
-            return distanceInfo.Range < 2 && Tools.IsSameTeam(ship, HostShip);
+            return distanceInfo.Range < 2 && Tools.IsFriendly(ship, HostShip);
         }
 
         private int GetFriendlyTargetPriority(GenericShip ship)

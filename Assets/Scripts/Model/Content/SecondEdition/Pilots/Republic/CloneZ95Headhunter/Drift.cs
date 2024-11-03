@@ -64,7 +64,7 @@ namespace Abilities.SecondEdition
         {
             if (Combat.AttackStep != CombatStep.Attack) return false;
 
-            if (!Tools.IsSameTeam(Combat.Attacker, HostShip)) return false;
+            if (!Tools.IsFriendly(Combat.Attacker, HostShip)) return false;
 
             if (HostShip.Tokens.GetNonLockRedOrangeTokens().Count != 1) return false;
 

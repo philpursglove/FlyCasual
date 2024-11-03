@@ -112,7 +112,7 @@ namespace Abilities.SecondEdition
 
         protected virtual bool CheckRequirements(GenericShip ship)
         {
-            var match = Tools.IsSameTeam(ship, HostShip)
+            var match = Tools.IsFriendly(ship, HostShip)
                 && ship.PilotInfo.PilotName != "MagnaGuard Protector";
             return match;
         }

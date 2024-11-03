@@ -1,13 +1,13 @@
-﻿using Content;
+﻿using Actions;
+using ActionsList;
+using BoardTools;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using Upgrade;
-using ActionsList;
-using BoardTools;
-using Actions;
 
 namespace Ship
 {
@@ -64,7 +64,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship, bool flag)
         {
-            if (!Tools.IsSameTeam(HostShip, ship) || Tools.IsSameShip(HostShip, ship)) return;
+            if (!Tools.IsFriendly(HostShip, ship) || Tools.IsSameShip(HostShip, ship)) return;
 
             DistanceInfo distanceInfo = new DistanceInfo(HostShip, ship);
             if (distanceInfo.Range > 2) return;

@@ -166,7 +166,7 @@ namespace Conditions
         {
             foreach (GenericShip ship in Roster.AllShips.Values)
             {
-                if (Tools.IsSameTeam(ship, Host) && !Tools.IsFriendly(ship, Host) && !ship.IsStressed)
+                if (Tools.IsSameTeam(ship, Host) && !ship.IsStressed)
                 {
                     ShotInfo shotInfo = new ShotInfo(Host, ship, Combat.ChosenWeapon);
                     if (shotInfo.InArc)
