@@ -1,6 +1,5 @@
 ﻿using Content;
 using Ship;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -63,8 +62,8 @@ namespace Abilities.SecondEdition
 
         protected void RegisterGarSaxonAbility()
         {
-            if (Tools.IsSameTeam(Combat.Attacker, HostShip)
-                && Combat.Attacker.ShipId != HostShip.ShipId
+            if (Tools.IsFriendly(Combat.Attacker, HostShip)
+                && !Tools.IsSameShip(Combat.Attacker, HostShip)
                 && Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon
                 && Combat.Defender.SectorsInfo.IsShipInSector(Combat.Attacker, Arcs.ArcType.Rear))
             {

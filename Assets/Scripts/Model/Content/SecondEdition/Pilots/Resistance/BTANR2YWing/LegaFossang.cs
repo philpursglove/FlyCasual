@@ -95,7 +95,7 @@ namespace Abilities.SecondEdition
 
             foreach (var bombHolder in BombsManager.GetBombsOnBoard())
             {
-                if (Tools.IsSameTeam(bombHolder.Value.HostShip, HostShip))
+                if (Tools.IsFriendly(bombHolder.Value.HostShip, HostShip))
                 {
                     if (BombsManager.IsDeviceInArc(HostShip, bombHolder.Key, Combat.ArcForShot, Combat.ChosenWeapon))
                     {

@@ -1,8 +1,8 @@
-﻿using Content;
+﻿using BoardTools;
+using Content;
+using Ship;
 using System.Collections.Generic;
 using Upgrade;
-using Ship;
-using BoardTools;
 
 namespace Ship
 {
@@ -64,10 +64,10 @@ namespace Abilities.SecondEdition
 
         protected void TryRegisterAbility(GenericShip ship)
         {
-            if (Tools.IsSameTeam(ship, HostShip)
+            if (Tools.IsFriendly(ship, HostShip)
                 && Board.IsShipBetweenRange(HostShip, ship, 0, 3)
+                && (Combat.Defender != null) 
                 && Tools.IsSameShip(ship, Combat.Defender)
-                && (Combat.Defender != null)
                 && !IsAlreadyRegistered
             )
             {

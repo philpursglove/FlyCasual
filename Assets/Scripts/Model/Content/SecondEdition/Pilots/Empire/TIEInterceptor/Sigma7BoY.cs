@@ -41,6 +41,8 @@ namespace Ship
                     isStandardLayout: true
                 );
 
+                ShipInfo.Hull++;
+
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(TargetLockAction)));
 
                 AutoThrustersAbility oldAbility = (AutoThrustersAbility) ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));

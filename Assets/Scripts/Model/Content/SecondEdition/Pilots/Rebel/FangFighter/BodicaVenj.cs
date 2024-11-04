@@ -63,7 +63,11 @@ namespace Abilities.SecondEdition
         private void CheckBodicaVenjAbility(GenericShip ship)
         {
 
-            if (!HostShip.IsDepleted && !HostShip.IsCannotAttackSecondTime && Tools.IsSameTeam(Combat.Defender, HostShip) && Combat.Defender.ShipId != HostShip.ShipId)
+            if (!HostShip.IsDepleted 
+                && !HostShip.IsCannotAttackSecondTime 
+                && Combat.Defender != null 
+                && Tools.IsFriendly(Combat.Defender, HostShip) 
+                && !Tools.IsSameShip(Combat.Defender, HostShip))
             {
                 bonusAttackTarget = Combat.Attacker;
                 bonusAttackTarget.OnCombatCheckExtraAttack += RegisterBodicaVenjAbility;

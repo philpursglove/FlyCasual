@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Movement;
+﻿using Actions;
 using ActionsList;
-using Actions;
 using Arcs;
-using Upgrade;
-using System;
+using Movement;
+using Ship;
 using Ship.CardInfo;
+using System;
+using System.Collections.Generic;
 
 namespace Ship
 {
@@ -37,7 +37,7 @@ namespace Ship
                     new ShipUpgradesInfo()
                 );
 
-                ShipAbilities.Add(new Abilities.SecondEdition.AdvancedAileronsAbility());
+                ShipAbilities.Add(new Abilities.SecondEdition.ControlledAileronsAbility());
 
                 ModelInfo = new ShipModelInfo
                 (
@@ -92,6 +92,7 @@ namespace Ship
 
 namespace Abilities.SecondEdition
 {
+    // Left in place in case XWA or AMG reintroduce Adaptive Ailerons
     public class AdvancedAileronsAbility : AdaptiveAileronsAbility
     {
 
@@ -109,6 +110,48 @@ namespace Abilities.SecondEdition
 
             HostShip.DialInfo.ChangeManeuverComplexity(new ManeuverHolder(ManeuverSpeed.Speed3, ManeuverDirection.Left, ManeuverBearing.Bank), MovementComplexity.Complex);
             HostShip.DialInfo.ChangeManeuverComplexity(new ManeuverHolder(ManeuverSpeed.Speed3, ManeuverDirection.Right, ManeuverBearing.Bank), MovementComplexity.Complex);
+        }
+    }
+
+    public class ControlledAileronsAbility : GenericAbility
+    {
+        public override void ActivateAbility()
+        {
+            HostShip.OnManeuverIsReadyToBeRevealed += RegisterControlledAileronsAbility;
+        }
+
+        public override void DeactivateAbility()
+        {
+            HostShip.OnManeuverIsReadyToBeRevealed -= RegisterControlledAileronsAbility;
+        }
+
+        public void RegisterControlledAileronsAbility(GenericShip ship)
+        {
+            RegisterAbilityTrigger(TriggerTypes.OnManeuverIsReadyToBeRevealed, CheckCanUseAbility);
+        }
+
+        private void CheckCanUseAbility(object sender, EventArgs e)
+        {
+            // AI doesn't know how to boost
+            if (HostShip.IsStressed || HostShip.Owner.GetType().IsSubclassOf(typeof(Players.GenericAiPlayer)))
+            {
+                Triggers.FinishTrigger();
+            }
+            else
+            {
+                DoControlledAileronsAbility();
+            }
+        }
+
+        private void DoControlledAileronsAbility()
+        {
+            HostShip.AskPerformFreeAction(
+                new BoostAction() { HostShip = TargetShip, Color = Actions.ActionColor.White },
+                Triggers.FinishTrigger,
+                HostShip.PilotInfo.PilotName,
+                "Do you want to activate your Controlled Ailerons?",
+                HostShip
+            );
         }
     }
 }

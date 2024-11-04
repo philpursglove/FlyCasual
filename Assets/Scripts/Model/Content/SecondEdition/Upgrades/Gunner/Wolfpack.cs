@@ -1,10 +1,10 @@
-﻿using Upgrade;
-using System.Collections.Generic;
+﻿using BoardTools;
 using Ship;
-using System;
-using BoardTools;
 using SubPhases;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -48,7 +48,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship)
         {
-            if (Tools.IsSameTeam(Combat.Defender, HostShip)
+            if (Tools.IsFriendly(Combat.Defender, HostShip)
                 && IsRangeFrom0To3()
                 && IsAttackerInArc()
             )

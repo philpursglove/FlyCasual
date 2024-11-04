@@ -99,7 +99,7 @@ namespace Abilities.SecondEdition
 
         private bool FilterTargets(GenericShip ship)
         {
-            return Tools.IsSameTeam(ship, HostShip)
+            return Tools.IsFriendly(ship, HostShip)
                 && HostShip.SectorsInfo.IsShipInSector(ship, Arcs.ArcType.FullRear)
                 && FilterTargetsByRange(ship, 0, 2);
         }

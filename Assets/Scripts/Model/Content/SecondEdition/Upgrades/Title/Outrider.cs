@@ -1,16 +1,13 @@
-﻿using Ship;
-using SubPhases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Tokens;
+﻿using ActionsList;
+using BoardTools;
+using Ship;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
     public class Outrider : GenericUpgrade
     {
-        public Outrider() : base()
+        public Outrider()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Outrider",
@@ -22,10 +19,11 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.Rebel),
                     new ShipRestriction(typeof(Ship.SecondEdition.YT2400LightFreighter.YT2400LightFreighter))
                 ),
-                abilityType: typeof(Abilities.SecondEdition.OutriderAbility),
-                seImageNumber: 105
+                abilityType: typeof(Abilities.SecondEdition.OutriderAbility)
             );
-        }        
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/outrider.png";
+
+        }
     }
 }
 
@@ -35,68 +33,66 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            GenericShip.AfterGotNumberOfDefenceDiceGlobal += CheckOutriderDiceChange;
-            HostShip.OnMovementFinishSuccessfully += CheckOutriderTokensAbility;
+            HostShip.AfterGotNumberOfAttackDice += CheckOutriderDiceChange;
+            HostShip.OnGenerateDiceModificationsOpposite += OutriderJukeEffect;
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.AfterGotNumberOfDefenceDiceGlobal -= CheckOutriderDiceChange;
-            HostShip.OnMovementFinishSuccessfully -= CheckOutriderTokensAbility;
+            HostShip.AfterGotNumberOfAttackDice -= CheckOutriderDiceChange;
+            HostShip.OnGenerateDiceModificationsOpposite -= OutriderJukeEffect;
         }
 
-        private void CheckOutriderDiceChange(ref int count)
+        private void OutriderJukeEffect(GenericShip host)
         {
-            if (Combat.Attacker == HostShip && Combat.ShotInfo.IsObstructedByObstacle)
+            GenericAction newAction = new OutriderJukeEffect()
             {
-                Messages.ShowInfo("Outrider: attack is obstructed,\n the defender rolls 1 fewer defense die");
-                count--;
-            }
+                ImageUrl = HostUpgrade.ImageUrl,
+                HostShip = host
+            };
+            host.AddAvailableDiceModificationOwn(newAction);
         }
 
-        private void CheckOutriderTokensAbility(GenericShip ship)
+        private void CheckOutriderDiceChange(ref int result)
         {
-            //to see if host ship moved thru obstacles, use HostShip.ObstaclesHit instead of HostShip.IsHitObstacles
-            //because HostShip.IsHitObstacles always returns false when HostShip.IsIgnoreObstacles = true (ex. Dash Rendar)
-            if (HostShip.ObstaclesHit.Count > 0 || HostShip.IsLandedOnObstacle)
+            ShotInfo shotInformation = new ShotInfo(Combat.Attacker, Combat.Defender, Combat.ChosenWeapon);
+            if (shotInformation.Range == 3)
             {
-                RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, CheckAbility);
-            }
-        }
-
-        private void CheckAbility(object sender, EventArgs e)
-        {
-            if (HostShip.Tokens.HasTokenByColor(TokenColors.Orange) || HostShip.Tokens.HasTokenByColor(TokenColors.Red))
-            {
-                OutriderAbilityDecisionSubPhase subphase = Phases.StartTemporarySubPhaseNew<OutriderAbilityDecisionSubPhase>(
-                    "Outrider: Select token to remove",
-                    Triggers.FinishTrigger
-                );
-                subphase.SourceUpgrade = HostUpgrade;
-                subphase.Start();
-            }
-            else
-            {
-                Triggers.FinishTrigger();
+                Messages.ShowInfo(HostShip.PilotInfo.PilotName + " is attacking at range 3 and gains +1 attack die");
+                result++;
             }
         }
     }
 }
 
-namespace SubPhases
+namespace ActionsList
 {
-    public class OutriderAbilityDecisionSubPhase : RemoveBadTokenDecisionSubPhase
+    public class OutriderJukeEffect : GenericAction
     {
-        public GenericUpgrade SourceUpgrade;
-
-        public override void PrepareCustomDecisions()
+        public OutriderJukeEffect()
         {
-            DescriptionShort = "Outrider";
-            DescriptionLong = "Select a token to remove";
-            ImageSource = SourceUpgrade;
+            DiceModificationTiming = DiceModificationTimingType.Opposite;
+        }
 
-            DecisionOwner = Selection.ThisShip.Owner;
-            DefaultDecisionName = decisions.First().Name;
+        public override string Name => "Outrider";
+        public override string DiceModificationName => "Outrider";
+
+        public override int GetDiceModificationPriority()
+        {
+            return 100;
+        }
+
+        public override bool IsDiceModificationAvailable()
+        {
+            return Combat.AttackStep == CombatStep.Defence &&
+                          Combat.DiceRollDefence.RegularSuccesses > 0 &&
+                          Combat.ShotInfo.IsObstructedByObstacle;
+        }
+
+        public override void ActionEffect(System.Action callBack)
+        {
+            Combat.DiceRollDefence.ChangeOne(DieSide.Success, DieSide.Focus);
+            callBack();
         }
     }
 }

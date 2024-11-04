@@ -67,23 +67,10 @@ namespace Abilities.SecondEdition
 
         private bool AreConditionsMet()
         {
-            bool result = false;
-
-            if (Tools.IsSameTeam(Combat.Attacker, HostShip))
-            {
-                if (new DistanceInfo(Combat.Attacker, HostShip).Range < 3)
-                {
-                    if (Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon)
-                    {
-                        if (Combat.Defender.SectorsInfo.IsShipInSector(HostShip, ArcType.Bullseye))
-                        {
-                            result = true;
-                        }
-                    }
-                }
-            }
-
-            return result;
+            return (Tools.IsFriendly(Combat.Attacker, HostShip) 
+                && new DistanceInfo(Combat.Attacker, HostShip).Range < 3 
+                && Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon
+                && Combat.Defender.SectorsInfo.IsShipInSector(HostShip, ArcType.Bullseye));
         }
     }
 }

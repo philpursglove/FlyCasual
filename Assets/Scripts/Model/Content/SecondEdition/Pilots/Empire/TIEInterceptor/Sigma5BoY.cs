@@ -39,6 +39,8 @@ namespace Ship
                     isStandardLayout: true
                 );
 
+                ShipInfo.Hull++;
+
                 AutoThrustersAbility oldAbility = (AutoThrustersAbility) ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 //oldAbility.DeactivateAbility();
                 ShipAbilities.Remove(oldAbility);

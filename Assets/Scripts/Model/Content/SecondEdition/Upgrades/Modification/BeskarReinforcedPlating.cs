@@ -85,7 +85,7 @@ namespace Abilities.SecondEdition
             {
                 Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: Faceup damage card is dealt facedown instead");
 
-                HostShip.State.Charges -= 1;
+                HostUpgrade.State.SpendCharges(chargesSpent);
                 Combat.CurrentCriticalHitCard.IsFaceup = false;
                 DecisionSubPhase.ConfirmDecision();
             }
@@ -93,7 +93,7 @@ namespace Abilities.SecondEdition
             {
                 Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: Faceup damage card is discarded instead");
 
-                HostShip.State.Charges -= 2;
+                HostUpgrade.State.SpendCharges(chargesSpent);
                 Combat.CurrentCriticalHitCard = null;
                 DecisionSubPhase.ConfirmDecision();
             }

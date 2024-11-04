@@ -89,8 +89,8 @@ namespace Abilities.SecondEdition
 
         private bool IsFriendlyShipAtR1(GenericShip anyShip)
         {
-            if (!Tools.IsSameTeam(HostShip, anyShip)) return false;
             if (Tools.IsSameShip(HostShip, anyShip)) return false;
+            if (!Tools.IsFriendly(HostShip, anyShip)) return false;
 
             DistanceInfo distInfo = new DistanceInfo(HostShip, anyShip);
             return distInfo.Range == 1;

@@ -1,7 +1,7 @@
-﻿using System;
-using ActionsList;
+﻿using ActionsList;
 using BoardTools;
 using Ship;
+using System;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -45,7 +45,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship, bool flag)
         {
-            if (Tools.IsSameTeam(HostShip, ship)
+            if (Tools.IsFriendly(HostShip, ship)
                 && ship.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol)))
             {
                 DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
