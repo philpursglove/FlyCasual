@@ -19,7 +19,7 @@ namespace UpgradesList.SecondEdition
             (
                 "MandalorianOptics",
                 UpgradeType.Modification,
-                cost: 5,
+                cost: 3,
                 restriction: new TagRestriction(Tags.Mandalorian),
                 abilityType: typeof(Abilities.SecondEdition.MandalorianOpticsAbility),
                 charges: 2
