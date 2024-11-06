@@ -17,7 +17,7 @@ namespace UpgradesList.SecondEdition
         {
             UpgradeInfo = new UpgradeCardInfo
             (
-                "MandalorianOptics",
+                "Mandalorian Optics",
                 UpgradeType.Modification,
                 cost: 3,
                 restriction: new TagRestriction(Tags.Mandalorian),
