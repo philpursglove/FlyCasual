@@ -31,7 +31,7 @@ namespace Abilities.SecondEdition
 {
     public class ContingencyProtocolAbility : GenericAbility
     {
-        GenericShip PreviousActiveShip = null;
+        GenericShip PreviousActiveShip;
 
         public override void ActivateAbility()
         {
@@ -49,7 +49,7 @@ namespace Abilities.SecondEdition
                 && ship.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol)))
             {
                 DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
-                if (distInfo.Range >= 0 && distInfo.Range <= 3)
+                if (distInfo.Range is >= 0 and <= 3)
                 {
                     RegisterAbilityTrigger
                     (
@@ -73,7 +73,7 @@ namespace Abilities.SecondEdition
                 Selection.ThisShip.GetAvailableActions(),
                 FinishAbility,
                 descriptionShort: HostUpgrade.UpgradeInfo.Name,
-                descriptionLong: "You may perform actionm even while stressed"
+                descriptionLong: "You may perform an action even while stressed"
             );
         }
 
