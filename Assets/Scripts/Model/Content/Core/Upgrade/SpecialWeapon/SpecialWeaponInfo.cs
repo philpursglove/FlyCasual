@@ -55,8 +55,9 @@ namespace Upgrade
         public ArcsList ArcRestrictions { get; private set; }
         public bool UsesCharges { get { return Charges > 0; } }
         public virtual bool NoRangeBonus { get; protected set; }
+        public int ChargesCost { get; private set; }
 
-        public SpecialWeaponInfo(int attackValue, int minRange, int maxRange, List<Type> requiresTokens = null, Type requiresToken = null, Type spendsToken = null, int charges = 0, bool regensCharges = false, bool discard = false, bool twinAttack = false, bool canShootOutsideArc = false, ArcType arc = ArcType.Front, bool noRangeBonus = false)
+        public SpecialWeaponInfo(int attackValue, int minRange, int maxRange, List<Type> requiresTokens = null, Type requiresToken = null, Type spendsToken = null, int charges = 0, bool regensCharges = false, bool discard = false, bool twinAttack = false, bool canShootOutsideArc = false, ArcType arc = ArcType.Front, bool noRangeBonus = false, int chargesCost = 1)
         {
             AttackValue = attackValue;
             MinRange = minRange;
@@ -74,6 +75,7 @@ namespace Upgrade
             ArcRestrictions = new ArcsList(arc);
             CanShootOutsideArc = canShootOutsideArc;
             NoRangeBonus = noRangeBonus;
+            ChargesCost = chargesCost;
         }
     }
 }
