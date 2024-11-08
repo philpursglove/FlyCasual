@@ -146,7 +146,7 @@ namespace ActionsList
             {
                 if (currentUpgrade is IShipWeapon
                     && (currentUpgrade.HasType(UpgradeType.Missile) || currentUpgrade.HasType(UpgradeType.Torpedo))
-                    && currentUpgrade.State.Charges > 0)
+                    && currentUpgrade.State.Charges > currentUpgrade.UpgradeInfo.ChargesCost)
                 {
                     if (currentUpgrade.UpgradeInfo.WeaponInfo.RequiresTokens.Contains(typeof(BlueTargetLockToken)))
                     {

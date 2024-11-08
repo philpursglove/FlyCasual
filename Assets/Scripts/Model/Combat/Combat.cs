@@ -158,6 +158,15 @@ public static class Combat
                 delegate { TryPerformAttack(isSilent: false); }
             );
         }
+        // Ask before using secondary weapons with charges
+        else if (weapons.Count == 1 && !Selection.ThisShip.PrimaryWeapons.Contains(weapons.First()) && weapons.First().WeaponInfo.UsesCharges)
+        {
+            Phases.StartTemporarySubPhaseOld(
+                "Choose a weapon for this attack.",
+                typeof(SkippableWeaponSelectionDecisionSubPhase),
+                delegate { TryPerformAttack(isSilent: false); }
+            );
+        }
         else if (weapons.Count == 1)
         {
             Combat.ChosenWeapon = weapons.First();
@@ -594,6 +603,15 @@ namespace SubPhases
             CallBack();
         }
 
+    }
+
+    public class SkippableWeaponSelectionDecisionSubPhase : WeaponSelectionDecisionSubPhase
+    {
+        public override void PrepareDecision(System.Action callBack)
+        {
+            ShowSkipButton = true;
+            base.PrepareDecision(callBack);
+        }
     }
 
     public class AttackExecutionSubphase : GenericSubPhase

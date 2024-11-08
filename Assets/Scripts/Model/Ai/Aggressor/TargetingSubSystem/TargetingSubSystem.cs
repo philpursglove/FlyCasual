@@ -115,8 +115,8 @@ namespace AI.Aggressor
                     }
                 }
             }
-            // If our current weapon uses charges and has no charges available, don't use it.
-            if (currentUpgrade != null && Weapon.WeaponInfo.UsesCharges == true && currentUpgrade.State.Charges == 0)
+            // If our current weapon uses charges and has inadequate charges available, don't use it.
+            if (currentUpgrade != null && Weapon.WeaponInfo.UsesCharges && currentUpgrade.UpgradeInfo.Charges > currentUpgrade.State.Charges)
             {
                 Priority = 0;
             }
