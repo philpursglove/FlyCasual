@@ -69,7 +69,6 @@ namespace UpgradesList.SecondEdition
                         chargesCost: 2
                     ),
                     abilityType: typeof(Abilities.SecondEdition.SaturationRocketsAbility),
-                    addArc: new ShipArcInfo(ArcType.FullFront),
                     restriction: new AbilityPresenceRestriction(typeof(LieutenantKarsabiSLAbility))
                 );
 
@@ -87,29 +86,69 @@ namespace Abilities.SecondEdition
         
         public override void ActivateAbility()
         {
-            HostShip.OnAttackStartAsAttacker += CheckFiringArc;            
+            //HostShip.OnCombatCheckExtraAttack
+            //HostShip.OnGenerateAvailableAttackPaymentList
+            
+            HostShip.OnAttackStartAsAttacker += RegisterSaturationRocketAbility;
+            HostShip.OnAttackFinishAsAttacker += CheckBonusAttack;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnAttackStartAsAttacker -= CheckFiringArc;
+            HostShip.OnAttackStartAsAttacker -= RegisterSaturationRocketAbility;
+            HostShip.OnAttackFinishAsAttacker -= CheckBonusAttack;
         }
 
-        public void CheckFiringArc()
+        public void RegisterSaturationRocketAbility()
         {
-            if(Combat.Defender != null && Combat.ShotInfo.InArcByType(ArcType.Front)) {
-                AskToUseAbility(
-                    HostUpgrade.UpgradeInfo.Name,
-                    NeverUseByDefault,
-                    AddAttackDie
+            // TODO: Add confirmation to use Saturation Rockets if only option?
+            if(Combat.ChosenWeapon == HostUpgrade)
+            {
+                RegisterAbilityTrigger(
+                    TriggerTypes.OnAttackStart, 
+                    CheckFiringArc
                 );
             }
         }
 
-        public void AddAttackDie(object sender, EventArgs e)
+        public void CheckFiringArc(object sender, System.EventArgs e)
         {
-            Messages.ShowInfo(HostShip.PilotInfo.PilotName + " spent 1 charge to add an attack die.");
+            if(Combat.Defender != null 
+                && Combat.ShotInfo.InArcByType(ArcType.Front)
+                && HostUpgrade.State.Charges > 0) {
+                AskToUseAbility(
+                    HostUpgrade.UpgradeInfo.Name,
+                    NeverUseByDefault,
+                    UseAbility,
+                    showSkipButton: false,
+                    descriptionLong: "Do you want to spend an additional charge to add an attack die?",
+                    imageHolder: HostShip
+                );
+            }
+            else
+            {
+                Triggers.FinishTrigger();
+            }
+        }
 
+        public void UseAbility(object sender, EventArgs e)
+        {
+            HostShip.AfterGotNumberOfAttackDice += SaturationRocketAddAttackDice;
+            HostUpgrade.State.SpendCharge();
+            SubPhases.DecisionSubPhase.ConfirmDecision();
+        }
+
+        private void SaturationRocketAddAttackDice(ref int value)
+        {
+            Messages.ShowInfo(HostShip.PilotInfo.PilotName + ": +1 attack die");
+            value++;
+            HostShip.AfterGotNumberOfAttackDice -= SaturationRocketAddAttackDice;
+        }
+
+        public void CheckBonusAttack(GenericShip ship)
+        {
+            Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " spent 1 charge to get a bonus attack.");
+            bonusAttack = true;
         }
     }
 
