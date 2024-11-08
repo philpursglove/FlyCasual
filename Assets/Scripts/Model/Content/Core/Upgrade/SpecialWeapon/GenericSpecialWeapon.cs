@@ -71,7 +71,7 @@ namespace Upgrade
 
             if (!State.IsFaceup) return false;
 
-            if (State.UsesCharges && State.Charges == 0) return false;
+            if (State.UsesCharges && WeaponInfo.ChargesCost > State.Charges) return false;
 
             ShotInfo shotInfo = new ShotInfo(HostShip, targetShip, this);
             int range = shotInfo.Range;
@@ -131,9 +131,9 @@ namespace Upgrade
             {
                 TryDiscard(callBack);
             }
-            else if (WeaponInfo.Charges > 0)
+            else if (WeaponInfo.Charges >= WeaponInfo.ChargesCost)
             {
-                State.SpendCharge();
+                State.SpendCharges(WeaponInfo.ChargesCost);
                 callBack();
             }
             else

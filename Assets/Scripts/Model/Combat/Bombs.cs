@@ -422,7 +422,7 @@ namespace Bombs
         {
             return ship.UpgradeBar.GetUpgradesOnlyFaceup()
                 .Where(n => n.GetType().BaseType == typeof(GenericTimedBomb) || n.GetType().BaseType == typeof(GenericTimedBombSE) || n.GetType().BaseType == typeof(GenericContactMineSE) || n.UpgradeInfo.SubType == UpgradeSubType.Remote)
-                .Where(n => n.State.UsesCharges == false || (n.State.UsesCharges == true && n.State.Charges > 0))
+                .Where(n => n.State.UsesCharges == false || (n.State.UsesCharges == true && n.State.Charges >= n.UpgradeInfo.ChargesCost))
                 .Where(n => subType == UpgradeSubType.None || n.UpgradeInfo.SubType == subType)
                 .Where(n => type == null || n.GetType() == type)
                 .ToList();
