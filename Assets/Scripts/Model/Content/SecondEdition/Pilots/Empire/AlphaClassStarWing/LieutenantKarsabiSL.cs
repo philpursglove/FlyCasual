@@ -3,9 +3,8 @@ using Actions;
 using ActionsList;
 using Arcs;
 using Ship;
-using SubPhases;
+using System;
 using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 
 namespace Ship
@@ -55,7 +54,6 @@ namespace UpgradesList.SecondEdition
     {
         public SaturationRockets() : base()
         {
-            // Currently, there's no way to spend 2 charges automatically, need to add this to UpgradeCardInfo or SpecialWeaponInfo
             UpgradeInfo = new UpgradeCardInfo(
                     "Saturation Rockets",
                     UpgradeType.Missile,
@@ -85,22 +83,33 @@ namespace Abilities.SecondEdition
     // TODO: Add abilities
     public class SaturationRocketsAbility : GenericAbility
     {
+        bool bonusAttack = false;
+        
         public override void ActivateAbility()
         {
-            HostShip.OnAttackStartAsAttacker += CheckCharges;
-            
+            HostShip.OnAttackStartAsAttacker += CheckFiringArc;            
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnAttackStartAsAttacker -= CheckCharges;
+            HostShip.OnAttackStartAsAttacker -= CheckFiringArc;
         }
 
-        public void CheckCharges()
+        public void CheckFiringArc()
         {
-            if(HostUpgrade.UpgradeInfo.WeaponInfo.Charges >= 2) {
-
+            if(Combat.Defender != null && Combat.ShotInfo.InArcByType(ArcType.Front)) {
+                AskToUseAbility(
+                    HostUpgrade.UpgradeInfo.Name,
+                    NeverUseByDefault,
+                    AddAttackDie
+                );
             }
+        }
+
+        public void AddAttackDie(object sender, EventArgs e)
+        {
+            Messages.ShowInfo(HostShip.PilotInfo.PilotName + " spent 1 charge to add an attack die.");
+
         }
     }
 
