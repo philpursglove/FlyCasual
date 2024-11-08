@@ -46,7 +46,8 @@ namespace Abilities.SecondEdition
         private void CheckAbility(GenericShip ship, bool flag)
         {
             if (Tools.IsFriendly(HostShip, ship)
-                && ship.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol)))
+                && ship.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol))
+                && HostShip != ship)
             {
                 DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
                 if (distInfo.Range is >= 0 and <= 3)
