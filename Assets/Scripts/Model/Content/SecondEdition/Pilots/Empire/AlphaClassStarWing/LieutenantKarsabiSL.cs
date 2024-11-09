@@ -2,6 +2,7 @@
 using Actions;
 using ActionsList;
 using Arcs;
+using BoardTools;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -83,53 +84,34 @@ namespace Abilities.SecondEdition
     public class SaturationRocketsAbility : GenericAbility
     {
         bool IsBonusAttack = false;
+        IShipWeapon OriginalWeapon;
         
         public override void ActivateAbility()
         {
             HostShip.OnAttackStartAsAttacker += RegisterSaturationRocketAbility;
-            //HostShip.OnAttackFinishAsAttacker += CheckBonusAttack;
-            Phases.Events.OnRoundEnd += ClearBonusAttackFlag;
+            HostShip.OnCombatCheckExtraAttack += RegisterBonusAttack;
+            Phases.Events.OnRoundEnd += ClearVariables;
         }
 
         public override void DeactivateAbility()
         {
             HostShip.OnAttackStartAsAttacker -= RegisterSaturationRocketAbility;
-            //HostShip.OnAttackFinishAsAttacker -= CheckBonusAttack;
-            Phases.Events.OnRoundEnd -= ClearBonusAttackFlag;
+            HostShip.OnCombatCheckExtraAttack -= RegisterBonusAttack;
+            Phases.Events.OnRoundEnd -= ClearVariables;
         }
 
         public void RegisterSaturationRocketAbility()
         {
             if(Combat.ChosenWeapon == HostUpgrade)
             {
-                // TODO: Don't do this, they show as two simultaneous abilities. We need them to show in order.
-                // Check OnExtraAttack and register the ask then.
+                OriginalWeapon = Combat.ChosenWeapon;    
+
                 RegisterAbilityTrigger(
                     TriggerTypes.OnAttackStart, 
                     CheckFiringArc
                 );
-
-                RegisterAbilityTrigger(
-                    TriggerTypes.OnCombatCheckExtraAttack,
-                    AskBonusAttack
-                );
             }
         }
-
-        public void RegisterSaturationRocketAbility(GenericShip ship)
-        {
-            RegisterSaturationRocketAbility();
-        }
-
-        //public void CheckBonusAttack(GenericShip ship)
-        //{
-        //    if (Combat.ChosenWeapon == this.HostUpgrade && !IsBonusAttack)
-        //    {
-        //        IsBonusAttack = true;
-
-        //        HostShip.OnCombatCheckExtraAttack += RegisterSaturationRocketAbility;
-        //    }
-        //}
 
         public void CheckFiringArc(object sender, System.EventArgs e)
         {
@@ -165,54 +147,73 @@ namespace Abilities.SecondEdition
             HostShip.AfterGotNumberOfAttackDice -= SaturationRocketAddAttackDice;
         }
 
-        public void AskBonusAttack(object sender, System.EventArgs e)
+        public void RegisterBonusAttack(GenericShip ship)
         {
-            if(IsBonusAttack && HostUpgrade.State.Charges > 0)
+            if (OriginalWeapon == HostUpgrade
+                && !IsBonusAttack 
+                && HostUpgrade.State.Charges > 0)
             {
-                AskToUseAbility(
-                    HostUpgrade.UpgradeInfo.Name,
-                    NeverUseByDefault,
-                    UseBonusAttack,
-                    showSkipButton: false,
-                    descriptionLong: "Do you want to spend an additional charge for a bonus attack?",
-                    imageHolder: HostShip
+                RegisterAbilityTrigger(
+                    TriggerTypes.OnCombatCheckExtraAttack,
+                    AskBonusAttack
                     );
             }
-            else
-            {
-                Triggers.FinishTrigger();
-            }
+        }
+
+        public void AskBonusAttack(object sender, System.EventArgs e)
+        {
+            AskToUseAbility(
+                HostUpgrade.UpgradeInfo.Name,
+                NeverUseByDefault,
+                UseBonusAttack,
+                showSkipButton: false,
+                descriptionLong: "Do you want to spend an additional charge for a bonus attack?"
+                );
         }
 
         public void UseBonusAttack(object sender, System.EventArgs e)
         {
             IsBonusAttack = true;
             
-            HostUpgrade.State.SpendCharge();
-
             Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " spent a charge to get a bonus attack.");
-            
+
+            //Combat.GenerateIntentToAttackCommand()
+
+            HostUpgrade.State.RestoreCharge();
+
             Combat.StartSelectAttackTarget(
                 HostShip,
-                null,
+                FinishAdditionalAttack,
+                extraAttackFilter: BonusAttackWithWeapon,
                 abilityName: HostUpgrade.UpgradeInfo.Name,
-                description: $"You may perform a bonus {HostUpgrade.UpgradeInfo.Name} attack",
-                imageSource: HostUpgrade
-
-                //GenericShip ship,
-                //Action callback,
-                //Func<GenericShip, IShipWeapon, bool, bool> extraAttackFilter = null,
-                //string abilityName = null,
-                //string description = null,
-                //IImageHolder imageSource = null,
-                //bool showSkipButton = true,
-                //Action < Action > payAttackCost = null
+                description: $"Select a target for bonus attack"
             );
         }
 
-        public void ClearBonusAttackFlag()
+        private bool BonusAttackWithWeapon(GenericShip target, IShipWeapon weapon, bool isSilent)
+        {
+            bool isValidWeapon = weapon == HostUpgrade;
+
+            if(!isValidWeapon && !isSilent) Messages.ShowError($"Bonus attack must be with {HostUpgrade.UpgradeInfo.Name}.");
+
+            return isValidWeapon;
+        }
+
+        private void FinishAdditionalAttack()
+        {
+            //if bonus attack was skipped, refund charge
+            if (Selection.ThisShip.IsAttackSkipped)
+            {
+                HostUpgrade.State.RestoreCharge();
+            }
+
+            SubPhases.DecisionSubPhase.ConfirmDecision();
+        }
+
+        public void ClearVariables()
         {
             IsBonusAttack = false;
+            OriginalWeapon = null;
         }
     }
 
