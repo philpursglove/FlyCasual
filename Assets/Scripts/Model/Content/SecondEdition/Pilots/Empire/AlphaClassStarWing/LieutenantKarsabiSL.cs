@@ -79,37 +79,57 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    // TODO: Add abilities
+    // TODO: Add extra shot
     public class SaturationRocketsAbility : GenericAbility
     {
-        bool bonusAttack = false;
+        bool IsBonusAttack = false;
         
         public override void ActivateAbility()
         {
-            //HostShip.OnCombatCheckExtraAttack
-            //HostShip.OnGenerateAvailableAttackPaymentList
-            
             HostShip.OnAttackStartAsAttacker += RegisterSaturationRocketAbility;
-            HostShip.OnAttackFinishAsAttacker += CheckBonusAttack;
+            //HostShip.OnAttackFinishAsAttacker += CheckBonusAttack;
+            Phases.Events.OnRoundEnd += ClearBonusAttackFlag;
         }
 
         public override void DeactivateAbility()
         {
             HostShip.OnAttackStartAsAttacker -= RegisterSaturationRocketAbility;
-            HostShip.OnAttackFinishAsAttacker -= CheckBonusAttack;
+            //HostShip.OnAttackFinishAsAttacker -= CheckBonusAttack;
+            Phases.Events.OnRoundEnd -= ClearBonusAttackFlag;
         }
 
         public void RegisterSaturationRocketAbility()
         {
-            // TODO: Add confirmation to use Saturation Rockets if only option?
             if(Combat.ChosenWeapon == HostUpgrade)
             {
+                // TODO: Don't do this, they show as two simultaneous abilities. We need them to show in order.
+                // Check OnExtraAttack and register the ask then.
                 RegisterAbilityTrigger(
                     TriggerTypes.OnAttackStart, 
                     CheckFiringArc
                 );
+
+                RegisterAbilityTrigger(
+                    TriggerTypes.OnCombatCheckExtraAttack,
+                    AskBonusAttack
+                );
             }
         }
+
+        public void RegisterSaturationRocketAbility(GenericShip ship)
+        {
+            RegisterSaturationRocketAbility();
+        }
+
+        //public void CheckBonusAttack(GenericShip ship)
+        //{
+        //    if (Combat.ChosenWeapon == this.HostUpgrade && !IsBonusAttack)
+        //    {
+        //        IsBonusAttack = true;
+
+        //        HostShip.OnCombatCheckExtraAttack += RegisterSaturationRocketAbility;
+        //    }
+        //}
 
         public void CheckFiringArc(object sender, System.EventArgs e)
         {
@@ -145,10 +165,54 @@ namespace Abilities.SecondEdition
             HostShip.AfterGotNumberOfAttackDice -= SaturationRocketAddAttackDice;
         }
 
-        public void CheckBonusAttack(GenericShip ship)
+        public void AskBonusAttack(object sender, System.EventArgs e)
         {
-            Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " spent 1 charge to get a bonus attack.");
-            bonusAttack = true;
+            if(IsBonusAttack && HostUpgrade.State.Charges > 0)
+            {
+                AskToUseAbility(
+                    HostUpgrade.UpgradeInfo.Name,
+                    NeverUseByDefault,
+                    UseBonusAttack,
+                    showSkipButton: false,
+                    descriptionLong: "Do you want to spend an additional charge for a bonus attack?",
+                    imageHolder: HostShip
+                    );
+            }
+            else
+            {
+                Triggers.FinishTrigger();
+            }
+        }
+
+        public void UseBonusAttack(object sender, System.EventArgs e)
+        {
+            IsBonusAttack = true;
+            
+            HostUpgrade.State.SpendCharge();
+
+            Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " spent a charge to get a bonus attack.");
+            
+            Combat.StartSelectAttackTarget(
+                HostShip,
+                null,
+                abilityName: HostUpgrade.UpgradeInfo.Name,
+                description: $"You may perform a bonus {HostUpgrade.UpgradeInfo.Name} attack",
+                imageSource: HostUpgrade
+
+                //GenericShip ship,
+                //Action callback,
+                //Func<GenericShip, IShipWeapon, bool, bool> extraAttackFilter = null,
+                //string abilityName = null,
+                //string description = null,
+                //IImageHolder imageSource = null,
+                //bool showSkipButton = true,
+                //Action < Action > payAttackCost = null
+            );
+        }
+
+        public void ClearBonusAttackFlag()
+        {
+            IsBonusAttack = false;
         }
     }
 
