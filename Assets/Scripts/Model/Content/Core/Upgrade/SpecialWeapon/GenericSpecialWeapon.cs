@@ -131,7 +131,7 @@ namespace Upgrade
             {
                 TryDiscard(callBack);
             }
-            else if (WeaponInfo.Charges >= WeaponInfo.ChargesCost)
+            else if (State.Charges >= WeaponInfo.ChargesCost)
             {
                 State.SpendCharges(WeaponInfo.ChargesCost);
                 callBack();
