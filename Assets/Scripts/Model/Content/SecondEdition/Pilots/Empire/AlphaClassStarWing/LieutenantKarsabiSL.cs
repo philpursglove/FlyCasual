@@ -29,8 +29,7 @@ namespace Ship
                     {
                         UpgradeType.Torpedo,
                         UpgradeType.Missile,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
+                        UpgradeType.Modification
                     },
                     isStandardLayout: true                    
                 );
