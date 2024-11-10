@@ -43,6 +43,8 @@ namespace Ship
 
                 ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(TargetLockAction), ActionColor.Red));
                 ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(ReloadAction), ActionColor.Red));
+
+                ShipAbilities.Add(new AlphaClassStarWingSLAbility());
             }
         }
     }

@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
-using Movement;
+﻿using Actions;
 using ActionsList;
-using Actions;
 using Arcs;
-using UnityEngine;
+using Movement;
+using Ship;
 using Ship.CardInfo;
+using SubPhases;
+using System.Collections.Generic;
+using Tokens;
+using UnityEngine;
 
 namespace Ship
 {
@@ -73,6 +76,58 @@ namespace Ship
 
                 ShipIconLetter = '&';
             }
+        }
+    }
+}
+
+namespace Abilities.SecondEdition
+{
+    public class AlphaClassStarWingSLAbility : GenericAbility
+    {
+        public override void ActivateAbility()
+        {
+            HostShip.OnCombatActivation += RegisterAlphaClassStarWingSLAbility;
+        }
+
+        public override void DeactivateAbility()
+        {
+            HostShip.OnCombatActivation -= RegisterAlphaClassStarWingSLAbility;
+        }
+
+        public void RegisterAlphaClassStarWingSLAbility(GenericShip ship)
+        {
+            RegisterAbilityTrigger(TriggerTypes.OnCombatActivation, CheckStrain);
+        }
+
+        public void CheckStrain(object sender, System.EventArgs e)
+        {
+            if (HostShip.Tokens.HasToken<WeaponsDisabledToken>())
+            {
+                AskToUseAbility(
+                    HostShip.PilotInfo.PilotName,
+                    AlwaysUseByDefault,
+                    UseAbility,
+                    descriptionLong: "Do you want to receive 1 Strain Token to remove Disarm Token?",
+                    imageHolder: HostShip
+                );
+            }
+            else
+            {
+                Triggers.FinishTrigger();
+            }
+        }
+
+        public void UseAbility(object sender, System.EventArgs e)
+        {
+            Messages.ShowInfo(HostShip.PilotInfo.PilotName + " recieved Strain token to remove a Disarm Token");
+
+            HostShip.Tokens.RemoveToken(
+                typeof(WeaponsDisabledToken),
+                delegate
+                {
+                    HostShip.Tokens.AssignToken(typeof(StrainToken), DecisionSubPhase.ConfirmDecision);
+                }
+            );
         }
     }
 }
