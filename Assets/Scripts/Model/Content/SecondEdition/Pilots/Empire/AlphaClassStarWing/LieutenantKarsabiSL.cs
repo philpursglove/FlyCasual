@@ -2,7 +2,6 @@
 using Actions;
 using ActionsList;
 using Arcs;
-using BoardTools;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -84,19 +83,16 @@ namespace Abilities.SecondEdition
     public class SaturationRocketsAbility : GenericAbility
     {
         bool IsBonusAttack = false;
-        IShipWeapon OriginalWeapon;
         
         public override void ActivateAbility()
         {
             HostShip.OnAttackStartAsAttacker += RegisterSaturationRocketAbility;
-            HostShip.OnCombatCheckExtraAttack += RegisterBonusAttack;
             Phases.Events.OnRoundEnd += ClearVariables;
         }
 
         public override void DeactivateAbility()
         {
             HostShip.OnAttackStartAsAttacker -= RegisterSaturationRocketAbility;
-            HostShip.OnCombatCheckExtraAttack -= RegisterBonusAttack;
             Phases.Events.OnRoundEnd -= ClearVariables;
         }
 
@@ -104,8 +100,6 @@ namespace Abilities.SecondEdition
         {
             if(Combat.ChosenWeapon == HostUpgrade)
             {
-                OriginalWeapon = Combat.ChosenWeapon;    
-
                 RegisterAbilityTrigger(
                     TriggerTypes.OnAttackStart, 
                     CheckFiringArc
@@ -117,7 +111,10 @@ namespace Abilities.SecondEdition
         {
             if(Combat.Defender != null 
                 && Combat.ShotInfo.InArcByType(ArcType.Front)
-                && HostUpgrade.State.Charges > 0) {
+                && HostUpgrade.State.Charges > 0)
+            {
+                if (!IsBonusAttack) HostShip.OnCombatCheckExtraAttack += RegisterBonusAttack;
+
                 AskToUseAbility(
                     HostUpgrade.UpgradeInfo.Name,
                     NeverUseByDefault,
@@ -129,7 +126,10 @@ namespace Abilities.SecondEdition
             }
             else
             {
-                Triggers.FinishTrigger();
+                if (!IsBonusAttack)
+                {
+                    Triggers.FinishTrigger();
+                }
             }
         }
 
@@ -149,15 +149,15 @@ namespace Abilities.SecondEdition
 
         public void RegisterBonusAttack(GenericShip ship)
         {
-            if (OriginalWeapon == HostUpgrade
-                && !IsBonusAttack 
+            if (!IsBonusAttack 
                 && HostUpgrade.State.Charges > 0)
             {
                 RegisterAbilityTrigger(
                     TriggerTypes.OnCombatCheckExtraAttack,
-                    AskBonusAttack
-                    );
+                    AskBonusAttack);
             }
+
+            HostShip.OnCombatCheckExtraAttack -= RegisterBonusAttack;
         }
 
         public void AskBonusAttack(object sender, System.EventArgs e)
@@ -177,30 +177,28 @@ namespace Abilities.SecondEdition
             
             Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " spent a charge to get a bonus attack.");
 
-            //Combat.GenerateIntentToAttackCommand()
-
             HostUpgrade.State.RestoreCharge();
+
+            HostShip.OnCheckIsForbiddenWeapon += AllowUpgradeOnly;
 
             Combat.StartSelectAttackTarget(
                 HostShip,
-                FinishAdditionalAttack,
-                extraAttackFilter: BonusAttackWithWeapon,
+                FinishBonusAttack,
                 abilityName: HostUpgrade.UpgradeInfo.Name,
-                description: $"Select a target for bonus attack"
+                description: $"Select a target for bonus attack",
+                showSkipButton: true
             );
         }
 
-        private bool BonusAttackWithWeapon(GenericShip target, IShipWeapon weapon, bool isSilent)
+        private void AllowUpgradeOnly(GenericShip target, IShipWeapon weapon, ref bool isForbidden)
         {
-            bool isValidWeapon = weapon == HostUpgrade;
-
-            if(!isValidWeapon && !isSilent) Messages.ShowError($"Bonus attack must be with {HostUpgrade.UpgradeInfo.Name}.");
-
-            return isValidWeapon;
+            isForbidden = weapon != HostUpgrade;
         }
 
-        private void FinishAdditionalAttack()
+        private void FinishBonusAttack()
         {
+            HostShip.OnCheckIsForbiddenWeapon -= AllowUpgradeOnly;
+
             //if bonus attack was skipped, refund charge
             if (Selection.ThisShip.IsAttackSkipped)
             {
@@ -213,7 +211,6 @@ namespace Abilities.SecondEdition
         public void ClearVariables()
         {
             IsBonusAttack = false;
-            OriginalWeapon = null;
         }
     }
 
