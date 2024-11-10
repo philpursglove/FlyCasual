@@ -79,7 +79,6 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    // TODO: Add extra shot
     public class SaturationRocketsAbility : GenericAbility
     {
         bool IsBonusAttack = false;
@@ -109,27 +108,30 @@ namespace Abilities.SecondEdition
 
         public void CheckFiringArc(object sender, System.EventArgs e)
         {
-            if(Combat.Defender != null 
-                && Combat.ShotInfo.InArcByType(ArcType.Front)
+            if(Combat.Defender != null
                 && HostUpgrade.State.Charges > 0)
             {
                 if (!IsBonusAttack) HostShip.OnCombatCheckExtraAttack += RegisterBonusAttack;
 
-                AskToUseAbility(
-                    HostUpgrade.UpgradeInfo.Name,
-                    NeverUseByDefault,
-                    UseAbility,
-                    showSkipButton: false,
-                    descriptionLong: "Do you want to spend an additional charge to add an attack die?",
-                    imageHolder: HostShip
-                );
+                if (Combat.ShotInfo.InArcByType(ArcType.Front))
+                {
+                    AskToUseAbility(
+                        HostUpgrade.UpgradeInfo.Name,
+                        NeverUseByDefault,
+                        UseAbility,
+                        showSkipButton: false,
+                        descriptionLong: "Do you want to spend an additional charge to add an attack die?",
+                        imageHolder: HostShip
+                        );
+                }
+                else
+                {
+                    Triggers.FinishTrigger();
+                }                
             }
             else
             {
-                if (!IsBonusAttack)
-                {
-                    Triggers.FinishTrigger();
-                }
+                Triggers.FinishTrigger();
             }
         }
 
@@ -149,8 +151,9 @@ namespace Abilities.SecondEdition
 
         public void RegisterBonusAttack(GenericShip ship)
         {
-            if (!IsBonusAttack 
-                && HostUpgrade.State.Charges > 0)
+            IsBonusAttack = true;
+
+            if (HostUpgrade.State.Charges > 0)
             {
                 RegisterAbilityTrigger(
                     TriggerTypes.OnCombatCheckExtraAttack,
@@ -173,10 +176,9 @@ namespace Abilities.SecondEdition
 
         public void UseBonusAttack(object sender, System.EventArgs e)
         {
-            IsBonusAttack = true;
-            
             Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " spent a charge to get a bonus attack.");
 
+            // Upgrade uses full initial charges instead of just 1 charge, we restore a charge first to balance it and not throw an error
             HostUpgrade.State.RestoreCharge();
 
             HostShip.OnCheckIsForbiddenWeapon += AllowUpgradeOnly;
@@ -218,12 +220,17 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            
+            HostShip.OnGetReloadChargesCount += RegisterLieutenantKarsabiAbility;
         }
 
         public override void DeactivateAbility()
         {
-            
+            HostShip.OnGetReloadChargesCount -= RegisterLieutenantKarsabiAbility;
+        }
+
+        public void RegisterLieutenantKarsabiAbility(GenericUpgrade upgrade, ref int count)
+        {
+            count = 2;
         }
     }
 }
