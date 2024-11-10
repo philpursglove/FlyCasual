@@ -163,7 +163,7 @@ public static class Combat
         {
             Phases.StartTemporarySubPhaseOld(
                 "Choose a weapon for this attack.",
-                typeof(SkippableWeaponSelectionDecisionSubPhase),
+                typeof(WeaponSelectionDecisionSubPhase),
                 delegate { TryPerformAttack(isSilent: false); }
             );
         }
