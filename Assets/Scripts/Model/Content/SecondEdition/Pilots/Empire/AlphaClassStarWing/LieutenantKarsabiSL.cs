@@ -189,8 +189,14 @@ namespace Abilities.SecondEdition
                 FinishBonusAttack,
                 abilityName: HostUpgrade.UpgradeInfo.Name,
                 description: $"Select a target for bonus attack",
-                showSkipButton: true
+                showSkipButton: true,
+                extraAttackFilter: BonusAttackCloseRangeOnly
             );
+        }
+
+        private bool BonusAttackCloseRangeOnly(GenericShip target, IShipWeapon weapon, bool isSilent)
+        {
+            return (weapon == HostUpgrade && Combat.ShotInfo.Range <= 1);
         }
 
         private void AllowUpgradeOnly(GenericShip target, IShipWeapon weapon, ref bool isForbidden)
