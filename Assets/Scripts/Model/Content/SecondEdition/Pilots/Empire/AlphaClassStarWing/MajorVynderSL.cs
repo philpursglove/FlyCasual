@@ -3,9 +3,9 @@ using Actions;
 using ActionsList;
 using Arcs;
 using Ship;
+using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Security.AccessControl;
 using Tokens;
 using Upgrade;
 
@@ -61,6 +61,7 @@ namespace UpgradesList.SecondEdition
                     "Long-Range Scanners",
                     UpgradeType.Sensor,
                     cost: 0,
+                    charges: 2,
                     abilityType: typeof(Abilities.SecondEdition.LongRangeScannersAbility),
                     restriction: new AbilityPresenceRestriction(typeof(MajorVynderSLAbility))
                 );
@@ -113,12 +114,41 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            
+            HostShip.BeforeActionIsPerformed += RegisterAbility;
         }
 
         public override void DeactivateAbility()
         {
-            
+            HostShip.BeforeActionIsPerformed -= RegisterAbility;
+        }
+
+        private void RegisterAbility(GenericAction action, ref bool isValid)
+        {
+            if (HostUpgrade.State.Charges > 0 && action.GetType() == typeof(TargetLockAction))
+            {
+                RegisterAbilityTrigger(TriggerTypes.BeforeActionIsPerformed, AskUseMajorVynderAbility);
+            }
+
+            isValid = true;
+        }
+
+        private void AskUseMajorVynderAbility(object sender, EventArgs e)
+        {
+            AskToUseAbility(
+                HostShip.PilotInfo.PilotName,
+                NeverUseByDefault,
+                UseMajorVynderAbility,
+                descriptionLong: "Do you want to spend 1 Charge to acquire locks at any range?",
+                imageHolder: HostShip
+            );
+        }
+
+        private void UseMajorVynderAbility(object sender, EventArgs e)
+        {
+            HostUpgrade.State.SpendCharge();
+            HostShip.SetTargetLockRange(0, int.MaxValue);
+
+            DecisionSubPhase.ConfirmDecision();
         }
     }
 
