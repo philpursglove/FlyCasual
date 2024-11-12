@@ -6,6 +6,7 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tokens;
 using Upgrade;
 
@@ -83,6 +84,7 @@ namespace UpgradesList.SecondEdition
                         minRange: 1,
                         maxRange: 3,
                         charges: 2,
+                        noRangeBonus: true,
                         arc: ArcType.Front,
                         requiresToken: typeof(BlueTargetLockToken)
                     ),
@@ -99,14 +101,96 @@ namespace Abilities.SecondEdition
 {
     public class MajorVynderSLAbility : GenericAbility
     {
+        // After you perform a Missile attack, you may performa a bonus cannon attack. While you perform this bonus attack, you may change 1 focus to a hit result.
+        bool usedBonusAttack;
+        IShipWeapon prevWeapon;
+
         public override void ActivateAbility()
         {
-            
+            HostShip.OnAttackStartAsAttacker += RegisterAbility;
+            HostShip.OnRoundEnd += ClearFlags;
         }
 
         public override void DeactivateAbility()
         {
-            
+            HostShip.OnAttackStartAsAttacker -= RegisterAbility;
+            HostShip.OnRoundEnd -= ClearFlags;
+        }
+
+        public void RegisterAbility()
+        {
+            if (!usedBonusAttack)
+            {
+                prevWeapon = Combat.ChosenWeapon;
+                HostShip.OnCombatCheckExtraAttack += RegisterBonusAttack;
+            }
+        }
+
+        public void RegisterBonusAttack(GenericShip ship)
+        {
+            usedBonusAttack = true;
+
+            if(prevWeapon.WeaponType == WeaponTypes.Missile)
+            { 
+                RegisterAbilityTrigger(TriggerTypes.OnCombatCheckExtraAttack, PerformBonusAttack);
+            }
+
+            HostShip.OnCombatCheckExtraAttack -= RegisterBonusAttack;
+        }
+
+        public void PerformBonusAttack(object sender, EventArgs e)
+        {
+            HostShip.OnCheckIsForbiddenWeapon += AllowCannonOnly;
+
+            AddDiceModification(
+                "Major Vynder Ability",
+                IsDiceModificationAvailable,
+                GetDiceModificationAiPriority,
+                DiceModificationType.Change,
+                1,
+                new List<DieSide> { DieSide.Focus },
+                DieSide.Success
+            );
+
+            Messages.ShowInfo($"Select a target for bonus attack.");
+
+            Combat.StartSelectAttackTarget(
+                HostShip,
+                FinishBonusAttack,
+                abilityName: HostShip.PilotName,
+                description: $"You may perform a bonus cannon attack, if you do, you may change 1 focus result to a hit result.",
+                showSkipButton: true
+            );
+        }
+
+        public void AllowCannonOnly(GenericShip ship, IShipWeapon weapon, ref bool isForbidden)
+        {
+            isForbidden = weapon.WeaponType != WeaponTypes.Cannon;
+        }
+
+        public void FinishBonusAttack()
+        {
+            HostShip.OnCheckIsForbiddenWeapon -= AllowCannonOnly;
+
+            Triggers.FinishTrigger();
+
+            RemoveDiceModification();
+        }
+
+        public bool IsDiceModificationAvailable()
+        {
+            return Combat.CurrentDiceRoll.Focuses > 0;
+        }
+
+        private int GetDiceModificationAiPriority()
+        {
+            return 100;
+        }
+
+        private void ClearFlags(GenericShip ship)
+        {
+            usedBonusAttack = false;
+            prevWeapon = null;
         }
     }
 
