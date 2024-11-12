@@ -65,6 +65,8 @@ namespace Upgrade
         {
             bool result = true;
 
+            if (HostShip.CheckIsForbiddenWeapon(HostShip, this)) return false;
+
             int MinRangeUpdated = WeaponInfo.MinRange;
             int MaxRangeUpdated = WeaponInfo.MaxRange;
             HostShip.CallUpdateWeaponRange(this, ref MinRangeUpdated, ref MaxRangeUpdated);
