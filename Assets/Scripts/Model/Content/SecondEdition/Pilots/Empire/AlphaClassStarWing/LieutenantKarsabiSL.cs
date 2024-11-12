@@ -67,11 +67,14 @@ namespace UpgradesList.SecondEdition
                         charges: 4,
                         regensCharges: true,
                         arc: ArcType.FullFront,
-                        chargesCost: 2
+                        chargesCost: 2,
+                        noRangeBonus: true
                     ),
                     abilityType: typeof(Abilities.SecondEdition.SaturationRocketsAbility),
                     restriction: new AbilityPresenceRestriction(typeof(LieutenantKarsabiSLAbility))
-                );
+            );
+
+            IsHidden = true;
 
             ImageUrl = "https://infinitearenas.com/xw2/images/pilots/lieutenantkarsabi-ssl.png";
         }
