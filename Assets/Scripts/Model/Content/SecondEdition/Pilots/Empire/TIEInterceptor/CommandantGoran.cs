@@ -93,18 +93,18 @@ namespace Abilities.SecondEdition
 
         public void RemoveRedToken()
         {
-            List<GenericToken> redtokens = (List<GenericToken>)TargetShip.Tokens.GetTokensByColor(TokenColors.Red).Where(t => t.GetType() != typeof(StressToken));
+            List<GenericToken> redtokens = TargetShip.Tokens.GetTokensByColor(TokenColors.Red).Where(t => t.GetType() != typeof(StressToken)).ToList<GenericToken>();
 
             if (redtokens.Count > 0)
             {
                 DecisionSubPhase pilotAbilityDecision = (DecisionSubPhase)Phases.StartTemporarySubPhaseNew(
                     HostShip.PilotName,
-                    typeof(CommandantgoranDecisionSubphase),
-                    Triggers.FinishTrigger
+                    typeof(CommandantgoranDecisionSubPhase),
+                    AbilityCleanup
                 );
 
-                pilotAbilityDecision.DescriptionShort = "Commandant Goran Pilot Ability";
-                pilotAbilityDecision.DescriptionLong = "Assign an Evade token and remove one non-stress red token.";
+                pilotAbilityDecision.DescriptionShort = $"{HostShip.PilotName} Pilot Ability";
+                pilotAbilityDecision.DescriptionLong = "Select a non-stress red token to remove.";
                 pilotAbilityDecision.ImageSource = HostShip;
 
                 pilotAbilityDecision.RequiredPlayer = HostShip.Owner.PlayerNo;
@@ -117,7 +117,7 @@ namespace Abilities.SecondEdition
                         RedTargetLockToken targetLockToken = (RedTargetLockToken)Token;
                         name = Token.Name + " " + targetLockToken.Letter;
                     }
-                    pilotAbilityDecision.AddDecision(name, delegate { HostShip.Tokens.RemoveToken(Token, DecisionSubPhase.ConfirmDecision); });
+                    pilotAbilityDecision.AddDecision(name, delegate { TargetShip.Tokens.RemoveToken(Token, DecisionSubPhase.ConfirmDecision); });
                 }
 
                 pilotAbilityDecision.ShowSkipButton = true;
@@ -125,7 +125,7 @@ namespace Abilities.SecondEdition
             }
             else
             {
-                Triggers.FinishTrigger();
+                SelectShipSubPhase.FinishSelection();
             }
         }
 
@@ -142,11 +142,16 @@ namespace Abilities.SecondEdition
             return isValid;
         }
 
+        public void AbilityCleanup()
+        {
+            DecisionSubPhase.ConfirmDecision();
+        }
+
         public int GetAiPriority(GenericShip ship)
         {
             return ship.PilotInfo.Cost;
         }
 
-        private class CommandantgoranDecisionSubphase : DecisionSubPhase { }
+        private class CommandantgoranDecisionSubPhase : DecisionSubPhase { }
     }
 }
