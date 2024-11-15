@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Ship;
-using Remote;
+﻿using GameCommands;
 using GameModes;
-using GameCommands;
+using Remote;
+using Ship;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace SubPhases
 {
