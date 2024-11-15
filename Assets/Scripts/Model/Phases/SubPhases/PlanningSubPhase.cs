@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Ship;
-using Remote;
+﻿using GameCommands;
 using GameModes;
-using GameCommands;
+using Remote;
+using Ship;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace SubPhases
 {
@@ -142,7 +142,6 @@ namespace SubPhases
             return ship.AssignedManeuver == null
                 && (ship.Owner.PlayerNo == RequiredPlayer
                     || (Global.IsNetworkGame == true && ship.Owner is Players.HumanPlayer))
-                && !RulesList.IonizationRule.IsIonized(ship)
                 && !(ship is GenericRemote);
         }
 
@@ -161,21 +160,14 @@ namespace SubPhases
         {
             if (ship is GenericRemote || IsLocked) return;
 
-            if (!RulesList.IonizationRule.IsIonized(ship))
-            {
-                IsLocked = true;
+            IsLocked = true;
 
-                Selection.ChangeActiveShip(ship);
-                DirectionsMenu.Show(
-                    SendAssignManeuverCommand,
-                    CheckForFinish,
-                    isRegularPlanning: true
-                );
-            }
-            else
-            {
-                Messages.ShowError("This ship is ionized. A maneuver cannot be assigned to it");
-            }
+            Selection.ChangeActiveShip(ship);
+            DirectionsMenu.Show(
+                SendAssignManeuverCommand,
+                CheckForFinish,
+                isRegularPlanning: true
+            );
         }
 
         private void SendAssignManeuverCommand(string maneuverCode)

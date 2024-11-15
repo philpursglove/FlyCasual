@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Bombs;
 using Movement;
-using System;
 using Obstacles;
-using System.Linq;
-using Bombs;
 using Remote;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Ship
 {
@@ -80,6 +79,7 @@ namespace Ship
 
         public GenericShip LastShipCollision { get; set; }
 
+        public EventHandlerShipManeuvers OnGetManeuvers;
         public Dictionary<string, MovementComplexity> Maneuvers { get; set; }
         public AI.GenericAiTable HotacManeuverTable { get; protected set; }
 
@@ -89,6 +89,7 @@ namespace Ship
         public event EventHandlerShipMovement AfterGetManeuverColorIncreaseComplexity;
         public event EventHandlerShipMovement AfterGetManeuverAvailablity;
 
+        public static event EventHandlerShip OnReadyGetManeuvers;
         public event EventHandlerShip OnManeuverIsReadyToBeRevealed;
         public static event EventHandlerShip OnManeuverIsReadyToBeRevealedGlobal;
         public event EventHandlerShip OnManeuverIsRevealed;
@@ -113,6 +114,11 @@ namespace Ship
 
         // TRIGGERS
 
+        public void CallReadyToGetManeuvers()
+        {
+            if (OnReadyGetManeuvers != null) OnReadyGetManeuvers(this);
+        }
+
         public void CallManeuverIsReadyToBeRevealed(System.Action callBack)
         {
             if (Selection.ThisShip.AssignedManeuver != null && Selection.ThisShip.AssignedManeuver.IsRevealDial)
@@ -120,9 +126,17 @@ namespace Ship
                 if (OnManeuverIsReadyToBeRevealedGlobal != null) OnManeuverIsReadyToBeRevealedGlobal(this);
                 if (OnManeuverIsReadyToBeRevealed != null) OnManeuverIsReadyToBeRevealed(this);
 
-                Triggers.ResolveTriggers(TriggerTypes.OnManeuverIsReadyToBeRevealed, callBack);
+                // Do not trigger dial reveal abilities when ionized
+                if (!this.State.IsIonized)
+                {
+                    Triggers.ResolveTriggers(TriggerTypes.OnManeuverIsReadyToBeRevealed, callBack);
+                }
+                else
+                {
+                    callBack();
+                }
             }
-            else  // For ionized ships
+            else
             {
                 callBack();
             }
@@ -289,6 +303,9 @@ namespace Ship
             {
                 result.Add(maneuverHolder.Key, new ManeuverHolder(maneuverHolder.Key).ColorComplexity);
             }
+
+            CallReadyToGetManeuvers();
+            OnGetManeuvers?.Invoke(result);
 
             return result;
         }
