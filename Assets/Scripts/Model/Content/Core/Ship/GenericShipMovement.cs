@@ -126,9 +126,17 @@ namespace Ship
                 if (OnManeuverIsReadyToBeRevealedGlobal != null) OnManeuverIsReadyToBeRevealedGlobal(this);
                 if (OnManeuverIsReadyToBeRevealed != null) OnManeuverIsReadyToBeRevealed(this);
 
-                Triggers.ResolveTriggers(TriggerTypes.OnManeuverIsReadyToBeRevealed, callBack);
+                // Do not trigger dial reveal abilities when ionized
+                if (!this.State.IsIonized)
+                {
+                    Triggers.ResolveTriggers(TriggerTypes.OnManeuverIsReadyToBeRevealed, callBack);
+                }
+                else
+                {
+                    callBack();
+                }
             }
-            else  // For ionized ships
+            else
             {
                 callBack();
             }
