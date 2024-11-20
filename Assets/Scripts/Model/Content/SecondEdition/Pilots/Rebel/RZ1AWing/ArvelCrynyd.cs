@@ -1,14 +1,11 @@
 ﻿using Actions;
 using ActionsList;
+using BoardTools;
 using Content;
 using Movement;
 using Ship;
-using SubPhases;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship
@@ -58,18 +55,26 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            HostShip.PrimaryWeapons.ForEach(n => n.WeaponInfo.MinRange = 0);
+            ShotInfo.OnRangeIsMeasured += SetMinRange;
 
             HostShip.OnActionIsReadyToBeFailed += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.PrimaryWeapons.ForEach(n => n.WeaponInfo.MinRange = 1);
+            ShotInfo.OnRangeIsMeasured -= SetMinRange;
 
             HostShip.OnActionIsReadyToBeFailed += CheckAbility;
         }
-        
+
+        private void SetMinRange(GenericShip thisShip, GenericShip anotherShip, IShipWeapon chosenWeapon, ref int range)
+        {
+            if (Combat.Attacker == HostShip && thisShip == HostShip && range == 0)
+            {
+                range = 1;
+            }
+        }
+
         private void CheckAbility(GenericAction action, List<ActionFailReason> failReasons, ref bool isDefaultFailOverwritten)
         {
             // TODO: Real fail reasons
