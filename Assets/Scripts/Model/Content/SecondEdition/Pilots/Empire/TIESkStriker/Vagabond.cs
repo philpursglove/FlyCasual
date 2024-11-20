@@ -31,13 +31,14 @@ namespace Ship
                         UpgradeType.Device,
                         UpgradeType.Modification
                     },
+                    abilityType: typeof(Abilities.SecondEdition.VagabondAbility),
                     tags: new List<Tags>
                     {
                         Tags.Tie
                     }
                 );
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/98/a8/98a8c9cc-53b2-4b57-ac0b-96da7c064740/swz66_vagabond.png";
+                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/vagabond.png";
             }
         }
     }
