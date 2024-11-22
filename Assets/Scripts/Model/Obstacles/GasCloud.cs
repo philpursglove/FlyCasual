@@ -38,7 +38,6 @@ namespace Obstacles
 
         private void BreakAllLocks(GenericShip ship, Action callback)
         {
-            //TODO: Not working
             ship.Tokens.RemoveAllTokensByType(typeof(GenericTargetLockToken), () => GetStrain(ship, callback));
         }
 
