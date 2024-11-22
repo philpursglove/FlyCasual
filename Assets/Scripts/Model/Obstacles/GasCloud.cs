@@ -10,26 +10,36 @@ namespace Obstacles
     {
         public GasCloud(string name, string shortName) : base(name, shortName)
         {
-            
+            RulesList.TargetLocksRule.OnCheckTargetLockIsDisallowed += DisallowTargetLocks;
         }
 
         public override string GetTypeName => "Gas Cloud";
 
         public override void OnHit(GenericShip ship)
         {
-            if (Editions.Edition.Current.RuleSet.GetType() == typeof(Editions.RuleSets.RuleSet25))
+            BreakAllLocks(ship, ()=> StartToRoll(ship));
+        }
+
+        public void DisallowTargetLocks(ref bool result, GenericShip attacker, ITargetLockable defender)
+        {
+            if (result)
             {
-                BreakAllLocks(ship, ()=> StartToRoll(ship));
-            }
-            else
-            {
-                StartToRoll(ship);
+                if (attacker != null && attacker.IsLandedOnObstacle && attacker.ObstaclesLanded.Contains(this))
+                {
+                    result = false;
+                }
+
+                if (defender != null && defender is GenericShip && ((GenericShip)defender).IsLandedOnObstacle && ((GenericShip)defender).ObstaclesLanded.Contains(this))
+                {
+                    result = false;
+                }
             }
         }
 
         private void BreakAllLocks(GenericShip ship, Action callback)
         {
-            ship.Tokens.RemoveAllTokensByType(typeof(Tokens.BlueTargetLockToken), () => GetStrain(ship, callback));
+            //TODO: Not working
+            ship.Tokens.RemoveAllTokensByType(typeof(GenericTargetLockToken), () => GetStrain(ship, callback));
         }
 
         private void GetStrain(GenericShip ship, Action callback)
@@ -43,7 +53,7 @@ namespace Obstacles
             Messages.ShowErrorToHuman(ship.PilotInfo.PilotName + " hit a gas cloud during movement, rolling for effect");
 
             GasCloudHitCheckSubPhase newPhase = (GasCloudHitCheckSubPhase)Phases.StartTemporarySubPhaseNew(
-                "Strain from gas cloud collision",
+                "Ionization from gas cloud collision",
                 typeof(GasCloudHitCheckSubPhase),
                 delegate
                 {
@@ -148,10 +158,8 @@ namespace ActionsList
     }
 }
 
-
 namespace SubPhases
 {
-
     public class GasCloudHitCheckSubPhase : DiceRollCheckSubPhase
     {
         private GenericShip prevActiveShip = Selection.ActiveShip;
