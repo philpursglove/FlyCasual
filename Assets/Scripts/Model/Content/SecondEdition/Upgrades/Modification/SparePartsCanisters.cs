@@ -1,12 +1,10 @@
 ﻿using ActionsList;
 using BoardTools;
-using Movement;
 using Obstacles;
 using Ship;
 using SquadBuilderNS;
 using SubPhases;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using UnityEngine;
@@ -107,7 +105,7 @@ namespace Abilities.SecondEdition
 
             HostUpgrade.State.SpendCharge();
 
-            Debris spareParts = new Debris("Spare Parts", "spareparts");
+            LooseCargo spareParts = new LooseCargo("Spare Parts", "spareparts");
             spareParts.Spawn("Spare Parts " + HostShip.ShipId, Board.GetBoard());
             ObstaclesManager.AddObstacle(spareParts);
 

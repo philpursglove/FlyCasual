@@ -12,11 +12,11 @@ namespace Obstacles
             
         }
 
-        public override string GetTypeName => "Loose Cargo";
+        public override string GetTypeName => "Debris";
 
         public override void OnHit(GenericShip ship)
         {
-            Messages.ShowErrorToHuman($"{ship.PilotInfo.PilotName} hit {GetTypeName} during movement, Strain token is assigned");
+            Messages.ShowErrorToHuman($"{ship.PilotInfo.PilotName} hit {Name} during movement, Strain token is assigned");
             ship.Tokens.AssignToken(
                 typeof(Tokens.StrainToken), 
                 delegate { StartToRoll(ship); }
@@ -25,10 +25,10 @@ namespace Obstacles
 
         private void StartToRoll(GenericShip ship)
         {
-            Messages.ShowErrorToHuman($"{ship.PilotInfo.PilotName} hit {GetTypeName} during movement, rolling for effect");
+            Messages.ShowErrorToHuman($"{ship.PilotInfo.PilotName} hit {Name} during movement, rolling for effect");
 
             LoosCargoHitCheckSubPhase newPhase = (LoosCargoHitCheckSubPhase)Phases.StartTemporarySubPhaseNew(
-                $"Damage from {GetTypeName} collision",
+                $"Damage from {Name} collision",
                 typeof(LoosCargoHitCheckSubPhase),
                 delegate
                 {
