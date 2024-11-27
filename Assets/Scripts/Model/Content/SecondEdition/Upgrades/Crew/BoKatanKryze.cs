@@ -1,15 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System;
-using SubPhases;
-using Actions;
-using ActionsList;
+﻿using Upgrade;
 
 namespace UpgradesList.SecondEdition
-{
-    public class BoKatanKryze : GenericUpgrade
+{ public class BoKatanKryze : GenericUpgrade
     {
-        public BoKatanKryze() : base()
+        public BoKatanKryze()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Bo-Katan Kryze",
@@ -22,7 +16,6 @@ namespace UpgradesList.SecondEdition
         }
     }
 }
-
 
 namespace Abilities.SecondEdition
 {
@@ -54,6 +47,5 @@ namespace Abilities.SecondEdition
         {
             RemoveDiceModification();
         }
-
     }
 }

@@ -3,14 +3,13 @@ using Upgrade;
 using System;
 using Tokens;
 using SubPhases;
-using ActionsList;
 using System.Linq;
 
 namespace UpgradesList.SecondEdition
 {
     public class BoKatanKryzeRebelScum : GenericUpgrade
     {
-        public BoKatanKryzeRebelScum() : base()
+        public BoKatanKryzeRebelScum()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Bo-Katan Kryze",
@@ -25,7 +24,6 @@ namespace UpgradesList.SecondEdition
         }
     }
 }
-
 
 namespace Abilities.SecondEdition
 {
@@ -133,6 +131,5 @@ namespace Abilities.SecondEdition
         }
 
         private class BoKatanKryzeDecisionSubphase : DecisionSubPhase { }
-
     }
 }
