@@ -348,14 +348,16 @@ namespace Bombs
         {
             if (CurrentDevice != null)
             {
-                if (onlyDrop || Selection.ThisShip.GetAvailableDeviceLaunchTemplates(CurrentDevice).Count == 0)
-                {
-                    DropDevice(); 
-                }
-                else
-                {
-                    AskWayToDropDevice();
-                }
+                Selection.ThisShip.CallBeforeDeviceWillBeDropped(delegate (){
+                    if (onlyDrop || Selection.ThisShip.GetAvailableDeviceLaunchTemplates(CurrentDevice).Count == 0)
+                    {
+                        DropDevice();
+                    }
+                    else
+                    {
+                        AskWayToDropDevice();
+                    }
+                });
             }
             else
             {
