@@ -24,7 +24,7 @@ namespace Ship.SecondEdition.DroidTriFighter
                 extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Configuration,
+                    UpgradeType.Modification,
                     UpgradeType.Modification
                 },
                 tags: new List<Tags>
