@@ -96,7 +96,7 @@ namespace Abilities.SecondEdition
 
             foreach (GenericToken token in Selection.ThisShip.Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange))
             {
-                if (!subPhase.GetDecisions().Any(n => n.Name == GetRemoveTokenDescription(token)))
+                if (subPhase.GetDecisions().All(n => n.Name != GetRemoveTokenDescription(token)))
                 {
                     subPhase.AddDecision(
                         GetRemoveTokenDescription(token),
