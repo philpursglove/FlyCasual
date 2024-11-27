@@ -169,6 +169,7 @@ namespace Ship
         public event EventHandlerModifyDice OnTryDiceResultModification;
         public event EventHandlerTrySelectDie OnTrySelectDie;
 
+        public event EventHandler BeforeBombWillBeDropped;
         public event EventHandler OnBombWillBeDropped;
         public event EventHandler OnBombWasDropped;
         public event EventHandler OnBombWasLaunched;
@@ -959,9 +960,16 @@ namespace Ship
 			);
         }
 
+        public void CallBeforeDeviceWillBeDropped(Action callback)
+        {
+            BeforeBombWillBeDropped?.Invoke();
+
+            Triggers.ResolveTriggers(TriggerTypes.BeforeBombWillBeDropped, callback);
+        }
+
         public void CallDeviceWillBeDropped(Action callback)
         {
-            if (OnBombWillBeDropped != null) OnBombWillBeDropped();
+            OnBombWillBeDropped?.Invoke();
 
             Triggers.ResolveTriggers(TriggerTypes.OnBombWillBeDropped, callback);
         }
