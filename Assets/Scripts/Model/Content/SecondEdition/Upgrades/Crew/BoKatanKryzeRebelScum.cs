@@ -14,7 +14,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Bo-Katan Kryze",
                 UpgradeType.Crew,
-                cost: 2,
+                cost: 4,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel, Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRebelScumAbility)
