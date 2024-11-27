@@ -1,20 +1,37 @@
 ﻿using Upgrade;
 
 namespace UpgradesList.SecondEdition
-{ public class BoKatanKryzeRepublicSeparatists : GenericUpgrade
+{ 
+    public class BoKatanKryzeRepublic : GenericUpgrade
     {
-        public BoKatanKryzeRepublicSeparatists()
+        public BoKatanKryzeRepublic()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Bo-Katan Kryze",
                 UpgradeType.Crew,
-                cost: 5,
+                cost: 8,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Republic, Faction.Separatists),
                 abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRepublicSeparatistsAbility)
             );
         }
     }
+
+    public class BoKatanKryzeSeparatists : GenericUpgrade
+    {
+        public BoKatanKryzeSeparatists()
+        {
+            UpgradeInfo = new UpgradeCardInfo(
+                "Bo-Katan Kryze",
+                UpgradeType.Crew,
+                cost: 6,
+                isLimited: true,
+                restriction: new FactionRestriction(Faction.Republic, Faction.Separatists),
+                abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRepublicSeparatistsAbility)
+            );
+        }
+    }
+
 }
 
 namespace Abilities.SecondEdition
