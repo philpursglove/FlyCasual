@@ -33,8 +33,6 @@ namespace Abilities.SecondEdition
 {
     public class ContingencyProtocolAbility : GenericAbility
     {
-        GenericShip PreviousActiveShip;
-
         public override void ActivateAbility()
         {
             HostShip.OnShipIsDestroyed += CheckAbility;
@@ -47,7 +45,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship, bool flag)
         {
-            List<GenericShip> friendlyShipsAtRange = Board.GetShipsAtRange(ship, new UnityEngine.Vector2(0, 3), Team.Type.Friendly).Where<GenericShip>(s => s.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol))).ToList();
+            List<GenericShip> friendlyShipsAtRange = Board.GetShipsAtRange(ship, new UnityEngine.Vector2(0, 3), Team.Type.Friendly).Where<GenericShip>(s => s.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol)) && s != HostShip).ToList();
 
             if(friendlyShipsAtRange.Count > 0)
             {
@@ -66,14 +64,13 @@ namespace Abilities.SecondEdition
         {
             SelectShipSubPhase.FinishSelectionNoCallback();
 
-            PreviousActiveShip = Selection.ActiveShip;
-            Selection.ChangeActiveShip(HostShip);
+            //Selection.ChangeActiveShip(Selection.AnotherShip);
 
-            HostShip.OnCanPerformActionWhileStressed += AllowActionsWhileStressed;
+            Selection.AnotherShip.OnCanPerformActionWhileStressed += AllowActionsWhileStressed;
 
-            HostShip.AskPerformFreeAction
+            Selection.AnotherShip.AskPerformFreeAction
             (
-                Selection.ThisShip.GetAvailableActions(),
+                Selection.AnotherShip.GetAvailableActions(),
                 FinishAbility,
                 descriptionShort: HostUpgrade.UpgradeInfo.Name,
                 descriptionLong: "You may perform an action even while stressed"
@@ -110,9 +107,9 @@ namespace Abilities.SecondEdition
 
         private void FinishAbility()
         {
-            HostShip.OnCanPerformActionWhileStressed -= AllowActionsWhileStressed;
+            Selection.AnotherShip.OnCanPerformActionWhileStressed -= AllowActionsWhileStressed;
 
-            Selection.ChangeActiveShip(PreviousActiveShip);
+            //Selection.ChangeActiveShip(HostShip);
         }
     }
 }
