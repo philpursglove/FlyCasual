@@ -1,7 +1,9 @@
 ﻿using ActionsList;
 using BoardTools;
 using Ship;
-using System;
+using SubPhases;
+using System.Collections.Generic;
+using System.Linq;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -35,35 +37,35 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            GenericShip.OnShipIsDestroyedGlobal += CheckAbility;
+            HostShip.OnShipIsDestroyed += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.OnShipIsDestroyedGlobal -= CheckAbility;
+            HostShip.OnShipIsDestroyed -= CheckAbility;
         }
 
         private void CheckAbility(GenericShip ship, bool flag)
         {
-            if (Tools.IsFriendly(HostShip, ship)
-                && ship.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol))
-                && HostShip != ship)
+            List<GenericShip> friendlyShipsAtRange = Board.GetShipsAtRange(ship, new UnityEngine.Vector2(0, 3), Team.Type.Friendly).Where<GenericShip>(s => s.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol))).ToList();
+
+            if(friendlyShipsAtRange.Count > 0)
             {
-                DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
-                if (distInfo.Range is >= 0 and <= 3)
-                {
-                    RegisterAbilityTrigger
-                    (
-                        TriggerTypes.OnShipIsDestroyed,
-                        ActivateContingencyProtocol,
-                        customTriggerName: $"{HostShip.PilotInfo.PilotName}: {HostUpgrade.UpgradeInfo.Name}"
-                    );
-                }
+                SelectTargetForAbility(
+                    ActivateContingencyProtocol,
+                    FilterTargets,
+                    GetAiPriority,
+                    HostShip.Owner.PlayerNo,
+                    name: HostUpgrade.UpgradeInfo.Name,
+                    description: "Selected ship may perform an action even while stressed",
+                    imageSource: HostUpgrade);
             }
         }
 
-        private void ActivateContingencyProtocol(object sender, EventArgs e)
+        private void ActivateContingencyProtocol()
         {
+            SelectShipSubPhase.FinishSelectionNoCallback();
+
             PreviousActiveShip = Selection.ActiveShip;
             Selection.ChangeActiveShip(HostShip);
 
@@ -78,6 +80,29 @@ namespace Abilities.SecondEdition
             );
         }
 
+        private bool FilterTargets(GenericShip ship)
+        {
+            bool result = false;
+
+            if (ship != HostShip && Tools.IsFriendly(HostShip, ship))
+            {
+                if(new DistanceInfo(HostShip, ship).Range <= 3)
+                {
+                    if (ship.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol)))
+                    {
+                        result = true;
+                    }
+                }                
+            }
+
+            return result;
+        }
+
+        private int GetAiPriority(GenericShip ship)
+        {
+            return 45;
+        }
+
         private void AllowActionsWhileStressed(GenericAction action, ref bool isAllowed)
         {
             isAllowed = true;
@@ -88,8 +113,6 @@ namespace Abilities.SecondEdition
             HostShip.OnCanPerformActionWhileStressed -= AllowActionsWhileStressed;
 
             Selection.ChangeActiveShip(PreviousActiveShip);
-
-            Triggers.FinishTrigger();
         }
     }
 }
