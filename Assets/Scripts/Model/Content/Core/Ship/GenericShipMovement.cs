@@ -2,6 +2,7 @@
 using Movement;
 using Obstacles;
 using Remote;
+using RulesList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -274,6 +275,7 @@ namespace Ship
         // TODO: Rewrite
         public MovementComplexity GetColorComplexityOfManeuver(ManeuverHolder movement)
         {
+            if (IonizationRule.IsIonized(this)) return movement.ColorComplexity;
             if (AfterGetManeuverColorDecreaseComplexity != null) AfterGetManeuverColorDecreaseComplexity(this, ref movement);
             if (AfterGetManeuverColorIncreaseComplexity != null) AfterGetManeuverColorIncreaseComplexity(this, ref movement);
             if (AfterGetManeuverAvailablity != null) AfterGetManeuverAvailablity(this, ref movement);
@@ -283,10 +285,7 @@ namespace Ship
 
         public MovementComplexity GetLastManeuverColor()
         {
-            MovementComplexity result = MovementComplexity.None;
-
-            result = AssignedManeuver.ColorComplexity;
-            return result;
+            return AssignedManeuver.ColorComplexity;
         }
 
         public ManeuverBearing GetLastManeuverBearing()
@@ -297,29 +296,36 @@ namespace Ship
 
         public Dictionary<string, MovementComplexity> GetManeuvers()
         {
-            Dictionary<string, MovementComplexity> result = new Dictionary<string, MovementComplexity>();
+            Dictionary<string, MovementComplexity> maneuvers = new(Maneuvers);
 
-            foreach (var maneuverHolder in Maneuvers)
+            CallReadyToGetManeuvers();
+            OnGetManeuvers?.Invoke(maneuvers);
+
+            Dictionary<string, MovementComplexity> result = new();
+
+            foreach (var maneuverHolder in maneuvers)
             {
                 result.Add(maneuverHolder.Key, new ManeuverHolder(maneuverHolder.Key).ColorComplexity);
             }
-
-            CallReadyToGetManeuvers();
-            OnGetManeuvers?.Invoke(result);
 
             return result;
         }
 
         public List<ManeuverHolder> GetManeuverHolders()
         {
-            List<ManeuverHolder> maneuverHolders = new List<ManeuverHolder>();
+            Dictionary<string, MovementComplexity> maneuvers = new(Maneuvers);
 
-            foreach (var maneuverHolder in Maneuvers)
+            CallReadyToGetManeuvers();
+            OnGetManeuvers?.Invoke(maneuvers);
+
+            List<ManeuverHolder> result = new List<ManeuverHolder>();
+
+            foreach (var maneuverHolder in maneuvers)
             {
-                maneuverHolders.Add(new ManeuverHolder(maneuverHolder.Key, this));
+                result.Add(new ManeuverHolder(maneuverHolder.Key, this));
             }
 
-            return maneuverHolders;
+            return result;
         }
 
         public bool HasManeuver(string maneuverString)
