@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Movement
 {
@@ -166,14 +163,15 @@ namespace Movement
             Direction = direction;
             Bearing = bearing;
 
-            ship = ship ?? Selection.ThisShip;
+            ship ??= Selection.ThisShip;
             shipTag = ship.GetTag();
 
-            if (!ship.Maneuvers.ContainsKey(parameters))
-            {
-                //
-            }
-            ColorComplexity = ship.Maneuvers[parameters];
+            Dictionary<string, MovementComplexity> maneuvers = new(ship.Maneuvers);
+
+            ship.CallReadyToGetManeuvers();
+            ship.OnGetManeuvers?.Invoke(maneuvers);
+
+            ColorComplexity = maneuvers[parameters];
             ColorComplexity = ship.GetColorComplexityOfManeuver(this);
         }
 
