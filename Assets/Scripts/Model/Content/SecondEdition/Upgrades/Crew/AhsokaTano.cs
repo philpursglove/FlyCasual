@@ -9,7 +9,7 @@ namespace UpgradesList.SecondEdition
 {
     public class AhsokaTano : GenericUpgrade
     {
-        public AhsokaTano() : base()
+        public AhsokaTano()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Ahsoka Tano",
@@ -25,7 +25,6 @@ namespace UpgradesList.SecondEdition
         }
     }
 }
-
 
 namespace Abilities.SecondEdition
 {
