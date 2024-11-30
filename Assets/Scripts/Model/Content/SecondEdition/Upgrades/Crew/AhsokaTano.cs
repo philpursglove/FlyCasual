@@ -54,7 +54,7 @@ namespace Abilities.SecondEdition
                     FilterTargets,
                     GetAiPriority,
                     HostShip.Owner.PlayerNo,
-                    HostShip.PilotInfo.PilotName,
+                    "Ahsoka Tano",
                     "You may spend 1 Force to choose 1 friendly ship in your Full Rear Arc at range 1-2. If you do, that ship may perform a red Focus action, even while stressed. ",
                     HostShip
                 );
