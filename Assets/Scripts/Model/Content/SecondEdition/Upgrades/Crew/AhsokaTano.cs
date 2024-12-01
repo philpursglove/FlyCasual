@@ -86,7 +86,7 @@ namespace Abilities.SecondEdition
                     Triggers.FinishTrigger();
                 },
                 HostUpgrade.UpgradeInfo.Name,
-                "You may perform an action, even if you is stressed.",
+                "You may perform an action, even if you are stressed.",
                 HostShip
             );
         }
