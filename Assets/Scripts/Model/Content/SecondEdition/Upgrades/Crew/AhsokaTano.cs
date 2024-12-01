@@ -54,7 +54,7 @@ namespace Abilities.SecondEdition
                     FilterTargets,
                     GetAiPriority,
                     HostShip.Owner.PlayerNo,
-                    "Ahsoka Tano",
+                    HostUpgrade.UpgradeInfo.Name,
                     "You may spend 1 Force to choose 1 friendly ship in your Full Rear Arc at range 1-2. If you do, that ship may perform a red Focus action, even while stressed. ",
                     HostShip
                 );
@@ -85,7 +85,7 @@ namespace Abilities.SecondEdition
                     TargetShip.BeforeActionIsPerformed -= PayForceCost;
                     Triggers.FinishTrigger();
                 },
-                HostShip.PilotInfo.PilotName,
+                HostUpgrade.UpgradeInfo.Name,
                 "You may perform an action, even if you is stressed.",
                 HostShip
             );
