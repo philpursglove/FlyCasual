@@ -1,10 +1,6 @@
-﻿using SubPhases;
+﻿using Ship;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using UnityEngine;
-using Ship;
 using Upgrade;
 
 namespace GameCommands
@@ -48,7 +44,7 @@ namespace GameCommands
                     if (secUpgrade == null) continue;
 
                     if (!secUpgrade.State.IsFaceup) continue;
-                    if (secUpgrade.State.UsesCharges && secUpgrade.State.Charges == 0) continue;
+                    if (secUpgrade.State.UsesCharges && secUpgrade.UpgradeInfo.ChargesCost > secUpgrade.State.Charges) continue;
 
                     if (secUpgrade.UpgradeInfo.Name == weaponName) return weapon;
                 }

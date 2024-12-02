@@ -24,7 +24,7 @@ namespace Ship.SecondEdition.DroidTriFighter
                 abilityType: typeof(Abilities.SecondEdition.PhlacArphoccPrototypeSoCAbility),
                 extraUpgradeIcons: new List<UpgradeType>
                 {
-                    UpgradeType.Configuration,
+                    UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Modification
                 },

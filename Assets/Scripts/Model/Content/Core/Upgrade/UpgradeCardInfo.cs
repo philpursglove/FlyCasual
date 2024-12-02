@@ -26,6 +26,7 @@ namespace Upgrade
         public bool IsStandardazed { get; private set; }
         public List<Type> AbilityTypes { get; private set; }
         public int Charges { get; private set; }
+        public int ChargesCost { get; private set; }
         public int RegensChargesCount { get; private set; }
         public bool CannotBeRecharged { get; private set; }
         public int SEImageNumber { get; private set; }
@@ -81,12 +82,14 @@ namespace Upgrade
             int addForce = 0,
             UpgradeSubType subType = UpgradeSubType.None,
             Type remoteType = null,
-            List<Legality> legalityInfo = null
+            List<Legality> legalityInfo = null,
+            int chargesCost = 1
         )
         {
             Name = name;
             Cost = cost;
             Charges = charges;
+            ChargesCost = chargesCost;
             CannotBeRecharged = cannotBeRecharged;
             SEImageNumber = seImageNumber;
             WeaponInfo = weaponInfo;

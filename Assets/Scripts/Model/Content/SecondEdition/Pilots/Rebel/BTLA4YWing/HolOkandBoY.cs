@@ -1,13 +1,13 @@
 ﻿using Abilities.SecondEdition;
+using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
 using System;
-using Content;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Upgrade;
-using BoardTools;
-using System.Linq;
 
 namespace Ship
 {
@@ -22,7 +22,7 @@ namespace Ship
                     "Hol Okand",
                     "Battle of Yavin",
                     Faction.Rebel,
-                    2,
+                    4,
                     3,
                     0,
                     isLimited: true,

@@ -42,7 +42,7 @@ namespace Upgrade
             }
             else if (State.UsesCharges)
             {
-                State.SpendCharge();
+                State.SpendCharges(UpgradeInfo.ChargesCost);
                 callBack();
             }
             else

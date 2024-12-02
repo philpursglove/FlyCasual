@@ -5,8 +5,6 @@ using Obstacles;
 using Ship;
 using SubPhases;
 using System;
-using Tokens;
-using UnityEngine;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -66,8 +64,8 @@ namespace Abilities.SecondEdition
             ManeuverTemplate dropTemplate = new ManeuverTemplate(ManeuverBearing.Straight, ManeuverDirection.Forward, ManeuverSpeed.Speed1, isBombTemplate: true);
             dropTemplate.ApplyTemplate(HostShip, HostShip.GetBack(), Direction.Bottom);
 
-            Debris looseCargo = new Debris("Loose Cargo", "loosecargo");
-            looseCargo.Spawn("Loose Cargo " + HostShip.ShipId, Board.GetBoard());
+            LooseCargo looseCargo = new LooseCargo("Loose Cargo", "loosecargo");
+            looseCargo.Spawn($"{looseCargo.Name}{HostShip.ShipId}", Board.GetBoard());
             ObstaclesManager.AddObstacle(looseCargo);
 
             looseCargo.ObstacleGO.transform.position = dropTemplate.GetFinalPosition();

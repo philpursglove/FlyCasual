@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using BoardTools;
+using Ship;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -45,12 +47,20 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            HostShip.PrimaryWeapons.ForEach(n => n.WeaponInfo.MinRange = 0);
+            ShotInfo.OnRangeIsMeasured += SetMinRange;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.PrimaryWeapons.ForEach(n => n.WeaponInfo.MinRange = 1);
+            ShotInfo.OnRangeIsMeasured -= SetMinRange;
+        }
+
+        private void SetMinRange(GenericShip thisShip, GenericShip anotherShip, IShipWeapon chosenWeapon, ref int range)
+        {
+            if(Combat.Attacker == HostShip && thisShip == HostShip && range == 0)
+            {
+                range = 1;
+            }
         }
 
     }

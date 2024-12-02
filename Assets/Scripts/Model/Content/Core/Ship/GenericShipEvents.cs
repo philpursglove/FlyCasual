@@ -43,6 +43,7 @@ namespace Ship
         public delegate void EventHandlerShipType(GenericShip ship, Type type);
         public delegate void EventHandlerShipToken(GenericShip ship, GenericToken token);
         public delegate void EventHandlerShipTypeBool(GenericShip ship, Type type, ref bool data);
+        public delegate void EventHandlerShipManeuvers(Dictionary<string, MovementComplexity> maneuvers);
         public delegate void EventHandlerShipMovement(GenericShip ship, ref ManeuverHolder movement);
         public delegate void EventHandlerShipCritArgs(GenericShip ship, GenericDamageCard crit, EventArgs e = null);
         public delegate void EventHandlerTokenBool(GenericToken token, ref bool data);

@@ -1,10 +1,13 @@
 ﻿using Abilities.SecondEdition;
-using ActionsList;
 using BoardTools;
 using Content;
 using Ship;
+using SubPhases;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Tokens;
+using UnityEngine;
 using Upgrade;
 
 namespace Ship.SecondEdition.TIEInterceptor
@@ -36,7 +39,9 @@ namespace Ship.SecondEdition.TIEInterceptor
                 skinName: "Skystrike Academy"
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/94/37/94377171-95d9-40e5-99be-8f8d6e52eb28/swz84_pilot_commandantgoran.png";
+            PilotNameCanonical = "commandantgoran";
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/pilots/commandantgoran.png";
         }
     }
 }
@@ -47,40 +52,106 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            GenericShip.OnMovementFinishUnsuccessfullyGlobal += CheckAbility;
+            Phases.Events.OnCombatPhaseStart_Triggers += RegisterAbility;
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.OnMovementFinishUnsuccessfullyGlobal -= CheckAbility;
+            Phases.Events.OnCombatPhaseStart_Triggers -= RegisterAbility;
         }
 
-        private void CheckAbility(GenericShip ship)
+        public void RegisterAbility()
         {
-            if (Tools.IsFriendly(HostShip, ship) && HostShip.State.Initiative > ship.State.Initiative)
-            {
-                DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
-                if (distInfo.Range <= 3) RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, AskToUseGorransAbility);
-            }
+            RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, AskUseAbility);
         }
 
-        private void AskToUseGorransAbility(object sender, EventArgs e)
+        public void AskUseAbility(object sender, EventArgs e)
         {
-            if (Selection.ThisShip != null)
+            if (Board.GetShipsAtRange(HostShip, new Vector2(0, 2), Team.Type.Friendly).Count > 0)
             {
-                Selection.ThisShip.AskPerformFreeAction
+                SelectTargetForAbility
                 (
-                    new FocusAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red },
-                    Triggers.FinishTrigger,
-                    descriptionShort: HostShip.PilotInfo.PilotName,
-                    descriptionLong: "You may perform red Focus acton",
-                    imageHolder: HostShip
+                    AssignEvadeToken,
+                    MeetsCriteria,
+                    GetAiPriority,
+                    HostShip.Owner.PlayerNo,
+                    HostShip.PilotInfo.PilotName,
+                    "You may assign an evade and remove a non-stress red token."
                 );
             }
             else
             {
+                Messages.ShowInfo($"{HostShip.PilotInfo.PilotName}: There are no targets for ability");
                 Triggers.FinishTrigger();
             }
         }
+
+        public void AssignEvadeToken()
+        {
+            TargetShip.Tokens.AssignToken(new EvadeToken(TargetShip), RemoveRedToken);
+        }
+
+        public void RemoveRedToken()
+        {
+            List<GenericToken> redtokens = TargetShip.Tokens.GetTokensByColor(TokenColors.Red).Where(t => t.GetType() != typeof(StressToken)).ToList<GenericToken>();
+
+            if (redtokens.Count > 0)
+            {
+                DecisionSubPhase pilotAbilityDecision = (DecisionSubPhase)Phases.StartTemporarySubPhaseNew(
+                    HostShip.PilotName,
+                    typeof(CommandantgoranDecisionSubPhase),
+                    AbilityCleanup
+                );
+
+                pilotAbilityDecision.DescriptionShort = $"{HostShip.PilotName} Pilot Ability";
+                pilotAbilityDecision.DescriptionLong = "Select a non-stress red token to remove.";
+                pilotAbilityDecision.ImageSource = HostShip;
+
+                pilotAbilityDecision.RequiredPlayer = HostShip.Owner.PlayerNo;
+
+                foreach (var Token in redtokens)
+                {
+                    string name = Token.Name;
+                    if (Token.GetType() == typeof(RedTargetLockToken))
+                    {
+                        RedTargetLockToken targetLockToken = (RedTargetLockToken)Token;
+                        name = Token.Name + " " + targetLockToken.Letter;
+                    }
+                    pilotAbilityDecision.AddDecision(name, delegate { TargetShip.Tokens.RemoveToken(Token, DecisionSubPhase.ConfirmDecision); });
+                }
+
+                pilotAbilityDecision.ShowSkipButton = true;
+                pilotAbilityDecision.Start();
+            }
+            else
+            {
+                SelectShipSubPhase.FinishSelection();
+            }
+        }
+
+        public bool MeetsCriteria(GenericShip ship)
+        {
+            DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
+            
+            bool isValid = (distInfo.Range <= 2 && ship.State.Initiative < HostShip.State.Initiative);
+
+            if(!isValid) {
+                Messages.ShowInfoToHuman("Choose a friendly target with a lower initiave between range 0 and 3");
+            }
+
+            return isValid;
+        }
+
+        public void AbilityCleanup()
+        {
+            DecisionSubPhase.ConfirmDecision();
+        }
+
+        public int GetAiPriority(GenericShip ship)
+        {
+            return ship.PilotInfo.Cost;
+        }
+
+        private class CommandantgoranDecisionSubPhase : DecisionSubPhase { }
     }
 }

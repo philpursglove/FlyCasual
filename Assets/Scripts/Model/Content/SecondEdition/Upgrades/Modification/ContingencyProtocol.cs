@@ -1,7 +1,9 @@
 ﻿using ActionsList;
 using BoardTools;
 using Ship;
-using System;
+using SubPhases;
+using System.Collections.Generic;
+using System.Linq;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -31,50 +33,65 @@ namespace Abilities.SecondEdition
 {
     public class ContingencyProtocolAbility : GenericAbility
     {
-        GenericShip PreviousActiveShip = null;
-
         public override void ActivateAbility()
         {
-            GenericShip.OnShipIsDestroyedGlobal += CheckAbility;
+            HostShip.OnShipIsDestroyed += RegisterAbility;
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.OnShipIsDestroyedGlobal -= CheckAbility;
+            HostShip.OnShipIsDestroyed -= RegisterAbility;
         }
 
-        private void CheckAbility(GenericShip ship, bool flag)
+        private void RegisterAbility(GenericShip ship, bool flag)
         {
-            if (Tools.IsFriendly(HostShip, ship)
-                && ship.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol)))
+            List<GenericShip> friendlyShipsAtRange = Board.GetShipsAtRange(ship, new UnityEngine.Vector2(0, 3), Team.Type.Friendly).Where<GenericShip>(s => s.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol)) && s != HostShip).ToList();
+
+            if (friendlyShipsAtRange.Count > 0)
             {
-                DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
-                if (distInfo.Range >= 0 && distInfo.Range <= 3)
-                {
-                    RegisterAbilityTrigger
-                    (
-                        TriggerTypes.OnShipIsDestroyed,
-                        ActivateContingencyProtocol,
-                        customTriggerName: $"{HostShip.PilotInfo.PilotName}: {HostUpgrade.UpgradeInfo.Name}"
-                    );
-                }
+                RegisterAbilityTrigger(TriggerTypes.OnShipIsDestroyed, CheckAbility);
             }
         }
 
-        private void ActivateContingencyProtocol(object sender, EventArgs e)
+        private void CheckAbility(object sender, System.EventArgs e)
         {
-            PreviousActiveShip = Selection.ActiveShip;
-            Selection.ChangeActiveShip(HostShip);
 
-            HostShip.OnCanPerformActionWhileStressed += AllowActionsWhileStressed;
+            SelectTargetForAbility(
+                ActivateContingencyProtocol,
+                FilterTargets,
+                GetAiPriority,
+                HostShip.Owner.PlayerNo,
+                name: HostUpgrade.UpgradeInfo.Name,
+                description: "Selected ship may perform an action even while stressed",
+                imageSource: HostUpgrade
+            );
+        }
 
-            HostShip.AskPerformFreeAction
+        private void ActivateContingencyProtocol()
+        {
+            SelectShipSubPhase.FinishSelectionNoCallback();
+
+            Selection.ChangeActiveShip(Selection.HoveredShip);
+
+            Selection.HoveredShip.OnCanPerformActionWhileStressed += AllowActionsWhileStressed;
+
+            Selection.HoveredShip.AskPerformFreeAction
             (
-                Selection.ThisShip.GetAvailableActions(),
+                Selection.HoveredShip.GetAvailableActions(),
                 FinishAbility,
                 descriptionShort: HostUpgrade.UpgradeInfo.Name,
-                descriptionLong: "You may perform actionm even while stressed"
+                descriptionLong: "You may perform an action even while stressed"
             );
+        }
+
+        private bool FilterTargets(GenericShip ship)
+        {
+            return ship != HostShip && Tools.IsFriendly(HostShip, ship) && new DistanceInfo(HostShip, ship).Range <= 3 && ship.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol));
+        }
+
+        private int GetAiPriority(GenericShip ship)
+        {
+            return 45;
         }
 
         private void AllowActionsWhileStressed(GenericAction action, ref bool isAllowed)
@@ -84,9 +101,9 @@ namespace Abilities.SecondEdition
 
         private void FinishAbility()
         {
-            HostShip.OnCanPerformActionWhileStressed -= AllowActionsWhileStressed;
+            Selection.HoveredShip.OnCanPerformActionWhileStressed -= AllowActionsWhileStressed;
 
-            Selection.ChangeActiveShip(PreviousActiveShip);
+            Selection.ChangeActiveShip(HostShip);
 
             Triggers.FinishTrigger();
         }

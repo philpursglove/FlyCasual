@@ -183,7 +183,7 @@ namespace Upgrade
                 && n.State.IsFaceup
                 && (
                     ((n as GenericSpecialWeapon).WeaponInfo.UsesCharges == false)
-                    || ((n as GenericSpecialWeapon).WeaponInfo.UsesCharges && n.State.Charges > 0)
+                    || ((n as GenericSpecialWeapon).WeaponInfo.UsesCharges && n.State.Charges >= n.UpgradeInfo.ChargesCost)
                 )
             ).ToList();
         }

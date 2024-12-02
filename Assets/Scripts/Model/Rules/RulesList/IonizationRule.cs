@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using Ship;
-using Tokens;
+﻿using Editions;
 using Movement;
+using Ship;
+using System.Collections.Generic;
 using System.Linq;
-using Editions;
+using Tokens;
 
 namespace RulesList
 {
@@ -15,7 +15,8 @@ namespace RulesList
         {
             if (!RuleIsInitialized)
             {
-                GenericShip.OnNoManeuverWasRevealedGlobal += SetIonManeuver;
+                GenericShip.OnReadyGetManeuvers += SetIonManeuver;
+                GenericShip.OnTokenIsAssignedGlobal += RemoveBlueTargetLocks;
                 RuleIsInitialized = true;
             }
         }
@@ -24,30 +25,10 @@ namespace RulesList
         {
             if (IsIonized(ship))
             {
-                AssignIonizationManeuver(ship);
+                ship.OnGetManeuvers += GetIonManeuver;
                 ship.OnMovementExecuted += RegisterRemoveIonization;
                 Edition.Current.WhenIonized(ship);
             }
-        }
-
-        private static void AssignIonizationManeuver(GenericShip ship)
-        {
-            GenericMovement ionizedMovement = new StraightMovement(
-                1,
-                ManeuverDirection.Forward,
-                ManeuverBearing.Straight,
-                ship.GetColorComplexityOfManeuver(
-                    new ManeuverHolder(
-                        ManeuverSpeed.Speed1,
-                        ManeuverDirection.Forward,
-                        ManeuverBearing.Straight,
-                        Edition.Current.IonManeuverComplexity
-                    )
-                )
-            ) {
-                IsRevealDial = false, IsIonManeuver = true
-            };
-            ship.SetAssignedManeuver(ionizedMovement);
         }
 
         private static void RegisterRemoveIonization(GenericShip ship)
@@ -78,6 +59,8 @@ namespace RulesList
                 typeof(IonToken),
                 Triggers.FinishTrigger
             );
+
+            ship.OnGetManeuvers -= GetIonManeuver;
         }
 
         public static bool IsIonized(GenericShip ship)
@@ -86,5 +69,25 @@ namespace RulesList
             return (ionTokensCount >= Edition.Current.NegativeTokensToAffectShip[ship.ShipInfo.BaseSize]);
         }
 
+        public static void RemoveBlueTargetLocks(GenericShip ship, GenericToken token)
+        {
+            if (ship.State.IsIonized)
+            {
+                foreach(BlueTargetLockToken tlock in ship.Tokens.GetTokens<BlueTargetLockToken>('*'))
+                {
+                    ship.Tokens.RemoveToken(tlock, delegate { });
+                }
+            }
+        }
+
+        public static void GetIonManeuver(Dictionary<string, MovementComplexity> result)
+        {
+            // Reset current maneuvers
+            result.Clear();
+
+            result.Add("1.L.B", MovementComplexity.Easy);
+            result.Add("1.F.S", MovementComplexity.Easy);
+            result.Add("1.R.B", MovementComplexity.Easy);
+        }
     }
 }

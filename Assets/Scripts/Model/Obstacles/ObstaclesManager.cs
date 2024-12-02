@@ -58,14 +58,18 @@ namespace Obstacles
                         "yt2400debris" + i
                     )
                 );
-            }
 
-            for (int i = 0; i < 3; i++)
-            {
                 Instance.AllPossibleObstacles.Add(
                     new Debris(
                         "VT49 Debris " + i,
                         "vt49decimatordebris" + i
+                    )
+                );
+
+                Instance.AllPossibleObstacles.Add(
+                    new Asteroid(
+                        $"Pride of Mandalore Rock {i}",
+                        $"prideofmandalorerock{i}"
                     )
                 );
             }
