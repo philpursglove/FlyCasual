@@ -3,8 +3,11 @@ using Content;
 using System.Collections.Generic;
 using System.Linq;
 using ActionsList;
+using ActionsList.SecondEdition;
 using Ship;
+using Tokens;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship
 {
@@ -38,11 +41,16 @@ namespace Ship
                     seImageNumber: 103,
                     skinName: "Red Stripes",
                     charges: 2,
-                    isStandardLayout:true
+                    isStandardLayout: true
                 );
-                PilotNameCanonical = "soontirfel-battleorderendor";
+                PilotNameCanonical = "soontirfel-battleoverendor";
 
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.FeedbackEmitter));
+                MustHaveUpgrades.Add(typeof(FeedbackEmitter));
+                MustHaveUpgrades.Add(typeof(ApexPredatorAbility));
+                MustHaveUpgrades.Add(typeof(NoEscapeAbility));
+
+                ImageUrl =
+                    "https://cdn.svc.asmodee.net/production-amgcom/uploads/2024/02/02012024-SWZ99_Transmission-Image_8-768x438.png";
 
                 AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 ShipAbilities.Remove(oldAbility);
@@ -61,7 +69,7 @@ namespace Abilities.SecondEdition
         {
             HostShip.OnAttackFinishAsAttacker += UseSoontirFelBoEAbility;
         }
-        
+
         public override void DeactivateAbility()
         {
             HostShip.OnAttackFinishAsAttacker -= UseSoontirFelBoEAbility;
@@ -99,7 +107,78 @@ namespace Abilities.SecondEdition
                 descriptionShort: "Soontir Fel",
                 descriptionLong: "You may perform a barrel roll or boost action",
                 imageHolder: HostUpgrade);
-
+            HostShip.Tokens.AssignToken(typeof(DepleteToken), null, null);
         }
+    }
+
+    public class ApexPredatorAbility : GenericAbility
+    {
+        public override void ActivateAbility()
+        {
+            HostShip.OnGenerateDiceModifications += AddApexPredatorReroll;
+        }
+
+        public override void DeactivateAbility()
+        {
+            HostShip.OnGenerateDiceModifications -= AddApexPredatorReroll;
+        }
+
+        private void AddApexPredatorReroll(GenericShip ship)
+        {
+            HostShip.AddAvailableDiceModificationOwn(new ApexPredatorActionEffect());
+        }
+    }
+}
+
+namespace ActionsList.SecondEdition
+{
+    public class ApexPredatorActionEffect : GenericAction
+    {
+        public ApexPredatorActionEffect()
+        {
+            Name = "Apex Predator";
+            DiceModificationName = "Apex Predator";
+        }
+
+        public override bool IsDiceModificationAvailable()
+        {
+            return Combat.Attacker.PilotInfo.Initiative > Combat.Defender.PilotInfo.Initiative;
+        }
+
+        public override void ActionEffect(System.Action callBack)
+        {
+            DiceRerollManager diceRerollManager = new DiceRerollManager
+            {
+                NumberOfDiceCanBeRerolled = 1,
+                CallBack = callBack
+            };
+            diceRerollManager.Start();
+        }
+
+        public override int GetDiceModificationPriority()
+        {
+            int result = 0;
+
+            if (Combat.AttackStep == CombatStep.Attack)
+            {
+                int attackFocuses = Combat.CurrentDiceRoll.FocusesNotRerolled;
+                int attackBlanks = Combat.CurrentDiceRoll.BlanksNotRerolled;
+                int numFocusTokens = Selection.ActiveShip.Tokens.CountTokensByType(typeof(FocusToken));
+                // Only use Fire Control if the number of dice that need re-rolled is 1.
+                if (numFocusTokens > 0)
+                {
+                    // Slightly above Target Lock.
+                    if (attackBlanks == 1) result = 81;
+                }
+                else
+                {
+                    // Slightly above Target Lock.
+                    if (attackBlanks + attackFocuses == 1) result = 81;
+                }
+            }
+
+            return result;
+        }
+
     }
 }
