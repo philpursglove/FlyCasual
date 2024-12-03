@@ -133,6 +133,8 @@ namespace Ship
         public event EventHandlerBombDropTemplates OnGetAvailableBombDropTemplatesForbid;
         public event EventHandlerBombDropTemplates OnGetAvailableBombLaunchTemplates;
         public event EventHandlerBombDropTemplates OnGetAvailableBombLaunchTemplatesModifications;
+        public event EventHandlerDirection OnGetBombTemplateDirection;
+
         public event EventHandlerBarrelRollTemplates OnGetAvailableBarrelRollTemplates;
         public event EventHandlerDecloakTemplates OnGetAvailableDecloakTemplates;
         public event EventHandlerBoostTemplates OnGetAvailableBoostTemplates;
@@ -316,6 +318,11 @@ namespace Ship
         {
             if (OnAttackMissedAsAttacker != null) OnAttackMissedAsAttacker();
             if (OnAttackMissedAsAttackerGlobal != null) OnAttackMissedAsAttackerGlobal();
+        }
+
+        public void CallOnGetBombTemplateDirection(ref Direction direction)
+        {
+            OnGetBombTemplateDirection?.Invoke(ref direction);
         }
 
         public void CallOnAttackMissedAsDefender()

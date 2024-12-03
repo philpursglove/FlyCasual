@@ -178,6 +178,9 @@ namespace Abilities.SecondEdition
     {
         // After you gain a stress token, you may spend 2 charges to gain an evade token.
         // When you drop a device, you may spend 1 charge to set the template with its middle line aligned with the hashmark on your ship's left or right side instead of your rear guides
+
+        Direction selectedDirection = Direction.Bottom;
+
         public override void ActivateAbility()
         {
             HostShip.OnTokenIsAssigned += RegisterEvadeAbility;
@@ -231,28 +234,45 @@ namespace Abilities.SecondEdition
 
         private void AskToUseDeviceDropAbility(object sender, EventArgs e)
         {
-            AskToUseAbility(
-                descriptionShort: HostShip.PilotName,
+            AskForDecision(
+                descriptionShort: "Gyro-Cockpit",
                 descriptionLong: "Spend 1 ship charge to drop device using left or right side instead of rear guides?",
-                useByDefault: NeverUseByDefault,
-                useAbility: UseDeviceAbility,
-                imageHolder: HostShip
+                imageHolder: HostShip,
+                decisions: new() {
+                    { "Left", UseDeviceAbilityLeft },
+                    { "Right", UseDeviceAbilityRight }
+                },
+                tooltips: new(),
+                defaultDecision: "No",
+                callback: Triggers.FinishTrigger,
+                showSkipButton: true
             );
         }
 
-        private void UseDeviceAbility(object sender, EventArgs e)
+        private void UseDeviceAbility()
         {
-            HostShip.OnGetAvailableBombDropTemplatesOneCondition += GetDeviceTemplates;
+            HostShip.OnGetBombTemplateDirection += GetDeviceDirection;
             HostShip.SpendCharge();
             Triggers.FinishTrigger();
         }
 
-        private void GetDeviceTemplates(List<ManeuverTemplate> availableTemplates, GenericUpgrade upgrade)
+        private void UseDeviceAbilityLeft(object sender, EventArgs e)
         {
-            availableTemplates.Clear();
-            availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Straight, ManeuverDirection.Left, ManeuverSpeed.Speed1, true, true));
-            availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Straight, ManeuverDirection.Right, ManeuverSpeed.Speed1, true, true));
-            HostShip.OnGetAvailableBombDropTemplatesOneCondition -= GetDeviceTemplates;
+            selectedDirection = Direction.Left;
+            UseDeviceAbility();
+        }
+
+        private void UseDeviceAbilityRight(object sender, EventArgs e)
+        {
+            selectedDirection = Direction.Right;
+            UseDeviceAbility();
+        }
+
+        private void GetDeviceDirection(ref Direction direction)
+        {
+            HostShip.OnGetBombTemplateDirection -= GetDeviceDirection;
+            direction = selectedDirection;
+            selectedDirection = Direction.Bottom;
         }
     }
 }
