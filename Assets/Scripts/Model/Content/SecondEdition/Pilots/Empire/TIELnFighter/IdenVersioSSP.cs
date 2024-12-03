@@ -41,7 +41,7 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(Disciplined));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Elusive));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/idenversio-swz105.png";
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/idenversio-swz105.png";
 
                 PilotNameCanonical = "idenversio-swz105";
             }
