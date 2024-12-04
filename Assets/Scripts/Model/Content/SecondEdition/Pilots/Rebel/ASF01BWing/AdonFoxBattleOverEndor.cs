@@ -1,13 +1,7 @@
 ﻿using Abilities.SecondEdition;
-using BoardTools;
 using Content;
-using Ship;
-using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Tokens;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship.SecondEdition.ASF01BWing
@@ -51,7 +45,7 @@ namespace Ship.SecondEdition.ASF01BWing
 
             ShipAbilities.Add(new GyroCockpit());
 
-            PilotNameCanonical = "ginamoonsong-battleoverendor";
+            PilotNameCanonical = "adonfox-battleoverendor";
 
             DefaultUpgrades.Remove(typeof(UpgradesList.SecondEdition.StabilizedSFoilsOpen));
         }
@@ -85,6 +79,7 @@ namespace Abilities.SecondEdition
             {
                 Messages.ShowInfo($"{HostShip.PilotName} adds an extra defense die");
                 HostShip.AfterGotNumberOfDefenceDice += AddDefenseDie;
+                Triggers.FinishTrigger();
             }
             else
             {
@@ -94,8 +89,8 @@ namespace Abilities.SecondEdition
 
         private void AddDefenseDie(ref int dieCount)
         {
+            HostShip.AfterGotNumberOfDefenceDice -= AddDefenseDie;
             dieCount++;
-            Triggers.FinishTrigger();
         }
     }
 
