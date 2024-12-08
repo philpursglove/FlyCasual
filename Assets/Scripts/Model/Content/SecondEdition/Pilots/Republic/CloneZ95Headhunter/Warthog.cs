@@ -19,7 +19,7 @@ namespace Ship
                     3,
                     10,
                     isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.HawkAbility),
+                    abilityType: typeof(Abilities.SecondEdition.WarthogAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
