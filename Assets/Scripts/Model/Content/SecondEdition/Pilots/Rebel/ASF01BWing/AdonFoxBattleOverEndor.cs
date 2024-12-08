@@ -1,10 +1,11 @@
 ﻿using Abilities.SecondEdition;
+using BoardTools;
+using Bombs;
 using Content;
+using Movement;
 using Ship;
-using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Upgrade;
 
 namespace Ship.SecondEdition.ASF01BWing
@@ -38,9 +39,6 @@ namespace Ship.SecondEdition.ASF01BWing
                 regensCharges: 1,
                 isStandardLayout: true
             );
-
-            ShipInfo.Shields = 0;
-            ShipInfo.Hull = 1;
 
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/adonfox-battleoverendor.png";
 
@@ -112,38 +110,26 @@ namespace Abilities.SecondEdition
             HostShip.OnShipIsDestroyed -= RegisterAbility;
         }
 
-        private void RegisterAbility(GenericShip ship, bool flag)
+        private void RegisterAbility(GenericShip ship, bool isFled)
         {
-
-            RegisterAbilityTrigger(TriggerTypes.OnShipIsDestroyed, UseAbility);
+            if (!isFled)
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnShipIsDestroyed, UseAbility);
+            }        
         }
 
         private void UseAbility(object sender, EventArgs e)
         {
-            // When you are destroyed, before you are removed, you may spend 1 charge on an equipped device upgrade to drop or launch a bomb using a speed 1 straight or bank template
-            List<GenericUpgrade> equippedBombs = HostShip.UpgradeBar.GetInstalledUpgrades(UpgradeType.Device).Where(b => b.State.Charges > 0 && typeof(GenericBomb).IsAssignableFrom(b.GetType())).ToList();
-
-            if(equippedBombs.Count > 0)
-            {
-                AskToUseAbility
-                (
-                    descriptionShort: HostUpgrade.UpgradeInfo.Name,
-                    useByDefault: AlwaysUseByDefault,
-                    useAbility: DropOrLaunchBomb,
-                    callback: Triggers.FinishTrigger,
-                    descriptionLong: "You may drop or launch a bomb using a speed 1 straight or bank template.",
-                    showSkipButton: false
-                );
-            }
-            else
-            {
-                Triggers.FinishTrigger();
-            }
+            HostShip.OnGetAvailableBombDropTemplatesTwoConditions += GetBombTemplates;
+            BombsManager.RegisterBombDropTriggerIfAvailable(HostShip, TriggerTypes.OnAbilityDirect);
+            Triggers.ResolveTriggers(TriggerTypes.OnAbilityDirect, Triggers.FinishTrigger);
         }
 
-        private void DropOrLaunchBomb(object sender, EventArgs e)
+        private void GetBombTemplates(List<ManeuverTemplate> availableTemplates, GenericUpgrade upgrade)
         {
-            
+            HostShip.OnGetAvailableBombDropTemplatesTwoConditions -= GetBombTemplates;
+            availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Bank, ManeuverDirection.Left, ManeuverSpeed.Speed1, isBombTemplate: true));
+            availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Bank, ManeuverDirection.Right, ManeuverSpeed.Speed1, isBombTemplate: true));
         }
     }
 }
