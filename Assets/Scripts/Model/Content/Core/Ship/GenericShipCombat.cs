@@ -133,6 +133,8 @@ namespace Ship
         public event EventHandlerBombDropTemplates OnGetAvailableBombDropTemplatesForbid;
         public event EventHandlerBombDropTemplates OnGetAvailableBombLaunchTemplates;
         public event EventHandlerBombDropTemplates OnGetAvailableBombLaunchTemplatesModifications;
+        public event EventHandlerDirection OnGetBombTemplateDirection;
+
         public event EventHandlerBarrelRollTemplates OnGetAvailableBarrelRollTemplates;
         public event EventHandlerDecloakTemplates OnGetAvailableDecloakTemplates;
         public event EventHandlerBoostTemplates OnGetAvailableBoostTemplates;
@@ -169,6 +171,7 @@ namespace Ship
         public event EventHandlerModifyDice OnTryDiceResultModification;
         public event EventHandlerTrySelectDie OnTrySelectDie;
 
+        public event EventHandler BeforeBombWillBeDropped;
         public event EventHandler OnBombWillBeDropped;
         public event EventHandler OnBombWasDropped;
         public event EventHandler OnBombWasLaunched;
@@ -315,6 +318,11 @@ namespace Ship
         {
             if (OnAttackMissedAsAttacker != null) OnAttackMissedAsAttacker();
             if (OnAttackMissedAsAttackerGlobal != null) OnAttackMissedAsAttackerGlobal();
+        }
+
+        public void CallOnGetBombTemplateDirection(ref Direction direction)
+        {
+            OnGetBombTemplateDirection?.Invoke(ref direction);
         }
 
         public void CallOnAttackMissedAsDefender()
@@ -959,9 +967,16 @@ namespace Ship
 			);
         }
 
+        public void CallBeforeDeviceWillBeDropped(Action callback)
+        {
+            BeforeBombWillBeDropped?.Invoke();
+
+            Triggers.ResolveTriggers(TriggerTypes.BeforeBombWillBeDropped, callback);
+        }
+
         public void CallDeviceWillBeDropped(Action callback)
         {
-            if (OnBombWillBeDropped != null) OnBombWillBeDropped();
+            OnBombWillBeDropped?.Invoke();
 
             Triggers.ResolveTriggers(TriggerTypes.OnBombWillBeDropped, callback);
         }

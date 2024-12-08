@@ -15,7 +15,7 @@ namespace Ship
                     "7th Sky Corps Pilot",
                     "",
                     Faction.Republic,
-                    3,
+                    2,
                     3,
                     3,
                     extraUpgradeIcons: new List<UpgradeType>
