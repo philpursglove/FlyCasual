@@ -60,8 +60,6 @@ namespace Ship
 
         public event EventHandlerBool OnCheckCanUseForceNow;
 
-        public event EventHandlerShipToken OnRedTokenGainedFromOverlappingObstacle;
-
         public GenericShip DockingHost;
 
         public List<GenericShip> TwoTargetLocksOnDifferentTargetsAreAllowed = new List<GenericShip>();
@@ -482,13 +480,6 @@ namespace Ship
             bool canUseForceNow = true;
             OnCheckCanUseForceNow?.Invoke(ref canUseForceNow);
             return canUseForceNow;
-        }
-
-        public void CallOnRedTokenGainedFromOverlappingObstacle(GenericToken token, Action callback)
-        {
-            if (OnRedTokenGainedFromOverlappingObstacle != null) OnRedTokenGainedFromOverlappingObstacle(this, token);
-
-            Triggers.ResolveTriggers(TriggerTypes.OnRedTokenGainedFromOverlappingObstacle, callback);
         }
     }
 
