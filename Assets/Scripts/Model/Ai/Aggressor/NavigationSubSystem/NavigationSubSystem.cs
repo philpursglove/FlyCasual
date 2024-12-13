@@ -274,9 +274,7 @@ namespace AI.Aggressor
                 {
                     yield return CheckNextTurnRecursive(ship);
 
-                    float minDistanceToEnemyShip, minDistanceToNearestEnemyInShotRange, minAngle;
-                    int enemiesInShotRange;
-                    ProcessHeavyGeometryCalculations(ship, out minDistanceToEnemyShip, out minDistanceToNearestEnemyInShotRange, out minAngle, out enemiesInShotRange);
+                    ProcessHeavyGeometryCalculations(ship, out float minDistanceToEnemyShip, out float minDistanceToNearestEnemyInShotRange, out float minAngle, out int enemiesInShotRange);
 
                     CurrentNavigationResult.distanceToNearestEnemy = minDistanceToEnemyShip;
                     CurrentNavigationResult.distanceToNearestEnemyInShotRange = minDistanceToNearestEnemyInShotRange;
