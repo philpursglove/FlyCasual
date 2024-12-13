@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using BoardTools;
+﻿using BoardTools;
 using Movement;
 using Players;
 using Ship;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AI.Aggressor
@@ -420,23 +420,25 @@ namespace AI.Aggressor
         {
             List<string> bestTurnManeuvers = new List<string>();
 
-            ManeuverHolder bestTurnManeuver = ship.GetManeuverHolders()
+            ManeuverHolder bestLeftTurnManeuver = ship.GetManeuverHolders()
                 .Where(n =>
                     n.Bearing == ManeuverBearing.Turn
                     && n.Direction == ManeuverDirection.Left
                 )
                 .OrderBy(n => n.SpeedIntUnsigned)
                 .FirstOrDefault();
-            bestTurnManeuvers.Add(bestTurnManeuver.ToString());
+            if(bestLeftTurnManeuver.Bearing == ManeuverBearing.Turn)
+                bestTurnManeuvers.Add(bestLeftTurnManeuver.ToString());
 
-            bestTurnManeuver = ship.GetManeuverHolders()
+            ManeuverHolder bestRightTurnManeuver = ship.GetManeuverHolders()
                 .Where(n =>
                     n.Bearing == ManeuverBearing.Turn
                     && n.Direction == ManeuverDirection.Right
                 )
                 .OrderBy(n => n.SpeedIntUnsigned)
                 .FirstOrDefault();
-            bestTurnManeuvers.Add(bestTurnManeuver.ToString());
+            if (bestRightTurnManeuver.Bearing == ManeuverBearing.Turn)
+                bestTurnManeuvers.Add(bestRightTurnManeuver.ToString());
 
             return bestTurnManeuvers;
         }
