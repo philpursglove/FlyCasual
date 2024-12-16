@@ -81,7 +81,7 @@ namespace Abilities.SecondEdition
         {
             if(Combat.Defender == HostShip)
             {
-                Messages.ShowInfo($"{HostShip.PilotName} adds an extra defense die");
+                Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} adds an extra defense die");
                 HostShip.AfterGotNumberOfDefenceDice += AddDefenseDie;
                 Triggers.FinishTrigger();
             }
