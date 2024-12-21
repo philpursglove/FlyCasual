@@ -79,6 +79,12 @@ namespace Obstacles
             newPhase.Start();
         }
 
+        public override void OnShotObstructedExtra(GenericShip attacker, GenericShip defender, ref int result)
+        {
+            Messages.ShowInfo("Attack is obstructed by Electro-Chaff Cloud the defender rolls 1 extra defense dice");
+            result += 1;
+        }
+
         public override void AfterObstacleRoll(GenericShip ship, DieSide side, Action callback)
         {
             if (side == DieSide.Crit || (side == DieSide.Success)
