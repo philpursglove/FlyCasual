@@ -44,7 +44,7 @@ namespace Obstacles
             }
         }
 
-        public virtual void OnShotObstructedExtra(GenericShip attacker, GenericShip defender) {
+        public virtual void OnShotObstructedExtra(GenericShip attacker, GenericShip defender, ref int result) {
             // Does nothing by default
         }
 
