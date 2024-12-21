@@ -10,13 +10,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity.Services.Core;
+using Unity.Services.RemoteConfig;
 using UnityEngine;
 using UnityEngine.UI;
 using Upgrade;
 
 public class MainMenu : MonoBehaviour {
 
-    const string PatreonUrl = "https://www.patreon.com/Sandrem";
+    const string PatreonUrl = "https://www.patreon.com/Baledin";
     private Faction CurrentAvatarsFaction = Faction.Rebel;
     public GameObject CurrentPanel;
     public GameObject RosterBuilderPrefab;
@@ -131,33 +133,29 @@ public class MainMenu : MonoBehaviour {
         Options.ChangeParameterValue("Title", text);
     }
 
-    private void CheckPatreonSupportNotification(bool arg1, bool arg2, int arg3)
+    private void CheckPatreonSupportNotification(ConfigResponse configResponse)
     {
-        int support = RemoteSettings.GetInt("SupportOnPatreon", -1);
-        if (support != -1) ShowSupportOnPatreon(support);
-
-        RemoteSettings.Completed -= CheckPatreonSupportNotification;
+        if (RemoteConfigService.Instance.appConfig.GetBool("ShowSupportOnPatreon", false)) ShowSupportOnPatreon();
+        RemoteConfigService.Instance.FetchCompleted -= CheckPatreonSupportNotification;
     }
 
-    private void CheckSupportUkraineNotification(bool arg1, bool arg2, int arg3)
+    private void CheckSupportUkraineNotification(ConfigResponse configResponse)
     {
-        bool support = RemoteSettings.GetBool("SupportUkraine", false);
-        if (support != false) ShowSupportUkraine();
-
-        RemoteSettings.Completed -= CheckSupportUkraineNotification;
+        if (RemoteConfigService.Instance.appConfig.GetBool("ShowSupportUkraine", false)) ShowSupportUkraine();
+        RemoteConfigService.Instance.FetchCompleted -= CheckSupportUkraineNotification;
     }
 
-    private void CheckUpdateNotification(bool wasUpdatedFromServer, bool settingsChanged, int serverResponse)
+    private void CheckUpdateNotification(ConfigResponse configResponse)
     {
-        Global.LatestVersionInt = RemoteSettings.GetInt("UpdateLatestVersionInt", Global.CurrentVersionInt);
+        Global.LatestVersionInt = RemoteConfigService.Instance.appConfig.GetInt("LatestVersionInt", -1);
         if (Global.LatestVersionInt > Global.CurrentVersionInt)
         {
-            string latestVersion = RemoteSettings.GetString("UpdateLatestVersion", Global.CurrentVersion);
-            string updateLink = RemoteSettings.GetString("UpdateLink");
+            string latestVersion = RemoteConfigService.Instance.appConfig.GetString("LatestVersion", Global.CurrentVersion);
+            string updateLink = RemoteConfigService.Instance.appConfig.GetString("UpdateLink");
             ShowNewVersionIsAvailable(latestVersion, updateLink);
         }
 
-        RemoteSettings.Completed -= CheckUpdateNotification;
+        RemoteConfigService.Instance.FetchCompleted -= CheckUpdateNotification;
     }
 
     private void ClearAvatarsPanel()
@@ -223,8 +221,10 @@ public class MainMenu : MonoBehaviour {
         }
     }
 
-    private void InitializeMenu()
+    private async void InitializeMenu()
     {
+        await UnityServices.InitializeAsync();
+        
         CurrentMainMenu = this;
         SetCurrentPanel();
 
@@ -390,10 +390,9 @@ public class MainMenu : MonoBehaviour {
 
     private void PrepareUpdateChecker()
     {
-        RemoteSettings.Completed += CheckUpdateNotification;
-        RemoteSettings.Completed += CheckPatreonSupportNotification;
-        RemoteSettings.Completed += CheckSupportUkraineNotification;
-        RemoteSettings.ForceUpdate();
+        RemoteConfigService.Instance.FetchCompleted += CheckUpdateNotification;
+        RemoteConfigService.Instance.FetchCompleted += CheckPatreonSupportNotification;
+        RemoteConfigService.Instance.FetchCompleted += CheckSupportUkraineNotification;
     }
 
     public void PreviousPanel()
@@ -536,7 +535,7 @@ public class MainMenu : MonoBehaviour {
         panel.SetActive(true);
     }
 
-    private void ShowSupportOnPatreon(int support)
+    private void ShowSupportOnPatreon()
     {
         //Don't show if new version is available
         if (Global.LatestVersionInt <= Global.CurrentVersionInt)
@@ -546,7 +545,6 @@ public class MainMenu : MonoBehaviour {
 
             GameObject panel = GameObject.Find("UI/Panels").transform.Find("MainMenuPanel").Find("SupportOnPatreon").gameObject;
 
-            //panel.transform.Find("Text").GetComponent<Text>().text = $"\"Rules 2.5\" and new expansions are coming! If you want\nto see them in Fly Casual -\nsupport me on patreon\n{support} / 200";
             panel.transform.position = new Vector2(Screen.width - 20, 20);
 
             panel.SetActive(true);

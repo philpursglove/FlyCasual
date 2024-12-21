@@ -42,7 +42,6 @@ public static class Options
     {
         Playmat = PlayerPrefs.GetString("PlaymatName", "Endor");
         BackgroundImage = PlayerPrefs.GetString("BackgroundImage", "_RANDOM");
-        CheckVersionUrl = PlayerPrefs.GetString("CheckVersionUrl", "http://sandrem.freeasphost.net/data/currentversion.txt");
         MusicVolume = PlayerPrefs.GetFloat("Music Volume", 0.25f);
         SfxVolume = PlayerPrefs.GetFloat("SFX Volume", 0.25f);
         AnimationSpeed = PlayerPrefs.GetFloat("Animation Speed V2", 0.25f);
