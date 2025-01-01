@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using BoardTools;
+﻿using BoardTools;
 using Movement;
 using Players;
 using Ship;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AI.Aggressor
@@ -274,9 +274,7 @@ namespace AI.Aggressor
                 {
                     yield return CheckNextTurnRecursive(ship);
 
-                    float minDistanceToEnemyShip, minDistanceToNearestEnemyInShotRange, minAngle;
-                    int enemiesInShotRange;
-                    ProcessHeavyGeometryCalculations(ship, out minDistanceToEnemyShip, out minDistanceToNearestEnemyInShotRange, out minAngle, out enemiesInShotRange);
+                    ProcessHeavyGeometryCalculations(ship, out float minDistanceToEnemyShip, out float minDistanceToNearestEnemyInShotRange, out float minAngle, out int enemiesInShotRange);
 
                     CurrentNavigationResult.distanceToNearestEnemy = minDistanceToEnemyShip;
                     CurrentNavigationResult.distanceToNearestEnemyInShotRange = minDistanceToNearestEnemyInShotRange;
@@ -422,23 +420,25 @@ namespace AI.Aggressor
         {
             List<string> bestTurnManeuvers = new List<string>();
 
-            ManeuverHolder bestTurnManeuver = ship.GetManeuverHolders()
+            ManeuverHolder bestLeftTurnManeuver = ship.GetManeuverHolders()
                 .Where(n =>
                     n.Bearing == ManeuverBearing.Turn
                     && n.Direction == ManeuverDirection.Left
                 )
                 .OrderBy(n => n.SpeedIntUnsigned)
                 .FirstOrDefault();
-            bestTurnManeuvers.Add(bestTurnManeuver.ToString());
+            if(bestLeftTurnManeuver.Bearing == ManeuverBearing.Turn)
+                bestTurnManeuvers.Add(bestLeftTurnManeuver.ToString());
 
-            bestTurnManeuver = ship.GetManeuverHolders()
+            ManeuverHolder bestRightTurnManeuver = ship.GetManeuverHolders()
                 .Where(n =>
                     n.Bearing == ManeuverBearing.Turn
                     && n.Direction == ManeuverDirection.Right
                 )
                 .OrderBy(n => n.SpeedIntUnsigned)
                 .FirstOrDefault();
-            bestTurnManeuvers.Add(bestTurnManeuver.ToString());
+            if (bestRightTurnManeuver.Bearing == ManeuverBearing.Turn)
+                bestTurnManeuvers.Add(bestRightTurnManeuver.ToString());
 
             return bestTurnManeuvers;
         }
@@ -446,7 +446,7 @@ namespace AI.Aggressor
         public static GenericShip GetNextShipWithoutAssignedManeuver()
         {
             return Roster.GetPlayer(Phases.CurrentSubPhase.RequiredPlayer).Ships.Values
-                .Where(n => n.AssignedManeuver == null && !n.State.IsIonized)
+                .Where(n => n.AssignedManeuver == null)
                 .OrderBy(n => VirtualBoard.Ships[n].OrderToActivate)
                 .FirstOrDefault();
         }

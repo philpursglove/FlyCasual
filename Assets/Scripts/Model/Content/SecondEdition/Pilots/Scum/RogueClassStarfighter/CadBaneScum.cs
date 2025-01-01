@@ -75,7 +75,7 @@ namespace Abilities.SecondEdition
             {
                 AskToUseAbility(
                     HostShip.PilotInfo.PilotName,
-                    AlwaysUseByDefault,
+                    NeverUseByDefault,
                     AgreeToTransferToken,
                     descriptionLong: "Do you want to spend 2 charges to transfer a red or orange token?",
                     imageHolder: HostShip

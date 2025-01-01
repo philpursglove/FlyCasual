@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ship;
+using System;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -38,6 +40,11 @@ namespace Abilities.SecondEdition
             );
         }
 
+        public override void DeactivateAbility()
+        {
+            RemoveDiceModification();
+        }
+
         private void PayAbilityCost(Action<bool> callback)
         {
             if (HostUpgrade.State.Charges > 0)
@@ -48,16 +55,11 @@ namespace Abilities.SecondEdition
             else callback(false);
         }
 
-        public override void DeactivateAbility()
-        {
-            RemoveDiceModification();
-        }
-
         public bool IsDiceModificationAvailable()
         {
-            var noFriendlyShipsInRange0to2 = true;
+            bool noFriendlyShipsInRange0to2 = true;
 
-            foreach (var friendlyShip in HostShip.Owner.Ships)
+            foreach (KeyValuePair<string, GenericShip> friendlyShip in HostShip.Owner.Ships)
             {
                 if (friendlyShip.Value != HostShip)
                 {
@@ -70,7 +72,9 @@ namespace Abilities.SecondEdition
                 }
             }
 
-            return ((HostShip.IsAttacking || HostShip.IsDefending) && noFriendlyShipsInRange0to2 && HostUpgrade.State.Charges > 0);
+            bool allDiceRerolled = Combat.CurrentDiceRoll.DiceRerolled.Count == Combat.CurrentDiceRoll.DiceList.Count;
+
+            return ((HostShip.IsAttacking || HostShip.IsDefending) && noFriendlyShipsInRange0to2 && HostUpgrade.State.Charges > 0 && !allDiceRerolled);
         }
 
         public int GetDiceModificationAiPriority()
