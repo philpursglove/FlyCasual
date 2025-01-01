@@ -1,7 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using Content;
 using System.Collections.Generic;
-using System.Linq;
 using ActionsList;
 using ActionsList.SecondEdition;
 using Ship;
@@ -46,14 +45,14 @@ namespace Ship
                 PilotNameCanonical = "soontirfel-battleoverendor";
 
                 MustHaveUpgrades.Add(typeof(FeedbackEmitter));
-                MustHaveUpgrades.Add(typeof(ApexPredatorAbility));
-                MustHaveUpgrades.Add(typeof(NoEscapeAbility));
+                MustHaveUpgrades.Add(typeof(ApexPredator));
+                MustHaveUpgrades.Add(typeof(NoEscape));
+                MustHaveUpgrades.Add(typeof(BlankSignature));
 
                 ImageUrl =
                     "https://cdn.svc.asmodee.net/production-amgcom/uploads/2024/02/02012024-SWZ99_Transmission-Image_8-768x438.png";
 
-                AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
-                ShipAbilities.Remove(oldAbility);
+                DefaultUpgrades.Remove(typeof(AutoThrustersAbility));
                 ShipAbilities.Add(new SensitiveControlsBoYRealAbility());
 
             }
@@ -84,7 +83,11 @@ namespace Abilities.SecondEdition
                 AskToUseAbility(
                     HostShip.PilotInfo.PilotName,
                     AlwaysUseByDefault,
-                    delegate { HostShip.SpendCharges(1); BoostOrBarrelRoll(); },
+                    delegate
+                    {
+                        HostShip.SpendCharges(1);
+                        BoostOrBarrelRoll();
+                    },
                     descriptionLong: "Do you want to spend 1 Charge and gain a Deplete token to boost or barrel roll?",
                     imageHolder: HostShip
                 );
@@ -110,15 +113,29 @@ namespace Abilities.SecondEdition
             HostShip.Tokens.AssignToken(typeof(DepleteToken), null, null);
         }
     }
+}
 
-    public class ApexPredatorAbility : GenericAbility
+namespace UpgradesList.SecondEdition
+{
+
+    public class ApexPredator : GenericUpgrade
     {
-        public override void ActivateAbility()
+        public ApexPredator()
+        {
+            UpgradeInfo = new UpgradeCardInfo(
+                "Apex Predator",
+                UpgradeType.Talent
+            );
+            IsHidden = true;
+
+        }
+
+        public new void ActivateAbility()
         {
             HostShip.OnGenerateDiceModifications += AddApexPredatorReroll;
         }
 
-        public override void DeactivateAbility()
+        public new void DeactivateAbility()
         {
             HostShip.OnGenerateDiceModifications -= AddApexPredatorReroll;
         }

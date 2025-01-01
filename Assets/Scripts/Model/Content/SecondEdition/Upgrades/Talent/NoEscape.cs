@@ -1,27 +1,40 @@
 ﻿using System.Collections.Generic;
-using Abilities;
 using ActionsList.SecondEdition;
 using BoardTools;
 using Ship;
 using Team;
 using Tokens;
 using UnityEngine;
+using Upgrade;
 
-public class NoEscapeAbility : GenericAbility
+namespace UpgradesList.SecondEdition
 {
-    public override void ActivateAbility()
+    public class NoEscape : GenericUpgrade
     {
-        HostShip.OnGenerateDiceModifications += AddNoEscapeReroll;
-    }
+        public NoEscape()
+        {
+            UpgradeInfo = new UpgradeCardInfo(
+                "No Escape",
+                UpgradeType.Talent
+            );
+            IsHidden = true;
 
-    public override void DeactivateAbility()
-    {
-        HostShip.OnGenerateDiceModifications -= AddNoEscapeReroll;
-    }
+        }
 
-    private void AddNoEscapeReroll(GenericShip ship)
-    {
-        HostShip.AddAvailableDiceModificationOwn(new NoEscapeActionEffect());
+        public new void ActivateAbility()
+        {
+            HostShip.OnGenerateDiceModifications += AddNoEscapeReroll;
+        }
+
+        public new void DeactivateAbility()
+        {
+            HostShip.OnGenerateDiceModifications -= AddNoEscapeReroll;
+        }
+
+        private void AddNoEscapeReroll(GenericShip ship)
+        {
+            HostShip.AddAvailableDiceModificationOwn(new NoEscapeActionEffect());
+        }
     }
 }
 
@@ -38,7 +51,8 @@ namespace ActionsList.SecondEdition
         public override bool IsDiceModificationAvailable()
         {
             var attackingShipsCount = Board.GetShipsAtRange(Combat.Defender, new Vector2(0, 1), Type.Enemy).Count;
-            var defendingShipsCount = Board.GetShipsAtRange(Combat.Defender, new Vector2(0, 1), Type.Friendly).Count;
+            var defendingShipsCount =
+                Board.GetShipsAtRange(Combat.Defender, new Vector2(0, 1), Type.Friendly).Count;
 
             return attackingShipsCount > defendingShipsCount;
         }
@@ -49,7 +63,7 @@ namespace ActionsList.SecondEdition
             {
                 NumberOfDiceCanBeRerolled = 1,
                 CallBack = callBack,
-                SidesCanBeRerolled = new List<DieSide>{DieSide.Blank}
+                SidesCanBeRerolled = new List<DieSide> { DieSide.Blank }
             };
             diceRerollManager.Start();
         }
