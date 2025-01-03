@@ -118,7 +118,10 @@ namespace Obstacles
 
         public static GenericObstacle GetPossibleObstacle(string obstacleShortName)
         {
-            obstacleShortName = obstacleShortName.Replace("vt49debris", "vt49decimatordebris"); // Pre 1.4
+            obstacleShortName = 
+                obstacleShortName.Replace("vt49debris", "vt49decimatordebris") // Pre 1.4
+                    .Replace("prideofmandalorerock", "pomasteroid") // Fix loading of old Pride of Mandalore obstacles
+                    .Replace("pomasteroid0", "pomasteroid3"); // Fix loading of old Pride of Mandalore obstacles
             return Instance.AllPossibleObstacles.First(n => n.ShortName == obstacleShortName);
         }
 
