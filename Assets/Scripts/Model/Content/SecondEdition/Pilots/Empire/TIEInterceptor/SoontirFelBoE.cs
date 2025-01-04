@@ -7,6 +7,7 @@ using Ship;
 using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
+using System.Linq;
 
 namespace Ship
 {
@@ -52,7 +53,8 @@ namespace Ship
                 ImageUrl =
                     "https://cdn.svc.asmodee.net/production-amgcom/uploads/2024/02/02012024-SWZ99_Transmission-Image_8-768x438.png";
 
-                DefaultUpgrades.Remove(typeof(AutoThrustersAbility));
+                AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
+                ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsBoYRealAbility());
 
             }
@@ -87,6 +89,7 @@ namespace Abilities.SecondEdition
                     {
                         HostShip.SpendCharges(1);
                         BoostOrBarrelRoll();
+                        HostShip.Tokens.AssignToken(typeof(DepleteToken), null, null);
                     },
                     descriptionLong: "Do you want to spend 1 Charge and gain a Deplete token to boost or barrel roll?",
                     imageHolder: HostShip
@@ -110,7 +113,6 @@ namespace Abilities.SecondEdition
                 descriptionShort: "Soontir Fel",
                 descriptionLong: "You may perform a barrel roll or boost action",
                 imageHolder: HostUpgrade);
-            HostShip.Tokens.AssignToken(typeof(DepleteToken), null, null);
         }
     }
 }
