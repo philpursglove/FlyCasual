@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Upgrade;
-using System;
+﻿using Arcs;
+using Content;
 using Ship;
 using SubPhases;
-using Arcs;
+using System;
+using System.Collections.Generic;
 using Tokens;
-using Content;
+using Upgrade;
 
 namespace Ship
 {
@@ -35,8 +35,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://i.imgur.com/6rxtxtb.png";
             }
         }
     }
@@ -129,10 +127,10 @@ namespace Abilities.SecondEdition
             subphase.DescriptionLong = "Which token to assign?";
             subphase.ImageSource = HostShip;
 
-            subphase.AddDecision("Deplete Tolen", delegate { AssignToken(new DepleteToken(TargetShip)); });
-            subphase.AddDecision("Strain Tolen", delegate { AssignToken(new StrainToken(TargetShip)); });
+            subphase.AddDecision("Deplete Token", delegate { AssignToken(new DepleteToken(TargetShip)); });
+            subphase.AddDecision("Strain Token", delegate { AssignToken(new StrainToken(TargetShip)); });
 
-            subphase.DefaultDecisionName = "Deplete Tolen";
+            subphase.DefaultDecisionName = "Deplete Token";
             subphase.DecisionOwner = HostShip.Owner;
             subphase.ShowSkipButton = false;
 
