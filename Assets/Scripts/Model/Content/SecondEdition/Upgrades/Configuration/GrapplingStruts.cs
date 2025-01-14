@@ -1,4 +1,4 @@
-﻿using BoardTools;
+﻿using ActionsList;
 using Obstacles;
 using Ship;
 using SubPhases;
@@ -24,6 +24,8 @@ namespace UpgradesList.SecondEdition
 
             AnotherSide = typeof(GrapplingStrutsOpen);
             SelectSideOnSetup = false;
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/grapplingstruts.png";
         }
     }
 
@@ -43,6 +45,8 @@ namespace UpgradesList.SecondEdition
             );
 
             AnotherSide = typeof(GrapplingStrutsClosed);
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/grapplingstruts-sideb.png";
         }
     }
 }
@@ -138,24 +142,24 @@ namespace Abilities.SecondEdition
             IgnoreObstaclesList.AddRange(HostShip.ObstaclesLanded);
 
             HostShip.IgnoreObstaclesList.AddRange(IgnoreObstaclesList);
-            HostShip.OnCheckIgnoreObstaclesDuringBarrelRoll += Allow;
 
             HostShip.OnManeuverIsRevealed += CheckSpecialManeuvers;
             HostShip.OnMovementFinish += FlipThisCard;
+            HostShip.OnGenerateActions += DisallowBarrelRoll;
         }
 
         public override void DeactivateAbility()
         {
             HostShip.OnManeuverIsRevealed -= CheckSpecialManeuvers;
             HostShip.OnMovementFinish -= FlipThisCard;
+            HostShip.OnGenerateActions -= DisallowBarrelRoll;
 
             HostShip.IgnoreObstaclesList.RemoveAll(n => IgnoreObstaclesList.Contains(n));
-            HostShip.OnCheckIgnoreObstaclesDuringBarrelRoll -= Allow;
         }
 
-        private void Allow(ref bool isAllowed)
+        private void DisallowBarrelRoll(GenericShip ship)
         {
-            isAllowed = true;
+            HostShip.RemoveAvailableAction(typeof(BarrelRollAction));
         }
 
         private void FlipThisCard(GenericShip ship)

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using SubPhases;
-using Tokens;
+﻿using Actions;
 using ActionsList;
-using GameModes;
 using Arcs;
-using Actions;
-using Editions;
 using BoardTools;
+using Editions;
+using SubPhases;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Tokens;
 
 namespace Ship
 {
@@ -349,6 +346,11 @@ namespace Ship
                     AvailableActionsList.Add(action);
                 }
             }
+        }
+
+        public void RemoveAvailableAction(Type ActionType)
+        {
+            AvailableActionsList.RemoveAll(action => action.GetType().Equals(ActionType));
         }
 
         public void AddAvailableFreeAction(GenericAction action)
