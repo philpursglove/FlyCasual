@@ -1,4 +1,5 @@
-﻿using Abilities.SecondEdition;
+﻿using System;
+using Abilities.SecondEdition;
 using Content;
 using System.Collections.Generic;
 using ActionsList;
@@ -45,7 +46,7 @@ namespace Ship
                 );
                 PilotNameCanonical = "soontirfel-battleoverendor";
 
-                MustHaveUpgrades.Add(typeof(FeedbackEmitter));
+                //MustHaveUpgrades.Add(typeof(FeedbackEmitter));
                 MustHaveUpgrades.Add(typeof(ApexPredator));
                 MustHaveUpgrades.Add(typeof(NoEscape));
                 MustHaveUpgrades.Add(typeof(BlankSignature));
@@ -68,51 +69,45 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnAttackFinishAsAttacker += UseSoontirFelBoEAbility;
+            HostShip.OnAttackFinishAsAttacker += RegisterSoontirFelBoEAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnAttackFinishAsAttacker -= UseSoontirFelBoEAbility;
+            HostShip.OnAttackFinishAsAttacker -= RegisterSoontirFelBoEAbility;
         }
 
-        private void UseSoontirFelBoEAbility(GenericShip ship)
+        private void RegisterSoontirFelBoEAbility(GenericShip ship)
+        {
+            RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, SoontirFelAbility);
+        }
+
+        private void SoontirFelAbility(object sender, EventArgs e)
         {
             // Are there charges left to power the ability?
             if (HostShip.State.Charges >= 2)
             {
                 // If there are we prompt to see if they want to use the ability.
-                AskToUseAbility(
-                    HostShip.PilotInfo.PilotName,
-                    AlwaysUseByDefault,
-                    delegate
+                HostShip.AskPerformFreeAction(
+                    new List<GenericAction>()
                     {
-                        HostShip.SpendCharges(1);
-                        BoostOrBarrelRoll();
-                        HostShip.Tokens.AssignToken(typeof(DepleteToken), null, null);
+                        new BoostAction() { CanBePerformedWhileStressed = true },
+                        new BarrelRollAction() { CanBePerformedWhileStressed = true }
                     },
-                    descriptionLong: "Do you want to spend 1 Charge and gain a Deplete token to boost or barrel roll?",
-                    imageHolder: HostShip
+                    () =>
+                    {
+                        
+                        HostShip.Tokens.AssignToken(typeof(DepleteToken), () =>
+                        {
+                            HostShip.SpendCharge();
+                        }, null);
+                        Triggers.FinishTrigger();
+                    },
+                    HostShip.PilotInfo.PilotName,
+                    "After you perform an attack, you may spend a charge and gain a Deplete token to perform a Barrel Roll or Boost action",
+                    HostShip
                 );
             }
-            else
-            {
-                Triggers.FinishTrigger();
-            }
-        }
-
-        private void BoostOrBarrelRoll()
-        {
-            HostShip.AskPerformFreeAction(
-                new List<GenericAction>()
-                {
-                    new BarrelRollAction() {HostShip = HostShip},
-                    new BoostAction() {HostShip = HostShip}
-                },
-                Triggers.FinishTrigger,
-                descriptionShort: "Soontir Fel",
-                descriptionLong: "You may perform a barrel roll or boost action",
-                imageHolder: HostUpgrade);
         }
     }
 }
