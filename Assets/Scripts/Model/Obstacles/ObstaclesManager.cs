@@ -4,7 +4,6 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Obstacles
@@ -65,11 +64,20 @@ namespace Obstacles
                         "vt49decimatordebris" + i
                     )
                 );
-
+            }
+            for (int i = 1; i <= 3; i++)
+            {
                 Instance.AllPossibleObstacles.Add(
                     new Asteroid(
                         $"Pride of Mandalore Rock {i}",
-                        $"prideofmandalorerock{i}"
+                        $"pomasteroid{i}"
+                    )
+                );
+
+                Instance.AllPossibleObstacles.Add(
+                    new Debris(
+                        $"Pride of Mandalore Debris {i}",
+                        $"pomdebris{i}"
                     )
                 );
             }
@@ -110,7 +118,10 @@ namespace Obstacles
 
         public static GenericObstacle GetPossibleObstacle(string obstacleShortName)
         {
-            obstacleShortName = obstacleShortName.Replace("vt49debris", "vt49decimatordebris"); // Pre 1.4
+            obstacleShortName = 
+                obstacleShortName.Replace("vt49debris", "vt49decimatordebris") // Pre 1.4
+                    .Replace("prideofmandalorerock", "pomasteroid") // Fix loading of old Pride of Mandalore obstacles
+                    .Replace("pomasteroid0", "pomasteroid3"); // Fix loading of old Pride of Mandalore obstacles
             return Instance.AllPossibleObstacles.First(n => n.ShortName == obstacleShortName);
         }
 
