@@ -1,9 +1,8 @@
-﻿using Upgrade;
-using Ship;
-using System;
+﻿using Ship;
 using SubPhases;
-using System.Collections.Generic;
+using System;
 using Tokens;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -55,7 +54,7 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            Phases.Events.OnGameStart += ChangeInitialWingsPosition;
+            ChangeInitialWingsPosition();
             HostShip.OnMovementFinishSuccessfully += RegisterAskToUseFlip;
             HostShip.AfterGotNumberOfDefenceDice += DecreaseDice;
             HostShip.Tokens.AssignCondition(new Conditions.SwivelWingCondition(HostShip, HostUpgrade));
@@ -63,7 +62,6 @@ namespace Abilities.SecondEdition
 
         public override void DeactivateAbility()
         {
-            Phases.Events.OnGameStart -= ChangeInitialWingsPosition;
             HostShip.OnMovementFinishSuccessfully -= RegisterAskToUseFlip;
             HostShip.AfterGotNumberOfDefenceDice -= DecreaseDice;
             HostShip.Tokens.RemoveCondition(typeof(Conditions.SwivelWingCondition));
@@ -77,9 +75,7 @@ namespace Abilities.SecondEdition
 
         protected void ChangeInitialWingsPosition()
         {
-            Phases.Events.OnGameStart -= ChangeInitialWingsPosition;
-
-            //HostShip.WingsOpen();
+            HostShip.WingsOpen();
         }
 
         protected virtual void RegisterAskToUseFlip(GenericShip ship)
@@ -95,7 +91,7 @@ namespace Abilities.SecondEdition
         {
             AskToUseAbility(
                 HostUpgrade.UpgradeInfo.Name,
-                AlwaysUseByDefault,
+                NeverUseByDefault,
                 DoFlipSide,
                 descriptionLong: "Do you want to flip the wing down?",
                 imageHolder: HostUpgrade
@@ -104,8 +100,8 @@ namespace Abilities.SecondEdition
 
         private void DoFlipSide(object sender, EventArgs e)
         {
-            //HostShip.WingsClose();
             (HostUpgrade as GenericDualUpgrade).Flip();
+            HostShip.WingsClose();
             DecisionSubPhase.ConfirmDecision();
         }
 
@@ -117,19 +113,19 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            ChangeInitialWingsPosition();
-            HostShip.OnMovementExecuted += RegisterAskToRotate;
+            Phases.Events.OnGameStart += ChangeInitialWingsPosition;
+            HostShip.OnManeuverIsRevealed += RegisterAskToRotate;
         }
 
         public override void DeactivateAbility()
         {
-            //HostShip.WingsOpen();
-            HostShip.OnMovementExecuted -= RegisterAskToRotate;
+            HostShip.OnManeuverIsRevealed -= RegisterAskToRotate;
         }
 
         protected void ChangeInitialWingsPosition()
         {
-            //HostShip.WingsClose();
+            Phases.Events.OnGameStart -= ChangeInitialWingsPosition;
+            HostShip.WingsClose();
         }
 
         protected void RegisterAskToRotate(GenericShip ship)
@@ -152,6 +148,7 @@ namespace Abilities.SecondEdition
             subphase.AddDecision("90 Counterclockwise", Rotate90Counterclockwise);
             subphase.AddDecision("90 Clockwise", Rotate90Clockwise);
             subphase.AddDecision("No", delegate { DecisionSubPhase.ConfirmDecision(); }, isCentered: true);
+            subphase.DefaultDecisionName = "No";
             subphase.Start();
         }
 
@@ -159,7 +156,6 @@ namespace Abilities.SecondEdition
         {
             DecisionSubPhase.ConfirmDecisionNoCallback();
             (HostUpgrade as GenericDualUpgrade).Flip();
-            //HostShip.WingsOpen();
             HostShip.Rotate180(Triggers.FinishTrigger);
         }
 
@@ -167,7 +163,6 @@ namespace Abilities.SecondEdition
         {
             DecisionSubPhase.ConfirmDecisionNoCallback();
             (HostUpgrade as GenericDualUpgrade).Flip();
-            //HostShip.WingsOpen();
             HostShip.Rotate90Clockwise(Triggers.FinishTrigger);
         }
 
@@ -175,7 +170,6 @@ namespace Abilities.SecondEdition
         {
             DecisionSubPhase.ConfirmDecisionNoCallback();
             (HostUpgrade as GenericDualUpgrade).Flip();
-            //HostShip.WingsOpen();
             HostShip.Rotate90Counterclockwise(Triggers.FinishTrigger);
         }
 
