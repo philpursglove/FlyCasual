@@ -21,7 +21,7 @@ namespace UpgradesList.SecondEdition
                 ),
                 abilityType: typeof(Abilities.SecondEdition.OutriderAbility)
             );
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/outrider.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/outrider-swz103.png";
 
         }
     }
