@@ -1,8 +1,6 @@
 using System.Threading.Tasks;
 using Unity.Services.Analytics;
-using Unity.Services.Authentication;
 using Unity.Services.Core;
-using Unity.Services.Core.Environments;
 using Unity.Services.RemoteConfig;
 using UnityEngine;
 
@@ -22,43 +20,16 @@ public class CloudServices : MonoBehaviour
         AnalyticsService.Instance.StartDataCollection();
     }
 
-    private void OnDestroy()
-    {
-        AnalyticsService.Instance.StopDataCollection();
-    }
-
     async void Awake()
     {
-        // initialize Unity's authentication and core services
         await InitializeRemoteConfigAsync();
-
-
-        // Fetch configuration settings from the remote service, they must be called with the attributes structs (empty or with custom attributes) to initiate the WebRequest.
         await RemoteConfigService.Instance.FetchConfigsAsync(new UserAttributes(), new AppAttributes());
     }
 
-
     async Task InitializeRemoteConfigAsync()
     {
-        InitializationOptions options = new();
-
-        if (Application.isEditor)
-        {
-            options.SetEnvironmentName("development");
-        }
-        else
-        {
-            options.SetEnvironmentName("production");
-        }
-
-        // initialize handlers for unity game services
-        await UnityServices.InitializeAsync(options);
-
-        // remote config requires authentication for managing environment information
-        if (!AuthenticationService.Instance.IsSignedIn)
-        {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        }
+        // initialize handlers for unity game services / remote config
+        await UnityServices.InitializeAsync();
     }
 }
 
