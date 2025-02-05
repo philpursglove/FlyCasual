@@ -1,9 +1,9 @@
-﻿using GameModes;
+﻿using Analytics;
+using GameModes;
 using Players;
 using SquadBuilderNS;
-using System.Collections.Generic;
+using Unity.Services.Analytics;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 public class Global : MonoBehaviour {
@@ -51,15 +51,7 @@ public class Global : MonoBehaviour {
 
     public static void StartBattle()
     {
-        if (DebugManager.ReleaseVersion)
-        {
-            AnalyticsEvent.GameStart(new Dictionary<string, object>()
-            {
-                { "Edition", Editions.Edition.Current.Name },
-                { "GameMode", GameModes.GameMode.CurrentGameMode.Name },
-                { "Version", Global.CurrentVersion }
-            });
-        }
+        AnalyticsService.Instance.RecordEvent(new BattleStartedEvent() { GameMode = GameMode.CurrentGameMode.Name });
 
         SquadBuilder.Instance.Database.ClearData();
         LoadingScreen.NextSceneIsReady(Phases.StartPhases);
@@ -69,7 +61,7 @@ public class Global : MonoBehaviour {
     {
         get
         {
-            switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+            switch (SceneManager.GetActiveScene().name)
             {
                 case "MainMenu":
                     return Scene.MainMenu;

@@ -1,7 +1,7 @@
-﻿using ExtraOptions.ExtraOptionsList;
+﻿using Analytics;
+using ExtraOptions.ExtraOptionsList;
 using Players;
-using UnityEngine;
-using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 namespace RulesList
 {
@@ -44,7 +44,7 @@ namespace RulesList
                     UI.ShowGameResults("Draw!");
                 }
 
-                if (DebugManager.ReleaseVersion) AnalyticsEvent.GameOver();
+                AnalyticsService.Instance.RecordEvent(new BattleEndedEvent());
 
                 Rules.FinishGame();
             }
