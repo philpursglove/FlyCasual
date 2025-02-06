@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Analytics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.Networking;
@@ -122,16 +124,15 @@ public class Console : MonoBehaviour {
     {
         DebugManager.ErrorIsAlreadyReported = true;
 
-        AnalyticsEvent.LevelFail(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
-            new Dictionary<string, object>()
-            {
-                { "Version", Global.CurrentVersion },
-                { "Pilot", (Selection.ThisShip != null) ? Selection.ThisShip.PilotInfo.PilotName : "None" },
-                { "Trigger", (Triggers.CurrentTrigger != null) ? Triggers.CurrentTrigger.Name : "None" },
-                { "Subphase", (Phases.CurrentSubPhase != null) ? Phases.CurrentSubPhase.GetType().ToString() : "None" }
-            }
-        );
+        GameErrorEvent gameErrorEvent = new GameErrorEvent()
+        {
+            Scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
+            Pilot = Selection.ThisShip != null ? Selection.ThisShip.PilotInfo.PilotName : "None",
+            Trigger = Triggers.CurrentTrigger != null ? Triggers.CurrentTrigger.Name : "None",
+            Subphase = Phases.CurrentSubPhase != null ? Phases.CurrentSubPhase.GetType().ToString() : "None"
+        };
+
+        AnalyticsService.Instance.RecordEvent(gameErrorEvent);
 
         StartCoroutine(UploadCustomReport(stackTrace));
     }

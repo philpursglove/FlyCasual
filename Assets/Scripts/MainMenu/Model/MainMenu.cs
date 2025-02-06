@@ -221,10 +221,8 @@ public class MainMenu : MonoBehaviour {
         }
     }
 
-    private async void InitializeMenu()
+    private void InitializeMenu()
     {
-        await UnityServices.InitializeAsync();
-        
         CurrentMainMenu = this;
         SetCurrentPanel();
 
