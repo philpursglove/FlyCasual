@@ -45,43 +45,53 @@ namespace Abilities.SecondEdition
 
         private void RegisterAbility(GenericShip ship, bool flag)
         {
-            List<GenericShip> friendlyShipsAtRange = Board.GetShipsAtRange(ship, new UnityEngine.Vector2(0, 3), Team.Type.Friendly).Where<GenericShip>(s => s.UpgradeBar.HasUpgradeInstalled(typeof(ContingencyProtocol)) && s != HostShip).ToList();
-
-            if (friendlyShipsAtRange.Count > 0)
-            {
-                RegisterAbilityTrigger(TriggerTypes.OnShipIsDestroyed, CheckAbility);
-            }
+            RegisterAbilityTrigger(TriggerTypes.OnShipIsDestroyed, CheckAbility);
         }
 
         private void CheckAbility(object sender, System.EventArgs e)
         {
+            if (TargetsForAbilityExist(FilterTargets))
+            {
+                Selection.ChangeActiveShip(HostShip);
 
-            SelectTargetForAbility(
-                ActivateContingencyProtocol,
-                FilterTargets,
-                GetAiPriority,
-                HostShip.Owner.PlayerNo,
-                name: HostUpgrade.UpgradeInfo.Name,
-                description: "Selected ship may perform an action even while stressed",
-                imageSource: HostUpgrade
-            );
+                SelectTargetForAbility(
+                    ActivateContingencyProtocol,
+                    FilterTargets,
+                    GetAiPriority,
+                    HostShip.Owner.PlayerNo,
+                    name: HostUpgrade.UpgradeInfo.Name,
+                    description: "Selected ship may perform an action even while stressed",
+                    imageSource: HostUpgrade
+                );
+            }
+            else
+            {
+                Triggers.FinishTrigger();
+            }
         }
 
         private void ActivateContingencyProtocol()
         {
-            SelectShipSubPhase.FinishSelectionNoCallback();
+            if(TargetShip == null)
+            {
+                Triggers.FinishTrigger();
+            }
+            else
+            {
+                SelectShipSubPhase.FinishSelectionNoCallback();
 
-            Selection.ChangeActiveShip(Selection.HoveredShip);
+                Selection.ChangeActiveShip(TargetShip);
 
-            Selection.HoveredShip.OnCanPerformActionWhileStressed += AllowActionsWhileStressed;
+                TargetShip.OnCanPerformActionWhileStressed += AllowActionsWhileStressed;
 
-            Selection.HoveredShip.AskPerformFreeAction
-            (
-                Selection.HoveredShip.GetAvailableActions(),
-                FinishAbility,
-                descriptionShort: HostUpgrade.UpgradeInfo.Name,
-                descriptionLong: "You may perform an action even while stressed"
-            );
+                TargetShip.AskPerformFreeAction
+                (
+                    TargetShip.GetAvailableActions(),
+                    FinishAbility,
+                    descriptionShort: HostUpgrade.UpgradeInfo.Name,
+                    descriptionLong: "You may perform an action even while stressed"
+                );
+            }
         }
 
         private bool FilterTargets(GenericShip ship)
@@ -101,7 +111,7 @@ namespace Abilities.SecondEdition
 
         private void FinishAbility()
         {
-            Selection.HoveredShip.OnCanPerformActionWhileStressed -= AllowActionsWhileStressed;
+            TargetShip.OnCanPerformActionWhileStressed -= AllowActionsWhileStressed;
 
             Selection.ChangeActiveShip(HostShip);
 
