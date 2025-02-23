@@ -1,14 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using GameCommands;
+using Obstacles;
 using Players;
+using Remote;
 using Ship;
 using SquadBuilderNS;
 using System;
-using GameCommands;
-using Obstacles;
-using Remote;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Upgrade;
+using UpgradesList.SecondEdition;
 
 public static partial class Roster
 {
@@ -410,6 +412,8 @@ public static partial class Roster
         AllUnits.Remove("ShipId:" + ship.ShipId);
         ship.Owner.Units.Remove("ShipId:" + ship.ShipId);
 
+        DisableUpgrades(ship);
+
         Reserve.Add(ship);
     }
 
@@ -422,6 +426,8 @@ public static partial class Roster
         AllUnits.Add("ShipId:" + ship.ShipId, ship);
         ship.Owner.Units.Add("ShipId:" + ship.ShipId, ship);
 
+        EnableUpgrades(ship);
+
         Reserve.Remove(ship);
     }
 
@@ -432,4 +438,26 @@ public static partial class Roster
         Roster.GetPlayer(playerNo).PlayerInfoPanel.transform.Find("StatusPanel").gameObject.SetActive(isActive);
     }
 
+    public static void DisableUpgrades(GenericShip ship)
+    {
+        foreach (GenericUpgrade upgrade in ship.UpgradeBar.GetUpgradesOnlyFaceup()) {
+            if(!ReserveUpgrades(upgrade))    
+                upgrade.DeactivateAbility();
+        }
+    }
+
+    public static void EnableUpgrades(GenericShip ship)
+    {
+        foreach (GenericUpgrade upgrade in ship.UpgradeBar.GetUpgradesOnlyFaceup())
+        {
+            if (!ReserveUpgrades(upgrade))
+                upgrade.ActivateAbility();
+        }
+    }
+
+    // Return true if upgrade allows moving to Reserve, this is to prevent deactivating the ability to return from reserve
+    public static bool ReserveUpgrades(GenericUpgrade upgrade)
+    {
+        return upgrade is BobaFett;
+    }
 }
