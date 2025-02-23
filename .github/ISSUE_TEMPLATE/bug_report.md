@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **Fly Casual Release Version**
-Which version did the bug occur in?
+Which version did the bug occur in (use version from Main Menu, please do not say Latest or similar)?
 
 **Online Game Mode**
 Yes/No
