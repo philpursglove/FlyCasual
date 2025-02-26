@@ -70,7 +70,7 @@ namespace Abilities.SecondEdition
                 HostShip.SpendCharge();
                 shouldBeDestroyed = false;
 
-                Messages.ShowInfo(HostShip.PilotInfo.PilotName + " has been moved to the Reserve");
+                Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} has been moved to Reserve");
 
                 Roster.MoveToReserve(HostShip);
 
@@ -92,7 +92,7 @@ namespace Abilities.SecondEdition
             var subphase = Phases.StartTemporarySubPhaseNew<SetupShipMidgameSubPhase>(
                 "Setup",
                 delegate {
-                    Messages.ShowInfo(HostShip.PilotInfo.PilotName + " has returned to the play area");
+                    Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} has returned to the play area");
                     Triggers.FinishTrigger();
                 }
             );
