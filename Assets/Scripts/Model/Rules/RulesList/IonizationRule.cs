@@ -35,6 +35,8 @@ namespace RulesList
         {
             if (BoardTools.Board.IsOffTheBoard(ship)) return;
 
+            ship.AssignedManeuver.IsIonManeuver = true;
+
             ship.OnMovementExecuted -= RegisterRemoveIonization;
 
             Triggers.RegisterTrigger(new Trigger
