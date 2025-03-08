@@ -20,7 +20,7 @@ public class CloudServices : MonoBehaviour
         AnalyticsService.Instance.StartDataCollection();
     }
 
-    async void Awake()
+    private async void Awake()
     {
         await InitializeUnityServices();
         await InitializeRemoteConfigAsync();
