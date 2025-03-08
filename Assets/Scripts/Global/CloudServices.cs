@@ -20,16 +20,26 @@ public class CloudServices : MonoBehaviour
         AnalyticsService.Instance.StartDataCollection();
     }
 
-    async void Awake()
+    private async void Awake()
     {
+        await InitializeUnityServices();
         await InitializeRemoteConfigAsync();
-        await RemoteConfigService.Instance.FetchConfigsAsync(new UserAttributes(), new AppAttributes());
+    }
+
+    async Task InitializeUnityServices()
+    {
+        if (UnityServices.State == ServicesInitializationState.Uninitialized)
+        {
+            await UnityServices.InitializeAsync();
+        }
     }
 
     async Task InitializeRemoteConfigAsync()
     {
-        // initialize handlers for unity game services / remote config
-        await UnityServices.InitializeAsync();
+        if (RemoteConfigService.Instance.requestStatus == ConfigRequestStatus.None)
+        {
+            await RemoteConfigService.Instance.FetchConfigsAsync(new UserAttributes(), new AppAttributes());
+        }
     }
 }
 
