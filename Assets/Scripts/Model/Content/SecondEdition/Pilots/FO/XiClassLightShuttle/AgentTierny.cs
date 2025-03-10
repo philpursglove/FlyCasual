@@ -126,15 +126,14 @@ namespace Conditions
             Host.OnAttackStartAsAttacker += CheckAlliedStress;
             GenericShip.OnFaceupCritCardReadyToBeDealtGlobal += CheckRemoveBrokenTrust;
             Host.OnAttackFinish += CheckRemoveBrokenTrust;
-            Host.OnAttackFinishAsAttacker += CheckRemoveBrokenTrust;
         }
-
+        
         public override void WhenRemoved()
         {
             Host.OnCheckIsFriendly -= TreatAsAllied;
             Host.OnAttackStartAsAttacker -= CheckAlliedStress;
             GenericShip.OnFaceupCritCardReadyToBeDealtGlobal -= CheckRemoveBrokenTrust;
-            Host.OnAttackFinishAsAttacker -= CheckRemoveBrokenTrust;
+            Host.OnAttackFinish -= CheckRemoveBrokenTrust;
         }
 
         public void CheckRemoveBrokenTrust(GenericShip ship)
