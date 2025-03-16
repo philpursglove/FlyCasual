@@ -23,7 +23,7 @@ namespace UpgradesList.SecondEdition
                     UpgradeType.Crew
                 },
                 subType: UpgradeSubType.Remote,
-                cost: 10,
+                cost: 8,
                 isLimited: true,
                 charges: 2,
                 cannotBeRecharged: true,
