@@ -134,6 +134,7 @@ namespace Ship
         public event EventHandlerBombDropTemplates OnGetAvailableBombLaunchTemplates;
         public event EventHandlerBombDropTemplates OnGetAvailableBombLaunchTemplatesModifications;
         public event EventHandlerDirection OnGetBombTemplateDirection;
+        public event EventHandlerBombDropTemplates OnGetGetAvailableDeviceSideDropTemplates;
 
         public event EventHandlerBarrelRollTemplates OnGetAvailableBarrelRollTemplates;
         public event EventHandlerDecloakTemplates OnGetAvailableDecloakTemplates;
@@ -176,6 +177,7 @@ namespace Ship
         public event EventHandler OnBombWasDropped;
         public event EventHandler OnBombWasLaunched;
         public event EventHandler OnCheckDropOfSecondDevice;
+        public static event EventHandler OnRemoteWasDroppedGlobal;
 
         public event EventHandelerWeaponRange OnUpdateWeaponRange;
         public static event EventHandelerWeaponRange OnUpdateWeaponRangeGlobal;
@@ -812,6 +814,18 @@ namespace Ship
             OnGetAvailableBombLaunchTemplates?.Invoke(availableTemplates, upgrade);
 
             OnGetAvailableBombLaunchTemplatesModifications?.Invoke(availableTemplates, upgrade);
+
+            return availableTemplates;
+        }
+
+        public List<ManeuverTemplate> GetAvailableDeviceSideDropTemplates(GenericUpgrade upgrade)
+        {
+            List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>();
+
+            OnGetGetAvailableDeviceSideDropTemplates?.Invoke(availableTemplates, upgrade);
+            OnGetAvailableBombDropTemplatesNoConditions?.Invoke(availableTemplates, upgrade);
+            OnGetAvailableBombDropTemplatesTwoConditions?.Invoke(availableTemplates, upgrade);
+            OnGetAvailableBombDropTemplatesOneCondition?.Invoke(availableTemplates, upgrade);
 
             return availableTemplates;
         }

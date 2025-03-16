@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using BoardTools;
+﻿using BoardTools;
 using Bombs;
-using System.Linq;
-using Upgrade;
 using Remote;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.tvOS;
+using Upgrade;
 
 namespace ActionsList
 {
@@ -46,6 +47,8 @@ namespace SubPhases
         List<ManeuverTemplate> AvailableBombDropTemplates = new List<ManeuverTemplate>();
         public ManeuverTemplate SelectedBombDropHelper;
         private List<GenericDeviceGameObject> BombObjects = new List<GenericDeviceGameObject>();
+        public bool useFrontGuides { get; set; }
+
 
         public override void Start()
         {
@@ -144,11 +147,17 @@ namespace SubPhases
             Quaternion bombRotation = bombDropTemplate.GetFinalRotation();
 
             // TODO: get type of remote from upgrade
-            ShipFactory.SpawnRemote(
+            GenericRemote remote = ShipFactory.SpawnRemote(
                 (GenericRemote) Activator.CreateInstance(BombsManager.CurrentDevice.UpgradeInfo.RemoteType, Selection.ThisShip.Owner),
                 bombPosition,
                 bombRotation
             );
+
+            if (useFrontGuides)
+            {
+                remote.SetAngles(remote.GetAngles() + new Vector3(0, 180, 0));
+                remote.SetPosition(remote.GetPosition() + (remote.GetJointPosition(1) - remote.GetJointPosition(2)));
+            }
 
             SelectedBombDropHelper = bombDropTemplate;
         }
