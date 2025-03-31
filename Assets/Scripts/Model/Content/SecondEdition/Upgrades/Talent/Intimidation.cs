@@ -32,21 +32,27 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            GenericShip.AfterGotNumberOfDefenceDiceGlobal += CheckAbility;
+            HostShip.OnAttackStartAsAttacker += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.AfterGotNumberOfDefenceDiceGlobal -= CheckAbility;
+            HostShip.OnAttackStartAsAttacker -= CheckAbility;
         }
 
-        private void CheckAbility(ref int count)
+        private void CheckAbility()
         {
-            if (HostShip.Owner != Combat.Defender.Owner && HostShip.ShipsBumped.Contains(Combat.Defender))
+            if (HostShip.ShipsBumped.Contains(Combat.Defender))
             {
-                Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " on a ship at range 0 causes " + Combat.Defender.PilotInfo.PilotName + " to roll 1 fewer defense die");
-                count--;
+                Combat.Defender.AfterGotNumberOfDefenceDice += RegisterIntimidated;
             }
+        }
+
+        private void RegisterIntimidated(ref int count)
+        {
+            Combat.Defender.AfterGotNumberOfDefenceDice -= RegisterIntimidated;
+            Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " on a ship at range 0 causes " + Combat.Defender.PilotInfo.PilotName + " to roll 1 fewer defense die");
+            count--;
         }
     }
 }
