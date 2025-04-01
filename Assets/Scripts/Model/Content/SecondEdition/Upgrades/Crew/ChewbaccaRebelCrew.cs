@@ -1,9 +1,8 @@
-﻿using Ship;
-using Upgrade;
+﻿using SubPhases;
 using System;
 using System.Linq;
-using SubPhases;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,6 +17,7 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 charges: 2,
+                chargesCost: 2,
                 regensCharges: true,
                 abilityType: typeof(Abilities.SecondEdition.ChewbaccaRebelCrewAbility),
                 seImageNumber: 82
@@ -38,6 +38,7 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
+            
             Phases.Events.OnCombatPhaseStart_Triggers += CheckAbility;
         }
 
@@ -48,7 +49,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility()
         {
-            if (HostUpgrade.State.Charges >= 2 && HostShip.Damage.HasFaceupCards)
+            if (HostShip.Owner.PlayerNo == Global.SquadBuilder.CurrentPlayer && HostUpgrade.State.Charges >= HostUpgrade.UpgradeInfo.ChargesCost && HostShip.Damage.HasFaceupCards)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, AskToUseOwnAbility);
             }
@@ -68,9 +69,9 @@ namespace Abilities.SecondEdition
 
         private void UseOwnAbility(object sender, EventArgs e)
         {
-            SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
+            DecisionSubPhase.ConfirmDecisionNoCallback();
 
-            HostUpgrade.State.SpendCharges(2);
+            HostUpgrade.State.SpendCharges(HostUpgrade.UpgradeInfo.ChargesCost);
 
             if (HostShip.Damage.GetFaceupCrits().Count == 1)
             {
