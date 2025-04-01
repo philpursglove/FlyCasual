@@ -16,7 +16,7 @@ namespace UpgradesList.SecondEdition
             (
                 "Clan Training",
                 UpgradeType.Talent,
-                cost: 3,
+                cost: 1,
                 restriction: new TagRestriction(Tags.Mandalorian),
                 abilityType: typeof(Abilities.SecondEdition.ClanTrainingAbility),
                 charges: 1
