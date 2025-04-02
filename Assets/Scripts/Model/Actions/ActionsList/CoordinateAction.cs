@@ -18,7 +18,7 @@ namespace Actions
         public bool SameActionLimit { get; set; }
         public Func<GenericShip, int> GetAiPriority;
         public bool TreatCoordinatedActionAsRed { get; set; }
-        public GenericShip CoordinateProvider { get; private set; }
+        public GenericShip CoordinateProvider { get; protected set; }
         public GenericAction FirstChosenAction { get; set; }
 
         public CoordinateActionData(GenericShip coordinateProvider)
@@ -34,7 +34,7 @@ namespace ActionsList
 
     public class CoordinateAction : GenericAction
     {
-        CoordinateActionData CoordinateActionData;
+        protected CoordinateActionData CoordinateActionData;
 
         public CoordinateAction()
         {
@@ -77,7 +77,7 @@ namespace ActionsList
             }
         }
 
-        private void CoordinateTargets(Action callback)
+        protected void CoordinateTargets(Action callback)
         {
             Phases.CurrentSubPhase.Pause();
 
@@ -97,7 +97,7 @@ namespace ActionsList
             Triggers.ResolveTriggers(TriggerTypes.OnCoordinateMultiTargetsAreSelected, callback);
         }
 
-        private void CoordinateShipForMultiSelection(GenericShip targetShip)
+        protected void CoordinateShipForMultiSelection(GenericShip targetShip)
         {
             CoordinateActionData.CoordinateProvider.OnCoordinateTargetIsSelected += PrepareToRememberChosenAction;
             CoordinateActionData.CoordinateProvider.CallCoordinateTargetIsSelected(
@@ -106,25 +106,25 @@ namespace ActionsList
             );
         }
 
-        private void PrepareToRememberChosenAction(GenericShip coordinatedShip)
+        protected void PrepareToRememberChosenAction(GenericShip coordinatedShip)
         {
             coordinatedShip.OnActionIsPerformed += RememberChosenAction;
             coordinatedShip.OnActionIsSkipped += ClearRememberChosenAction;
         }
 
-        private void ClearRememberChosenAction(GenericShip coordinatedShip)
+        protected void ClearRememberChosenAction(GenericShip coordinatedShip)
         {
             coordinatedShip.OnActionIsPerformed -= RememberChosenAction;
             coordinatedShip.OnActionIsSkipped -= ClearRememberChosenAction;
         }
 
-        private void RememberChosenAction(GenericAction action)
+        protected void RememberChosenAction(GenericAction action)
         {
             if (CoordinateActionData.FirstChosenAction == null) CoordinateActionData.FirstChosenAction = action;
             ClearRememberChosenAction(Selection.ThisShip);
         }
 
-        private void PerformMultiCoordinateEffect(GenericShip targetShip)
+        protected void PerformMultiCoordinateEffect(GenericShip targetShip)
         {
             CoordinateActionData.CoordinateProvider.State.LastCoordinatedShip = targetShip;
 
@@ -184,7 +184,7 @@ namespace ActionsList
             return result;
         }
 
-        private bool FilterCoordinateTargets(GenericShip ship)
+        protected bool FilterCoordinateTargets(GenericShip ship)
         {
             return ship.Owner.PlayerNo == Selection.ThisShip.Owner.PlayerNo
                 && Board.CheckInRange(CoordinateActionData.CoordinateProvider, ship, 1, 2, RangeCheckReason.CoordinateAction)
@@ -207,7 +207,6 @@ namespace ActionsList
             }
         }
     }
-
 }
 
 namespace SubPhases
@@ -238,7 +237,7 @@ namespace SubPhases
             Rules.Actions.ActionIsFailed(TheShip, HostAction, ActionFailReason.WrongRange, false);
         }
 
-        private int GetAiCoordinatePriority(GenericShip ship)
+        protected int GetAiCoordinatePriority(GenericShip ship)
         {
             int result = 0;
 
@@ -248,7 +247,7 @@ namespace SubPhases
             return result;
         }
 
-        private int NeedTokenPriority(GenericShip ship)
+        protected int NeedTokenPriority(GenericShip ship)
         {
             if (!ship.Tokens.HasToken(typeof(FocusToken))) return 100;
             if (ship.ActionBar.HasAction(typeof(EvadeAction)) && !ship.Tokens.HasToken(typeof(EvadeToken))) return 50;
@@ -256,7 +255,7 @@ namespace SubPhases
             return 0;
         }
 
-        private bool FilterCoordinateTargets(GenericShip ship)
+        protected bool FilterCoordinateTargets(GenericShip ship)
         {
             return ship.Owner.PlayerNo == Selection.ThisShip.Owner.PlayerNo
                 && Board.CheckInRange(Selection.ThisShip, ship, 1, 2, RangeCheckReason.CoordinateAction)
@@ -264,14 +263,14 @@ namespace SubPhases
                 && Selection.ThisShip.CallCheckCanCoordinate(ship);
         }
 
-        private void SelectCoordinateTarget()
+        protected void SelectCoordinateTarget()
         {
             Selection.ThisShip.State.LastCoordinatedShip = TargetShip;
 
             Selection.ThisShip.CallCoordinateTargetIsSelected(TargetShip, PerformCoordinateEffect);
         }
 
-        private void PerformCoordinateEffect()
+        protected virtual void PerformCoordinateEffect()
         {
             var coordinatingShip = Selection.ThisShip;
             Selection.ThisShip = TargetShip;
