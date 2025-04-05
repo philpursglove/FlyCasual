@@ -20,8 +20,6 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.CutthroatAbility),
                 restriction: new FactionRestriction(Faction.Scum)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/fd/7b/fd7b2ccc-d500-4a02-bb2a-9e0538406d65/swz85_upgrade_cutthroat.png";
         }        
     }
 }
@@ -72,8 +70,10 @@ namespace Abilities.SecondEdition
         {
             foreach (GenericUpgrade upgrade in HostShip.UpgradeBar.GetUpgradesAll())
             {
+                bool hasRegen = upgrade.UpgradeInfo.RegensChargesCount > 0 || ((upgrade.UpgradeInfo.WeaponInfo)?.RegensCharges ?? false);
+
                 if (upgrade.State.MaxCharges > 0
-                    && upgrade.UpgradeInfo.RegensChargesCount == 0
+                    && !hasRegen
                     && upgrade.State.Charges < upgrade.State.MaxCharges
                     && !upgrade.UpgradeInfo.CannotBeRecharged
                 )
