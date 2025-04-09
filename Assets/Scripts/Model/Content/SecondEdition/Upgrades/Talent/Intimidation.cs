@@ -1,4 +1,5 @@
 ﻿using Content;
+using Editions;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -42,7 +43,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(ref int count)
         {
-            if (HostShip.Owner != Combat.Defender.Owner && HostShip.ShipsBumped.Contains(Combat.Defender))
+            if (HostShip.Owner == Combat.Attacker.Owner && HostShip.ShipsBumped.Contains(Combat.Defender) && !Edition.Current.RuleSet.PreventDiceModification(Combat.ShotInfo.Range))
             {
                 Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + " on a ship at range 0 causes " + Combat.Defender.PilotInfo.PilotName + " to roll 1 fewer defense die");
                 count--;
