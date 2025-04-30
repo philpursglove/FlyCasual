@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Unity.Services.Core;
+using TMPro;
 using Unity.Services.RemoteConfig;
 using UnityEngine;
 using UnityEngine.UI;
@@ -353,6 +353,22 @@ public class MainMenu : MonoBehaviour {
         GameObject.Find("UI/Panels/AvatarsPanel/Title/InputField").gameObject.GetComponent<InputField>().text = Options.Title;
     }
 
+    private bool IsValidIpv4Address(string address)
+    {
+        string[] octets = address.Trim().Split('.');
+
+        if (octets.Length != 4) return false;
+
+        foreach (string oct in octets)
+        {
+            if (!int.TryParse(oct, out int octet)) return false;
+
+            if (octet > 255 || octet < 1) return false;
+        }
+
+        return true;
+    }
+
     public void JoinMatch(GameObject panel)
     {
         //Messages.ShowInfo("Joining room...");
@@ -360,10 +376,15 @@ public class MainMenu : MonoBehaviour {
         Network.JoinRoom(password);
     }
 
-    public void JoinRoomByIp(Text ipText)
+    public void JoinRoomByIp(TMP_InputField ipField)
     {
-        Network.ServerUri = "tcp4://" + ipText.text;
-        Network.JoinRoom(null);
+        if (IsValidIpv4Address(ipField.text))
+        {
+            Network.ServerUri = "tcp4://" + ipField.text;
+            Network.JoinRoom(null);
+        } else {
+            Messages.ShowError("Invalid IP Address.");
+        }
     }
 
     public void OnSupportOnPatreonClick()
