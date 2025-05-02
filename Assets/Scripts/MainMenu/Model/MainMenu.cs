@@ -363,7 +363,7 @@ public class MainMenu : MonoBehaviour {
         {
             if (!int.TryParse(oct, out int octet)) return false;
 
-            if (octet > 255 || octet < 1) return false;
+            if (octet > 255 || octet < 0) return false;
         }
 
         return true;
