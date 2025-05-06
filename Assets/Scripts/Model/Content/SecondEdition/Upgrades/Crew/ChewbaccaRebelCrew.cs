@@ -52,8 +52,8 @@ namespace Abilities.SecondEdition
             {
                 Triggers.RegisterTrigger(new Trigger()
                 {
-                    Name = $"#{HostUpgrade.HostShip.ShipId}: {HostUpgrade.UpgradeInfo.Name}",
-                    TriggerOwner = HostUpgrade.HostShip.Owner.PlayerNo,
+                    Name = $"#{HostShip.ShipId}: {HostUpgrade.UpgradeInfo.Name}",
+                    TriggerOwner = HostShip.Owner.PlayerNo,
                     TriggerType = TriggerTypes.OnCombatPhaseStart,
                     EventHandler = AskToUseOwnAbility
                 });
