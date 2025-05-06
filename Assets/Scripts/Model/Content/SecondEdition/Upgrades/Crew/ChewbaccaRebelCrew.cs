@@ -37,8 +37,7 @@ namespace Abilities.SecondEdition
     public class ChewbaccaRebelCrewAbility : GenericAbility
     {
         public override void ActivateAbility()
-        {
-            
+        {            
             Phases.Events.OnCombatPhaseStart_Triggers += CheckAbility;
         }
 
@@ -49,9 +48,15 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility()
         {
-            if (HostShip.Owner.PlayerNo == Global.SquadBuilder.CurrentPlayer && HostUpgrade.State.Charges >= HostUpgrade.UpgradeInfo.ChargesCost && HostShip.Damage.HasFaceupCards)
+            if(HostUpgrade.State.Charges >= HostUpgrade.UpgradeInfo.ChargesCost && HostShip.Damage.HasFaceupCards)
             {
-                RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, AskToUseOwnAbility);
+                Triggers.RegisterTrigger(new Trigger()
+                {
+                    Name = $"#{HostUpgrade.HostShip.ShipId}: {HostUpgrade.UpgradeInfo.Name}",
+                    TriggerOwner = HostUpgrade.HostShip.Owner.PlayerNo,
+                    TriggerType = TriggerTypes.OnCombatPhaseStart,
+                    EventHandler = AskToUseOwnAbility
+                });
             }
         }
 
