@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Arcs;
-using Upgrade;
+﻿using Arcs;
 using System;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -22,16 +22,14 @@ namespace UpgradesList.SecondEdition
                     minRange: 2,
                     maxRange: 3,
                     charges: 2,
+                    chargesCost: 2,
                     regensCharges: true,
                     arc: ArcType.Bullseye
                 ),
                 abilityType: typeof(Abilities.SecondEdition.ProtonCannonsAbility)
-
             );
-
-
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/protoncannons.png";
         }
+
         public override void PayAttackCost(Action callBack) { callBack(); }
     }
 }
@@ -48,7 +46,7 @@ namespace Abilities.SecondEdition
                 GetDiceModificationAiPriority,
                 DiceModificationType.Change,
                 1,
-                new List<DieSide>() { DieSide.Focus, DieSide.Success  },
+                new List<DieSide>() { DieSide.Focus, DieSide.Success },
                 DieSide.Crit,
                 payAbilityCost: payCharges
             );
@@ -61,10 +59,9 @@ namespace Abilities.SecondEdition
 
         private void payCharges(Action<bool> callback)
         {
-            if (HostUpgrade.State.Charges > 1)
+            if (HostUpgrade.State.Charges >= HostUpgrade.UpgradeInfo.WeaponInfo.ChargesCost)
             {
-                HostUpgrade.State.SpendCharge();
-                HostUpgrade.State.SpendCharge();
+                HostUpgrade.State.SpendCharges(HostUpgrade.UpgradeInfo.WeaponInfo.ChargesCost);
                 callback(true);
             }
             else
@@ -81,7 +78,7 @@ namespace Abilities.SecondEdition
 
             if (Combat.ChosenWeapon != HostUpgrade) result = false;
 
-            if (HostUpgrade.State.Charges < 2) result = false;
+            if (HostUpgrade.State.Charges < HostUpgrade.UpgradeInfo.WeaponInfo.ChargesCost) result = false;
 
             return result;
         }
