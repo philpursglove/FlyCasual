@@ -1,5 +1,4 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -26,6 +25,30 @@ namespace Ship
                     },
                     seImageNumber: 33,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class KashyyykDefenderXWA : AuzituckGunship
+        {
+            public KashyyykDefenderXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Kashyyyk Defender",
+                    "",
+                    Faction.Rebel,
+                    1,
+                    5,
+                    16,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
+                        UpgradeType.Modification
+                    },
+                    seImageNumber: 33,
+                    legality: new List<Legality>() { Legality.XWA }
                 );
             }
         }

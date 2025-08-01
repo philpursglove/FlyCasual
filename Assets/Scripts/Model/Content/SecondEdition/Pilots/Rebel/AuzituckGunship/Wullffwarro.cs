@@ -1,5 +1,4 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -30,6 +29,32 @@ namespace Ship
                     },
                     seImageNumber: 31,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class WullffwarroXWA : AuzituckGunship
+        {
+            public WullffwarroXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Wullffwarro",
+                    "Wookiee Chief",
+                    Faction.Rebel,
+                    4,
+                    4,
+                    4,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.WullffwarroAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew
+                    },
+                    seImageNumber: 31,
+                    legality: new List<Legality>() { Legality.XWA }
                 );
             }
         }

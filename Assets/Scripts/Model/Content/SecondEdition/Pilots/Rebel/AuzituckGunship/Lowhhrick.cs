@@ -1,6 +1,5 @@
 ﻿using Content;
 using Ship;
-using System.Collections;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
@@ -37,6 +36,36 @@ namespace Ship
                 ModelInfo.SkinName = "Lowhhrick";
             }
         }
+
+        public class LowhhrickXWA : AuzituckGunship
+        {
+            public LowhhrickXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Lowhhrick",
+                    "Escaped Gladiator",
+                    Faction.Rebel,
+                    3,
+                    5,
+                    15,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.LowhhrickAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
+                        UpgradeType.Modification
+                    },
+                    seImageNumber: 32,
+                    legality: new List<Legality>() { Legality.XWA }
+                );
+
+                ModelInfo.SkinName = "Lowhhrick";
+            }
+        }
+
     }
 }
 
