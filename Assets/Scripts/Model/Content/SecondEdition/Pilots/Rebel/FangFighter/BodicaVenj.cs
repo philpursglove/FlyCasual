@@ -35,7 +35,42 @@ namespace Ship
                     {
                         Tags.Mandalorian 
                     },
-                    skinName: "Bodica Venj"
+                    skinName: "Bodica Venj",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/bodicavenj.png";
+            }
+        }
+
+        public class BodicaVenjXWA : FangFighter
+        {
+            public BodicaVenjXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Bodica Venj",
+                    "Wrathful Warrior",
+                    Faction.Rebel,
+                    4,
+                    4,
+                    5,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.BodicaVenjAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Torpedo
+                    },
+                    tags: new List<Tags>()
+                    {
+                        Tags.Mandalorian
+                    },
+                    skinName: "Bodica Venj",
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/bodicavenj.png";

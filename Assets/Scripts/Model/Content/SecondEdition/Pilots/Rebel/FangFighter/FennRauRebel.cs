@@ -36,7 +36,44 @@ namespace Ship
                     {
                         Tags.Mandalorian 
                     },
-                    skinName: "Fenn Rau"
+                    skinName: "Fenn Rau",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                PilotNameCanonical = "fennrau-rebelalliance";
+
+                ImageUrl = "https://i.imgur.com/czHjZ4D.png";
+            }
+        }
+
+        public class FennRauRebelXWA : FangFighter
+        {
+            public FennRauRebelXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Fenn Rau",
+                    "Mandalorian Protector",
+                    Faction.Rebel,
+                    6,
+                    5,
+                    8,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.FennRauRebelFangAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Torpedo
+                    },
+                    tags: new List<Tags>()
+                    {
+                        Tags.Mandalorian
+                    },
+                    skinName: "Fenn Rau",
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 PilotNameCanonical = "fennrau-rebelalliance";
