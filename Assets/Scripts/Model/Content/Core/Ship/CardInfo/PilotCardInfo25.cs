@@ -76,7 +76,7 @@ namespace Ship
 
             SkinName = skinName;
             Tags = tags ?? new List<Tags>();
-            LegalityInfo = legality ?? new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal };
+            LegalityInfo = legality ?? new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal, Legality.XWA };
 
             IsStandardLayout = isStandardLayout;
         }
