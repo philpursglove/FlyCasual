@@ -37,5 +37,37 @@ namespace Ship
                 );
             }
         }
+
+        public class ZebOrreliosXWA : AttackShuttle
+        {
+            public ZebOrreliosXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "\"Zeb\" Orrelios",
+                    "Spectre-4",
+                    Faction.Rebel,
+                    2,
+                    3,
+                    6,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.ZebOrreliosPilotAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Modification,
+                        UpgradeType.Turret,
+                        UpgradeType.Title
+                    },
+                    seImageNumber: 37,
+                    tags: new List<Tags>
+                    {
+                        Tags.Spectre
+                    },
+                    legality: new List<Legality>() { Legality.XWA }
+                );
+            }
+        }
     }
 }

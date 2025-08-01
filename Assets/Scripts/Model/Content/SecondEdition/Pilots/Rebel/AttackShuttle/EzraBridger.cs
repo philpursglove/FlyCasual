@@ -40,6 +40,40 @@ namespace Ship
                 );
             }
         }
+
+        public class EzraBridgerXWA : AttackShuttle
+        {
+            public EzraBridgerXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Ezra Bridger",
+                    "Spectre-6",
+                    Faction.Rebel,
+                    3,
+                    4,
+                    12,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.EzraBridgerPilotAbility),
+                    force: 1,
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.ForcePower,
+                        UpgradeType.Crew,
+                        UpgradeType.Modification,
+                        UpgradeType.Turret,
+                        UpgradeType.Title
+                    },
+                    seImageNumber: 36,
+                    tags: new List<Tags>
+                    {
+                        Tags.LightSide,
+                        Tags.Spectre
+                    },
+                    legality: new List<Legality>() { Legality.XWA }
+                );
+            }
+        }
     }
 }
 
