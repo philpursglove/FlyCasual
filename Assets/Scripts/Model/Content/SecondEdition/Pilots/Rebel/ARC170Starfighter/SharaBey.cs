@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,37 @@ namespace Ship
                         UpgradeType.Astromech,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 67
+                    seImageNumber: 67,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class SharaBeyXWA : ARC170Starfighter
+        {
+            public SharaBeyXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Shara Bey",
+                    "Green Four",
+                    Faction.Rebel,
+                    4,
+                    5,
+                    15,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.SharaBeyAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
+                    },
+                    seImageNumber: 67,
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

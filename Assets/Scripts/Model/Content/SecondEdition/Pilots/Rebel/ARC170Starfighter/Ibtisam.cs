@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -28,7 +29,36 @@ namespace Ship
                         UpgradeType.Astromech,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 68
+                    seImageNumber: 68,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class IbtisamXWA : ARC170Starfighter
+        {
+            public IbtisamXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Ibtisam",
+                    "Survivor of Endor",
+                    Faction.Rebel,
+                    3,
+                    4,
+                    7,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.IbtisamAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Torpedo                        
+                    },
+                    seImageNumber: 68,
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }
