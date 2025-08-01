@@ -34,7 +34,44 @@ namespace Ship
                     {
                         Tags.YWing
                     },
-                    seImageNumber: 13
+                    seImageNumber: 13,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                PilotNameCanonical = "norrawexley-btla4ywing";
+            }
+        }
+
+        public class NorraWexleyXWA : BTLA4YWing
+        {
+            public NorraWexleyXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Norra Wexley",
+                    "Gold Nine",
+                    Faction.Rebel,
+                    5,
+                    4,
+                    12,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.NorraWexleyAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
+                        UpgradeType.Torpedo                        
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.YWing
+                    },
+                    seImageNumber: 13,
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 PilotNameCanonical = "norrawexley-btla4ywing";

@@ -1,7 +1,5 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship
@@ -30,7 +28,36 @@ namespace Ship
                     {
                         Tags.YWing
                     },
-                    seImageNumber: 17
+                    seImageNumber: 17,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class GoldSquadronVeteranXWA : BTLA4YWing
+        {
+            public GoldSquadronVeteranXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Gold Squadron Veteran",
+                    "",
+                    Faction.Rebel,
+                    3,
+                    3,
+                    8,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Modification,
+                        UpgradeType.Turret,
+                        UpgradeType.Missile
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.YWing
+                    },
+                    seImageNumber: 17,
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

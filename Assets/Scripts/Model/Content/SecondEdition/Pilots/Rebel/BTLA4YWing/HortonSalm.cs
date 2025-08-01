@@ -2,9 +2,7 @@
 using BoardTools;
 using Content;
 using Ship;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Upgrade;
 
@@ -40,7 +38,42 @@ namespace Ship
                         Tags.YWing
                     },
                     seImageNumber: 15,
-                    skinName: "Gray"
+                    skinName: "Gray",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class HortonSalmXWA : BTLA4YWing
+        {
+            public HortonSalmXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Horton Salm",
+                    "Gray Leader",
+                    Faction.Rebel,
+                    4,
+                    4,
+                    16,
+                    isLimited: true,
+                    abilityType: typeof(HortonSalmAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.YWing
+                    },
+                    seImageNumber: 15,
+                    skinName: "Gray",
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

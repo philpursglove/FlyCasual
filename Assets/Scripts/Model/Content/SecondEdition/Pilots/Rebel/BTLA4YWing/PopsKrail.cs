@@ -1,6 +1,5 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
-using Conditions;
 using Content;
 using Ship;
 using SubPhases;
@@ -40,7 +39,43 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/bec9574e-4585-4b27-8988-bf27c2548a7f/SWZ97_PopsKraillegal.png";
+            }
+        }
+
+        public class PopsKrailXWA : BTLA4YWing
+        {
+            public PopsKrailXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "\"Pops\" Krail",
+                    "Gold Five",
+                    Faction.Rebel,
+                    3,
+                    3,
+                    6,
+                    isLimited: true,
+                    abilityType: typeof(PopsKrailAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.YWing
+                    },
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/bec9574e-4585-4b27-8988-bf27c2548a7f/SWZ97_PopsKraillegal.png";

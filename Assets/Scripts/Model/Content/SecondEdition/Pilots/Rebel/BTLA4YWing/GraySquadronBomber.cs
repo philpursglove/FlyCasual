@@ -28,7 +28,38 @@ namespace Ship
                     {
                         Tags.YWing
                     },
-                    seImageNumber: 18
+                    seImageNumber: 18,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class GraySquadronBomberXWA : BTLA4YWing
+        {
+            public GraySquadronBomberXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Gray Squadron Bomber",
+                    "",
+                    Faction.Rebel,
+                    2,
+                    4,
+                    18,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
+                        UpgradeType.Missile                        
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.YWing
+                    },
+                    seImageNumber: 18,
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

@@ -37,7 +37,48 @@ namespace Ship
                     {
                         Tags.YWing
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                ShipAbilities.Add(new HopeAbility());
+
+                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.DorsalTurret));
+                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.AdvProtonTorpedoes));
+                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.PreciseAstromech));
+
+                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/a4/Holokand-battleofyavin.png";
+
+                PilotNameCanonical = "holokand-battleofyavin";
+            }
+        }
+
+        public class HolOkandBoYXWA : BTLA4YWing
+        {
+            public HolOkandBoYXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Hol Okand",
+                    "Battle of Yavin",
+                    Faction.Rebel,
+                    4,
+                    4,
+                    0,
+                    isLimited: true,
+                    abilityType: typeof(HolOkandBoYAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Turret,
+                        UpgradeType.Torpedo,
+                        UpgradeType.Astromech
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.YWing
+                    },
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 ShipAbilities.Add(new HopeAbility());

@@ -1,9 +1,9 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
 using System;
-using Content;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
@@ -43,7 +43,43 @@ namespace Ship
                     {
                         Tags.YWing
                     },
-                    seImageNumber: 14
+                    seImageNumber: 14,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class DutchVanderXWA : BTLA4YWing
+        {
+            public DutchVanderXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "\"Dutch\" Vander",
+                    "Gold Leader",
+                    Faction.Rebel,
+                    4,
+                    4,
+                    10,
+                    isLimited: true,
+                    abilityType: typeof(DutchVanderAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.YWing
+                    },
+                    seImageNumber: 14,
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }
