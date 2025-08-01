@@ -40,7 +40,45 @@ namespace Ship.SecondEdition.ASF01BWing
                 {
                     Tags.BWing
                 },
-                skinName: "Red"
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            ImageUrl = "https://i.imgur.com/tDMmS4S.png";
+        }
+    }
+
+    public class NetremPollardXWA : ASF01BWing
+    {
+        public NetremPollardXWA() : base()
+        {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Netrem Pollard",
+                "Dagger Leader",
+                Faction.Rebel,
+                3,
+                4,
+                12,
+                isLimited: true,
+                abilityType: typeof(NetremPollardAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.BWing
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.XWA }
             );
 
             ImageUrl = "https://i.imgur.com/tDMmS4S.png";

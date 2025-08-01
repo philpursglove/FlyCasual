@@ -38,7 +38,44 @@ namespace Ship
                         Tags.BWing
                     },
                     seImageNumber: 23,
-                    skinName: "Dark Blue"
+                    skinName: "Dark Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class BraylenStrammXWA : ASF01BWing
+        {
+            public BraylenStrammXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Braylen Stramm",
+                    "Blade Leader",
+                    Faction.Rebel,
+                    4,
+                    5,
+                    13,
+                    isLimited: true,
+                    abilityType: typeof(BraylenStrammAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
+                        UpgradeType.Torpedo,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.BWing
+                    },
+                    seImageNumber: 23,
+                    skinName: "Dark Blue",
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

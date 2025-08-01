@@ -1,23 +1,13 @@
 ﻿using Abilities.SecondEdition;
-using ActionsList;
 using BoardTools;
-using Bombs;
-using Conditions;
 using Content;
-using GameCommands;
-using GameModes;
-using Movement;
-using Newtonsoft.Json.Linq;
 using Ship;
 using SubPhases;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Tokens;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 using Upgrade;
 
 namespace Ship
@@ -52,7 +42,57 @@ namespace Ship
                     skinName: "Gina Moonsong",
                     charges: 2,
                     regensCharges: 1,
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                ShipInfo.Shields++;
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/ginamoonsong-battleoverendor.png";
+
+                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ItsATrap));
+                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Juke));
+                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ProtonTorpedoes));
+                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonBombs));
+
+                ShipAbilities.Add(new GyroCockpit());
+
+                PilotNameCanonical = "ginamoonsong-battleoverendor";
+
+                DefaultUpgrades.Remove(typeof(UpgradesList.SecondEdition.StabilizedSFoilsOpen));
+            }
+        }
+        
+        public class GinaMoonsongBattleOverEndorXWA : ASF01BWing
+        {
+            public GinaMoonsongBattleOverEndorXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Gina Moonsong",
+                    "Battle Over Endor",
+                    Faction.Rebel,
+                    5,
+                    6,
+                    0,
+                    isLimited: true,
+                    abilityType: typeof(GinaMoonsongBattleOverEndorAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Torpedo,
+                        UpgradeType.Device
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.BWing
+                    },
+                    skinName: "Gina Moonsong",
+                    charges: 2,
+                    regensCharges: 1,
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 ShipInfo.Shields++;

@@ -39,7 +39,44 @@ namespace Ship
                         Tags.BWing
                     },
                     seImageNumber: 24,
-                    skinName: "Dark Blue"
+                    skinName: "Dark Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class TenNumbXWA : ASF01BWing
+        {
+            public TenNumbXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Ten Numb",
+                    "Blue Five",
+                    Faction.Rebel,
+                    4,
+                    4,
+                    5,
+                    isLimited: true,
+                    abilityType: typeof(TenNumbAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
+                        UpgradeType.Torpedo,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.BWing
+                    },
+                    seImageNumber: 24,
+                    skinName: "Dark Blue",
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

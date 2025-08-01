@@ -41,7 +41,45 @@ namespace Ship
                     {
                         Tags.BWing
                     },
-                    skinName: "Gina Moonsong"
+                    skinName: "Gina Moonsong",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/32/8a/328a4f31-c01e-4966-a418-59c6fd42739e/swz66_gina-moonsong.png";
+            }
+        }
+
+        public class GinaMoonsongXWA : ASF01BWing
+        {
+            public GinaMoonsongXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Gina Moonsong",
+                    "Insubordinate Ace",
+                    Faction.Rebel,
+                    5,
+                    4,
+                    7,
+                    isLimited: true,
+                    abilityType: typeof(GinaMoonsongAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
+                        UpgradeType.Torpedo,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.BWing
+                    },
+                    skinName: "Gina Moonsong",
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/32/8a/328a4f31-c01e-4966-a418-59c6fd42739e/swz66_gina-moonsong.png";
