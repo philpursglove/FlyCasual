@@ -40,6 +40,38 @@ namespace Ship
                 ModelInfo.SkinName = "Green";
             }
         }
+
+        public class CorranHornXWA : EWing
+        {
+            public CorranHornXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Corran Horn",
+                    "Tenacious Investigator",
+                    Faction.Rebel,
+                    5,
+                    5,
+                    9,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.CorranHornAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Sensor,
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Torpedo,
+                    },
+                    seImageNumber: 50,
+                    legality: new List<Legality>() { Legality.XWA }
+                );
+
+                ModelInfo.SkinName = "Green";
+            }
+        }
     }
 }
 

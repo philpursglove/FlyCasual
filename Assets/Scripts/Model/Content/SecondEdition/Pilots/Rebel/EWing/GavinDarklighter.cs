@@ -1,6 +1,5 @@
 ﻿using BoardTools;
 using Content;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -33,6 +32,35 @@ namespace Ship
                     },
                     seImageNumber: 51,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class GavinDarklighterXWA : EWing
+        {
+            public GavinDarklighterXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Gavin Darklighter",
+                    "Bold Wingman",
+                    Faction.Rebel,
+                    4,
+                    5,
+                    10,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.GavinDarklighterAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Torpedo
+                    },
+                    seImageNumber: 51,
+                    legality: new List<Legality>() { Legality.XWA }
                 );
             }
         }

@@ -1,7 +1,5 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship
@@ -29,6 +27,32 @@ namespace Ship
                     },
                     seImageNumber: 53,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class KnaveSquadronEscortXWA : EWing
+        {
+            public KnaveSquadronEscortXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Knave Squadron Escort",
+                    "",
+                    Faction.Rebel,
+                    2,
+                    6,
+                    22,
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Astromech,
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Torpedo                        
+                    },
+                    seImageNumber: 53,
+                    legality: new List<Legality>() { Legality.XWA }
                 );
             }
         }
