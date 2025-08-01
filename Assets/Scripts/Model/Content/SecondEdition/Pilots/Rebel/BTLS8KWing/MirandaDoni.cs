@@ -1,6 +1,5 @@
 ﻿using Content;
 using SubPhases;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -34,6 +33,36 @@ namespace Ship
                     },
                     seImageNumber: 62,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class MirandaDoniXWA : BTLS8KWing
+        {
+            public MirandaDoniXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Miranda Doni",
+                    "Heavy Hitter",
+                    Faction.Rebel,
+                    4,
+                    5,
+                    20,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.MirandaDoniAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Crew,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Device,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo                        
+                    },
+                    seImageNumber: 62,
+                    legality: new List<Legality>() { Legality.XWA }
                 );
             }
         }

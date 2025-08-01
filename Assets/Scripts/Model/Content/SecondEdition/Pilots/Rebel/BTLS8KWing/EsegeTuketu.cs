@@ -2,7 +2,6 @@
 using Content;
 using Ship;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
@@ -37,6 +36,36 @@ namespace Ship
                     },
                     seImageNumber: 63,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
+                );
+            }
+        }
+        
+        public class EsegeTuketuXWA : BTLS8KWing
+        {
+            public EsegeTuketuXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Esege Tuketu",
+                    "Selfless Hero",
+                    Faction.Rebel,
+                    3,
+                    4,
+                    11,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.EsegeTuketuAbility),
+                    extraUpgradeIcons: new List<UpgradeType>()
+                    {
+                        UpgradeType.Crew,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Missile,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
+                    },
+                    seImageNumber: 63,
+                    legality: new List<Legality>() { Legality.XWA }
                 );
             }
         }
