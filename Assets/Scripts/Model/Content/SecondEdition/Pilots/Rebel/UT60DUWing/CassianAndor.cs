@@ -1,4 +1,5 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -27,13 +28,24 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Sensor,
                         UpgradeType.Crew,
+                        UpgradeType.Sensor,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
-                    seImageNumber: 56
+                    seImageNumber: 56,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class CassianAndorXWA : CassianAndor
+        {
+            public CassianAndorXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

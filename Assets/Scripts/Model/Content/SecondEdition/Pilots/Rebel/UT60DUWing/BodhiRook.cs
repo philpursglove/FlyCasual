@@ -1,5 +1,7 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using Ship;
+using Ship.SecondEdition.T65XWing;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -23,14 +25,25 @@ namespace Ship
                     abilityType: typeof(BodhiRookAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
-                    seImageNumber: 54
+                    seImageNumber: 54,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class BodhiRookXWA : BodhiRook
+        {
+            public BodhiRookXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
