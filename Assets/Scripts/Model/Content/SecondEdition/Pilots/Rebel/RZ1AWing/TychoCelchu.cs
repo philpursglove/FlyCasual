@@ -33,7 +33,41 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.AWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/790214c2-924a-4066-894a-ac71d59cc82b/SWZ97_TychoCelchulegal.png";
+            }
+        }
+
+        public class TychoCelchuXWA : RZ1AWing
+        {
+            public TychoCelchuXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Tycho Celchu",
+                    "Son of Alderaan",
+                    Faction.Rebel,
+                    5,
+                    4,
+                    10,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.TychoCelchuAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Cannon,
+                        UpgradeType.Missile,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.AWing
+                    },
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/790214c2-924a-4066-894a-ac71d59cc82b/SWZ97_TychoCelchulegal.png";

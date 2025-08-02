@@ -28,7 +28,36 @@ namespace Ship
                         Tags.AWing
                     },
                     seImageNumber: 22,
-                    skinName: "Phoenix Squadron"
+                    skinName: "Phoenix Squadron",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class PhoenixSquadronPilotXWA : RZ1AWing
+        {
+            public PhoenixSquadronPilotXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Phoenix Squadron Pilot",
+                    "",
+                    Faction.Rebel,
+                    1,
+                    3,
+                    6,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.AWing
+                    },
+                    seImageNumber: 22,
+                    skinName: "Phoenix Squadron",
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

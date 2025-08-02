@@ -38,7 +38,41 @@ namespace Ship
                         Tags.AWing
                     },
                     seImageNumber: 19,
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class JakeFarrellXWA : RZ1AWing
+        {
+            public JakeFarrellXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Jake Farrell",
+                    "Sage Instructor",
+                    Faction.Rebel,
+                    4,
+                    4,
+                    12,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.JakeFarrellAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.AWing
+                    },
+                    seImageNumber: 19,
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

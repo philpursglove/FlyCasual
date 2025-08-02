@@ -36,7 +36,48 @@ namespace Ship
                         Tags.LightSide
                     },
                     abilityText: "After you fully execute a maneuver, you may choose a friendly ship at range 0-1 and spend 1 Force. That ship may perform an action, even if it is stressed.",
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                PilotNameCanonical = "ahsokatano-rz1awing";
+
+                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f2/84/f284aa2b-9e09-4c3c-968b-935360a65edc/swz83_pilot_ahsokatano.png";
+            }
+        }
+
+        public class AhsokaTanoXWA : RZ1AWing
+        {
+            public AhsokaTanoXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Ahsoka Tano",
+                    "Fulcrum",
+                    Faction.Rebel,
+                    5,
+                    4,
+                    5,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.AhsokaTanoRebelAbility),
+                    force: 3,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.ForcePower,
+                        UpgradeType.ForcePower,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.AWing,
+                        Tags.LightSide
+                    },
+                    abilityText: "After you fully execute a maneuver, you may choose a friendly ship at range 0-1 and spend 1 Force. That ship may perform an action, even if it is stressed.",
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 PilotNameCanonical = "ahsokatano-rz1awing";

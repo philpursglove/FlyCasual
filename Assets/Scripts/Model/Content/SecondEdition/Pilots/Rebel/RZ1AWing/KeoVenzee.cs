@@ -35,7 +35,42 @@ namespace Ship
                     {
                         Tags.AWing
                     },
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                ImageUrl = "https://i.imgur.com/DFRzYC6.png";
+            }
+        }
+
+        public class KeoVenzeeXWA : RZ1AWing
+        {
+            public KeoVenzeeXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Keo Venzee",
+                    "Auspicious Ace",
+                    Faction.Rebel,
+                    3,
+                    4,
+                    12,
+                    force: 1,
+                    regensForce: 0,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.KeoVenzeeAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Missile,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.AWing
+                    },
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 ImageUrl = "https://i.imgur.com/DFRzYC6.png";

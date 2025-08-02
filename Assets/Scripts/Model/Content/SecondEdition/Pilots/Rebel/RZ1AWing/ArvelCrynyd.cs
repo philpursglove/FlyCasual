@@ -36,7 +36,38 @@ namespace Ship
                     {
                         Tags.AWing
                     },
-                    seImageNumber: 20
+                    seImageNumber: 20,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class ArvelCrynydXWA : RZ1AWing
+        {
+            public ArvelCrynydXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Arvel Crynyd",
+                    "Green Leader",
+                    Faction.Rebel,
+                    3,
+                    3,
+                    7,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.ArvelCrynydAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Configuration
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.AWing
+                    },
+                    seImageNumber: 20,
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }
