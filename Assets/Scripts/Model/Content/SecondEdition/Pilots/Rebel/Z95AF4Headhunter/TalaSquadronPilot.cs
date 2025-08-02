@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -22,8 +23,19 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 29
+                    seImageNumber: 29,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class TalaSquadronPilotXWA : TalaSquadronPilot
+        {
+            public TalaSquadronPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
