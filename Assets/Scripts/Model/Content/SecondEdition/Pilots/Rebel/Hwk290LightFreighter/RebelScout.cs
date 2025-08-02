@@ -1,7 +1,5 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship
@@ -29,7 +27,35 @@ namespace Ship
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 45
+                    seImageNumber: 45,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class RebelScoutXWA : Hwk290LightFreighter
+        {
+            public RebelScoutXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Rebel Scout",
+                    "",
+                    Faction.Rebel,
+                    2,
+                    3,
+                    7,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Modification,
+                        UpgradeType.Device
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.Freighter
+                    },
+                    seImageNumber: 45,
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }

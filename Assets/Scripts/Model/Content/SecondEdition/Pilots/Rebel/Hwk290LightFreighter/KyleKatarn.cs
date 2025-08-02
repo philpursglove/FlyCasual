@@ -38,7 +38,41 @@ namespace Ship
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 43
+                    seImageNumber: 43,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
+
+        public class KyleKatarnXWA : Hwk290LightFreighter
+        {
+            public KyleKatarnXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Kyle Katarn",
+                    "Relentless Operative",
+                    Faction.Rebel,
+                    3,
+                    4,
+                    5,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.KyleKatarnAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Title
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.Freighter
+                    },
+                    seImageNumber: 43,
+                    legality: new List<Legality> { Legality.XWA }
                 );
             }
         }
