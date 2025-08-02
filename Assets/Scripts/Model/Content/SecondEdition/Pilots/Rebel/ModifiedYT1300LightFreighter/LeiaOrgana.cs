@@ -41,7 +41,47 @@ namespace Ship
                         Tags.Freighter,
                         Tags.YT1300,
                         Tags.LightSide
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/5b/ff/5bffb367-cb6e-4b8b-948f-25a70acd3a3f/swz66_leia-organa.png";
+            }
+        }
+
+        public class LeiaOrganaXWA : ModifiedYT1300LightFreighter
+        {
+            public LeiaOrganaXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Leia Organa",
+                    "There Is Another",
+                    Faction.Rebel,
+                    5,
+                    7,
+                    15,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.LeiaOrganaPilotAbility),
+                    force: 1,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.ForcePower,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Title
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.Freighter,
+                        Tags.YT1300,
+                        Tags.LightSide
+                    },
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/5b/ff/5bffb367-cb6e-4b8b-948f-25a70acd3a3f/swz66_leia-organa.png";

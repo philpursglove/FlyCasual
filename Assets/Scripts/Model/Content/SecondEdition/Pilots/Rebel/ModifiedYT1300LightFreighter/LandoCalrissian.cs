@@ -42,7 +42,47 @@ namespace Ship
                         Tags.Freighter,
                         Tags.YT1300
                     },
-                    seImageNumber: 70
+                    seImageNumber: 70,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                PilotNameCanonical = "landocalrissian-modifiedyt1300lightfreighter";
+            }
+        }
+
+        public class LandoCalrissianXWA : ModifiedYT1300LightFreighter
+        {
+            public LandoCalrissianXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Lando Calrissian",
+                    "General of the Alliance",
+                    Faction.Rebel,
+                    5,
+                    7,
+                    15,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.LandoCalrissianRebelPilotAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
+                        UpgradeType.Gunner,
+                        UpgradeType.Illicit,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Title
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.Freighter,
+                        Tags.YT1300
+                    },
+                    seImageNumber: 70,
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 PilotNameCanonical = "landocalrissian-modifiedyt1300lightfreighter";

@@ -41,7 +41,49 @@ namespace Ship
                         Tags.Freighter,
                         Tags.YT1300
                     },
-                    seImageNumber: 69
+                    seImageNumber: 69,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                PilotNameCanonical = "hansolo-modifiedyt1300lightfreighter";
+            }
+        }
+
+        public class HanSoloXWA : ModifiedYT1300LightFreighter
+        {
+            public HanSoloXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Han Solo",
+                    "Scoundrel for Hire",
+                    Faction.Rebel,
+                    6,
+                    9,
+                    25,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.HanSoloRebelPilotAbility),
+                    charges: 1,
+                    regensCharges: 1,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
+                        UpgradeType.Gunner,
+                        UpgradeType.Illicit,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Title
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.Freighter,
+                        Tags.YT1300
+                    },
+                    seImageNumber: 69,
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 PilotNameCanonical = "hansolo-modifiedyt1300lightfreighter";
