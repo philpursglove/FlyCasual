@@ -34,7 +34,44 @@ namespace Ship
                         Tags.Spectre,
                         Tags.LightSide
                     },
-                    seImageNumber: 39
+                    seImageNumber: 39,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                PilotNameCanonical = "ezrabridger-sheathipedeclassshuttle";
+            }
+        }
+
+        public class EzraBridgerXWA : SheathipedeClassShuttle
+        {
+            public EzraBridgerXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Ezra Bridger",
+                    "Spectre-6",
+                    Faction.Rebel,
+                    3,
+                    4,
+                    12,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.EzraBridgerPilotAbility),
+                    force: 1,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.ForcePower,
+                        UpgradeType.Astromech,
+                        UpgradeType.Crew,
+                        UpgradeType.Modification,
+                        UpgradeType.Title
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.Spectre,
+                        Tags.LightSide
+                    },
+                    seImageNumber: 39,
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 PilotNameCanonical = "ezrabridger-sheathipedeclassshuttle";

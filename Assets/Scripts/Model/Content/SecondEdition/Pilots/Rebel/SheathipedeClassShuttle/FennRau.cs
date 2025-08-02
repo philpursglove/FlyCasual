@@ -39,7 +39,43 @@ namespace Ship
                         Tags.Spectre,
                         Tags.Mandalorian
                     },
-                    seImageNumber: 38
+                    seImageNumber: 38,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+
+                PilotNameCanonical = "fennrau-sheathipedeclassshuttle";
+            }
+        }
+
+        public class FennRauXWA : SheathipedeClassShuttle
+        {
+            public FennRauXWA() : base()
+            {
+                PilotInfo = new PilotCardInfo25
+                (
+                    "Fenn Rau",
+                    "Reluctant Rebel",
+                    Faction.Rebel,
+                    6,
+                    4,
+                    6,
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.FennRauRebelAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Crew,
+                        UpgradeType.Modification,
+                        UpgradeType.Title
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.Spectre,
+                        Tags.Mandalorian
+                    },
+                    seImageNumber: 38,
+                    legality: new List<Legality> { Legality.XWA }
                 );
 
                 PilotNameCanonical = "fennrau-sheathipedeclassshuttle";
