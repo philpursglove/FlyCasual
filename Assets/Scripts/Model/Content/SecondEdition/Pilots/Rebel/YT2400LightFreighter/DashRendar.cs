@@ -29,16 +29,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
                         UpgradeType.Illicit,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Missile,
                         UpgradeType.Title
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dashrendar-freighterforhire.png";
+            }
+        }
+
+        public class DashRendarXWA : DashRendar
+        {
+            public DashRendarXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
