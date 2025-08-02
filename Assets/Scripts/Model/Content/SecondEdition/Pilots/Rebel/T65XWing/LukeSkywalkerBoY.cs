@@ -42,7 +42,8 @@ namespace Ship
                     },
                     seImageNumber: 2,
                     skinName: "Luke Skywalker",
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipAbilities.Add(new HopeAbility());
@@ -55,6 +56,15 @@ namespace Ship
                 ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/6/61/Lukeskywalker-battleofyavin.png";
 
                 PilotNameCanonical = "lukeskywalker-battleofyavin";
+            }
+        }
+
+        public class LukeSkywalkerBoYXWA : LukeSkywalkerBoY
+        {
+            public LukeSkywalkerBoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

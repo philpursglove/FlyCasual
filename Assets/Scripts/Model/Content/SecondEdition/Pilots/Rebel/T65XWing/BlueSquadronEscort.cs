@@ -28,8 +28,26 @@ namespace Ship
                         Tags.XWing
                     },
                     seImageNumber: 11,
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class BlueSquadronEscortXWA : BlueSquadronEscort
+        {
+            public BlueSquadronEscortXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                { 
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

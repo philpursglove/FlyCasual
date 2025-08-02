@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Abilities.SecondEdition;
+using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
-using BoardTools;
-using Abilities.SecondEdition;
-using Content;
 
 namespace Ship
 {
@@ -28,19 +28,30 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
                         UpgradeType.Astromech,
                         UpgradeType.Modification,
+                        UpgradeType.Torpedo,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.XWing
                     },
-                    seImageNumber: 4
+                    seImageNumber: 4,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "garvendreis-t65xwing";
+            }
+        }
+
+        public class GarvenDreisXWA : GarvenDreis
+        {
+            public GarvenDreisXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

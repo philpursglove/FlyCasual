@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Upgrade;
-using Abilities.SecondEdition;
+﻿using Abilities.SecondEdition;
 using Content;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship
 {
@@ -33,7 +33,8 @@ namespace Ship
                     {
                         Tags.XWing
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipAbilities.Add(new HopeAbility());
@@ -44,6 +45,15 @@ namespace Ship
                 ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/5/52/Garvendreis-battleofyavin.png";
 
                 PilotNameCanonical = "garvendreis-battleofyavin";
+            }
+        }
+
+        public class GarvenDreisBoYXWA : GarvenDreisBoY
+        {
+            public GarvenDreisBoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

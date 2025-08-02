@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Actions;
+﻿using Actions;
 using ActionsList;
 using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -25,9 +25,9 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
                         UpgradeType.Illicit,
+                        UpgradeType.Missile,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
@@ -36,8 +36,19 @@ namespace Ship
                         Tags.XWing
                     },
                     seImageNumber: 8,
-                    skinName: "Partisan"
+                    skinName: "Partisan",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class LeevanTenzaXWA : LeevanTenza
+        {
+            public LeevanTenzaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

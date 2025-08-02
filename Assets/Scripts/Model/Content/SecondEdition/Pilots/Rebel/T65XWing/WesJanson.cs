@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System;
-using Upgrade;
+﻿using Abilities.Parameters;
 using Content;
-using Abilities.Parameters;
+using System;
+using System.Collections.Generic;
 using Tokens;
+using Upgrade;
 
 namespace Ship
 {
@@ -26,9 +26,9 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
                         UpgradeType.Modification,
+                        UpgradeType.Missile,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
@@ -36,14 +36,26 @@ namespace Ship
                         Tags.XWing
                     },
                     charges: 1,
-                    regensCharges: 1
+                    regensCharges: 1,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/be88838d-bbd6-42d5-8b1d-161eb2fa98f3/SWZ97_WesJansonlegal.png";
             }
         }
+
+        public class WesJansonXWA : WesJanson
+        {
+            public WesJansonXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
+
 namespace Abilities.SecondEdition
 {
     public class WesJansonAbility : CombinedAbility

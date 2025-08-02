@@ -28,8 +28,19 @@ namespace Ship
                     {
                         Tags.XWing
                     },
-                    seImageNumber: 10
+                    seImageNumber: 10,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class RedSquadronVeteranXWA : RedSquadronVeteran
+        {
+            public RedSquadronVeteranXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
