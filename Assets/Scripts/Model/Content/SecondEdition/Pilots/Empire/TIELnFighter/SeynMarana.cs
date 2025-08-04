@@ -35,8 +35,19 @@ namespace Ship
                         Tags.Tie
                     },
                     seImageNumber: 86,
-                    skinName: "Inferno"
+                    skinName: "Inferno",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SeynMaranaXWA : SeynMarana
+        {
+            public SeynMaranaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -20,18 +20,27 @@ namespace Ship
                     7,
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
                         UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/3d/7c/3d7ca1c1-9e57-4085-a9a6-e82a3d92c6df/swz67_onyx-sentry.png";
+        public class OnyxSquadronSentryXWA : OnyxSquadronSentry
+        {
+            public OnyxSquadronSentryXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

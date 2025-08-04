@@ -28,8 +28,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 120
+                    seImageNumber: 120,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class BlackSquadronScoutXWA : BlackSquadronScout
+        {
+            public BlackSquadronScoutXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -34,12 +34,21 @@ namespace Ship.SecondEdition.TIEDDefender
                     Tags.Sith
                 },
                 abilityText: "You may not spend force charges except when attacking. While you perform an attack, you may spend 1 force charge to turn a blank result into a hit.",
-                force: 3
+                force: 3,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "darthvader-tieddefender";
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/23/1c/231cae81-8fda-49a0-964d-9fb544b5e846/swz84_pilot_darthvader.png";
+    public class DarthVaderXWA : DarthVader
+    {
+        public DarthVaderXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

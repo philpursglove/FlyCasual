@@ -25,20 +25,29 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
                         UpgradeType.Gunner,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/c4b1a1ef-76b0-4da2-a06e-eb8e04fe0d84/SWZ97_FlightLeaderUbbellegal+%281%29.png";
+        public class FlightLeaderUbbelXWA : FlightLeaderUbbel
+        {
+            public FlightLeaderUbbelXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

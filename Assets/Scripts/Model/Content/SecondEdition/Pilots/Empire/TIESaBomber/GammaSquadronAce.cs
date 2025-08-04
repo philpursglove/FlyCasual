@@ -31,10 +31,29 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ModelInfo.SkinName = "Gamma Squadron";
+            }
+        }
+
+        public class GammaSquadronAceXWA : GammaSquadronAce
+        {
+            public GammaSquadronAceXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

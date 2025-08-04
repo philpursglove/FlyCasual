@@ -27,22 +27,32 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
                         UpgradeType.Device,
                         UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Missile,
+                        UpgradeType.Missile
                     },
                     seImageNumber: 107,
                     tags: new List<Tags>
                     {
                         Tags.Tie
                     },
-                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ModelInfo.SkinName = "White Death";
+            }
+        }
+
+        public class TomaxBrenXWA : TomaxBren
+        {
+            public TomaxBrenXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

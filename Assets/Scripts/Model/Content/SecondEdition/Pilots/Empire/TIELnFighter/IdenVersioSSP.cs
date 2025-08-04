@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Abilities.SecondEdition;
+using Content;
 using Ship;
 using SubPhases;
-using Abilities.SecondEdition;
+using System.Collections.Generic;
 using Upgrade;
-using Content;
 using UpgradesList.SecondEdition;
 
 namespace Ship
@@ -35,15 +35,23 @@ namespace Ship
                         Tags.Tie
                     },
                     skinName: "Inferno",
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(Disciplined));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Elusive));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/idenversio-swz105.png";
-
                 PilotNameCanonical = "idenversio-swz105";
+            }
+        }
+
+        public class IdenVersioSSPXWA : IdenVersioSSP
+        {
+            public IdenVersioSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

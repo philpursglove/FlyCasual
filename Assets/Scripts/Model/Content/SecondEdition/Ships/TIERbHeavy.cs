@@ -23,7 +23,7 @@ namespace Ship.SecondEdition.TIERbHeavy
                 (
                     new Dictionary<Faction, Type>
                     {
-                        { Faction.Imperial, typeof(CardiaAcademyPilot) }
+                        { Faction.Imperial, typeof(CaridaAcademyCadet) }
                     }
                 ),
                 new ShipArcsInfo(ArcType.SingleTurret, 2), 1, 8, 0,

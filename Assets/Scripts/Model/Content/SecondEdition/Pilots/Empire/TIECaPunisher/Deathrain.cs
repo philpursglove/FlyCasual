@@ -40,6 +40,26 @@ namespace Ship
                 );
             }
         }
+
+        public class DeathrainXWA : Deathrain
+        {
+            public DeathrainXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Talent,
+                        UpgradeType.Sensor,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Device,
+                        UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

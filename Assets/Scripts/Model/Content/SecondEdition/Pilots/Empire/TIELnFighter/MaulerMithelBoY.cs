@@ -1,7 +1,5 @@
-﻿using BoardTools;
-using Content;
+﻿using Content;
 using Ship;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -33,10 +31,9 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/4/41/Maulermithel-battleofyavin.png";
 
                 MustHaveUpgrades.Add(typeof(Predator));
                 MustHaveUpgrades.Add(typeof(AfterBurners));
@@ -44,6 +41,15 @@ namespace Ship
                 ShipInfo.Hull++;
 
                 PilotNameCanonical = "maulermithel-battleofyavin";
+            }
+        }
+
+        public class MaulerMithelBoYXWA : MaulerMithelBoY
+        {
+            public MaulerMithelBoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

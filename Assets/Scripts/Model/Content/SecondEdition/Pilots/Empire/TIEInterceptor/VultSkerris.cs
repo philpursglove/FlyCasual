@@ -33,12 +33,21 @@ namespace Ship
                     abilityText: " Action: Recover 1 charge take 1 strain. Before you engage you spend 1 charge to perform an action.",
                     charges: 1,
                     regensCharges: -1,
-                    skinName: "Skystrike Academy"
+                    skinName: "Skystrike Academy",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
-                PilotNameCanonical = "vultskerris-tieinterceptor";
+                PilotNameCanonical = "vultskerris-tieininterceptor";
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/fc/c9/fcc90b4b-afb5-4e62-a385-7053fde0d825/swz84_pilot_vultskerris.png";
+        public class VultSkerrisXWA : VultSkerris
+        {
+            public VultSkerrisXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

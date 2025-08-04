@@ -1,9 +1,9 @@
 ﻿using Abilities.SecondEdition;
-using System.Linq;
-using Upgrade;
-using Tokens;
-using System.Collections.Generic;
 using Content;
+using System.Collections.Generic;
+using System.Linq;
+using Tokens;
+using Upgrade;
 
 namespace Ship
 {
@@ -34,8 +34,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 114
+                    seImageNumber: 114,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class CaptainFerophXWA : CaptainFeroph
+        {
+            public CaptainFerophXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
