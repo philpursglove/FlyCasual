@@ -1,4 +1,5 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -33,10 +34,19 @@ namespace Ship
                         UpgradeType.Astromech,
                         UpgradeType.Illicit,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/716ee284-e908-4d1d-9f52-ce361d8a88ae/SWZ97_TakaJamoreesalegal+%281%29.png";
+        public class TakaJamoreesaXWA : TakaJamoreesa
+        {
+            public TakaJamoreesaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

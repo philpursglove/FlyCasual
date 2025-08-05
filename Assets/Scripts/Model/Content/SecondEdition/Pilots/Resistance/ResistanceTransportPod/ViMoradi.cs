@@ -38,6 +38,16 @@ namespace Ship.SecondEdition.ResistanceTransportPod
             );
         }
     }
+
+    public class ViMoradiXWA : ViMoradi
+    {
+        public ViMoradiXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

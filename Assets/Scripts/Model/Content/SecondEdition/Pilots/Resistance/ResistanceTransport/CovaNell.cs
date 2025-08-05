@@ -1,4 +1,5 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -25,18 +26,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Astromech,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
                         UpgradeType.Cannon,
                         UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification
-                    }
+                        UpgradeType.Torpedo
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/1b/93/1b934d61-0f90-42d0-bf84-0052960b105b/swz45_cova-nell.png";
+        public class CovaNellXWA : CovaNell
+        {
+            public CovaNellXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

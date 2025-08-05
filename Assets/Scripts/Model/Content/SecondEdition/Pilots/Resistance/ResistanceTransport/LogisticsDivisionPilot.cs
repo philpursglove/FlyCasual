@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship.SecondEdition.ResistanceTransport
@@ -17,14 +18,23 @@ namespace Ship.SecondEdition.ResistanceTransport
                 6,
                 extraUpgradeIcons: new List<UpgradeType>
                 {
-                    UpgradeType.Cannon,
-                    UpgradeType.Crew,
                     UpgradeType.Astromech,
-                    UpgradeType.Astromech
-                }
-            );
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Cannon
+                },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/95/69/95692636-a7ef-499c-afb7-5891b998f696/swz45_logistics-pilot.png";
+    public class LogisticsDivisionPilotXWA : LogisticsDivisionPilot
+    {
+        public LogisticsDivisionPilotXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

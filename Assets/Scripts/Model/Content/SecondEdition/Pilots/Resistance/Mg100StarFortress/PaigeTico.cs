@@ -28,20 +28,37 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
                         UpgradeType.Crew,
+                        UpgradeType.Sensor,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
                         UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Device
                     },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
+                    legality: new List<Legality>() { Legality.ExtendedLegal },
+                    skinName: "Cobalt"
                 );
+            }
+        }
 
-                ModelInfo.SkinName = "Cobalt";
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/48/7e/487e95ce-b13c-4d39-97f6-8e28e633d07f/swz66_paige-tico.png";
+        public class PaigeTicoXWA : PaigeTico
+        {
+            public PaigeTicoXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device,
+                        UpgradeType.Device
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -27,16 +27,27 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Tech,
-                        UpgradeType.Tech,
                         UpgradeType.Astromech,
+                        UpgradeType.Modification,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.XWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class TemminWexleyXWA : TemminWexley
+        {
+            public TemminWexleyXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

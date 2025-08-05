@@ -23,24 +23,33 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Turret,
                         UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
                         UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
+                        UpgradeType.Turret,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.YWing
                     },
-                    skinName: "Red"
+                    skinName: "Red",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "caithrenalli-btanr2ywing";
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/quuZGXf.png";
+        public class CaiThrenalliXWA : CaiThrenalli
+        {
+            public CaiThrenalliXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -24,7 +24,7 @@ namespace Ship.SecondEdition.ResistanceTransportPod
                 abilityType: typeof(BB8TransportPodAbility),
                 extraUpgradeIcons: new List<UpgradeType>
                 {
-                    
+
                     UpgradeType.Tech,
                     UpgradeType.Tech,
                     UpgradeType.Crew,
@@ -32,13 +32,22 @@ namespace Ship.SecondEdition.ResistanceTransportPod
                 },
                 tags: new List<Tags>
                 {
-                    Tags.Droid 
-                }
+                    Tags.Droid
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipInfo.ActionIcons.SwitchToDroidActions();
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/20/47/20474294-ecdf-4000-8f8c-63ba9ff0c9aa/swz45_bb-8.png";
+    public class BB8XWA : BB8
+    {
+        public BB8XWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

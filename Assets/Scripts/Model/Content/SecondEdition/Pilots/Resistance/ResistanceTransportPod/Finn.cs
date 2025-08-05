@@ -1,5 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,19 @@ namespace Ship.SecondEdition.ResistanceTransportPod
                     UpgradeType.Tech,
                     UpgradeType.Crew,
                     UpgradeType.Modification
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class FinnXWA : Finn
+    {
+        public FinnXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
