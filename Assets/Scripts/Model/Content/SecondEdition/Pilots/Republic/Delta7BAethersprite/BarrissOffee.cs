@@ -30,10 +30,21 @@ namespace Ship.SecondEdition.Delta7BAethersprite
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Blue"
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "barrissoffee-delta7baethersprite";
+        }
+    }
+
+    public class BarrissOffee7BXWA : BarrissOffee7B
+    {
+        public BarrissOffee7BXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

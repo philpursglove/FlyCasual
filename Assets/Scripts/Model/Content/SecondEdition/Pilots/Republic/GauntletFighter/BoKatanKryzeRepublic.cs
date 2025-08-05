@@ -31,12 +31,12 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Crew,
-                        UpgradeType.Torpedo,
                         UpgradeType.Gunner,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Torpedo,
                         UpgradeType.Configuration,
                         UpgradeType.Title
                     },
@@ -44,10 +44,19 @@ namespace Ship
                     {
                         Tags.Mandalorian
                     },
-                    skinName: "Dark Blue"
+                    skinName: "Dark Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/b/b7/Bokatankryze-republic.png";
+        public class BoKatanKryzeRepublicXWA : BoKatanKryzeRepublic
+        {
+            public BoKatanKryzeRepublicXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

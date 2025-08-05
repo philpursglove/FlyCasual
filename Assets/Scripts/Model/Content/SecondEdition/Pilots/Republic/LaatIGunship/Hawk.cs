@@ -27,20 +27,30 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Gunner,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
                         Tags.Clone
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/a0/d0/a0d0bfa8-544c-4872-8f6e-ef5fc3329c3a/swz70_a1_hawk_ship.png";
+            }
+        }
+
+        public class HawkXWA : Hawk
+        {
+            public HawkXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

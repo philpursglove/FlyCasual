@@ -31,10 +31,27 @@ namespace Ship
                     {
                         Tags.Clone,
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/6c/73/6c73ec27-bf29-4ace-86e9-4d03cdafa884/swz48_pilot-shadow-vet.png";
+        public class ShadowSquadronVeteranXWA : ShadowSquadronVeteran
+        {
+            public ShadowSquadronVeteranXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

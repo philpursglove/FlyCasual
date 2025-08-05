@@ -38,10 +38,19 @@ namespace Ship.SecondEdition.Eta2Actis
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Red"
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/fa/6a/fa6afe10-be85-46ee-93e6-0637b3ce34b0/swz79_shaak-ti.png";
+    public class ShaakTiXWA : ShaakTi
+    {
+        public ShaakTiXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

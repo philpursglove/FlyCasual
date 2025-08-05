@@ -30,9 +30,9 @@ namespace Ship.SecondEdition.Eta2Actis
                     UpgradeType.ForcePower,
                     UpgradeType.ForcePower,
                     UpgradeType.Talent,
-                    UpgradeType.Cannon,
                     UpgradeType.Astromech,
-                    UpgradeType.Modification
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon
                 },
                 tags: new List<Tags>
                 {
@@ -40,12 +40,21 @@ namespace Ship.SecondEdition.Eta2Actis
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Yellow"
+                skinName: "Yellow",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "anakinskywalker-eta2actis";
+        }
+    }
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/a0/Anakin_eta-2.png";
+    public class AnakinSkywalkerXWA : AnakinSkywalker
+    {
+        public AnakinSkywalkerXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

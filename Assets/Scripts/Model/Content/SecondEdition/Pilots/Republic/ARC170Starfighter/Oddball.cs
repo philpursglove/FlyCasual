@@ -35,12 +35,21 @@ namespace Ship
                     {
                         Tags.Clone
                     },
-                    skinName: "Red"
+                    skinName: "Red",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "oddball-arc170starfighter";
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/ff/29/ff29970e-5ed7-416d-b5da-3918e226b3dc/swz33_odd-ball.png";
+        public class OddBallXWA : OddBall
+        {
+            public OddBallXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

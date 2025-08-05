@@ -27,17 +27,26 @@ namespace Ship.SecondEdition.V19TorrentStarfighter
                 extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Torpedo,
+                    UpgradeType.Modification,
                     UpgradeType.Missile,
-                    UpgradeType.Modification
+                    UpgradeType.Torpedo,
                 },
                 tags: new List<Tags>
                 {
                     Tags.Clone
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/18/d2/18d2b2c2-482a-4b6f-8c53-c3f0f24bea4b/swz32_odd-ball.png";
+    public class OddBallXWA : OddBall
+    {
+        public OddBallXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

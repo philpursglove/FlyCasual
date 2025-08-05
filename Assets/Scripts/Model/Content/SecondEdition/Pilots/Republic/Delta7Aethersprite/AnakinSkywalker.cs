@@ -38,8 +38,28 @@ namespace Ship.SecondEdition.Delta7Aethersprite
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Anakin Skywalker"
+                skinName: "Anakin Skywalker",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class AnakinSkywalkerXWA : AnakinSkywalker
+    {
+        public AnakinSkywalkerXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration,
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

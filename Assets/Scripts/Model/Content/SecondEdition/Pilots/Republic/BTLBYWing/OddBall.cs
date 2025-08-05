@@ -19,7 +19,6 @@ namespace Ship
                     4,
                     18,
                     isLimited: true,
-                    //January 2020 errata: Should read: "After you fully execute...":
                     abilityText: "After you fully execute a red maneuver or perform a red action, if there is an enemy ship in your bullseye arc, you may acquire a lock on that ship.",
                     abilityType: typeof(Abilities.SecondEdition.OddBallAbility),
                     extraUpgradeIcons: new List<UpgradeType>
@@ -36,12 +35,21 @@ namespace Ship
                     {
                         Tags.Clone,
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "oddball-btlbywing";
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/99/a7/99a78a22-4e8c-4197-a7fb-2163746daa90/swz48_pilot-odd-ball.png";
+        public class OddBallXWA : OddBall
+        {
+            public OddBallXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -24,16 +24,25 @@ namespace Ship.SecondEdition.V19TorrentStarfighter
                 extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
+                    UpgradeType.Modification,
                     UpgradeType.Missile,
-                    UpgradeType.Modification
                 },
                 tags: new List<Tags>
                 {
                     Tags.Clone
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/57/c4/57c43689-5d1f-4fd2-b1f6-d4bec9448634/swz32_kickback.png";
+    public class KickbackXWA : Kickback
+    {
+        public KickbackXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

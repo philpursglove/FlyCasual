@@ -2,6 +2,7 @@
 using ActionsList;
 using BoardTools;
 using Conditions;
+using Content;
 using Ship;
 using SubPhases;
 using System.Collections.Generic;
@@ -30,13 +31,22 @@ namespace Ship
                     abilityType: typeof(NabooHandmaidenAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Sensor,
                         UpgradeType.Astromech,
-                        UpgradeType.Modification
-                    }
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/ad/b6/adb64448-5777-4fd3-8311-293207d7103b/swz40_naboo-handmaiden.png";
+        public class NabooHandmaidenXWA : NabooHandmaiden
+        {
+            public NabooHandmaidenXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

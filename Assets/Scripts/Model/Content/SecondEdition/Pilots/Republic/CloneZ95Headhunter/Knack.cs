@@ -34,10 +34,19 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Clone
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/knack.png";
+        public class KnackXWA : Knack
+        {
+            public KnackXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

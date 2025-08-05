@@ -36,10 +36,27 @@ namespace Ship.SecondEdition.Eta2Actis
                 {
                     Tags.Jedi,
                     Tags.LightSide
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/53a01dab-f036-4231-92b6-2f5a2cccd184/SWZ97_KitFistolegal.png";
+    public class KitFistoXWA : KitFisto
+    {
+        public KitFistoXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.ForcePower,
+                UpgradeType.ForcePower,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Cannon
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

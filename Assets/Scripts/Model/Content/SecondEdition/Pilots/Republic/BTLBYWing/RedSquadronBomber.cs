@@ -30,10 +30,26 @@ namespace Ship
                     {
                         Tags.Clone,
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/45/9f/459f895c-ba35-4d01-819b-653c2e4b7b96/swz48_pilot-red-sqd-bomber.png";
+        public class RedSquadronBomberXWA : RedSquadronBomber
+        {
+            public RedSquadronBomberXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Astromech,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
+                        UpgradeType.Torpedo                        
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

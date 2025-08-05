@@ -27,20 +27,30 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
+                        UpgradeType.Gunner,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
                         UpgradeType.Missile,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification
+                        UpgradeType.Torpedo,
                     },
                     tags: new List<Tags>
                     {
                         Tags.Clone
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/63/a5/63a5a158-1bb9-43f9-a461-a4778edb212d/swz70_a1_warthog_ship.png";
+            }
+        }
+
+        public class WarthogXWA : Warthog
+        {
+            public WarthogXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 26;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
