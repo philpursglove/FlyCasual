@@ -147,7 +147,7 @@ namespace Upgrade
             SubType = subType;
             RemoteType = remoteType;
 
-            LegalityInfo = legalityInfo ?? new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal };
+            LegalityInfo = legalityInfo ?? new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal, Legality.XWA };
         }
 
         public bool HasType(UpgradeType upgradeType)
