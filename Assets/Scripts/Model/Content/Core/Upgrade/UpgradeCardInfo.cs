@@ -44,7 +44,7 @@ namespace Upgrade
         public ShipArcInfo AddArc { get; private set; }
         public ArcType RemoveArc { get; private set; }
         public Type RemoteType { get; private set; }
-        public List<Legality> LegalityInfo { get; private set; }
+        public List<Legality> LegalityInfo { get; set; }
 
         public UpgradeCardInfo(
             string name,
