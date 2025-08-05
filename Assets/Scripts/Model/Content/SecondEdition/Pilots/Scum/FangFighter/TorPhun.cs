@@ -3,7 +3,6 @@ using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Tokens;
 using Upgrade;
 
@@ -28,18 +27,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Modification,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
                         Tags.Mandalorian
                     },
-                    skinName: "Skull Squadron"
+                    skinName: "Skull Squadron",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/bbede7a9-748c-4269-8d6c-cdab20cc7029/SWZ97_TorPhunlegal.png";
+        public class TorPhunXWA : TorPhun
+        {
+            public TorPhunXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

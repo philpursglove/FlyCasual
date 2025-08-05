@@ -1,5 +1,6 @@
 ﻿using ActionsList;
 using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -28,20 +29,29 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.HondoOhnakaPilotAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
+                        UpgradeType.Missile,
                         UpgradeType.Title
                     },
-                    skinName: "Jango Fett"
+                    skinName: "Jango Fett",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/f0da444b-7695-43ad-b637-e7918f33a83c/SWZ97_HondoOhnakalegal.png";
+        public class HondoOhnakaXWA : HondoOhnaka
+        {
+            public HondoOhnakaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

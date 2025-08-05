@@ -1,12 +1,10 @@
 ﻿using ActionsList;
-using Arcs;
 using Content;
 using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship
@@ -40,10 +38,19 @@ namespace Ship
                     {
                         Tags.BountyHunter
                     },
-                    skinName: "Red Stripes"
+                    skinName: "Red Stripes",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/c/c0/Guildbountyhunter.png";
+        public class GuildBountyHunterXWA : GuildBountyHunter
+        {
+            public GuildBountyHunterXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

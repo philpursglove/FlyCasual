@@ -43,6 +43,16 @@ namespace Ship
                 );
             }
         }
+
+        public class KetsuOnyoXWA : KetsuOnyo
+        {
+            public KetsuOnyoXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

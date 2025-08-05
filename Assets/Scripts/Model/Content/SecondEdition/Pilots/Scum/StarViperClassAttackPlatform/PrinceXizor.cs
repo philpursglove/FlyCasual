@@ -1,7 +1,6 @@
 ﻿using Arcs;
 using BoardTools;
 using Content;
-using Players;
 using Ship;
 using SubPhases;
 using System;
@@ -30,14 +29,24 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
                         UpgradeType.Torpedo,
-                        UpgradeType.Modification,
                         UpgradeType.Title
                     },
                     seImageNumber: 180,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class PrinceXizorXWA : PrinceXizor
+        {
+            public PrinceXizorXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

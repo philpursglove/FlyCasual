@@ -31,10 +31,29 @@ namespace Ship.SecondEdition.BTLA4YWing
                 {
                     Tags.YWing
                 },
-                skinName: "Gray"
+                skinName: "Gray",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/14/35/1435fe85-32d8-4fb3-8e80-e4d68add15ef/swz85_pilot_arlizhadrassian.png";
+    public class ArlizHadrassianXWA : ArlizHadrassian
+    {
+        public ArlizHadrassianXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -31,12 +31,21 @@ namespace Ship
                         Tags.Droid
                     },
                     isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.G4RGORVMAbility)
+                    abilityType: typeof(Abilities.SecondEdition.G4RGORVMAbility),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/4c/2c/4c2c309f-f9b0-4a93-a3a5-28b43fe981c3/swz66_g4r-g0r_vm.png";
+        public class G4RGORVMXWA : G4RGORVM
+        {
+            public G4RGORVMXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

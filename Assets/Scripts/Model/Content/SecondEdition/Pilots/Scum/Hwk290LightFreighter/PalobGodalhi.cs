@@ -31,18 +31,29 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Crew,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
                         UpgradeType.Title
                     },
                     tags: new List<Tags>
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 175
+                    seImageNumber: 175,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class PalobGodalhiXWA : PalobGodalhi
+        {
+            public PalobGodalhiXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

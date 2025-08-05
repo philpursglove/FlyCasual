@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -19,14 +20,23 @@ namespace Ship
                     5,
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
-                    }
+                        UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon                        
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/outerrimhunter.png";
+        public class OuterRimHunterXWA : OuterRimHunter
+        {
+            public OuterRimHunterXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

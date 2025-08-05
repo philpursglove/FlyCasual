@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -25,8 +26,19 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 185
+                    seImageNumber: 185,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class LaetinAsheraXWA : LaetinAshera
+        {
+            public LaetinAsheraXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

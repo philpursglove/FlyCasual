@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using UnityEngine;
-using Upgrade;
 
 namespace Ship
 {
@@ -38,7 +37,7 @@ namespace Ship
                         new ActionInfo(typeof(ReloadAction))
                     ),
                     new ShipUpgradesInfo(),
-                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal }
+                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal, Content.Legality.XWA }
                 );
 
                 ModelInfo = new ShipModelInfo

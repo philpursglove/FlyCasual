@@ -45,6 +45,16 @@ namespace Ship
                 PilotNameCanonical = "sabinewren-lancerclasspursuitcraft";
             }
         }
+
+        public class SabineWrenXWA : SabineWren
+        {
+            public SabineWrenXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

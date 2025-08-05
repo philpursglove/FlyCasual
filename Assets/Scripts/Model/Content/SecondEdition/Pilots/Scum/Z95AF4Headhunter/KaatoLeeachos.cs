@@ -27,18 +27,28 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile                        
                     },
                     tags: new List<Tags>
                     {
                         Tags.BountyHunter
                     },
-                    seImageNumber: 170
+                    seImageNumber: 170,
+                    skinName: "Kaa'to Leeachos",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ModelInfo.SkinName = "Kaa'to Leeachos";
+        public class KaatoLeeachosXWA : KaatoLeeachos
+        {
+            public KaatoLeeachosXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

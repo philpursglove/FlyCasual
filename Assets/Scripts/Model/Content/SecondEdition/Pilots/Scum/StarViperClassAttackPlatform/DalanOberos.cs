@@ -31,15 +31,25 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Modification
+                        UpgradeType.Torpedo                        
                     },
                     seImageNumber: 179,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "dalanoberos-starviperclassattackplatform";
+            }
+        }
+
+        public class DalanOberosXWA : DalanOberos
+        {
+            public DalanOberosXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

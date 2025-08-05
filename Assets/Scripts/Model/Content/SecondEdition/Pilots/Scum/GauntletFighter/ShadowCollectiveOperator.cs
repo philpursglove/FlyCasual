@@ -1,5 +1,4 @@
 ﻿using Content;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -24,20 +23,29 @@ namespace Ship
                     {
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Device,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>()
                     {
                         Tags.Mandalorian 
                     },
-                    skinName: "Red"
+                    skinName: "Red",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/8/8f/Shadowcollectiveoperator.png";
+        public class ShadowCollectiveOperatorXWA : ShadowCollectiveOperator
+        {
+            public ShadowCollectiveOperatorXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

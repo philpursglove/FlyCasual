@@ -1,10 +1,10 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System;
 using System.Collections.Generic;
-using Upgrade;
 using System.Linq;
 using Tokens;
-using Content;
+using Upgrade;
 
 namespace Ship
 {
@@ -28,22 +28,31 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
                         Tags.BountyHunter
                     },
-                    skinName: "Nashtah Pup"
+                    skinName: "Nashtah Pup",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "bossk-z95af4headhunter";
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f5/a0/f5a0b23e-82c1-4092-98b2-7f01bd2577db/swz58_bossk.png";
-
                 ShipAbilities.Add(new Abilities.SecondEdition.PursuitCraft());
+            }
+        }
+    
+        public class BosskXWA : Bossk
+        {
+            public BosskXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
