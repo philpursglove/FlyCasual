@@ -40,7 +40,8 @@ namespace Ship
                     {
                         Tags.DarkSide,
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
             }
         }
