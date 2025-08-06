@@ -4,6 +4,7 @@ using Content;
 using Ship;
 using System.Collections.Generic;
 using System.Linq;
+using Abilities.SecondEdition;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -37,8 +38,20 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> {Legality.StandardLegal, Legality.ExtendedLegal}
                 );
+            }
+        }
+
+        public class EmberXWA : Ember
+        {
+            public EmberXWA() : base()
+            {
+                var pilot = (PilotInfo as PilotCardInfo25);
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 10;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
             }
         }
     }
