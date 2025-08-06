@@ -31,5 +31,22 @@ namespace Ship
                 );
             }
         }
+
+        public class ZetaSquadronPilotXWA : ZetaSquadronPilot
+        {
+            public ZetaSquadronPilotXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 12;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }

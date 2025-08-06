@@ -43,6 +43,26 @@ namespace Ship
                 );
             }
         }
+
+        public class LieutenantGalekXWA : LieutenantGalek
+        {
+            public LieutenantGalekXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 15;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

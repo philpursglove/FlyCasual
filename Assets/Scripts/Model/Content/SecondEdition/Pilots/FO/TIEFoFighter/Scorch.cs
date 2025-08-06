@@ -37,6 +37,26 @@ namespace Ship
                 );
             }
         }
+        
+        public class ScorchXWA: Scorch
+        {
+            public ScorchXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 14;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

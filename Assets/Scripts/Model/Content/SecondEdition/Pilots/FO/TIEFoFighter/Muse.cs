@@ -36,6 +36,24 @@ namespace Ship
                 );
             }
         }
+
+        public class MuseXWA : Muse
+        {
+            public MuseXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 9;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

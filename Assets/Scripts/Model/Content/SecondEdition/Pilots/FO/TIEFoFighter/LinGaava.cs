@@ -41,6 +41,25 @@ namespace Ship
                 );
             }
         }
+
+        public class LinGaavaXWA : LinGaava
+        {
+            public LinGaavaXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 9;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

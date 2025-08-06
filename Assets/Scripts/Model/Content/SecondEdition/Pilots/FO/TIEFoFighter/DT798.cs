@@ -38,6 +38,24 @@ namespace Ship
                 );
             }
         }
+
+        public class DT798XWA : DT798
+        {
+            public DT798XWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality>() {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 4;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

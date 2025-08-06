@@ -1,6 +1,7 @@
 ﻿using Content;
 using Ship;
 using System.Collections.Generic;
+using Abilities.SecondEdition;
 using Upgrade;
 
 namespace Ship
@@ -35,6 +36,27 @@ namespace Ship
                     },
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class MidnightXWA : Midnight
+        {
+            public MidnightXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 17;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
             }
         }
     }

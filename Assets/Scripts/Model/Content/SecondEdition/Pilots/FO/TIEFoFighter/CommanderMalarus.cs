@@ -41,6 +41,26 @@ namespace Ship
                 );
             }
         }
+
+        public class CommanderMalarusXWA : CommanderMalarus
+        {
+            public CommanderMalarusXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 19;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Missile,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

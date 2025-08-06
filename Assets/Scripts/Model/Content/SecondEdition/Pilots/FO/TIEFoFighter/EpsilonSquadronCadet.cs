@@ -30,5 +30,23 @@ namespace Ship
                 );
             }
         }
+
+        public class EpsilonSquadronCadetXWA : EpsilonSquadronCadet
+        {
+            public EpsilonSquadronCadetXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 13;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
