@@ -39,10 +39,7 @@ namespace Ship
                     {
                         Tags.Tie
                     }
-                );
-
-                ImageUrl = "https://i.imgur.com/pK2cqXm.png";
-            }
+                );            }
         }
     }
 }

@@ -43,7 +43,6 @@ namespace Ship
                     }
                 );
 
-                ImageUrl = "https://i.imgur.com/Mj8XIc4.png";
             }
         }
     }

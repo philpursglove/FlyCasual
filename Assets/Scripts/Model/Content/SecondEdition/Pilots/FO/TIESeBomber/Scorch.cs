@@ -41,8 +41,6 @@ namespace Ship
                 );
 
                 PilotNameCanonical = "scorch-tiesebomber";
-
-                ImageUrl = "https://i.imgur.com/lK59dsa.png";
             }
         }
     }

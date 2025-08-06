@@ -33,8 +33,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/sienarjaemustestpilot.png";
             }
         }
     }

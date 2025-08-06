@@ -43,8 +43,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/f646cd72-d2a9-446e-82b6-66028abfcea5/SWZ97_JulJerjerrodlegal.png";
             }
         }
     }
