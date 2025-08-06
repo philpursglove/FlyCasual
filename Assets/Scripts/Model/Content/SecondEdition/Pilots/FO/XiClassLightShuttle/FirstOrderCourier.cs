@@ -26,8 +26,6 @@ namespace Ship
                     }
                 );
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/9f/49/9f490467-49a5-456f-b649-42cb74ecdd8a/swz69_a1_ship_courier.png";
-
                 PilotNameCanonical = "firstordercourier-xiclasslightshuttle";
             }
         }
