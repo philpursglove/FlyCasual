@@ -106,8 +106,7 @@ namespace SquadBuilderNS
             Transform contentTransform = GameObject.Find("UI/Panels/SelectUpgradePanel/Panel/Scroll View/Viewport/Content").transform;
             GameObject newUpgradePanel = MonoBehaviour.Instantiate(prefab, contentTransform);
 
-            string upgradeType = Global.SquadBuilder.Database.AllUpgrades.Find(n => n.UpgradeNameCanonical == upgrade.UpgradeNameCanonical && n.UpgradeType == upgrade.UpgradeType).UpgradeTypeName;
-            GenericUpgrade newUpgrade = (GenericUpgrade)System.Activator.CreateInstance(Type.GetType(upgradeType));
+            GenericUpgrade newUpgrade = (GenericUpgrade)System.Activator.CreateInstance(Type.GetType(upgrade.UpgradeTypeName));
             Edition.Current.AdaptUpgradeToRules(newUpgrade);
 
             UpgradePanelSquadBuilder script = newUpgradePanel.GetComponent<UpgradePanelSquadBuilder>();
