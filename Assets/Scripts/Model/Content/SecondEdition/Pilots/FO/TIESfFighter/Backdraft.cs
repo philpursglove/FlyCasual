@@ -36,8 +36,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/ac/Swz18_backdraft_a3.png";
             }
         }
     }
