@@ -40,7 +40,8 @@ namespace Ship
                         Tags.DarkSide,
                         Tags.LightSide,
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "kyloren-tiewiwhispermodifiedinterceptor";
