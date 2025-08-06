@@ -44,8 +44,6 @@ namespace Ship
                 );
 
                 PilotNameCanonical = "kyloren-tiewiwhispermodifiedinterceptor";
-
-                ImageUrl = "https://i.imgur.com/1PGGda3.png";
             }
         }
     }
