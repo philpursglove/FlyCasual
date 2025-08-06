@@ -34,8 +34,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/80/bb/80bbabbb-3b30-448e-a896-ddcfc05082bd/swz26_a1_scorch.png";
             }
         }
     }

@@ -33,8 +33,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/8/81/Swz18_a1_muse.png";
             }
         }
     }

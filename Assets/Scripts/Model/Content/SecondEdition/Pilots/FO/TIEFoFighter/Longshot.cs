@@ -33,8 +33,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/a6/a3/a6a34b16-16d8-43f7-b250-0e8dd9299a5f/swz26_a1_longshot.png";
             }
         }
     }

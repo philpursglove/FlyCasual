@@ -40,8 +40,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/fa44b5e8-b315-48cb-97cd-ad7250ae3ef2/SWZ97_LieutenantGaleklegal.png";
             }
         }
     }

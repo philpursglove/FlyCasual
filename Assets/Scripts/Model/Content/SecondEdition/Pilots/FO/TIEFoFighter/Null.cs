@@ -1,8 +1,6 @@
 ﻿using Content;
 using Ship;
-using SubPhases;
 using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 
 namespace Ship
@@ -35,8 +33,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/f/f2/TieFO_Null.png";
             }
         }
     }

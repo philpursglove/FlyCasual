@@ -3,7 +3,6 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 
 namespace Ship
@@ -36,8 +35,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/ad1d0d9c-9706-4e50-8d3b-8cd40877ea34/SWZ97_DT798legal.png";
             }
         }
     }

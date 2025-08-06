@@ -28,8 +28,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/c0/af/c0afde49-7f44-4c59-8051-cc4140a04be0/swz26_a1_zeta-pilot.png";
             }
         }
     }

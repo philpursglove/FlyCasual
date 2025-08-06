@@ -27,8 +27,6 @@ namespace Ship
                         Tags.Tie
                     }
                 );
-
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/1/18/Swz26_a1_epsilon-pilot.png";
             }
         }
     }
