@@ -35,7 +35,8 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Modification
                     },
-                    abilityType: typeof(Abilities.SecondEdition.AgentTiernyAbility)
+                    abilityType: typeof(Abilities.SecondEdition.AgentTiernyAbility),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "agenttierny";

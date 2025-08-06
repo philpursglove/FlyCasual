@@ -23,7 +23,8 @@ namespace Ship
                         UpgradeType.Tech,
                         UpgradeType.Crew,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "firstordercourier-xiclasslightshuttle";

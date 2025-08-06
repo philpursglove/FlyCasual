@@ -31,7 +31,8 @@ namespace Ship
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "gideonhask-xiclasslightshuttle";

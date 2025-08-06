@@ -30,7 +30,8 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification
                     },
-                    abilityType: typeof(Abilities.SecondEdition.AgentTerexPilotAbility)
+                    abilityType: typeof(Abilities.SecondEdition.AgentTerexPilotAbility),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
             }
         }

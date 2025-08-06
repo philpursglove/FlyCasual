@@ -31,7 +31,8 @@ namespace Ship
                         UpgradeType.Crew,
                         UpgradeType.Modification,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "commandermalarus-xiclasslightshuttle";
