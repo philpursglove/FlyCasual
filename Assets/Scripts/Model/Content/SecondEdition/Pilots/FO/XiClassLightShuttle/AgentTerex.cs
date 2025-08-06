@@ -1,5 +1,6 @@
 ﻿using Abilities.Parameters;
 using System.Collections.Generic;
+using Content;
 using Upgrade;
 
 namespace Ship

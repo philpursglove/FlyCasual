@@ -4,6 +4,7 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
+using Content;
 using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
