@@ -1,9 +1,4 @@
 ﻿using Upgrade;
-using UnityEngine;
-using Ship;
-using System.Collections.Generic;
-using System;
-using Tokens;
 
 namespace UpgradesList.SecondEdition
 {
@@ -21,8 +16,6 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.R2AstromechBoYAbility),
                 charges: 2
             );
-
-            ImageUrl = "https://i.imgur.com/g9vlF6c.jpg";
 
             NameCanonical = "r2f2-battleofyavin";
         }

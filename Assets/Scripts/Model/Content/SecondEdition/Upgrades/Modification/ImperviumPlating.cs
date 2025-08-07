@@ -17,7 +17,7 @@ namespace UpgradesList.SecondEdition
                 charges: 2
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/10/67/10676484-b596-43fd-a218-2d85707cf476/swz29_impervium-plating.png";
+            
         }
     }
 }

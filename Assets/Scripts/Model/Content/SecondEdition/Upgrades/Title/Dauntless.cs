@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -17,9 +18,19 @@ namespace UpgradesList.SecondEdition
                     new ShipRestriction(typeof(Ship.SecondEdition.VT49Decimator.VT49Decimator))
                 ),
                 abilityType: typeof(Abilities.SecondEdition.DauntlessAbility),
-                seImageNumber: 123
+                seImageNumber: 123,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class DauntlessXWA : Dauntless
+    {
+        public DauntlessXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

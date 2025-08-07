@@ -20,7 +20,7 @@ namespace UpgradesList.SecondEdition
 
             IsHidden = true;
 
-            ImageUrl = "https://i.imgur.com/YWhDshn.jpg";
+            
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Ship;
-using System.Linq;
+﻿using Content;
+using Ship;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -22,9 +22,19 @@ namespace UpgradesList.SecondEdition
                     charges: 3
                 ),
                 abilityType: typeof(Abilities.SecondEdition.ConcussionMissilesAbility),
-                seImageNumber: 38
+                seImageNumber: 38,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class ConcussionMissilesXWA : ConcussionMissiles
+    {
+        public ConcussionMissilesXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

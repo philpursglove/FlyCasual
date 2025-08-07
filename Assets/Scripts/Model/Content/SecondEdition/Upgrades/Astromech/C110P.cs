@@ -1,7 +1,8 @@
-﻿using Upgrade;
+﻿using Content;
 using Ship;
-using System.Linq;
 using System;
+using System.Linq;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,13 +17,13 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 charges: 2,
                 restriction: new FactionRestriction(Faction.Republic),
-                abilityType: typeof(Abilities.SecondEdition.C110PAbility)
+                abilityType: typeof(Abilities.SecondEdition.C110PAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             SelectSideOnSetup = false;
             AnotherSide = typeof(C110PErratic);
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/10/a8/10a8d369-5f71-4f3c-80c1-0b3dbed5d2ff/swz48_cards-c1-10p.png";
+            NameCanonical = "c110p";
         }
     }
 
@@ -35,14 +36,21 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "C1-10P (Erratic)",
                 UpgradeType.Astromech,
-                cost: 2,
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.C110PErraticAbility)
             );
 
             AnotherSide = typeof(C110P);
+            NameCanonical = "c110p-sideb";
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/16/fb/16fb5483-81db-4172-857b-08cdcb254a3a/swz48_cards-c1-10p_erratic.png";
+    public class C110PXWA : C110P
+    {
+        public C110PXWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

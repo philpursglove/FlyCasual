@@ -1,9 +1,9 @@
-﻿using Upgrade;
-using Ship;
-using Movement;
+﻿using Actions;
 using ActionsList;
-using Actions;
+using Movement;
+using Ship;
 using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -24,8 +24,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new ShipRestriction(typeof(Ship.SecondEdition.TIERbHeavy.TIERbHeavy)),
                 abilityType: typeof(Abilities.SecondEdition.ManeuverAssistMGK300Ability)
             );
-
-            ImageUrl = "https://i.imgur.com/tYqSuOn.png";
         }
     }
 }

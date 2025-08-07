@@ -28,6 +28,15 @@ namespace UpgradesList.SecondEdition
             );
         }
     }
+
+    public class StaticDischargeVanesXWA : StaticDischargeVanes
+    {
+        public StaticDischargeVanesXWA() : base()
+        {
+            UpgradeInfo.Cost = 12;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

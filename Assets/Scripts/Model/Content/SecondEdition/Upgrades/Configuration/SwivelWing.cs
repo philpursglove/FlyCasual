@@ -18,9 +18,8 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.SwivelWingDownAbility)
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/swivelwing.png";
-
             AnotherSide = typeof(SwivelWingUp);
+            NameCanonical = "swivelwing";
         }
     }
 
@@ -29,7 +28,6 @@ namespace UpgradesList.SecondEdition
         public SwivelWingUp() : base()
         {
             IsHidden = true;
-            NameCanonical = "SwivelWing-anotherside";
 
             UpgradeInfo = new UpgradeCardInfo(
                 "Swivel Wing (Up)",
@@ -39,11 +37,9 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.SwivelWingUpAbility)
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/swivelwing-sideb.png";
-
             IsSecondSide = true;
-
             AnotherSide = typeof(SwivelWingDown);
+            NameCanonical = "swivelwing-sideb";
         }
     }
 }

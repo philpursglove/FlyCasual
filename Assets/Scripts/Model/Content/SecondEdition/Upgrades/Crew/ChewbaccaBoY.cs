@@ -25,8 +25,6 @@ namespace UpgradesList.SecondEdition
             );
 
             NameCanonical = "chewbacca-battleofyavin";
-
-            ImageUrl = "https://i.imgur.com/prWwkwj.jpg";
         }
     }
 }

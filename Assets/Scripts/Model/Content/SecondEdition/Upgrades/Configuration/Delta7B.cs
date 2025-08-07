@@ -1,8 +1,7 @@
-﻿using Ship;
+﻿using Content;
 using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
-using Content;
 
 namespace UpgradesList.SecondEdition
 {
@@ -22,8 +21,6 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedBanned
                 }
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/d6/97/d697602c-8614-4192-a44d-986fa2d2fd7a/swz_delta-7b.png";
         }
     }
 }

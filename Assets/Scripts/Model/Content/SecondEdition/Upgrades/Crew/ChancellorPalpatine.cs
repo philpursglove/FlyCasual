@@ -1,12 +1,13 @@
-﻿using Upgrade;
-using Ship;
+﻿using Actions;
 using ActionsList;
-using System;
-using SubPhases;
-using Actions;
 using BoardTools;
+using Content;
+using Ship;
+using SubPhases;
+using System;
 using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -22,11 +23,13 @@ namespace UpgradesList.SecondEdition
                 addAction: new ActionInfo(typeof(CoordinateAction), ActionColor.Purple),
                 restriction: new FactionRestriction(Faction.Republic, Faction.Separatists),
                 isLimited: true,
-                abilityType: typeof(Abilities.SecondEdition.ChancellorPalpatineAbility)
+                abilityType: typeof(Abilities.SecondEdition.ChancellorPalpatineAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             SelectSideOnSetup = false;
             AnotherSide = typeof(DarthSidious);
+            NameCanonical = "chancellorpalpatine";
 
             Avatar = new AvatarInfo(
                 Faction.Republic,
@@ -44,7 +47,6 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Darth Sidious",
                 UpgradeType.Crew,
-                cost: 14,
                 addForce: 1,
                 addAction: new ActionInfo(typeof(CoordinateAction), ActionColor.Purple),
                 abilityType: typeof(Abilities.SecondEdition.DarthSidiousAbility)
@@ -52,14 +54,22 @@ namespace UpgradesList.SecondEdition
 
             AnotherSide = typeof(ChancellorPalpatine);
             IsSecondSide = true;
+            NameCanonical = "chancellorpalpatine-sideb";
 
             Avatar = new AvatarInfo(
                 Faction.Separatists,
                 new Vector2(304, 10),
                 new Vector2(75, 75)
             );
+        }
+    }
 
-            NameCanonical = "chancellorpalpatine-sideb";
+    public class ChancellorPalpatineXWA : ChancellorPalpatine
+    {
+        public ChancellorPalpatineXWA() : base()
+        {
+            UpgradeInfo.Cost = 11;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

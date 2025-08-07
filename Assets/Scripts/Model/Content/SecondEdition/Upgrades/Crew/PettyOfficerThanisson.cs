@@ -1,10 +1,10 @@
-﻿using Ship;
-using Upgrade;
-using Arcs;
+﻿using Arcs;
+using Content;
+using Ship;
 using SubPhases;
-//using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,7 +18,8 @@ namespace UpgradesList.SecondEdition
                 cost: 3,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.FirstOrder),
-                abilityType: typeof(Abilities.SecondEdition.PettyOfficerThanissonCrewAbility)
+                abilityType: typeof(Abilities.SecondEdition.PettyOfficerThanissonCrewAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -26,6 +27,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(308, 1)
             );
         }        
+    }
+
+    public class PettyOfficerThanissonXWA : PettyOfficerThanisson
+    {
+        public PettyOfficerThanissonXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

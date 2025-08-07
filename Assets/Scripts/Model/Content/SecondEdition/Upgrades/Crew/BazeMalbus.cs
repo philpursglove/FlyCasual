@@ -1,6 +1,8 @@
 ﻿using ActionsList;
+using Content;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -21,7 +23,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 abilityType: typeof(Abilities.SecondEdition.BazeMalbusCrewAbility),
-                seImageNumber: 79
+                seImageNumber: 79,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -29,6 +32,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(427, 1),
                 new Vector2(150, 150)
             );
+        }
+    }
+
+    public class BazeMalbusXWA : BazeMalbus
+    {
+        public BazeMalbusXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

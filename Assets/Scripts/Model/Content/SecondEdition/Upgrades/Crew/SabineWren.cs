@@ -1,12 +1,12 @@
-﻿using Upgrade;
+﻿using Content;
 using Ship;
-using Tokens;
+using SubPhases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SubPhases;
+using Tokens;
 using UnityEngine;
-using Content;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -34,6 +34,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(474, 13)
             );
         }        
+    }
+
+    public class SabineWrenXWA : SabineWren
+    {
+        public SabineWrenXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

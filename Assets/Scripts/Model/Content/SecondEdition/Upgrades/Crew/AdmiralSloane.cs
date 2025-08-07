@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 using Content;
+using Unity.PlasticSCM.Editor.WebApi;
 
 namespace UpgradesList.SecondEdition
 {
@@ -30,6 +31,15 @@ namespace UpgradesList.SecondEdition
                 Faction.Imperial,
                 new Vector2(385, 11)
             );
+        }
+    }
+
+    public class AdmiralSloaneXWA : AdmiralSloane
+    {
+        public AdmiralSloaneXWA() : base()
+        {
+            UpgradeInfo.Cost = 25;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

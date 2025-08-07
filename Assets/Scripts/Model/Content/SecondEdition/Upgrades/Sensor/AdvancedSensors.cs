@@ -1,9 +1,8 @@
-﻿using Ship;
-using Upgrade;
-using ActionsList;
-using System;
-using System.Collections.Generic;
+﻿using ActionsList;
 using Content;
+using Ship;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -24,6 +23,15 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
+        }
+    }
+
+    public class AdvancedSensorsXWA : AdvancedSensors
+    {
+        public AdvancedSensorsXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

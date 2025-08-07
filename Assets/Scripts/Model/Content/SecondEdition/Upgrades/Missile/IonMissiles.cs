@@ -1,4 +1,5 @@
-﻿using Tokens;
+﻿using Content;
+using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -19,8 +20,18 @@ namespace UpgradesList.SecondEdition
                     charges: 3
                 ),
                 abilityType: typeof(Abilities.SecondEdition.IonDamageAbility),
-                seImageNumber: 40
+                seImageNumber: 40,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class IonMissilesXWA : IonMissiles
+    {
+        public IonMissilesXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

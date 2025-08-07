@@ -1,5 +1,4 @@
-﻿using ActionsList;
-using BoardTools;
+﻿using Content;
 using Ship;
 using Tokens;
 using Upgrade;
@@ -15,8 +14,18 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Tech,
                 cost: 3,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.FerrospherePaintAbility)
+                abilityType: typeof(Abilities.SecondEdition.FerrospherePaintAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class FerrospherePaintXWA : FerrospherePaint
+    {
+        public FerrospherePaintXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

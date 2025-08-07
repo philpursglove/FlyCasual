@@ -2,7 +2,6 @@
 using Ship;
 using SubPhases;
 using System;
-using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -18,8 +17,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new TagRestriction(Tags.LightSide),
                 abilityType: typeof(Abilities.SecondEdition.PatienceAbility)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/5c/f9/5cf91573-a7a8-47ec-9139-f3d0043fce0c/swz79_patience.png";
         }
     }
 }

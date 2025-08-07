@@ -1,12 +1,12 @@
-using Ship;
-using Upgrade;
-using SubPhases;
-using Conditions;
-using Tokens;
 using BoardTools;
-using UnityEngine;
+using Conditions;
 using Content;
+using Ship;
+using SubPhases;
 using System.Collections.Generic;
+using Tokens;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -33,6 +33,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(474, 20)
             );
         }        
+    }
+
+    public class InformantXWA : Informant
+    {
+        public InformantXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

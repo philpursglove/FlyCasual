@@ -1,7 +1,6 @@
-﻿using Ship;
+﻿using Content;
 using System.Collections.Generic;
 using Upgrade;
-using Content;
 
 namespace UpgradesList.SecondEdition
 {
@@ -21,6 +20,15 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
+        }
+    }
+
+    public class HullUpgradeXWA : HullUpgrade
+    {
+        public HullUpgradeXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

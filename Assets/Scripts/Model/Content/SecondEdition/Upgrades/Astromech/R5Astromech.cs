@@ -1,9 +1,9 @@
-﻿using Upgrade;
-using System.Linq;
-using System.Collections.Generic;
-using ActionsList;
-using System;
+﻿using ActionsList;
 using Content;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -24,6 +24,15 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
+        }
+    }
+
+    public class R5AstromechXWA : R5Astromech
+    {
+        public R5AstromechXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

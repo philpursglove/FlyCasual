@@ -24,7 +24,7 @@ namespace UpgradesList.SecondEdition
                 //seImageNumber: ??
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/dd/5a/dd5adbe7-cb13-4d42-8a81-211cd265c210/swz32_synchronized-console.png";
+            
         }
     }
 }

@@ -26,8 +26,14 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/12/25/1225b83d-2bdb-45f1-8301-2150bdc5ec26/swz84_upgrade_interloperturn.png";
+    public class InterloperTurnXWA : InterloperTurn
+    {
+        public InterloperTurnXWA() : base()
+        {
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

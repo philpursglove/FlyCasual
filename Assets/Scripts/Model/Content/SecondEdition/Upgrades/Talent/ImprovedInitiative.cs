@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.ImprovedInitiativeAbility)
             );
 
-            ImageUrl = "https://i.imgur.com/nvHEwLO.png";
+            
         }
     }
 }

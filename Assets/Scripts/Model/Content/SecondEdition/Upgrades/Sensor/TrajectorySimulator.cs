@@ -28,6 +28,15 @@ namespace UpgradesList.SecondEdition
             );
         }        
     }
+
+    public class TrajectorySimulatorXWA : TrajectorySimulator
+    {
+        public TrajectorySimulatorXWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

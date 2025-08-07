@@ -1,6 +1,7 @@
 ﻿using Actions;
 using ActionsList;
 using BoardTools;
+using Content;
 using Obstacles;
 using Ship;
 using Upgrade;
@@ -18,8 +19,18 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.DebrisGambit),
                 restriction: new BaseSizeRestriction(BaseSize.Small, BaseSize.Medium),
                 addAction: new ActionInfo(typeof(EvadeAction), ActionColor.Red),
-                seImageNumber: 3
+                seImageNumber: 3,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class DebrisGambitXWA : DebrisGambit
+    {
+        public DebrisGambitXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

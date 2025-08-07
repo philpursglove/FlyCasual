@@ -1,12 +1,12 @@
-﻿using Upgrade;
+﻿using Actions;
 using ActionsList;
-using Actions;
-using System.Collections.Generic;
+using BoardTools;
+using Remote;
 using Ship;
 using System;
+using System.Collections.Generic;
 using Tokens;
-using Remote;
-using BoardTools;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -27,8 +27,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new ShipRestriction(typeof(Ship.SecondEdition.TIERbHeavy.TIERbHeavy)),
                 abilityType: typeof(Abilities.SecondEdition.TargetAssistMGK300Ability)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/c1/d7/c1d74e73-d6e7-47c5-9d2f-707d1c88cb67/swz67_target-assist_mgk300.png";
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Bombs;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -20,10 +21,9 @@ namespace UpgradesList.SecondEdition
                 cost: 4,
                 charges: 3,
                 subType: UpgradeSubType.Bomb,
-                abilityType: typeof(Abilities.SecondEdition.ConcussionBombsAbility)
+                abilityType: typeof(Abilities.SecondEdition.ConcussionBombsAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/concussionbombs.png";
 
             bombPrefabPath = "Prefabs/Bombs/ConcussionBomb";
         }
@@ -115,6 +115,15 @@ namespace UpgradesList.SecondEdition
         }
 
         private class ConcussionBombDecisionSubphase : DecisionSubPhase { }
+    }
+
+    public class ConcussionBombsXWA : ConcussionBombs
+    {
+        public ConcussionBombsXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

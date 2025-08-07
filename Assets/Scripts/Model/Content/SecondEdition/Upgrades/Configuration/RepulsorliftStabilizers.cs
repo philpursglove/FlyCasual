@@ -1,10 +1,9 @@
-﻿using Upgrade;
+﻿using Movement;
 using Ship;
-using System;
 using SubPhases;
-using System.Collections.Generic;
-using Movement;
+using System;
 using System.Linq;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,11 +18,9 @@ namespace UpgradesList.SecondEdition
                 restriction: new ShipRestriction(typeof(Ship.SecondEdition.HMPDroidGunship.HMPDroidGunship)),
                 abilityType: typeof(Abilities.SecondEdition.RepulsorliftStabilizersInactiveAbility)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/28/39/2839eb69-5a45-47e1-a69d-4bb0b4f8ab5d/swz71_upgrade_stabilizer-inactive.png";
-
             SelectSideOnSetup = false;
             AnotherSide = typeof(RepulsorliftStabilizersActive);
+            NameCanonical = "repulsorliftstabilizers";
         }
     }
 
@@ -33,8 +30,6 @@ namespace UpgradesList.SecondEdition
         {
             IsHidden = true;
 
-            NameCanonical = "repulsorliftstabilizers-anotherside";
-
             UpgradeInfo = new UpgradeCardInfo(
                 "Repulsorlift Stabilizers (Active)",
                 UpgradeType.Configuration,
@@ -43,10 +38,9 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.RepulsorliftStabilizersActiveAbility)
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b9/24/b92420be-2835-4e12-b76e-b2675533249c/swz71_upgrade_stabilizer-active.png";
-
             IsSecondSide = true;
             AnotherSide = typeof(RepulsorliftStabilizersInactive);
+            NameCanonical = "repulsorliftstabilizers-sideb";
         }
     }
 }

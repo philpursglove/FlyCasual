@@ -32,8 +32,6 @@ namespace UpgradesList.SecondEdition
                 },
                 isStandardazed: true
             );
-            
-            ImageUrl = "https://i.imgur.com/PZiB0nf.png";
         }
     }
 }

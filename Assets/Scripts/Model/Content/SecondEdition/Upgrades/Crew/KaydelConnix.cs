@@ -1,12 +1,10 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
-using Tokens;
-using System;
-using Content;
+﻿using Content;
 using Movement;
+using Ship;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -33,6 +31,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(251, 1)
             );
         }        
+    }
+
+    public class KaydelConnixXWA : KaydelConnix
+    {
+        public KaydelConnixXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

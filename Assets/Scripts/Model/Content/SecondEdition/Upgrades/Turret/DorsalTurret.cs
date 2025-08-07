@@ -1,8 +1,8 @@
 ﻿using Actions;
 using ActionsList;
 using Arcs;
+using Content;
 using Ship;
-using System.Linq;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -24,9 +24,19 @@ namespace UpgradesList.SecondEdition
                 addArc: new ShipArcInfo(ArcType.SingleTurret),
                 addAction: new ActionInfo(typeof(RotateArcAction)),
                 abilityType: typeof(Abilities.SecondEdition.DorsalTurretAbility),
-                seImageNumber: 31
+                seImageNumber: 31,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class DorsalTurretXWA : DorsalTurret
+    {
+        public DorsalTurretXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

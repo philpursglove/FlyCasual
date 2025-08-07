@@ -1,4 +1,5 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
 using Upgrade;
 
@@ -14,9 +15,19 @@ namespace UpgradesList.SecondEdition
                 cost: 2,
                 abilityType: typeof(Abilities.SecondEdition.SaturationSalvoAbility),
                 restriction: new ActionBarRestriction(typeof(ReloadAction)),
-                seImageNumber: 14
+                seImageNumber: 14,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class SaturationSalvoXWA : SaturationSalvo
+    {
+        public SaturationSalvoXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

@@ -1,6 +1,6 @@
-﻿using Upgrade;
-using System.Collections.Generic;
+﻿using Content;
 using Ship;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -13,9 +13,19 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Talent,
                 cost: 12,
                 abilityType: typeof(Abilities.SecondEdition.OutmaneuverAbility),
-                seImageNumber: 11
+                seImageNumber: 11,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class OutmaneuverXWA : Outmaneuver
+    {
+        public OutmaneuverXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

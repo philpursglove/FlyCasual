@@ -1,8 +1,8 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Tokens;
 using Upgrade;
 
@@ -24,9 +24,19 @@ namespace UpgradesList.SecondEdition
                     charges: 4
                 ),
                 abilityType: typeof(Abilities.SecondEdition.CluseterMissilesAbility),
-                seImageNumber: 37
+                seImageNumber: 37,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class ClusterMissilesXWA : ClusterMissiles
+    {
+        public ClusterMissilesXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

@@ -1,11 +1,8 @@
-﻿using Upgrade;
-using System.Linq;
-using System.Collections.Generic;
-using System;
-using Tokens;
-using Ship;
-using Content;
+﻿using Content;
 using Movement;
+using Ship;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -23,11 +20,10 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>
                 {
                     Legality.StandardBanned,
-                    Legality.ExtendedLegal
+                    Legality.ExtendedLegal,
+                    Legality.XWA
                 }
             );
-
-            ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/c/c4/Swz40_card-r2-a6.png";
         }
     }
 }

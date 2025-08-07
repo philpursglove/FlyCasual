@@ -1,10 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System;
-using Tokens;
+﻿using BoardTools;
+using Content;
+using Ship;
 using System.Collections.Generic;
-using BoardTools;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,10 +17,9 @@ namespace UpgradesList.SecondEdition
                 cost: 2,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum, Faction.Separatists),
-                abilityType: typeof(Abilities.SecondEdition.BobaFettGunnerAbility)
+                abilityType: typeof(Abilities.SecondEdition.BobaFettGunnerAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b6/39/b6395ed5-2a9c-46fd-9945-b906224aa05d/swz82_a1_upgrade_boba-fett.png";
 
             Avatar = new AvatarInfo(
                 Faction.Scum,
@@ -29,7 +27,16 @@ namespace UpgradesList.SecondEdition
             );
 
             NameCanonical = "bobafett-gunner";
-        }        
+        }
+    }
+
+    public class BobaFettGunnerXWA : BobaFettGunner
+    {
+        public BobaFettGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 
