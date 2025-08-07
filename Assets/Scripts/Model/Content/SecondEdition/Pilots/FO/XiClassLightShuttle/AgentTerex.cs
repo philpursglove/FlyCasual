@@ -42,7 +42,7 @@ namespace Ship
             public AgentTerexXWA() : base()
             {
                 var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
                 pilot.Cost = 3;
                 pilot.LoadoutValue = 8;
                 pilot.ExtraUpgrades = new List<UpgradeType>

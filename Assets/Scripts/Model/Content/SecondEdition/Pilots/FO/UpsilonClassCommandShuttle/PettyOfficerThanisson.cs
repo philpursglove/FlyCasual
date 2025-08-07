@@ -48,7 +48,7 @@ namespace Ship
             public PettyOfficerThanissonXWA() : base()
             {
                 var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
                 pilot.Cost = 6;
                 pilot.LoadoutValue = 19;
                 pilot.ExtraUpgrades = new List<UpgradeType>

@@ -49,7 +49,7 @@ namespace Ship
             public AgentTiernyXWA() : base()
             {
                 var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
                 pilot.Cost = 5;
                 pilot.LoadoutValue = 20;
                 pilot.ExtraUpgrades = new List<UpgradeType>

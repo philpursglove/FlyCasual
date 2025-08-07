@@ -44,7 +44,7 @@ namespace Ship
             public LieutenantTavsonXWA() : base()
             {
                 var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
                 pilot.Cost = 7;
                 pilot.LoadoutValue = 25;
                 pilot.ExtraUpgrades = new List<UpgradeType>

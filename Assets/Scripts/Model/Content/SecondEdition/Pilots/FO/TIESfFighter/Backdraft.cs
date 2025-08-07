@@ -47,7 +47,7 @@ namespace Ship
                 var pilot = (PilotCardInfo25)PilotInfo;
                 pilot.Cost = 4;
                 pilot.LoadoutValue = 8;
-                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
                 pilot.ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,

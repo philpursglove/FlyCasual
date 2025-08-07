@@ -7,60 +7,58 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEWiWhisperModifiedInterceptor
 {
-    namespace SecondEdition.TIEWiWhisperModifiedInterceptor
+    public class Nightfall : TIEWiWhisperModifiedInterceptor
     {
-        public class Nightfall : TIEWiWhisperModifiedInterceptor
+        public Nightfall() : base()
         {
-            public Nightfall() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Nightfall\"",
-                    "709th Legion Veteran",
-                    Faction.FirstOrder,
-                    4,
-                    4,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.NightfallPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class NightfallXWA: Nightfall
-        {
-            public NightfallXWA() : base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 11;
-                pilot.Legality = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Nightfall\"",
+                "709th Legion Veteran",
+                Faction.FirstOrder,
+                4,
+                4,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.NightfallPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Missile,
                     UpgradeType.Tech,
                     UpgradeType.Tech,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
     }
+
+    public class NightfallXWA : Nightfall
+    {
+        public NightfallXWA() : base()
+        {
+            var pilot = (PilotCardInfo25)PilotInfo;
+            pilot.Cost = 4;
+            pilot.LoadoutValue = 11;
+            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            pilot.ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Missile,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+        }
+    }
+}
 
 namespace Abilities.SecondEdition
 {

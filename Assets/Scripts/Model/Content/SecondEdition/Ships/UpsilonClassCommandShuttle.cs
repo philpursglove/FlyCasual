@@ -36,7 +36,7 @@ namespace Ship
                         new ActionInfo(typeof(JamAction))
                     ),
                     new ShipUpgradesInfo(),
-                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal }
+                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal, Content.Legality.XWA }
                 );
 
                 ModelInfo = new ShipModelInfo

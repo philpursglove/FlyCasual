@@ -43,7 +43,7 @@ namespace Ship
             public BlackoutXWA(): base()
             {
                 var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.Legality = new List<Legality> {Legality.XWA};
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
                 pilot.Cost = 5;
                 pilot.LoadoutValue = 6;
                 pilot.ExtraUpgrades = new List<UpgradeType>
