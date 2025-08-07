@@ -31,6 +31,24 @@ namespace Ship
                 PilotNameCanonical = "firstordercourier-xiclasslightshuttle";
             }
         }
+
+        public class FirstOrderCourierXWA : FirstOrderCourier
+        {
+            public FirstOrderCourierXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 14;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

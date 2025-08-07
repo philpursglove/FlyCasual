@@ -43,6 +43,27 @@ namespace Ship
                 PilotNameCanonical = "agenttierny";
             }
         }
+
+        public class AgentTiernyXWA : AgentTierny
+        {
+            public AgentTiernyXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 20;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

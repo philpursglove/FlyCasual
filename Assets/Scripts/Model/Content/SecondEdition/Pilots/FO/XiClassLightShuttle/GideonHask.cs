@@ -39,6 +39,27 @@ namespace Ship
                 PilotNameCanonical = "gideonhask-xiclasslightshuttle";
             }
         }
+
+        public class GideonHaskXWA : GideonHask
+        {
+            public GideonHaskXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 12;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

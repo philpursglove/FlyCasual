@@ -39,6 +39,27 @@ namespace Ship
                 PilotNameCanonical = "commandermalarus-xiclasslightshuttle";
             }
         }
+
+        public class CommanderMalarusXWA : CommanderMalarus
+        {
+            public CommanderMalarusXWA(): base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 14;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 
