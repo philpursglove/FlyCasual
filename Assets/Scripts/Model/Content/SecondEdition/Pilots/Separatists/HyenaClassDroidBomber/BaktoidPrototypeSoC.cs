@@ -29,16 +29,24 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
                 {
                     Tags.Droid
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
             
             MustHaveUpgrades.Add(typeof(HomingMissiles));
             MustHaveUpgrades.Add(typeof(ContingencyProtocol));
             MustHaveUpgrades.Add(typeof(StrutLockOverride));
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/6/6c/Baktoidprototype-siegeofcoruscant.png";
-
             PilotNameCanonical = "baktoidprototype-siegeofcoruscant";
+        }
+    }
+
+    public class BaktoidPrototypeSoCXWA : BaktoidPrototypeSoC
+    {
+        public BaktoidPrototypeSoCXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

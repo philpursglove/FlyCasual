@@ -33,7 +33,8 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
                 {
                     Tags.Droid
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipInfo.ActionIcons.RemoveActions(typeof(ReloadAction));
@@ -43,9 +44,16 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
             MustHaveUpgrades.Add(typeof(ContingencyProtocol));
             MustHaveUpgrades.Add(typeof(StrutLockOverride));
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/4/43/Dbs32c-siegeofcoruscant.png";
-
             PilotNameCanonical = "dbs32c-siegeofcoruscant";
+        }
+    }
+
+    public class DBS32CSoCXWA : DBS32CSoC
+    {
+        public DBS32CSoCXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

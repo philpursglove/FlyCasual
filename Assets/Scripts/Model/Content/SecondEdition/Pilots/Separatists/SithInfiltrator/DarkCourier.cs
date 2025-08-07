@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship.SecondEdition.SithInfiltrator
@@ -21,10 +22,26 @@ namespace Ship.SecondEdition.SithInfiltrator
                     UpgradeType.Cannon,
                     UpgradeType.Device,
                     UpgradeType.Modification
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e2/02/e20245ab-47e9-41f9-abdf-62f571246faf/swz30_dark-courier.png";
+        }
+    }
+
+    public class DarkCourierXWA : DarkCourier
+    {
+        public DarkCourierXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Torpedo,
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -39,8 +39,6 @@ namespace Ship.SecondEdition.DroidTriFighter
             MustHaveUpgrades.Add(typeof(ContingencyProtocol));
             MustHaveUpgrades.Add(typeof(EvasionSequence7));
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/5/5a/SWZ95_PhlacArphoccPrototype.png";
-
             PilotNameCanonical = "phlacarphoccprototype-siegeofcoruscant";
         }
     }

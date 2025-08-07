@@ -31,16 +31,24 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                 {
                     Tags.Droid
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(DiscordMissiles));
             MustHaveUpgrades.Add(typeof(ContingencyProtocol));
             MustHaveUpgrades.Add(typeof(StrutLockOverride));
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/1/1e/Dfs081-siegeofcoruscant.png";
-
             PilotNameCanonical = "dfs081-siegeofcoruscant";
+        }
+    }
+
+    public class Dfs081SoCXWA : Dfs081SoC
+    {
+        public Dfs081SoCXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 2;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

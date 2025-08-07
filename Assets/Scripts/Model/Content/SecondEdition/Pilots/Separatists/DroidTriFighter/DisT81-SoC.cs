@@ -31,16 +31,24 @@ namespace Ship.SecondEdition.DroidTriFighter
                 {
                     Tags.Droid
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(Outmaneuver));
             MustHaveUpgrades.Add(typeof(AfterBurners));
             MustHaveUpgrades.Add(typeof(ContingencyProtocol));
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/d/db/Dist81-siegeofcoruscant.png";
-
             PilotNameCanonical = "dist81-siegeofcoruscant";
+        }
+    }
+
+    public class DisT81SoCXWA : DisT81SoC
+    {
+        public DisT81SoCXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

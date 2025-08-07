@@ -5,45 +5,61 @@ using System.Linq;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.FiresprayClassPatrolCraft
 {
-    namespace SecondEdition.FiresprayClassPatrolCraft
+    public class BobaFettSep : FiresprayClassPatrolCraft
     {
-        public class BobaFettSep : FiresprayClassPatrolCraft
+        public BobaFettSep() : base()
         {
-            public BobaFettSep() : base()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Boba Fett",
+                "Survivor",
+                Faction.Separatists,
+                3,
+                7,
+                16,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.BobaFettSeparatistAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Crew,
+                    UpgradeType.Device,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.BountyHunter
+                },
+                skinName: "Jango Fett",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            PilotNameCanonical = "bobafett-separatistalliance";
+        }
+    }
+
+    public class BobaFettSepXWA : BobaFettSep
+    {
+        public BobaFettSepXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Boba Fett",
-                    "Survivor",
-                    Faction.Separatists,
-                    3,
-                    7,
-                    16,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.BobaFettSeparatistAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
-                        UpgradeType.Crew,
-                        UpgradeType.Device,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.BountyHunter
-                    },
-                    skinName: "Jango Fett"
-                );
-
-                PilotNameCanonical = "bobafett-separatists";
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/17/5d/175d51c6-6a7a-4f59-b8c1-44417a746187/swz82_a1_boba-fett.png";
-            }
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

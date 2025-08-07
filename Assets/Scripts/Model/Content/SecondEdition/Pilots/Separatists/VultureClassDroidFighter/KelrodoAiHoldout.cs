@@ -1,6 +1,7 @@
 ﻿using Actions;
 using ActionsList;
 using BoardTools;
+using Content;
 using Movement;
 using Ship;
 using SubPhases;
@@ -31,7 +32,8 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                     UpgradeType.Talent,
                     UpgradeType.Missile,
                     UpgradeType.Modification
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipInfo.ActionIcons.RemoveLinkedAction(typeof(BarrelRollAction), typeof(CalculateAction));
@@ -43,8 +45,22 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
             DialInfo.ChangeManeuverComplexity(new ManeuverHolder(ManeuverSpeed.Speed3, ManeuverDirection.Right, ManeuverBearing.Bank), MovementComplexity.Normal);
             DialInfo.ChangeManeuverComplexity(new ManeuverHolder(ManeuverSpeed.Speed3, ManeuverDirection.Left, ManeuverBearing.Turn), MovementComplexity.Complex);
             DialInfo.ChangeManeuverComplexity(new ManeuverHolder(ManeuverSpeed.Speed3, ManeuverDirection.Right, ManeuverBearing.Turn), MovementComplexity.Complex);
+        }
+    }
 
-            ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/4ea8c128-aa07-420e-8046-9adffd1180e6/SWZ97_KelrodoAIHoldoutlegal.png";
+    public class KelrodoAiHoldoutXWA : KelrodoAiHoldout
+    {
+        public KelrodoAiHoldoutXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
