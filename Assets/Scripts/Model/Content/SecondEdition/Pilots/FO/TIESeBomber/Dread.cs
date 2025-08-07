@@ -42,16 +42,17 @@ namespace Ship
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
             }
+        }
 
-            public class DreadXWA : Dread
+        public class DreadXWA : Dread
+        {
+            public DreadXWA() : base()
             {
-                public DreadXWA() : base()
-                {
-                    var pilot = (PilotCardInfo25)PilotInfo;
-                    pilot.Cost = 4;
-                    pilot.LoadoutValue = 20;
-                    pilot.Legality = new List<Legality> { Legality.XWA };
-                    pilot.ExtraUpgrades = new List<UpgradeType>
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 20;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
                     {
                         UpgradeType.Tech,
                         UpgradeType.Torpedo,
@@ -60,12 +61,13 @@ namespace Ship
                         UpgradeType.Device,
                         UpgradeType.Device,
                         UpgradeType.Modification
+                        UpgradeType.Modification
                     };
-                }
             }
         }
     }
 }
+
 
 namespace Abilities.SecondEdition
 {
