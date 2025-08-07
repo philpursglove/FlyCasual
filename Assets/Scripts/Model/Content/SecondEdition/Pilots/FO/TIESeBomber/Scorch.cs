@@ -44,6 +44,28 @@ namespace Ship
                 PilotNameCanonical = "scorch-tiesebomber";
             }
         }
+
+        public class ScorchXWA : Scorch
+        {
+            public ScorchXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 6;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

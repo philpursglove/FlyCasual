@@ -46,6 +46,29 @@ namespace Ship
                 );
             }
         }
+
+        public class JulJerjerrodXWA : JulJerjerrod
+        {
+            public JulJerjerrodXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 7;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

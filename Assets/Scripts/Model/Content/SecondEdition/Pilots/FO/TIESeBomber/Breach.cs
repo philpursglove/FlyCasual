@@ -43,7 +43,29 @@ namespace Ship
                     },
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
+        public class BreachXWA : Breach
+        {
+            public BreachXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 16;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                };
             }
         }
     }

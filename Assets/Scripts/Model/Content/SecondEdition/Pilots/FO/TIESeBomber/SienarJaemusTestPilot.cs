@@ -36,5 +36,25 @@ namespace Ship
                 );
             }
         }
+
+        public class SienarJeamusTestPilotXWA : SienarJeamusTestPilot
+        {
+            public SienarJeamusTestPilotXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 6;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }

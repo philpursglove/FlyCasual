@@ -36,5 +36,26 @@ namespace Ship
                 );
             }
         }
+
+        public class FirstOrderCadetXWA : FirstOrderCadet
+        {
+            public FirstOrderCadetXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 4;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
