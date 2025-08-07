@@ -1,5 +1,6 @@
 ﻿using Editions;
 using Ship;
+using Ship.SecondEdition.ScavengedYT1300;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,27 @@ namespace SquadBuilderNS
                 UpgradeSlotPanels = new List<UpgradeSlotPanel>();
                 UpgradePanelSquadBuilder.WaitingToLoad = 0;
 
-                List<UpgradeSlot> availableSlots = Global.SquadBuilder.CurrentShip.Instance.UpgradeBar.GetUpgradeSlots().OrderBy(s => s.Type).ToList();
+                UpgradeType[] slotOrder = new[] {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration,
+                    UpgradeType.Title,
+                    UpgradeType.TacticalRelay,
+                };
+
+                List<UpgradeSlot> availableSlots = Global.SquadBuilder.CurrentShip.Instance.UpgradeBar.GetUpgradeSlots().OrderBy(s => Array.IndexOf(slotOrder, s.Type)).ToList();
 
                 foreach (UpgradeSlot slot in availableSlots)
                 {
