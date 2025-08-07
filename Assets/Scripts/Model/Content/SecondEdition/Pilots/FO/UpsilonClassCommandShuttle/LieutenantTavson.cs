@@ -38,6 +38,27 @@ namespace Ship
                 );
             }
         }
+
+        public class LieutenantTavsonXWA : LieutenantTavson
+        {
+            public LieutenantTavsonXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.Cost = 7;
+                pilot.LoadoutValue = 25;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon
+                };
+            }
+        }
     }
 }
 

@@ -1,8 +1,9 @@
 ﻿using BoardTools;
+using Content;
 using System;
 using System.Collections.Generic;
+using Abilities.SecondEdition;
 using Upgrade;
-using Content;
 
 namespace Ship
 {
@@ -30,8 +31,27 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class TN3465XWA : TN3465
+        {
+            public TN3465XWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 11;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
             }
         }
     }

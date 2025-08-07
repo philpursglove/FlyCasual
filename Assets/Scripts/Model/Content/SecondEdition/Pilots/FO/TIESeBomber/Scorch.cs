@@ -37,12 +37,33 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "scorch-tiesebomber";
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/lK59dsa.png";
+        public class ScorchXWA : Scorch
+        {
+            public ScorchXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 6;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
             }
         }
     }

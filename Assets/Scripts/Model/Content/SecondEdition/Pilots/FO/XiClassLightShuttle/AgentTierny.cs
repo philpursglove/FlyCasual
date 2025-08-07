@@ -4,6 +4,7 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
+using Content;
 using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -35,10 +36,32 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Modification
                     },
-                    abilityType: typeof(Abilities.SecondEdition.AgentTiernyAbility)
+                    abilityType: typeof(Abilities.SecondEdition.AgentTiernyAbility),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "agenttierny";
+            }
+        }
+
+        public class AgentTiernyXWA : AgentTierny
+        {
+            public AgentTiernyXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 20;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
             }
         }
     }

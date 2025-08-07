@@ -34,10 +34,31 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/ac/Swz18_backdraft_a3.png";
+        public class BackdraftXWA : Backdraft
+        {
+            public BackdraftXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 8;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Content;
 using Upgrade;
 
 namespace Ship
@@ -23,12 +24,29 @@ namespace Ship
                         UpgradeType.Tech,
                         UpgradeType.Crew,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/9f/49/9f490467-49a5-456f-b649-42cb74ecdd8a/swz69_a1_ship_courier.png";
-
                 PilotNameCanonical = "firstordercourier-xiclasslightshuttle";
+            }
+        }
+
+        public class FirstOrderCourierXWA : FirstOrderCourier
+        {
+            public FirstOrderCourierXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 14;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                };
             }
         }
     }

@@ -3,6 +3,7 @@ using Content;
 using Ship;
 using SubPhases;
 using System.Collections.Generic;
+using Abilities.SecondEdition;
 using Tokens;
 using Upgrade;
 
@@ -33,8 +34,27 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class LieutenantRivasXWA : LieutenantRivas
+        {
+            public LieutenantRivasXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 11;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
             }
         }
     }
