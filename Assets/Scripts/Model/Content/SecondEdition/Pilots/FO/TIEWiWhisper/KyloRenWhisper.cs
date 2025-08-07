@@ -47,6 +47,28 @@ namespace Ship
                 PilotNameCanonical = "kyloren-tiewiwhispermodifiedinterceptor";
             }
         }
+
+        public class KyloRenWhisperXWA: KyloRenWhisper
+        {
+            public KyloRenWhisperXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 12;
+                pilot.Legality = new List<Legality> {Legality.XWA};
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Missile,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                };
+            }
+        }
     }
 }
 

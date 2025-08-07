@@ -41,15 +41,33 @@ namespace Ship
                 );
             }
         }
+
+        public class NightfallXWA: Nightfall
+        {
+            public NightfallXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 11;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Configuration
+                };
+            }
+        }
     }
-}
 
 namespace Abilities.SecondEdition
 {
     public class NightfallPilotAbility : GenericAbility
     {
         private GenericShip SufferedShip;
-
+        
         public override void ActivateAbility()
         {
             HostShip.OnMovementFinishSuccessfully += RegisterAssignJamToShipsInFlightPath;

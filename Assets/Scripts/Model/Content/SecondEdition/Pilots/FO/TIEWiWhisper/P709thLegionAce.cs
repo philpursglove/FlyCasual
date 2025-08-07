@@ -34,5 +34,24 @@ namespace Ship
                 );
             }
         }
+
+        public class P709thLegionAceXWA : P709thLegionAce
+        {
+            public P709thLegionAceXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 5;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Configuration
+                };
+            }
+        }
     }
 }

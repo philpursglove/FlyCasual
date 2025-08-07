@@ -42,6 +42,26 @@ namespace Ship
                 );
             }
         }
+
+        public class WhirlwindXWA : Whirlwind
+        {
+            public WhirlwindXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 20;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Configuration
+                };
+            }
+        }
     }
 }
 
