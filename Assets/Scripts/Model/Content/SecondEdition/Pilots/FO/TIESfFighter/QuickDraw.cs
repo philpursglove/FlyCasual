@@ -40,6 +40,26 @@ namespace Ship
                 );
             }
         }
+
+        public class QuickdrawXWA : Quickdraw
+        {
+            public QuickdrawXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 12;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

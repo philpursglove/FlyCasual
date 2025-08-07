@@ -39,6 +39,28 @@ namespace Ship
                 );
             }
         }
+
+        public class BackdraftXWA : Backdraft
+        {
+            public BackdraftXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 8;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new Legality(UpgradeType)
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

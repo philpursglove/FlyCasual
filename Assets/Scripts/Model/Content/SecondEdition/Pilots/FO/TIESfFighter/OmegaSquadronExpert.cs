@@ -34,5 +34,25 @@ namespace Ship
                 );
             }
         }
+
+        public class OmegaSquadronExpertXWA : OmegaSquadronExpert
+        {
+            public OmegaSquadronExpertXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 9;
+                pilot.Legality = new List<Legality> {Legality.XWA};
+                pilot.ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                };
+            }
+        }
     }
 }

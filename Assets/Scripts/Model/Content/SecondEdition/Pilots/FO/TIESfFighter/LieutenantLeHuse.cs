@@ -44,6 +44,26 @@ namespace Ship
                 );
             }
         }
+
+        public class LieutenantLeHuseXWA : LieutenantLeHuse
+        {
+            public LieutenantLeHuseXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 6;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 
