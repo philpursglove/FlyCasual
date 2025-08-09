@@ -54,7 +54,7 @@ namespace Ship
                     UpgradeType.Torpedo,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                }
+                };
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/clanwrenvolunteer.png";
             }
         }
