@@ -44,6 +44,23 @@ namespace Ship
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dirkullodin.png";
             }
         }
+
+        public class DirkUllodinXWA: DirkUllodin
+        {
+            public DirkUllodinXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Legality = new List<Legality> { Legality.XWA };
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 9;
+                pilot.ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Torpedo,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 
