@@ -44,51 +44,29 @@ namespace Ship
                 );
 
                 PilotNameCanonical = "ezrabridger-gauntletfighter";
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/3/3f/Ezra-gauntlet.png";
             }
         }
 
-        public class EzraBridgerXWA : GauntletFighter
+        public class EzraBridgerXWA : EzraBridger
         {
             public EzraBridgerXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Ezra Bridger",
-                    "Spectre-6",
-                    Faction.Rebel,
-                    3,
-                    6,
-                    15,
-                    force: 1,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.EzraBridgerPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.ForcePower,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Configuration,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.LightSide,
-                        Tags.Spectre
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                PilotNameCanonical = "ezrabridger-gauntletfighter";
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/3/3f/Ezra-gauntlet.png";
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Configuration,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

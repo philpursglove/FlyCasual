@@ -3,68 +3,55 @@ using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLS8KWing
 {
-    namespace SecondEdition.BTLS8KWing
+    public class MirandaDoni : BTLS8KWing
     {
-        public class MirandaDoni : BTLS8KWing
+        public MirandaDoni() : base()
         {
-            public MirandaDoni() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Miranda Doni",
-                    "Heavy Hitter",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    14,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.MirandaDoniAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Crew,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
-                    },
-                    seImageNumber: 62,
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Miranda Doni",
+                "Heavy Hitter",
+                Faction.Rebel,
+                4,
+                5,
+                14,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.MirandaDoniAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Crew,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                },
+                seImageNumber: 62,
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class MirandaDoniXWA : BTLS8KWing
+    public class MirandaDoniXWA : MirandaDoni
+    {
+        public MirandaDoniXWA() : base()
         {
-            public MirandaDoniXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Miranda Doni",
-                    "Heavy Hitter",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    20,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.MirandaDoniAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Missile,
-                        UpgradeType.Torpedo                        
-                    },
-                    seImageNumber: 62,
-                    legality: new List<Legality>() { Legality.XWA }
-                );
-            }
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Device,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo                        
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -1,70 +1,56 @@
 ﻿using Content;
-using Org.BouncyCastle.Tls.Crypto.Impl;
 using Ship;
 using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ARC170Starfighter
 {
-    namespace SecondEdition.ARC170Starfighter
+    public class GarvenDreis : ARC170Starfighter
     {
-        public class GarvenDreis : ARC170Starfighter
+        public GarvenDreis() : base()
         {
-            public GarvenDreis() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Garven Dreis",
-                    "Red Leader",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.GarvenDreisArcAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification
-                    },
-                    seImageNumber: 66,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Garven Dreis",
+                "Red Leader",
+                Faction.Rebel,
+                4,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.GarvenDreisArcAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification
+                },
+                seImageNumber: 66,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class GarvenDreisXWA : ARC170Starfighter
+    public class GarvenDreisXWA : GarvenDreis
+    {
+        public GarvenDreisXWA() : base()
         {
-            public GarvenDreisXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Garven Dreis",
-                    "Red Leader",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    3,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.GarvenDreisArcAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile                        
-                    },
-                    seImageNumber: 66,
-                    legality: new List<Legality> { Legality.XWA }
-                );
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Cannon,
+                UpgradeType.Missile                        
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

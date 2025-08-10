@@ -1,7 +1,6 @@
 ﻿using ActionsList;
 using Content;
 using Ship;
-using Ship.SecondEdition.T65XWing;
 using SubPhases;
 using System.Collections.Generic;
 using Tokens;

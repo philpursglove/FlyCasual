@@ -36,32 +36,22 @@ namespace Ship
             }
         }
 
-        public class GavinDarklighterXWA : EWing
+        public class GavinDarklighterXWA : GavinDarklighter
         {
             public GavinDarklighterXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Gavin Darklighter",
-                    "Bold Wingman",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.GavinDarklighterAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo
-                    },
-                    seImageNumber: 51,
-                    legality: new List<Legality>() { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

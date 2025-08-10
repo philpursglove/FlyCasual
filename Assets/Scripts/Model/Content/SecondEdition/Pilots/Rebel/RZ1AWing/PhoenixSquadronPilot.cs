@@ -34,31 +34,18 @@ namespace Ship
             }
         }
 
-        public class PhoenixSquadronPilotXWA : RZ1AWing
+        public class PhoenixSquadronPilotXWA : PhoenixSquadronPilot
         {
             public PhoenixSquadronPilotXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Phoenix Squadron Pilot",
-                    "",
-                    Faction.Rebel,
-                    1,
-                    3,
-                    6,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    seImageNumber: 22,
-                    skinName: "Phoenix Squadron",
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

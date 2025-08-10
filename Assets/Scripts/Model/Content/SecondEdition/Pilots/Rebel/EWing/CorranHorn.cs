@@ -41,35 +41,23 @@ namespace Ship
             }
         }
 
-        public class CorranHornXWA : EWing
+        public class CorranHornXWA : CorranHorn
         {
             public CorranHornXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Corran Horn",
-                    "Tenacious Investigator",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.CorranHornAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Sensor,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo,
-                    },
-                    seImageNumber: 50,
-                    legality: new List<Legality>() { Legality.XWA }
-                );
-
-                ModelInfo.SkinName = "Green";
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo,
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

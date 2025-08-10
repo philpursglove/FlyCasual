@@ -43,36 +43,22 @@ namespace Ship
             }
         }
 
-        public class RoarkGarnetXWA : Hwk290LightFreighter
+        public class RoarkGarnetXWA : RoarkGarnet
         {
             public RoarkGarnetXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Roark Garnet",
-                    "Good-Hearted Smuggler",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    11,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.RoarkGarnetAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter
-                    },
-                    seImageNumber: 44,
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

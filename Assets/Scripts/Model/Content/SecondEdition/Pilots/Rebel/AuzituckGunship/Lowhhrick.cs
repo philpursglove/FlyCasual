@@ -4,68 +4,52 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.AuzituckGunship
 {
-    namespace SecondEdition.AuzituckGunship
+    public class Lowhhrick : AuzituckGunship
     {
-        public class Lowhhrick : AuzituckGunship
+        public Lowhhrick() : base()
         {
-            public Lowhhrick() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lowhhrick",
-                    "Escaped Gladiator",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LowhhrickAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification
-                    },
-                    seImageNumber: 32,
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lowhhrick",
+                "Escaped Gladiator",
+                Faction.Rebel,
+                3,
+                5,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LowhhrickAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                },
+                seImageNumber: 32,
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
 
-                ModelInfo.SkinName = "Lowhhrick";
-            }
+            ModelInfo.SkinName = "Lowhhrick";
         }
+    }
 
-        public class LowhhrickXWA : AuzituckGunship
+    public class LowhhrickXWA : Lowhhrick
+    {
+        public LowhhrickXWA() : base()
         {
-            public LowhhrickXWA() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lowhhrick",
-                    "Escaped Gladiator",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LowhhrickAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification
-                    },
-                    seImageNumber: 32,
-                    legality: new List<Legality>() { Legality.XWA }
-                );
-
-                ModelInfo.SkinName = "Lowhhrick";
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
-
     }
 }
 

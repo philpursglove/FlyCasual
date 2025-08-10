@@ -45,48 +45,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(Outmaneuver));
                 MustHaveUpgrades.Add(typeof(IonMissiles));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/jakefarrell-swz106.png";
-
                 PilotNameCanonical = "jakefarrell-swz106";
             }
         }
 
-        public class JakeFarrellSSPXWA : RZ1AWing
+        public class JakeFarrellSSPXWA : JakeFarrellSSP
         {
             public JakeFarrellSSPXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jake Farrell",
-                    "Sage Instructor",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.JakeFarrellAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Missile
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Blue",
-                    isStandardLayout: true,
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                MustHaveUpgrades.Add(typeof(Elusive));
-                MustHaveUpgrades.Add(typeof(Outmaneuver));
-                MustHaveUpgrades.Add(typeof(IonMissiles));
-
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/jakefarrell-swz106.png";
-
-                PilotNameCanonical = "jakefarrell-swz106";
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

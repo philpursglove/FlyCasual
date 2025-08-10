@@ -3,7 +3,6 @@ using Content;
 using Ship;
 using SubPhases;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -44,36 +43,21 @@ namespace Ship
             }
         }
 
-        public class JakeFarrellXWA : RZ1AWing
+        public class JakeFarrellXWA : JakeFarrell
         {
             public JakeFarrellXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jake Farrell",
-                    "Sage Instructor",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.JakeFarrellAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    seImageNumber: 19,
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

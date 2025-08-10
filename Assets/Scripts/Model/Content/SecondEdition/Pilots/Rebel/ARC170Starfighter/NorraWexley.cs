@@ -2,66 +2,53 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ARC170Starfighter
 {
-    namespace SecondEdition.ARC170Starfighter
+    public class NorraWexley : ARC170Starfighter
     {
-        public class NorraWexley : ARC170Starfighter
+        public NorraWexley() : base()
         {
-            public NorraWexley() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Norra Wexley",
-                    "Gold Nine",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.NorraWexleyAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Gunner,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification
-                    },
-                    seImageNumber: 65,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Norra Wexley",
+                "Gold Nine",
+                Faction.Rebel,
+                5,
+                5,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.NorraWexleyAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Gunner,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification
+                },
+                seImageNumber: 65,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class NorraWexleyXWA : ARC170Starfighter
+    public class NorraWexleyXWA : NorraWexley
+    {
+        public NorraWexleyXWA() : base()
         {
-            public NorraWexleyXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Norra Wexley",
-                    "Gold Nine",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.NorraWexleyAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Torpedo                        
-                    },
-                    seImageNumber: 65,
-                    legality: new List<Legality> { Legality.XWA }
-                );
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo                        
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

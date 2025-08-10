@@ -1,5 +1,4 @@
 ﻿using Content;
-using Ship.SecondEdition.T65XWing;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -40,8 +39,6 @@ namespace Ship
                     },
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/d0/bf/d0bf7c63-2c2c-4372-8ace-7299d180c774/swz66_alexsandr-kallus.png";
             }
         }
 

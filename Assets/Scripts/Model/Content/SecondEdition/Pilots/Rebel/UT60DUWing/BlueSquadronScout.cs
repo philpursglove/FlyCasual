@@ -1,5 +1,4 @@
 ﻿using Content;
-using Ship.SecondEdition.T65XWing;
 using System.Collections.Generic;
 using Upgrade;
 

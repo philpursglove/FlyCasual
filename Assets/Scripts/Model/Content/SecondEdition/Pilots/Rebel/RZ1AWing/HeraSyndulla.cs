@@ -39,46 +39,25 @@ namespace Ship
                 );
 
                 PilotNameCanonical = "herasyndulla-rz1awing";
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/d/dc/Herasyndullaawing.png";
             }
         }
 
-        public class HeraSyndullaXWA : RZ1AWing
+        public class HeraSyndullaXWA : HeraSyndulla
         {
             public HeraSyndullaXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Hera Syndulla",
-                    "Phoenix Leader",
-                    Faction.Rebel,
-                    6,
-                    4,
-                    4,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.HeraSyndullaABWingAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing,
-                        Tags.Spectre
-                    },
-                    skinName: "Hera Syndulla",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                PilotNameCanonical = "herasyndulla-rz1awing";
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/d/dc/Herasyndullaawing.png";
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

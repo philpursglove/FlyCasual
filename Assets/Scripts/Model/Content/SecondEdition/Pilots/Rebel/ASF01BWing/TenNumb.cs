@@ -5,80 +5,62 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ASF01BWing
 {
-    namespace SecondEdition.ASF01BWing
+    public class TenNumb : ASF01BWing
     {
-        public class TenNumb : ASF01BWing
+        public TenNumb() : base()
         {
-            public TenNumb() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Ten Numb",
-                    "Blue Five",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    14,
-                    isLimited: true,
-                    abilityType: typeof(TenNumbAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.BWing
-                    },
-                    seImageNumber: 24,
-                    skinName: "Dark Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Ten Numb",
+                "Blue Five",
+                Faction.Rebel,
+                4,
+                5,
+                14,
+                isLimited: true,
+                abilityType: typeof(TenNumbAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Device,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.BWing
+                },
+                seImageNumber: 24,
+                skinName: "Dark Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class TenNumbXWA : ASF01BWing
+    public class TenNumbXWA : TenNumb
+    {
+        public TenNumbXWA() : base()
         {
-            public TenNumbXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Ten Numb",
-                    "Blue Five",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    5,
-                    isLimited: true,
-                    abilityType: typeof(TenNumbAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.BWing
-                    },
-                    seImageNumber: 24,
-                    skinName: "Dark Blue",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-            }
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Cannon,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

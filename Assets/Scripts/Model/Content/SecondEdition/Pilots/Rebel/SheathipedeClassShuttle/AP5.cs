@@ -43,37 +43,20 @@ namespace Ship
             }
         }
 
-        public class AP5XWA : SheathipedeClassShuttle
+        public class AP5XWA : AP5
         {
             public AP5XWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "AP-5",
-                    "Escaped Analyst Droid",
-                    Faction.Rebel,
-                    1,
-                    3,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.AP5PilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Astromech,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Spectre,
-                        Tags.Droid
-                    },
-                    seImageNumber: 41,
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                ShipInfo.ActionIcons.SwitchToDroidActions();
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

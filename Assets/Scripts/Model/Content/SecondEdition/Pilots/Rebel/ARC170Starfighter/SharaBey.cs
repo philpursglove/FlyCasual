@@ -5,66 +5,53 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ARC170Starfighter
 {
-    namespace SecondEdition.ARC170Starfighter
+    public class SharaBey : ARC170Starfighter
     {
-        public class SharaBey : ARC170Starfighter
+        public SharaBey() : base()
         {
-            public SharaBey() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Shara Bey",
-                    "Green Four",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.SharaBeyAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification
-                    },
-                    seImageNumber: 67,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Shara Bey",
+                "Green Four",
+                Faction.Rebel,
+                4,
+                4,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.SharaBeyAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification
+                },
+                seImageNumber: 67,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class SharaBeyXWA : ARC170Starfighter
+    public class SharaBeyXWA : SharaBey
+    {
+        public SharaBeyXWA() : base()
         {
-            public SharaBeyXWA() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Shara Bey",
-                    "Green Four",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.SharaBeyAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Torpedo
-                    },
-                    seImageNumber: 67,
-                    legality: new List<Legality> { Legality.XWA }
-                );
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

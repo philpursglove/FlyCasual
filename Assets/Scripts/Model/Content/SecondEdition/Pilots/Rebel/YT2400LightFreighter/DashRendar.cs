@@ -40,6 +40,7 @@ namespace Ship
                 );
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dashrendar-freighterforhire.png";
+                PilotNameCanonical = "dashrendar-swz103-rebelalliance";
             }
         }
 

@@ -47,38 +47,21 @@ namespace Ship
             }
         }
 
-        public class FennRauXWA : SheathipedeClassShuttle
+        public class FennRauXWA : FennRau
         {
             public FennRauXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Fenn Rau",
-                    "Reluctant Rebel",
-                    Faction.Rebel,
-                    6,
-                    4,
-                    6,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.FennRauRebelAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Spectre,
-                        Tags.Mandalorian
-                    },
-                    seImageNumber: 38,
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                PilotNameCanonical = "fennrau-sheathipedeclassshuttle";
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

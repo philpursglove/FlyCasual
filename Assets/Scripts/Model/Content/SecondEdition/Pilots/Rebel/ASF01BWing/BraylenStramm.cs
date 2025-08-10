@@ -4,80 +4,62 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ASF01BWing
 {
-    namespace SecondEdition.ASF01BWing
+    public class BraylenStramm : ASF01BWing
     {
-        public class BraylenStramm : ASF01BWing
+        public BraylenStramm() : base()
         {
-            public BraylenStramm() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Braylen Stramm",
-                    "Blade Leader",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(BraylenStrammAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.BWing
-                    },
-                    seImageNumber: 23,
-                    skinName: "Dark Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Braylen Stramm",
+                "Blade Leader",
+                Faction.Rebel,
+                4,
+                5,
+                12,
+                isLimited: true,
+                abilityType: typeof(BraylenStrammAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Device,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.BWing
+                },
+                seImageNumber: 23,
+                skinName: "Dark Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class BraylenStrammXWA : ASF01BWing
+    public class BraylenStrammXWA : BraylenStramm
+    {
+        public BraylenStrammXWA() : base()
         {
-            public BraylenStrammXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Braylen Stramm",
-                    "Blade Leader",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    13,
-                    isLimited: true,
-                    abilityType: typeof(BraylenStrammAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.BWing
-                    },
-                    seImageNumber: 23,
-                    skinName: "Dark Blue",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-            }
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Cannon,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

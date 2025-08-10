@@ -43,37 +43,23 @@ namespace Ship
             }
         }
 
-        public class JanOrsXWA : Hwk290LightFreighter
+        public class JanOrsXWA : JanOrs
         {
             public JanOrsXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jan Ors",
-                    "Espionage Expert",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.JanOrsAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter
-                    },
-                    seImageNumber: 42,
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

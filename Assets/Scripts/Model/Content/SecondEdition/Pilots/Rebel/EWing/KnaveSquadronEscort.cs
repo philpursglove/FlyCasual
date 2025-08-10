@@ -31,29 +31,21 @@ namespace Ship
             }
         }
 
-        public class KnaveSquadronEscortXWA : EWing
+        public class KnaveSquadronEscortXWA : KnaveSquadronEscort
         {
             public KnaveSquadronEscortXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Knave Squadron Escort",
-                    "",
-                    Faction.Rebel,
-                    2,
-                    6,
-                    22,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Astromech,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo                        
-                    },
-                    seImageNumber: 53,
-                    legality: new List<Legality>() { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo                        
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

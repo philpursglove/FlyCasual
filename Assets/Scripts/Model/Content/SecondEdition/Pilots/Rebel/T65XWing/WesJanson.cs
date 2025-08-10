@@ -39,8 +39,6 @@ namespace Ship
                     regensCharges: 1,
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/be88838d-bbd6-42d5-8b1d-161eb2fa98f3/SWZ97_WesJansonlegal.png";
             }
         }
 

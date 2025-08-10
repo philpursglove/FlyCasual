@@ -1,5 +1,4 @@
 ﻿using Content;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -37,43 +36,26 @@ namespace Ship
                     skinName: "Blue",
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/a6/Mandalorianresistancepilot.png";
             }
         }
 
-        public class MandalorianResistancePilotXWA : GauntletFighter
+        public class MandalorianResistancePilotXWA : MandalorianResistancePilot
         {
             public MandalorianResistancePilotXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Mandalorian Resistance Pilot",
-                    "Clan Loyalist",
-                    Faction.Rebel,
-                    2,
-                    6,
-                    20,
-                    isLimited: true,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Mandalorian
-                    },
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/a6/Mandalorianresistancepilot.png";
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

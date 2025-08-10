@@ -41,37 +41,21 @@ namespace Ship
             }
         }
 
-        public class ZebOrreliosXWA : SheathipedeClassShuttle
+        public class ZebOrreliosXWA : ZebOrrelios
         {
             public ZebOrreliosXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Zeb\" Orrelios",
-                    "Spectre-4",
-                    Faction.Rebel,
-                    2,
-                    3,
-                    4,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ZebOrreliosPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Spectre
-                    },
-                    seImageNumber: 40,
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                PilotNameCanonical = "zeborrelios-sheathipedeclassshuttle";
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

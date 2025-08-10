@@ -33,30 +33,18 @@ namespace Ship
             }
         }
 
-        public class RebelScoutXWA : Hwk290LightFreighter
+        public class RebelScoutXWA : RebelScout
         {
             public RebelScoutXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Rebel Scout",
-                    "",
-                    Faction.Rebel,
-                    2,
-                    3,
-                    7,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Modification,
-                        UpgradeType.Device
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter
-                    },
-                    seImageNumber: 45,
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Device
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

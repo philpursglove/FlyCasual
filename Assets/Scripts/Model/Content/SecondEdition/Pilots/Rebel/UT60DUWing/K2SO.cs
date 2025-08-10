@@ -1,7 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using Content;
 using Ship;
-using Ship.SecondEdition.T65XWing;
 using System;
 using System.Collections.Generic;
 using Tokens;
@@ -41,8 +40,6 @@ namespace Ship
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/56/cb/56cb9ec8-0eff-4c6f-acda-f54413baadc7/swz66_k-2so.png";
             }
         }
 

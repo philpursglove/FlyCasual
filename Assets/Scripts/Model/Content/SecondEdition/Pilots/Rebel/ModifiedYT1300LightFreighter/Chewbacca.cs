@@ -47,42 +47,25 @@ namespace Ship
             }
         }
 
-        public class ChewbaccaXWA : ModifiedYT1300LightFreighter
+        public class ChewbaccaXWA : Chewbacca
         {
             public ChewbaccaXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Chewbacca",
-                    "The Mighty",
-                    Faction.Rebel,
-                    4,
-                    7,
-                    20,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ChewbaccaRebelPilotAbility),
-                    charges: 1,
-                    regensCharges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.YT1300
-                    },
-                    seImageNumber: 71,
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

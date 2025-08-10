@@ -2,64 +2,60 @@
 using Arcs;
 using BoardTools;
 using Content;
+using Movement;
 using Ship;
 using SubPhases;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Upgrade;
-using Movement;
-using System.Linq;
 
-namespace Ship
+namespace Ship.SecondEdition.FangFighter
 {
-    namespace SecondEdition.FangFighter
+    public class DirkUllodin : FangFighter
     {
-        public class DirkUllodin : FangFighter
+        public DirkUllodin() : base()
         {
-            public DirkUllodin() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Dirk Ullodin",
-                    "Aspiring Commando",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.DirkUllodinAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Torpedo,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Mandalorian 
-                    },
-                    skinName: "Dirk Ullodin"
-                );
-
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dirkullodin.png";
-            }
-        }
-
-        public class DirkUllodinXWA: DirkUllodin
-        {
-            public DirkUllodinXWA() : base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.Legality = new List<Legality> { Legality.XWA };
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 9;
-                pilot.ExtraUpgrades = new List<UpgradeType>()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Dirk Ullodin",
+                "Aspiring Commando",
+                Faction.Rebel,
+                3,
+                4,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.DirkUllodinAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Torpedo,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Mandalorian 
+                },
+                skinName: "Dirk Ullodin",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class DirkUllodinXWA: DirkUllodin
+    {
+        public DirkUllodinXWA() : base()
+        {
+            var pilot = (PilotCardInfo25) PilotInfo;
+            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            pilot.Cost = 4;
+            pilot.LoadoutValue = 9;
+            pilot.ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Torpedo,
+                UpgradeType.Modification,
+                UpgradeType.Modification
+            };
         }
     }
 }

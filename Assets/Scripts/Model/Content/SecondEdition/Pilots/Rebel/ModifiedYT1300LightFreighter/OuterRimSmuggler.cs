@@ -34,33 +34,20 @@ namespace Ship
             }
         }
 
-        public class OuterRimSmugglerXWA : ModifiedYT1300LightFreighter
+        public class OuterRimSmugglerXWA : OuterRimSmuggler
         {
             public OuterRimSmugglerXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Outer Rim Smuggler",
-                    "",
-                    Faction.Rebel,
-                    1,
-                    6,
-                    11,
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.YT1300
-                    },
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile
-                    },
-                    seImageNumber: 72,
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

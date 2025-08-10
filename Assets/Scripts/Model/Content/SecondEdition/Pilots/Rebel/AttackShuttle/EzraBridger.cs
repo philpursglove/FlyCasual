@@ -3,76 +3,57 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.AttackShuttle
 {
-    namespace SecondEdition.AttackShuttle
+    public class EzraBridger : AttackShuttle
     {
-        public class EzraBridger : AttackShuttle
+        public EzraBridger() : base()
         {
-            public EzraBridger() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Ezra Bridger",
-                    "Spectre-6",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.EzraBridgerPilotAbility),
-                    force: 1,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.Turret,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    seImageNumber: 36,
-                    tags: new List<Tags>
-                    {
-                        Tags.LightSide,
-                        Tags.Spectre                        
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Ezra Bridger",
+                "Spectre-6",
+                Faction.Rebel,
+                3,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.EzraBridgerPilotAbility),
+                force: 1,
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Turret,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                },
+                seImageNumber: 36,
+                tags: new List<Tags>
+                {
+                    Tags.LightSide,
+                    Tags.Spectre                        
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class EzraBridgerXWA : AttackShuttle
+    public class EzraBridgerXWA : EzraBridger
+    {
+        public EzraBridgerXWA() : base()
         {
-            public EzraBridgerXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Ezra Bridger",
-                    "Spectre-6",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.EzraBridgerPilotAbility),
-                    force: 1,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Turret,
-                        UpgradeType.Title
-                    },
-                    seImageNumber: 36,
-                    tags: new List<Tags>
-                    {
-                        Tags.LightSide,
-                        Tags.Spectre
-                    },
-                    legality: new List<Legality>() { Legality.XWA }
-                );
-            }
+                UpgradeType.ForcePower,
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Turret,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

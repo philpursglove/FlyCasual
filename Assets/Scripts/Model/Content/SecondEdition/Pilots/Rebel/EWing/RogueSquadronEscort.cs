@@ -31,30 +31,22 @@ namespace Ship
             }
         }
 
-        public class RogueSquadronEscortXWA : EWing
+        public class RogueSquadronEscortXWA : RogueSquadronEscort
         {
             public RogueSquadronEscortXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Rogue Squadron Escort",
-                    "",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    14,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo
-                    },
-                    seImageNumber: 52,
-                    legality: new List<Legality>() { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

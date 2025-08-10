@@ -1,7 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using Content;
 using Ship;
-using Ship.SecondEdition.T65XWing;
 using System.Collections.Generic;
 using Upgrade;
 

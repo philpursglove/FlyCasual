@@ -43,50 +43,27 @@ namespace Ship
                 ShipInfo.ActionIcons.SwitchToDroidActions();
 
                 PilotNameCanonical = "chopper-gauntletfighter";
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/4/45/Choppergauntlet.png";
             }
         }
 
-        public class ChopperXWA : GauntletFighter
+        public class ChopperXWA : Chopper
         {
             public ChopperXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Chopper\"",
-                    "Spectre-3",
-                    Faction.Rebel,
-                    2,
-                    6,
-                    18,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ChopperPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Configuration,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Droid,
-                        Tags.Spectre
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                ShipInfo.ActionIcons.SwitchToDroidActions();
-
-                PilotNameCanonical = "chopper-gauntletfighter";
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/4/45/Choppergauntlet.png";
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Configuration,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

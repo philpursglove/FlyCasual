@@ -1,5 +1,4 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -36,33 +35,20 @@ namespace Ship
             }
         }
 
-        public class GreenSquadronPilotXWA : RZ1AWing
+        public class GreenSquadronPilotXWA : GreenSquadronPilot
         {
             public GreenSquadronPilotXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Green Squadron Pilot",
-                    "",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    13,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    seImageNumber: 21,
-                    skinName: "Green",
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

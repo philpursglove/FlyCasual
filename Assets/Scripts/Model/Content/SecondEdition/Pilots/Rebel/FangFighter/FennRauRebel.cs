@@ -40,45 +40,27 @@ namespace Ship
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
-                PilotNameCanonical = "fennrau-rebelalliance";
+                PilotNameCanonical = "fennrau-fangfighter";
 
-                ImageUrl = "https://i.imgur.com/czHjZ4D.png";
+                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/fennrau-rebel-fang.png";
             }
         }
 
-        public class FennRauRebelXWA : FangFighter
+        public class FennRauRebelXWA : FennRauRebel
         {
             public FennRauRebelXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Fenn Rau",
-                    "Mandalorian Protector",
-                    Faction.Rebel,
-                    6,
-                    5,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.FennRauRebelFangAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Torpedo
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Mandalorian
-                    },
-                    skinName: "Fenn Rau",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                PilotNameCanonical = "fennrau-rebelalliance";
-
-                ImageUrl = "https://i.imgur.com/czHjZ4D.png";
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

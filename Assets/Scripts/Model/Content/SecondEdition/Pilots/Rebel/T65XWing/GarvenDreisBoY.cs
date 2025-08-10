@@ -42,8 +42,6 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.AdvProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R5K6BoY));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/5/52/Garvendreis-battleofyavin.png";
-
                 PilotNameCanonical = "garvendreis-battleofyavin";
             }
         }

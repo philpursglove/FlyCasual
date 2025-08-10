@@ -1,6 +1,4 @@
 ﻿using Content;
-using Mods.ModsList;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -40,45 +38,23 @@ namespace Ship
                 );
 
                 PilotNameCanonical = "sabinewren-rz1awing";
-
-                ImageUrl = "https://i.imgur.com/zpIsycf.png";
             }
         }
 
-        public class SabineWrenXWA : RZ1AWing
+        public class SabineWrenXWA : SabineWren
         {
             public SabineWrenXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Sabine Wren",
-                    "Daughter of Mandalore",
-                    Faction.Rebel,
-                    3,
-                    3,
-                    4,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.SabineWrenAWingAbility),
-                    abilityText: "While you defend or perform an attack, if the attack range is 1 and you are in the enemy ship's front arc, you may change 1 of your results to a hit or evade result.",
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing,
-                        Tags.Mandalorian
-                    },
-                    skinName: "Green",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                PilotNameCanonical = "sabinewren-rz1awing";
-
-                ImageUrl = "https://i.imgur.com/zpIsycf.png";
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

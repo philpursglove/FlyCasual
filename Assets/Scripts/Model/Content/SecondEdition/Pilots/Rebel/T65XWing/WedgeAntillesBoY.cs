@@ -26,8 +26,6 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(R2A3BoY));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/a4/Wedgeantilles-battleofyavin.png";
-
                 PilotNameCanonical = "wedgeantilles-battleofyavin";
             }
         }

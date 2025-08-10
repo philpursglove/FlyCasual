@@ -48,8 +48,6 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R2F2BoY));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/8/8a/Biggsdarklighter-battleofyavin.png";
-
                 PilotNameCanonical = "biggsdarklighter-battleofyavin";
             }
         }

@@ -44,36 +44,22 @@ namespace Ship
             }
         }
 
-        public class KyleKatarnXWA : Hwk290LightFreighter
+        public class KyleKatarnXWA : KyleKatarn
         {
             public KyleKatarnXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Kyle Katarn",
-                    "Relentless Operative",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    5,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.KyleKatarnAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter
-                    },
-                    seImageNumber: 43,
-                    legality: new List<Legality> { Legality.XWA }
-                );
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

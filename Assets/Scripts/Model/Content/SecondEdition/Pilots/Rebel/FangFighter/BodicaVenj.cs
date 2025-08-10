@@ -38,42 +38,24 @@ namespace Ship
                     skinName: "Bodica Venj",
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/bodicavenj.png";
             }
         }
 
-        public class BodicaVenjXWA : FangFighter
+        public class BodicaVenjXWA : BodicaVenj
         {
             public BodicaVenjXWA() : base()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Bodica Venj",
-                    "Wrathful Warrior",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    5,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.BodicaVenjAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Torpedo
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Mandalorian
-                    },
-                    skinName: "Bodica Venj",
-                    legality: new List<Legality> { Legality.XWA }
-                );
-
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/bodicavenj.png";
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
