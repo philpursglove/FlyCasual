@@ -1,10 +1,9 @@
-﻿using Ship;
-using Upgrade;
+﻿using Content;
+using Ship;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.Collections.Generic;
-using Content;
-using Unity.PlasticSCM.Editor.WebApi;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
