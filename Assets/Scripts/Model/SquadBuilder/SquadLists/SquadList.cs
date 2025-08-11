@@ -1,4 +1,5 @@
-﻿using Editions;
+﻿using Content;
+using Editions;
 using Obstacles;
 using Players;
 using Ship;
@@ -15,6 +16,7 @@ namespace SquadBuilderNS
         public string Name { get; set; }
         public Type PlayerType { get; set; }
         public Faction SquadFaction { get; set; }
+        public Legality Format { get; set; }
         public List<SquadListShip> Ships { get; } = new List<SquadListShip>();
         public List<GenericObstacle> ChosenObstacles { get; } = new List<GenericObstacle>();
         public int Points => Ships.Sum(n => GetShipCost(n));
@@ -33,6 +35,22 @@ namespace SquadBuilderNS
         {
             PlayerNo = playerNo;
             SetDefaultObstacles();
+
+            switch(Options.Format)
+            {
+                case "XWA":
+                    Format = Legality.XWA;
+                    break;
+                case "Standard":
+                case "AMG Standard":
+                    Format = Legality.StandardLegal;
+                    break;
+                case "Extended":
+                case "AMG Extended":
+                default:
+                    Format = Legality.ExtendedLegal;
+                    break;
+            }
         }
 
         public void SetDefaultObstacles()
@@ -186,7 +204,9 @@ namespace SquadBuilderNS
             {
                 foreach (var upgradeType in ship.DefaultUpgrades)
                 {
-                    GenericUpgrade upgrade = (GenericUpgrade)Activator.CreateInstance(upgradeType);
+                    // Convert upgrade based on format
+                    UpgradeRecord upgradeRecord = SquadBuilder.Instance.Database.AllUpgrades.FirstOrDefault(n => upgradeType.IsAssignableFrom(Type.GetType(n.UpgradeTypeName)) && n.AllowableFormats.Contains(Format));
+                    GenericUpgrade upgrade = (GenericUpgrade)Activator.CreateInstance(Type.GetType(upgradeRecord.UpgradeTypeName));
                     Edition.Current.AdaptUpgradeToRules(upgrade);
 
                     squadBuilderShip.TryInstallUpgade(upgrade);
