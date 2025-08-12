@@ -1,5 +1,6 @@
 ﻿using BoardTools;
 using Bombs;
+using Content;
 using Movement;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace UpgradesList.SecondEdition
                 cannotBeRecharged: true,
                 restriction: new FactionRestriction(Faction.Separatists),
                 abilityType: typeof(Abilities.SecondEdition.DiscordMissilesAbility),
-                remoteType: typeof(Remote.BuzzDroidSwarm)
+                remoteType: typeof(Remote.BuzzDroidSwarm),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
 
@@ -39,6 +41,15 @@ namespace UpgradesList.SecondEdition
                 new ManeuverTemplate(ManeuverBearing.Bank, ManeuverDirection.Left, ManeuverSpeed.Speed3),
                 new ManeuverTemplate(ManeuverBearing.Bank, ManeuverDirection.Right, ManeuverSpeed.Speed3)
             };
+        }
+    }
+
+    public class DiscordMissilesXWA : DiscordMissiles
+    {
+        public DiscordMissilesXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

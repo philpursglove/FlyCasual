@@ -36,16 +36,24 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(Elusive));
                 MustHaveUpgrades.Add(typeof(Outmaneuver));
                 MustHaveUpgrades.Add(typeof(AfterBurners));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/maarekstele-swz105.png";
-
                 PilotNameCanonical = "maarekstele-swz105";
+            }
+        }
+
+        public class MaarekSteleSSPXWA : MaarekSteleSSP
+        {
+            public MaarekSteleSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

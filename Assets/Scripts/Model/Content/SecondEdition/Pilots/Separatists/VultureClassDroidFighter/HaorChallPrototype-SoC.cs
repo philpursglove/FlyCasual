@@ -34,16 +34,24 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                     Tags.Droid
                 },
                 skinName: "Gray",
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(IonMissiles));
             MustHaveUpgrades.Add(typeof(ContingencyProtocol));
             MustHaveUpgrades.Add(typeof(StrutLockOverride));
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/5/53/Haorchallprototype-siegeofcoruscant.png";
-
             PilotNameCanonical = "haorchallprototype-siegeofcoruscant";
+        }
+    }
+
+    public class HaorChallPrototypeSoCXWA : HaorChallPrototypeSoC
+    {
+        public HaorChallPrototypeSoCXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 2;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

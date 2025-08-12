@@ -26,21 +26,30 @@ namespace Ship
                     abilityType: typeof(K2SOPilotAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.Droid
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/56/cb/56cb9ec8-0eff-4c6f-acda-f54413baadc7/swz66_k-2so.png";
+        public class K2SOXWA : K2SO
+        {
+            public K2SOXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

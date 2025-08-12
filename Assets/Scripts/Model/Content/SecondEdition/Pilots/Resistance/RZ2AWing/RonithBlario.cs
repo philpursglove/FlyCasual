@@ -30,18 +30,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
                         Tags.AWing
                     },
-                    skinName: "Red"
+                    skinName: "Red",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/27/9a/279ac02a-e274-4bcb-9570-d469cd12936e/swz66_ronith-blario.png";
+        public class RonithBlarioXWA : RonithBlario
+        {
+            public RonithBlarioXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

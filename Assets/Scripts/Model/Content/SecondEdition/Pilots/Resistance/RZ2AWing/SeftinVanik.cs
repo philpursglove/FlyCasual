@@ -27,18 +27,27 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
                         Tags.AWing
                     },
-                    skinName: "Green (HoH)"
+                    skinName: "Green (HoH)",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/73/ef/73ef0cdc-deb6-451d-a76c-0b3d9ef147ec/swz68_seftin-vanik.png";
+        public class SeftinVanikXWA : SeftinVanik
+        {
+            public SeftinVanikXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

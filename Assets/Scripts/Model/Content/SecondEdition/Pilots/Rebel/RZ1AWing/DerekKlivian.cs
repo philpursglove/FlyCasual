@@ -1,5 +1,4 @@
 ﻿using Content;
-using Mods.ModsList;
 using Ship;
 using SubPhases;
 using System;
@@ -34,10 +33,25 @@ namespace Ship.SecondEdition.RZ1AWing
                 {
                     Tags.AWing
                 },
-                skinName: "Blue"
+                skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/d3/b1/d3b16ec1-de8e-446c-8fab-b7749a6537c8/swz83_pilot_derekklivian.png";
+    public class DerekKlivianXWA : DerekKlivian
+    {
+        public DerekKlivianXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

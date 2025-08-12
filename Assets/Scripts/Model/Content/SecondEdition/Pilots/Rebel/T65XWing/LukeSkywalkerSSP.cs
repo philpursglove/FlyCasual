@@ -42,8 +42,6 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(R2D2));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/lukeskywalker-swz106.png";
-
                 PilotNameCanonical = "lukeskywalker-swz106";
             }
         }

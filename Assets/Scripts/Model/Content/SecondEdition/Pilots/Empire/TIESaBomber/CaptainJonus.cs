@@ -2,7 +2,6 @@
 using Content;
 using Ship;
 using System.Collections.Generic;
-using System.Linq;
 using Upgrade;
 
 namespace Ship
@@ -30,17 +29,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
                         UpgradeType.Device,
                         UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Missile,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
                     },
                     seImageNumber: 108,
-                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class CaptainJonusXWA : CaptainJonus
+        {
+            public CaptainJonusXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

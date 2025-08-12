@@ -28,17 +28,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Turret,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
                         UpgradeType.Title
                     },
                     seImageNumber: 204,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class CaptainNymXWA : CaptainNym
+        {
+            public CaptainNymXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

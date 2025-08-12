@@ -31,20 +31,41 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.FinchDallowAbility),
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
+                        UpgradeType.Sensor,
                         UpgradeType.Gunner,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
                         UpgradeType.Device,
                         UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Missile
                     },
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
 
                 ModelInfo.SkinName = "Cobalt";
+            }
+        }
+
+        public class FinchDallowXWA : FinchDallow
+        {
+            public FinchDallowXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Crew,
+                        UpgradeType.Gunner,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device,
+                        UpgradeType.Device,
+                        UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

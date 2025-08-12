@@ -1,10 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
-using Tokens;
+﻿using Conditions;
+using Content;
+using Ship;
 using System;
-using Conditions;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,16 +18,24 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Separatists, Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.ZamWesellCrewAbility),
-                charges: 2
+                charges: 2,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Scum,
                 new Vector2(239, 1)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/77/bd/77bd5f12-05de-4c34-9e5a-e8dfa636de52/swz82_a1_upgrade_zam-wessel.png";
         }        
+    }
+
+    public class ZamWesellXWA : ZamWesell
+    {
+        public ZamWesellXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

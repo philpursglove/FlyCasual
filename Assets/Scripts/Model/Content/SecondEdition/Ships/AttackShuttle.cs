@@ -1,11 +1,10 @@
-﻿using ActionsList;
-using Actions;
+﻿using Actions;
+using ActionsList;
 using Arcs;
-using Ship;
-using System.Collections.Generic;
 using Movement;
+using Ship;
 using Ship.CardInfo;
-using Upgrade;
+using System.Collections.Generic;
 
 namespace Ship
 {
@@ -38,7 +37,7 @@ namespace Ship
                     {
                         new LinkedActionInfo(typeof(BarrelRollAction), typeof(EvadeAction))
                     },
-                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal }
+                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal, Content.Legality.XWA }
                 );
 
                 ModelInfo = new ShipModelInfo

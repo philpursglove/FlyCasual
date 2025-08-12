@@ -1,7 +1,6 @@
 ﻿using BoardTools;
 using Content;
 using Movement;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -34,10 +33,19 @@ namespace Ship
                         Tags.Tie
                     },
                     abilityText: "While you barrel roll, you may use bank templates, instead of straight template",
-                    skinName: "Skystrike Academy"
+                    skinName: "Skystrike Academy",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/5bOPsfP.png";
+        public class LieutenantLorrirXWA : LieutenantLorrir
+        {
+            public LieutenantLorrirXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

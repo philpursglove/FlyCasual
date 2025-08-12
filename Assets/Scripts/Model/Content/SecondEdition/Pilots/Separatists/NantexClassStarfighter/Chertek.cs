@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -25,10 +26,24 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/cb/32/cb321604-f7ca-4429-9d8f-0da43b7b5d5f/swz47_cards-chertek.png";
+        public class ChertekXWA : Chertek
+        {
+            public ChertekXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

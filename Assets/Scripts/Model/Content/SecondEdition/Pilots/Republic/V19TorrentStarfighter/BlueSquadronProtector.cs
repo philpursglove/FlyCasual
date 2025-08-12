@@ -24,10 +24,19 @@ namespace Ship.SecondEdition.V19TorrentStarfighter
                 tags: new List<Tags>
                 {
                     Tags.Clone
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/51/18/5118d916-b09f-47a1-a4dd-0df667267d1b/swz32_blue-sqd-protector.png";
+    public class BlueSquadronProtectorXWA : BlueSquadronProtector
+    {
+        public BlueSquadronProtectorXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

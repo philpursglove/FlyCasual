@@ -1,7 +1,8 @@
-﻿using Upgrade;
-using System.Collections.Generic;
+﻿using BoardTools;
+using Content;
 using Ship;
-using BoardTools;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -14,10 +15,20 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Talent,
                 cost: 4,
                 abilityType: typeof(Abilities.SecondEdition.GraviticDeflectionAbility),
-                restriction: new ShipRestriction(typeof(Ship.SecondEdition.NantexClassStarfighter.NantexClassStarfighter))
+                restriction: new ShipRestriction(typeof(Ship.SecondEdition.NantexClassStarfighter.NantexClassStarfighter)),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b0/6f/b06f34a5-7c10-4f97-a915-3b935b16d6ff/swz47_upgrade-gravitic-deflection.png";
+            
+        }
+    }
+
+    public class GraviticDeflectionXWA : GraviticDeflection
+    {
+        public GraviticDeflectionXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

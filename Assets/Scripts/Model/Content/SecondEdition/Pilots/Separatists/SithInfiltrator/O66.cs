@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Content;
+﻿using Content;
 using Ship;
+using System;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship.SecondEdition.SithInfiltrator
@@ -32,12 +32,30 @@ namespace Ship.SecondEdition.SithInfiltrator
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/c4/a7/c4a7f563-fae2-4dd2-a0bb-fa0fd697d2a5/swz30_0-66.png";
-
             ShipInfo.ActionIcons.SwitchToDroidActions();
+        }
+    }
+
+    public class O66XWA : O66
+    {
+        public O66XWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title,
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

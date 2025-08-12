@@ -30,10 +30,21 @@ namespace Ship.SecondEdition.Delta7BAethersprite
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Green"
+                skinName: "Green",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "luminaraunduli-delta7baethersprite";
+        }
+    }
+
+    public class LuminaraUnduli7BXWA : LuminaraUnduli7B
+    {
+        public LuminaraUnduli7BXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

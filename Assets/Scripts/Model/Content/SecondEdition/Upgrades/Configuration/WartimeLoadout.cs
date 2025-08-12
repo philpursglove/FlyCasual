@@ -1,6 +1,7 @@
 ﻿using Actions;
 using ActionsList;
 using Arcs;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,18 @@ namespace UpgradesList.SecondEdition
                     new UpgradeSlot(UpgradeType.Missile),
                     new UpgradeSlot(UpgradeType.Torpedo)
                 },
-                abilityType: typeof(Abilities.SecondEdition.WartimeLoadoutAbility)
+                abilityType: typeof(Abilities.SecondEdition.WartimeLoadoutAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            
-            ImageUrl = "https://i.imgur.com/Qe0Owij.png";
+        }
+    }
+
+    public class WartimeLoadoutXWA : WartimeLoadout
+    {
+        public WartimeLoadoutXWA() : base()
+        {
+            UpgradeInfo.Cost = 0;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

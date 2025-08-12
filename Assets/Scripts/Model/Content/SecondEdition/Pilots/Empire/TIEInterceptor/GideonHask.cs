@@ -7,9 +7,9 @@ namespace Ship
 {
     namespace SecondEdition.TIEInterceptor
     {
-        public class GideoHask : TIEInterceptor
+        public class GideonHask : TIEInterceptor
         {
-            public GideoHask() : base()
+            public GideonHask() : base()
             {
                 PilotInfo = new PilotCardInfo25
                 (
@@ -20,7 +20,7 @@ namespace Ship
                     4,
                     7,
                     isLimited: true,
-                    abilityType: typeof(GideoHaskTieInterceptorAbility),
+                    abilityType: typeof(GideonHaskTieInterceptorAbility),
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
@@ -32,12 +32,21 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "gideonhask-tieininterceptor";
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/AF5bPjw.png";
+        public class GideonHaskXWA : GideonHask
+        {
+            public GideonHaskXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
@@ -45,7 +54,7 @@ namespace Ship
 
 namespace Abilities.SecondEdition
 {
-    public class GideoHaskTieInterceptorAbility : GenericAbility
+    public class GideonHaskTieInterceptorAbility : GenericAbility
     {
         public override void ActivateAbility()
         {

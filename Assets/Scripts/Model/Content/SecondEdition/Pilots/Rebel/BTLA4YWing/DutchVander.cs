@@ -1,51 +1,70 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
 using System;
-using Content;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class DutchVander : BTLA4YWing
     {
-        public class DutchVander : BTLA4YWing
+        public DutchVander() : base()
         {
-            public DutchVander() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Dutch\" Vander",
-                    "Gold Leader",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(DutchVanderAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Astromech,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    seImageNumber: 14
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Dutch\" Vander",
+                "Gold Leader",
+                Faction.Rebel,
+                4,
+                4,
+                12,
+                isLimited: true,
+                abilityType: typeof(DutchVanderAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Astromech,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                seImageNumber: 14,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class DutchVanderXWA : DutchVander
+    {
+        public DutchVanderXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

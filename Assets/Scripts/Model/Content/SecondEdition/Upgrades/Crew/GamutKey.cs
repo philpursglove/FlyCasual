@@ -1,9 +1,7 @@
-﻿using System;
-using BoardTools;
-using Obstacles;
+﻿using BoardTools;
+using Content;
 using Ship;
 using Tokens;
-using UnityEngine;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -20,10 +18,18 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 charges: 2,
-                regensCharges: true
+                regensCharges: true,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/8c/7a/8c7a9702-c9c5-4bcd-8da6-34ef8830d6cd/swz85_upgrade_gamutkey.png";
+    public class GamutKeyXWA : GamutKey
+    {
+        public GamutKeyXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

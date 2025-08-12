@@ -1,11 +1,6 @@
-﻿using Actions;
-using ActionsList;
-using Arcs;
-using Ship;
+﻿using Ship;
 using SubPhases;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -24,8 +19,6 @@ namespace UpgradesList.SecondEdition
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.StrutLockOverrideAbility)
             );
-            
-            ImageUrl = "https://i.imgur.com/enlmZTV.jpg";
         }
     }
 }

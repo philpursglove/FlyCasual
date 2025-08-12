@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using SquadBuilderNS;
 using SubPhases;
@@ -20,10 +21,9 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.NotoriousAbility),
                 charges: 2,
                 regensCharges: true,
-                restriction: new UpgradeBarRestriction(UpgradeType.Illicit)
+                restriction: new UpgradeBarRestriction(UpgradeType.Illicit),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/notorious.png";
         }
 
         public override bool IsAllowedForSquadBuilderPostCheck(SquadList squadList)
@@ -38,6 +38,15 @@ namespace UpgradesList.SecondEdition
             {
                 return true;
             }
+        }
+    }
+
+    public class NotoriousXWA : Notorious
+    {
+        public NotoriousXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

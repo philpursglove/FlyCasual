@@ -33,8 +33,19 @@ namespace Ship
                     {
                         Tags.BountyHunter
                     },
-                    seImageNumber: 186
+                    seImageNumber: 186,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class QuinnJastXWA : QuinnJast
+        {
+            public QuinnJastXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

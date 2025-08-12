@@ -1,10 +1,8 @@
-﻿using Upgrade;
+﻿using Content;
 using Ship;
-using ActionsList;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-using Movement;
-using SubPhases;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,9 +16,19 @@ namespace UpgradesList.SecondEdition
                 cost: 6,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
-                abilityType: typeof(Abilities.SecondEdition.UrsaWrenAbility)
+                abilityType: typeof(Abilities.SecondEdition.UrsaWrenAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class UrsaWrenXWA : UrsaWren
+    {
+        public UrsaWrenXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

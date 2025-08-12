@@ -1,5 +1,6 @@
 ﻿using Actions;
 using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
 using System.Collections.Generic;
@@ -19,8 +20,18 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 addAction: new ActionInfo(typeof(CoordinateAction), ActionColor.Red),
                 abilityType: typeof(Abilities.SecondEdition.SquadLeaderAbility),
-                seImageNumber: 16
+                seImageNumber: 16,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class SquadLeaderXWA : SquadLeader
+    {
+        public SquadLeaderXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

@@ -33,11 +33,29 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipInfo.ActionIcons.RemoveActions(typeof(ReloadAction));
             ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(JamAction), ActionColor.Red));
+        }
+    }
+
+    public class DBS32CXWA : DBS32C
+    {
+        public DBS32CXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Configuration,
+                UpgradeType.TacticalRelay,
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

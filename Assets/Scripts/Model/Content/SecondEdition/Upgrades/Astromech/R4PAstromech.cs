@@ -1,7 +1,8 @@
-﻿using Upgrade;
-using Ship;
+﻿using Content;
 using Movement;
+using Ship;
 using System;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -15,9 +16,18 @@ namespace UpgradesList.SecondEdition
                 cost: 2,
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.R4PAstromechAbility),
-                restriction: new FactionRestriction(Faction.Republic)
+                restriction: new FactionRestriction(Faction.Republic),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f2/b0/f2b08b38-29fa-4be1-b96d-c09a5ac4bc7c/swz32_r4-p_astromech.png";
+        }
+    }
+
+    public class R4PAstromechXWA : R4PAstromech
+    {
+        public R4PAstromechXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

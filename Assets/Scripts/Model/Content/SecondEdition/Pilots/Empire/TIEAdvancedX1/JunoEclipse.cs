@@ -1,7 +1,5 @@
 ﻿using ActionsList;
 using Content;
-using Ship;
-using SubPhases;
 using System;
 using System.Collections.Generic;
 using Upgrade;
@@ -35,10 +33,26 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
-                );;
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/44389529-87de-42a0-962c-97d223fb597b/SWZ97_JunoEclipselegal.png";
+        public class JunoEclipseXWA : JunoEclipse
+        {
+            public JunoEclipseXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

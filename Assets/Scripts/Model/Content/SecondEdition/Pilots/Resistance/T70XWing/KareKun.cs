@@ -33,10 +33,19 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.XWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/42/59/42597afe-f592-4bac-98ad-f70e876fb451/swz25_kare_a1.png";
+        public class KareKunXWA : KareKun
+        {
+            public KareKunXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

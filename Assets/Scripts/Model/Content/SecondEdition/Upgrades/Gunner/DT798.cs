@@ -22,7 +22,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.DT798Ability)
             );
 
-            ImageUrl = "https://i.imgur.com/jcFAIMm.png";
+            
         }
     }
 }

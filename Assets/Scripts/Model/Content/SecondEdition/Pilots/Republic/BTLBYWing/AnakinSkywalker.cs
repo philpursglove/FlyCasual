@@ -37,12 +37,30 @@ namespace Ship
                         Tags.Jedi,
                         Tags.LightSide,
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "anakinskywalker-btlbywing";
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/94/5b/945bf6ea-b339-4132-b3af-a47b53b0b9f0/swz48_pilot-anakin-skywalker.png";
+        public class AnakinSkywalkerXWA : AnakinSkywalker
+        {
+            public AnakinSkywalkerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,7 +1,7 @@
-﻿using Upgrade;
+﻿using SubPhases;
 using System;
 using Tokens;
-using SubPhases;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,8 +17,6 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.R4B11Ability),
                 restriction: new FactionRestriction(Faction.Scum)
             );
-            
-            ImageUrl = "https://i.imgur.com/fyETLhg.png";
         }
     }
 }

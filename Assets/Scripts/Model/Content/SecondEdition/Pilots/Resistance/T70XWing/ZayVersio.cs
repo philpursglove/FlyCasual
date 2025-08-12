@@ -32,10 +32,19 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.XWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/b6b11bba-184a-4b05-9f79-a3d77effa82b/SWZ97_ZayVersiolegal+%281%29.png";
+        public class ZayVersioXWA : ZayVersio
+        {
+            public ZayVersioXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

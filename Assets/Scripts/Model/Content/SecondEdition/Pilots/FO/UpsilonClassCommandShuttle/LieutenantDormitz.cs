@@ -39,6 +39,29 @@ namespace Ship
                 );
             }
         }
+
+        public class LieutenantDormitzXWA : LieutenantDormitz
+        {
+            public LieutenantDormitzXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.Cost = 7;
+                pilot.LoadoutValue = 18;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Sensor,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Cannon,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

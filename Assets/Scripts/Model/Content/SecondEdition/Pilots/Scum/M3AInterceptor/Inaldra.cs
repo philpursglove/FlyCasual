@@ -1,4 +1,5 @@
 ﻿using ActionsList.SecondEdition;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,19 @@ namespace Ship
                     {
                         UpgradeType.Modification
                     },
-                    seImageNumber: 187
+                    seImageNumber: 187,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class InaldraXWA : Inaldra
+        {
+            public InaldraXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

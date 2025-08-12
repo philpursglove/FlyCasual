@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Movement;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,16 +26,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Cannon,
+                        UpgradeType.Missile,
                         UpgradeType.Title
                     },
-                    seImageNumber: 150
+                    seImageNumber: 150,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class EmonAzzameenXWA : EmonAzzameen
+        {
+            public EmonAzzameenXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

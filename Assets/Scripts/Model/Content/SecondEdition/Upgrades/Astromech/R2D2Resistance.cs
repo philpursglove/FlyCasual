@@ -1,7 +1,8 @@
-﻿using Upgrade;
+﻿using Content;
 using Ship;
-using System;
 using SubPhases;
+using System;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,12 +17,20 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.R2D2ResistanceAbility),
                 restriction: new FactionRestriction(Faction.Resistance),
-                charges: 4
+                charges: 4,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             NameCanonical = "r2d2-resistance";
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/1c/97/1c971472-6fea-493b-ac8f-888fc6363c84/swz68_r2d2.png";
+    public class R2D2ResistanceXWA : R2D2Resistance
+    {
+        public R2D2ResistanceXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

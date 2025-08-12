@@ -33,8 +33,19 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 131
+                    seImageNumber: 131,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class WhisperXWA : Whisper
+        {
+            public WhisperXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

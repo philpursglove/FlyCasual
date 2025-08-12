@@ -24,7 +24,7 @@ namespace UpgradesList.SecondEdition
                 restriction: new ShipRestriction(typeof(Ship.SecondEdition.RogueClassStarfighter.RogueClassStarfighter))
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/xanadublood.png";
+            
         }
     }
 }

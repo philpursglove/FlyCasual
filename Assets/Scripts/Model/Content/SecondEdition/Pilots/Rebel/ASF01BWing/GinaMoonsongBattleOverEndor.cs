@@ -1,75 +1,72 @@
 ﻿using Abilities.SecondEdition;
-using ActionsList;
 using BoardTools;
-using Bombs;
-using Conditions;
 using Content;
-using GameCommands;
-using GameModes;
-using Movement;
-using Newtonsoft.Json.Linq;
 using Ship;
 using SubPhases;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Tokens;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ASF01BWing
 {
-    namespace SecondEdition.ASF01BWing
+    public class GinaMoonsongBattleOverEndor : ASF01BWing
     {
-        public class GinaMoonsongBattleOverEndor : ASF01BWing
+        public GinaMoonsongBattleOverEndor() : base()
         {
-            public GinaMoonsongBattleOverEndor() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Gina Moonsong",
-                    "Battle Over Endor",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(GinaMoonsongBattleOverEndorAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Device
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.BWing
-                    },
-                    skinName: "Gina Moonsong",
-                    charges: 2,
-                    regensCharges: 1,
-                    isStandardLayout: true
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Gina Moonsong",
+                "Battle Over Endor",
+                Faction.Rebel,
+                5,
+                5,
+                0,
+                isLimited: true,
+                abilityType: typeof(GinaMoonsongBattleOverEndorAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Device
+                },
+                tags: new List<Tags>
+                {
+                    Tags.BWing
+                },
+                skinName: "Gina Moonsong",
+                charges: 2,
+                regensCharges: 1,
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipInfo.Shields++;
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/ginamoonsong-battleoverendor.png";
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/ginamoonsong-battleoverendor.png";
+            ShipInfo.Shields++;
 
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ItsATrap));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Juke));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ProtonTorpedoes));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonBombs));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ItsATrap));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Juke));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ProtonTorpedoes));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonBombs));
 
-                ShipAbilities.Add(new GyroCockpit());
+            ShipAbilities.Add(new GyroCockpit());
 
-                PilotNameCanonical = "ginamoonsong-battleoverendor";
+            PilotNameCanonical = "ginamoonsong-battleoverendor";
 
-                DefaultUpgrades.Remove(typeof(UpgradesList.SecondEdition.StabilizedSFoilsOpen));
-            }
+            DefaultUpgrades.Remove(typeof(UpgradesList.SecondEdition.StabilizedSFoilsOpen));
+        }
+    }
+        
+    public class GinaMoonsongBattleOverEndorXWA : GinaMoonsongBattleOverEndor
+    {
+        public GinaMoonsongBattleOverEndorXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

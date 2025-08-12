@@ -27,23 +27,42 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.CorusKapellimAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Tech,
-                        UpgradeType.Turret,
                         UpgradeType.Astromech,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
                         UpgradeType.Illicit,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.YWing
                     },
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/0uhUP03.png";
+        public class CorusKapellimXWA : CorusKapellim
+        {
+            public CorusKapellimXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Astromech,
+                        UpgradeType.Illicit,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device,
+                        UpgradeType.Turret
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using ActionsList;
-using Ship;
+﻿using Content;
 using System;
 using Tokens;
 using Upgrade;
@@ -21,10 +20,18 @@ namespace UpgradesList.SecondEdition
                     charges: 2,
                     requiresToken: typeof(BlueTargetLockToken)
                 ),
-                abilityType: typeof(Abilities.SecondEdition.PlasmaTorpedoesAbility)
+                abilityType: typeof(Abilities.SecondEdition.PlasmaTorpedoesAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/6f/83/6f83abcd-9460-4208-a439-f6a81597f5f0/swz40_card-plasma-torpedoes.png";
+    public class PlasmaTorpedoesXWA : PlasmaTorpedoes
+    {
+        public PlasmaTorpedoesXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

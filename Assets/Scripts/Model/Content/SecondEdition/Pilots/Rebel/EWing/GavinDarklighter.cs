@@ -1,6 +1,5 @@
 ﻿using BoardTools;
 using Content;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -34,6 +33,25 @@ namespace Ship
                     seImageNumber: 51,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class GavinDarklighterXWA : GavinDarklighter
+        {
+            public GavinDarklighterXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

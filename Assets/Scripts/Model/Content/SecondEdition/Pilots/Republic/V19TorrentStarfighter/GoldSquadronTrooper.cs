@@ -19,16 +19,25 @@ namespace Ship.SecondEdition.V19TorrentStarfighter
                 extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
+                    UpgradeType.Modification,
                     UpgradeType.Missile,
-                    UpgradeType.Modification
                 },
                 tags: new List<Tags>
                 {
                     Tags.Clone
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/ab/a7/aba7c941-3472-453f-bfd8-032f5f854e0b/swz32_gold-sqd-trooper.png";
+        }
+    }
+
+    public class GoldSquadronTrooperXWA : GoldSquadronTrooper
+    {
+        public GoldSquadronTrooperXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

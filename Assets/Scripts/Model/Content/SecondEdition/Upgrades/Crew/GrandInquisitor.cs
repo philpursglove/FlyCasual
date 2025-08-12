@@ -1,10 +1,12 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
+﻿using ActionsList;
 using BoardTools;
-using ActionsList;
+using Content;
+using Ship;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -20,7 +22,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Imperial),
                 abilityType: typeof(Abilities.SecondEdition.GrandInquisitorCrewAbility),
-                seImageNumber: 116
+                seImageNumber: 116,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -28,6 +31,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(452, 10),
                 new Vector2(125, 125)
             );
+        }
+    }
+
+    public class GrandInquisitorXWA : GrandInquisitor
+    {
+        public GrandInquisitorXWA() : base()
+        {
+            UpgradeInfo.Cost = 12;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

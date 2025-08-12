@@ -29,10 +29,28 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/0UHEp9m.png";
+        public class P709thLegionAceXWA : P709thLegionAce
+        {
+            public P709thLegionAceXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 5;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

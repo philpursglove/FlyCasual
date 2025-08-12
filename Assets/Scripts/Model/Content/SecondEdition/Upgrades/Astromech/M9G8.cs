@@ -1,8 +1,7 @@
-﻿using Upgrade;
-using UnityEngine;
+﻿using ActionsList;
+using Content;
 using Ship;
-using System;
-using ActionsList;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,8 +15,18 @@ namespace UpgradesList.SecondEdition
                 cost: 5,
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.M9G8Ability),
-                restriction: new FactionRestriction(Faction.Resistance)
+                restriction: new FactionRestriction(Faction.Resistance),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class M9G8XWA : M9G8
+    {
+        public M9G8XWA() : base() 
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

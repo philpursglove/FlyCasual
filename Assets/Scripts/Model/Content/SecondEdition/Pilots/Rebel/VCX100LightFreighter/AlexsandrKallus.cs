@@ -6,20 +6,20 @@ namespace Ship
 {
     namespace SecondEdition.VCX100LightFreighter
     {
-        public class AlexandrKallus : VCX100LightFreighter
+        public class AlexsandrKallus : VCX100LightFreighter
         {
-            public AlexandrKallus() : base()
+            public AlexsandrKallus() : base()
             {
                 PilotInfo = new PilotCardInfo25
                 (
-                    "Alexandr Kallus",
+                    "Alexsandr Kallus",
                     "Fulcrum",
                     Faction.Rebel,
                     4,
                     7,
                     16,
                     isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.AlexandrKallusAbility),
+                    abilityType: typeof(Abilities.SecondEdition.AlexsandrKallusAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
@@ -36,10 +36,31 @@ namespace Ship
                     {
                         Tags.Freighter,
                         Tags.Spectre
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/d0/bf/d0bf7c63-2c2c-4372-8ace-7299d180c774/swz66_alexsandr-kallus.png";
+        public class AlexsandrKallusXWA : AlexsandrKallus
+        {
+            public AlexsandrKallusXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                { 
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
@@ -49,7 +70,7 @@ namespace Abilities.SecondEdition
 {
     //While you defend, if the attacker modified any attack dice, you may roll an additional defense die.
 
-    public class AlexandrKallusAbility : GenericAbility
+    public class AlexsandrKallusAbility : GenericAbility
     {
         public override void ActivateAbility()
         {

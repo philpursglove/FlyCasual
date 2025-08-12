@@ -1,12 +1,11 @@
-﻿using Editions;
+﻿using Content;
+using Editions;
 using Obstacles;
 using Ship;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace SquadBuilderNS
@@ -18,8 +17,9 @@ namespace SquadBuilderNS
             JSONObject squadJson = new JSONObject();
             squadJson.AddField("name", squadList.Name);
             squadJson.AddField("faction", Edition.Current.FactionToXws(squadList.SquadFaction));
+            squadJson.AddField("ruleset", squadList.Format.ToString());
             squadJson.AddField("points", squadList.Points);
-            squadJson.AddField("version", "0.3.0");
+            squadJson.AddField("version", Global.CurrentVersion);
 
             List<SquadListShip> playerShipConfigs = squadList.Ships;
             JSONObject[] squadPilotsArrayJson = new JSONObject[playerShipConfigs.Count];
@@ -102,8 +102,6 @@ namespace SquadBuilderNS
         {
             JSONObject pilotJson = new JSONObject();
             pilotJson.AddField("id", shipHolder.Instance.PilotNameCanonical);
-            //TODO: Restore
-            //pilotJson.AddField("points", GetShipCost(shipHolder));
             pilotJson.AddField("ship", shipHolder.Instance.ShipTypeCanonical);
 
             Dictionary<string, JSONObject> upgradesDict = new Dictionary<string, JSONObject>();
@@ -130,7 +128,7 @@ namespace SquadBuilderNS
             JSONObject vendorJson = new JSONObject();
             JSONObject skinJson = new JSONObject();
             skinJson.AddField("skin", (shipHolder.Instance.PilotInfo as PilotCardInfo25).SkinName);
-            vendorJson.AddField("Sandrem.FlyCasual", skinJson);
+            vendorJson.AddField("Baledin.FlyCasual", skinJson);
 
             pilotJson.AddField("vendor", vendorJson);
 
@@ -186,6 +184,25 @@ namespace SquadBuilderNS
                     squad.Name = squadJson["name"].str;
                 }
 
+                if (squadJson.HasField("ruleset"))
+                {
+                    switch(squadJson["ruleset"].str)
+                    {
+                        case "XWA":
+                            squad.Format = Legality.XWA; break;
+                        case "ExtendedLegal":
+                        case "AMG":
+                            squad.Format = Legality.ExtendedLegal; break;
+                        case "StandardLegal":
+                        default:
+                            squad.Format = Legality.StandardLegal; break;
+                    }
+                }
+                else
+                {
+                    squad.Format = Legality.StandardLegal;
+                }
+
                 string factionNameXws = squadJson["faction"].str;
                 Faction faction = Edition.Current.XwsToFaction(factionNameXws);
                 squad.SquadFaction = faction;
@@ -198,7 +215,7 @@ namespace SquadBuilderNS
                         string shipNameXws = pilotJson["ship"].str;
 
                         string shipNameGeneral = "";
-                        ShipRecord shipRecord = SquadBuilder.Instance.Database.AllShips.FirstOrDefault(n => n.ShipNameCanonical == shipNameXws);
+                        ShipRecord shipRecord = SquadBuilder.Instance.Database.AllShips.FirstOrDefault(n => n.ShipNameCanonical == shipNameXws && n.AllowableFormats.Contains(squad.Format));
                         if (shipRecord == null)
                         {
                             Messages.ShowError("Cannot find ship: " + shipNameXws);
@@ -208,7 +225,7 @@ namespace SquadBuilderNS
                         shipNameGeneral = shipRecord.ShipName;
 
                         string pilotNameXws = pilotJson["id"].str;
-                        PilotRecord pilotRecord = SquadBuilder.Instance.Database.AllPilots.FirstOrDefault(n => n.PilotNameCanonical == pilotNameXws && n.Ship.ShipName == shipNameGeneral && n.PilotFaction == faction);
+                        PilotRecord pilotRecord = SquadBuilder.Instance.Database.AllPilots.FirstOrDefault(n => n.PilotNameCanonical == pilotNameXws && n.Ship.ShipName == shipNameGeneral && n.PilotFaction == faction && n.AllowableFormats.Contains(squad.Format));
                         if (pilotRecord == null)
                         {
                             Messages.ShowError("Cannot find pilot: " + pilotNameXws);
@@ -231,13 +248,13 @@ namespace SquadBuilderNS
                                     JSONObject upgradeNames = upgradeJsons[upgradeType];
                                     foreach (JSONObject upgradeRecord in upgradeNames.list)
                                     {
-                                        UpgradeRecord newUpgradeRecord = SquadBuilder.Instance.Database.AllUpgrades.FirstOrDefault(n => n.UpgradeNameCanonical == upgradeRecord.str);
+                                        UpgradeRecord newUpgradeRecord = SquadBuilder.Instance.Database.AllUpgrades.FirstOrDefault(n => n.UpgradeNameCanonical == upgradeRecord.str && n.AllowableFormats.Contains(squad.Format));
                                         if (newUpgradeRecord == null)
                                         {
                                             Messages.ShowError("Cannot find upgrade: " + upgradeRecord.str);
                                         }
 
-                                        bool upgradeInstalledSucessfully = newShip.InstallUpgrade(upgradeRecord.str, Edition.Current.XwsToUpgradeType(upgradeType));
+                                        bool upgradeInstalledSucessfully = newShip.InstallUpgrade(newUpgradeRecord);
                                         if (!upgradeInstalledSucessfully && !upgradesThatCannotBeInstalled.ContainsKey(upgradeRecord.str)) upgradesThatCannotBeInstalled.Add(upgradeRecord.str, upgradeType);
                                     }
                                 }
@@ -278,9 +295,9 @@ namespace SquadBuilderNS
                         if (pilotJson.HasField("vendor"))
                         {
                             JSONObject vendorData = pilotJson["vendor"];
-                            if (vendorData.HasField("Sandrem.FlyCasual"))
+                            if (vendorData.HasField("Baledin.FlyCasual"))
                             {
-                                JSONObject myVendorData = vendorData["Sandrem.FlyCasual"];
+                                JSONObject myVendorData = vendorData["Baledin.FlyCasual"];
                                 if (myVendorData.HasField("skin"))
                                 {
                                     (newShip.Instance.PilotInfo as PilotCardInfo25).SkinName = myVendorData["skin"].str;

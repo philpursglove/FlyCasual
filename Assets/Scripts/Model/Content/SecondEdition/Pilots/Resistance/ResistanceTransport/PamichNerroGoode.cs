@@ -1,4 +1,5 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -20,19 +21,28 @@ namespace Ship.SecondEdition.ResistanceTransport
                 abilityType: typeof(PammichNerroGoodeAbility),
                 extraUpgradeIcons: new List<UpgradeType>
                 {
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
                     UpgradeType.Sensor,
+                    UpgradeType.Modification,
                     UpgradeType.Tech,
                     UpgradeType.Cannon,
                     UpgradeType.Cannon,
-                    UpgradeType.Torpedo,
-                    UpgradeType.Crew,
-                    UpgradeType.Crew,
-                    UpgradeType.Astromech,
-                    UpgradeType.Modification
-                }
-            );
+                    UpgradeType.Torpedo
+                },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/8b/2d/8b2da8f2-041a-43e0-a48d-84fc958eb05e/swz45_pammich-goode.png";
+    public class PammichNerroGoodeXWA : PammichNerroGoode
+    {
+        public PammichNerroGoodeXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Ship
                     {
                         new LinkedActionInfo(typeof(BarrelRollAction), typeof(EvadeAction))
                     },
-                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal }
+                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal, Content.Legality.XWA }
                 );
 
                 ModelInfo = new ShipModelInfo

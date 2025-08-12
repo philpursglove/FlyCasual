@@ -1,9 +1,8 @@
-﻿using Upgrade;
-using System.Collections.Generic;
-using ActionsList;
+﻿using ActionsList;
+using Content;
 using Ship;
-using System.Linq;
-using Actions;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,10 +18,18 @@ namespace UpgradesList.SecondEdition
                 restrictions: new UpgradeCardRestrictions(
                     new BaseSizeRestriction(BaseSize.Small),
                     new ActionBarRestriction(typeof(BoostAction))
-                )
+                ),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/5f/dd/5fdda9e7-dea9-4188-aaf1-e06446b38e45/swz79_extreme-maneuvers.png";
+    public class ExtremeManeuversXWA : ExtremeManeuvers
+    {
+        public ExtremeManeuversXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

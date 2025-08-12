@@ -5,6 +5,8 @@
         StandardLegal,
         ExtendedLegal,
         StandardBanned,
-        ExtendedBanned
+        ExtendedBanned,
+        XWA,
+        XWABanned
     }
 }

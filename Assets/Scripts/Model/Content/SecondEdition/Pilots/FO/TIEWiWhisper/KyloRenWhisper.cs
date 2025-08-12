@@ -40,12 +40,33 @@ namespace Ship
                         Tags.DarkSide,
                         Tags.LightSide,
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "kyloren-tiewiwhispermodifiedinterceptor";
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/1PGGda3.png";
+        public class KyloRenWhisperXWA: KyloRenWhisper
+        {
+            public KyloRenWhisperXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 12;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Missile,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

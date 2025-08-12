@@ -40,10 +40,32 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/Mj8XIc4.png";
+        public class BreachXWA : Breach
+        {
+            public BreachXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 16;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                };
             }
         }
     }

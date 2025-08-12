@@ -2,51 +2,44 @@
 using BoardTools;
 using Content;
 using Ship;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class HortonSalmSSP : BTLA4YWing
     {
-        public class HortonSalmSSP : BTLA4YWing
+        public HortonSalmSSP() : base()
         {
-            public HortonSalmSSP() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Horton Salm",
-                    "Gray Leader",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(HortonSalmSSPAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Turret,
-                        UpgradeType.Device
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    skinName: "Gray",
-                    isStandardLayout: true
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Horton Salm",
+                "Gray Leader",
+                Faction.Rebel,
+                4,
+                4,
+                0,
+                isLimited: true,
+                abilityType: typeof(HortonSalmSSPAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Turret,
+                    UpgradeType.Device
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                skinName: "Gray",
+                isStandardLayout: true
+            );
 
-                MustHaveUpgrades.Add(typeof(IonCannonTurret));
-                MustHaveUpgrades.Add(typeof(ProximityMines));
+            MustHaveUpgrades.Add(typeof(IonCannonTurret));
+            MustHaveUpgrades.Add(typeof(ProximityMines));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/hortonsalm-swz106.png";
-
-                PilotNameCanonical = "hortonsalm-swz106";
-            }
+            PilotNameCanonical = "hortonsalm-swz106";
         }
     }
 }

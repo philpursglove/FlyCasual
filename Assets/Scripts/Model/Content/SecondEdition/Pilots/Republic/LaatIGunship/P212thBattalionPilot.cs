@@ -20,21 +20,30 @@ namespace Ship
                     7,
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Gunner,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Missile,
                     },
                     tags: new List<Tags>
                     {
                         Tags.Clone
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/80/e7/80e7698b-13df-4d66-ba2b-575df467a7df/swz70_a1_battalion-pilot_ship.png";
+        public class P212thBattalionPilotXWA : P212thBattalionPilot
+        {
+            public P212thBattalionPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

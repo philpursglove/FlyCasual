@@ -1,8 +1,9 @@
-﻿using Upgrade;
-using Ship;
+﻿using Actions;
 using ActionsList;
-using Actions;
+using Content;
+using Ship;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,7 +18,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.HanSoloScumGunnerAbility),
                 restriction: new FactionRestriction(Faction.Scum),
-                seImageNumber: 163
+                seImageNumber: 163,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -27,6 +29,15 @@ namespace UpgradesList.SecondEdition
             );
 
             NameCanonical = "hansolo-gunner";
+        }
+    }
+
+    public class HanSoloScumXWA : HanSoloScum
+    {
+        public HanSoloScumXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

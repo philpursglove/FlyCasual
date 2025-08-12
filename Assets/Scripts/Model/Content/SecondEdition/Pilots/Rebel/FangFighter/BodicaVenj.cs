@@ -35,10 +35,27 @@ namespace Ship
                     {
                         Tags.Mandalorian 
                     },
-                    skinName: "Bodica Venj"
+                    skinName: "Bodica Venj",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/bodicavenj.png";
+        public class BodicaVenjXWA : BodicaVenj
+        {
+            public BodicaVenjXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

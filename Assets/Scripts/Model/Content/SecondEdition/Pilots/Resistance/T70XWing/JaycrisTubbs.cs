@@ -34,8 +34,19 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.XWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class JaycrisTubbsXWA : JaycrisTubbs
+        {
+            public JaycrisTubbsXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

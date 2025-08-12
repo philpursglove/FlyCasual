@@ -22,7 +22,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.UnstableSublightEnginesAbility)
             );
 
-            ImageUrl = "https://i.imgur.com/Cbkyau3.jpg";
+            
         }        
     }
 }

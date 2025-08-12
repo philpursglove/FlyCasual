@@ -25,12 +25,23 @@ namespace Ship
                     {
                         Tags.Droid
                     },
-                    seImageNumber: 229
+                    seImageNumber: 229,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
 
                 ShipAbilities.Add(new Abilities.SecondEdition.AutopilotDroneAbility());
+            }
+        }
+
+        public class AutopilotDroneXWA : AutopilotDrone
+        {
+            public AutopilotDroneXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 1;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

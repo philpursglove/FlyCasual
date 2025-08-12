@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Ship;
-using Abilities.SecondEdition;
-using Upgrade;
+﻿using Abilities.SecondEdition;
 using Content;
+using Ship;
+using System.Collections.Generic;
+using Upgrade;
 using UpgradesList.SecondEdition;
 
 namespace Ship
@@ -32,10 +32,9 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/9/90/Darkcurse-battleofyavin.png";
 
                 MustHaveUpgrades.Add(typeof(Ruthless));
                 MustHaveUpgrades.Add(typeof(PrecisionIonEngines));
@@ -43,6 +42,15 @@ namespace Ship
                 ShipInfo.Hull++;
 
                 PilotNameCanonical = "darkcurse-battleofyavin";
+            }
+        }
+
+        public class DarkCurseXWA : DarkCurse
+        {
+            public DarkCurseXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

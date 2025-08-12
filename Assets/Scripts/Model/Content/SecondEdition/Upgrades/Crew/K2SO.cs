@@ -1,12 +1,13 @@
-﻿using Ship;
-using Upgrade;
+﻿using Actions;
 using ActionsList;
+using Content;
+using Ship;
 using SubPhases;
-using Actions;
-using Tokens;
 using System;
 using System.Collections.Generic;
+using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -21,16 +22,24 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 addActions: new List<ActionInfo> { new ActionInfo(typeof(CalculateAction)), new ActionInfo(typeof(JamAction)) },
-                abilityType: typeof(Abilities.SecondEdition.K2SOAbility)
+                abilityType: typeof(Abilities.SecondEdition.K2SOAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Rebel,
                 new Vector2(233, 1)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e9/71/e97130c3-368d-4453-a0ff-51a63d30394c/swz66_k-2so_upgrade.png";
         }        
+    }
+
+    public class K2SOXWA : K2SO
+    {
+        public K2SOXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

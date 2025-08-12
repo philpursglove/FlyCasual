@@ -1,10 +1,10 @@
 ﻿using Content;
 using Movement;
 using Ship;
+using SubPhases;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
-using SubPhases;
 
 namespace UpgradesList.SecondEdition
 {
@@ -21,7 +21,8 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>
                 {
                     Legality.StandardBanned,
-                    Legality.ExtendedLegal
+                    Legality.ExtendedLegal,
+                    Legality.XWA
                 }
             );
         }

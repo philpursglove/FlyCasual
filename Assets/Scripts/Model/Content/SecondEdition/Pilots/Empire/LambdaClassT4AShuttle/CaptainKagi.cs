@@ -26,16 +26,26 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.CaptainKagiAbility),
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
-                        UpgradeType.Cannon,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Modification,
+                        UpgradeType.Cannon,
                         UpgradeType.Title
                     },
                     seImageNumber: 142,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class CaptainKagiXWA : CaptainKagi
+        {
+            public CaptainKagiXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

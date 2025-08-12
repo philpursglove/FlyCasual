@@ -29,16 +29,26 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Turret,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
                         UpgradeType.Gunner,
                         UpgradeType.Modification,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Turret,
+                        UpgradeType.Missile,
+                        UpgradeType.Missile
                     },
                     seImageNumber: 127,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class LieutenantKestalXWA : LieutenantKestal
+        {
+            public LieutenantKestalXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

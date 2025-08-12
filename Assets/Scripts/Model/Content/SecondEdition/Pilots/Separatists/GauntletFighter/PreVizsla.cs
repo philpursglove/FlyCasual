@@ -2,45 +2,61 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.GauntletFighter
 {
-    namespace SecondEdition.GauntletFighter
+    public class PreVizsla : GauntletFighter
     {
-        public class PreVizsla : GauntletFighter
+        public PreVizsla() : base()
         {
-            public PreVizsla() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Pre Vizsla",
-                    "Leader of Death Watch",
-                    Faction.Separatists,
-                    3,
-                    6,
-                    14,
-                    isLimited: true,
-                    charges: 2,
-                    regensCharges: 1,
-                    abilityType: typeof(Abilities.SecondEdition.PreVizslaAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Device,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Mandalorian 
-                    },
-                    skinName: "CIS Light"
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Pre Vizsla",
+                "Leader of Death Watch",
+                Faction.Separatists,
+                3,
+                6,
+                14,
+                isLimited: true,
+                charges: 2,
+                regensCharges: 1,
+                abilityType: typeof(Abilities.SecondEdition.PreVizslaAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Mandalorian 
+                },
+                skinName: "CIS Light",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/1/1f/Previzsla.png";
-            }
+    public class PreVizslaXWA : PreVizsla
+    {
+        public PreVizslaXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 25;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

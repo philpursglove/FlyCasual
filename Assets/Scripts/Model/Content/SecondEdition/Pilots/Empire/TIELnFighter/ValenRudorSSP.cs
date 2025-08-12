@@ -33,15 +33,23 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(Disciplined));
                 MustHaveUpgrades.Add(typeof(PrecisionIonEngines));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/valenrudor-swz105.png";
-
                 PilotNameCanonical = "valenrudor-swz105";
+            }
+        }
+
+        public class ValenRudorSSPXWA : ValenRudorSSP
+        {
+            public ValenRudorSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

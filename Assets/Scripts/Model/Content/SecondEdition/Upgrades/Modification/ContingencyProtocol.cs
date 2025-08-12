@@ -23,7 +23,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.ContingencyProtocolAbility)
             );
 
-            ImageUrl = "https://i.imgur.com/5MMMAtf.jpg";
+            
         }
         
     }

@@ -25,19 +25,29 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
                         UpgradeType.Crew,
+                        UpgradeType.Sensor,
                         UpgradeType.Gunner,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
                         UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Device
                     },
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
 
                 ModelInfo.SkinName = "Cobalt";
+            }
+        }
+
+        public class CatXWA : Cat
+        {
+            public CatXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

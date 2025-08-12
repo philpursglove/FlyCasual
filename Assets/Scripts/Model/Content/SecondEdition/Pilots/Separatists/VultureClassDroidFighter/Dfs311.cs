@@ -31,10 +31,26 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/07/b9/07b9dde5-0302-4c31-b54e-92ef136400b1/swz31_dfs-311.png";
+    public class Dfs311XWA : Dfs311
+    {
+        public Dfs311XWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 2;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 2;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

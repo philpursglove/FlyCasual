@@ -1,4 +1,5 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -22,9 +23,19 @@ namespace UpgradesList.SecondEdition
                     new ShipRestriction(typeof(Ship.SecondEdition.LambdaClassT4AShuttle.LambdaClassT4AShuttle))
                 ),
                 abilityType: typeof(Abilities.SecondEdition.ST321Ability),
-                seImageNumber: 124
+                seImageNumber: 124,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class ST321XWA : ST321
+    {
+        public ST321XWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

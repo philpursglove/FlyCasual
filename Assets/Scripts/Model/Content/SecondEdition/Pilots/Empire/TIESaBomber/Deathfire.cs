@@ -1,10 +1,8 @@
-﻿using ActionsList;
-using Bombs;
+﻿using Bombs;
 using Content;
 using Ship;
 using SubPhases;
 using System.Collections.Generic;
-using System.Linq;
 using Upgrade;
 
 namespace Ship
@@ -31,17 +29,27 @@ namespace Ship
                     },
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
                         UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
                     },
                     seImageNumber: 110,
-                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ModelInfo.SkinName = "Gamma Squadron";
+            }
+        }
+
+        public class DeathfireXWA : Deathfire
+        {
+            public DeathfireXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

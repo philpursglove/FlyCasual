@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Abilities.SecondEdition;
-using Upgrade;
-using System.Linq;
+﻿using Abilities.SecondEdition;
 using Content;
+using System.Collections.Generic;
+using System.Linq;
+using Upgrade;
 
 namespace Ship
 {
@@ -34,8 +34,19 @@ namespace Ship
                         Tags.Tie
                     },
                     seImageNumber: 84,
-                    skinName: "Inferno"
+                    skinName: "Inferno",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class GideonHaskXWA : GideonHask
+        {
+            public GideonHaskXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

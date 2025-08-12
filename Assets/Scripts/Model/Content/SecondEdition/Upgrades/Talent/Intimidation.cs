@@ -24,6 +24,15 @@ namespace UpgradesList.SecondEdition
             );
         }        
     }
+
+    public class IntimidationXWA : Intimidation
+    {
+        public IntimidationXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

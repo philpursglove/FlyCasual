@@ -1,9 +1,9 @@
-﻿using Upgrade;
-using Ship;
+﻿using BoardTools;
 using Movement;
+using Ship;
 using System;
-using BoardTools;
 using System.Linq;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,7 +18,6 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.R4P44Ability),
                 restriction: new FactionRestriction(Faction.Republic)
             );
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/71/af/71afc8f6-022b-48f7-9694-83e6322782b2/swz33_r4-p44-upgrade.png";
         }
     }
 }

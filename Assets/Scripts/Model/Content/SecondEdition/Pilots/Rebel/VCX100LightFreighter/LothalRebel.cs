@@ -28,8 +28,25 @@ namespace Ship
                         UpgradeType.Torpedo,
                         UpgradeType.Gunner
                     },
-                    seImageNumber: 76
+                    seImageNumber: 76,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class LothalRebelXWA : LothalRebel
+        {
+            public LothalRebelXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                { 
+                    UpgradeType.Crew,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

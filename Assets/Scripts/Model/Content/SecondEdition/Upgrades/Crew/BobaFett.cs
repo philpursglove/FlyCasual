@@ -1,11 +1,11 @@
-﻿using Ship;
-using Upgrade;
-using System;
-using SubPhases;
-using BoardTools;
-using UnityEngine;
+﻿using BoardTools;
 using Content;
+using Ship;
+using SubPhases;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -34,6 +34,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(150, 150)
             );
         }        
+    }
+
+    public class BobaFettXWA: BobaFett
+    {
+        public BobaFettXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

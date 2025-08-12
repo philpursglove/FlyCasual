@@ -1,9 +1,8 @@
-﻿using Upgrade;
-using Ship;
-using ActionsList;
+﻿using ActionsList;
+using Content;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,7 +15,8 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Gunner,
                 cost: 1,
                 abilityType: typeof(Abilities.SecondEdition.AgileGunnerAbility),
-                seImageNumber: 162
+                seImageNumber: 162,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -24,6 +24,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(367, 5),
                 new Vector2(100, 100)
             );
+        }
+    }
+
+    public class AgileGunnerXWA : AgileGunner
+    {
+        public AgileGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

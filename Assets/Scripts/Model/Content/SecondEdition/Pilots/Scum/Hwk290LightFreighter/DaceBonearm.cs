@@ -31,18 +31,29 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Crew,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
                         UpgradeType.Title
                     },
                     tags: new List<Tags>
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 174
+                    seImageNumber: 174,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class DaceBonearmXWA : DaceBonearm
+        {
+            public DaceBonearmXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

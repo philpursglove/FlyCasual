@@ -1,10 +1,7 @@
 ﻿using Arcs;
-using BoardTools;
-using Ship;
-using System.Linq;
-using Upgrade;
 using Content;
 using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -29,9 +26,16 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e5/8d/e58d4426-4b4b-4fed-a2e9-0ed970600df5/swz45_autoblasters.png";            
         }        
+    }
+
+    public class AutoblastersXWA : Autoblasters
+    {
+        public AutoblastersXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

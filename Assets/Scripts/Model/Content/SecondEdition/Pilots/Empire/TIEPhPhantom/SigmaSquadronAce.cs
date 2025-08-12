@@ -29,8 +29,19 @@ namespace Ship
                         UpgradeType.Gunner,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 133
+                    seImageNumber: 133,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SigmaSquadronAceXWA : SigmaSquadronAce
+        {
+            public SigmaSquadronAceXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

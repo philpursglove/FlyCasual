@@ -1,12 +1,12 @@
-﻿using Upgrade;
-using Ship;
+﻿using ActionsList;
 using Arcs;
-using System.Linq;
-using ActionsList;
-using Actions;
 using BoardTools;
+using Content;
+using Ship;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -20,7 +20,8 @@ namespace UpgradesList.SecondEdition
                 cost: 3,
                 abilityType: typeof(Abilities.SecondEdition.VeteranTurretGunnerAbility),
                 restriction: new ActionBarRestriction(typeof(RotateArcAction)),
-                seImageNumber: 52
+                seImageNumber: 52,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -28,6 +29,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(423, 17),
                 new Vector2(150, 150)
             );
+        }
+    }
+
+    public class VeteranTurretGunnerXWA : VeteranTurretGunner
+    {
+        public VeteranTurretGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

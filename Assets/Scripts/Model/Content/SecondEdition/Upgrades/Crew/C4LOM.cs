@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
 using System.Linq;
@@ -18,13 +19,23 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.C4LOMAbility),
-                seImageNumber: 128
+                seImageNumber: 128,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Scum,
                 new Vector2(393, 10)
             );
+        }
+    }
+
+    public class C4LOMXWA : C4LOM
+    {
+        public C4LOMXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using Content;
 using Ship;
-using SubPhases;
 using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 
 namespace Ship
@@ -33,10 +31,26 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/f/f2/TieFO_Null.png";
+        public class NullXWA : Null
+        {
+            public NullXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 8;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
             }
         }
     }

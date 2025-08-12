@@ -1,6 +1,7 @@
 ﻿using Content;
 using Ship;
 using System.Collections.Generic;
+using Abilities.SecondEdition;
 using Upgrade;
 
 namespace Ship
@@ -32,10 +33,30 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/56/94/56940164-d919-4b04-8303-f39357555fad/swz18_a1_midnight.png";
+        public class MidnightXWA : Midnight
+        {
+            public MidnightXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 17;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
             }
         }
     }

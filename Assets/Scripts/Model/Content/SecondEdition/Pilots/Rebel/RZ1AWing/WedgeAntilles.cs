@@ -34,12 +34,28 @@ namespace Ship
                         Tags.AWing
                     },
                     abilityText: "While you perform a primary attack, if the defender is your front arc. The defender rolls 1 fewer defense die.",
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "wedgeantilles-rz1awing";
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/3f/b7/3fb7e02c-21fc-4f85-bbcd-2fcf2c5efcab/swz83_pilot_wedgeantilles.png";
+        public class WedgeAntillesXWA : WedgeAntilles
+        {
+            public WedgeAntillesXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -2,6 +2,7 @@
 using Ship;
 using System;
 using System.Collections.Generic;
+using Content;
 using Upgrade;
 
 namespace Ship
@@ -31,12 +32,32 @@ namespace Ship
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/fc/47/fc47d552-1b3f-4281-8a0e-5ced929d7ec8/swz69_a1_ship_hask.png";
-
                 PilotNameCanonical = "gideonhask-xiclasslightshuttle";
+            }
+        }
+
+        public class GideonHaskXWA : GideonHask
+        {
+            public GideonHaskXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 12;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                };
             }
         }
     }

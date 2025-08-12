@@ -1,8 +1,6 @@
 ﻿using BoardTools;
 using Content;
 using Movement;
-using Ship;
-using SubPhases;
 using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
@@ -28,15 +26,25 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Illicit,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
                         UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Device                        
                     },
                     seImageNumber: 161,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ConstableZuvioXWA : ConstableZuvio
+        {
+            public ConstableZuvioXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

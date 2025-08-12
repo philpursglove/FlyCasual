@@ -41,8 +41,16 @@ namespace Ship.SecondEdition.DroidTriFighter
                     Legality.ExtendedLegal
                 }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/57/f7/57f74986-1cbf-4745-9792-360153f75719/swz81_phlac-prototype_cutout.png";
+    public class PhlacArphoccPrototypeXWA : PhlacArphoccPrototype
+    {
+        public PhlacArphoccPrototypeXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

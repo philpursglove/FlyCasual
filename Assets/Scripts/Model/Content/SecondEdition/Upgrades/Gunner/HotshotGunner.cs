@@ -1,11 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System.Collections.Generic;
-using Tokens;
-using System.Linq;
-using ActionsList;
+﻿using Content;
+using Ship;
 using System;
+using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,7 +16,8 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Gunner,
                 cost: 6,
                 abilityType: typeof(Abilities.SecondEdition.HotshotGunnerAbility),
-                seImageNumber: 49
+                seImageNumber: 49,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -27,6 +26,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(125, 125)
             );
         }        
+    }
+
+    public class HotshotGunnerXWA : HotshotGunner
+    {
+        public HotshotGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

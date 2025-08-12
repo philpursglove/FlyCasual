@@ -19,7 +19,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility)                
             );
 
-            ImageUrl = "https://i.imgur.com/tkj9nOB.jpg";
+            
         }
     }
 }

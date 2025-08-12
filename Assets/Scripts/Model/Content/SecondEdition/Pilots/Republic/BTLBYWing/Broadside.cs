@@ -33,10 +33,19 @@ namespace Ship
                         Tags.Clone,
                         Tags.YWing
                     },
-                    abilityType: typeof(Abilities.SecondEdition.BroadsideAbility)
+                    abilityType: typeof(Abilities.SecondEdition.BroadsideAbility),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/1e/11/1e117608-f88d-490d-a84e-949b48b7af93/swz48_pilot-broadside.png";
+        public class BroadsideXWA : Broadside
+        {
+            public BroadsideXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

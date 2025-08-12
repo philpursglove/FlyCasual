@@ -38,8 +38,6 @@ namespace Ship
                     }
                 );
 
-                ImageUrl = "https://i.imgur.com/0lxticA.png";
-
                 PilotNameCanonical = "corranhorn-t65xwing";
             }
         }

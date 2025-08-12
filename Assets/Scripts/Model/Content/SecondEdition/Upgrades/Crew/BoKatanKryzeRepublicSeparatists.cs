@@ -1,4 +1,5 @@
-﻿using Upgrade;
+﻿using Content;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 { 
@@ -11,8 +12,9 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Crew,
                 cost: 8,
                 isLimited: true,
-                restriction: new FactionRestriction(Faction.Republic, Faction.Separatists),
-                abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRepublicSeparatistsAbility)
+                restriction: new FactionRestriction(Faction.Republic),
+                abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRepublicSeparatistsAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
     }
@@ -26,12 +28,30 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Crew,
                 cost: 6,
                 isLimited: true,
-                restriction: new FactionRestriction(Faction.Republic, Faction.Separatists),
-                abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRepublicSeparatistsAbility)
+                restriction: new FactionRestriction(Faction.Separatists),
+                abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRepublicSeparatistsAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
     }
 
+    public class BoKatanKryzeRepublicXWA : BoKatanKryzeRepublic
+    {
+        public BoKatanKryzeRepublicXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
+    }
+
+    public class BoKatanKryzeSeparatistsXWA : BoKatanKryzeSeparatists
+    {
+        public BoKatanKryzeSeparatistsXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

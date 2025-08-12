@@ -28,10 +28,19 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.XWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/2/24/Swz25_blue-sqd_a1.png";
+        public class BlueSquadronRookieXWA : BlueSquadronRookie
+        {
+            public BlueSquadronRookieXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -20,19 +20,30 @@ namespace Ship
                     6,
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
+                        UpgradeType.Illicit,
                         UpgradeType.Device,
-                        UpgradeType.Illicit
+                        UpgradeType.Turret,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
                     },
                     tags: new List<Tags>
                     {
                         Tags.YWing
                     },
                     seImageNumber: 167,
-                    skinName: "Gray"
+                    skinName: "Gray",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class HiredGunXWA : HiredGun
+        {
+            public HiredGunXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

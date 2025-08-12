@@ -1,7 +1,5 @@
-﻿using BoardTools;
-using Content;
+﻿using Content;
 using Ship;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -34,10 +32,9 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/3/33/Backstabber-battleofyavin.png";
 
                 MustHaveUpgrades.Add(typeof(CrackShot));
                 MustHaveUpgrades.Add(typeof(Disciplined));
@@ -46,6 +43,15 @@ namespace Ship
                 ShipInfo.Hull++;
 
                 PilotNameCanonical = "backstabber-battleofyavin";
+            }
+        }
+
+        public class BackstabberBoYXWA : BackstabberBoY
+        {
+            public BackstabberBoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

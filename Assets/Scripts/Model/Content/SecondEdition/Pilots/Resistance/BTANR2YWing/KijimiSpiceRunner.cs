@@ -20,22 +20,40 @@ namespace Ship
                     4,
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Tech,
-                        UpgradeType.Turret,
                         UpgradeType.Astromech,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
                         UpgradeType.Illicit,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.YWing
                     },
-                    skinName: "Red"
+                    skinName: "Red",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/0/07/KijimiSpiceRunner.png";
+        public class KijimiSpiceRunnerXWA : KijimiSpiceRunner
+        {
+            public KijimiSpiceRunnerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

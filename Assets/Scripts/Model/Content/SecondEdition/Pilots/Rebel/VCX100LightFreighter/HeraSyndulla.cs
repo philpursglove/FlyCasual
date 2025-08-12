@@ -25,13 +25,13 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Modification,
+                        UpgradeType.Turret,
+                        UpgradeType.Torpedo,
                         UpgradeType.Title                        
                     },
                     tags: new List<Tags>
@@ -48,6 +48,16 @@ namespace Ship
                 );
 
                 PilotNameCanonical = "herasyndulla-vcx100lightfreighter";
+            }
+        }
+
+        public class HeraSyndullaXWA : HeraSyndulla
+        {
+            public HeraSyndullaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

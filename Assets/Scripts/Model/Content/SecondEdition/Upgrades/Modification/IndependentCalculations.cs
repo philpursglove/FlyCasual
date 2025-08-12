@@ -19,7 +19,7 @@ namespace UpgradesList.SecondEdition
                 isStandardazed: true
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/5c/76/5c762c2d-5ae5-43d2-8791-908c211d0515/swz81_upgrade_independent-calculations.png";
+            
         }
     }
 }

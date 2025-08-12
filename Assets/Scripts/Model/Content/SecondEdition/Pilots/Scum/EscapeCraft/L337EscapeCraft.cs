@@ -1,5 +1,4 @@
-﻿using Actions;
-using Content;
+﻿using Content;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -31,7 +30,8 @@ namespace Ship
                     {
                         Tags.Droid
                     },
-                    seImageNumber: 228
+                    seImageNumber: 228,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "l337-escapecraft";
@@ -39,6 +39,16 @@ namespace Ship
                 ShipInfo.ActionIcons.SwitchToDroidActions();
 
                 ShipAbilities.Add(new Abilities.SecondEdition.CoPilotAbility());
+            }
+        }
+
+        public class L337EscapeCraftXWA : L337EscapeCraft
+        {
+            public L337EscapeCraftXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

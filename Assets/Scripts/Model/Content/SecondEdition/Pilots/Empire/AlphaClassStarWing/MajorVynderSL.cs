@@ -2,11 +2,11 @@
 using Actions;
 using ActionsList;
 using Arcs;
+using Content;
 using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Tokens;
 using Upgrade;
 
@@ -34,7 +34,8 @@ namespace Ship
                         UpgradeType.Cannon,
                         UpgradeType.Missile
                     },
-                    isStandardLayout: true                    
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "majorvynder-ssl";
@@ -47,6 +48,15 @@ namespace Ship
                 ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(ReloadAction), ActionColor.Red));
 
                 ShipAbilities.Add(new AlphaClassStarWingSLAbility());
+            }
+        }
+
+        public class MajorVynderSLXWA : MajorVynderSL
+        {
+            public MajorVynderSLXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

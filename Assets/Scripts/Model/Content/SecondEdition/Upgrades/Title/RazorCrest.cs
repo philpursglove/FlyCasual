@@ -27,7 +27,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.RazorCrestAbility)
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/razorcrest.png";
+            
         }
     }
 }

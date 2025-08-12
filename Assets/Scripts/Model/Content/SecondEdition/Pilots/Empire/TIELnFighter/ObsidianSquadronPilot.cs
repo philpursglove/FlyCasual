@@ -1,5 +1,6 @@
 ﻿using Content;
 using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship
 {
@@ -21,8 +22,23 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 91
+                    seImageNumber: 91,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ObsidianSquadronPilotXWA : ObsidianSquadronPilot
+        {
+            public ObsidianSquadronPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 2;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

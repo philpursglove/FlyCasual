@@ -38,12 +38,21 @@ namespace Ship.SecondEdition.Eta2Actis
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Blue"
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "obiwankenobi-eta2actis";
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/2d/36/2d3610e5-ebc0-4448-8fb3-4b6dcc5f391a/swz79_obi-wan_kenobi.png";
+    public class ObiWanKenobiXWA : ObiWanKenobi
+    {
+        public ObiWanKenobiXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

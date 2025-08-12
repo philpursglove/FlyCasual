@@ -1,13 +1,13 @@
-﻿using Ship;
-using Upgrade;
-using SubPhases;
-using System.Linq;
-using Movement;
-using System.Collections.Generic;
+﻿using Actions;
 using ActionsList;
-using Actions;
+using Content;
+using Movement;
+using Ship;
+using SubPhases;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -27,7 +27,8 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Resistance),
                 addAction: new ActionInfo(typeof(CoordinateAction), ActionColor.Purple),
                 addForce: 1,
-                abilityType: typeof(Abilities.SecondEdition.LeiaOrganaResistanceAbility)
+                abilityType: typeof(Abilities.SecondEdition.LeiaOrganaResistanceAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             NameCanonical = "leiaorgana-resistance";
@@ -38,6 +39,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(150, 150)
             );
         }        
+    }
+
+    public class LeiaOrganaResistanceXWA : LeiaOrganaResistance
+    {
+        public LeiaOrganaResistanceXWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -17,9 +18,19 @@ namespace UpgradesList.SecondEdition
                     new ShipRestriction(typeof(Ship.SecondEdition.YV666LightFreighter.YV666LightFreighter))
                 ),
                 abilityType: typeof(Abilities.SecondEdition.HoundsToothAbility),
-                seImageNumber: 148
+                seImageNumber: 148,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class HoundsToothXWA : HoundsTooth
+    {
+        public HoundsToothXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

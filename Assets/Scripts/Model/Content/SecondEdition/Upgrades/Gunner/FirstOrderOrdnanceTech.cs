@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
                 addActionLink: new LinkedActionInfo(typeof(ReloadAction), typeof(TargetLockAction), linkedColor: ActionColor.White)
             );
 
-            ImageUrl = "https://i.imgur.com/QNh8vcN.png";
+            
         }
     }
 }

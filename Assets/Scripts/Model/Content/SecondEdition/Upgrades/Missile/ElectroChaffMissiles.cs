@@ -1,5 +1,6 @@
 ﻿using BoardTools;
 using Bombs;
+using Content;
 using Movement;
 using Obstacles;
 using System;
@@ -11,6 +12,7 @@ namespace UpgradesList.SecondEdition
     public class ElectroChaffMissiles : GenericTimedBombSE
     {
         private ElectroChaffCloud chaffCloud;
+
         public ElectroChaffMissiles() : base()
         {
             UpgradeInfo = new UpgradeCardInfo
@@ -25,8 +27,10 @@ namespace UpgradesList.SecondEdition
                 limited: 2,
                 charges: 1,
                 cannotBeRecharged: true,
-                subType: UpgradeSubType.Bomb
+                subType: UpgradeSubType.Bomb,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+
             detonationRange = 2;
             bombPrefabPath = "Prefabs/Bombs/ElectroChaffCloud";
         }
@@ -73,6 +77,15 @@ namespace UpgradesList.SecondEdition
             ObstaclesManager.DestroyObstacle(chaffCloud);
             Phases.Events.OnEndPhaseStart_Triggers -= base.PlanTimedDetonation;
             base.Detonate();
+        }
+    }
+
+    public class ElectroChaffMissilesXWA : ElectroChaffMissiles
+    {
+        public ElectroChaffMissilesXWA() : base()
+        {
+            UpgradeInfo.Cost = 11;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

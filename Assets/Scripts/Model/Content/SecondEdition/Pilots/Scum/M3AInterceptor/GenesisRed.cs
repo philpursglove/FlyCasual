@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
@@ -28,8 +29,24 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 184
+                    seImageNumber: 184,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class GenesisRedXWA : GenesisRed
+        {
+            public GenesisRedXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Talent,
+                        UpgradeType.Modification
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

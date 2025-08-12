@@ -27,9 +27,9 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
                         UpgradeType.Astromech,
                         UpgradeType.Modification,
+                        UpgradeType.Torpedo,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
@@ -37,8 +37,19 @@ namespace Ship
                         Tags.XWing
                     },
                     seImageNumber: 1,
-                    skinName: "Wedge Antilles"
+                    skinName: "Wedge Antilles",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class WedgeAntillesXWA : WedgeAntilles
+        {
+            public WedgeAntillesXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

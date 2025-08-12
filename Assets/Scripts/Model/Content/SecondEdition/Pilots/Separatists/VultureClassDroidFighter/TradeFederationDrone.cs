@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship.SecondEdition.VultureClassDroidFighter
@@ -19,10 +20,25 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                 {
                     UpgradeType.Modification,
                     UpgradeType.Configuration
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f0/05/f005d66c-754c-4bff-8ca2-45ea67e2d074/swz31_trade-federation-drone.png";
+    public class TradeFederationDroneXWA : TradeFederationDrone
+    {
+        public TradeFederationDroneXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 2;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

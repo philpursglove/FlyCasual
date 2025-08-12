@@ -32,10 +32,25 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                 {
                     Tags.Droid
                 },
-                skinName: "Gray"
+                skinName: "Gray",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/04/05/0405890a-0f0a-444e-b9eb-8d92dbdf3d63/swz29_hadr-chall.png";
+    public class HaorChallPrototypeXWA : HaorChallPrototype
+    {
+        public HaorChallPrototypeXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 2;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 2;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Configuration,
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

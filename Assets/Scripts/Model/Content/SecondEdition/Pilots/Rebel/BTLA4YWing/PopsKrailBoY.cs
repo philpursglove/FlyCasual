@@ -3,47 +3,42 @@ using Content;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class PopsKrailBoY : BTLA4YWing
     {
-        public class PopsKrailBoY : BTLA4YWing
+        public PopsKrailBoY() : base()
         {
-            public PopsKrailBoY() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Pops\" Krail",
-                    "Battle of Yavin",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(PopsKrailBoYAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    isStandardLayout: true
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Pops\" Krail",
+                "Battle of Yavin",
+                Faction.Rebel,
+                4,
+                4,
+                0,
+                isLimited: true,
+                abilityType: typeof(PopsKrailBoYAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Astromech
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                isStandardLayout: true
+            );
 
-                ShipAbilities.Add(new HopeAbility());
+            ShipAbilities.Add(new HopeAbility());
 
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonCannonTurret));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.AdvProtonTorpedoes));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R4Astromech));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonCannonTurret));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.AdvProtonTorpedoes));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R4Astromech));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/9/9b/Popskrail-battleofyavin.png";
-
-                PilotNameCanonical = "popskrail-battleofyavin";
-            }
+            PilotNameCanonical = "popskrail-battleofyavin";
         }
     }
 }

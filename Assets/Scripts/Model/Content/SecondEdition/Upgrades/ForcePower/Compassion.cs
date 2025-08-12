@@ -1,6 +1,6 @@
-﻿using Upgrade;
-using Ship;
+﻿using Ship;
 using System;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,8 +16,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new TagRestriction(Content.Tags.LightSide),
                 abilityType: typeof(Abilities.SecondEdition.CompassionAbility)       
             );
-
-            ImageUrl = "https://i.imgur.com/AcRepjE.png";
         }
     }
 }

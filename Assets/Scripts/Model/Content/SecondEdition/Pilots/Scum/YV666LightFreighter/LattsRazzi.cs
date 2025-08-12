@@ -29,13 +29,13 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Missile,
                         UpgradeType.Title
                     },
                     tags: new List<Tags>
@@ -43,8 +43,19 @@ namespace Ship
                         Tags.BountyHunter,
                         Tags.Freighter
                     },
-                    seImageNumber: 212
+                    seImageNumber: 212,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class LattsRazziXWA : LattsRazzi
+        {
+            public LattsRazziXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

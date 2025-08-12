@@ -1,54 +1,49 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using Ship;
 using SubPhases;
 using System;
-using Content;
 using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class DutchVanderBoY : BTLA4YWing
     {
-        public class DutchVanderBoY : BTLA4YWing
+        public DutchVanderBoY() : base()
         {
-            public DutchVanderBoY() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Dutch\" Vander",
-                    "Battle of Yavin",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(DutchVanderBoYAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    isStandardLayout: true
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Dutch\" Vander",
+                "Battle of Yavin",
+                Faction.Rebel,
+                4,
+                4,
+                0,
+                isLimited: true,
+                abilityType: typeof(DutchVanderBoYAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Astromech
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                isStandardLayout: true
+            );
 
-                ShipAbilities.Add(new HopeAbility());
+            ShipAbilities.Add(new HopeAbility());
 
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonCannonTurret));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.AdvProtonTorpedoes));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.TargetingAstromech));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonCannonTurret));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.AdvProtonTorpedoes));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.TargetingAstromech));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/d/d4/Dutchvander-battleofyavin.png";
-
-                PilotNameCanonical = "dutchvander-battleofyavin";
-            }
+            PilotNameCanonical = "dutchvander-battleofyavin";
         }
     }
 }

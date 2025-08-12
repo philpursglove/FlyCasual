@@ -36,12 +36,31 @@ namespace Ship
                     {
                         Tags.Mandalorian 
                     },
-                    skinName: "Fenn Rau"
+                    skinName: "Fenn Rau",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
-                PilotNameCanonical = "fennrau-rebelalliance";
+                PilotNameCanonical = "fennrau-fangfighter";
 
-                ImageUrl = "https://i.imgur.com/czHjZ4D.png";
+                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/fennrau-rebel-fang.png";
+            }
+        }
+
+        public class FennRauRebelXWA : FennRauRebel
+        {
+            public FennRauRebelXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

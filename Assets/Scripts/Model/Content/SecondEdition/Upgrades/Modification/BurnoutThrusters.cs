@@ -1,11 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System.Collections.Generic;
-using Actions;
+﻿using Actions;
 using ActionsList;
-using Tokens;
-using System.Linq;
+using Ship;
 using SubPhases;
+using Tokens;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -24,9 +22,7 @@ namespace UpgradesList.SecondEdition
                 charges: 1,
                 addAction: new ActionInfo(typeof(SlamAction)),
                 abilityType: typeof(Abilities.SecondEdition.BurnoutThrustersAbility)
-            );
-
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/burnoutthrusters.png";
+            );            
         }        
     }
 }

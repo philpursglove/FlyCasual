@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Ship;
-using ActionsList.SecondEdition;
-using System;
-using SubPhases;
-using Upgrade;
+﻿using ActionsList.SecondEdition;
 using Content;
+using Ship;
+using SubPhases;
+using System;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship
 {
@@ -28,16 +27,26 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
+                        UpgradeType.Missile,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.XWing
                     },
-                    seImageNumber: 3
+                    seImageNumber: 3,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ThaneKyrellXWA : ThaneKyrell
+        {
+            public ThaneKyrellXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

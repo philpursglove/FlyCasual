@@ -21,17 +21,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Sensor,
+                        UpgradeType.Gunner,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
-                        UpgradeType.Gunner,
-                        UpgradeType.Gunner,
                         UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Device
                     },
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
 
                 ModelInfo.SkinName = "Cobalt";
+            }
+        }
+
+        public class CobaltSquadronBomberXWA : CobaltSquadronBomber
+        {
+            public CobaltSquadronBomberXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

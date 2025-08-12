@@ -39,6 +39,29 @@ namespace Ship
                 );
             }
         }
+
+        public class CaptainCardinalXWA : CaptainCardinal
+        {
+            public CaptainCardinalXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 6;
+                pilot.LoadoutValue = 16;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Cannon,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

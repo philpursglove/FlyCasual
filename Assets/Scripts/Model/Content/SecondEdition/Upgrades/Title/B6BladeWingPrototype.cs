@@ -19,8 +19,6 @@ namespace UpgradesList.SecondEdition
                     new ShipRestriction(typeof(Ship.SecondEdition.ASF01BWing.ASF01BWing))
                 )
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/af/a8/afa8ba7b-d5dd-42ac-a992-618bd3f71dbb/swz83_upgrade_b6bladewingprototype1.png";
-        }        
+        }
     }
 }

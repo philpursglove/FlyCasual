@@ -1,5 +1,4 @@
 ﻿using Arcs;
-using BoardTools;
 using Content;
 using Ship;
 using SubPhases;
@@ -33,17 +32,26 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
                     },
                     seImageNumber: 208,
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
+                    legality: new List<Legality>() { Legality.ExtendedLegal },
+                    skinName: "Dalan Oberos"
                 );
+            }
+        }
 
-                ModelInfo.SkinName = "Dalan Oberos";
+        public class DalanOberosXWA : DalanOberos
+        {
+            public DalanOberosXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -20,7 +20,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.SensorJammerAbility)
             );
 
-            ImageUrl = "https://i.imgur.com/hN4ZDsy.jpg";
+            
         }
     }
 }

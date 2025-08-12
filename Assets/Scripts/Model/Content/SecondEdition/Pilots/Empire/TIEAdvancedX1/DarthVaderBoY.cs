@@ -37,7 +37,8 @@ namespace Ship
                         Tags.Sith
                     },
                     skinName: "Blue",
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.Shields++;
@@ -46,9 +47,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(Hate));
                 MustHaveUpgrades.Add(typeof(AfterBurners));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/a9/Darthvader-battleofyavin.png";
-
                 PilotNameCanonical = "darthvader-battleofyavin";
+            }
+        }
+
+        public class DarthVaderBoYXWA : DarthVaderBoY
+        {
+            public DarthVaderBoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

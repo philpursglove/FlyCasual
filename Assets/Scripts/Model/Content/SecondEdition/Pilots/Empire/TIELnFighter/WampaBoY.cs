@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Ship;
-using Abilities.SecondEdition;
-using Upgrade;
-using Content;
+﻿using Abilities.SecondEdition;
 using Actions;
 using ActionsList;
+using Content;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship
 {
@@ -35,12 +34,11 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(TargetLockAction)));
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/0/0c/Wampa-battleofyavin.png";
 
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Elusive));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Vengeful));
@@ -48,6 +46,15 @@ namespace Ship
                 ShipInfo.Hull++;
 
                 PilotNameCanonical = "wampa-battleofyavin";
+            }
+        }
+
+        public class WampaBoYXWA : WampaBoY
+        {
+            public WampaBoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

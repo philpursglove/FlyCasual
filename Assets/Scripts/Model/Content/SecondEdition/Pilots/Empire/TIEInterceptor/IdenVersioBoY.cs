@@ -36,22 +36,29 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.Shields++;
 
-                AutoThrustersAbility oldAbility = (AutoThrustersAbility) ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
-                //oldAbility.DeactivateAbility();
+                AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsBoYRealAbility());
 
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Predator));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Fanatic));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/7/76/Idenversio-battleofyavin.png";
-
                 PilotNameCanonical = "idenversio-battleofyavin";
+            }
+        }
+
+        public class IdenVersioBoYXWA : IdenVersioBoY
+        {
+            public IdenVersioBoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

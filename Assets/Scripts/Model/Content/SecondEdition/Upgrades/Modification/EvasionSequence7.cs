@@ -20,7 +20,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.EvasionSequence7Ability)
             );
 
-            ImageUrl = "https://i.imgur.com/a4AvvnZ.jpg";
+            
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Ship;
-using Upgrade;
-using System;
-using UnityEngine;
+﻿using Content;
+using Ship;
 using Tokens;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,7 +17,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.BosskGunnerAbility),
-                seImageNumber: 139
+                seImageNumber: 139,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -26,6 +27,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(150, 150)
             );
         }        
+    }
+
+    public class BosskXWA : Bossk
+    {
+        public BosskXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

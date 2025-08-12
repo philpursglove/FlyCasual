@@ -4,7 +4,6 @@ using Arcs;
 using Movement;
 using Ship.CardInfo;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Ship
@@ -38,7 +37,7 @@ namespace Ship
                         new ActionInfo(typeof(RotateArcAction))
                     ),
                     new ShipUpgradesInfo(),
-                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal }
+                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal, Content.Legality.XWA }
                 );
 
 

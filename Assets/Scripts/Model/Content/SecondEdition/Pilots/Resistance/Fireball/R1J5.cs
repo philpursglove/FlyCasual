@@ -25,18 +25,29 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.R1J5PilotAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
                         UpgradeType.Modification,
+                        UpgradeType.Missile,
                         UpgradeType.Title
                     },
                     tags: new List<Tags>
                     {
                         Tags.Droid
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
+            }
+        }
+
+        public class R1J5XWA : R1J5
+        {
+            public R1J5XWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

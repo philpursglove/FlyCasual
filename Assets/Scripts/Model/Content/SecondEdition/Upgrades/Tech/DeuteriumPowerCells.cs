@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,18 @@ namespace UpgradesList.SecondEdition
                 cost: 6,
                 charges: 2,
                 restriction: new FactionRestriction(Faction.FirstOrder),
-                abilityType: typeof(Abilities.SecondEdition.DeuteriumPowerCellsAbility)
+                abilityType: typeof(Abilities.SecondEdition.DeuteriumPowerCellsAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class DeuteriumPowerCellsXWA : DeuteriumPowerCells
+    {
+        public DeuteriumPowerCellsXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

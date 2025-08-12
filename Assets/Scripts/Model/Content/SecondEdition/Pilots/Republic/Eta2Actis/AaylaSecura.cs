@@ -26,19 +26,28 @@ namespace Ship.SecondEdition.Eta2Actis
                     UpgradeType.ForcePower,
                     UpgradeType.ForcePower,
                     UpgradeType.Talent,
-                    UpgradeType.Cannon,
                     UpgradeType.Astromech,
-                    UpgradeType.Modification
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon
                 },
                 tags: new List<Tags>
                 {
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Blue"
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/c2/e2/c2e2ee1f-1bdd-4ff7-ad95-c442af9b510a/swz79_aayla-secura.png";
+    public class AaylaSecuraXWA : AaylaSecura
+    {
+        public AaylaSecuraXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

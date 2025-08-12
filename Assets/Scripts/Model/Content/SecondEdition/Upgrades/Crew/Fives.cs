@@ -1,12 +1,11 @@
 ﻿using Ship;
-using Upgrade;
 using SubPhases;
-using System.Linq;
-using Movement;
 using System;
-using Tokens;
 using System.Collections.Generic;
+using System.Linq;
+using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -27,8 +26,6 @@ namespace UpgradesList.SecondEdition
                 Faction.Republic,
                 new Vector2(227, 9)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/fa/fe/fafeeec4-919f-4968-b26f-93f3cdda03b3/swz70_a1_fives_upgrade.png";
         }        
     }
 }
