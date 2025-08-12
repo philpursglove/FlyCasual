@@ -1,9 +1,5 @@
-﻿using ActionsList;
-using Ship;
-using SubPhases;
+﻿using SubPhases;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Tokens;
 using Upgrade;
 
@@ -21,7 +17,7 @@ namespace UpgradesList.SecondEdition
                 cost: 0,
                 abilityType: typeof(Abilities.SecondEdition.TargetingMatrixAbility)
             );
-            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/ChaffParticles.jpg";
+            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/TargetingMatrix.jpg";
         }        
     }
 }
@@ -33,29 +29,17 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            HostShip.OnAttackStartAsAttacker += AssignTrigger;
-        }
-
-        public override void DeactivateAbility()
-        {
-            HostShip.OnAttackStartAsAttacker -= AssignTrigger;
-        }
-
-        public void AssignTrigger()
-        {
             HostShip.OnAfterNeutralizeResults += CheckAbility;
         }
 
-        public void ReleaseTrigger()
+        public override void DeactivateAbility()
         {
             HostShip.OnAfterNeutralizeResults -= CheckAbility;
         }
 
         private void CheckAbility()
         {
-            ReleaseTrigger();
-
-            if (Combat.DiceRollAttack.Focuses > 0)
+            if (HostShip == Combat.Attacker && Combat.DiceRollAttack.Focuses > 0)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAfterNeutralizeResults, AskToStrain);
             }
@@ -65,12 +49,12 @@ namespace Abilities.SecondEdition
         {
 
             AskToUseAbility(
-                    HostUpgrade.UpgradeInfo.Name,
-                    AlwaysUseByDefault,
-                    UseAbility,
-                    descriptionLong: "Do you want to spend one focus result to assign a strain token to the defender?",
-                    imageHolder: HostUpgrade
-                );
+                HostUpgrade.UpgradeInfo.Name,
+                AlwaysUseByDefault,
+                UseAbility,
+                descriptionLong: "Do you want to spend one focus result to assign a strain token to the defender?",
+                imageHolder: HostUpgrade
+            );
         }
 
         private void UseAbility(object sender, EventArgs e)

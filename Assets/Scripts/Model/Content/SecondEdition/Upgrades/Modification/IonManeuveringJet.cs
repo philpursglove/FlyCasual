@@ -1,10 +1,8 @@
 ﻿using ActionsList;
+using Movement;
 using Ship;
-using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Movement;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -22,7 +20,7 @@ namespace UpgradesList.SecondEdition
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.IonManeuveringJetAbility)
             );
-            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/ChaffParticles.jpg";
+            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/IonManeuveringJet.jpg";
         }        
     }
 }

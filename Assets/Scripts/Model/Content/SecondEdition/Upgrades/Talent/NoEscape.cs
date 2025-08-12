@@ -13,7 +13,7 @@ namespace UpgradesList.SecondEdition
                 "No Escape",
                 UpgradeType.Talent,
                 cost: 0,
-                abilityType: typeof(Abilities.SecondEdition.NoEscapeBoEAbility)
+                abilityType: typeof(Abilities.SecondEdition.NoEscapeAbility)
             );
 
             IsHidden = true;
@@ -24,7 +24,7 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    public class NoEscapeBoEAbility : GenericAbility
+    public class NoEscapeAbility : GenericAbility
     {
         public override void ActivateAbility()
         {
