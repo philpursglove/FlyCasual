@@ -30,7 +30,7 @@ namespace UpgradesList.SecondEdition
                     new LinkedActionInfo(typeof(BarrelRollAction), typeof(JamAction), ActionColor.White),
                     new LinkedActionInfo(typeof(BoostAction), typeof(JamAction), ActionColor.White)
                 },
-                isStandardazed: true
+                isStandardized: true
             );
             
             ImageUrl = "https://i.imgur.com/PZiB0nf.png";
