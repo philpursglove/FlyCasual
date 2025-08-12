@@ -90,7 +90,7 @@ namespace Ship.SecondEdition.TIELnFighter
     }
 }
 
-namespace Abilities.Secondedition
+namespace Abilities.SecondEdition
 {
     public class FormedUpAbility : GenericAbility
     {
