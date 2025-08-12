@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
                 cost: 0,
                 abilityType: typeof(Abilities.SecondEdition.TargetingMatrixAbility)
             );
-            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/TargetingMatrix.jpg";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scythe6-battleoverendor.png";
         }        
     }
 }

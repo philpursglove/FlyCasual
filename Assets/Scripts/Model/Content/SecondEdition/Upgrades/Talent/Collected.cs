@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
             );
 
             IsHidden = true;
-            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/Collected.jpg";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/lieutenanthebsly-battleoverendor.png";
         }
     }
 }

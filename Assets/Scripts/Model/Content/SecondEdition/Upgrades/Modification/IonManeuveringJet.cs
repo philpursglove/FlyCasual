@@ -20,7 +20,7 @@ namespace UpgradesList.SecondEdition
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.IonManeuveringJetAbility)
             );
-            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/IonManeuveringJet.jpg";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scythe6-battleoverendor.png";
         }        
     }
 }
