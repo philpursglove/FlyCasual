@@ -81,7 +81,7 @@ namespace SquadBuilderNS
                 if (type.MemberType == MemberTypes.NestedType) continue;
 
                 UpgradeRecord upgradeRecord = new UpgradeRecord(type);
-                if (upgradeRecord.IsAllowedForSquadBuilder) AllUpgrades.Add(upgradeRecord);
+                AllUpgrades.Add(upgradeRecord);
             }
 
             AllUpgrades = AllUpgrades.OrderBy(n => n.Instance.UpgradeInfo.Name).ToList();

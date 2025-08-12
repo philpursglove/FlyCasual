@@ -15,11 +15,11 @@ namespace SquadBuilderNS
         {
             UpgradePanelSquadBuilder.WaitingToLoad = 0;
 
-            List<UpgradeRecord> filteredUpgrades = null;
+            List<UpgradeRecord> filteredUpgrades = Global.SquadBuilder.Database.AllUpgrades.Where(u => u.IsAllowedForSquadBuilder).ToList();
 
             if (slot.Type != UpgradeType.Omni)
             {
-                filteredUpgrades = Global.SquadBuilder.Database.AllUpgrades.Where(n =>
+                filteredUpgrades = filteredUpgrades.Where(n =>
                      n.Instance.HasType(slot.Type)
                      && n.Instance.UpgradeInfo.Restrictions.IsAllowedForShip(Global.SquadBuilder.CurrentShip.Instance)
                      && n.Instance.IsAllowedForShip(Global.SquadBuilder.CurrentShip.Instance)
@@ -27,10 +27,6 @@ namespace SquadBuilderNS
                      && Content.XWingFormats.IsLegalForFormat(n.Instance)
                      && ShipDoesntHaveUpgradeWithSameName(Global.SquadBuilder.CurrentShip.Instance, n.Instance)
                 ).ToList();
-            }
-            else
-            {
-                filteredUpgrades = Global.SquadBuilder.Database.AllUpgrades;
             }
 
             int filteredUpgradesCount = filteredUpgrades.Count();
