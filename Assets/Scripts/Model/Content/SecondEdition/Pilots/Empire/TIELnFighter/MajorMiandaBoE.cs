@@ -1,6 +1,4 @@
-﻿using Abilities.Secondedition;
-using Abilities.SecondEdition;
-using Actions;
+﻿using Actions;
 using ActionsList;
 using Content;
 using Ship;
@@ -37,11 +35,10 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    abilityType: typeof(MajorMiandaAbility),
-                    extraUpgradeIcon: UpgradeType.Talent
+                    abilityType: typeof(Abilities.SecondEdition.MajorMiandaAbility)
                 );
 
-                ShipAbilities.Add(new FormedUpAbility());
+                ShipAbilities.Add(new Abilities.SecondEdition.FormedUpAbility());
                 ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BarrelRollAction), typeof(EvadeAction)));
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(CoordinateAction), ActionColor.Red));
                 ShipInfo.Shields++;
