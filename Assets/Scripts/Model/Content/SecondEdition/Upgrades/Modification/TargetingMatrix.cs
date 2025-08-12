@@ -1,4 +1,5 @@
-﻿using SubPhases;
+﻿using Ship;
+using SubPhases;
 using System;
 using Tokens;
 using Upgrade;
@@ -29,19 +30,19 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            HostShip.OnAfterNeutralizeResults += CheckAbility;
+            HostShip.OnAfterNeutralizeResultsAttacker += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnAfterNeutralizeResults -= CheckAbility;
+            HostShip.OnAfterNeutralizeResultsAttacker -= CheckAbility;
         }
 
         private void CheckAbility()
         {
             if (HostShip == Combat.Attacker && Combat.DiceRollAttack.Focuses > 0)
             {
-                RegisterAbilityTrigger(TriggerTypes.OnAfterNeutralizeResults, AskToStrain);
+                RegisterAbilityTrigger(TriggerTypes.OnAfterNeutralizeResultsAttacker, AskToStrain);
             }
         }
 
