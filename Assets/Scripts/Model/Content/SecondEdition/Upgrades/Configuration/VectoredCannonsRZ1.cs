@@ -28,8 +28,6 @@ namespace UpgradesList.SecondEdition
                 isStandardazed: true
             );
             NameCanonical = "vectoredcannonsrz1";
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b0/1a/b01a4dff-267b-436c-a719-878335302bca/swz83_upgrade_vectoredcannonsrz1.png";
         }
     }
 }
