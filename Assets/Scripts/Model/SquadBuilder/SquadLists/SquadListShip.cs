@@ -33,9 +33,13 @@ namespace SquadBuilderNS
 
         public bool InstallUpgrade(string upgradeNameCanonical, UpgradeType upgradeType)
         {
-            return InstallUpgrade(SquadBuilder.Instance.Database.AllUpgrades.FirstOrDefault(n => n.UpgradeNameCanonical == upgradeNameCanonical && n.UpgradeType == upgradeType));
+            return InstallUpgrade(SquadBuilder.Instance.Database.AllUpgrades.FirstOrDefault(n => n.UpgradeNameCanonical == upgradeNameCanonical && n.UpgradeType == upgradeType && n.AllowableFormats.Contains(List.Format)));
         }
 
+        public bool InstallUpgrade(string upgradeTypeName)
+        {
+            return InstallUpgrade(SquadBuilder.Instance.Database.AllUpgrades.FirstOrDefault(n => n.AllowableFormats.Contains(List.Format) && Type.GetType(upgradeTypeName).IsAssignableFrom(Type.GetType(n.UpgradeTypeName))));
+        }
         public bool InstallUpgrade(UpgradeRecord upgradeRecord)
         {
             try
@@ -48,22 +52,6 @@ namespace SquadBuilderNS
             catch
             {
                 if (!string.IsNullOrEmpty(upgradeRecord.UpgradeTypeName)) Messages.ShowError($"Cannot find upgrade: {upgradeRecord.UpgradeTypeName}");
-                return false;
-            }
-        }
-
-        public bool InstallUpgrade(string upgradeTypeName)
-        {
-            try
-            {
-                GenericUpgrade newUpgrade = (GenericUpgrade)System.Activator.CreateInstance(Type.GetType(upgradeTypeName));
-                Edition.Current.AdaptUpgradeToRules(newUpgrade);
-
-                return TryInstallUpgade(newUpgrade);
-            }
-            catch
-            {
-                if (!string.IsNullOrEmpty(upgradeTypeName)) Messages.ShowError($"Cannot find upgrade: {upgradeTypeName}");
                 return false;
             }
         }
