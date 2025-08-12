@@ -41,6 +41,8 @@ namespace Abilities.SecondEdition
         {
             if (HostShip.Tokens.CountTokensByType<Tokens.FocusToken>() == 0) return;
 
+            if (Combat.ChosenWeapon.WeaponType != WeaponTypes.PrimaryWeapon) return;
+
             RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskUseCollectedAbility);
         }
 

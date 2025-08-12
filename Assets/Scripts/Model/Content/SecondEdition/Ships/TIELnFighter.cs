@@ -9,6 +9,7 @@ using SubPhases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tokens;
 using UnityEngine;
 
 namespace Ship.SecondEdition.TIELnFighter
@@ -106,8 +107,8 @@ namespace Abilities.SecondEdition
 
         private void CheckEndPhaseAbility()
         {
-            if (HostShip.Tokens.GetNonLockRedTokens().Count > 0
-                && hasFriendlyShipsInRange())
+            if (HostShip.Tokens.CountTokensByType<StressToken>() > 0
+                && HasFriendlyShipsInRange())
             {
                 RegisterAbilityTrigger(TriggerTypes.OnRoundEnd, AskRemoveToken);
             }
@@ -115,32 +116,24 @@ namespace Abilities.SecondEdition
 
         private void AskRemoveToken(object sender, EventArgs e)
         {
-            Selection.ChangeActiveShip(HostShip);
-            FormedUpRemoveRedTokenAbilityDecisionSubPhase subphase = Phases.StartTemporarySubPhaseNew<FormedUpRemoveRedTokenAbilityDecisionSubPhase>(
-                "Formed Up: You may remove 1 non-lock red token",
-                Triggers.FinishTrigger
+            AskToUseAbility(
+                HostShip.PilotInfo.PilotName,
+                AlwaysUseByDefault,
+                UseFormedUpAbility,
+                descriptionLong: "Do you want to remove 1 Stress Token?",
+                imageHolder: HostShip
             );
-            subphase.ImageSource = HostReal as IImageHolder;
-            subphase.AbilityHostShip = HostShip;
-            subphase.RemoveOnlyNonLocks = true;
-            subphase.Start();
         }
 
-        private class FormedUpRemoveRedTokenAbilityDecisionSubPhase : RemoveRedTokenDecisionSubPhase
+        private void UseFormedUpAbility(object sender, EventArgs e)
         {
-            public GenericShip AbilityHostShip;
-
-            public override void PrepareCustomDecisions()
-            {
-                DescriptionShort = AbilityHostShip.PilotInfo.PilotName;
-                DescriptionLong = "You may remove 1 non-lock red token";
-
-                DecisionOwner = Selection.ThisShip.Owner;
-                DefaultDecisionName = decisions.First().Name;
-            }
+            HostShip.Tokens.RemoveToken(
+                typeof(StressToken),
+                DecisionSubPhase.ConfirmDecision
+            );
         }
 
-        private bool hasFriendlyShipsInRange()
+        private bool HasFriendlyShipsInRange()
         {
             List<GenericShip> friendlyTies = Board.GetShipsAtRange(HostShip, new Vector2(0, 1), Team.Type.Friendly).Where(n => n is Ship.SecondEdition.TIELnFighter.TIELnFighter).ToList();
             return friendlyTies.Count > 1;
