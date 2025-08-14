@@ -31,12 +31,12 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnMovementFinish += CheckAbility;
+            HostShip.OnMovementFinishSuccessfully += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnMovementFinish -= CheckAbility;
+            HostShip.OnMovementFinishSuccessfully -= CheckAbility;
         }
 
         private void CheckAbility(GenericShip ship)
@@ -67,7 +67,7 @@ namespace Abilities.SecondEdition
                         Triggers.FinishTrigger();
                     },
                     HostUpgrade.UpgradeInfo.Name,
-                    "After you fully execute a Koigran Turn, you may spend 1 Charge to perform an action, even while stressed",
+                    "After you fully execute a Koiogran Turn, you may spend 1 Charge to perform an action, even while stressed",
                     HostUpgrade
                 );
             }
