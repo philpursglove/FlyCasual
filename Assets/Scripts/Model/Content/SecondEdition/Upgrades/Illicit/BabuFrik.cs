@@ -23,7 +23,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.BabuFrikAbility)
             );
 
-            ImageUrl = "https://i.imgur.com/pSLHvH1.png";
+            
         }        
     }
 }

@@ -41,10 +41,30 @@ namespace Ship
                         Tags.Freighter,
                         Tags.YT1300,
                         Tags.LightSide
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/5b/ff/5bffb367-cb6e-4b8b-948f-25a70acd3a3f/swz66_leia-organa.png";
+        public class LeiaOrganaXWA : LeiaOrgana
+        {
+            public LeiaOrganaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

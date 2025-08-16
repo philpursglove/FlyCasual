@@ -28,8 +28,8 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
                         UpgradeType.Astromech,
+                        UpgradeType.Torpedo,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
@@ -37,8 +37,19 @@ namespace Ship
                         Tags.XWing
                     },
                     seImageNumber: 5,
-                    skinName: "Jek Porkins"
+                    skinName: "Jek Porkins",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class JekPorkinsXWA : JekPorkins
+        {
+            public JekPorkinsXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -20,7 +20,7 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Rebel)
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/40/1d/401d56e8-2f49-491b-9815-0f31e6d0b9e1/swz83_hopeful.png";
+            
         }        
     }
 }

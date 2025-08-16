@@ -1,12 +1,9 @@
-﻿using Upgrade;
-using System.Collections.Generic;
-using System.Linq;
-using Actions;
-using ActionsList;
-using Tokens;
+﻿using ActionsList;
+using BoardTools;
+using Content;
 using Ship;
 using System;
-using BoardTools;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -24,10 +21,18 @@ namespace UpgradesList.SecondEdition
                     maxRange: 2,
                     noRangeBonus: true
                 ),
-                abilityType: typeof(Abilities.SecondEdition.SnapShotAbility)
+                abilityType: typeof(Abilities.SecondEdition.SnapShotAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/0c/6b/0c6b9e6c-7c2f-4322-bcf0-f6f2fce44323/swz47_upgrade-snap-shot.png";
+    public class SnapShotXWA : SnapShot
+    {
+        public SnapShotXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

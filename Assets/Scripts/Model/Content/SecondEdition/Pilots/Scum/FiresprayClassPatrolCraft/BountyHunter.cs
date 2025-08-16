@@ -30,9 +30,29 @@ namespace Ship
                         Tags.BountyHunter
                     },
                     seImageNumber: 154,
-                    skinName: "Mandalorian Mercenary"
+                    skinName: "Mandalorian Mercenary",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
             }
         }
+
+        public class BountyHunterXWA : BountyHunter
+        {
+            public BountyHunterXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Gunner,
+                        UpgradeType.Illicit,
+                        UpgradeType.Device,
+                        UpgradeType.Cannon,
+                        UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
+
     }
 }

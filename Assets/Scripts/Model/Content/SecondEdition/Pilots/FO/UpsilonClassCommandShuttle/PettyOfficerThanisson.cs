@@ -42,6 +42,29 @@ namespace Ship
                 );
             }
         }
+
+        public class PettyOfficerThanissonXWA : PettyOfficerThanisson
+        {
+            public PettyOfficerThanissonXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.Cost = 6;
+                pilot.LoadoutValue = 19;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

@@ -3,10 +3,8 @@ using Content;
 using Ship;
 using SubPhases;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Tokens;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship.SecondEdition.Hwk290LightFreighter
@@ -39,12 +37,30 @@ namespace Ship.SecondEdition.Hwk290LightFreighter
                     Tags.Freighter
                 },
                 charges: 2,
-                regensCharges: 1
+                skinName: "Black",
+                regensCharges: 1,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/12/d5/12d5d473-b2ec-419b-a5ec-eb57060684bb/swz85_pilot_gamutkey.png";
-
-            ModelInfo.SkinName = "Black";
+    public class GamutKeyXWA : GamutKey
+    {
+        public GamutKeyXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

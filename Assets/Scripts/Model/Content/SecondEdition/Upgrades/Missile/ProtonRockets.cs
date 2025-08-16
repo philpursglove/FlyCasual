@@ -1,6 +1,5 @@
 ﻿using Arcs;
-using Ship;
-using System.Linq;
+using Content;
 using Tokens;
 using Upgrade;
 
@@ -22,8 +21,18 @@ namespace UpgradesList.SecondEdition
                     charges: 1,
                     arc: ArcType.Bullseye
                 ),
-                seImageNumber: 41
+                seImageNumber: 41,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class ProtonRocketsXWA : ProtonRockets
+    {
+        public ProtonRocketsXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

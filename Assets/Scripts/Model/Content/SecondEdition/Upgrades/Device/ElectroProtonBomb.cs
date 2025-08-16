@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using ActionsList;
+using Bombs;
+using Ship;
+using SubPhases.SecondEdition;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Tokens;
 using UnityEngine;
 using Upgrade;
-using Ship;
-using System.Linq;
-using Bombs;
-using SubPhases.SecondEdition;
-using Tokens;
-using ActionsList;
 
 namespace UpgradesList.SecondEdition
 {
@@ -27,7 +26,6 @@ namespace UpgradesList.SecondEdition
                 limited: 1,
                 restriction: new ActionBarRestriction(typeof(ReloadAction))
             );
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/27/b2/27b2f5f3-8f2c-4480-831d-d593cd9aa567/swz41_electro-proton_bomb.png";
             detonationRange = 2;
             bombPrefabPath = "Prefabs/Bombs/ElectroProtonBomb";
         }

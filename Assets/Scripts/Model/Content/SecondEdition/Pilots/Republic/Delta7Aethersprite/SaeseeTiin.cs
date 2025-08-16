@@ -40,8 +40,16 @@ namespace Ship.SecondEdition.Delta7Aethersprite
                 },
                 skinName: "Saesee Tiin"
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/77/73/777350cb-614b-48fd-ad8d-d9c867053c6b/swz32_saesee-tiin.png";
+    public class SaeseeTiinXWA : SaeseeTiin
+    {
+        public SaeseeTiinXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

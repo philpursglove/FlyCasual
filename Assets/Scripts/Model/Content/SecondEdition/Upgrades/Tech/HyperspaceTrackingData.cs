@@ -1,9 +1,9 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Tokens;
 using Upgrade;
 
@@ -24,8 +24,18 @@ namespace UpgradesList.SecondEdition
                     new BaseSizeRestriction(BaseSize.Large),
                     new FactionRestriction(Faction.FirstOrder)
                     ),
-                abilityType: typeof(Abilities.SecondEdition.HyperspaceTrackingDataAbility)
-                );
+                abilityType: typeof(Abilities.SecondEdition.HyperspaceTrackingDataAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class HyperspaceTrackingDataXWA : HyperspaceTrackingData
+    {
+        public HyperspaceTrackingDataXWA() : base()
+        {
+            UpgradeInfo.Cost = 15;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

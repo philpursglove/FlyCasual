@@ -28,16 +28,26 @@ namespace Ship
                     },
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
-                        UpgradeType.Tech,
                         UpgradeType.Crew,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device
                     },
                     seImageNumber: 162,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SarcoPlankXWA : SarcoPlank
+        {
+            public SarcoPlankXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿using Ship;
-using System.Collections.Generic;
+﻿using Content;
+using Ship;
 using Tokens;
 using Upgrade;
 
@@ -14,13 +14,23 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.ForcePower,
                 cost: 3,
                 abilityType: typeof(Abilities.SecondEdition.HeightenedPerception),
-                seImageNumber: 19
+                seImageNumber: 19,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
 
         public void ModifyPilotSkill(ref int pilotSkill)
         {
             pilotSkill = 7;
+        }
+    }
+
+    public class HeightenedPerceptionXWA : HeightenedPerception
+    {
+        public HeightenedPerceptionXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

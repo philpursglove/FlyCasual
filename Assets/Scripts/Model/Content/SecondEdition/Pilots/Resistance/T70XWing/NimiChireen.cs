@@ -6,20 +6,20 @@ namespace Ship
 {
     namespace SecondEdition.T70XWing
     {
-        public class NimiChereen : T70XWing
+        public class NimiChireen : T70XWing
         {
-            public NimiChereen() : base()
+            public NimiChireen() : base()
             {
                 PilotInfo = new PilotCardInfo25
                 (
-                    "Nimi Chereen",
+                    "Nimi Chireen",
                     "Hopeful Hero",
                     Faction.Resistance,
                     2,
                     4,
                     9,
                     isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.NimiChereenAbility),
+                    abilityType: typeof(Abilities.SecondEdition.NimiChireenAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Tech,
@@ -30,10 +30,19 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.XWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/b/b5/Nimi_chireen.png";
+        public class NimiChireenXWA : NimiChireen
+        {
+            public NimiChireenXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
@@ -41,7 +50,7 @@ namespace Ship
 
 namespace Abilities.SecondEdition
 {
-    public class NimiChereenAbility : GenericAbility
+    public class NimiChireenAbility : GenericAbility
     {
         public override void ActivateAbility()
         {

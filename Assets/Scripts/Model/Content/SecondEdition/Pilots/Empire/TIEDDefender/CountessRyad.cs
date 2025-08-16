@@ -1,9 +1,9 @@
-﻿using Movement;
+﻿using Content;
+using Movement;
 using Ship;
 using System;
-using Upgrade;
 using System.Collections.Generic;
-using Content;
+using Upgrade;
 
 namespace Ship
 {
@@ -37,8 +37,19 @@ namespace Ship
                         Tags.Tie
                     },
                     seImageNumber: 124,
-                    skinName: "Crimson"
+                    skinName: "Crimson",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class CountessRyadXWA : CountessRyad
+        {
+            public CountessRyadXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

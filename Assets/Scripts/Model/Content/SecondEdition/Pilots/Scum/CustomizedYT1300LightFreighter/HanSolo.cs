@@ -25,12 +25,12 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Missile,
                         UpgradeType.Title
                     },
                     tags: new List<Tags>
@@ -38,8 +38,19 @@ namespace Ship
                         Tags.Freighter,
                         Tags.YT1300
                     },
-                    seImageNumber: 222
+                    seImageNumber: 222,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class HanSoloXWA : HanSolo
+        {
+            public HanSoloXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

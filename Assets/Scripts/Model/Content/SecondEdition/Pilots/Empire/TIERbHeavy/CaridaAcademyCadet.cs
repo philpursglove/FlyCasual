@@ -6,13 +6,13 @@ namespace Ship
 {
     namespace SecondEdition.TIERbHeavy
     {
-        public class CardiaAcademyPilot : TIERbHeavy
+        public class CaridaAcademyCadet : TIERbHeavy
         {
-            public CardiaAcademyPilot() : base()
+            public CaridaAcademyCadet() : base()
             {
                 PilotInfo = new PilotCardInfo25
                 (
-                    "Cardia Academy Pilot",
+                    "Carida Academy Cadet",
                     "",
                     Faction.Imperial,
                     1,
@@ -27,10 +27,19 @@ namespace Ship
                         UpgradeType.Cannon,
                         UpgradeType.Cannon,
                         UpgradeType.Configuration
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/43/2d/432db246-0a8d-42de-9711-a893c825b9b3/swz67_carida-cadet.png";
+        public class CaridaAcademyCadetXWA : CaridaAcademyCadet
+        {
+            public CaridaAcademyCadetXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

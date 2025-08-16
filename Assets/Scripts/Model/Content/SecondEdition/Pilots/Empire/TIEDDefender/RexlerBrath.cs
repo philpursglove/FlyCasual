@@ -1,7 +1,7 @@
-﻿using Tokens;
-using Upgrade;
+﻿using Content;
 using System.Collections.Generic;
-using Content;
+using Tokens;
+using Upgrade;
 
 namespace Ship
 {
@@ -34,8 +34,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 122
+                    seImageNumber: 122,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class RexlerBrathXWA : RexlerBrath
+        {
+            public RexlerBrathXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -32,15 +32,23 @@ namespace Ship
                     },
                     abilityText: "While you defend or perform a primary attack, you may spend 1 lock you have on the enemy ship to add 1 focus result to your dice results.",
                     skinName: "Red",
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(Hopeful));
                 MustHaveUpgrades.Add(typeof(ConcussionMissiles));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/sharabey-swz106.png";
-
                 PilotNameCanonical = "sharabey-swz106";
+            }
+        }
+
+        public class SharaBeySSPXWA : SharaBeySSP
+        {
+            public SharaBeySSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

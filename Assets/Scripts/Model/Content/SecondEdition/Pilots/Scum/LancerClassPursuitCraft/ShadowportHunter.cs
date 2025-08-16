@@ -32,5 +32,22 @@ namespace Ship
                 );
             }
         }
+
+        public class ShadowportHunterXWA : ShadowportHunter
+        {
+            public ShadowportHunterXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }

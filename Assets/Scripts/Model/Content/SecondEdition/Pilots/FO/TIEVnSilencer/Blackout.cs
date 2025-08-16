@@ -32,8 +32,29 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class BlackoutXWA : Blackout
+        {
+            public BlackoutXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 6;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

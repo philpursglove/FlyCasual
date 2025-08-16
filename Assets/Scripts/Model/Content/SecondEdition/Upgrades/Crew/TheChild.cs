@@ -1,8 +1,8 @@
-﻿using Upgrade;
-using Ship;
-using System;
+﻿using Ship;
 using SubPhases;
+using System;
 using Tokens;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,8 +19,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Imperial, Faction.Rebel, Faction.Scum),
                 addForce: 2
             );
-
-            ImageUrl = "https://i.imgur.com/8pqkhJr.png";
         }
     }
 }
@@ -40,7 +38,6 @@ namespace Abilities.SecondEdition
         {
             HostShip.OnCheckForceRecurring -= DenyForceRecurring;
             HostShip.OnAttackFinishAsDefender -= CheckForceRegenAbility;
-            Phases.Events.OnSetupEnd -= RegisterAskToAssignConditions;
         }
 
         private void DenyForceRecurring(ref bool isForceRecurring)
@@ -52,13 +49,28 @@ namespace Abilities.SecondEdition
         {
             if (Combat.DamageInfo.IsDefenderSufferedDamage && HostShip.State.Force < HostShip.State.MaxForce)
             {
-                Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: {HostShip.PilotInfo.PilotName} recovers 1 Force");
-                HostShip.State.RestoreForce();
+                Triggers.RegisterTrigger(
+                        new Trigger()
+                        {
+                            Name = "Recover Force",
+                            TriggerType = TriggerTypes.OnAttackFinish,
+                            TriggerOwner = HostShip.Owner.PlayerNo,
+                            EventHandler = ForceRegen
+                        }
+                    );                
             }
+        }
+
+        private void ForceRegen(object sender, EventArgs e)
+        {
+            Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: {HostShip.PilotInfo.PilotName} recovers 1 Force");
+            HostShip.State.RestoreForce();
+            Triggers.FinishTrigger();
         }
 
         private void RegisterAskToAssignConditions()
         {
+            Phases.Events.OnSetupEnd -= RegisterAskToAssignConditions;
             RegisterAbilityTrigger(TriggerTypes.OnSetupEnd, AskOpponentToSelect2Ships);
         }
 
@@ -135,7 +147,7 @@ namespace Conditions
 
         private void CheckBonus(GenericShip ship)
         {
-            if (Combat.Defender.UpgradeBar.HasUpgradeInstalled(typeof(UpgradesList.SecondEdition.TheChild)))
+            if (Combat.Defender.UpgradeBar.HasUpgradeInstalled(typeof(UpgradesList.SecondEdition.TheChild)) && !Combat.Defender.IsDestroyed)
             {
                 CachedAttacker = Combat.Attacker;
                 CachedDefender = Combat.Defender;

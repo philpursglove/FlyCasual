@@ -1,8 +1,4 @@
-﻿using BoardTools;
-using Content;
-using Ship;
-using SubPhases;
-using System;
+﻿using Content;
 using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -33,16 +29,24 @@ namespace Ship.SecondEdition.DroidTriFighter
                 {
                     Tags.Droid
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(Marksmanship));
             MustHaveUpgrades.Add(typeof(AfterBurners));
             MustHaveUpgrades.Add(typeof(ContingencyProtocol));
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/c/ce/Dis347-siegeofcoruscant.png";
-
             PilotNameCanonical = "dis347-siegeofcoruscant";
+        }
+    }
+
+    public class Dis347SoCXWA : Dis347SoC
+    {
+        public Dis347SoCXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

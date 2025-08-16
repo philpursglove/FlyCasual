@@ -29,10 +29,19 @@ namespace Ship.SecondEdition.Eta2Actis
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Blue"
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b4/8d/b48d787d-96db-4955-9a58-5c8aa3ab9035/swz79_jedi-general.png";
+    public class JediGeneralXWA : JediGeneral
+    {
+        public JediGeneralXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

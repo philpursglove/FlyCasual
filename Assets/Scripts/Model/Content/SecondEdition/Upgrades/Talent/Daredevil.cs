@@ -1,5 +1,6 @@
 ﻿using Actions;
 using ActionsList;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -19,8 +20,18 @@ namespace UpgradesList.SecondEdition
                     new BaseSizeRestriction(BaseSize.Small),
                     new ActionBarRestriction(typeof(BoostAction), ActionColor.White)
                 ),
-                seImageNumber: 2
+                seImageNumber: 2,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class DaredevilXWA : Daredevil
+    {
+        public DaredevilXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

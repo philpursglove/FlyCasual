@@ -22,8 +22,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Rebel, Faction.Scum, Faction.Imperial),
                 abilityType: typeof(Abilities.SecondEdition.TristanWrenCrewAbility)
             );
-
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/f/fb/Tristanwren.png";
         }
 
         public override bool IsAllowedForSquadBuilderPostCheck(SquadList squadList)

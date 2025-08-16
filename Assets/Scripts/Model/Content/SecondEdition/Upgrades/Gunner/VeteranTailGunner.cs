@@ -1,8 +1,8 @@
-﻿using Upgrade;
+﻿using Arcs;
+using Content;
 using Ship;
-using Arcs;
-using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,7 +16,8 @@ namespace UpgradesList.SecondEdition
                 cost: 5,
                 abilityType: typeof(Abilities.SecondEdition.VeteranTailGunnerAbility),
                 restriction: new ArcRestriction(ArcType.Rear),
-                seImageNumber: 51
+                seImageNumber: 51,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -24,6 +25,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(409, 32),
                 new Vector2(125, 125)
             );
+        }
+    }
+
+    public class VeteranTailGunnerXWA : VeteranTailGunner
+    {
+        public VeteranTailGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

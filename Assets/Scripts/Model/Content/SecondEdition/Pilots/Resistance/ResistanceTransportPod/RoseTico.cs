@@ -1,5 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using BoardTools;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +29,19 @@ namespace Ship.SecondEdition.ResistanceTransportPod
                     UpgradeType.Crew,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e7/36/e736f7ba-c5dd-4222-9bdb-b889eea03293/swz45_rose-tico.png";
+    public class RoseTicoXWA : RoseTico
+    {
+        public RoseTicoXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

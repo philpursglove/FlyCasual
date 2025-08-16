@@ -1,8 +1,7 @@
-﻿using Upgrade;
+﻿using Arcs;
+using Content;
 using System.Collections.Generic;
-using Ship;
-using System.Linq;
-using Arcs;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -15,9 +14,19 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Talent,
                 cost: 1,
                 abilityType: typeof(Abilities.SecondEdition.MarksmanshipAbility),
-                seImageNumber: 10
+                seImageNumber: 10,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class MarksmanshipXWA : Marksmanship
+    {
+        public MarksmanshipXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

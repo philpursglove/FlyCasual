@@ -26,17 +26,26 @@ namespace Ship.SecondEdition.V19TorrentStarfighter
                 extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
+                    UpgradeType.Modification,
                     UpgradeType.Missile,
                     UpgradeType.Missile,
-                    UpgradeType.Modification
                 },
                 tags: new List<Tags>
                 {
                     Tags.Clone
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/d8a4e985-c13e-440c-bcdf-2d0aab767c6e/SWZ97_Slammerlegal.png";
+    public class SlammerXWA : Slammer
+    {
+        public SlammerXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -26,22 +26,31 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.HoundAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Gunner,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile,
+                        UpgradeType.Missile,
                     },
                     tags: new List<Tags>
                     {
                         Tags.Clone
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/61/ee/61ee228d-9369-4a23-9cb6-3068c0920f10/swz70_a1_hound_ship.png";
+        public class HoundXWA : Hound
+        {
+            public HoundXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

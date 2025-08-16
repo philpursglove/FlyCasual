@@ -36,12 +36,21 @@ namespace Ship.SecondEdition.TIEInterceptor
                 {
                     Tags.Tie
                 },
-                skinName: "Skystrike Academy"
+                skinName: "Skystrike Academy",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "commandantgoran";
+        }
+    }
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/pilots/commandantgoran.png";
+    public class CommandantGoranXWA : CommandantGoran
+    {
+        public CommandantGoranXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

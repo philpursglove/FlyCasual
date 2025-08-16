@@ -1,4 +1,5 @@
 ﻿using Arcs;
+using Content;
 using Ship;
 using System;
 using Upgrade;
@@ -15,9 +16,19 @@ namespace UpgradesList.SecondEdition
                 cost: 4,
                 abilityType: typeof(Abilities.SecondEdition.CrackShotAbility),
                 charges: 1,
-                seImageNumber: 1
+                seImageNumber: 1,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class CrackShotXWA : CrackShot
+    {
+        public CrackShotXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

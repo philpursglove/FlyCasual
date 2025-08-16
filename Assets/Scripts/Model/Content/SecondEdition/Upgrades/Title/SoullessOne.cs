@@ -1,6 +1,7 @@
-﻿using Upgrade;
-using BoardTools;
+﻿using BoardTools;
+using Content;
 using System.Linq;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,10 +19,18 @@ namespace UpgradesList.SecondEdition
                     new ShipRestriction(typeof(Ship.SecondEdition.Belbullab22Starfighter.Belbullab22Starfighter)),
                     new FactionRestriction(Faction.Separatists)
                 ),
-                abilityType: typeof(Abilities.SecondEdition.SoullessOneAbility)
-            );
+                abilityType: typeof(Abilities.SecondEdition.SoullessOneAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
+            );            
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f3/18/f318bb11-2334-4b13-aee2-3930ed267cf0/swz29_a2_soulless-one.png";
+    public class SoullessOneXWA : SoullessOne
+    {
+        public SoullessOneXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

@@ -20,16 +20,27 @@ namespace Ship
                     6,
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Torpedo,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Torpedo
                     },
                     tags: new List<Tags>
                     {
                         Tags.Mandalorian
                     },
                     seImageNumber: 159,
-                    skinName: "Skull Squadron"
+                    skinName: "Skull Squadron",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SkullSquadronPilotXWA : SkullSquadronPilot
+        {
+            public SkullSquadronPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

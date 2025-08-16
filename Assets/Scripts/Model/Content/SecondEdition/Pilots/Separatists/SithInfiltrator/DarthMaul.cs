@@ -38,10 +38,32 @@ namespace Ship.SecondEdition.SithInfiltrator
                 {
                     Tags.DarkSide,
                     Tags.Sith
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/35/d8/35d8295c-1018-4ed7-94a0-c0bff4e6fbbc/swz30_darth-maul.png";
+        }
+    }
+
+    public class DarthMaulPilotXWA : DarthMaulPilot
+    {
+        public DarthMaulPilotXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title,
+                    UpgradeType.TacticalRelay,
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

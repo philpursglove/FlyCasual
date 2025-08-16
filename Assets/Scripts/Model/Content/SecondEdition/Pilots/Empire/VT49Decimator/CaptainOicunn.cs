@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -25,16 +26,27 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
-                        UpgradeType.Device,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Torpedo,
                         UpgradeType.Title
                     },
-                    seImageNumber: 146
+                    seImageNumber: 146,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class CaptainOicunnXWA : CaptainOicunn
+        {
+            public CaptainOicunnXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

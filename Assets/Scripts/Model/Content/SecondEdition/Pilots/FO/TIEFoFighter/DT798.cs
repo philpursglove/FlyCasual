@@ -3,7 +3,6 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 
 namespace Ship
@@ -34,10 +33,27 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/ad1d0d9c-9706-4e50-8d3b-8cd40877ea34/SWZ97_DT798legal.png";
+        public class DT798XWA : DT798
+        {
+            public DT798XWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality>() {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 4;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification
+                };
             }
         }
     }

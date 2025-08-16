@@ -341,12 +341,15 @@ public static class Combat
         }
     }
 
-	private static void CalculateAttackResults()
-	{
+    private static void CalculateAttackResults()
+    {
         Combat.Defender.CallCombatCompareResults();
+        Combat.Attacker.CallAfterNeutralizeResultsAttacker(ContinueAttackResults);
+    }
 
+    private static void ContinueAttackResults()
+    {
         DiceRollAttack.RemoveAllFailures();
-
         Combat.Defender.CallAfterNeutralizeResults(CheckAttackHit);
     }
 

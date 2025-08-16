@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
-using BoardTools;
-using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -34,8 +34,26 @@ namespace Ship
                         Tags.XWing
                     },
                     seImageNumber: 7,
-                    skinName: "Biggs Darklighter"
+                    skinName: "Biggs Darklighter",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class BiggsDarklighterXWA : BiggsDarklighter
+        {
+            public BiggsDarklighterXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

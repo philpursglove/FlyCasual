@@ -1,10 +1,10 @@
-﻿using Ship;
-using Upgrade;
+﻿using Actions;
 using ActionsList;
-using Actions;
-using System;
+using Ship;
 using SubPhases;
+using System;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -27,8 +27,6 @@ namespace UpgradesList.SecondEdition
                 Faction.Republic,
                 new Vector2(261, 1)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/18/f5/18f5a7f6-8fce-4dba-b6cf-f5c739f807ca/swz70_a1_kit-fisto_upgrade.png";
         }        
     }
 }

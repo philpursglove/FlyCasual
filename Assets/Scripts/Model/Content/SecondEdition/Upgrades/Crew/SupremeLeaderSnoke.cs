@@ -1,11 +1,11 @@
-﻿using Ship;
-using Upgrade;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using BoardTools;
+using Content;
+using Ship;
 using SubPhases;
 using System;
-using BoardTools;
-using Content;
+using System.Collections.Generic;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -37,6 +37,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(346, 1),
                 new Vector2(150, 150)
             );
+        }
+    }
+
+    public class SupremeLeaderSnokeXWA : SupremeLeaderSnoke
+    {
+        public SupremeLeaderSnokeXWA() : base()
+        {
+            UpgradeInfo.Cost = 15;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

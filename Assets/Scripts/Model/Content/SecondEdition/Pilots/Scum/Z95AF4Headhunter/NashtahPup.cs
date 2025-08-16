@@ -1,6 +1,8 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SquadBuilderNS;
 using System;
+using System.Collections.Generic;
 
 namespace Ship
 {
@@ -20,7 +22,8 @@ namespace Ship
                     0,
                     isLimited: true,
                     seImageNumber: 171,
-                    skinName: "Nashtah Pup"
+                    skinName: "Nashtah Pup",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipAbilities.Add(new Abilities.SecondEdition.EscapeCraftSE());
@@ -37,6 +40,16 @@ namespace Ship
                     Messages.ShowError("You need YV-666 ship with the Hound's Tooth title\nto use Nashtah Pup in a squad");
                     return false;
                 }
+            }
+        }
+
+        public class NashtahPupXWA : NashtahPup
+        {
+            public NashtahPupXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 0;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

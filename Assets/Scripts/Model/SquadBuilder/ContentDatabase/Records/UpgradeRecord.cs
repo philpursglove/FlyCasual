@@ -1,5 +1,8 @@
-﻿using Editions;
+﻿using Content;
+using Editions;
+using Ship;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
@@ -13,6 +16,7 @@ namespace SquadBuilderNS
         public string UpgradeTypeName => Instance.GetType().ToString();
         public UpgradeType UpgradeType => Instance.UpgradeInfo.UpgradeTypes.First();
         public bool IsAllowedForSquadBuilder => Instance.IsAllowedForSquadBuilder();
+        public List<Legality> AllowableFormats => Instance.UpgradeInfo?.LegalityInfo;
 
         public UpgradeRecord(Type type)
         {

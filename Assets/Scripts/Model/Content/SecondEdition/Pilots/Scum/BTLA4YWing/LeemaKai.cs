@@ -24,20 +24,29 @@ namespace Ship.SecondEdition.BTLA4YWing
                 abilityType: typeof(Abilities.SecondEdition.LeemaKaiAbility),
                 extraUpgradeIcons: new List<UpgradeType>()
                 {
-                    UpgradeType.Tech,
-                    UpgradeType.Turret,
-                    UpgradeType.Torpedo,
-                    UpgradeType.Missile,
                     UpgradeType.Astromech,
-                    UpgradeType.Device
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
                 },
                 tags: new List<Tags>
                 {
                     Tags.YWing
-                }
-            );
+                },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f5/ce/f5ce6adb-194d-458f-a6df-f84a6cc57d33/swz85_pilot_leemakai.png";
+    public class LeemaKaiXWA : LeemaKai
+    {
+        public LeemaKaiXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -39,10 +39,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    skinName: "Yellow Edges"
+                    skinName: "Yellow Edges",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/50/1e/501ea754-bb34-499e-aec9-1f65f941666a/swz84_ship_vultskerris.png";
+        public class VultSkerrisDefenderXWA : VultSkerrisDefender
+        {
+            public VultSkerrisDefenderXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

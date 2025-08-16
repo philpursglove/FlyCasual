@@ -29,13 +29,13 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.ForcePower,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Modification,
+                        UpgradeType.Turret,
+                        UpgradeType.Torpedo,
                         UpgradeType.Title
                     },
                     tags: new List<Tags>
@@ -45,8 +45,19 @@ namespace Ship
                         Tags.LightSide,
                         Tags.Spectre
                     },
-                    seImageNumber: 74
+                    seImageNumber: 74,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class KananJarrusXWA : KananJarrus
+        {
+            public KananJarrusXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
@@ -24,17 +25,28 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
                         UpgradeType.Crew,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Cannon,
+                        UpgradeType.Missile,
                         UpgradeType.Title
                     },
                     seImageNumber: 151,
-                    skinName: "Kath Scarlet"
+                    skinName: "Kath Scarlet",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class KathScarletSVXWA : KathScarletSV
+        {
+            public KathScarletSVXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

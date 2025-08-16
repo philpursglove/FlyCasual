@@ -1,5 +1,4 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -30,8 +29,26 @@ namespace Ship
                         Tags.AWing
                     },
                     seImageNumber: 21,
-                    skinName: "Green"
+                    skinName: "Green",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class GreenSquadronPilotXWA : GreenSquadronPilot
+        {
+            public GreenSquadronPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

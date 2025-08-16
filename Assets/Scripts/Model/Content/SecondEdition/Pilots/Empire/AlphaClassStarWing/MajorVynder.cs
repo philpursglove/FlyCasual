@@ -29,8 +29,19 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
-                    seImageNumber: 135
+                    seImageNumber: 135,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class MajorVynderXWA : MajorVynder
+        {
+            public MajorVynderXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

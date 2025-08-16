@@ -20,8 +20,6 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.CutthroatAbility),
                 restriction: new FactionRestriction(Faction.Scum)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/fd/7b/fd7b2ccc-d500-4a02-bb2a-9e0538406d65/swz85_upgrade_cutthroat.png";
         }        
     }
 }
@@ -42,8 +40,9 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship, bool flag)
         {
+            if (HostShip == ship) return;
             if (!Tools.IsAnotherFriendly(HostShip, ship)) return;
-            if (!ship.PilotInfo.IsLimited && !ship.UpgradeBar.HasUpgradeInstalled(typeof(Cutthroat))) return;
+            if (!(ship.PilotInfo.IsLimited || ship.UpgradeBar.HasUpgradeInstalled(typeof(Cutthroat)))) return;
             
             DistanceInfo distanceInfo = new DistanceInfo(HostShip, ship);
             if (distanceInfo.Range > 3) return;
@@ -73,7 +72,7 @@ namespace Abilities.SecondEdition
             foreach (GenericUpgrade upgrade in HostShip.UpgradeBar.GetUpgradesAll())
             {
                 if (upgrade.State.MaxCharges > 0
-                    && upgrade.UpgradeInfo.RegensChargesCount == 0
+                    && !UpgradeHasRegen(upgrade)
                     && upgrade.State.Charges < upgrade.State.MaxCharges
                     && !upgrade.UpgradeInfo.CannotBeRecharged
                 )
@@ -118,9 +117,9 @@ namespace Abilities.SecondEdition
             foreach (GenericUpgrade upgrade in HostShip.UpgradeBar.GetUpgradesAll())
             {
                 if (upgrade.State.MaxCharges > 0
-                    && upgrade.UpgradeInfo.RegensChargesCount == 0
                     && upgrade.State.Charges < upgrade.State.MaxCharges
                     && !upgrade.UpgradeInfo.CannotBeRecharged
+                    && !UpgradeHasRegen(upgrade)
                 )
                 {
                     subphase.AddDecision(
@@ -161,6 +160,11 @@ namespace Abilities.SecondEdition
             DecisionSubPhase.ConfirmDecisionNoCallback();
             upgrade.State.RestoreCharges(1);
             Triggers.FinishTrigger();
+        }
+
+        private bool UpgradeHasRegen(GenericUpgrade upgrade)
+        {
+            return upgrade.UpgradeInfo.RegensChargesCount > 0 || ((upgrade.UpgradeInfo.WeaponInfo)?.RegensCharges ?? false);
         }
 
         private class CutthroatDecisionSubphase : DecisionSubPhase { }

@@ -34,16 +34,24 @@ namespace Ship.SecondEdition.SithInfiltrator
                     Tags.DarkSide,
                     Tags.Sith
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(Malice));
             MustHaveUpgrades.Add(typeof(RoilingAnger));
             MustHaveUpgrades.Add(typeof(Scimitar));
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/9/93/Countdooku-siegeofcoruscant.png";
-
             PilotNameCanonical = "countdooku-siegeofcoruscant";
+        }
+    }
+
+    public class CountDookuSoCXWA : CountDookuSoC
+    {
+        public CountDookuSoCXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

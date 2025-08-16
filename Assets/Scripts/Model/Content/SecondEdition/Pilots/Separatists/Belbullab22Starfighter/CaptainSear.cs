@@ -1,5 +1,6 @@
 ﻿using ActionsList;
 using Arcs;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,19 @@ namespace Ship.SecondEdition.Belbullab22Starfighter
                     UpgradeType.TacticalRelay,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/76/ba/76baabac-2258-4d60-9cf9-d7b0cdf0faeb/swz29_captain-sear.png";
+    public class CaptainSearXWA : CaptainSear
+    {
+        public CaptainSearXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

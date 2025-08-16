@@ -1,7 +1,8 @@
-﻿using Editions;
+﻿using Content;
+using Editions;
 using Ship;
 using System;
-using UnityEngine;
+using System.Collections.Generic;
 
 namespace SquadBuilderNS
 {
@@ -15,6 +16,7 @@ namespace SquadBuilderNS
         public int PilotSkill => Instance.PilotInfo.Initiative;
         public ShipRecord Ship { get; }
         public bool IsAllowedForSquadBuilder => Instance.PilotInfo != null && Instance.IsAllowedForSquadBuilder();
+        public List<Legality> AllowableFormats => ((PilotCardInfo25)Instance.PilotInfo)?.LegalityInfo;
 
         public PilotRecord(ShipRecord ship, Type type)
         {

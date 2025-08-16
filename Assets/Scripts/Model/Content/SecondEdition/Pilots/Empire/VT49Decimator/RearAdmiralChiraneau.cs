@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using Tokens;
@@ -25,17 +26,28 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
-                        UpgradeType.Device,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Torpedo,
                         UpgradeType.Title
                     },
-                    seImageNumber: 147
+                    seImageNumber: 147,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class RearAdmiralChiraneauXWA : RearAdmiralChiraneau
+        {
+            public RearAdmiralChiraneauXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 8;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 24;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

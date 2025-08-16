@@ -34,10 +34,29 @@ namespace Ship
                         Tags.Spectre,
                         Tags.LightSide
                     },
-                    seImageNumber: 39
+                    seImageNumber: 39,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "ezrabridger-sheathipedeclassshuttle";
+            }
+        }
+
+        public class EzraBridgerXWA : EzraBridger
+        {
+            public EzraBridgerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

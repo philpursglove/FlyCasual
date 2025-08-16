@@ -1,7 +1,8 @@
-﻿using Upgrade;
+﻿using Arcs;
+using Content;
 using Ship;
-using Arcs;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,13 +18,23 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.FirstOrder),
                     new ShipRestriction(typeof(Ship.SecondEdition.TIESfFighter.TIESfFighter))
                 ),
-                abilityType: typeof(Abilities.SecondEdition.SpecialForcesGunnerAbility)
+                abilityType: typeof(Abilities.SecondEdition.SpecialForcesGunnerAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.FirstOrder,
                 new Vector2(336, 1)
             );
+        }
+    }
+
+    public class SpecialForcesGunnerXWA : SpecialForcesGunner
+    {
+        public SpecialForcesGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 0;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

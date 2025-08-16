@@ -1,6 +1,5 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
-using Conditions;
 using Content;
 using Ship;
 using SubPhases;
@@ -9,42 +8,58 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class PopsKrail : BTLA4YWing
     {
-        public class PopsKrail : BTLA4YWing
+        public PopsKrail() : base()
         {
-            public PopsKrail() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Pops\" Krail",
-                    "Gold Five",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    16,
-                    isLimited: true,
-                    abilityType: typeof(PopsKrailAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech,
-                        UpgradeType.Device,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Pops\" Krail",
+                "Gold Five",
+                Faction.Rebel,
+                3,
+                4,
+                16,
+                isLimited: true,
+                abilityType: typeof(PopsKrailAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Astromech,
+                    UpgradeType.Device,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/bec9574e-4585-4b27-8988-bf27c2548a7f/SWZ97_PopsKraillegal.png";
-            }
+    public class PopsKrailXWA : PopsKrail
+    {
+        public PopsKrailXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Turret,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

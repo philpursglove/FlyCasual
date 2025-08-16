@@ -1,7 +1,6 @@
 ﻿using Arcs;
 using BoardTools;
 using Content;
-using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -28,19 +27,30 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.NomLumbAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
+                        UpgradeType.Torpedo
                     },
                     tags: new List<Tags>
                     {
                         Tags.BountyHunter
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class NomLumbXWA : NomLumb
+        {
+            public NomLumbXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

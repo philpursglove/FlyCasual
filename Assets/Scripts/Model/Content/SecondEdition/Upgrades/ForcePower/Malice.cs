@@ -1,7 +1,7 @@
-﻿using Upgrade;
-using System.Collections.Generic;
+﻿using Ship;
 using System;
-using Ship;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,8 +17,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new TagRestriction(Content.Tags.DarkSide),
                 abilityType: typeof(Abilities.SecondEdition.MaliceAbility)       
             );
-
-            ImageUrl = "https://i.imgur.com/X4wX6Pp.png";
         }
     }
 }

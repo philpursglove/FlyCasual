@@ -37,6 +37,28 @@ namespace Ship
                 );
             }
         }
+
+        public class MajorStridanXWA : MajorStridan
+        {
+            public MajorStridanXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.Cost = 6;
+                pilot.LoadoutValue = 17;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Cannon,
+                    UpgradeType.Modification
+                };
+            }
+        }
     }
 }
 

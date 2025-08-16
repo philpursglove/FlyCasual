@@ -31,5 +31,22 @@ namespace Ship
                 );
             }
         }
+
+        public class GandFindsmanXWA : GandFindsman
+        {
+            public GandFindsmanXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }

@@ -38,7 +38,8 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.Hull++;
@@ -46,16 +47,22 @@ namespace Ship
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(TargetLockAction)));
 
                 AutoThrustersAbility oldAbility = (AutoThrustersAbility) ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
-                //oldAbility.DeactivateAbility();
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsBoYRealAbility());
 
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Marksmanship));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.FireControlSystem));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/b/bc/Sigma7-battleofyavin.png";
-
                 PilotNameCanonical = "sigma7-battleofyavin";
+            }
+        }
+
+        public class Sigma7BoYXWA : Sigma7BoY
+        {
+            public Sigma7BoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

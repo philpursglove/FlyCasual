@@ -8,47 +8,65 @@ using Tokens;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ASF01BWing
 {
-    namespace SecondEdition.ASF01BWing
+    public class GinaMoonsong : ASF01BWing
     {
-        public class GinaMoonsong : ASF01BWing
+        public GinaMoonsong() : base()
         {
-            public GinaMoonsong() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Gina Moonsong",
-                    "Insubordinate Ace",
-                    Faction.Rebel,
-                    5,
-                    4,
-                    11,
-                    isLimited: true,
-                    abilityType: typeof(GinaMoonsongAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.BWing
-                    },
-                    skinName: "Gina Moonsong"
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Gina Moonsong",
+                "Insubordinate Ace",
+                Faction.Rebel,
+                5,
+                4,
+                11,
+                isLimited: true,
+                abilityType: typeof(GinaMoonsongAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Device,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.BWing
+                },
+                skinName: "Gina Moonsong",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/32/8a/328a4f31-c01e-4966-a418-59c6fd42739e/swz66_gina-moonsong.png";
-            }
+    public class GinaMoonsongXWA : GinaMoonsong
+    {
+        public GinaMoonsongXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Cannon,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
+
 
 namespace Abilities.SecondEdition
 {

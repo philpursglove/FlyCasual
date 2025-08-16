@@ -25,8 +25,19 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
-                    seImageNumber: 137
+                    seImageNumber: 137,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class RhoSquadronPilotXWA : RhoSquadronPilot
+        {
+            public RhoSquadronPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

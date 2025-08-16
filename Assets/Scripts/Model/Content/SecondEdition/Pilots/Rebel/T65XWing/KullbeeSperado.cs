@@ -1,9 +1,9 @@
-﻿using Upgrade;
-using Abilities.SecondEdition;
-using System.Collections.Generic;
+﻿using Abilities.SecondEdition;
 using ActionsList;
-using SubPhases;
 using Content;
+using SubPhases;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship
 {
@@ -26,8 +26,8 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
+                        UpgradeType.Missile,
                         UpgradeType.Illicit,
                         UpgradeType.Configuration
                     },
@@ -37,8 +37,18 @@ namespace Ship
                         Tags.XWing
                     },
                     seImageNumber: 6,
-                    skinName: "Partisan"
+                    skinName: "Partisan",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class KullbeeSperadoXWA : KullbeeSperado
+        {
+            public KullbeeSperadoXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

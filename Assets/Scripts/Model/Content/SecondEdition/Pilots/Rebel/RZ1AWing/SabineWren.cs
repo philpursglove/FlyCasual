@@ -1,6 +1,4 @@
 ﻿using Content;
-using Mods.ModsList;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -35,12 +33,28 @@ namespace Ship
                         Tags.AWing,
                         Tags.Mandalorian
                     },
-                    skinName: "Green"
+                    skinName: "Green",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "sabinewren-rz1awing";
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/zpIsycf.png";
+        public class SabineWrenXWA : SabineWren
+        {
+            public SabineWrenXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

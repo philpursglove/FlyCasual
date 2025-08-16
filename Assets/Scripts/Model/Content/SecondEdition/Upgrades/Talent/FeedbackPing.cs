@@ -23,7 +23,7 @@ namespace UpgradesList.SecondEdition
                 )
             );
 
-            ImageUrl = "https://i.imgur.com/48SK1DJ.png";
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -29,10 +30,24 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b8/a1/b8a10569-18ca-4111-be65-38d48be9b788/swz47_cards-berwer-kret.png";
+        public class BerwerKretXWA : BerwerKret
+        {
+            public BerwerKretXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

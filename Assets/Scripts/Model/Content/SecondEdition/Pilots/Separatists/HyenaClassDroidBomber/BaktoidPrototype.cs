@@ -33,8 +33,27 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class BaktoidPrototypeXWA : BaktoidPrototype
+    {
+        public BaktoidPrototypeXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Content;
+using System;
 using Tokens;
 using Upgrade;
 
@@ -19,9 +20,19 @@ namespace UpgradesList.SecondEdition
                     requiresToken: typeof(BlueTargetLockToken),
                     charges: 2
                 ),
-                abilityType: typeof(Abilities.SecondEdition.HomingTorpedoesAbility)
+                abilityType: typeof(Abilities.SecondEdition.HomingTorpedoesAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class HomingTorpedoesXWA : HomingTorpedoes
+    {
+        public HomingTorpedoesXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

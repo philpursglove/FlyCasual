@@ -26,23 +26,42 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.LegaFossangAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
+                        UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
+                        UpgradeType.Device,
                         UpgradeType.Turret,
                         UpgradeType.Missile,
-                        UpgradeType.Astromech,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.YWing
                     },
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/SIFbsBi.png";
+        public class LegaFossangXWA : LegaFossang
+        {
+            public LegaFossangXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
+                        UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

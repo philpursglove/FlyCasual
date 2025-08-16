@@ -39,7 +39,8 @@ namespace Ship
                         Tags.Freighter,
                         Tags.YT1300
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipAbilities.Add(new SoloAbility());
@@ -49,9 +50,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(MillenniumFalcon));
                 MustHaveUpgrades.Add(typeof(L337sProgramming));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/5/5e/Hansolo-battleofyavin.png";
-
                 PilotNameCanonical = "hansolo-battleofyavin";
+            }
+        }
+
+        public class HanSoloBoYXWA : HanSoloBoY
+        {
+            public HanSoloBoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

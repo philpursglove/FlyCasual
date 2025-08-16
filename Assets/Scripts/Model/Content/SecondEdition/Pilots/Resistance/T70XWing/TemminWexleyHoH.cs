@@ -27,8 +27,8 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Tech,
+                        UpgradeType.Tech,
                         UpgradeType.Astromech,
-                        UpgradeType.Modification,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
@@ -36,12 +36,21 @@ namespace Ship
                     {
                         Tags.XWing
                     },
-                    skinName: "Green (HoH)"
+                    skinName: "Green (HoH)",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "temminwexley-swz68";
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/2c/81/2c81e32f-8c0d-4d26-a9b5-e6bfbe9dab0e/swz68_temmin-wexley.png";
+        public class TemminWexleyHoHXWA : TemminWexleyHoH
+        {
+            public TemminWexleyHoHXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

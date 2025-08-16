@@ -27,22 +27,40 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.ShasaZaroAbility),
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Tech,
-                        UpgradeType.Turret,
                         UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
                         UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
+                        UpgradeType.Turret,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.YWing
                     },
-                    skinName: "Red"
+                    skinName: "Red",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/AL8m0H5.png";
+        public class ShasaZaroXWA : ShasaZaro
+        {
+            public ShasaZaroXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device,
+                        UpgradeType.Turret
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,9 +1,8 @@
 ﻿using Actions;
 using ActionsList;
 using Arcs;
+using Content;
 using Ship;
-using System.Linq;
-using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -25,9 +24,19 @@ namespace UpgradesList.SecondEdition
                 addArc: new ShipArcInfo(ArcType.SingleTurret),
                 addAction: new ActionInfo(typeof(RotateArcAction)),
                 abilityType: typeof(Abilities.SecondEdition.IonDamageAbilityTurret),
-                seImageNumber: 32
+                seImageNumber: 32,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class IonCannonTurretXWA : IonCannonTurret
+    {
+        public IonCannonTurretXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

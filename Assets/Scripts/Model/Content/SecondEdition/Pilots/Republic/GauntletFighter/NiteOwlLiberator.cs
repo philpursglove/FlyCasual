@@ -24,19 +24,28 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>()
                     {
                         Tags.Mandalorian
                     },
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/7/76/Niteowlliberator.png";
+        public class NiteOwlLiberatorXWA : NiteOwlLiberator
+        {
+            public NiteOwlLiberatorXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

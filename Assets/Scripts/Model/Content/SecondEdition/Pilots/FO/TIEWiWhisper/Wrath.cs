@@ -37,10 +37,29 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/AOPpXkq.png";
+        public class WrathXWA : Wrath
+        {
+            public WrathXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 17;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Cannon,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

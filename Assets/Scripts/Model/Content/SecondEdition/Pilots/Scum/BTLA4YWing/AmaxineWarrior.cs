@@ -29,10 +29,26 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/52/7d/527dd63a-1c64-4d78-bac3-b7b999accaf9/swz85_pilot_amaxinewarrior.png";
+        public class AmaxineWarriorXWA : AmaxineWarrior
+        {
+            public AmaxineWarriorXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

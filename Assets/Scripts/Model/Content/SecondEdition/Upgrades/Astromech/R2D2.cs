@@ -1,7 +1,6 @@
-﻿using Upgrade;
-using UnityEngine;
-using Ship;
+﻿using Content;
 using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,8 +16,18 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.R2AstromechAbility),
                 restriction: new FactionRestriction(Faction.Rebel),
                 charges: 3,
-                seImageNumber: 100
+                seImageNumber: 100,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class R2D2XWA : R2D2
+    {
+        public R2D2XWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

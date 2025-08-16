@@ -31,12 +31,28 @@ namespace Ship.SecondEdition.Delta7BAethersprite
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Plo Koon"
+                skinName: "Plo Koon",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+            
+            PilotNameCanonical = "adigallia-delta7baethersprite";
+        }
+    }
 
-            PilotNameCanonical = "adagallia-delta7baethersprite";
-
-            ImageUrl = "https://infinitearenas.com/xw2/images/pilots/adigallia-delta7baethersprite.png";
+    public class AdiGalliaXWA : AdiGallia
+    {
+        public AdiGalliaXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

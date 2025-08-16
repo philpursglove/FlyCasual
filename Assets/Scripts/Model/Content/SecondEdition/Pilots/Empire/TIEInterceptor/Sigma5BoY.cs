@@ -1,9 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
-using BoardTools;
 using Content;
-using Ship;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
@@ -36,22 +33,29 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.Hull++;
 
-                AutoThrustersAbility oldAbility = (AutoThrustersAbility) ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
-                //oldAbility.DeactivateAbility();
+                AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsBoYRealAbility());
 
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.SensorJammer));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Elusive));
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/8/85/Sigma5-battleofyavin.png";
-
                 PilotNameCanonical = "sigma5-battleofyavin";
+            }
+        }
+
+        public class Sigma5BoYXWA : Sigma5BoY
+        {
+            public Sigma5BoYXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

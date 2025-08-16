@@ -1,5 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using Conditions;
+using Content;
 using Mods;
 using Mods.ModsList;
 using Ship;
@@ -29,19 +30,28 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Astromech,
                         UpgradeType.Sensor,
                         UpgradeType.Torpedo,
-                        UpgradeType.Astromech
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/80/40/8040bcab-ebc0-487e-8dff-bd69da7311dd/swz40_padme-amidala.png";
 
                 if (ModsManager.Mods[typeof(LimitedEditionNabooRoyalN1StarfighterMod)].IsOn)
                 {
                     ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e8/c1/e8c1866f-a83a-469f-b2c0-a144c166fced/swzp02_padme-amidala.jpg";
                     ModelInfo.SkinName = "Silver";
                 }
+            }
+        }
+
+        public class PadmeAmidalaXWA : PadmeAmidala
+        {
+            public PadmeAmidalaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

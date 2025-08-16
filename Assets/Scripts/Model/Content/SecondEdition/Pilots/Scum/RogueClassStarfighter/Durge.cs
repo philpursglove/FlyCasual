@@ -25,18 +25,27 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon
                     },
                     tags: new List<Tags>()
                     {
                         Tags.BountyHunter
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/9e694fa9-2526-4309-9c51-ad78603548bb/SWZ97_Durge2legal.png";
+        public class DurgeXWA : Durge
+        {
+            public DurgeXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

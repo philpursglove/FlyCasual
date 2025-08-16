@@ -36,12 +36,29 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.LightSide
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "anakinskywalker-nabooroyaln1starfighter";
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/01/c2/01c23677-9c23-46fd-a97d-082f3f7866fd/swz40_anakin-skywalker.png";
+        public class AnakinSkywalkerXWA : AnakinSkywalker
+        {
+            public AnakinSkywalkerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo,
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

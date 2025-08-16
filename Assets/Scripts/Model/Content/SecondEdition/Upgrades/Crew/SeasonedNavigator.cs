@@ -1,9 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System.Collections.Generic;
+﻿using Content;
 using Movement;
+using Ship;
+using System.Collections.Generic;
 using UnityEngine;
-using Content;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -29,6 +29,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(369, 24),
                 new Vector2(125, 125)
             );
+        }
+    }
+
+    public class SeasonedNavigatorXWA : SeasonedNavigator
+    {
+        public SeasonedNavigatorXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

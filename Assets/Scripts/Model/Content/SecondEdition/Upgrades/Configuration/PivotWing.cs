@@ -1,8 +1,8 @@
-﻿using Upgrade;
-using Ship;
-using System;
+﻿using Ship;
 using SubPhases;
+using System;
 using Tokens;
+using Upgrade;
 
 namespace UpgradesList.FirstEdition
 {
@@ -19,6 +19,7 @@ namespace UpgradesList.FirstEdition
             );
 
             AnotherSide = typeof(PivotWingLanding);
+            NameCanonical = "pivotwing-sideb";
         }
     }
 
@@ -35,6 +36,7 @@ namespace UpgradesList.FirstEdition
             );
 
             AnotherSide = typeof(PivotWingAttack);
+            NameCanonical = "pivotwing";
         }
     }
 }
@@ -187,9 +189,8 @@ namespace UpgradesList.SecondEdition
                 seImageNumber: 107
             );
 
-            NameCanonical = "pivotwing-sideb";
-
             AnotherSide = typeof(PivotWingClosed);
+            NameCanonical = "pivotwing-sideb";
         }
     }
 
@@ -209,8 +210,8 @@ namespace UpgradesList.SecondEdition
             );
 
             IsSecondSide = true;
-
             AnotherSide = typeof(PivotWingOpen);
+            NameCanonical = "pivotwing";
         }
     }
 }

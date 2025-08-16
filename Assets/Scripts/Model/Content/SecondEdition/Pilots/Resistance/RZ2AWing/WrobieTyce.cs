@@ -25,18 +25,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Modification,
                         UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
                         Tags.AWing
                     },
-                    skinName: "Green (HoH)"
+                    skinName: "Green (HoH)",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/d3/66/d3669149-00da-4abf-9e08-9655e10db166/swz68_wrobie-tyce.png";
+        public class WrobieTyceXWA : WrobieTyce
+        {
+            public WrobieTyceXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

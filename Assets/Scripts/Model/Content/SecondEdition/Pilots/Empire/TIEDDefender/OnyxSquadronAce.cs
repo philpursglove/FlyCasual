@@ -1,6 +1,6 @@
-﻿using Upgrade;
+﻿using Content;
 using System.Collections.Generic;
-using Content;
+using Upgrade;
 
 namespace Ship
 {
@@ -30,8 +30,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 125
+                    seImageNumber: 125,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class OnyxSquadronAceXWA : OnyxSquadronAce
+        {
+            public OnyxSquadronAceXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

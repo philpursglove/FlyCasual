@@ -1,33 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.FiresprayClassPatrolCraft
 {
-    namespace SecondEdition.FiresprayClassPatrolCraft
+    public class SeparatistRacketeer : FiresprayClassPatrolCraft
     {
-        public class SeparatistRacketeer : FiresprayClassPatrolCraft
+        public SeparatistRacketeer() : base()
         {
-            public SeparatistRacketeer() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Separatist Racketeer",
-                    "",
-                    Faction.Separatists,
-                    2,
-                    7,
-                    10,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
-                        UpgradeType.Device
-                    },
-                    skinName: "Jango Fett"
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Separatist Racketeer",
+                "",
+                Faction.Separatists,
+                2,
+                7,
+                10,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Device
+                },
+                skinName: "Jango Fett",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/16/8c/168ca8f4-0015-44a3-9a7c-099caff70881/swz82_a1_separatist-racketeer.png";
-            }
+    public class SeparatistRacketeerXWA : SeparatistRacketeer
+    {
+        public SeparatistRacketeerXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Missile,
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

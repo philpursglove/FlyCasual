@@ -1,10 +1,11 @@
-﻿using Upgrade;
-using SubPhases;
-using Bombs;
-using System.Collections.Generic;
+﻿using Bombs;
+using Content;
 using Ship;
+using SubPhases;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,8 +20,18 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.GeniusAbility),
                 restriction: new FactionRestriction(Faction.Scum),                
-                seImageNumber: 143
+                seImageNumber: 143,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class GeniusXWA : Genius
+    {
+        public GeniusXWA() : base()
+        {
+            UpgradeInfo.Cost = 0;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

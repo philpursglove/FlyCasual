@@ -38,7 +38,8 @@ namespace Ship
                         UpgradeType.Gunner,
                         UpgradeType.Astromech
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.Shields++;
@@ -51,6 +52,15 @@ namespace Ship
                 PilotNameCanonical = "oddball-siegeofcoruscant";
 
                 ModelInfo.SkinName = "Red";
+            }
+        }
+
+        public class OddballSoCXWA : OddballSoC
+        {
+            public OddballSoCXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

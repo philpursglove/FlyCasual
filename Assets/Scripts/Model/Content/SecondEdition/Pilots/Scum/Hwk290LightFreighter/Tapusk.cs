@@ -28,19 +28,38 @@ namespace Ship.SecondEdition.Hwk290LightFreighter
                 {
                     UpgradeType.Talent,
                     UpgradeType.Crew,
-                    UpgradeType.Device,
                     UpgradeType.Illicit,
                     UpgradeType.Modification,
-                    UpgradeType.Modification
+                    UpgradeType.Modification,
+                    UpgradeType.Device
                 },
                 tags: new List<Tags>
                 {
                     Tags.Freighter
                 },
-                skinName: "Black"
-            );
+                skinName: "Black",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+        }
+    }
 
-            ImageUrl = "https://i.imgur.com/oIZlcvg.png";
+    public class TapuskXWA : Tapusk
+    {
+        public TapuskXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

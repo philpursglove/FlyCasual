@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
                 //seImageNumber: 69
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/86/a1/86a1115b-eb55-491b-84e4-67e2b6124999/swz19_a1_primed-thrusters.png";
+            
         }
     }
 }

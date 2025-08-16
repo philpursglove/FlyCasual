@@ -35,10 +35,19 @@ namespace Ship
                     {
                         Tags.Clone,
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b2/2d/b22dd819-8ac1-4767-b870-0212bb2601fa/swz48_pilot-matchstick.png";
+        public class MatchstickXWA : Matchstick
+        {
+            public MatchstickXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

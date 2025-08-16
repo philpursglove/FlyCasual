@@ -1,6 +1,6 @@
-﻿using Upgrade;
+﻿using Content;
 using System.Collections.Generic;
-using Content;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -23,8 +23,6 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
-
-            ImageUrl = "https://i.imgur.com/6hwr0eL.jpg";
         }
     }
 }

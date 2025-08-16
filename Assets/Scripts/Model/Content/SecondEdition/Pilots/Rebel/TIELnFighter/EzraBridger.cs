@@ -33,13 +33,24 @@ namespace Ship
                         Tags.Spectre,
                         Tags.Tie                        
                     },
-                    seImageNumber: 46
+                    seImageNumber: 46,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "ezrabridger-tielnfighter";
 
                 ModelInfo.ModelName = "TIE Fighter Rebel";
                 ModelInfo.SkinName = "Rebel";
+            }
+        }
+
+        public class EzraBridgerXWA : EzraBridger
+        {
+            public EzraBridgerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

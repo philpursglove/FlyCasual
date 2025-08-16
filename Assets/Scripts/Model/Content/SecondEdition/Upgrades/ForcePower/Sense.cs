@@ -2,7 +2,6 @@
 using Content;
 using Ship;
 using SubPhases;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
@@ -26,6 +25,15 @@ namespace UpgradesList.SecondEdition
                 }
             );
         }        
+    }
+
+    public class SenseXWA : Sense
+    {
+        public SenseXWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

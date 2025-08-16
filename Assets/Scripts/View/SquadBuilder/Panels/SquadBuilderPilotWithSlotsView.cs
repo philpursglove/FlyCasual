@@ -3,8 +3,6 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Upgrade;
 
@@ -76,7 +74,27 @@ namespace SquadBuilderNS
                 UpgradeSlotPanels = new List<UpgradeSlotPanel>();
                 UpgradePanelSquadBuilder.WaitingToLoad = 0;
 
-                List<UpgradeSlot> availableSlots = Global.SquadBuilder.CurrentShip.Instance.UpgradeBar.GetUpgradeSlots().OrderBy(s => s.Type).ToList();
+                UpgradeType[] slotOrder = new[] {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration,
+                    UpgradeType.Title,
+                    UpgradeType.TacticalRelay,
+                };
+
+                List<UpgradeSlot> availableSlots = Global.SquadBuilder.CurrentShip.Instance.UpgradeBar.GetUpgradeSlots().OrderBy(s => Array.IndexOf(slotOrder, s.Type)).ToList();
 
                 foreach (UpgradeSlot slot in availableSlots)
                 {

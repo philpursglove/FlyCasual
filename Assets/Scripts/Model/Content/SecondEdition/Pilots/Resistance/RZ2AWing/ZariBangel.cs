@@ -24,18 +24,29 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
                         UpgradeType.Modification,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Tech,
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
                         Tags.AWing
                     },
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ZariBangelXWA : ZariBangel
+        {
+            public ZariBangelXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -22,8 +23,19 @@ namespace Ship
                         UpgradeType.Missile,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 30
+                    seImageNumber: 30,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class BanditSquadronPilotXWA : BanditSquadronPilot
+        {
+            public BanditSquadronPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

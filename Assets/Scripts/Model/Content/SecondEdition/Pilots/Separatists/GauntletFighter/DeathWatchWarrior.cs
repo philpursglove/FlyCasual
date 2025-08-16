@@ -2,42 +2,58 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.GauntletFighter
 {
-    namespace SecondEdition.GauntletFighter
+    public class DeathWatchWarrior : GauntletFighter
     {
-        public class DeathWatchWarrior : GauntletFighter
+        public DeathWatchWarrior() : base()
         {
-            public DeathWatchWarrior() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Death Watch Warrior",
-                    "Fanatical Adheren",
-                    Faction.Separatists,
-                    2,
-                    7,
-                    10,
-                    isLimited: true,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Device,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Mandalorian 
-                    },
-                    skinName: "CIS Dark"
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Death Watch Warrior",
+                "Fanatical Adheren",
+                Faction.Separatists,
+                2,
+                7,
+                10,
+                isLimited: true,
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Mandalorian 
+                },
+                skinName: "CIS Dark",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/e/ed/Deathwatchwarrior.png";
-            }
+    public class DeathWatchWarriorXWA : DeathWatchWarrior
+    {
+        public DeathWatchWarriorXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

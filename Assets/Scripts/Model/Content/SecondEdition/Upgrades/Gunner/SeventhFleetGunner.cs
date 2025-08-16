@@ -1,11 +1,11 @@
-﻿using Upgrade;
+﻿using BoardTools;
+using Content;
 using Ship;
-using ActionsList;
+using SubPhases;
 using System;
-using BoardTools;
 using System.Linq;
 using UnityEngine;
-using SubPhases;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,7 +19,8 @@ namespace UpgradesList.SecondEdition
                 cost: 13,
                 restriction: new FactionRestriction(Faction.Republic),
                 charges: 1,
-                abilityType: typeof(Abilities.SecondEdition.SeventhFleetGunnerAbility)
+                abilityType: typeof(Abilities.SecondEdition.SeventhFleetGunnerAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -27,6 +28,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(289, 59),
                 new Vector2(50, 50)
             );
+        }
+    }
+
+    public class SeventhFleetGunnerXWA : SeventhFleetGunner
+    {
+        public SeventhFleetGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

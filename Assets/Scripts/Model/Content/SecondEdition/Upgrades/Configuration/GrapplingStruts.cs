@@ -24,8 +24,7 @@ namespace UpgradesList.SecondEdition
 
             AnotherSide = typeof(GrapplingStrutsOpen);
             SelectSideOnSetup = false;
-
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/grapplingstruts.png";
+            NameCanonical = "grapplingstruts";
         }
     }
 
@@ -45,8 +44,7 @@ namespace UpgradesList.SecondEdition
             );
 
             AnotherSide = typeof(GrapplingStrutsClosed);
-
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/grapplingstruts-sideb.png";
+            NameCanonical = "grapplingstruts-sideb";
         }
     }
 }

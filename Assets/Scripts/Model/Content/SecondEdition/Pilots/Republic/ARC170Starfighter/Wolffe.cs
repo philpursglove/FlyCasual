@@ -38,10 +38,28 @@ namespace Ship
                     {
                         Tags.Clone
                     },
-                    skinName: "Wolffe"
+                    skinName: "Wolffe",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/fb/ae/fbae3c90-c9bb-483a-a929-4381c205d416/swz33_wolffe.png";
+        public class WolffeXWA : Wolffe
+        {
+            public WolffeXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

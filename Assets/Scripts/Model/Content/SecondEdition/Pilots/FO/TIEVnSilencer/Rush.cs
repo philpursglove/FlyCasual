@@ -33,8 +33,28 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class RushXWA : Rush
+        {
+            public RushXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 8;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

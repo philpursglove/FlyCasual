@@ -35,8 +35,8 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ModelInfo.SkinName = "White Death";
@@ -45,9 +45,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(BarrageRockets));
                 MustHaveUpgrades.Add(typeof(ProximityMines));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/tomaxbren-swz105.png";
-
                 PilotNameCanonical = "tomaxbren-swz105";
+            }
+        }
+
+        public class TomaxBrenSSPXWA : TomaxBrenSSP
+        {
+            public TomaxBrenSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

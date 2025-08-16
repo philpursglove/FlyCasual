@@ -28,20 +28,29 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.BenTeeneAbility),
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
                         UpgradeType.Crew,
+                        UpgradeType.Sensor,
                         UpgradeType.Gunner,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Tech,
                         UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Device
                     },
+                    skinName: "Crimson",
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ModelInfo.SkinName = "Crimson";
+        public class BenTeeneXWA : BenTeene
+        {
+            public BenTeeneXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

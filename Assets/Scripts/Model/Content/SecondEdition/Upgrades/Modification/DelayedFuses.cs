@@ -15,7 +15,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.DelayedFusesAbility),
                 seImageNumber: 74);
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/delayedfuses.png";
+            
         }
         
     }

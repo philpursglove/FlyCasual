@@ -3,42 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class NorraWexley : BTLA4YWing
     {
-        public class NorraWexley : BTLA4YWing
+        public NorraWexley() : base()
         {
-            public NorraWexley() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Norra Wexley",
-                    "Gold Nine",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    18,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.NorraWexleyAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Turret,
-                        UpgradeType.Gunner,
-                        UpgradeType.Astromech,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    seImageNumber: 13
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Norra Wexley",
+                "Gold Nine",
+                Faction.Rebel,
+                5,
+                5,
+                18,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.NorraWexleyAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Turret,
+                    UpgradeType.Gunner,
+                    UpgradeType.Astromech,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                seImageNumber: 13,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "norrawexley-btla4ywing";
-            }
+            PilotNameCanonical = "norrawexley-btla4ywing";
+        }
+    }
+
+    public class NorraWexleyXWA : NorraWexley
+    {
+        public NorraWexleyXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo                        
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

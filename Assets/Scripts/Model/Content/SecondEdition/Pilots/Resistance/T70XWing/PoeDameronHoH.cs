@@ -40,12 +40,21 @@ namespace Ship
                     {
                         Tags.XWing
                     },
-                    skinName: "Poe Dameron (RoS)"
+                    skinName: "Poe Dameron (RoS)",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "poedameron-swz68";
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/76/66/76668017-6298-4471-b1cc-d388d5fc11b8/swz68_poe-dameron.png";
+        public class PoeDameronHoHXWA : PoeDameronHoH
+        {
+            public PoeDameronHoHXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

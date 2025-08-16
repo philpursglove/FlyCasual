@@ -28,10 +28,25 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/37/0c/370c5cb2-0f0d-4d6f-9358-eb3cad9088dc/swz29_precise-hunter.png";
+        }
+    }
+
+    public class PreciseHunterXWA : PreciseHunter
+    {
+        public PreciseHunterXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 2;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Cannon,
+                UpgradeType.Configuration,
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

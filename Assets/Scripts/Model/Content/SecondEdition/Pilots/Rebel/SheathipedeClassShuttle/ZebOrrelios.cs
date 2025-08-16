@@ -33,10 +33,29 @@ namespace Ship
                     {
                         Tags.Spectre
                     },
-                    seImageNumber: 40
+                    seImageNumber: 40,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "zeborrelios-sheathipedeclassshuttle";
+            }
+        }
+
+        public class ZebOrreliosXWA : ZebOrrelios
+        {
+            public ZebOrreliosXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

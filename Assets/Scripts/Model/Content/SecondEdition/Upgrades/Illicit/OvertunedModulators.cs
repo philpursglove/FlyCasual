@@ -19,7 +19,7 @@ namespace UpgradesList.SecondEdition
                 charges: 1
             );
 
-            ImageUrl = "https://i.imgur.com/WC14X2N.png";
+            
         }        
     }
 }

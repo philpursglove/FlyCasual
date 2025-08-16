@@ -1,5 +1,6 @@
 ﻿using Abilities.Parameters;
 using System.Collections.Generic;
+using Content;
 using Upgrade;
 
 namespace Ship
@@ -30,10 +31,31 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification
                     },
-                    abilityType: typeof(Abilities.SecondEdition.AgentTerexPilotAbility)
+                    abilityType: typeof(Abilities.SecondEdition.AgentTerexPilotAbility),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/9a/27/9a27c06f-58be-49b7-ab36-63dc2fae3b9a/swz69_a1_ship_terex.png";
+        public class AgentTerexXWA : AgentTerex
+        {
+            public AgentTerexXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 8;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification
+                };
             }
         }
     }

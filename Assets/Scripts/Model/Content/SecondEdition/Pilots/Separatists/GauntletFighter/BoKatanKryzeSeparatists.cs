@@ -7,49 +7,67 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.GauntletFighter
 {
-    namespace SecondEdition.GauntletFighter
+    public class BoKatanKryzeSeparatists : GauntletFighter
     {
-        public class BoKatanKryzeSeparatists : GauntletFighter
+        public BoKatanKryzeSeparatists() : base()
         {
-            public BoKatanKryzeSeparatists() : base()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Bo-Katan Kryze",
+                "Vizsla's Lieutenant",
+                Faction.Separatists,
+                4,
+                6,
+                12,
+                isLimited: true,
+                charges: 1,
+                regensCharges: 1,
+                abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeSeparatistsAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Mandalorian 
+                },
+                skinName: "CIS",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            PilotNameCanonical = "bokatankryze-separatistalliance";
+        }
+    }
+
+    public class BoKatanKryzeSeparatistsXWA : BoKatanKryzeSeparatists
+    {
+        public BoKatanKryzeSeparatistsXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Bo-Katan Kryze",
-                    "Vizsla's Lieutenant",
-                    Faction.Separatists,
-                    4,
-                    6,
-                    12,
-                    isLimited: true,
-                    charges: 1,
-                    regensCharges: 1,
-                    abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeSeparatistsAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Device,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Mandalorian 
-                    },
-                    skinName: "CIS"
-                );
-
-                PilotNameCanonical = "bokatankryze-separatistalliance";
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/a4/Bokatankryze-separatist-alliance.png";
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Configuration,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

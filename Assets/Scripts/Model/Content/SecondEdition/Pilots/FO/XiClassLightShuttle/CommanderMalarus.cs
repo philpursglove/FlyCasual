@@ -2,6 +2,7 @@
 using Ship;
 using System;
 using System.Collections.Generic;
+using Content;
 using Upgrade;
 
 namespace Ship
@@ -31,12 +32,32 @@ namespace Ship
                         UpgradeType.Crew,
                         UpgradeType.Modification,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/85/c4/85c41c14-3071-401b-b3ee-89d048acd9f0/swz69_a1_ship_malarus.png";
-
                 PilotNameCanonical = "commandermalarus-xiclasslightshuttle";
+            }
+        }
+
+        public class CommanderMalarusXWA : CommanderMalarus
+        {
+            public CommanderMalarusXWA(): base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 14;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
             }
         }
     }

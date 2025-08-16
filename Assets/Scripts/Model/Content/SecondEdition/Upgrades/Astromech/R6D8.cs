@@ -1,9 +1,7 @@
-﻿using Upgrade;
-using System.Linq;
-using System.Collections.Generic;
-using System;
+﻿using BoardTools;
+using Content;
 using Ship;
-using BoardTools;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,10 +15,18 @@ namespace UpgradesList.SecondEdition
                 cost: 4,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.R6D8Ability)
+                abilityType: typeof(Abilities.SecondEdition.R6D8Ability),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e5/c2/e5c25a09-ca2a-4742-92d5-d39d0d33d99b/swz68_r6d8.png";
+    public class R6D8XWA : R6D8
+    {
+        public R6D8XWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

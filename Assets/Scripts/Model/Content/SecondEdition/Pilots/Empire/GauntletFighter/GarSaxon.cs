@@ -28,19 +28,28 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>()
                     {
                         Tags.Mandalorian 
                     },
-                    skinName: "CIS Dark"
+                    skinName: "CIS Dark",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/7/79/Garsaxon.png";
+        public class GarSaxonXWA : GarSaxon
+        {
+            public GarSaxonXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 24;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

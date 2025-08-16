@@ -2,47 +2,62 @@
 using BoardTools;
 using Content;
 using Ship;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class HortonSalm : BTLA4YWing
     {
-        public class HortonSalm : BTLA4YWing
+        public HortonSalm() : base()
         {
-            public HortonSalm() : base()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Horton Salm",
+                "Gray Leader",
+                Faction.Rebel,
+                4,
+                3,
+                7,
+                isLimited: true,
+                abilityType: typeof(HortonSalmAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Astromech,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                seImageNumber: 15,
+                skinName: "Gray",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class HortonSalmXWA : HortonSalm
+    {
+        public HortonSalmXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Horton Salm",
-                    "Gray Leader",
-                    Faction.Rebel,
-                    4,
-                    3,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(HortonSalmAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Astromech,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    seImageNumber: 15,
-                    skinName: "Gray"
-                );
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Turret,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Ship;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Content;
 using Tokens;
 using Upgrade;
 
@@ -22,8 +20,18 @@ namespace UpgradesList.SecondEdition
                     charges: 2
                 ),
                 abilityType: typeof(Abilities.SecondEdition.IonDamageAbility),
-                seImageNumber: 34
+                seImageNumber: 34,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class IonTorpedoesXWA : IonTorpedoes
+    {
+        public IonTorpedoesXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }

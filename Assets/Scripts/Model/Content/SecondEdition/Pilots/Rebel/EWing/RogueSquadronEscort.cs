@@ -1,7 +1,5 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship
@@ -30,6 +28,25 @@ namespace Ship
                     seImageNumber: 52,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class RogueSquadronEscortXWA : RogueSquadronEscort
+        {
+            public RogueSquadronEscortXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

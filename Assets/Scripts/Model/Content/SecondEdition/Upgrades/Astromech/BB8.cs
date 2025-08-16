@@ -1,4 +1,5 @@
 ﻿using ActionsList;
+using Content;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -15,9 +16,18 @@ namespace UpgradesList.SecondEdition
                 cost: 4,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.BB8Ability)
+                abilityType: typeof(Abilities.SecondEdition.BB8Ability),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/13/fe/13fe41a3-58df-41a7-ba97-38aed4a6c1fe/swz25_bb-8_a1.png";
+        }
+    }
+
+    public class BB8XWA : BB8
+    {
+        public BB8XWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

@@ -1,13 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
-using System.Collections.Generic;
-using Tokens;
-using BoardTools;
+﻿using Actions;
 using ActionsList;
+using Content;
 using System;
-using Actions;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -24,7 +20,8 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.FirstOrder),
                     new ActionBarRestriction(typeof(CoordinateAction))
                 ),
-                abilityType: typeof(Abilities.SecondEdition.GeneralHuxAbility)
+                abilityType: typeof(Abilities.SecondEdition.GeneralHuxAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -32,6 +29,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(326, 1)
             );
         }        
+    }
+
+    public class GeneralHuxXWA : GeneralHux
+    {
+        public GeneralHuxXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

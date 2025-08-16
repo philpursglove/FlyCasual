@@ -1,10 +1,9 @@
-﻿using Upgrade;
-using UnityEngine;
+﻿using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
 using Tokens;
-using Content;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -25,6 +24,15 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
+        }
+    }
+
+    public class R2AstromechXWA : R2Astromech
+    {
+        public R2AstromechXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

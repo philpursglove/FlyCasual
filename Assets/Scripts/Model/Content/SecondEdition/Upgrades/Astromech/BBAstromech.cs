@@ -1,9 +1,8 @@
-﻿using System;
-using Upgrade;
+﻿using ActionsList;
 using Ship;
-using UnityEngine;
+using System;
 using System.Collections.Generic;
-using ActionsList;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,7 +18,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Resistance),
                 abilityType: typeof(Abilities.SecondEdition.BBAstromechAbility)
             );
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f8/fd/f8fd534a-43df-4285-a41c-1f8a789d06a5/swz25_bb-astromech_a1.png";
         }
     }
 }

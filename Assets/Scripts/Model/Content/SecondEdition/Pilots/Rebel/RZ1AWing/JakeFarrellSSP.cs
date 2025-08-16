@@ -37,16 +37,24 @@ namespace Ship
                         Tags.AWing
                     },
                     skinName: "Blue",
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(Elusive));
                 MustHaveUpgrades.Add(typeof(Outmaneuver));
                 MustHaveUpgrades.Add(typeof(IonMissiles));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/jakefarrell-swz106.png";
-
                 PilotNameCanonical = "jakefarrell-swz106";
+            }
+        }
+
+        public class JakeFarrellSSPXWA : JakeFarrellSSP
+        {
+            public JakeFarrellSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

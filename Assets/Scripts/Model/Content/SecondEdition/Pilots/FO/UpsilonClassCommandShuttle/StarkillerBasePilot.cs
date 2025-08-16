@@ -32,5 +32,26 @@ namespace Ship
                 );
             }
         }
+
+        public class StarkillerBasePilotXWA : StarkillerBasePilot
+        {
+            public StarkillerBasePilotXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.Cost = 6;
+                pilot.LoadoutValue = 17;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon
+                };
+            }
+        }
     }
 }

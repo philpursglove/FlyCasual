@@ -27,5 +27,21 @@ namespace Ship
                 );
             }
         }
+
+        public class CartelMarauderXWA : CartelMarauder
+        {
+            public CartelMarauderXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }

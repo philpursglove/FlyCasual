@@ -37,10 +37,21 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
-                );
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b6/de/b6de4a15-0b5d-4c39-8a2e-c96af5dff9fe/swz62_card_major-vonreg.png";
+                );
+            }
+        }
+
+        public class MajorVonregXWA : MajorVonreg
+        {
+            public MajorVonregXWA() : base()
+            {
+                var pilot = (PilotInfo as PilotCardInfo25);
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 11;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
             }
         }
     }

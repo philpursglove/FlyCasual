@@ -36,12 +36,21 @@ namespace Ship
                     {
                         Tags.Droid,
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b5/43/b543af57-7466-4c68-8a21-427b00e7cbd6/swz48_pilot-r2-d2.png";
-
                 ShipInfo.ActionIcons.SwitchToDroidActions();
+            }
+        }
+
+        public class R2D2XWA : R2D2
+        {
+            public R2D2XWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -18,10 +18,18 @@ namespace UpgradesList.SecondEdition
                 cost: 3,
                 charges: 2,
                 restriction: new TagRestriction(Tags.Mandalorian),
-                abilityType: typeof(Abilities.SecondEdition.BeskarReinforcedPlatingAbility)                
+                abilityType: typeof(Abilities.SecondEdition.BeskarReinforcedPlatingAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/beskarreinforcedplating.png";
+    public class BeskarReinforcedPlatingXWA : BeskarReinforcedPlating
+    {
+        public BeskarReinforcedPlatingXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

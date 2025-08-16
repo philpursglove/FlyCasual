@@ -2,7 +2,6 @@
 using Content;
 using Ship;
 using System.Collections.Generic;
-using System.Linq;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -34,17 +33,24 @@ namespace Ship
                         UpgradeType.Torpedo,
                         UpgradeType.Device
                     },
-                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(FeedbackPing));
                 MustHaveUpgrades.Add(typeof(PlasmaTorpedoes));
                 MustHaveUpgrades.Add(typeof(ProtonBombs));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/captainjonus-swz105.png";
-
                 PilotNameCanonical = "captainjonus-swz105";
+            }
+        }
+
+        public class CaptainJonusSSPXWA : CaptainJonusSSP
+        {
+            public CaptainJonusSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

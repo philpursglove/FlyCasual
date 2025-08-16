@@ -3,7 +3,6 @@ using Content;
 using Movement;
 using Ship;
 using SubPhases;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
@@ -35,7 +34,8 @@ namespace Ship.SecondEdition.DroidTriFighter
                 tags: new List<Tags>
                 {
                     Tags.BountyHunter
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipInfo.ActionIcons.SwitchToOrganicActions();
@@ -46,8 +46,16 @@ namespace Ship.SecondEdition.DroidTriFighter
             DialInfo.ChangeManeuverComplexity(new ManeuverHolder(ManeuverSpeed.Speed3, ManeuverDirection.Right, ManeuverBearing.Bank), MovementComplexity.Easy);
             DialInfo.ChangeManeuverComplexity(new ManeuverHolder(ManeuverSpeed.Speed3, ManeuverDirection.Left, ManeuverBearing.Turn), MovementComplexity.Normal);
             DialInfo.ChangeManeuverComplexity(new ManeuverHolder(ManeuverSpeed.Speed3, ManeuverDirection.Right, ManeuverBearing.Turn), MovementComplexity.Normal);
+        }
+    }
 
-            ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/8971dc41-0a34-4f6f-be9e-56e0e94fda79/SWZ97_VolanDaslegal.png";
+    public class VolanDasXWA : VolanDas
+    {
+        public VolanDasXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

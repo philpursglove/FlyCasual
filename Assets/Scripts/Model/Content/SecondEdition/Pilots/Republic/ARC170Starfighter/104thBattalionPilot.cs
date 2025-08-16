@@ -30,10 +30,19 @@ namespace Ship
                     {
                         Tags.Clone
                     },
-                    skinName: "Red"
+                    skinName: "Red",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/0d/16/0d16748c-6591-4e97-96ee-8db6c89abca5/swz33_battalion-pilot.png";
+        public class P104thBattalionPilotXWA : P104thBattalionPilot
+        {
+            public P104thBattalionPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

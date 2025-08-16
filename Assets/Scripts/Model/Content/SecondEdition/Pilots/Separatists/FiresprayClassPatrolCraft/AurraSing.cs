@@ -8,45 +8,61 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.FiresprayClassPatrolCraft
 {
-    namespace SecondEdition.FiresprayClassPatrolCraft
+    public class AurraSing : FiresprayClassPatrolCraft
     {
-        public class AurraSing : FiresprayClassPatrolCraft
+        public AurraSing() : base()
         {
-            public AurraSing() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Aurra Sing",
-                    "Bane of the Jedi",
-                    Faction.Separatists,
-                    4,
-                    7,
-                    10,
-                    isLimited: true,
-                    force: 1,
-                    abilityType: typeof(Abilities.SecondEdition.AurraSingAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Device,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.DarkSide,
-                        Tags.BountyHunter
-                    },
-                    skinName: "Jango Fett"
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Aurra Sing",
+                "Bane of the Jedi",
+                Faction.Separatists,
+                4,
+                7,
+                10,
+                isLimited: true,
+                force: 1,
+                abilityType: typeof(Abilities.SecondEdition.AurraSingAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Device,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.DarkSide,
+                    Tags.BountyHunter
+                },
+                skinName: "Jango Fett",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/da4433d1-3b24-4bcc-a335-d6d5810b596d/SWZ97_AurraSinglegal.png?format=1000w";
-            }
+    public class AurraSingXWA : AurraSing
+    {
+        public AurraSingXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Cannon,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

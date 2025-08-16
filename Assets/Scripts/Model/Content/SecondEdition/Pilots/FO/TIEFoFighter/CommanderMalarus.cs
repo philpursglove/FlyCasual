@@ -36,10 +36,29 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/d/d2/Swz26_a1_malarus.png";
+        public class CommanderMalarusXWA : CommanderMalarus
+        {
+            public CommanderMalarusXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 19;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Missile,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
             }
         }
     }

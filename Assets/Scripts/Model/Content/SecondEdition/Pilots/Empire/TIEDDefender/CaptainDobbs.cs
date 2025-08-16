@@ -34,10 +34,19 @@ namespace Ship.SecondEdition.TIEDDefender
                 tags: new List<Tags>
                 {
                     Tags.Tie
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://i.imgur.com/RfgdAPL.png";
+    public class CaptainDobbsXWA : CaptainDobbs
+    {
+        public CaptainDobbsXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

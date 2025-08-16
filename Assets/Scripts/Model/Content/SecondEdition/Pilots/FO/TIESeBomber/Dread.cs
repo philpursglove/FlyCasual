@@ -38,14 +38,35 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/pK2cqXm.png";
+        public class DreadXWA : Dread
+        {
+            public DreadXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 20;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo,
+                };
             }
         }
     }
 }
+
 
 namespace Abilities.SecondEdition
 {

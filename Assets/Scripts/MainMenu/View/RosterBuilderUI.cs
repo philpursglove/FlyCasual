@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Players;
+using System.ComponentModel;
 
 public class RosterBuilderUI : MonoBehaviour {
 
@@ -190,7 +191,22 @@ public class RosterBuilderUI : MonoBehaviour {
 
     public void ToggleFormat()
     {
-        Options.Format = (Options.Format == "Standard") ? "Extended" : "Standard";
+        switch(Options.Format)
+        {
+            case "Standard":
+            case "AMG Standard":
+                Options.Format = "AMG Extended";
+                break;
+            case "Extended":
+            case "AMG Extended":
+                Options.Format = "XWA";
+                break;
+            case "XWA":
+            default:
+                Options.Format = "AMG Standard";
+                break;
+        }
+        
         Options.ChangeParameterValue("Format", Options.Format);
 
         Global.SquadBuilder.View.ShowCurrentFormat();

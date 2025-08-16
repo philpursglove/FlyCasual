@@ -40,10 +40,21 @@ namespace Ship
                     {
                         Tags.Freighter,
                         Tags.YT1300
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "chewbacca-scavengedyt1300";
+            }
+        }
+
+        public class ChewbaccaXWA : Chewbacca
+        {
+            public ChewbaccaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

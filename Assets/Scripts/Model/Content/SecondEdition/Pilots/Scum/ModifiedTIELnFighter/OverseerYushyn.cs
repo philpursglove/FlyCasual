@@ -34,10 +34,25 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-                
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/c1/78/c178c035-befe-44dd-bdb6-541c377ed85b/swz23_overseer-yushyn.png";
+            }
+        }
+
+        public class OverseerYushynXWA : OverseerYushyn
+        {
+            public OverseerYushynXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
