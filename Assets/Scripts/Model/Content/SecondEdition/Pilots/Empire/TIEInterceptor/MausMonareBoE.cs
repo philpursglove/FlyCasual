@@ -28,6 +28,12 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
+                    },
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Modification
                     }
 
                 );
