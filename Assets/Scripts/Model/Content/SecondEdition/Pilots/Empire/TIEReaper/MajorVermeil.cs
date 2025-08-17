@@ -35,8 +35,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 113
+                    seImageNumber: 113,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class MajorVermeilXWA : MajorVermeil
+        {
+            public MajorVermeilXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -34,11 +34,22 @@ namespace Ship
                         Tags.Clone,
                         Tags.Tie
                     },
-                    seImageNumber: 48
+                    seImageNumber: 48,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ModelInfo.ModelName = "TIE Fighter Rebel";
                 ModelInfo.SkinName = "Rebel";
+            }
+        }
+
+        public class CaptainRexXWA : CaptainRex
+        {
+            public CaptainRexXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

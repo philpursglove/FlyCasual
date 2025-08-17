@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Bombs;
+using Content;
+using Ship;
+using SubPhases.SecondEdition;
+using System;
 using UnityEngine;
 using Upgrade;
-using Ship;
-using System.Linq;
-using SubPhases;
-using SubPhases.SecondEdition;
-using Bombs;
 
 namespace UpgradesList.SecondEdition
 {
@@ -22,7 +19,8 @@ namespace UpgradesList.SecondEdition
                 charges: 2,
                 cannotBeRecharged: true,
                 subType: UpgradeSubType.Mine,
-                seImageNumber: 66
+                seImageNumber: 66,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             bombPrefabPath = "Prefabs/Bombs/ProximityMine";
@@ -51,6 +49,15 @@ namespace UpgradesList.SecondEdition
             bombObject.transform.Find("Explosion/Ring").GetComponent<ParticleSystem>().Play();
 
             GameManagerScript.Wait(1, delegate { callBack(); });
+        }
+    }
+
+    public class ProximityMinesXWA : ProximityMines
+    {
+        public ProximityMinesXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

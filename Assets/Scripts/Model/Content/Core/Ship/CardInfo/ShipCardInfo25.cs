@@ -48,7 +48,7 @@ namespace Ship
 
             AbilityText = abilityText;
 
-            LegalityInfo = legality ?? new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal };
+            LegalityInfo = legality ?? new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal, Legality.XWA };
         }
     }
 }

@@ -27,6 +27,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.VectoredCannonsRZ1Ability),
                 isStandardized: true
             );
+            NameCanonical = "vectoredcannonsrz1";
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ActionsList;
 using Arcs;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -14,11 +15,19 @@ namespace UpgradesList.SecondEdition
                 "Enduring",
                 UpgradeType.Talent,
                 cost: 5,
-                abilityType: typeof(Abilities.SecondEdition.EnduringAbility)
+                abilityType: typeof(Abilities.SecondEdition.EnduringAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/enduring.png";
-        }        
+    public class EnduringXWA : Enduring
+    {
+        public EnduringXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

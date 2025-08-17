@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -21,10 +22,19 @@ namespace Ship
                     {
                         UpgradeType.Modification,
                         UpgradeType.Configuration
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/a1/27/a127938a-aecc-48eb-ba09-622781e84084/swz80_ship_volunteer.png";
+        public class LoyalistVolunteerXWA : LoyalistVolunteer
+        {
+            public LoyalistVolunteerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

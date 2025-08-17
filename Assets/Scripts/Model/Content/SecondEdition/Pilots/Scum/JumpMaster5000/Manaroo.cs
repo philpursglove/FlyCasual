@@ -30,20 +30,31 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Torpedo,
                         UpgradeType.Title
                     },
                     tags: new List<Tags>
                     {
                         Tags.BountyHunter
                     },
-                    seImageNumber: 215
+                    seImageNumber: 215,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ManarooXWA : Manaroo
+        {
+            public ManarooXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

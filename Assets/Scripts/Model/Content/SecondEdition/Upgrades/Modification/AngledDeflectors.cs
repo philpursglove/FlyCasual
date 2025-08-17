@@ -1,7 +1,7 @@
 ﻿using Actions;
 using ActionsList;
+using Content;
 using Ship;
-using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -23,10 +23,18 @@ namespace UpgradesList.SecondEdition
                     )
                 ),
                 addAction: new ActionInfo(typeof(ReinforceAction)),
-                addShields: -1
+                addShields: -1,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/50/91/5091f169-b8ea-449a-909d-9d8dd39b2efb/swz45_angled-deflectors.png";
+    public class AngledDeflectorsXWA : AngledDeflectors
+    {
+        public AngledDeflectorsXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

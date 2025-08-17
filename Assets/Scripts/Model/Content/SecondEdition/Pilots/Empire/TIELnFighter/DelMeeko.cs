@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Ship;
+﻿using Abilities.SecondEdition;
 using ActionsList;
-using Abilities.SecondEdition;
-using Upgrade;
 using Content;
+using Ship;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship
 {
@@ -34,8 +34,19 @@ namespace Ship
                         Tags.Tie
                     },
                     seImageNumber: 85,
-                    skinName: "Inferno"
+                    skinName: "Inferno",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class DelMeekoXWA : DelMeeko
+        {
+            public DelMeekoXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

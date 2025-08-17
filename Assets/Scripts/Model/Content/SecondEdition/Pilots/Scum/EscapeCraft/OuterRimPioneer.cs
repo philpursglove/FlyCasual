@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -27,10 +28,21 @@ namespace Ship
                         UpgradeType.Crew,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 227
+                    seImageNumber: 227,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipAbilities.Add(new Abilities.SecondEdition.CoPilotAbility());
+            }
+        }
+
+        public class OuterRimPioneerXWA : OuterRimPioneer
+        {
+            public OuterRimPioneerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

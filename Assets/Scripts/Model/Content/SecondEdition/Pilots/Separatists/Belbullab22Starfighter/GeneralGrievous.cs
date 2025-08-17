@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,19 @@ namespace Ship.SecondEdition.Belbullab22Starfighter
                     UpgradeType.Title,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e1/9e/e19e3aaa-4b9f-4a9e-bc8f-46812882ebc7/swz29_grievous.png";
+    public class GeneralGrievousXWA : GeneralGrievous
+    {
+        public GeneralGrievousXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

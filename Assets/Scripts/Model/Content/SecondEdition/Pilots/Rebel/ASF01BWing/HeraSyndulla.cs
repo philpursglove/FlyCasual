@@ -48,8 +48,6 @@ namespace Ship
                 );
 
                 PilotNameCanonical = "herasyndulla-asf01bwing";
-
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/b/bd/Herasyndullabwing.png";
             }
         }
     }

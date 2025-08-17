@@ -38,12 +38,25 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class HoloXWA : Holo
+        {
+            public HoloXWA() : base()
+            {
+                var pilot = (PilotInfo as PilotCardInfo25);
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 15;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
 }
+
 
 namespace Abilities.SecondEdition
 {
@@ -100,7 +113,8 @@ namespace Abilities.SecondEdition
                 {
                     subphase.AddDecision(
                         (token is RedTargetLockToken) ? token.Name + " \"" + (token as RedTargetLockToken).Letter + "\"" : token.Name,
-                        delegate {
+                        delegate
+                        {
                             SelectedToken = token;
                             DecisionSubPhase.ConfirmDecisionNoCallback();
                             AskToSelectShipToTransferToken();

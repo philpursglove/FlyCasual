@@ -36,10 +36,27 @@ namespace Ship
                     {
                         Tags.DarkSide,
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/f542f260-755f-48ff-84bf-7d8486ffd6b7/SWZ97_SecondSisterlegal.png";
+        public class SecondSisterXWA : SecondSister
+        {
+            public SecondSisterXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

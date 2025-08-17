@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship.SecondEdition.Belbullab22Starfighter
@@ -20,8 +21,19 @@ namespace Ship.SecondEdition.Belbullab22Starfighter
                     UpgradeType.Talent,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class SkakoanAceXWA : SkakoanAce
+    {
+        public SkakoanAceXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

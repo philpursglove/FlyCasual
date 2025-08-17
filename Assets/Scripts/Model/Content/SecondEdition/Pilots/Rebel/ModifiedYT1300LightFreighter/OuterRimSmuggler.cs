@@ -28,8 +28,26 @@ namespace Ship
                         UpgradeType.Missile,
                         UpgradeType.Gunner
                     },
-                    seImageNumber: 72
+                    seImageNumber: 72,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class OuterRimSmugglerXWA : OuterRimSmuggler
+        {
+            public OuterRimSmugglerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

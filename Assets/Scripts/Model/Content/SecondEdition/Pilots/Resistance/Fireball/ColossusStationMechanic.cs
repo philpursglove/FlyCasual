@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -19,10 +20,21 @@ namespace Ship
                     5,
                     extraUpgradeIcons: new List<UpgradeType>
                     {
-                        UpgradeType.Missile,
-                        UpgradeType.Modification
-                    }
+                        UpgradeType.Modification,
+                        UpgradeType.Missile                        
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ColossusStationMechanicXWA : ColossusStationMechanic
+        {
+            public ColossusStationMechanicXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

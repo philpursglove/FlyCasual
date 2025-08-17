@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -22,16 +23,25 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
+                        UpgradeType.Missile,
                         UpgradeType.Title
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/16/42/164202d5-47a5-44ea-a96b-49c795005ca8/swz63_a1_card_kazuda-xiono.png";
+        public class KazudaXionoXWA : KazudaXiono
+        {
+            public KazudaXionoXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

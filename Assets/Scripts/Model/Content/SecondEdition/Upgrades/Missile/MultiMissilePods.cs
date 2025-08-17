@@ -1,5 +1,4 @@
 ﻿using Arcs;
-using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -33,8 +32,6 @@ namespace UpgradesList.SecondEdition
                 ),
                 abilityType: typeof(Abilities.SecondEdition.MultiMissilePodsAbility)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/2b/f1/2bf158e3-099c-4969-a882-b52af5a88273/swz71_upgrade_multi-missile-pod.png";
         }        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
+using Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,16 +25,27 @@ namespace Ship.SecondEdition.ResistanceTransport
                 abilityType: typeof(NodinChavdriGoodeAbility),
                 extraUpgradeIcons: new List<UpgradeType>
                 {
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
                     UpgradeType.Tech,
                     UpgradeType.Cannon,
                     UpgradeType.Cannon,
-                    UpgradeType.Torpedo,
                     UpgradeType.Missile,
-                    UpgradeType.Crew,
-                    UpgradeType.Astromech,
-                    UpgradeType.Modification
-                }
-            );
+                    UpgradeType.Torpedo
+                },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                );
+        }
+    }
+
+    public class NodinChavdriXWA : NodinChavdri
+    {
+        public NodinChavdriXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

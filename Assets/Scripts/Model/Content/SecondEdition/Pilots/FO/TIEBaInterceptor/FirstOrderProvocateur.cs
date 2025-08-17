@@ -27,10 +27,20 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/ef/d7/efd7cc94-bdf7-4f63-80eb-476444dfeb28/swz62_card_first-order-provocateur.png";
+        public class FirstOrderProvocateurXWA : FirstOrderProvocateur
+        {
+            public FirstOrderProvocateurXWA() : base()
+            {
+                var pilot = (PilotInfo as PilotCardInfo25);
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 11;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
             }
         }
     }

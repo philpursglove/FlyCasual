@@ -40,10 +40,30 @@ namespace Ship.SecondEdition.ASF01BWing
                 {
                     Tags.BWing
                 },
-                skinName: "Red"
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://i.imgur.com/tDMmS4S.png";
+    public class NetremPollardXWA : NetremPollard
+    {
+        public NetremPollardXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Cannon,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

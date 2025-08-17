@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,24 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/6f/a2/6fa2fb39-4c76-4d21-8f3a-6910a34a7845/swz47_cards-gorgol.png";
+        public class GorgolXWA : Gorgol
+        {
+            public GorgolXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

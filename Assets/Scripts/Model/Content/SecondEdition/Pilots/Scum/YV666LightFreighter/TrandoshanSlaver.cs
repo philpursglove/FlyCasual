@@ -28,8 +28,28 @@ namespace Ship
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 213
+                    seImageNumber: 213,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class TrandoshanSlaverXWA : TrandoshanSlaver
+        {
+            public TrandoshanSlaverXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 27;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

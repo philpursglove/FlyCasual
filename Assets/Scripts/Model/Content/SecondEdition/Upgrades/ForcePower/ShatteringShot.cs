@@ -15,7 +15,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.ShatteringShotAbility)                
             );
 
-            ImageUrl = "https://i.imgur.com/6NeEkwu.png";
+            
         }
     }
 }

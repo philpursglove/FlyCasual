@@ -27,12 +27,21 @@ namespace Ship.SecondEdition.Delta7BAethersprite
                 {
                     Tags.Jedi,
                     Tags.LightSide
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "jediknight-delta7baethersprite";
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/b0/b3/b0b3f463-a3ea-4fe6-be69-41afed1b4110/swz32_jedi-knight.png";
+    public class JediKnight7BXWA : JediKnight7B
+    {
+        public JediKnight7BXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

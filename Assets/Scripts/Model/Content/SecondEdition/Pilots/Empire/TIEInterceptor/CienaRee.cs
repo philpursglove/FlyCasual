@@ -33,10 +33,19 @@ namespace Ship.SecondEdition.TIEInterceptor
                 tags: new List<Tags>
                 {
                     Tags.Tie
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/19/2b/192b0e2b-9b56-4480-bced-13933545bae3/swz84_pilot_cienaree.png";
+    public class CienaReeXWA : CienaRee
+    {
+        public CienaReeXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

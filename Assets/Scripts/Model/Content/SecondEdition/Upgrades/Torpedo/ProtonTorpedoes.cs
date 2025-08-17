@@ -1,4 +1,5 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
 using Tokens;
 using Upgrade;
@@ -21,9 +22,19 @@ namespace UpgradesList.SecondEdition
                     requiresToken: typeof(BlueTargetLockToken)
                 ),
                 abilityType: typeof(Abilities.SecondEdition.ProtonTorpedoesAbility),
-                seImageNumber: 35
+                seImageNumber: 35,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class ProtonTorpedoesXWA : ProtonTorpedoes
+    {
+        public ProtonTorpedoesXWA() : base()
+        {
+            UpgradeInfo.Cost = 14;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

@@ -35,8 +35,19 @@ namespace Ship.SecondEdition.Delta7Aethersprite
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Ahsoka Tano"
+                skinName: "Ahsoka Tano",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class AhsokaTanoXWA : AhsokaTano
+    {
+        public AhsokaTanoXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using ActionsList;
 using Content;
-using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -33,10 +32,27 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.AWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/790214c2-924a-4066-894a-ac71d59cc82b/SWZ97_TychoCelchulegal.png";
+        public class TychoCelchuXWA : TychoCelchu
+        {
+            public TychoCelchuXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

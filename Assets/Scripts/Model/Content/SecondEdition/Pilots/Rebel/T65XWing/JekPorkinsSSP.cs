@@ -44,8 +44,6 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(R5D8));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/jekporkins-swz106.png";
-
                 PilotNameCanonical = "jekporkins-swz106";
             }
         }

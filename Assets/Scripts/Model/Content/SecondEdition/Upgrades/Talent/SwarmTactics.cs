@@ -1,8 +1,7 @@
-﻿using Upgrade;
-using System.Collections.Generic;
+﻿using Content;
 using Ship;
-using System.Linq;
 using SubPhases;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -15,8 +14,18 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Talent,
                 cost: 5,
                 abilityType: typeof(Abilities.SecondEdition.SwarmTacticsAbility),
-                seImageNumber: 17
+                seImageNumber: 17,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class SwarmTacticsXWA : SwarmTactics
+    {
+        public SwarmTacticsXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

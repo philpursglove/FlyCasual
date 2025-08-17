@@ -34,8 +34,19 @@ namespace Ship.SecondEdition.Delta7Aethersprite
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Green"
+                skinName: "Green",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class LuminaraUnduliXWA : LuminaraUnduli
+    {
+        public LuminaraUnduliXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

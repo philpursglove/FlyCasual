@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -26,16 +27,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
+                        UpgradeType.Torpedo
                     },
-                    seImageNumber: 216
+                    seImageNumber: 216,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class TelTrevuraXWA : TelTrevura
+        {
+            public TelTrevuraXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -2,7 +2,6 @@
 using Content;
 using Ship;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
@@ -28,22 +27,31 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
                         UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Turret,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
                     },
                     tags: new List<Tags>
                     {
                         Tags.YWing
                     },
-                    skinName: "Gray"
+                    skinName: "Gray",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/df/43/df43e318-057c-4c0e-9419-104687ed1ef2/swz85_ship_padric.png";
+        public class PadricXWA : Padric
+        {
+            public PadricXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

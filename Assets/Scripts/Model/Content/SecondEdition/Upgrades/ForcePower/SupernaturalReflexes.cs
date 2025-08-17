@@ -21,7 +21,8 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>
                 {
                     Legality.StandardBanned,
-                    Legality.ExtendedLegal
+                    Legality.ExtendedLegal,
+                    Legality.XWA
                 }
             );
         }

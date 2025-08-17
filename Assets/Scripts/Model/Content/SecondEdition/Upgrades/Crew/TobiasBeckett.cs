@@ -1,12 +1,12 @@
-﻿using Ship;
-using Upgrade;
-using System;
-using SubPhases;
-using BoardTools;
-using Obstacles;
-using UnityEngine;
+﻿using BoardTools;
 using Content;
+using Obstacles;
+using Ship;
+using SubPhases;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -34,6 +34,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(342, 6)
             );
         }        
+    }
+
+    public class TobiasBeckettXWA : TobiasBeckett
+    {
+        public TobiasBeckettXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

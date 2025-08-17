@@ -1,12 +1,11 @@
-﻿using Ship;
-using Upgrade;
+﻿using Content;
+using Ship;
+using SubPhases;
+using System.Collections.Generic;
 using System.Linq;
 using Tokens;
-using SubPhases;
-using System;
 using UnityEngine;
-using Content;
-using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -33,9 +32,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(259, 1),
                 new Vector2(75, 75)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/10/5d/105d386c-ff1b-44be-9b9c-a2c1dc2877ec/swz69_pyre_card.png";
         }        
+    }
+
+    public class CommanderPyreXWA : CommanderPyre
+    {
+        public CommanderPyreXWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

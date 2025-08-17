@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Mods;
 using System.Linq;
-using System.Text;
 using UnityEngine;
-using Mods;
-using ExtraOptions;
 
 public static class Options
 {
@@ -54,7 +50,7 @@ public static class Options
         Edition = "SecondEdition";
         ShowFps = PlayerPrefs.GetInt("ShowFps", 0) == 1;
         Resolution = PlayerPrefs.GetString("Resolution", Screen.currentResolution.ToString());
-        Format = PlayerPrefs.GetString("Format", "Standard");
+        Format = PlayerPrefs.GetString("Format", "AMG Standard");
 
         FullScreen = PlayerPrefs.GetInt("FullScreen", 1) == 1;
         Screen.fullScreen = FullScreen;

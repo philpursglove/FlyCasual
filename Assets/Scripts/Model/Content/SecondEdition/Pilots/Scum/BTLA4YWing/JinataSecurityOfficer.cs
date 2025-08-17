@@ -28,10 +28,27 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e6/7f/e67f3145-67ad-4175-8a48-b92d87e58c28/swz85_pilot_jinatasecurityofficer.png";
+        public class JinataSecurityOfficerXWA : JinataSecurityOfficer
+        {
+            public JinataSecurityOfficerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

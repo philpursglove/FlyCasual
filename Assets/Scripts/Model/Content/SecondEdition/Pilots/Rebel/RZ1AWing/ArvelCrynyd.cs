@@ -36,8 +36,25 @@ namespace Ship
                     {
                         Tags.AWing
                     },
-                    seImageNumber: 20
+                    seImageNumber: 20,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ArvelCrynydXWA : ArvelCrynyd
+        {
+            public ArvelCrynydXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

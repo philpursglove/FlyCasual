@@ -34,8 +34,8 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Sensor,
                         UpgradeType.Crew,
+                        UpgradeType.Sensor,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Title
@@ -45,6 +45,16 @@ namespace Ship
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
+            }
+        }
+
+        public class P4LOMXWA : P4LOM
+        {
+            public P4LOMXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

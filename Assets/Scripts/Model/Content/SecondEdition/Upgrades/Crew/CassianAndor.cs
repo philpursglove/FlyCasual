@@ -1,12 +1,12 @@
-﻿using Ship;
-using Upgrade;
+﻿using BoardTools;
+using Content;
+using Movement;
+using Ship;
 using SubPhases;
 using System;
-using BoardTools;
-using UnityEngine;
-using Movement;
 using System.Collections.Generic;
-using Content;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -34,7 +34,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(373, 1),
                 new Vector2(200, 200)
             );
-        }        
+        }
+    }
+
+    public class CassianAndorXWA : CassianAndor
+    {
+        public CassianAndorXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,19 @@ namespace Ship
                     {
                         UpgradeType.Modification
                     },
-                    seImageNumber: 188
+                    seImageNumber: 188,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SunnyBounderXWA : SunnyBounder
+        {
+            public SunnyBounderXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,9 +1,6 @@
-﻿using Upgrade;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using Ship;
-using BoardTools;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -20,8 +17,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Republic),
                 abilityType: typeof(Abilities.SecondEdition.R7A7Ability)
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f5/84/f58409a7-8000-4201-a912-014b011521cb/swz80_upgrade_r7-a7.png";
         }
     }
 }

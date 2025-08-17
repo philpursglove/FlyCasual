@@ -1,5 +1,4 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -31,6 +30,23 @@ namespace Ship
                     seImageNumber: 79,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class WildSpaceFringerXWA : WildSpaceFringer
+        {
+            public WildSpaceFringerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

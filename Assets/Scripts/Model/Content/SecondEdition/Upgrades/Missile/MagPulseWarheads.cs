@@ -1,4 +1,5 @@
-﻿using Tokens;
+﻿using Content;
+using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -18,10 +19,18 @@ namespace UpgradesList.SecondEdition
                     requiresToken: typeof(BlueTargetLockToken),
                     charges: 2
                 ),
-                abilityType: typeof(Abilities.SecondEdition.MagPulseDamageAbility)
+                abilityType: typeof(Abilities.SecondEdition.MagPulseDamageAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/8f/95/8f95b9f7-5990-4060-acea-0fc73d026d2a/swz62_mag-pulse-warheads.png";
+    public class MagPulseWarheadsXWA : MagPulseWarheads
+    {
+        public MagPulseWarheadsXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

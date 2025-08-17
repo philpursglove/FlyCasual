@@ -30,8 +30,26 @@ namespace Ship
                         Tags.XWing
                     },
                     seImageNumber: 12,
-                    skinName: "Partisan"
+                    skinName: "Partisan",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class CavernAngelsZealotXWA : CavernAngelsZealot
+        {
+            public CavernAngelsZealotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType> 
+                { 
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,8 +1,5 @@
-﻿using Ship;
-using SubPhases;
-using System;
+﻿using Content;
 using System.Collections.Generic;
-using Content;
 using Upgrade;
 
 namespace Ship
@@ -34,8 +31,8 @@ namespace Ship
                     {
                         Tags.Clone
                     },
-                    isStandardLayout: true
-                    
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Wolfpack));
@@ -47,6 +44,15 @@ namespace Ship
                 PilotNameCanonical = "wolffe-siegeofcoruscant";
 
                 ModelInfo.SkinName = "Wolffe";
+            }
+        }
+
+        public class WolffeSoCXWA : WolffeSoC
+        {
+            public WolffeSoCXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

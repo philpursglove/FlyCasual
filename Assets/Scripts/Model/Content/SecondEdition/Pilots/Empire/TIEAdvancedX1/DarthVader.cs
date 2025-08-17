@@ -43,8 +43,29 @@ namespace Ship
                         Tags.Sith
                     },
                     seImageNumber: 93,
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class DarthVaderXWA : DarthVader
+        {
+            public DarthVaderXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.ForcePower,
+                        UpgradeType.ForcePower,
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

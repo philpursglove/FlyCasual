@@ -1,6 +1,6 @@
-﻿using ActionsList;
-using Arcs;
+﻿using Arcs;
 using BoardTools;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 addForce: 1,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.ReyGunnerAbility)
+                abilityType: typeof(Abilities.SecondEdition.ReyGunnerAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -30,6 +31,15 @@ namespace UpgradesList.SecondEdition
 
             NameCanonical = "rey-gunner";
         }        
+    }
+
+    public class ReyGunnerXWA : ReyGunner
+    {
+        public ReyGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 14;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

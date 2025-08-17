@@ -40,8 +40,19 @@ namespace Ship
                     {
                         Tags.XWing
                     },
-                    skinName: "Black One"
+                    skinName: "Black One",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class PoeDameronXWA : PoeDameron
+        {
+            public PoeDameronXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 26;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

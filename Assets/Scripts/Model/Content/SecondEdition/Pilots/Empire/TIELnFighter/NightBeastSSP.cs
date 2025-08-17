@@ -32,15 +32,24 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(Disciplined));
                 MustHaveUpgrades.Add(typeof(Predator));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/nightbeast-swz105.png";
-
                 PilotNameCanonical = "nightbeast-swz105";
+            }
+        }
+
+        public class NightBeastSSPXWA : NightBeastSSP
+        {
+            public NightBeastSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

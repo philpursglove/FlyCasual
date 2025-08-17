@@ -26,10 +26,19 @@ namespace Ship.SecondEdition.DroidTriFighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/e5/c8/e5c82543-69af-42ee-bb32-32b0c11d6845/swz81_separatist-interceptor_cutout.png";
+    public class SeparatistInterceptorXWA : SeparatistInterceptor
+    {
+        public SeparatistInterceptorXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -26,15 +26,15 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.EdonKappehlAbility),
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon,
                         UpgradeType.Crew,
+                        UpgradeType.Sensor,
                         UpgradeType.Gunner,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
                         UpgradeType.Device,
                         UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Cannon
                     },
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
@@ -42,8 +42,17 @@ namespace Ship
                 ModelInfo.SkinName = "Crimson";
             }
         }
-    }
 
+        public class EdonKappehlXWA : EdonKappehl
+        {
+            public EdonKappehlXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

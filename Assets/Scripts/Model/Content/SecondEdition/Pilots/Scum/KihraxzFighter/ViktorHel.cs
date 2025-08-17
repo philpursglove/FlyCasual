@@ -30,15 +30,25 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Illicit,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile
                     },
                     seImageNumber: 193,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ViktorHelXWA : ViktorHel
+        {
+            public ViktorHelXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

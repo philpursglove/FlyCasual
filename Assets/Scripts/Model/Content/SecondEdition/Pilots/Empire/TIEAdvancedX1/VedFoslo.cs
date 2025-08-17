@@ -1,8 +1,8 @@
-﻿using Upgrade;
+﻿using Content;
 using Movement;
 using Ship;
 using System.Collections.Generic;
-using Content;
+using Upgrade;
 
 namespace Ship
 {
@@ -40,6 +40,16 @@ namespace Ship
                     },
                     seImageNumber: 95
                 );
+            }
+        }
+
+        public class VedFosloXWA : VedFoslo
+        {
+            public VedFosloXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -30,10 +30,19 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Clone
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/drift.png";
+        public class DriftXWA : Drift
+        {
+            public DriftXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

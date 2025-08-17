@@ -30,10 +30,26 @@ namespace Ship
                     {
                         Tags.Clone
                     },
-                    skinName: "Red"
+                    skinName: "Red",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/a2/4e/a24eeedb-2b56-427b-90a0-142230928a02/swz33_sqd-7-vet.png";
+        public class SquadSevenVeteranXWA : SquadSevenVeteran
+        {
+            public SquadSevenVeteranXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

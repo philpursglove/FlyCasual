@@ -29,10 +29,27 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Droid
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/63/42/63427875-49ac-4a44-953e-ee14de2f932d/swz71_card_predator.png";
+        public class SeparatistPredatorXWA : SeparatistPredator
+        {
+            public SeparatistPredatorXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

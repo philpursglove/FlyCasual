@@ -1,4 +1,5 @@
-﻿using SubPhases;
+﻿using Content;
+using SubPhases;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
@@ -29,8 +30,26 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
-                    seImageNumber: 136
+                    seImageNumber: 136,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class LieutenantKarsabiXWA : LieutenantKarsabi
+        {
+            public LieutenantKarsabiXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                { 
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

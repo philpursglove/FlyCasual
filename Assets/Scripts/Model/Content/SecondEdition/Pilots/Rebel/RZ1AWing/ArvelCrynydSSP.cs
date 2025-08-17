@@ -1,5 +1,4 @@
-﻿using Abilities.SecondEdition;
-using Actions;
+﻿using Actions;
 using ActionsList;
 using Content;
 using Movement;
@@ -35,15 +34,23 @@ namespace Ship
                     {
                         Tags.AWing
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(Predator));
                 MustHaveUpgrades.Add(typeof(AfterBurners));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/arvelcrynyd-swz106.png";
-
                 PilotNameCanonical = "arvelcrynyd-swz106";
+            }
+        }
+
+        public class ArvelCrynydSSPXWA: ArvelCrynydSSP
+        {
+            public ArvelCrynydSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

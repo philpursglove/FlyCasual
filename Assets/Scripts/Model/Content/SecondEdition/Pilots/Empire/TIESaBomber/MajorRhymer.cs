@@ -24,20 +24,30 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
                         UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Missile,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
                     },
                     seImageNumber: 109,
                     tags: new List<Tags>
                     {
                         Tags.Tie
                     },
-                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class MajorRhymerXWA : MajorRhymer
+        {
+            public MajorRhymerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

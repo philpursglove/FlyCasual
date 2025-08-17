@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -25,10 +26,19 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Modification
                     },
-                    skinName: "Red Stripes"
+                    skinName: "Red Stripes",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/outerrimenforcer.png";
+        public class OuterRimEnforcerXWA : OuterRimEnforcer
+        {
+            public OuterRimEnforcerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

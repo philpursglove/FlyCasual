@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BoardTools;
 using Tokens;
 using UnityEngine;
+using Content;
 
 namespace UpgradesList.SecondEdition
 {
@@ -22,7 +23,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Imperial),
                 abilityType: typeof(Abilities.SecondEdition.DeathTroopersAbility),
-                seImageNumber: 113
+                seImageNumber: 113,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -30,6 +32,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(436, 1)
             );
         }        
+    }
+
+    public class DeathTroopersXWA : DeathTroopers
+    {
+        public DeathTroopersXWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

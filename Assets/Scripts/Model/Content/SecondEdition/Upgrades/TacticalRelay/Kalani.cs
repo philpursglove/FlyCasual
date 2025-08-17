@@ -33,7 +33,7 @@ namespace UpgradesList.SecondEdition
                 new Vector2(250, 1)
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/kalani.png";
+            
         }        
     }
 }

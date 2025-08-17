@@ -26,10 +26,26 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/7b/20/7b2032d2-dc96-4b69-9c59-92c809ba3da5/swz41_techno-union-bomber.png";
+    public class TechnoUnionBomberXWA : TechnoUnionBomber
+    {
+        public TechnoUnionBomberXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

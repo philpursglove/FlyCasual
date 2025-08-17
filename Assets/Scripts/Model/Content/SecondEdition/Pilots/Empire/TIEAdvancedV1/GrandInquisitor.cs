@@ -36,8 +36,27 @@ namespace Ship
                         Tags.DarkSide,
                         Tags.Tie
                     },
-                    seImageNumber: 99
+                    seImageNumber: 99,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class GrandInquisitorXWA : GrandInquisitor
+        {
+            public GrandInquisitorXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

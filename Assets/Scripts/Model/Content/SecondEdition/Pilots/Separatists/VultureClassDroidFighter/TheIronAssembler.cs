@@ -34,10 +34,26 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/b03bf8e3-1596-4e31-9220-ea5511043a11/SWZ97_TheIronAssemblerlegal.png";
+    public class TheIronAssemblerXWA : TheIronAssembler
+    {
+        public TheIronAssemblerXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

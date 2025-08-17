@@ -1,10 +1,7 @@
 ﻿using Arcs;
-using BoardTools;
 using Content;
 using Ship;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Upgrade;
 
 namespace Ship
@@ -39,10 +36,19 @@ namespace Ship
                     {
                         Tags.Mandalorian,
                         Tags.BountyHunter
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/b/bb/Themandalorian.png";
+        public class TheMandalorianXWA : TheMandalorian
+        {
+            public TheMandalorianXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

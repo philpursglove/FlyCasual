@@ -51,6 +51,29 @@ namespace Ship
                 PilotNameCanonical = "hansolo-scavengedyt1300";
             }
         }
+
+        public class HanSoloXWA : HanSolo
+        {
+            public HanSoloXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

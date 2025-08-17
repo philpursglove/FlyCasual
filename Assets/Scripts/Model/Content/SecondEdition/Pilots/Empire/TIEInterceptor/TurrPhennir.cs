@@ -34,8 +34,19 @@ namespace Ship
                         Tags.Tie
                     },
                     seImageNumber: 104,
-                    skinName: "Red Stripes"
+                    skinName: "Red Stripes",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class TurrPhennirXWA : TurrPhennir
+        {
+            public TurrPhennirXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

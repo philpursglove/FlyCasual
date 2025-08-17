@@ -1,14 +1,13 @@
 ﻿using Actions;
 using ActionsList;
+using Arcs;
 using BoardTools;
 using Movement;
-using Editions;
 using Ship;
+using Ship.CardInfo;
 using SubPhases;
 using System.Collections.Generic;
 using Tokens;
-using Arcs;
-using Ship.CardInfo;
 using UnityEngine;
 using Upgrade;
 
@@ -39,7 +38,7 @@ namespace Ship
                         new ActionInfo(typeof(EvadeAction), ActionColor.Red)
                     ),
                     new ShipUpgradesInfo(),
-                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal }
+                    legality: new List<Content.Legality>() { Content.Legality.ExtendedLegal, Content.Legality.XWA }
                 );
 
                 ModelInfo = new ShipModelInfo

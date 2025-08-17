@@ -1,5 +1,6 @@
 ﻿using ActionsList;
 using Arcs;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,18 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.Separatists),
                     new ActionBarRestriction(typeof(CalculateAction))                    
                 ),
-                abilityType: typeof(Abilities.SecondEdition.EnergyShellChargesAbility)
+                abilityType: typeof(Abilities.SecondEdition.EnergyShellChargesAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class EnergyShellChargesXWA : EnergyShellCharges
+    {
+        public EnergyShellChargesXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

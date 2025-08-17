@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Abilities.SecondEdition;
+using Content;
 using Ship;
 using SubPhases;
-using Abilities.SecondEdition;
+using System.Collections.Generic;
 using Upgrade;
-using Content;
 
 namespace Ship
 {
@@ -37,8 +37,19 @@ namespace Ship
                         Tags.Tie
                     },
                     seImageNumber: 83,
-                    skinName: "Inferno"
+                    skinName: "Inferno",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class IdenVersioXWA : IdenVersio
+        {
+            public IdenVersioXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

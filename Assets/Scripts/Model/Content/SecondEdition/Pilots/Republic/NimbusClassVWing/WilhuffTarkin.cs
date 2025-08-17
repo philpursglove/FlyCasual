@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -28,14 +29,23 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
                         UpgradeType.Modification,
+                        UpgradeType.Missile,
                         UpgradeType.Configuration
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/bf/0e/bf0e3b50-3f36-4940-953b-f0a2d9f2b9b9/swz80_ship_tarkin.png";
+        public class WilhuffTarkinXWA : WilhuffTarkin
+        {
+            public WilhuffTarkinXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

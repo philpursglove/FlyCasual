@@ -1,8 +1,8 @@
 ﻿using Content;
-using System.Collections.Generic;
-using Upgrade;
 using Ship;
 using SubPhases;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship
 {
@@ -25,22 +25,31 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>()
                     {
                         Tags.BountyHunter
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "nomlumb-rogueclassstarfighter";
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/nomlumb-rogueclassstarfighter.png";
+        public class NomLumbXWA : NomLumb
+        {
+            public NomLumbXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

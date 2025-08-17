@@ -22,8 +22,23 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 92
+                    seImageNumber: 92,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class AcademyPilotXWA : AcademyPilot
+        {
+            public AcademyPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 2;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

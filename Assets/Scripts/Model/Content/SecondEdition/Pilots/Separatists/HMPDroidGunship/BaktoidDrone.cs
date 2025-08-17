@@ -28,13 +28,27 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Droid
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/7c/61/7c61a6d9-0c5a-4bc0-9d4d-f38e3723a2c1/swz71_card_baktoid.png";
             }
+        }
 
-            
+        public class BaktoidDroneXWA : BaktoidDrone
+        {
+            public BaktoidDroneXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
         }
     }
 }

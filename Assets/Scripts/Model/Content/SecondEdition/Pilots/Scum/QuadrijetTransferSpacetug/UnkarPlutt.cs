@@ -23,15 +23,29 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.UnkarPluttAbility),
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
-                        UpgradeType.Tech,
                         UpgradeType.Crew,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Tech,
+                        UpgradeType.Device                        
                     },
                     seImageNumber: 163,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class UnkarPluttXWA : UnkarPlutt
+        {
+            public UnkarPluttXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

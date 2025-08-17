@@ -39,7 +39,8 @@ namespace Ship
                         Tags.Sith
                     },
                     skinName: "Blue",
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.Shields++;
@@ -48,9 +49,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(IonMissiles));
                 MustHaveUpgrades.Add(typeof(AfterBurners));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/darthvader-swz105.png";
-
                 PilotNameCanonical = "darthvader-swz105";
+            }
+        }
+
+        public class DarthVaderSSPXWA : DarthVaderSSP
+        {
+            public DarthVaderSSPXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

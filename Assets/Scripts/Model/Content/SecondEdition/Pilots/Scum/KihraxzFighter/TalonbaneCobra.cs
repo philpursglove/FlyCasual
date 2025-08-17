@@ -23,15 +23,25 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Missile,
                         UpgradeType.Illicit,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Missile
                     },
                     seImageNumber: 191,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class TalonbaneCobraXWA : TalonbaneCobra
+        {
+            public TalonbaneCobraXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

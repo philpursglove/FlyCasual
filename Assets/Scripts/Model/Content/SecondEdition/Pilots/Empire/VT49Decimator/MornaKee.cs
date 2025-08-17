@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -28,18 +29,27 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Torpedo,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification,
                         UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
+                        UpgradeType.Torpedo,
                         UpgradeType.Title
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/53/16/53162173-c0c4-423e-8bbe-d5d0be9554cb/swz66_morna-kee.png";
+        public class MornaKeeXWA : MornaKee
+        {
+            public MornaKeeXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

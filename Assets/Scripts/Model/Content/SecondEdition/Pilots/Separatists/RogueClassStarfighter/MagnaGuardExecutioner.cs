@@ -29,7 +29,8 @@ namespace Ship
                     tags: new List<Tags>()
                     {
                         Tags.Droid
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
@@ -38,8 +39,22 @@ namespace Ship
                 oldAbility.DeactivateAbility();
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new NetworkedCalculationsAbility());
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/magnaguardexecutioner.png";
+        public class MagnaGuardExecutionerXWA : MagnaGuardExecutioner
+        {
+            public MagnaGuardExecutionerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

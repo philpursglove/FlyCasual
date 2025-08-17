@@ -27,5 +27,20 @@ namespace Ship
                 );
             }
         }
+
+        public class BlackSunEnforcerXWA : BlackSunEnforcer
+        {
+            public BlackSunEnforcerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Illicit,
+                    UpgradeType.Tech
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }

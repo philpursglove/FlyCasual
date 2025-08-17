@@ -31,8 +31,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 119
+                    seImageNumber: 119,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class PureSabaccXWA : PureSabacc
+        {
+            public PureSabaccXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -44,12 +44,21 @@ namespace Ship
                     {
                         Tags.Freighter,
                         Tags.YT1300
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "landocalrissian-scavengedyt1300";
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/01ba9a50-1f9e-4ba8-be73-171a3ae59511/SWZ97_LandoCalrissianlegal+%281%29.png";
+        public class LandoCalrissianXWA : LandoCalrissian
+        {
+            public LandoCalrissianXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
@@ -227,7 +236,7 @@ namespace Abilities.SecondEdition
 
         private bool FilterSelection(GenericShip ship)
         {
-            return FilterByTargetType(ship, TargetTypes.OtherFriendly) && FilterTargetsByRange(ship, 0, 2);
+            return FilterByTargetType(ship, TargetTypes.AnyFriendly) && FilterTargetsByRange(ship, 0, 2);
         }
 
         private int GetAiPriority(GenericShip ship)

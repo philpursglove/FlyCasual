@@ -28,8 +28,19 @@ namespace Ship
                     {
                         Tags.AWing
                     },
-                    skinName: "Green"
+                    skinName: "Green",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class GreenSquadronExpertXWA : GreenSquadronExpert
+        {
+            public GreenSquadronExpertXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

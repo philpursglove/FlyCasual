@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,27 @@ namespace Ship.SecondEdition.Belbullab22Starfighter
                     UpgradeType.Modification,
                     UpgradeType.Modification
                 },                
-                skinName: "Wat Tambor"
+                skinName: "Wat Tambor",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/5e/3d/5e3d8e36-3989-40f4-9908-6bd6583bb88a/swz29_wat-tambor.png";
+    public class WatTamborXWA : WatTambor
+    {
+        public WatTamborXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Title,
+                UpgradeType.TacticalRelay,
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

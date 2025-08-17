@@ -25,17 +25,37 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Crew,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Device
                     },
                     tags: new List<Tags>
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 176
+                    seImageNumber: 176,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class TorkilMuxXWA : TorkilMux
+        {
+            public TorkilMuxXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

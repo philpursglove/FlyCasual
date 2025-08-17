@@ -25,8 +25,7 @@ namespace UpgradesList.SecondEdition
 
             AnotherSide = typeof(InterceptBoosterDetached);
             SelectSideOnSetup = false;
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/0d/3f/0d3f071a-1c8e-416f-9c0e-1195ca31c102/swz81_upgrade_intercept-booster_attached.png"; ;
+            NameCanonical = "interceptbooster";
         }
     }
 
@@ -44,8 +43,7 @@ namespace UpgradesList.SecondEdition
             );
 
             AnotherSide = typeof(InterceptBoosterAttached);
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/c5/49/c549df37-e99d-4746-a34c-d42d74d854b4/swz81_upgrade_intercept-booster_detached.png";
+            NameCanonical = "interceptbooster-sideb";
         }
     }
 }

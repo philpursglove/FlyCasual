@@ -1,10 +1,9 @@
-﻿using Upgrade;
-using Ship;
+﻿using Actions;
 using ActionsList;
-using System;
+using Ship;
 using SubPhases;
-using System.Collections.Generic;
-using Actions;
+using System;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {

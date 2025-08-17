@@ -25,10 +25,19 @@ namespace Ship.SecondEdition.DroidTriFighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/74/88/7488fd46-8f27-4ca9-b573-db8d6f7d749e/swz81_colicoid-interceptor_cutout.png";
+    public class ColicoidInterceptorXWA : ColicoidInterceptor
+    {
+        public ColicoidInterceptorXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

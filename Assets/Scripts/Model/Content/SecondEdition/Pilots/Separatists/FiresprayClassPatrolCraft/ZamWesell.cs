@@ -8,45 +8,62 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.FiresprayClassPatrolCraft
 {
-    namespace SecondEdition.FiresprayClassPatrolCraft
+    public class ZamWesell : FiresprayClassPatrolCraft
     {
-        public class ZamWesell : FiresprayClassPatrolCraft
+        public ZamWesell() : base()
         {
-            public ZamWesell() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Zam Wesell",
-                    "Clawdite Changeling",
-                    Faction.Separatists,
-                    5,
-                    8,
-                    22,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ZamWesellPilotAbility),
-                    charges: 4,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
-                        UpgradeType.Crew,
-                        UpgradeType.Device,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.BountyHunter
-                    },
-                    skinName: "Jango Fett"
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Zam Wesell",
+                "Clawdite Changeling",
+                Faction.Separatists,
+                5,
+                8,
+                22,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ZamWesellPilotAbility),
+                charges: 4,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Crew,
+                    UpgradeType.Device,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.BountyHunter
+                },
+                skinName: "Jango Fett",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/08/f3/08f343b7-9d01-4e1f-91d8-e6eca0eb4fe0/swz82_a1_zam-wessel.png";
-            }
+    public class ZamWesellXWA : ZamWesell
+    {
+        public ZamWesellXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Cannon,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

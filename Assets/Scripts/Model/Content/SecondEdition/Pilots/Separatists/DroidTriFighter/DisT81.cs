@@ -35,10 +35,19 @@ namespace Ship.SecondEdition.DroidTriFighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/c/c2/DIS-T81.png";
+    public class DisT81XWA : DisT81
+    {
+        public DisT81XWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -35,10 +35,25 @@ namespace Ship
                     {
                         Tags.AWing
                     },
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://i.imgur.com/DFRzYC6.png";
+        public class KeoVenzeeXWA : KeoVenzee
+        {
+            public KeoVenzeeXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

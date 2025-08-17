@@ -1,4 +1,5 @@
 ﻿using Arcs;
+using Content;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
@@ -24,9 +25,19 @@ namespace UpgradesList.SecondEdition
                     requiresToken: typeof(FocusToken)
                 ),
                 abilityType: typeof(Abilities.SecondEdition.BarrageRocketsAbility),
-                seImageNumber: 36
+                seImageNumber: 36,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class BarrageRocketsXWA : BarrageRockets
+    {
+        public BarrageRocketsXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

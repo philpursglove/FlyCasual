@@ -39,8 +39,37 @@ namespace Ship
                     {
                         Tags.Freighter,
                         Tags.YT1300
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class ReyXWA : Rey
+        {
+            public ReyXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 8;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 28;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                { 
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).Tags = new List<Tags>
+                {
+                    Tags.Freighter,
+                    Tags.LightSide,
+                    Tags.YT1300
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

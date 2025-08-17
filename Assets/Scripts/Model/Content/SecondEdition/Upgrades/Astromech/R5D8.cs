@@ -1,4 +1,6 @@
-﻿using Upgrade;
+﻿using Content;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -14,8 +16,18 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.R5AstromechAbility),
                 restriction: new FactionRestriction(Faction.Rebel),
                 charges: 3,
-                seImageNumber: 101
+                seImageNumber: 101,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class R5D8XWA : R5D8
+    {
+        public R5D8XWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

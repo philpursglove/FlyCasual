@@ -31,12 +31,29 @@ namespace Ship
                     },
                     tags: new List<Tags>()
                     {
-                        Tags.Mandalorian 
+                        Tags.Mandalorian
                     },
-                    skinName: "Clan Wren Volunteers"
+                    skinName: "Clan Wren Volunteers",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/clanwrenvolunteer.png";
+        public class ClanWrenVolunteerXWA : ClanWrenVolunteer
+        {
+            public ClanWrenVolunteerXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 12;
+                pilot.ExtraUpgrades = new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
             }
         }
     }

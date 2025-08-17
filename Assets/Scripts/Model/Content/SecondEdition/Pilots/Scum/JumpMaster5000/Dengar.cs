@@ -28,20 +28,31 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Torpedo,
                         UpgradeType.Title
                     },
                     tags: new List<Tags>
                     {
                         Tags.BountyHunter
                     },
-                    seImageNumber: 214
+                    seImageNumber: 214,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class DengarXWA : Dengar
+        {
+            public DengarXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

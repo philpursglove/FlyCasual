@@ -27,7 +27,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.SensorScramblersAbility)
             );
             
-            ImageUrl = "https://i.imgur.com/BJPKpq0.png";
+            
         }
     }
 }

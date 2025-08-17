@@ -35,11 +35,33 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Title
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+
                 ImageUrl = "https://infinitearenas.com/xw2/images/pilots/leebo-wisdomofages.png";
+                PilotNameCanonical = "leebo-swz103-rebelalliance";
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
+            }
+        }
+
+        public class LeeboXWA : Leebo
+        {
+            public LeeboXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                { 
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Actions;
 using ActionsList;
 using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -22,16 +23,24 @@ namespace UpgradesList.SecondEdition
                 isSolitary: true,
                 addAction: new ActionInfo(typeof(CalculateAction), ActionColor.White, this),
                 restriction: new FactionRestriction(Faction.Separatists),
-                abilityType: typeof(Abilities.SecondEdition.KrakenAbility)
+                abilityType: typeof(Abilities.SecondEdition.KrakenAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Separatists,
                 new Vector2(209, 1)
-            );
-
-            ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/7/77/Swz29_kraken.png";
+            );            
         }        
+    }
+
+    public class KrakenXWA : Kraken
+    {
+        public KrakenXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

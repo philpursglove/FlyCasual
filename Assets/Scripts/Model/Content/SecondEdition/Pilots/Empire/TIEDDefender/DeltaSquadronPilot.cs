@@ -28,8 +28,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 126
+                    seImageNumber: 126,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class DeltaSquadronPilotXWA : DeltaSquadronPilot
+        {
+            public DeltaSquadronPilotXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

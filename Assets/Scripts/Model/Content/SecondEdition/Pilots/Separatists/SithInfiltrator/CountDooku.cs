@@ -41,10 +41,31 @@ namespace Ship.SecondEdition.SithInfiltrator
                 {
                     Tags.DarkSide,
                     Tags.Sith
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/3d/83/3d83b84f-e7d4-46b3-83ae-4d49245ae50d/swz30_count-dooku.png";
+    public class CountDookuXWA : CountDooku
+    {
+        public CountDookuXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title,
+                    UpgradeType.TacticalRelay,
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

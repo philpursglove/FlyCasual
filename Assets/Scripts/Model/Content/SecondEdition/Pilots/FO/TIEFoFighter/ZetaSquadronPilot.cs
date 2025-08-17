@@ -26,10 +26,26 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/c0/af/c0afde49-7f44-4c59-8051-cc4140a04be0/swz26_a1_zeta-pilot.png";
+        public class ZetaSquadronPilotXWA : ZetaSquadronPilot
+        {
+            public ZetaSquadronPilotXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 12;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
             }
         }
     }

@@ -1,8 +1,7 @@
 ﻿using ActionsList;
-using Ship;
+using Content;
 using SquadBuilderNS;
 using System;
-using UnityEngine;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -19,10 +18,9 @@ namespace UpgradesList.SecondEdition
                     new TagRestriction(Content.Tags.XWing),
                     new UpgradeBarRestriction(UpgradeType.Configuration)
                 ),
-                abilityType: typeof(Abilities.SecondEdition.BackwardsTailslideAbility)
+                abilityType: typeof(Abilities.SecondEdition.BackwardsTailslideAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/c4/d5/c4d543bc-bcf0-4c88-b8df-f652210752b9/swz68_backward-tailslide.png";
         }
 
         public override bool IsAllowedForSquadBuilderPostCheck(SquadList squadList)
@@ -37,6 +35,15 @@ namespace UpgradesList.SecondEdition
             {
                 return true;
             }
+        }
+    }
+
+    public class BackwardsTailslideXWA : BackwardsTailslide
+    {
+        public BackwardsTailslideXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

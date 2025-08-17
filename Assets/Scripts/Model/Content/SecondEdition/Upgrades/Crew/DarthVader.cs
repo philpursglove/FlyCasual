@@ -1,10 +1,12 @@
-﻿using Ship;
-using Upgrade;
+﻿using BoardTools;
+using Content;
+using Ship;
 using SubPhases;
 using System;
-using BoardTools;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -20,7 +22,8 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Imperial),
                 addForce: 1,
                 abilityType: typeof(Abilities.SecondEdition.DarthVaderCrewAbility),
-                seImageNumber: 112
+                seImageNumber: 112,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -28,6 +31,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(429, 24)
             );
         }        
+    }
+
+    public class DarthVaderXWA : DarthVader
+    {
+        public DarthVaderXWA() : base()
+        {
+            UpgradeInfo.Cost = 15;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

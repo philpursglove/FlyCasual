@@ -1,8 +1,8 @@
-﻿using Movement;
+﻿using Content;
+using Movement;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
-using Content;
 
 namespace UpgradesList.SecondEdition
 {
@@ -29,6 +29,15 @@ namespace UpgradesList.SecondEdition
                 }
             );
         }        
+    }
+
+    public class SlaveIXWA: SlaveI
+    {
+        public SlaveIXWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

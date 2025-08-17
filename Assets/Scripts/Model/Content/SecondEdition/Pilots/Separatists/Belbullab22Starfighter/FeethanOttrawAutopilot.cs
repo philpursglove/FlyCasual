@@ -24,12 +24,21 @@ namespace Ship.SecondEdition.Belbullab22Starfighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/6e/76/6e7626dc-3b81-4290-aece-ddf5d86e7667/swz29_autopilot.png";
-
             ShipInfo.ActionIcons.SwitchToDroidActions();
+        }
+    }
+
+    public class FeethanOttrawAutopilotXWA : FeethanOttrawAutopilot
+    {
+        public FeethanOttrawAutopilotXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

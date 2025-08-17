@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using Bombs;
+using Content;
+using Ship;
+using SubPhases;
+using SubPhases.SecondEdition;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
-using Ship;
-using System.Linq;
-using SubPhases;
-using SubPhases.SecondEdition;
-using Bombs;
 
 namespace UpgradesList.SecondEdition
 {
@@ -26,7 +25,8 @@ namespace UpgradesList.SecondEdition
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.BombletGeneratorAbility),
                 subType: UpgradeSubType.Bomb,
-                seImageNumber: 63
+                seImageNumber: 63,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             bombPrefabPath = "Prefabs/Bombs/Bomblet";
@@ -55,9 +55,16 @@ namespace UpgradesList.SecondEdition
 
             GameManagerScript.Wait(1, delegate { callBack(); });
         }
-
     }
 
+    public class BombletGeneratorXWA : BombletGenerator
+    {
+        public BombletGeneratorXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
+    }
 }
 
 namespace SubPhases.SecondEdition

@@ -25,16 +25,34 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.LieutenantSaiAbility),
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
                         UpgradeType.Cannon,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Modification,
                         UpgradeType.Title
                     },
                     seImageNumber: 144,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class LieutenantSaiXWA : LieutenantSai
+        {
+            public LieutenantSaiXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                { 
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

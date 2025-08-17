@@ -35,10 +35,28 @@ namespace Ship
                         Tags.Spectre,
                         Tags.Droid
                     },
-                    seImageNumber: 41
+                    seImageNumber: 41,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
+            }
+        }
+
+        public class AP5XWA : AP5
+        {
+            public AP5XWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

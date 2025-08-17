@@ -36,10 +36,19 @@ namespace Ship.SecondEdition.DroidTriFighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/91/bb/91bb3546-290e-4131-895e-a77d79ebbc99/swz81_fearsome-predator_cutout.png";
+    public class FearsomePredatorXWA : FearsomePredator
+    {
+        public FearsomePredatorXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -19,7 +19,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.FanaticAbility)
             );
 
-            ImageUrl = "https://i.imgur.com/3AzqrIt.jpg";
+            
         }
     }
 }

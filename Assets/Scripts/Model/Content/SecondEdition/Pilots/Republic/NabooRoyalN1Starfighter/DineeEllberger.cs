@@ -1,4 +1,5 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -25,13 +26,22 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Astromech,
                         UpgradeType.Sensor,
                         UpgradeType.Torpedo,
-                        UpgradeType.Astromech
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/48/69/4869e3a3-e56f-4abb-8af3-19bf76c80764/swz40_dinee-ellberger.png";
+        public class DineeEllbergerXWA : DineeEllberger
+        {
+            public DineeEllbergerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

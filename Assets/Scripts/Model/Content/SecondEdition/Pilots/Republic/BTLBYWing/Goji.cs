@@ -40,10 +40,19 @@ namespace Ship
                     {
                         Tags.Clone,
                         Tags.YWing
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/71/ca/71ca5555-2cf9-4d11-8163-c443669897bd/swz48_pilot-goji.png";
+        public class GojiXWA : Goji
+        {
+            public GojiXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

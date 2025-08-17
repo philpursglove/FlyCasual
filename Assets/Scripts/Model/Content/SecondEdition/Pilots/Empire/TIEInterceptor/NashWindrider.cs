@@ -37,10 +37,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    skinName: "Skystrike Academy"
+                    skinName: "Skystrike Academy",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/be/1b/be1bc184-02e3-4b23-9006-6c299ec2a7a6/swz84_pilot_nashwindrider.png";
+        public class NashWindriderXWA : NashWindrider
+        {
+            public NashWindriderXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,9 +1,7 @@
 ﻿using Actions;
 using ActionsList;
-using Ship;
+using Content;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -22,8 +20,18 @@ namespace UpgradesList.SecondEdition
                 addShields: 1,
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.ViragoAbility),
-                seImageNumber: 155
+                seImageNumber: 155,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class ViragoXWA : Virago
+    {
+        public ViragoXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }

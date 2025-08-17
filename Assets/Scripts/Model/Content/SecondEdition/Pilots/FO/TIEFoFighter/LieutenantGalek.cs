@@ -38,10 +38,29 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/fa44b5e8-b315-48cb-97cd-ad7250ae3ef2/SWZ97_LieutenantGaleklegal.png";
+        public class LieutenantGalekXWA : LieutenantGalek
+        {
+            public LieutenantGalekXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 4;
+                pilot.LoadoutValue = 15;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification
+                };
             }
         }
     }

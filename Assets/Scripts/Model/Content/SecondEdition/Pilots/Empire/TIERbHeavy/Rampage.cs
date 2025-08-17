@@ -27,19 +27,28 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
                         UpgradeType.Gunner,
                         UpgradeType.Modification,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
                         UpgradeType.Configuration
                     },
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/ee/88/ee888bad-fa08-42e2-a558-cbf9a6f2da62/swz67_rampage.png";
+        public class RampageXWA : Rampage
+        {
+            public RampageXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Arcs;
+using Content;
 using System;
 using System.Collections.Generic;
 using Upgrade;
@@ -26,11 +27,21 @@ namespace UpgradesList.SecondEdition
                     regensCharges: true,
                     arc: ArcType.Bullseye
                 ),
-                abilityType: typeof(Abilities.SecondEdition.ProtonCannonsAbility)
+                abilityType: typeof(Abilities.SecondEdition.ProtonCannonsAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
 
         public override void PayAttackCost(Action callBack) { callBack(); }
+    }
+
+    public class ProtonCannonsXWA : ProtonCannons
+    {
+        public ProtonCannonsXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

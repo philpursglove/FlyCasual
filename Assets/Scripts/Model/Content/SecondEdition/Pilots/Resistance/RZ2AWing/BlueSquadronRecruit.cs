@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace Ship
@@ -22,8 +23,25 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Tech
                     },
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class BlueSquadronRecruitXWA : BlueSquadronRecruit
+        {
+            public BlueSquadronRecruitXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                        UpgradeType.Talent,
+                        UpgradeType.Tech,
+                        UpgradeType.Missile
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

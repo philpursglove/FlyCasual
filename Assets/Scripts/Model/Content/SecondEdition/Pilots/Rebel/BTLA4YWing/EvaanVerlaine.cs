@@ -7,41 +7,38 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class EvaanVerlaine : BTLA4YWing
     {
-        public class EvaanVerlaine : BTLA4YWing
+        public EvaanVerlaine() : base()
         {
-            public EvaanVerlaine() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Evaan Verlaine",
-                    "Gold Three",
-                    Faction.Rebel,
-                    3,
-                    3,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(EvaanVerlaineAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Astromech,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    seImageNumber: 16
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Evaan Verlaine",
+                "Gold Three",
+                Faction.Rebel,
+                3,
+                3,
+                8,
+                isLimited: true,
+                abilityType: typeof(EvaanVerlaineAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Astromech,
+                    UpgradeType.Device,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                seImageNumber: 16
+            );
         }
     }
 }

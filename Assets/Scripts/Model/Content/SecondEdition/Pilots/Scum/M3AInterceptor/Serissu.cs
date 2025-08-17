@@ -1,4 +1,5 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -29,8 +30,19 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Modification
                     },
-                    seImageNumber: 183
+                    seImageNumber: 183,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SerissuXWA : Serissu
+        {
+            public SerissuXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

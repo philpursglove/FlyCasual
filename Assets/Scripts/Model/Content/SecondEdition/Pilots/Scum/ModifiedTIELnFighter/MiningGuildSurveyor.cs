@@ -25,10 +25,19 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/bf/da/bfda499f-603a-41c7-b2ee-50ffeeddb384/swz23_mining-guild-surveyor.png";
+        public class MiningGuildSurveyorXWA : MiningGuildSurveyor
+        {
+            public MiningGuildSurveyorXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 2;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

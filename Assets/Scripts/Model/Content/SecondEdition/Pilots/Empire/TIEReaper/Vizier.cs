@@ -33,8 +33,19 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    seImageNumber: 115
+                    seImageNumber: 115,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class VizierXWA : Vizier
+        {
+            public VizierXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

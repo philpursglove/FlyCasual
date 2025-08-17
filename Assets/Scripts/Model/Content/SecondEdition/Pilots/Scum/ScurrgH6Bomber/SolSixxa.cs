@@ -1,5 +1,4 @@
 ﻿using BoardTools;
-using Bombs;
 using Content;
 using Movement;
 using System.Collections.Generic;
@@ -27,16 +26,26 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Turret,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
+                        UpgradeType.Modification,
                         UpgradeType.Device,
                         UpgradeType.Device,
-                        UpgradeType.Modification
+                        UpgradeType.Turret
                     },
                     seImageNumber: 205,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SolSixxaXWA : SolSixxa
+        {
+            public SolSixxaXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

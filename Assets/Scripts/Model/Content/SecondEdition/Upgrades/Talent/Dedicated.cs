@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
@@ -19,11 +20,19 @@ namespace UpgradesList.SecondEdition
                 (
                     new FactionRestriction(Faction.Republic),
                     new TagRestriction(Content.Tags.Clone)
-                )
+                ),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-
-            ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/d/dd/Swz32_dedicated.png";
         }        
+    }
+
+    public class DedicatedXWA : Dedicated
+    {
+        public DedicatedXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

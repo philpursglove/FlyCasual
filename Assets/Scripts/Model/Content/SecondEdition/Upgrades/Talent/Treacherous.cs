@@ -1,5 +1,6 @@
 ﻿using ActionsList;
 using BoardTools;
+using Content;
 using Ship;
 using System;
 using Tokens;
@@ -17,9 +18,19 @@ namespace UpgradesList.SecondEdition
                 cost: 3,
                 abilityType: typeof(Abilities.SecondEdition.TreacherousAbility),
                 restriction: new FactionRestriction(Faction.Separatists),
-                charges: 1
+                charges: 1,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }        
+    }
+
+    public class TreacherousXWA : Treacherous
+    {
+        public TreacherousXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

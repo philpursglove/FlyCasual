@@ -31,7 +31,8 @@ namespace Ship
                     {
                         Tags.Clone
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.VeteranTailGunner));
@@ -43,6 +44,15 @@ namespace Ship
                 PilotNameCanonical = "jag-siegeofcoruscant";
 
                 ModelInfo.SkinName = "Red";
+            }
+        }
+
+        public class JagSoCXWA : JagSoC
+        {
+            public JagSoCXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

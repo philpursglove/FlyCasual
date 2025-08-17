@@ -23,20 +23,31 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
                         UpgradeType.Astromech,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
-                        UpgradeType.Modification
+                        UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Turret,
+                        UpgradeType.Missile,
+                        UpgradeType.Torpedo
                     },
                     tags: new List<Tags>
                     {
                         Tags.YWing
                     },
-                    seImageNumber: 165
+                    seImageNumber: 165,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class KavilXWA : Kavil
+        {
+            public KavilXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

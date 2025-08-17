@@ -32,8 +32,28 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class RecoilXWA : Recoil
+        {
+            public RecoilXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 5;
+                pilot.LoadoutValue = 9;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

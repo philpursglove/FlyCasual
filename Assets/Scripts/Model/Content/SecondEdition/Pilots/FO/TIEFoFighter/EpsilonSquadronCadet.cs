@@ -25,10 +25,27 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/1/18/Swz26_a1_epsilon-pilot.png";
+        public class EpsilonSquadronCadetXWA : EpsilonSquadronCadet
+        {
+            public EpsilonSquadronCadetXWA() : base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 13;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification
+                };
             }
         }
     }

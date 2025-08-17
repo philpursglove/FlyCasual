@@ -35,11 +35,11 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Sensor,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Device,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
+                        UpgradeType.Device,
+                        UpgradeType.Cannon,
+                        UpgradeType.Cannon,
                         UpgradeType.Title
                     },
                     seImageNumber: 197,
@@ -47,6 +47,16 @@ namespace Ship
                 );
 
                 ModelInfo.SkinName = "Green";
+            }
+        }
+
+        public class IG88AXWA : IG88A
+        {
+            public IG88AXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

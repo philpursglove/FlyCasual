@@ -27,8 +27,26 @@ namespace Ship
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 177
+                    seImageNumber: 177,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SpiceRunnerXWA : SpiceRunner
+        {
+            public SpiceRunnerXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Device
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

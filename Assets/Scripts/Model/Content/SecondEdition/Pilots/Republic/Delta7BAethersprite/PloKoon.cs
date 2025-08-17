@@ -31,12 +31,28 @@ namespace Ship.SecondEdition.Delta7BAethersprite
                     Tags.Jedi,
                     Tags.LightSide
                 },
-                skinName: "Plo Koon"
+                skinName: "Plo Koon",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "plokoon-delta7baethersprite";
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/6a/6f/6a6fef51-fb5f-49c1-b5cc-8e96b6d09051/swz32_plo-koon.png";
+    public class PloKoon7BXWA : PloKoon7B
+    {
+        public PloKoon7BXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

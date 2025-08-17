@@ -35,12 +35,21 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Droid
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipInfo.ActionIcons.SwitchToDroidActions();
+            }
+        }
 
-                ImageUrl = "https://static.wikia.nocookie.net/xwing-miniatures-second-edition/images/0/0f/Q90.png";
+        public class Q9Dash0XWA : Q9Dash0
+        {
+            public Q9Dash0XWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -1,10 +1,11 @@
-﻿using Upgrade;
-using Ship;
-using Arcs;
-using System.Linq;
+﻿using Arcs;
 using BoardTools;
+using Content;
+using Ship;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,7 +20,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.BistanGunnerAbility),
                 restriction: new FactionRestriction(Faction.Rebel),
-                seImageNumber: 95
+                seImageNumber: 95,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -27,6 +29,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(397, 4),
                 new Vector2(125, 125)
             );
+        }
+    }
+
+    public class BistanGunnerXWA : BistanGunner
+    {
+        public BistanGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 12;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

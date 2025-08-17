@@ -1,5 +1,4 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -31,12 +30,21 @@ namespace Ship
                     {
                         Tags.XWing
                     },
-                    skinName: "Black One"
+                    skinName: "Black One",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "blacksquadronace-t70xwing";
+            }
+        }
 
-                ImageUrl = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/a/a7/Swz25_black-sqd-ace_a1.png";
+        public class BlackSquadronAceXWA : BlackSquadronAce
+        {
+            public BlackSquadronAceXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

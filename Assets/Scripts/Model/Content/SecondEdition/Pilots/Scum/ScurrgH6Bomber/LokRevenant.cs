@@ -30,5 +30,24 @@ namespace Ship
                 );
             }
         }
+
+        public class LokRevenantXWA : LokRevenant
+        {
+            public LokRevenantXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 25;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Turret
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }

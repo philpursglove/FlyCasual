@@ -2,43 +2,59 @@
 using Content;
 using Ship;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLS8KWing
 {
-    namespace SecondEdition.BTLS8KWing
+    public class EsegeTuketu : BTLS8KWing
     {
-        public class EsegeTuketu : BTLS8KWing
+        public EsegeTuketu() : base()
         {
-            public EsegeTuketu() : base()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Esege Tuketu",
+                "Selfless Hero",
+                Faction.Rebel,
+                3,
+                5,
+                16,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.EsegeTuketuAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Torpedo,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Crew,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                },
+                seImageNumber: 63,
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
+        }
+    }
+        
+    public class EsegeTuketuXWA : EsegeTuketu
+    {
+        public EsegeTuketuXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Esege Tuketu",
-                    "Selfless Hero",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    16,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.EsegeTuketuAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Crew,
-                        UpgradeType.Device,
-                        UpgradeType.Modification
-                    },
-                    seImageNumber: 63,
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-            }
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Missile,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

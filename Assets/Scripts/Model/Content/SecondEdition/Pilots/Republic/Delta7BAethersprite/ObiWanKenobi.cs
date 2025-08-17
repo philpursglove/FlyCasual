@@ -31,12 +31,29 @@ namespace Ship.SecondEdition.Delta7BAethersprite
                 {
                     Tags.Jedi,
                     Tags.LightSide
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             PilotNameCanonical = "obiwankenobi-delta7baethersprite";
+        }
+    }
 
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/f9/24/f9246e39-4852-4a8f-a331-9b78f62439e9/swz32_obi-wan-kenobi.png";
+    public class ObiWanKenobi7BXWA : ObiWanKenobi7B
+    {
+        public ObiWanKenobi7BXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

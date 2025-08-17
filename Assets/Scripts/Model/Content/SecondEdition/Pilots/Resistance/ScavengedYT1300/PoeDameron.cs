@@ -42,12 +42,21 @@ namespace Ship
                     {
                         Tags.Freighter,
                         Tags.YT1300
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "poedameron-scavengedyt1300";
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/6d63e9f9-05c3-48c3-bcc1-768e378a5560/SWZ97_PoeDameronlegal+%281%29.png";
+        public class PoeDameronXWA : PoeDameron
+        {
+            public PoeDameronXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

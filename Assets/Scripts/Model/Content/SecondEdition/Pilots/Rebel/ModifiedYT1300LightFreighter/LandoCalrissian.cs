@@ -42,10 +42,33 @@ namespace Ship
                         Tags.Freighter,
                         Tags.YT1300
                     },
-                    seImageNumber: 70
+                    seImageNumber: 70,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "landocalrissian-modifiedyt1300lightfreighter";
+            }
+        }
+
+        public class LandoCalrissianXWA : LandoCalrissian
+        {
+            public LandoCalrissianXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

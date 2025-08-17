@@ -35,10 +35,28 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/75/01/7501b0b3-6350-4f5a-af84-0c988a5493ba/swz26_a1_static.png";
+        public class StaticXWA : Static
+        {
+            public StaticXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.Cost = 3;
+                pilot.LoadoutValue = 8;
+                pilot.ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Modification
+                };
             }
         }
     }

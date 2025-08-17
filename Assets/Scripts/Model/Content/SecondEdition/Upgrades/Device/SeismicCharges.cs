@@ -24,8 +24,6 @@ namespace UpgradesList.SecondEdition
                 seImageNumber: 67
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/seismiccharges.png";
-
             bombPrefabPath = "Prefabs/Bombs/SeismicCharge";
         }
 

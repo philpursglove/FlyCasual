@@ -1,11 +1,9 @@
-﻿using Upgrade;
+﻿using Actions;
 using ActionsList;
-using Actions;
-using System.Collections.Generic;
-using UnityEngine;
 using Ship;
-using System.Linq;
 using System;
+using System.Linq;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -22,8 +20,6 @@ namespace UpgradesList.SecondEdition
                 addAction: new ActionInfo(typeof(TargetLockAction), ActionColor.Red),
                 abilityType: typeof(Abilities.SecondEdition.RookKastCrewAbility)
             );
-
-            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/rookkast.png";
         }        
     }
 }

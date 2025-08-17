@@ -1,7 +1,5 @@
 ﻿using Content;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship
@@ -29,8 +27,24 @@ namespace Ship
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 45
+                    seImageNumber: 45,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class RebelScoutXWA : RebelScout
+        {
+            public RebelScoutXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Device
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

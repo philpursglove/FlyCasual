@@ -25,10 +25,25 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
                 tags: new List<Tags>
                 {
                     Tags.Droid
-                }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/89/cb/89cb527c-4578-410c-9e5b-4ac78815a679/swz31_separatist-drone.png";
+        }
+    }
+
+    public class SeparatistDroneXWA : SeparatistDrone
+    {
+        public SeparatistDroneXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

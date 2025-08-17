@@ -1,4 +1,5 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -23,14 +24,23 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Torpedo,
                         UpgradeType.Astromech,
-                        UpgradeType.Modification
-                    }
+                        UpgradeType.Sensor,
+                        UpgradeType.Modification,
+                        UpgradeType.Torpedo,
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images.squarespace-cdn.com/content/v1/5ce432b1f9d2be000134d8ae/d857e3ca-7688-4854-9787-8f051dec8144/SWZ97_GavynSykeslegal.png";
+        public class GavynSykesXWA : GavynSykes
+        {
+            public GavynSykesXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

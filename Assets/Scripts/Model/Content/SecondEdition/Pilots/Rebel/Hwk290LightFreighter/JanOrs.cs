@@ -37,8 +37,29 @@ namespace Ship
                     {
                         Tags.Freighter
                     },
-                    seImageNumber: 42
+                    seImageNumber: 42,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class JanOrsXWA : JanOrs
+        {
+            public JanOrsXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

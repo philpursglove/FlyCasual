@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Upgrade;
+﻿using BoardTools;
+using Bombs;
+using Movement;
 using Ship;
-using System.Linq;
 using SubPhases;
 using SubPhases.SecondEdition;
-using Bombs;
-using BoardTools;
-using Movement;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -25,8 +24,6 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.ThermalDetonatorsAbility),
                 subType: UpgradeSubType.Bomb
             );
-
-            ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/52/bf/52bff580-897d-4af0-9084-5088765babf0/swz80_upgrade_thermal-detonators.png";
 
             bombPrefabPath = "Prefabs/Bombs/ThermalDetonator";
         }

@@ -36,10 +36,29 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Droid
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/46/92/469279ec-b2cc-4168-81e2-f1bc616b0037/swz71_card_prototype.png";
+        public class GeonosianPrototypeXWA : GeonosianPrototype
+        {
+            public GeonosianPrototypeXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration,
+                    UpgradeType.TacticalRelay,
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

@@ -30,12 +30,21 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Clone
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "hawk-clonez95headhunter";
+            }
+        }
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/hawk-clonez95headhunter.png";
+        public class HawkXWA : Hawk
+        {
+            public HawkXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

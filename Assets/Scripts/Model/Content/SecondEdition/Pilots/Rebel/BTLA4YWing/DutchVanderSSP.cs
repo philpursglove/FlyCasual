@@ -1,9 +1,9 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
 using System;
-using Content;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
@@ -11,43 +11,38 @@ using UnityEngine;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.BTLA4YWing
 {
-    namespace SecondEdition.BTLA4YWing
+    public class DutchVanderSSP : BTLA4YWing
     {
-        public class DutchVanderSSP : BTLA4YWing
+        public DutchVanderSSP() : base()
         {
-            public DutchVanderSSP() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Dutch\" Vander",
-                    "Gold Leader",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(DutchVanderSSPAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Turret,
-                        UpgradeType.Device
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    isStandardLayout: true
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Dutch\" Vander",
+                "Gold Leader",
+                Faction.Rebel,
+                4,
+                4,
+                0,
+                isLimited: true,
+                abilityType: typeof(DutchVanderSSPAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Turret,
+                    UpgradeType.Device
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                isStandardLayout: true
+            );
 
-                MustHaveUpgrades.Add(typeof(IonCannonTurret));
-                MustHaveUpgrades.Add(typeof(ProtonBombs));
+            MustHaveUpgrades.Add(typeof(IonCannonTurret));
+            MustHaveUpgrades.Add(typeof(ProtonBombs));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dutchvander-swz106.png";
-
-                PilotNameCanonical = "dutchvander-swz106";
-            }
+            PilotNameCanonical = "dutchvander-swz106";
         }
     }
 }

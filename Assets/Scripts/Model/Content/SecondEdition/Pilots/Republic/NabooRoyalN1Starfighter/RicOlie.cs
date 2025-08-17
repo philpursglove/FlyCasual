@@ -1,4 +1,5 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -25,13 +26,22 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
+                        UpgradeType.Astromech,
                         UpgradeType.Sensor,
                         UpgradeType.Torpedo,
-                        UpgradeType.Astromech
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
 
-                ImageUrl = "https://images-cdn.fantasyflightgames.com/filer_public/d2/7b/d27baa36-e835-4311-b86b-b9b19ce8a0b9/swz40_ric-olie.png";
+        public class RicOlieXWA : RicOlie
+        {
+            public RicOlieXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

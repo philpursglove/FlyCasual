@@ -1,8 +1,8 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
+using Content;
 using Ship;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -27,15 +27,26 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
                     },
                     seImageNumber: 59,
-                    skinName: "Blue"
+                    skinName: "Blue",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class HeffToberXWA : HeffTobber
+        {
+            public HeffToberXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

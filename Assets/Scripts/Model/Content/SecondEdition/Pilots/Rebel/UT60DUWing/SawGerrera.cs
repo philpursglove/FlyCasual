@@ -2,9 +2,7 @@
 using ActionsList;
 using Content;
 using Ship;
-using System.Collections;
 using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 
 namespace Ship
@@ -28,9 +26,9 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>
                     {
                         UpgradeType.Talent,
+                        UpgradeType.Crew,
+                        UpgradeType.Crew,
                         UpgradeType.Sensor,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
@@ -40,8 +38,19 @@ namespace Ship
                         Tags.Partisan
                     },
                     seImageNumber: 55,
-                    skinName: "Partisan"
+                    skinName: "Partisan",
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
+            }
+        }
+
+        public class SawGerreraXWA : SawGerrera
+        {
+            public SawGerreraXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
