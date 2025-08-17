@@ -1,6 +1,8 @@
 ﻿using Abilities.SecondEdition;
 using ActionsList;
+using Content;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using Upgrade;
@@ -13,13 +15,21 @@ namespace Ship
         {
             public MausMonareBoE()
             {
-                PilotInfo = new PilotCardInfo(
+                PilotInfo = new PilotCardInfo25(
                     "Maus Monare",
+                    "Battle Over Endor",
+                    Faction.Imperial,
                     3,
-                    42,
-                    isLimited: true,
+                    4,
+                    0,
                     abilityType: typeof(MausMonareAbility),
-                    extraUpgradeIcon: UpgradeType.Talent
+                    isLimited: true,
+                    isStandardLayout: true,
+                    tags: new List<Tags>
+                    {
+                        Tags.Tie
+                    }
+
                 );
                 PilotNameCanonical = "mausmonare-battleoverendor";
                 ShipInfo.Shields++;
@@ -28,6 +38,10 @@ namespace Ship
                 AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
+
+                MustHaveUpgrades.Add(typeof(NoEscapeAbility));
+                MustHaveUpgrades.Add(typeof(OutmaneuverAbility));
+
             }
         }
     }

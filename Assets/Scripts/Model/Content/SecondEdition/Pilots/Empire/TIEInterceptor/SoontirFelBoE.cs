@@ -4,6 +4,7 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Content;
 using Tokens;
 using Upgrade;
 
@@ -15,21 +16,40 @@ namespace Ship
         {
             public SoontirFelBoE()
             {
-                PilotInfo = new PilotCardInfo(
+                PilotInfo = new PilotCardInfo25(
                     "Soontir Fel",
+                    "Battle Over Endor",
+                    Faction.Imperial,
                     6,
-                    49,
+                    5,
+                    loadoutValue: 0,
+                    isStandardLayout: true,
                     isLimited: true,
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Sensor,
+                        UpgradeType.Illicit
+                    },
+
                     abilityType: typeof(SoontirFelBattleOverEndorAbility),
                     charges: 2,
-                    extraUpgradeIcon: UpgradeType.Talent
+                    tags: new List<Tags>
+                    {
+                        Tags.Tie
+                    }
+
                 );
+
                 PilotNameCanonical = "soontirfel-battleoverendor";
                 ShipInfo.UpgradeIcons.Upgrades.Remove(UpgradeType.Configuration);
                 AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
                 ModelInfo.SkinName = "Red Stripes";
+                
+                MustHaveUpgrades.Add(typeof(NoEscapeAbility));
             }
         }
     }
@@ -52,11 +72,11 @@ namespace Abilities.SecondEdition
 
         private void RegisterAbility(GenericShip ship)
         {
-            if(HostShip.State.Charges > 0)
+            if (HostShip.State.Charges > 0)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskToUseAbility);
             }
-            
+
         }
 
         private void AskToUseAbility(object sender, EventArgs e)
@@ -81,7 +101,8 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             RegisterAbilityTrigger(
                 TriggerTypes.OnFreeAction,
-                delegate {
+                delegate
+                {
                     HostShip.SpendCharge();
                     HostShip.Tokens.AssignToken(typeof(DepleteToken), Triggers.FinishTrigger);
                 }

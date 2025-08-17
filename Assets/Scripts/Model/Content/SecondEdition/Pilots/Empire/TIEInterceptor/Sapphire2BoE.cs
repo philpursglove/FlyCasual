@@ -1,5 +1,7 @@
-﻿using Abilities.SecondEdition;
+﻿using System.Collections.Generic;
+using Abilities.SecondEdition;
 using System.Linq;
+using Content;
 using Tokens;
 using Upgrade;
 
@@ -11,18 +13,40 @@ namespace Ship
         {
             public Sapphire2BoE()
             {
-                PilotInfo = new PilotCardInfo(
+                PilotInfo = new PilotCardInfo25(
                     "Sapphire 2",
+                    "Battle Over Endor",
+                    Faction.Imperial,
                     1,
-                    38,
+                    4,
+                    1,
+                    extraUpgradeIcons:new List<UpgradeType>()
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Modification,
+                        UpgradeType.Tech
+                    },
                     isLimited: true,
-                    abilityType: typeof(Sapphire2Ability)
+                    isStandardLayout: true,
+                    abilityType: typeof(Sapphire2Ability),
+                    tags: new List<Tags>
+                    {
+                        Tags.Tie
+                    }
+
                 );
                 PilotNameCanonical = "sapphire2-battleoverendor";
                 ShipInfo.UpgradeIcons.Upgrades.Remove(UpgradeType.Configuration);
                 AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
+
+                MustHaveUpgrades.Add(typeof(NoEscapeAbility));
+                MustHaveUpgrades.Add(typeof(TargetingMatrixAbility));
+                MustHaveUpgrades.Add(typeof(PrimedThrustersAbility));
+
+
             }
         }
     }
