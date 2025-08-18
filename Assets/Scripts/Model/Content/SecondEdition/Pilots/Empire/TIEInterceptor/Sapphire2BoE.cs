@@ -48,7 +48,7 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(PrimedThrusters));
                 MustHaveUpgrades.Add(typeof(Reckless));
 
-
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/sapphire2-battleoverendor.png";
             }
         }
     }

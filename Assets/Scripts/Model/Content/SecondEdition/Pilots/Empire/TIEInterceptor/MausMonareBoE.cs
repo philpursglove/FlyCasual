@@ -49,6 +49,8 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(NoEscape));
                 MustHaveUpgrades.Add(typeof(Outmaneuver));
                 MustHaveUpgrades.Add(typeof(FuelInjectionOverride));
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/mausmonare-battleoverendor.png";
             }
         }
     }

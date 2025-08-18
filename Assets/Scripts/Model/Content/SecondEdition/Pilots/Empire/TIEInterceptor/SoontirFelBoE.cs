@@ -54,6 +54,8 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(ApexPredator));
                 MustHaveUpgrades.Add(typeof(BlankSignature));
                 MustHaveUpgrades.Add(typeof(FeedbackEmitter));
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/soontirfel-battleoverendor.png";
             }
         }
     }
