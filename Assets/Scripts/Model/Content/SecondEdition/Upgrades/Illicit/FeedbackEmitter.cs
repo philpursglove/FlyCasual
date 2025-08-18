@@ -7,7 +7,7 @@ namespace UpgradesList.SecondEdition
 {
     public class FeedbackEmitter : GenericUpgrade
     {
-        public FeedbackEmitter() : base()
+        public FeedbackEmitter() 
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Feedback Emitter",

@@ -7,7 +7,7 @@ namespace UpgradesList.SecondEdition
 {
     public class BlankSignature : GenericUpgrade
     {
-        public BlankSignature() : base()
+        public BlankSignature()
         {
             UpgradeInfo = new UpgradeCardInfo
             (

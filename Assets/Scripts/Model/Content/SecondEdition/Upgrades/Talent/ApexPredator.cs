@@ -6,7 +6,7 @@ namespace UpgradesList.SecondEdition
 {
     public class ApexPredator : GenericUpgrade
     {
-        public ApexPredator() : base()
+        public ApexPredator()
         {
             UpgradeInfo = new UpgradeCardInfo
             (
@@ -23,7 +23,7 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    //While you perform a primary attack, if the defender's initative is lower than yours, you may reroll 1 attack die.
+    //While you perform a primary attack, if the defender's initiative is lower than yours, you may reroll 1 attack die.
     public class ApexPredatorAbility : GenericAbility
     {
         public override void ActivateAbility()
