@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship
 {
@@ -45,9 +46,9 @@ namespace Ship
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
 
-                MustHaveUpgrades.Add(typeof(NoEscapeAbility));
-                MustHaveUpgrades.Add(typeof(OutmaneuverAbility));
-
+                MustHaveUpgrades.Add(typeof(NoEscape));
+                MustHaveUpgrades.Add(typeof(Outmaneuver));
+                MustHaveUpgrades.Add(typeof(FuelInjectionOverride));
             }
         }
     }

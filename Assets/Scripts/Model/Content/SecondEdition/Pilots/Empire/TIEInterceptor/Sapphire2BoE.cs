@@ -4,6 +4,7 @@ using System.Linq;
 using Content;
 using Tokens;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship
 {
@@ -42,9 +43,10 @@ namespace Ship
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
 
-                MustHaveUpgrades.Add(typeof(NoEscapeAbility));
-                MustHaveUpgrades.Add(typeof(TargetingMatrixAbility));
-                MustHaveUpgrades.Add(typeof(PrimedThrustersAbility));
+                MustHaveUpgrades.Add(typeof(NoEscape));
+                MustHaveUpgrades.Add(typeof(TargetingMatrix));
+                MustHaveUpgrades.Add(typeof(PrimedThrusters));
+                MustHaveUpgrades.Add(typeof(Reckless));
 
 
             }

@@ -7,6 +7,7 @@ using System.Linq;
 using Content;
 using Tokens;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship
 {
@@ -49,7 +50,10 @@ namespace Ship
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
                 ModelInfo.SkinName = "Red Stripes";
                 
-                MustHaveUpgrades.Add(typeof(NoEscapeAbility));
+                MustHaveUpgrades.Add(typeof(NoEscape));
+                MustHaveUpgrades.Add(typeof(ApexPredator));
+                MustHaveUpgrades.Add(typeof(BlankSignature));
+                MustHaveUpgrades.Add(typeof(FeedbackEmitter));
             }
         }
     }
