@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
                     new ShipRestriction(typeof(Ship.SecondEdition.TIEDDefender.TIEDDefender))
                 ),
                 abilityType: typeof(Abilities.SecondEdition.TIEDefenderEliteAbility),
-                isStandardazed: true
+                isStandardized: true
             );
         }
     }

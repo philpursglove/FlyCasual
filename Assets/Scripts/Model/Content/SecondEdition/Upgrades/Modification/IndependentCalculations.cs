@@ -16,10 +16,8 @@ namespace UpgradesList.SecondEdition
                 cost: 2,
                 restriction: new AbilityPresenceRestriction(typeof(Abilities.SecondEdition.NetworkedCalculationsAbility)),
                 abilityType: typeof(Abilities.SecondEdition.IndependentCalculationsWrapperAbility),
-                isStandardazed: true
+                isStandardized: true
             );
-
-            
         }
     }
 }

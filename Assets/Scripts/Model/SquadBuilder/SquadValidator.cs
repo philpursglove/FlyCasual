@@ -169,7 +169,7 @@ namespace SquadBuilderNS
             {
                 foreach (var upgrade in shipConfig.Instance.UpgradeBar.GetUpgradesAll())
                 {
-                    if (upgrade.UpgradeInfo.IsStandardazed)
+                    if (upgrade.UpgradeInfo.IsStandardized)
                     {
                         if (standardizedUpgradesFound.ContainsKey(shipConfig.Instance.ShipInfo.ShipName))
                         {

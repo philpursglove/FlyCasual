@@ -25,7 +25,7 @@ namespace UpgradesList.SecondEdition
                 addArc: new ShipArcInfo(ArcType.SingleTurret, 2),
                 removeArc: ArcType.Front,
                 abilityType: typeof(Abilities.SecondEdition.VectoredCannonsRZ1Ability),
-                isStandardazed: true
+                isStandardized: true
             );
             NameCanonical = "vectoredcannonsrz1";
         }
