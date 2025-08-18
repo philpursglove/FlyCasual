@@ -178,7 +178,7 @@ namespace SubPhases
 
         protected virtual void GenerateListOfAvailableTemplates()
         {
-            List<ManeuverTemplate> allowedTemplates = Selection.ThisShip.GetAvailableBarrelRollTemplates();
+            List<ManeuverTemplate> allowedTemplates = Selection.ThisShip.GetAvailableBarrelRollTemplates(HostAction);
 
             foreach (ManeuverTemplate barrelRollTemplate in allowedTemplates)
             {
