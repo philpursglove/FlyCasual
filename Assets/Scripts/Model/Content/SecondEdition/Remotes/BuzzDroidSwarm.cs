@@ -226,7 +226,7 @@ namespace Abilities.SecondEdition
         {
             return !collisionDetector.OverlapsAsteroidNow
                 && !collisionDetector.OverlapsShipNow
-                && collisionDetector.OverlapedMinesNow.Count == 0;
+                && collisionDetector.OverlappedMinesNow.Count == 0
         }
 
         private void RestoreRenderers()

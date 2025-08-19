@@ -20,8 +20,8 @@ public class ObstaclesStayDetectorForced: MonoBehaviour {
 
     public List<GenericShip> OverlappedShipsNow = new List<GenericShip>();
     public bool OffTheBoardNow = false;
-    public List<Collider> OverlapedMinesNow = new List<Collider>();
     public List<GenericObstacle> OverlappedAsteroidsNow = new List<GenericObstacle>();
+    public List<Collider> OverlappedMinesNow = new();
     public bool OverlapsCurrentShipNow { get; private set; }
 
     private GenericShip theShip; 

@@ -576,7 +576,7 @@ namespace SubPhases
 
         private void CheckMines()
         {
-            foreach (var mineCollider in SelectedTemplate.Collider.OverlapedMinesNow)
+            foreach (var mineCollider in SelectedTemplate.Collider.OverlappedMinesNow)
             {
                 GenericDeviceGameObject mineObject = mineCollider.transform.parent.GetComponent<GenericDeviceGameObject>();
                 if (!TheShip.MinesHit.Contains(mineObject)) TheShip.MinesHit.Add(mineObject);
