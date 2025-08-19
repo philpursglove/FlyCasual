@@ -1,4 +1,5 @@
-﻿using BoardTools;
+﻿using Arcs;
+using BoardTools;
 using Players;
 using Remote;
 using Ship;
@@ -15,11 +16,14 @@ namespace Remote
     {
         public BuzzDroidSwarm(GenericPlayer owner) : base(owner)
         {
-            RemoteInfo = new RemoteInfo(
-                "Buzz Droid Swarm",
-                0, 3, 1,
-                "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/3/38/Remote_BuzzDroidSwarm.png",
-                typeof(Abilities.SecondEdition.BuzzDroidSwarmAbiliy)
+            RemoteInfo = new RemoteInfo25(
+                name: "Buzz Droid Swarm",
+                initiative: 0, 
+                arcInfo: new ShipArcsInfo(ArcType.None, 0), 
+                agility: 1, 
+                hull: 1,
+                imageUrl: "https://infinitearenas.com/xw2/images/upgrades/buzzdroidswarm.png",
+                abilityType: typeof(Abilities.SecondEdition.BuzzDroidSwarmAbiliy)
             );
         }
 
@@ -71,14 +75,48 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
+            GenericShip.OnRemoteWasLaunchedGlobal += CheckOverlap;
             GenericShip.OnPositionFinishGlobal += CheckRemoteOverlapping;
             HostShip.OnCombatActivation += RegisterDealDamageToEnemyShipsAtRange;
         }
 
         public override void DeactivateAbility()
         {
+            GenericShip.OnRemoteWasLaunchedGlobal -= CheckOverlap;
             GenericShip.OnPositionFinishGlobal -= CheckRemoteOverlapping;
             HostShip.OnCombatActivation -= RegisterDealDamageToEnemyShipsAtRange;
+        }
+
+        private void CheckOverlap()
+        {
+            GameManagerScript.Instance.StartCoroutine(ReCheckOverlap());
+        }
+
+        private IEnumerator ReCheckOverlap()
+        {
+            ObstaclesStayDetectorForced collisionDetector = HostShip.Model.GetComponentInChildren<ObstaclesStayDetectorForced>();
+
+            //RelocateToFrontGuides();
+
+            collisionDetector.ReCheckCollisionsStart();
+            collisionDetector.TheShip = HostShip;
+            yield return new WaitForFixedUpdate();
+            
+            bool overlapsShip = collisionDetector.OverlapsShipNow;
+            collisionDetector.ReCheckCollisionsFinish();
+
+            if (overlapsShip)
+            {
+                foreach(GenericShip ship in collisionDetector.OverlappedShipsNow)
+                {
+                    if (!ship.RemotesOverlapped.Contains((GenericRemote) HostShip) && !Tools.IsFriendly(ship, HostShip))
+                    {
+                        ship.RemotesOverlapped.Add((GenericRemote)HostShip);
+                        Trigger trigger = RegisterAbilityTrigger(TriggerTypes.OnRemoteWasLaunched, delegate { AttachToShip(ship); });
+                        trigger.IsPriority = true;
+                    }
+                }
+            }
         }
 
         private void RegisterDealDamageToEnemyShipsAtRange(GenericShip ship)
@@ -115,6 +153,7 @@ namespace Abilities.SecondEdition
             }
             else
             {
+                Selection.ChangeActiveShip(HostShip);
                 HostShip.IsAttackPerformed = true;
                 Triggers.FinishTrigger();
             }
@@ -125,7 +164,7 @@ namespace Abilities.SecondEdition
             // Only for real ships
             if (ship is GenericRemote) return;
 
-            if (ship.Owner.PlayerNo == HostShip.Owner.PlayerNo) return;
+            if (Tools.IsSameTeam(ship, HostShip)) return;
 
             if (ship.RemotesOverlapped.Contains(HostShip) || ship.RemotesMovedThrough.Contains(HostShip))
             {
@@ -153,14 +192,14 @@ namespace Abilities.SecondEdition
 
             collisionDetector.ReCheckCollisionsStart();
             yield return new WaitForFixedUpdate();
-            bool canBePlacedFront = NoCollisionsWithObjects(collisionDetector);
+            bool canBePlacedFront = NoCollisionsWithObjects(collisionDetector, SufferedShip);
             collisionDetector.ReCheckCollisionsFinish();
 
             RelocateToRearGuides();
 
             collisionDetector.ReCheckCollisionsStart();
             yield return new WaitForFixedUpdate();
-            bool canBePlacedRear = NoCollisionsWithObjects(collisionDetector);
+            bool canBePlacedRear = NoCollisionsWithObjects(collisionDetector, SufferedShip);
             collisionDetector.ReCheckCollisionsFinish();
 
             HostShip.SetPositionInfo(OldPosition);
@@ -222,16 +261,28 @@ namespace Abilities.SecondEdition
             callback();
         }
 
-        private static bool NoCollisionsWithObjects(ObstaclesStayDetectorForced collisionDetector)
+        private static bool NoCollisionsWithObjects(ObstaclesStayDetectorForced collisionDetector, GenericShip sufferedShip)
         {
+            //this shouldn't be necessary. I don't know why the sufferedShip is showing up in the overlapped list
+            //I think it might have something to do with the two collisionDetectors running in close proximity... maybe??
+            if (collisionDetector.OverlapsShipNow)
+            {
+                return !collisionDetector.OverlapsAsteroidNow
+                && collisionDetector.OverlappedShipsNow.Count == 1
+                && collisionDetector.OverlappedShipsNow.Contains(sufferedShip)
+                && collisionDetector.OverlappedMinesNow.Count == 0
+                && collisionDetector.OverlappedRemotesNow.Count == 0;
+            }
+
             return !collisionDetector.OverlapsAsteroidNow
                 && !collisionDetector.OverlapsShipNow
                 && collisionDetector.OverlappedMinesNow.Count == 0
+                && collisionDetector.OverlappedRemotesNow.Count == 0;
         }
 
         private void RestoreRenderers()
         {
-            foreach (var rendererData in RenderersOldState)
+            foreach (KeyValuePair<Renderer, bool> rendererData in RenderersOldState)
             {
                 rendererData.Key.enabled = rendererData.Value;
             }
@@ -293,5 +344,4 @@ namespace Abilities.SecondEdition
 
         private class RelocationDecisionSubPhase : DecisionSubPhase { }
     }
-
 }

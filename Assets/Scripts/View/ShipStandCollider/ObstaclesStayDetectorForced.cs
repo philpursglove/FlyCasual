@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using Obstacles;
+using Remote;
+using Ship;
 using System.Collections.Generic;
 using UnityEngine;
-using Ship;
-using Obstacles;
 
 public class ObstaclesStayDetectorForced: MonoBehaviour {
 
@@ -18,10 +18,11 @@ public class ObstaclesStayDetectorForced: MonoBehaviour {
         get { return OverlappedAsteroidsNow.Count > 0; }
     }
 
-    public List<GenericShip> OverlappedShipsNow = new List<GenericShip>();
+    public List<GenericShip> OverlappedShipsNow = new ();
+    public List<GenericRemote> OverlappedRemotesNow = new ();
     public bool OffTheBoardNow = false;
-    public List<GenericObstacle> OverlappedAsteroidsNow = new List<GenericObstacle>();
     public List<Collider> OverlappedMinesNow = new();
+    public List<GenericObstacle> OverlappedAsteroidsNow = new ();
     public bool OverlapsCurrentShipNow { get; private set; }
 
     private GenericShip theShip; 
@@ -36,10 +37,11 @@ public class ObstaclesStayDetectorForced: MonoBehaviour {
 
     public void ReCheckCollisionsStart()
     {
-        OverlappedShipsNow = new List<GenericShip>();
+        OverlappedShipsNow = new ();
+        OverlappedRemotesNow = new ();
         OffTheBoardNow = false;
-        OverlapedMinesNow = new List<Collider>();
-        OverlappedAsteroidsNow = new List<GenericObstacle> ();
+        OverlappedMinesNow = new ();
+        OverlappedAsteroidsNow = new ();
         OverlapsCurrentShipNow = false;
 
         checkCollisionsNow = true;
@@ -54,32 +56,41 @@ public class ObstaclesStayDetectorForced: MonoBehaviour {
     {
         if (checkCollisionsNow)
         {
-            if (collisionInfo.tag == "Obstacle")
+            if (collisionInfo.CompareTag("Obstacle"))
             {
                 GenericObstacle obstacle = ObstaclesManager.GetChosenObstacle(collisionInfo.transform.name);
                 if (!OverlappedAsteroidsNow.Contains(obstacle)) OverlappedAsteroidsNow.Add(obstacle);
             }
-            else if (collisionInfo.tag == "Mine")
+            else if (collisionInfo.CompareTag("Mine"))
             {
-                if (!OverlapedMinesNow.Contains(collisionInfo)) OverlapedMinesNow.Add(collisionInfo);
+                if (!OverlappedMinesNow.Contains(collisionInfo)) OverlappedMinesNow.Add(collisionInfo);
             }
-            else if (collisionInfo.name == "OffTheBoard")
+            else if (collisionInfo.name.StartsWith("OffTheBoard"))
             {
                 OffTheBoardNow = true;
             }
             else if (collisionInfo.name == "ObstaclesStayDetector")
             {
-                if (collisionInfo.tag != TheShip.GetTag())
+                if (!collisionInfo.CompareTag(TheShip.GetTag()))
                 {
                     GenericShip ship = Roster.GetShipById(collisionInfo.tag);
                     if (ship != null && !OverlappedShipsNow.Contains(ship)) OverlappedShipsNow.Add(ship);
                 }
-                else if (collisionInfo.tag == TheShip.GetTag())
+                else if (collisionInfo.CompareTag(TheShip.GetTag()))
                 {
                     OverlapsCurrentShipNow = true;
                 }
             }
+            else if (collisionInfo.name == "RemoteCollider")
+            {
+                if (!this.CompareTag(collisionInfo.tag))
+                {
+                    if (!OverlappedRemotesNow.Contains(Roster.GetShipById(collisionInfo.tag) as GenericRemote))
+                    {
+                        OverlappedRemotesNow.Add(Roster.GetShipById(collisionInfo.tag) as GenericRemote);
+                    }
+                }
+            }
         }
     }
-
 }
