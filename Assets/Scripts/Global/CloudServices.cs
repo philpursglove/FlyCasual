@@ -37,7 +37,7 @@ public class CloudServices : MonoBehaviour
         if (UnityServices.State == ServicesInitializationState.Uninitialized)
         {
             InitializationOptions options = new InitializationOptions().SetEnvironmentName(DebugManager.FullDebug ? "development" : "production");
-            await UnityServices.InitializeAsync();
+            await UnityServices.InitializeAsync(options);
         }
     }
 
