@@ -19,7 +19,7 @@ namespace UpgradesList.SecondEdition
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.FuelInjectionOverrideAbility)
             );
-            NameCanonical = "fuelinjectionoverride-battleoverendore";
+            NameCanonical = "fuelinjectionoverride-battleoverendor";
         }        
     }
 }
