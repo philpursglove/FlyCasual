@@ -58,6 +58,7 @@ public enum TriggerTypes
     OnCoordinateTargetIsSelected,
     OnCoordinateMultiTargetsAreSelected,
     OnJamTargetIsSelected,
+    OnProtectTargetIsSelected,
     OnTargetLockIsAcquired,
     OnRerollIsConfirmed,
     OnDieResultIsSpent,
@@ -87,10 +88,12 @@ public enum TriggerTypes
     OnDamageCardSeverityIsChecked,
     OnDamageCardIsDealt,
     OnFaceupCritCardReadyToBeDealt,
-    OnFaceupCritCardReadyToBeDealtUI,
+    OnFaceupCritCardRevealed,
     OnFaceupCritCardIsDealt,
     OnSelectDamageCardToExpose,
     OnFaceupDamageCardIsRepaired,
+    OnFacedownDamageCardIsRepaired,
+    OnShipIsDestroyedCheck,
     OnShipIsDestroyed,
     OnShipIsReadyToBeRemoved,
     OnShipIsRemoved,
@@ -116,9 +119,13 @@ public enum TriggerTypes
     OnBombWillBeDropped,
     OnBombWasDropped,
     OnBombWasLaunched,
+    OnRemoteWasDropped,
+    OnRemoteWasLaunched,
     OnCheckDropOfSecondDevice,
 
-    OnUndockingFinish
+    OnUndockingFinish,
+
+    OnRedTokenGainedFromOverlappingObstacle
 }
 
 public class Trigger
@@ -132,6 +139,8 @@ public class Trigger
     public bool Skippable;
 
     public bool IsCurrent;
+
+    public bool IsPriority;
 
     public void Fire()
     {
@@ -244,9 +253,13 @@ public static partial class Triggers
             if (currentTriggersList.Count != 0)
             {
                 currentLevel.IsActive = true;
-                if ((currentTriggersList.Count == 1) || (IsAllSkippable(currentTriggersList)))
+                if (currentTriggersList.Count == 1 || IsAllSkippable(currentTriggersList))
                 {
                     FireTrigger(currentTriggersList[0]);
+                }
+                else if(currentTriggersList.Count(n=>n.IsPriority) > 0)
+                {
+                    FireTrigger(currentTriggersList.FirstOrDefault(n => n.IsPriority));
                 }
                 else
                 {
