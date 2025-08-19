@@ -40,8 +40,6 @@ namespace Ship
                 );
                 PilotNameCanonical = "mausmonare-battleoverendor";
                 ShipInfo.Shields++;
-                ShipInfo.UpgradeIcons.Upgrades.Remove(UpgradeType.Modification);
-                ShipInfo.UpgradeIcons.Upgrades.Remove(UpgradeType.Configuration);
                 AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
