@@ -101,20 +101,20 @@ namespace SubPhases
 
         // Core
 
-        protected void StartBarrelRollPlanning(bool isDeckloak = false)
+        protected void StartBarrelRollPlanning(bool isDecloak = false)
         {
-            IsDecloak = isDeckloak;
-            AskToSelectTemplate(PerfromTemplatePlanning);
+            IsDecloak = isDecloak;
+            AskToSelectTemplate(PerformTemplatePlanning);
         }
 
-        public virtual void PerfromTemplatePlanning()
+        public virtual void PerformTemplatePlanning()
         {
             Selection.ThisShip.CallUpdateChosenBarrelRollTemplate(ref SelectedTemplate);
 
             Edition.Current.BarrelRollTemplatePlanning();
         }
 
-        public void PerfromTemplatePlanningSecondEdition()
+        public void PerformTemplatePlanningSecondEdition()
         {
             GameManagerScript.Instance.StartCoroutine(
                 CheckCollisionsOfTemporaryElements(AskBarrelRollShift)

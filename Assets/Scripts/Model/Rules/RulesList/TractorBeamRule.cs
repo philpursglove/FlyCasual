@@ -198,7 +198,7 @@ namespace SubPhases
             );
 
             Phases.UpdateHelpInfo();
-            brPlanning.PerfromTemplatePlanning();
+            brPlanning.PerformTemplatePlanning();
         }
 
         private void PerfromLeftBrTemplatePlanning()
