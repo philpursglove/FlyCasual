@@ -20,7 +20,7 @@ namespace Ship
                     Faction.Imperial,
                     1,
                     4,
-                    1,
+                    0,
                     extraUpgradeIcons:new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
