@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Ship;
+﻿using ActionsList;
 using Editions;
-using System.Linq;
-using System;
+using Ship;
 using SubPhases;
-using ActionsList;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RulesList
 {
@@ -83,8 +83,8 @@ namespace RulesList
             {
                 List<GenericAction> actionsToPerform = new List<GenericAction>();
 
-                if (Selection.ThisShip.ActionBar.PrintedActions.Any(n => n is FocusAction)) actionsToPerform.Add(new FocusAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
-                if (Selection.ThisShip.ActionBar.PrintedActions.Any(n => n is CalculateAction)) actionsToPerform.Add(new CalculateAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
+                if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is FocusAction)) actionsToPerform.Add(new FocusAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
+                if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is CalculateAction)) actionsToPerform.Add(new CalculateAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
 
                 Selection.ThisShip.AskPerformFreeAction
                 (
