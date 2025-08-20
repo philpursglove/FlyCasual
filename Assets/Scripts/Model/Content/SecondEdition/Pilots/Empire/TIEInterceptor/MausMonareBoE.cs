@@ -21,7 +21,7 @@ namespace Ship
                     "Battle Over Endor",
                     Faction.Imperial,
                     3,
-                    4,
+                    5,
                     0,
                     abilityType: typeof(MausMonareAbility),
                     isLimited: true,
@@ -35,7 +35,8 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
 
                 );
                 PilotNameCanonical = "mausmonare-battleoverendor";
@@ -49,6 +50,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(FuelInjectionOverride));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/mausmonare-battleoverendor.png";
+            }
+        }
+
+        public class MausMonareBoEXWA : MausMonareBoE
+        {
+            public MausMonareBoEXWA()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
