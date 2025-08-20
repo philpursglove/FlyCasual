@@ -7,18 +7,19 @@ namespace UpgradesList.SecondEdition
 {
     public class FeedbackEmitter : GenericUpgrade
     {
-        public FeedbackEmitter() 
+        public FeedbackEmitter()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Feedback Emitter",
                 UpgradeType.Illicit,
                 cost: 0,
                 abilityType: typeof(Abilities.SecondEdition.FeedbackEmitterAbility),
-                charges: 1
+                charges: 1,
+                cannotBeRecharged: true
             );
 
             IsHidden = true;
-        }        
+        }
     }
 }
 
@@ -63,7 +64,7 @@ namespace Abilities.SecondEdition
 
         private void JamIt(object sender, EventArgs e)
         {
-            
+
             if (ObjectForAbility is GenericShip)
             {
                 Messages.ShowInfo($"Feedback Emitter: {ObjectForAbility.PilotInfo.PilotName} is Jammed");
@@ -80,7 +81,7 @@ namespace Abilities.SecondEdition
                 Messages.ShowInfo($"Feedback Emitter: non-ship object is not Jammed");
                 SubPhases.DecisionSubPhase.ConfirmDecision();
             }
-            
+
         }
     }
 }
