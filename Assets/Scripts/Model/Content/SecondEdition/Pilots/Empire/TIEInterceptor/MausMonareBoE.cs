@@ -55,7 +55,7 @@ namespace Ship
 
         public class MausMonareBoEXWA : MausMonareBoE
         {
-            public MausMonareBoEXWA()
+            public MausMonareBoEXWA() : base()
             {
                 var pilot = (PilotCardInfo25)PilotInfo;
                 pilot.Cost = 4;
