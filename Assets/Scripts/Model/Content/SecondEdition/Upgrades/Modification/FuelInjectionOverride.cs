@@ -65,13 +65,15 @@ namespace Abilities.SecondEdition
 
         private void Cleanup()
         {
-            HostUpgrade.State.SpendCharge();
             Triggers.FinishTrigger();
         }
 
         private void UpdateTemplate(object sender, EventArgs e)
         {
+            HostUpgrade.State.SpendCharge();
+
             DecisionSubPhase.ConfirmDecision();
+            
             if (Action is BoostAction)
             {
                 HostShip.OnUpdateChosenBoostTemplate += UpdateBoostTemplate;
