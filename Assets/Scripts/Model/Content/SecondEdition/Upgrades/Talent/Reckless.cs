@@ -53,7 +53,6 @@ namespace Abilities.SecondEdition
             {
                 Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": if you use the 1 Left or 1 Right Turn template, roll an attack die. On a hit or crit result, gain a stress token.");
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, RollDiceForStress);
-
             }
         }
 
