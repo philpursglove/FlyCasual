@@ -81,7 +81,7 @@ namespace RulesList
         {
             if (!Selection.ThisShip.IsStressed)
             {
-                List<GenericAction> actionsToPerform = new List<GenericAction>();
+                List<GenericAction> actionsToPerform = new ();
 
                 if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is FocusAction)) actionsToPerform.Add(new FocusAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
                 if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is CalculateAction)) actionsToPerform.Add(new CalculateAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
@@ -116,13 +116,14 @@ namespace RulesList
 
         public void ClearBumps(GenericShip ship)
         {
-            foreach (var bumpedShip in ship.ShipsBumped)
+            foreach (GenericShip bumpedShip in ship.ShipsBumped)
             {
                 if (bumpedShip.ShipsBumped.Contains(ship))
                 {
                     bumpedShip.ShipsBumped.Remove(ship);
                 }
             }
+
             ship.ShipsBumped = new List<GenericShip>();
 
             // Clear remotes bumps too
@@ -144,7 +145,6 @@ namespace RulesList
                 }
             }
         }
-
     }
 }
 
@@ -153,7 +153,7 @@ namespace SubPhases
 
     public class OverlappedFriendlyShipDamageCheckSubPhase : DiceRollCheckSubPhase
     {
-        private GenericShip prevActiveShip = Selection.ActiveShip;
+        private readonly GenericShip prevActiveShip = Selection.ActiveShip;
 
         public override void Prepare()
         {
