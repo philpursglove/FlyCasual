@@ -1,4 +1,5 @@
-﻿using Content;
+﻿using ActionsList;
+using Content;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -61,6 +62,8 @@ namespace Abilities.SecondEdition
         //While you perform an attack, if you are at range 0-1 of the defender, you may reroll 1 attack die. 
         public override void ActivateAbility()
         {
+            Rules.DiceModification.OnAllowRangeZeroAttackModifications += AllowRangeZeroModification;
+
             AddDiceModification(
                 HostName,
                 IsAvailable,
@@ -68,6 +71,11 @@ namespace Abilities.SecondEdition
                 DiceModificationType.Reroll,
                 1
             );
+        }
+
+        private void AllowRangeZeroModification(GenericAction action, ref bool allowed)
+        {
+            allowed = allowed || (Combat.Attacker == HostShip && IsAvailable() && action.IsReroll);
         }
 
         private bool IsAvailable()
@@ -83,6 +91,7 @@ namespace Abilities.SecondEdition
         public override void DeactivateAbility()
         {
             RemoveDiceModification();
+            Rules.DiceModification.OnAllowRangeZeroAttackModifications -= AllowRangeZeroModification;
         }
     }
 }
