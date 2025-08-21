@@ -110,7 +110,7 @@ namespace Abilities.FirstEdition
             HostShip.OnGetAvailableBarrelRollTemplates -= ChangeBarrelRollTemplates;
         }
 
-        private void ChangeBarrelRollTemplates(List<ManeuverTemplate> availableTemplates)
+        private void ChangeBarrelRollTemplates(List<ManeuverTemplate> availableTemplates, GenericAction action)
         {
             if (availableTemplates.Any(n => n.Name == "Straight 1"))
             {

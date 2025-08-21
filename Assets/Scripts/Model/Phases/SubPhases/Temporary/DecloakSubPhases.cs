@@ -69,10 +69,10 @@ namespace SubPhases
             IsTemporary = true;
             UpdateHelpInfo();
 
-            StartBarrelRollPlanning(isDeckloak: true);
+            StartBarrelRollPlanning(isDecloak: true);
         }
 
-        public override void PerfromTemplatePlanning()
+        public override void PerformTemplatePlanning()
         {
             Edition.Current.DecloakTemplatePlanning();
         }
