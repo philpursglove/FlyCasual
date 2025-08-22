@@ -36,21 +36,7 @@ namespace SquadBuilderNS
             PlayerNo = playerNo;
             SetDefaultObstacles();
 
-            switch(Options.Format)
-            {
-                case "XWA":
-                    Format = Legality.XWA;
-                    break;
-                case "Standard":
-                case "AMG Standard":
-                    Format = Legality.StandardLegal;
-                    break;
-                case "Extended":
-                case "AMG Extended":
-                default:
-                    Format = Legality.ExtendedLegal;
-                    break;
-            }
+            Format = Options.ListFormat;
         }
 
         public void SetDefaultObstacles()
@@ -149,9 +135,9 @@ namespace SquadBuilderNS
 
             int sameUpgradePresent = 0;
 
-            foreach (var ship in Ships)
+            foreach (SquadListShip ship in Ships)
             {
-                foreach (var upgrade in ship.Instance.UpgradeBar.GetUpgradesAll())
+                foreach (GenericUpgrade upgrade in ship.Instance.UpgradeBar.GetUpgradesAll())
                 {
                     if (upgrade.UpgradeInfo.GetCleanName() == upgradeToCopy.UpgradeInfo.GetCleanName())
                     {
@@ -169,7 +155,7 @@ namespace SquadBuilderNS
 
             int samePilotPresent = 0;
 
-            foreach (var ship in Ships)
+            foreach (SquadListShip ship in Ships)
             {
                 if (ship.Instance.PilotInfo.PilotName == pilotToCopy.PilotInfo.PilotName)
                 {
@@ -202,7 +188,7 @@ namespace SquadBuilderNS
 
             if (isFromUi)
             {
-                foreach (var upgradeType in ship.DefaultUpgrades)
+                foreach (Type upgradeType in ship.DefaultUpgrades)
                 {
                     // Convert upgrade based on format
                     UpgradeRecord upgradeRecord = SquadBuilder.Instance.Database.AllUpgrades.FirstOrDefault(n => upgradeType.IsAssignableFrom(Type.GetType(n.UpgradeTypeName)) && n.AllowableFormats.Contains(Format));
@@ -234,9 +220,9 @@ namespace SquadBuilderNS
 
         public bool HasUpgrade(string name)
         {
-            foreach (var shipHolder in Ships)
+            foreach (SquadListShip shipHolder in Ships)
             {
-                foreach (var upgrade in shipHolder.Instance.UpgradeBar.GetUpgradesAll())
+                foreach (GenericUpgrade upgrade in shipHolder.Instance.UpgradeBar.GetUpgradesAll())
                 {
                     if (upgrade.UpgradeInfo.Name == name) return true;
                 }

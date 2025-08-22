@@ -1,4 +1,6 @@
-﻿using Mods;
+﻿using Content;
+using Mods;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -26,12 +28,14 @@ public static class Options
     public static string Resolution;
     public static int DisplayId;
     public static string Format;
+    public static Legality ListFormat;
 
     public static readonly string DefaultAvatar = "UpgradesList.SecondEdition.AgileGunner";
 
     static Options()
     {
         ReadOptions();
+        ListFormat = GetFormatAsLegality();
     }
 
     public static void ReadOptions()
@@ -75,7 +79,7 @@ public static class Options
 
     private static void ReadMods()
     {
-        foreach (var modHolder in ModsManager.Mods)
+        foreach (KeyValuePair<System.Type, Mod> modHolder in ModsManager.Mods)
         {
             modHolder.Value.IsOn = PlayerPrefs.GetInt("mods/" + modHolder.Key.ToString(), 0) == 1;
         }
@@ -138,6 +142,8 @@ public static class Options
     {
         PlayerPrefs.SetString(parameter, value);
         PlayerPrefs.Save();
+
+        ListFormat = parameter.Equals("Format") ? GetFormatAsLegality(value) : ListFormat;
     }
 
     public static void ChangeParameterValue(string parameter, bool value)
@@ -167,5 +173,46 @@ public static class Options
         PlayerPrefs.SetString("CheckVersionUrl", newUrl);
         CheckVersionUrl = newUrl;
     }
-}
 
+    private static Legality GetFormatAsLegality()
+    {
+        // Used to convert Format string to Legality, should not be called otherwise--you likely want to use ListFormat instead
+        return GetFormatAsLegality(Format);
+    }
+
+    public static Legality GetFormatAsLegality(string format)
+    {
+        switch (format)
+        {
+            case "XWA":
+                return Legality.XWA;
+            case "Standard":
+            case "AMG Standard":
+                return Legality.StandardLegal;
+            case "AMG":
+            case "Extended":
+            case "AMG Extended":
+            default:
+                return Legality.ExtendedLegal;
+        }
+    }
+
+    public static string GetFormatAsString(string format)
+    {
+        return GetFormatAsString(GetFormatAsLegality(format));
+    }
+
+    public static string GetFormatAsString(Legality legality)
+    {
+        switch (legality)
+        {
+            case Legality.StandardLegal:
+                return "AMG Standard";
+            case Legality.XWA:
+                return "XWA";
+            case Legality.ExtendedLegal:
+            default:
+                return "AMG Extended";
+        }
+    }
+}
