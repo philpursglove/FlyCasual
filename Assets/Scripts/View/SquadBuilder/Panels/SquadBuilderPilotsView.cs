@@ -24,7 +24,7 @@ namespace SquadBuilderNS
                     && n.Instance.GetType().ToString().Contains(Edition.Current.NameShort)
                     && !n.Instance.IsHiddenSquadbuilderOnly
                     && n.Instance.PilotInfo.GetType() == typeof(PilotCardInfo25)
-                    && Content.XWingFormats.IsLegalForFormat(n.Instance)
+                    && Content.XWingFormats.IsLegalForFormat(n.Instance, Options.ListFormat)
                 )
                 .OrderByDescending(n => n.PilotSkill)
                 .OrderByDescending(n => (n.Instance.PilotInfo as PilotCardInfo25).LoadoutValue)

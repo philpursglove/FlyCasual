@@ -61,7 +61,7 @@ public class UpgradePanelSquadBuilder : MonoBehaviour {
                 this.gameObject.transform.Find("UpgradeImage").GetComponent<Image>().material = GrayscaleMaterial;
                 this.gameObject.transform.Find("WIPInfo").gameObject.SetActive(true);
             }
-            else if (Content.XWingFormats.IsBanned(Upgrade))
+            else if (Content.XWingFormats.IsBanned(Upgrade, Options.ListFormat))
             {
                 this.gameObject.transform.Find("UpgradeImage").GetComponent<Image>().material = GrayscaleMaterial;
                 this.gameObject.transform.Find("BannedInfo").gameObject.SetActive(true);
@@ -80,7 +80,7 @@ public class UpgradePanelSquadBuilder : MonoBehaviour {
 
     private void SetSlotImage()
     {
-        string slotTypeName = UpgradeName.Substring(5, UpgradeName.Length - 5);
+        string slotTypeName = UpgradeName[5..];
         string editionName = "SecondEdition";
         Sprite sprite = (Sprite)Resources.Load("Sprites/SquadBuiler/UpgradeSlots/" + editionName + "/" + slotTypeName, typeof(Sprite));
         this.gameObject.transform.Find("UpgradeImage").GetComponent<Image>().sprite = sprite;
@@ -114,7 +114,7 @@ public class UpgradePanelSquadBuilder : MonoBehaviour {
     {
         if (!textureIsScaled) TextureScale.Bilinear(newTexture, (int)Edition.Current.UpgradeCardSize.x, (int)Edition.Current.UpgradeCardSize.y);
         if (!TextureCache.Cache.ContainsKey(textureCacheKey)) TextureCache.Cache.Add(textureCacheKey, newTexture);
-        Sprite newSprite = null;
+        Sprite newSprite;
         if (!Compact)
         {
             newSprite = Sprite.Create(
@@ -202,6 +202,7 @@ public class UpgradePanelSquadBuilder : MonoBehaviour {
         {
             loadingPanel.FinallyShow();
         }
+
         AllLoadingPanels.Clear();
 
         GameObject loadingText = GameObject.Find("UI/Panels/SelectUpgradePanel/LoadingText");
