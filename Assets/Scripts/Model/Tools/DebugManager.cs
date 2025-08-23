@@ -1,6 +1,4 @@
 ﻿using Players;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class DebugManager
@@ -13,7 +11,13 @@ public static class DebugManager
 
     public static bool NoCinematicCamera;
 
-    public static bool FullDebug;
+    private static bool fullDebug;
+
+    public static bool FullDebug
+    {
+        get { return Application.isEditor || fullDebug; }
+        set { fullDebug = value; }
+    }
 
     public static bool DebugTemporary;
 
