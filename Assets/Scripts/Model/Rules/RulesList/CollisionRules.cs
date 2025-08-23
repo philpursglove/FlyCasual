@@ -91,7 +91,7 @@ namespace RulesList
                     actionsToPerform,
                     Triggers.FinishTrigger,
                     descriptionShort: "Action after overlapping",
-                    descriptionLong: "You may perform printed Focus/Coordinate action as red"
+                    descriptionLong: "You may perform printed Focus/Calculate action as red"
                 );
             }
             else
