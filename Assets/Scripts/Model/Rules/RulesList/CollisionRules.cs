@@ -83,15 +83,33 @@ namespace RulesList
             {
                 List<GenericAction> actionsToPerform = new ();
 
-                if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is FocusAction)) actionsToPerform.Add(new FocusAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
-                if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is CalculateAction)) actionsToPerform.Add(new CalculateAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
+                bool hasFocus = false;
+                bool hasCalculate = false;
+                
+                if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is FocusAction))
+                {
+                    actionsToPerform.Add(new FocusAction()
+                        {HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red});
+                    hasFocus = true;
+                }
 
+                if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is CalculateAction))
+                {
+                    actionsToPerform.Add(new CalculateAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
+                    hasCalculate = true;
+                }
+
+                string message = "";
+                if (hasFocus) message = "You may perform a Focus action as red";
+                if (hasCalculate) message = "You may perform a Calculate action as red";
+                if (hasFocus & hasCalculate) message = "You may perform a Focus or Calculate action as red";
+                
                 Selection.ThisShip.AskPerformFreeAction
                 (
                     actionsToPerform,
                     Triggers.FinishTrigger,
                     descriptionShort: "Action after overlapping",
-                    descriptionLong: "You may perform printed Focus/Calculate action as red"
+                    descriptionLong: message
                 );
             }
             else
