@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace SquadBuilderNS
 {
@@ -27,6 +28,7 @@ namespace SquadBuilderNS
             {
                 squadPilotsArrayJson[i] = GenerateSquadPilot(playerShipConfigs[i]);
             }
+
             JSONObject squadPilotsJson = new JSONObject(squadPilotsArrayJson);
             squadJson.AddField("pilots", squadPilotsJson);
 
@@ -107,7 +109,7 @@ namespace SquadBuilderNS
             Dictionary<string, JSONObject> upgradesDict = new Dictionary<string, JSONObject>();
             if (!(shipHolder.Instance.PilotInfo as PilotCardInfo25).IsStandardLayout)
             {
-                foreach (var installedUpgrade in shipHolder.Instance.UpgradeBar.GetUpgradesAll())
+                foreach (GenericUpgrade installedUpgrade in shipHolder.Instance.UpgradeBar.GetUpgradesAll())
                 {
                     string slotName = Edition.Current.UpgradeTypeToXws(installedUpgrade.UpgradeInfo.UpgradeTypes[0]);
                     if (!upgradesDict.ContainsKey(slotName))
@@ -122,6 +124,7 @@ namespace SquadBuilderNS
                     }
                 }
             }
+
             JSONObject upgradesDictJson = new JSONObject(upgradesDict);
             pilotJson.AddField("upgrades", upgradesDictJson);
 
@@ -186,22 +189,14 @@ namespace SquadBuilderNS
 
                 if (squadJson.HasField("ruleset"))
                 {
-                    switch(squadJson["ruleset"].str)
-                    {
-                        case "XWA":
-                            squad.Format = Legality.XWA; break;
-                        case "ExtendedLegal":
-                        case "AMG":
-                            squad.Format = Legality.ExtendedLegal; break;
-                        case "StandardLegal":
-                        default:
-                            squad.Format = Legality.StandardLegal; break;
-                    }
+                    squad.Format = Options.GetFormatAsLegality(squadJson["ruleset"].str);
                 }
                 else
                 {
-                    squad.Format = Legality.StandardLegal;
+                    squad.Format = Legality.ExtendedLegal;
                 }
+
+                Options.ListFormat = squad.Format; // Options.ListFormat keeps everything in sync for the saved list
 
                 string factionNameXws = squadJson["faction"].str;
                 Faction faction = Edition.Current.XwsToFaction(factionNameXws);
@@ -264,7 +259,7 @@ namespace SquadBuilderNS
                                     Dictionary<string, string> upgradesThatCannotBeInstalledCopy = new Dictionary<string, string>(upgradesThatCannotBeInstalled);
 
                                     bool wasSuccess = false;
-                                    foreach (var upgrade in upgradesThatCannotBeInstalledCopy)
+                                    foreach (KeyValuePair<string, string> upgrade in upgradesThatCannotBeInstalledCopy)
                                     {
                                         bool upgradeInstalledSucessfully = newShip.InstallUpgrade(upgrade.Key, Edition.Current.XwsToUpgradeType(upgrade.Value));
                                         if (upgradeInstalledSucessfully)
@@ -288,7 +283,6 @@ namespace SquadBuilderNS
                                 {
                                     Messages.ShowError("Cannot install upgrade: " + upgradeType.ToString());
                                 }
-
                             }
                         }
 

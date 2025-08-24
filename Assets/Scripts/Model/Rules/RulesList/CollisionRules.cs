@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Ship;
+﻿using ActionsList;
 using Editions;
-using System.Linq;
-using System;
+using Ship;
 using SubPhases;
-using ActionsList;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RulesList
 {
@@ -81,17 +81,35 @@ namespace RulesList
         {
             if (!Selection.ThisShip.IsStressed)
             {
-                List<GenericAction> actionsToPerform = new List<GenericAction>();
+                List<GenericAction> actionsToPerform = new ();
 
-                if (Selection.ThisShip.ActionBar.PrintedActions.Any(n => n is FocusAction)) actionsToPerform.Add(new FocusAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
-                if (Selection.ThisShip.ActionBar.PrintedActions.Any(n => n is CalculateAction)) actionsToPerform.Add(new CalculateAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
+                bool hasFocus = false;
+                bool hasCalculate = false;
+                
+                if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is FocusAction))
+                {
+                    actionsToPerform.Add(new FocusAction()
+                        {HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red});
+                    hasFocus = true;
+                }
 
+                if (Selection.ThisShip.ActionBar.AllActions.Any(n => n is CalculateAction))
+                {
+                    actionsToPerform.Add(new CalculateAction() { HostShip = Selection.ThisShip, Color = Actions.ActionColor.Red });
+                    hasCalculate = true;
+                }
+
+                string message = "";
+                if (hasFocus) message = "You may perform a Focus action as red";
+                if (hasCalculate) message = "You may perform a Calculate action as red";
+                if (hasFocus & hasCalculate) message = "You may perform a Focus or Calculate action as red";
+                
                 Selection.ThisShip.AskPerformFreeAction
                 (
                     actionsToPerform,
                     Triggers.FinishTrigger,
                     descriptionShort: "Action after overlapping",
-                    descriptionLong: "You may perform printed Focus/Coordinate action as red"
+                    descriptionLong: message
                 );
             }
             else
@@ -116,13 +134,14 @@ namespace RulesList
 
         public void ClearBumps(GenericShip ship)
         {
-            foreach (var bumpedShip in ship.ShipsBumped)
+            foreach (GenericShip bumpedShip in ship.ShipsBumped)
             {
                 if (bumpedShip.ShipsBumped.Contains(ship))
                 {
                     bumpedShip.ShipsBumped.Remove(ship);
                 }
             }
+
             ship.ShipsBumped = new List<GenericShip>();
 
             // Clear remotes bumps too
@@ -144,7 +163,6 @@ namespace RulesList
                 }
             }
         }
-
     }
 }
 
@@ -153,7 +171,7 @@ namespace SubPhases
 
     public class OverlappedFriendlyShipDamageCheckSubPhase : DiceRollCheckSubPhase
     {
-        private GenericShip prevActiveShip = Selection.ActiveShip;
+        private readonly GenericShip prevActiveShip = Selection.ActiveShip;
 
         public override void Prepare()
         {

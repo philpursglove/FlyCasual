@@ -1,11 +1,16 @@
 using System.Threading.Tasks;
 using Unity.Services.Analytics;
+using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Core.Environments;
 using Unity.Services.RemoteConfig;
 using UnityEngine;
 
 public class CloudServices : MonoBehaviour
 {
+    private const string environmentIdDev = "1630a476-212c-45b9-add1-924ac00d114b";
+    private const string environmentIdProd = "76391cb2-067a-4633-9c0c-938aeec9d376";
+
     public struct UserAttributes { }
 
     public struct AppAttributes
@@ -23,6 +28,7 @@ public class CloudServices : MonoBehaviour
     private async void Awake()
     {
         await InitializeUnityServices();
+        await AuthenticateUnityServices();
         await InitializeRemoteConfigAsync();
     }
 
@@ -30,7 +36,8 @@ public class CloudServices : MonoBehaviour
     {
         if (UnityServices.State == ServicesInitializationState.Uninitialized)
         {
-            await UnityServices.InitializeAsync();
+            InitializationOptions options = new InitializationOptions().SetEnvironmentName(DebugManager.FullDebug ? "development" : "production");
+            await UnityServices.InitializeAsync(options);
         }
     }
 
@@ -38,7 +45,16 @@ public class CloudServices : MonoBehaviour
     {
         if (RemoteConfigService.Instance.requestStatus == ConfigRequestStatus.None)
         {
+            RemoteConfigService.Instance.SetEnvironmentID(DebugManager.FullDebug ? environmentIdDev : environmentIdProd);
             await RemoteConfigService.Instance.FetchConfigsAsync(new UserAttributes(), new AppAttributes());
+        }
+    }
+
+    async Task AuthenticateUnityServices()
+    {
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
     }
 }

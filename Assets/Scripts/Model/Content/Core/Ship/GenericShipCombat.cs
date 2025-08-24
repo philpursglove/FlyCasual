@@ -838,11 +838,11 @@ namespace Ship
             OnGetBombTemplateDirection?.Invoke(ref direction);
         }
 
-        public List<ManeuverTemplate> GetAvailableBarrelRollTemplates()
+        public List<ManeuverTemplate> GetAvailableBarrelRollTemplates(GenericAction action)
         {
             List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>(ShipBase.BarrelRollTemplatesAvailable);
 
-            OnGetAvailableBarrelRollTemplates?.Invoke(availableTemplates);
+            OnGetAvailableBarrelRollTemplates?.Invoke(availableTemplates, action);
 
             return availableTemplates;
         }
