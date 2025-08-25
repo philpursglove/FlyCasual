@@ -91,7 +91,11 @@ namespace SquadBuilderNS
                 float descriptionPreferredHeight = descriptionText.preferredHeight;
                 descriptionRectTransform.sizeDelta = new Vector2(descriptionRectTransform.sizeDelta.x, descriptionPreferredHeight);
 
-                SquadListRecord.transform.Find("PointsValue").GetComponent<Text>().text = squadList["points"].i.ToString();
+                Transform pointsContainer = SquadListRecord.transform.Find("PointsContainer");
+                pointsContainer.transform.Find("PointsValue").GetComponent<Text>().text = squadList["points"].i.ToString();
+
+                if(squadList.HasField("ruleset"))
+                    pointsContainer.transform.Find("FormatValue").GetComponent<Text>().text = Options.GetFormatAsString(squadList["ruleset"].str);
 
                 SquadListRecord.GetComponent<RectTransform>().sizeDelta = new Vector2(
                     SquadListRecord.GetComponent<RectTransform>().sizeDelta.x,
@@ -100,8 +104,9 @@ namespace SquadBuilderNS
 
                 SquadListRecord.name = squadList["filename"].str;
 
-                SquadListRecord.transform.Find("DeleteButton").GetComponent<Button>().onClick.AddListener(delegate { DeleteSavedSquadAndRefresh(SquadListRecord.name); });
-                SquadListRecord.transform.Find("LoadButton").GetComponent<Button>().onClick.AddListener(delegate { LoadSavedSquadAndReturn(GetSavedSquadJson(SquadListRecord.name)); });
+                Transform buttonContainer = SquadListRecord.transform.Find("ButtonContainer");
+                buttonContainer.Find("DeleteButton").GetComponent<Button>().onClick.AddListener(delegate { DeleteSavedSquadAndRefresh(SquadListRecord.name); });
+                buttonContainer.Find("LoadButton").GetComponent<Button>().onClick.AddListener(delegate { LoadSavedSquadAndReturn(GetSavedSquadJson(SquadListRecord.name)); });
             }
 
             SquadBuilderView.OrganizePanels(contentTransform, FREE_SPACE);

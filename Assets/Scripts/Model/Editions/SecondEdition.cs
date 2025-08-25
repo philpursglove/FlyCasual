@@ -179,12 +179,12 @@ namespace Editions
 
         public override void BarrelRollTemplatePlanning()
         {
-            (Phases.CurrentSubPhase as BarrelRollPlanningSubPhase).PerfromTemplatePlanningSecondEdition();
+            (Phases.CurrentSubPhase as BarrelRollPlanningSubPhase).PerformTemplatePlanningSecondEdition();
         }
 
         public override void DecloakTemplatePlanning()
         {
-            (Phases.CurrentSubPhase as DecloakPlanningSubPhase).PerfromTemplatePlanningSecondEdition();
+            (Phases.CurrentSubPhase as DecloakPlanningSubPhase).PerformTemplatePlanningSecondEdition();
         }
 
         public override void SquadBuilderIsOpened()

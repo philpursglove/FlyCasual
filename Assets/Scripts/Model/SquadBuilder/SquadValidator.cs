@@ -1,6 +1,5 @@
 ﻿using Content;
 using Editions;
-using Players;
 using Ship;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +73,7 @@ namespace SquadBuilderNS
         private bool ValidateLimitedCards(SquadList squad)
         {
             Dictionary<string, int> uniqueCards = new Dictionary<string, int>();
-            foreach (var shipConfig in squad.Ships)
+            foreach (SquadListShip shipConfig in squad.Ships)
             {
                 if (shipConfig.Instance.PilotInfo.IsLimited)
                 {
@@ -82,7 +81,7 @@ namespace SquadBuilderNS
                     if (uniqueCards.ContainsKey(cleanName)) uniqueCards[cleanName]--; else uniqueCards.Add(cleanName, shipConfig.Instance.PilotInfo.Limited - 1);
                 }
 
-                foreach (var upgrade in shipConfig.Instance.UpgradeBar.GetUpgradesAll())
+                foreach (GenericUpgrade upgrade in shipConfig.Instance.UpgradeBar.GetUpgradesAll())
                 {
                     if (upgrade.UpgradeInfo.IsLimited)
                     {
@@ -92,7 +91,7 @@ namespace SquadBuilderNS
                 }
             }
 
-            foreach (var uniqueCardInfo in uniqueCards)
+            foreach (KeyValuePair<string,int> uniqueCardInfo in uniqueCards)
             {
                 if (uniqueCardInfo.Value < 0)
                 {
@@ -139,9 +138,9 @@ namespace SquadBuilderNS
         {
             int solitaryCards = 0;
 
-            foreach (var shipConfig in squad.Ships)
+            foreach (SquadListShip shipConfig in squad.Ships)
             {
-                foreach (var upgrade in shipConfig.Instance.UpgradeBar.GetUpgradesAll())
+                foreach (GenericUpgrade upgrade in shipConfig.Instance.UpgradeBar.GetUpgradesAll())
                 {
                     if (upgrade.UpgradeInfo.IsSolitary)
                     {
@@ -165,11 +164,11 @@ namespace SquadBuilderNS
         {
             Dictionary<string, GenericUpgrade> standardizedUpgradesFound = new Dictionary<string, GenericUpgrade>();
 
-            foreach (var shipConfig in squad.Ships)
+            foreach (SquadListShip shipConfig in squad.Ships)
             {
-                foreach (var upgrade in shipConfig.Instance.UpgradeBar.GetUpgradesAll())
+                foreach (GenericUpgrade upgrade in shipConfig.Instance.UpgradeBar.GetUpgradesAll())
                 {
-                    if (upgrade.UpgradeInfo.IsStandardazed)
+                    if (upgrade.UpgradeInfo.IsStandardized)
                     {
                         if (standardizedUpgradesFound.ContainsKey(shipConfig.Instance.ShipInfo.ShipName))
                         {
@@ -187,9 +186,9 @@ namespace SquadBuilderNS
                 }
             }
 
-            foreach (var standardizedPair in standardizedUpgradesFound)
+            foreach (KeyValuePair<string, GenericUpgrade> standardizedPair in standardizedUpgradesFound)
             {
-                foreach (var shipConfig in squad.Ships)
+                foreach (SquadListShip shipConfig in squad.Ships)
                 {
                     if (shipConfig.Instance.ShipInfo.ShipName == standardizedPair.Key)
                     {
@@ -211,11 +210,11 @@ namespace SquadBuilderNS
         {
             bool result = true;
 
-            foreach (var shipHolder in squad.Ships)
+            foreach (SquadListShip shipHolder in squad.Ships)
             {
                 if (!shipHolder.Instance.IsAllowedForSquadBuilderPostCheck(squad)) return false;
 
-                foreach (var upgradeHolder in shipHolder.Instance.UpgradeBar.GetUpgradesAll())
+                foreach (GenericUpgrade upgradeHolder in shipHolder.Instance.UpgradeBar.GetUpgradesAll())
                 {
                     if (!upgradeHolder.IsAllowedForSquadBuilderPostCheck(squad)) return false;
                 }
@@ -228,9 +227,9 @@ namespace SquadBuilderNS
         {
             bool result = true;
 
-            foreach (var shipHolder in squad.Ships)
+            foreach (SquadListShip shipHolder in squad.Ships)
             {
-                foreach (var upgradeSlot in shipHolder.Instance.UpgradeBar.GetUpgradeSlots())
+                foreach (UpgradeSlot upgradeSlot in shipHolder.Instance.UpgradeBar.GetUpgradeSlots())
                 {
                     if (!upgradeSlot.IsEmpty)
                     {
@@ -243,11 +242,13 @@ namespace SquadBuilderNS
                                 return false;
                             }
                         }
+
                         if (upgradeSlot.InstalledUpgrade.UpgradeInfo.Cost > upgradeSlot.MaxCost)
                         {
                             Messages.ShowError($"The upgrade must costs less than {upgradeSlot.MaxCost}: {upgradeSlot.InstalledUpgrade.UpgradeInfo.Name}");
                             return false;
                         }
+
                         if (upgradeSlot.MustBeUnique && !upgradeSlot.InstalledUpgrade.UpgradeInfo.IsLimited)
                         {
                             Messages.ShowError($"The upgrade must be unique : {upgradeSlot.InstalledUpgrade.UpgradeInfo.Name}");
@@ -264,17 +265,17 @@ namespace SquadBuilderNS
         {
             foreach (SquadListShip ship in squad.Ships)
             {
-                if (!XWingFormats.IsLegalForFormat(ship.Instance))
+                if (!XWingFormats.IsLegalForFormat(ship.Instance, squad.Format))
                 {
-                    Messages.ShowError($"{ship.Instance.PilotInfo.PilotName} is not legal for format {Options.Format}!");
+                    Messages.ShowError($"{ship.Instance.PilotInfo.PilotName} is not legal for format {squad.Format}!");
                     return false;
                 }
 
                 foreach (GenericUpgrade upgrade in ship.Instance.UpgradeBar.GetUpgradesAll())
                 {
-                    if (!XWingFormats.IsLegalForFormat(upgrade))
+                    if (!XWingFormats.IsLegalForFormat(upgrade, squad.Format))
                     {
-                        Messages.ShowError($"{upgrade.UpgradeInfo.Name} is not legal for format {Options.Format}!");
+                        Messages.ShowError($"{upgrade.UpgradeInfo.Name} is not legal for format {squad.Format}!");
                         return false;
                     }
                 }

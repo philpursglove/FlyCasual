@@ -1,4 +1,5 @@
-﻿using Editions;
+﻿using Content;
+using Editions;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace SquadBuilderNS
 
             List<ShipRecord> shipsFiltered = Global.SquadBuilder.Database.AllShips
                 .Where(n => n.Instance.ShipInfo.GetType() == typeof(Ship.ShipCardInfo25))
-                .Where(n => Content.XWingFormats.IsShipLegalForFormat(n.Instance))
+                .Where(n => XWingFormats.IsShipLegalForFormat(n.Instance, Options.ListFormat))
                 .OrderBy(s => s.Instance.ShipInfo.ShipName)
                 .ToList();
 

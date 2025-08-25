@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
                 cost: 0,
                 restriction: new AbilityPresenceRestriction(typeof(Abilities.SecondEdition.AutoThrustersAbility)),
                 abilityType: typeof(Abilities.SecondEdition.SensitiveControlsHolderAbility),
-                isStandardazed: true
+                isStandardized: true
             );
         }
     }

@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using BoardTools;
+using SubPhases;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using SubPhases;
 namespace ActionsList
 {
 
@@ -13,6 +14,7 @@ namespace ActionsList
         {
             Name = "Barrel Roll";
         }
+        public ManeuverTemplate SelectedTemplate { get; set; }
 
         public override void ActionTake()
         {

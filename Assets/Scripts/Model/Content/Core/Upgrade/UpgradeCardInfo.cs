@@ -23,7 +23,7 @@ namespace Upgrade
         public bool IsLimited { get { return Limited != 0; } }
         public bool FeIsLimitedPerShip { get; private set; }
         public bool IsSolitary { get; private set; }
-        public bool IsStandardazed { get; private set; }
+        public bool IsStandardized { get; private set; }
         public List<Type> AbilityTypes { get; private set; }
         public int Charges { get; private set; }
         public int ChargesCost { get; private set; }
@@ -53,7 +53,7 @@ namespace Upgrade
             int cost = 0,
             bool isLimited = false,
             bool isSolitary = false,
-            bool isStandardazed = false,
+            bool isStandardized = false,
             int limited = 0,
             Type abilityType = null,
             UpgradeCardRestriction restriction = null,
@@ -94,7 +94,7 @@ namespace Upgrade
             SEImageNumber = seImageNumber;
             WeaponInfo = weaponInfo;
             IsSolitary = isSolitary;
-            IsStandardazed = isStandardazed;
+            IsStandardized = isStandardized;
 
             AbilityTypes = new List<Type>();
             if (abilityType != null) AbilityTypes.Add(abilityType);

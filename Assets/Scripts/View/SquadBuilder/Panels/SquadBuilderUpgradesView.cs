@@ -24,7 +24,7 @@ namespace SquadBuilderNS
                      && n.Instance.UpgradeInfo.Restrictions.IsAllowedForShip(Global.SquadBuilder.CurrentShip.Instance)
                      && n.Instance.IsAllowedForShip(Global.SquadBuilder.CurrentShip.Instance)
                      && n.Instance.HasEnoughSlotsInShip(Global.SquadBuilder.CurrentShip.Instance)
-                     && Content.XWingFormats.IsLegalForFormat(n.Instance)
+                     && Content.XWingFormats.IsLegalForFormat(n.Instance, Options.ListFormat)
                      && ShipDoesntHaveUpgradeWithSameName(Global.SquadBuilder.CurrentShip.Instance, n.Instance)
                 ).ToList();
             }

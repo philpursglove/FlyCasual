@@ -20,7 +20,7 @@ namespace UpgradesList.SecondEdition
                 cost: 2,
                 restriction: new ShipRestriction(typeof(Ship.SecondEdition.BTANR2YWing.BTANR2YWing)),
                 addShields: 2,
-                isStandardazed: true,
+                isStandardized: true,
                 addActions: new List<ActionInfo>()
                 {
                     new ActionInfo(typeof(TargetLockAction)),
