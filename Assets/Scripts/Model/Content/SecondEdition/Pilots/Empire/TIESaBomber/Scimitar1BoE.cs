@@ -1,0 +1,114 @@
+﻿using Content;
+using Ship;
+using System;
+using System.Collections.Generic;
+using Actions;
+using ActionsList;
+using Upgrade;
+using UpgradesList.SecondEdition;
+
+namespace Ship
+{
+    namespace SecondEdition.TIESaBomber
+    {
+        public class Scimitar1BoE : TIESaBomber
+        {
+            public Scimitar1BoE() : base()
+            {
+                PilotInfo = new PilotCardInfo25(
+                    "Scimitar 1",
+                    "Battle Over Endor",
+                    Faction.Imperial,
+                    3,
+                    4,
+                    loadoutValue: 0,
+                    isStandardLayout: true,
+                    isLimited: true,
+                    charges: 2,
+                    abilityType: typeof(Abilities.SecondEdition.Scimitar1Ability),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Talent,
+                        UpgradeType.Torpedo,
+                        UpgradeType.Device
+                    },
+                    tags: new List<Tags>
+                    {
+                        Tags.Tie
+                    }
+                );
+
+                MustHaveUpgrades.Add(typeof(Marksmanship));
+                MustHaveUpgrades.Add(typeof(NoEscape));
+                MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
+                MustHaveUpgrades.Add(typeof(IonBombs));
+
+                //TODO Make a TIE Bomber BoE class
+                var shipInfo = (ShipCardInfo25) ShipInfo;
+                shipInfo.ActionIcons = new ShipActionsInfo
+                (
+                    new ActionInfo(typeof(FocusAction)),
+                    new ActionInfo(typeof(TargetLockAction)),
+                    new ActionInfo(typeof(ReloadAction), ActionColor.Red)
+                );
+                shipInfo.ActionIcons.LinkedActions.Add(new LinkedActionInfo(typeof(BarrelRollAction), typeof(TargetLockAction), ActionColor.Red));
+
+                PilotNameCanonical = "scimitar1-battleoverendor";
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scimitar1-battleoverendor.png";
+            }
+        }
+    }
+}
+
+namespace Abilities.SecondEdition
+{
+    //After a friendly ship at range 0-3 performs an attack, you may spend 1 charge to acquire a lock on the defender.
+    public class Scimitar1Ability : GenericAbility
+    {
+        public override void ActivateAbility()
+        {
+            GenericShip.OnAttackFinishGlobal += RegisterTrigger;
+        }
+
+        public override void DeactivateAbility()
+        {
+            GenericShip.OnAttackFinishGlobal -= RegisterTrigger;
+        }
+
+        private void RegisterTrigger(GenericShip ship)
+        {
+            var range = new BoardTools.DistanceInfo(HostShip, Combat.Attacker).Range;
+
+            if (HostShip.State.Charges > 0
+                && Tools.IsFriendly(Combat.Attacker, HostShip)
+                && range >= 0 && range <= 3)
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskAcquireLock);
+            }
+        }
+
+        private void AskAcquireLock(object sender, EventArgs e)
+        {
+            AskToUseAbility(
+                HostShip.PilotInfo.PilotName,
+                AlwaysUseByDefault,
+                AcquireLock,
+                descriptionLong: "Do you want to acquire a lock on the defender?",
+                imageHolder: HostShip
+            );
+        }
+
+        private void AcquireLock(object sender, EventArgs e)
+        {
+            Messages.ShowInfo(HostName + ": Acquires lock on " + Combat.Defender.PilotInfo.PilotName);
+            ActionsHolder.AcquireTargetLock(HostShip, Combat.Defender, CleanUp, CleanUp);
+        }
+
+        private void CleanUp()
+        {
+            HostShip.SpendCharge();
+            SubPhases.DecisionSubPhase.ConfirmDecision();
+        }
+    }
+}
