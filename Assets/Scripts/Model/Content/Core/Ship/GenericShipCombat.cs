@@ -100,6 +100,8 @@ namespace Ship
         public event EventHandlerBool OnCheckFaceupCrit;
         public event EventHandlerShipCritArgs OnFaceupCritCardReadyToBeDealt;
         public static event EventHandlerShipCritArgs OnFaceupCritCardReadyToBeDealtGlobal;
+        public event EventHandlerShipCritArgs OnFaceupCritCardRevealed;
+        public static event EventHandlerShipCritArgs OnFaceupCritCardRevealedGlobal;
         public event EventHandlerShipCritArgs OnAssignCrit;
 
         public event EventHandlerShipBool OnDamageWasSuccessfullyDealt;
@@ -111,6 +113,7 @@ namespace Ship
         public static event EventHandlerShipDamage OnDamageInstanceResolvedGlobal;
         public static event EventHandlerShipBomb OnAfterSufferBombEffect;
 
+        public event EventHandlerShip OnBeforeCheckPreventDestruction;
         public event EventHandlerShipRefBool OnCheckPreventDestruction;
         public static event EventHandlerShipRefBool OnCheckPreventDestructionGlobal;
         public event EventHandlerShipBool OnShipIsDestroyed;
@@ -176,6 +179,10 @@ namespace Ship
         public event EventHandler OnBombWillBeDropped;
         public event EventHandler OnBombWasDropped;
         public event EventHandler OnBombWasLaunched;
+        public event EventHandler OnRemoteWasDropped;
+        public static event EventHandler OnRemoteWasDroppedGlobal;
+        public event EventHandler OnRemoteWasLaunched;
+        public static event EventHandler OnRemoteWasLaunchedGlobal;
         public event EventHandler OnCheckDropOfSecondDevice;
 
         public event EventHandelerWeaponRange OnUpdateWeaponRange;
@@ -191,35 +198,35 @@ namespace Ship
 
         public void CallOnActivationPhaseStart()
         {
-            if (OnActivationPhaseStart != null) OnActivationPhaseStart(this);
+            OnActivationPhaseStart?.Invoke(this);
         }
 
         public void CallOnSystemsPhaseStart()
         {
-            if (OnSystemsPhaseStart != null) OnSystemsPhaseStart(this);
+            OnSystemsPhaseStart?.Invoke(this);
         }
 
         public void CallOnRoundEnd()
         {
-            if (OnRoundEnd != null) OnRoundEnd(this);
+            OnRoundEnd?.Invoke(this);
         }
 
         public void CallOnActionSubPhaseStart()
         {
-            if (OnActionSubPhaseStart != null) OnActionSubPhaseStart(this);
+            OnActionSubPhaseStart?.Invoke(this);
         }
 
         public bool CallCanPerformAttack(bool result = true, List<string> stringList = null, bool isSilent = false)
         {
-            if (stringList == null) stringList = new List<string>();
+            stringList ??= new List<string>();
 
-            if (OnTryPerformAttack != null) OnTryPerformAttack(ref result, stringList);
+            OnTryPerformAttack?.Invoke(ref result, stringList);
 
-            if (OnTryPerformAttackGlobal != null) OnTryPerformAttackGlobal(ref result, stringList);
+            OnTryPerformAttackGlobal?.Invoke(ref result, stringList);
 
             if (!isSilent && stringList.Count > 0)
             {
-                foreach (var errorMessage in stringList)
+                foreach (string errorMessage in stringList)
                 {
                     Messages.ShowErrorToHuman(errorMessage);
                 }
@@ -230,7 +237,7 @@ namespace Ship
 
         public void CallAfterAttackDiceModification()
         {
-            if (AfterAttackDiceModification != null) AfterAttackDiceModification();
+            AfterAttackDiceModification?.Invoke();
         }
 
         public void CallAttackStart()
@@ -239,19 +246,19 @@ namespace Ship
             {
                 IsAttackPerformed = true;
 
-                if (OnAttackStartAsAttacker != null) OnAttackStartAsAttacker();
-                if (OnAttackStartAsAttackerGlobal != null) OnAttackStartAsAttackerGlobal();
+                OnAttackStartAsAttacker?.Invoke();
+                OnAttackStartAsAttackerGlobal?.Invoke();
             }
             else if (Combat.Defender.ShipId == this.ShipId)
             {
-                if (OnAttackStartAsDefender != null) OnAttackStartAsDefender();
-                if (OnAttackStartAsDefenderGlobal != null) OnAttackStartAsDefenderGlobal();
+                OnAttackStartAsDefender?.Invoke();
+                OnAttackStartAsDefenderGlobal?.Invoke();
             }
         }
 
         public void CallDiceAboutToBeRolled(Action callback)
         {
-            if (OnDiceAboutToBeRolled != null) OnDiceAboutToBeRolled();
+            OnDiceAboutToBeRolled?.Invoke();
 
             Triggers.ResolveTriggers(TriggerTypes.OnDiceAboutToBeRolled, callback);
         }
@@ -260,119 +267,114 @@ namespace Ship
         {
             if (Combat.Attacker.ShipId == this.ShipId)
             {
-                if (OnShotStartAsAttacker != null) OnShotStartAsAttacker();
+                OnShotStartAsAttacker?.Invoke();
             }
             else if (Combat.Defender.ShipId == this.ShipId)
             {
-                if (OnShotStartAsDefender != null) OnShotStartAsDefender();
+                OnShotStartAsDefender?.Invoke();
             }
         }
 
         public void CallCheckCancelCritsFirst()
         {
-            if (OnCheckCancelCritsFirst != null) OnCheckCancelCritsFirst(this);
+            OnCheckCancelCritsFirst?.Invoke(this);
         }
 
         public void CallDefenceStartAsAttacker()
         {
-            if (OnDefenceStartAsAttacker != null) OnDefenceStartAsAttacker();
+            OnDefenceStartAsAttacker?.Invoke();
         }
 
         public void CallDefenceStartAsDefender()
         {
-            if (OnDefenceStartAsDefender != null) OnDefenceStartAsDefender();
+            OnDefenceStartAsDefender?.Invoke();
         }
 
         public void CallShotHitAsAttacker()
         {
-            if (OnShotHitAsAttacker != null) OnShotHitAsAttacker();
+            OnShotHitAsAttacker?.Invoke();
         }
 
         public void CallShotHitAsDefender()
         {
-            if (OnShotHitAsDefenderGlobal != null) OnShotHitAsDefenderGlobal();
+            OnShotHitAsDefenderGlobal?.Invoke();
 
-            if (OnShotHitAsDefender != null) OnShotHitAsDefender();
+            OnShotHitAsDefender?.Invoke();
         }
 
         public void CallTryDamagePrevention(DamageSourceEventArgs e, Action callback)
         {
-            if (OnTryDamagePreventionGlobal != null) OnTryDamagePreventionGlobal(this, e);
-            if (OnTryDamagePrevention != null) OnTryDamagePrevention(this, e);
+            OnTryDamagePreventionGlobal?.Invoke(this, e);
+            OnTryDamagePrevention?.Invoke(this, e);
 
             Triggers.ResolveTriggers(TriggerTypes.OnTryDamagePrevention, callback);
         }
 
         public void CallOnAttackHitAsAttacker()
         {
-            if (OnAttackHitAsAttacker != null) OnAttackHitAsAttacker();
+            OnAttackHitAsAttacker?.Invoke();
         }
 
         public void CallOnAttackHitAsDefender()
         {
-            if (OnAttackHitAsDefenderGlobal != null) OnAttackHitAsDefenderGlobal();
+            OnAttackHitAsDefenderGlobal?.Invoke();
 
-            if (OnAttackHitAsDefender != null) OnAttackHitAsDefender();
+            OnAttackHitAsDefender?.Invoke();
         }
 
         public void CallOnAttackMissedAsAttacker()
         {
-            if (OnAttackMissedAsAttacker != null) OnAttackMissedAsAttacker();
-            if (OnAttackMissedAsAttackerGlobal != null) OnAttackMissedAsAttackerGlobal();
-        }
-
-        public void CallOnGetBombTemplateDirection(ref Direction direction)
-        {
-            OnGetBombTemplateDirection?.Invoke(ref direction);
+            OnAttackMissedAsAttacker?.Invoke();
+            OnAttackMissedAsAttackerGlobal?.Invoke();
         }
 
         public void CallOnAttackMissedAsDefender()
         {
-            if (OnAttackMissedAsDefender != null) OnAttackMissedAsDefender();
+            OnAttackMissedAsDefender?.Invoke();
         }
 
         public void CallAfterAttackWindow()
         {
-            if (AfterAttackWindow != null) AfterAttackWindow();
+            AfterAttackWindow?.Invoke();
         }
 
         public void CallAttackFinish()
         {
-            if (OnAttackFinish != null) OnAttackFinish(this);
+            OnAttackFinish?.Invoke(this);
         }
 
         public void CallAttackFinishGlobal()
         {
-            if (OnAttackFinishGlobal != null) OnAttackFinishGlobal(this);
+            OnAttackFinishGlobal?.Invoke(this);
         }
 
         public void CallAttackFinishAsAttacker()
         {
-            if (OnAttackFinishAsAttacker != null) OnAttackFinishAsAttacker(this);
+            OnAttackFinishAsAttacker?.Invoke(this);
         }
 
         public void CallAttackFinishAsDefender()
         {
-            if (OnAttackFinishAsDefender != null) OnAttackFinishAsDefender(this);
+            OnAttackFinishAsDefender?.Invoke(this);
         }
 
         public void CallOnImmediatelyAfterRolling(DiceRoll diceroll, Action callBack)
         {
-            if (OnImmediatelyAfterRolling != null) OnImmediatelyAfterRolling(diceroll);
+            OnImmediatelyAfterRolling?.Invoke(diceroll);
 
             Triggers.ResolveTriggers(TriggerTypes.OnImmediatelyAfterRolling, callBack);
         }
 
         public void CallOnImmediatelyAfterReRolling(DiceRoll diceroll, Action callBack)
         {
-            if (OnImmediatelyAfterReRolling != null) OnImmediatelyAfterReRolling(diceroll);
+            OnImmediatelyAfterReRolling?.Invoke(diceroll);
 
             Triggers.ResolveTriggers(TriggerTypes.OnImmediatelyAfterReRolling, callBack);
         }
 
         public void CallOnAtLeastOneCritWasCancelledByDefender()
         {
-            if (OnAtLeastOneCritWasCancelledByDefender != null) OnAtLeastOneCritWasCancelledByDefender();
+            OnAtLeastOneCritWasCancelledByDefender?.Invoke();
         }
 
         public List<Type> GetWeaponAttackRequirement(GenericSpecialWeapon weapon, bool isSilent)
@@ -392,8 +394,8 @@ namespace Ship
 
         public void CallOnDamageCardIsDealt(Action callBack)
         {
-            if (OnDamageCardIsDealt != null) OnDamageCardIsDealt(this);
-            if (OnDamageCardIsDealtGlobal != null) OnDamageCardIsDealtGlobal(this);
+            OnDamageCardIsDealt?.Invoke(this);
+            OnDamageCardIsDealtGlobal?.Invoke(this);
 
             Triggers.ResolveTriggers(TriggerTypes.OnDamageCardIsDealt, callBack);
         }
@@ -401,21 +403,21 @@ namespace Ship
         public void CallOnDamageInstanceResolved(DamageSourceEventArgs dsource, Action callback)
         {
             if (this == Combat.Defender) Combat.DamageInfo.IsDefenderSufferedDamage = true;
-            if (OnDamageInstanceResolvedGlobal != null) OnDamageInstanceResolvedGlobal(this, dsource);
+            OnDamageInstanceResolvedGlobal?.Invoke(this, dsource);
 
             Triggers.ResolveTriggers(TriggerTypes.OnDamageInstanceResolved, callback);
         }
 
         public void CallOnShieldIsLost(Action callback)
         {
-            if (OnShieldLost != null) OnShieldLost();
+            OnShieldLost?.Invoke();
 
             Triggers.ResolveTriggers(TriggerTypes.OnShieldIsLost, callback);
         }
 
         public void CallCombatCheckExtraAttack(Action callback)
         {
-            if (OnCombatCheckExtraAttack != null) OnCombatCheckExtraAttack(this);
+            OnCombatCheckExtraAttack?.Invoke(this);
 
             Triggers.ResolveTriggers(TriggerTypes.OnCombatCheckExtraAttack, callback);
         }
@@ -424,8 +426,8 @@ namespace Ship
         {
             //Messages.ShowInfo("Ship is activated! " + this.ShipId);
 
-            if (OnCombatActivation != null) OnCombatActivation(this);
-            if (OnCombatActivationGlobal != null) OnCombatActivationGlobal(this);
+            OnCombatActivation?.Invoke(this);
+            OnCombatActivationGlobal?.Invoke(this);
 
             Triggers.ResolveTriggers(TriggerTypes.OnCombatActivation, callback);
         }
@@ -434,7 +436,7 @@ namespace Ship
         {
             //Messages.ShowInfo("Ship is deactivated! " + this.ShipId);
 
-            if (OnCombatDeactivation != null) OnCombatDeactivation(this);
+            OnCombatDeactivation?.Invoke(this);
 
             Triggers.ResolveTriggers(TriggerTypes.OnCombatDeactivation, callback);
         }
@@ -443,7 +445,7 @@ namespace Ship
 
         public int GetNumberOfAttackDice(GenericShip targetShip)
         {
-            var result = Combat.ChosenWeapon.WeaponInfo.AttackValue;
+            int result = Combat.ChosenWeapon.WeaponInfo.AttackValue;
 
             AfterGotNumberOfAttackDice?.Invoke(ref result);
             if (Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon)
@@ -461,15 +463,15 @@ namespace Ship
         {
             int result = State.Agility;
 
-            if (AfterGotNumberOfDefenceDice != null) AfterGotNumberOfDefenceDice(ref result);
-            if (AfterGotNumberOfDefenceDiceGlobal != null) AfterGotNumberOfDefenceDiceGlobal(ref result);
+            AfterGotNumberOfDefenceDice?.Invoke(ref result);
+            AfterGotNumberOfDefenceDiceGlobal?.Invoke(ref result);
 
             if (Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon)
             {
-                if (AfterGotNumberOfPrimaryWeaponDefenceDice != null) AfterGotNumberOfPrimaryWeaponDefenceDice(ref result);
+                AfterGotNumberOfPrimaryWeaponDefenceDice?.Invoke(ref result);
             }
 
-            if (AfterGotNumberOfDefenceDiceCap != null) AfterGotNumberOfDefenceDiceCap(ref result);
+            AfterGotNumberOfDefenceDiceCap?.Invoke(ref result);
 
             if (result < 0) result = 0;
 
@@ -481,21 +483,19 @@ namespace Ship
 
         public void CallAfterNumberOfDefenceDiceConfirmed(int numDefenceDice)
         {
-            if (AfterNumberOfDefenceDiceConfirmed != null) AfterNumberOfDefenceDiceConfirmed(ref numDefenceDice);
+            AfterNumberOfDefenceDiceConfirmed?.Invoke(ref numDefenceDice);
         }
 
         public bool TryDiceResultModification(Die die, GenericAbility.DiceModificationType modType, DieSide newResult, ref bool isAllowed)
         {
-            if (OnTryDiceResultModification != null)
-            {
-                OnTryDiceResultModification(die, modType, newResult, ref isAllowed);
-            }
+            OnTryDiceResultModification?.Invoke(die, modType, newResult, ref isAllowed);
+
             return isAllowed;
         }
 
         public bool TrySelectDie(Die die, ref bool isAllowed)
         {
-            if (OnTrySelectDie != null) OnTrySelectDie(die, ref isAllowed);
+            OnTrySelectDie?.Invoke(die, ref isAllowed);
             return isAllowed;
         }
 
@@ -523,12 +523,12 @@ namespace Ship
 
             bool isCritical = (AssignedDamageDiceroll.Successes > 0 && AssignedDamageDiceroll.RegularSuccesses == 0);
 
-            if (OnSufferDamageDecidingSeverity != null) OnSufferDamageDecidingSeverity(sender, e, ref isCritical);
+            OnSufferDamageDecidingSeverity?.Invoke(sender, e, ref isCritical);
 
             if (isCritical)
             {
                 bool skipSufferDamage = false;
-                if (OnSufferCriticalDamage != null) OnSufferCriticalDamage(sender, e, ref skipSufferDamage);
+                OnSufferCriticalDamage?.Invoke(sender, e, ref skipSufferDamage);
 
                 if (!skipSufferDamage)
                 {
@@ -583,11 +583,11 @@ namespace Ship
                 {
                     Name = "Information about faceup damage card",
                     TriggerOwner = this.Owner.PlayerNo,
-                    TriggerType = TriggerTypes.OnFaceupCritCardReadyToBeDealtUI,
+                    TriggerType = TriggerTypes.OnFaceupCritCardRevealed,
                     EventHandler = InformCrit.LoadAndShow
                 });
 
-                Triggers.ResolveTriggers(TriggerTypes.OnFaceupCritCardReadyToBeDealt, delegate { SufferFaceupDamageCard(callback); });
+                Triggers.ResolveTriggers(TriggerTypes.OnFaceupCritCardReadyToBeDealt, delegate { SufferFaceupDamageCard(e, callback); });
             }
             else
             {
@@ -595,10 +595,13 @@ namespace Ship
             }
         }
 
-        private void SufferFaceupDamageCard(Action callback)
+        private void SufferFaceupDamageCard(EventArgs e, Action callback)
         {
+            OnFaceupCritCardRevealed?.Invoke(this, Combat.CurrentCriticalHitCard);
+            OnFaceupCritCardRevealedGlobal?.Invoke(this, Combat.CurrentCriticalHitCard, e);
+
             Triggers.ResolveTriggers(
-                TriggerTypes.OnFaceupCritCardReadyToBeDealtUI,
+                TriggerTypes.OnFaceupCritCardRevealed,
                 delegate { SufferFaceupDamageCardPart2(callback); }
             );
         }
@@ -630,12 +633,12 @@ namespace Ship
 
         public void CallAfterAssignedDamageIsChanged()
         {
-            if (AfterAssignedDamageIsChanged != null) AfterAssignedDamageIsChanged(this);
+            AfterAssignedDamageIsChanged?.Invoke(this);
         }
 
         private bool CheckFaceupCrit(bool result)
         {
-            if (OnCheckFaceupCrit != null) OnCheckFaceupCrit(ref result);
+            OnCheckFaceupCrit?.Invoke(ref result);
             return result;
         }
 
@@ -654,7 +657,7 @@ namespace Ship
 
         private void CallOnDamageWasSuccessfullyDealt(bool isCritical, Action callback)
         {
-            if (OnDamageWasSuccessfullyDealt != null) OnDamageWasSuccessfullyDealt(this, isCritical);
+            OnDamageWasSuccessfullyDealt?.Invoke(this, isCritical);
 
             Triggers.ResolveTriggers(TriggerTypes.OnDamageWasSuccessfullyDealt, callback);
         }
@@ -669,27 +672,40 @@ namespace Ship
         {
             if (State.HullCurrent == 0 && !IsDestroyed)
             {
-                bool preventDestruction = false;
+                CallBeforeCheckPreventDestruction(delegate { CallCheckPreventDestruction(callBack); });
+            }
+            else
+            {
+                callBack();
+            }
+        }
 
-                OnCheckPreventDestruction?.Invoke(this, ref preventDestruction);
+        private void CallBeforeCheckPreventDestruction(Action callBack)
+        {
+            OnBeforeCheckPreventDestruction?.Invoke(this);
 
-                OnCheckPreventDestructionGlobal?.Invoke(this, ref preventDestruction);
+            Triggers.ResolveTriggers(TriggerTypes.OnShipIsDestroyedCheck, callBack);
+        }
 
-                if (!preventDestruction)
-                {
-                    IsDestroyed = true;
+        private void CallCheckPreventDestruction(Action callBack)
+        {
+            bool preventDestruction = false;
 
-                    PlayDestroyedAnimSound(
-                        delegate { CallShipDestruction(
-                            delegate { PlanShipRemoval(callBack); },
-                            isFled: false);
-                        }
-                    );
-                }
-                else
-                {
-                    callBack();
-                }
+            OnCheckPreventDestruction?.Invoke(this, ref preventDestruction);
+
+            OnCheckPreventDestructionGlobal?.Invoke(this, ref preventDestruction);
+
+            if (!preventDestruction)
+            {
+                IsDestroyed = true;
+
+                PlayDestroyedAnimSound(
+                    delegate {
+                        CallShipDestruction(
+                     delegate { PlanShipRemoval(callBack); },
+                     isFled: false);
+                    }
+                );
             }
             else
             {
@@ -765,19 +781,19 @@ namespace Ship
 
         public void DeactivateAllAbilities()
         {
-            foreach (var shipAbility in ShipAbilities)
+            foreach (GenericAbility shipAbility in ShipAbilities)
             {
                 shipAbility.DeactivateAbility();
             }
 
-            foreach (var pilotAbility in PilotAbilities)
+            foreach (GenericAbility pilotAbility in PilotAbilities)
             {
                 pilotAbility.DeactivateAbility();
             }
 
-            foreach (var upgrade in UpgradeBar.GetUpgradesOnlyFaceup())
+            foreach (GenericUpgrade upgrade in UpgradeBar.GetUpgradesOnlyFaceup())
             {
-                foreach (var upgradeAbility in upgrade.UpgradeAbilities)
+                foreach (GenericAbility upgradeAbility in upgrade.UpgradeAbilities)
                 {
                     upgradeAbility.DeactivateAbility();
                 }
@@ -817,6 +833,11 @@ namespace Ship
             return availableTemplates;
         }
 
+        public void CallOnGetBombTemplateDirection(ref Direction direction)
+        {
+            OnGetBombTemplateDirection?.Invoke(ref direction);
+        }
+
         public List<ManeuverTemplate> GetAvailableBarrelRollTemplates(GenericAction action)
         {
             List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>(ShipBase.BarrelRollTemplatesAvailable);
@@ -837,7 +858,7 @@ namespace Ship
 
         public List<BoostMove> GetAvailableBoostTemplates(GenericAction action)
         {
-            var availableMoves = new List<BoostMove>
+            List<BoostMove> availableMoves = new List<BoostMove>
             {
                 new BoostMove(ActionsHolder.BoostTemplates.Straight1),
                 new BoostMove(ActionsHolder.BoostTemplates.LeftBank1),
@@ -877,9 +898,9 @@ namespace Ship
         {
             bool result = CanAttackBumpedTargetAlways;
 
-            if (OnCanAttackBumpedTarget != null) OnCanAttackBumpedTarget(ref result, this, defender);
+            OnCanAttackBumpedTarget?.Invoke(ref result, this, defender);
 
-            if (OnCanAttackBumpedTargetGlobal != null) OnCanAttackBumpedTargetGlobal(ref result, this, defender);
+            OnCanAttackBumpedTargetGlobal?.Invoke(ref result, this, defender);
 
             return result;
         }
@@ -888,13 +909,12 @@ namespace Ship
         {
             bool result = false;
 
-            if (OnCanAttackWhileLandedOnObstacle != null) OnCanAttackWhileLandedOnObstacle(this, ref result);
+            OnCanAttackWhileLandedOnObstacle?.Invoke(this, ref result);
 
-            if (OnCanAttackWhileLandedOnObstacleGlobal != null) OnCanAttackWhileLandedOnObstacleGlobal(this, ref result);
+            OnCanAttackWhileLandedOnObstacleGlobal?.Invoke(this, ref result);
 
             return result;
         }
-
 
         public List<IShipWeapon> GetAllWeapons()
         {
@@ -917,7 +937,7 @@ namespace Ship
         {
             IgnoresBombDetonationEffect = false;
 
-            if (OnCheckSufferBombDetonation != null) OnCheckSufferBombDetonation(this);
+            OnCheckSufferBombDetonation?.Invoke(this);
             Triggers.ResolveTriggers(TriggerTypes.OnCheckSufferBombDetonation, callback);
         }
 
@@ -925,26 +945,26 @@ namespace Ship
         {
             bool result = true;
 
-            if (OnTryConfirmDiceResults != null) OnTryConfirmDiceResults(ref result);
+            OnTryConfirmDiceResults?.Invoke(ref result);
 
             return result;
         }
 
         public void CallCombatCompareResults()
         {
-            if (OnCombatCompareResults != null) OnCombatCompareResults(this);
+            OnCombatCompareResults?.Invoke(this);
         }
 
         public void CallAfterNeutralizeResultsAttacker(Action callback)
         {
-            if (OnAfterNeutralizeResultsAttacker != null) OnAfterNeutralizeResultsAttacker();
+            OnAfterNeutralizeResultsAttacker?.Invoke();
 
             Triggers.ResolveTriggers(TriggerTypes.OnAfterNeutralizeResultsAttacker, callback);
         }
 
         public void CallAfterNeutralizeResults(Action callback)
         {
-            if (OnAfterNeutralizeResults != null) OnAfterNeutralizeResults();
+            OnAfterNeutralizeResults?.Invoke();
 
             Triggers.ResolveTriggers(TriggerTypes.OnAfterNeutralizeResults, callback);
         }
@@ -1000,6 +1020,13 @@ namespace Ship
                     delegate { CallCheckDropOfSecondDevice(callback); }
                 );
             }
+            else if (Bombs.BombsManager.CurrentDevice.UpgradeInfo.SubType == UpgradeSubType.Remote)
+            {
+                OnRemoteWasDropped?.Invoke();
+                OnRemoteWasDroppedGlobal?.Invoke();
+
+                Triggers.ResolveTriggers(TriggerTypes.OnRemoteWasDropped, callback);
+            }
             else
             {
                 callback();
@@ -1017,9 +1044,16 @@ namespace Ship
         {
             if (Bombs.BombsManager.CurrentDevice.UpgradeInfo.SubType == UpgradeSubType.Bomb || Bombs.BombsManager.CurrentDevice.UpgradeInfo.SubType == UpgradeSubType.Mine)
             {
-                if (OnBombWasLaunched != null) OnBombWasLaunched();
+                OnBombWasLaunched?.Invoke();
 
                 Triggers.ResolveTriggers(TriggerTypes.OnBombWasLaunched, callback);
+            }
+            else if(Bombs.BombsManager.CurrentDevice.UpgradeInfo.SubType == UpgradeSubType.Remote)
+            {
+                OnRemoteWasLaunched?.Invoke();
+                OnRemoteWasLaunchedGlobal?.Invoke();
+
+                Triggers.ResolveTriggers(TriggerTypes.OnRemoteWasLaunched, callback);
             }
             else
             {
@@ -1029,9 +1063,9 @@ namespace Ship
 
         public void CallUpdateWeaponRange(IShipWeapon weapon, ref int minRange, ref int maxRange, GenericShip target=null)
         {
-            if (OnUpdateWeaponRange != null) OnUpdateWeaponRange(weapon, ref minRange, ref maxRange, target);
+            OnUpdateWeaponRange?.Invoke(weapon, ref minRange, ref maxRange, target);
 
-            if (OnUpdateWeaponRangeGlobal != null) OnUpdateWeaponRangeGlobal(weapon, ref minRange, ref maxRange, target);
+            OnUpdateWeaponRangeGlobal?.Invoke(weapon, ref minRange, ref maxRange, target);
         }
 
         public void ShowAttackAnimationAndSound()
