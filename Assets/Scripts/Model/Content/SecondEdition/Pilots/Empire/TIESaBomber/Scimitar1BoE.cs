@@ -2,8 +2,6 @@
 using Ship;
 using System;
 using System.Collections.Generic;
-using Actions;
-using ActionsList;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -44,16 +42,6 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(IonBombs));
 
-                //TODO Make a TIE Bomber BoE class
-                var shipInfo = (ShipCardInfo25) ShipInfo;
-                shipInfo.ActionIcons = new ShipActionsInfo
-                (
-                    new ActionInfo(typeof(FocusAction)),
-                    new ActionInfo(typeof(TargetLockAction)),
-                    new ActionInfo(typeof(ReloadAction), ActionColor.Red)
-                );
-                shipInfo.ActionIcons.LinkedActions.Add(new LinkedActionInfo(typeof(BarrelRollAction), typeof(TargetLockAction), ActionColor.Red));
-
                 PilotNameCanonical = "scimitar1-battleoverendor";
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scimitar1-battleoverendor.png";
             }
@@ -63,7 +51,8 @@ namespace Ship
 
 namespace Abilities.SecondEdition
 {
-    //After a friendly ship at range 0-3 performs an attack, you may spend 1 charge to acquire a lock on the defender.
+    //After a friendly ship at range 0-3 performs an attack, you may spend 1 charge
+    //to acquire a lock on the defender.
     public class Scimitar1Ability : GenericAbility
     {
         public override void ActivateAbility()
