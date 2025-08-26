@@ -38,6 +38,7 @@ namespace Ship
                 
                 MustHaveUpgrades.Add(typeof(AdvProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(AfterBurners));
+                MustHaveUpgrades.Add(typeof(AutomatedLoaders));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
             }
