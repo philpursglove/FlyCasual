@@ -3,6 +3,7 @@ using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship
 {
@@ -10,7 +11,7 @@ namespace Ship
     {
         public class MajorRhymerTBE : TIESaBomber
         {
-            public MajorRhymerTBE() : base()
+            public MajorRhymerTBE() 
             {
                 PilotInfo = new PilotCardInfo25(
                     "Major Rhymer",
@@ -20,15 +21,25 @@ namespace Ship
                     5,
                     loadoutValue:0,
                     isStandardLayout: true,
-                     tags: new List<Tags>
+                    tags: new List<Tags>
                     {
                         Tags.Tie
                     },
                     isLimited: true,
                     abilityType: typeof(Abilities.SecondEdition.MajorRhymerTBEAbility),
-                    extraUpgradeIcon: UpgradeType.Talent
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Torpedo,
+                        UpgradeType.Modification,
+                        UpgradeType.Modification
+                    }
                 );
                 PilotNameCanonical = "majorrhymer-swz98";
+                
+                MustHaveUpgrades.Add(typeof(AdvProtonTorpedoes));
+                MustHaveUpgrades.Add(typeof(AfterBurners));
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
             }
         }
     }
@@ -71,7 +82,5 @@ namespace Abilities.SecondEdition
         {
             return 70;
         }
-
-
     }
 }

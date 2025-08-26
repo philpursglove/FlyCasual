@@ -6,6 +6,7 @@ using Ship;
 using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship
 {
@@ -13,7 +14,7 @@ namespace Ship
     {
         public class DeathfireTBE : TIESaBomber
         {
-            public DeathfireTBE() : base()
+            public DeathfireTBE() 
             {
                 PilotInfo = new PilotCardInfo25(
                     "\"Deathfire\"",
@@ -30,9 +31,20 @@ namespace Ship
                     charges: 2,
                     regensCharges: 1,
                     isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.DeathfireTBEAbility)
+                    abilityType: typeof(Abilities.SecondEdition.DeathfireTBEAbility),
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Device,
+                        UpgradeType.Device
+                    }
                 );
                 PilotNameCanonical = "deathfire-swz98";
+                
+                MustHaveUpgrades.Add(typeof(ProtonBombs));
+                MustHaveUpgrades.Add(typeof(ConnerNets));
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/deathfire-swz98.png";
             }
         }
     }
@@ -44,7 +56,6 @@ namespace Abilities.SecondEdition
     //you may spend 2 charges to drop or launch a bomb using the 3 forward template.
     public class DeathfireTBEAbility : GenericAbility
     {
-
         public override void ActivateAbility()
         {
             HostShip.OnMovementFinish += CheckAbility;
@@ -60,8 +71,7 @@ namespace Abilities.SecondEdition
             //AI doesn't use ability
             if (HostShip.Owner.UsesHotacAiRules) return;
 
-            if (HostShip.AssignedManeuver.Speed >= 3
-                && HostShip.AssignedManeuver.Speed <= 5
+            if (HostShip.AssignedManeuver.Speed is >= 3 and <= 5
                 && !HostShip.IsBumped && HostShip.State.Charges > 1
                 && !HostShip.IsBombAlreadyDropped)
             {

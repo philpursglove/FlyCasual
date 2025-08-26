@@ -1,6 +1,7 @@
 ﻿using Content;
 using System.Collections.Generic;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship
 {
@@ -8,7 +9,7 @@ namespace Ship
     {
         public class CaptainJonusTBE : TIESaBomber
         {
-            public CaptainJonusTBE() : base()
+            public CaptainJonusTBE() 
             {
                 PilotInfo = new PilotCardInfo25(
                     "Captain Jonus",
@@ -18,15 +19,25 @@ namespace Ship
                     5,
                     loadoutValue:0,
                     isStandardLayout:true,
-                     tags: new List<Tags>
+                    tags: new List<Tags>
                     {
                         Tags.Tie
                     },
                     isLimited: true,
                     abilityType: typeof(Abilities.SecondEdition.CaptainJonusTBEAbility),
-                    extraUpgradeIcon: UpgradeType.Talent
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Missile,
+                        UpgradeType.Device
+                    }
                 );
                 PilotNameCanonical = "captainjonus-swz98";
+                
+                MustHaveUpgrades.Add(typeof(BarrageRockets));
+                MustHaveUpgrades.Add(typeof(ProtonBombs));
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png";
             }
         }
     }

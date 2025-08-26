@@ -4,6 +4,7 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship
 {
@@ -11,7 +12,7 @@ namespace Ship
     {
         public class TomaxBrenTBE : TIESaBomber
         {
-            public TomaxBrenTBE() : base()
+            public TomaxBrenTBE() 
             {
                 PilotInfo = new PilotCardInfo25(
                     "Tomax Bren",
@@ -21,7 +22,7 @@ namespace Ship
                     4,
                     loadoutValue: 0,
                     isStandardLayout: true,
-                     tags: new List<Tags>
+                    tags: new List<Tags>
                     {
                         Tags.Tie
                     },
@@ -29,9 +30,19 @@ namespace Ship
                     charges: 2,
                     regensCharges: 1,
                     abilityType: typeof(Abilities.SecondEdition.TomaxBrenTBEAbility),
-                    extraUpgradeIcon: UpgradeType.Talent
+                    extraUpgradeIcons: new List<UpgradeType>
+                    {
+                        UpgradeType.Talent,
+                        UpgradeType.Torpedo,
+                        UpgradeType.Device
+                    }
                 );
                 PilotNameCanonical = "tomaxbren-swz98";
+                
+                MustHaveUpgrades.Add(typeof(PlasmaTorpedoes));
+                MustHaveUpgrades.Add(typeof(IonBombs));
+
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tomaxbren-swz98.png";
             }
         }
     }
