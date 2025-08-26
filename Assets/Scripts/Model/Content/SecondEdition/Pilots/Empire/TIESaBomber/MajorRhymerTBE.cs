@@ -12,19 +12,23 @@ namespace Ship
         {
             public MajorRhymerTBE() : base()
             {
-                PilotInfo = new PilotCardInfo(
+                PilotInfo = new PilotCardInfo25(
                     "Major Rhymer",
+                    "Precision Destruction",
+                    Faction.Imperial,
                     4,
-                    33,
+                    5,
+                    loadoutValue:0,
+                    isStandardLayout: true,
                      tags: new List<Tags>
                     {
-                        Tags.LsL
+                        Tags.Tie
                     },
                     isLimited: true,
                     abilityType: typeof(Abilities.SecondEdition.MajorRhymerTBEAbility),
                     extraUpgradeIcon: UpgradeType.Talent
                 );
-                PilotNameCanonical = "majorrhymer-swz98-lsl";
+                PilotNameCanonical = "majorrhymer-swz98";
             }
         }
     }

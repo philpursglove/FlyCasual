@@ -15,20 +15,24 @@ namespace Ship
         {
             public DeathfireTBE() : base()
             {
-                PilotInfo = new PilotCardInfo(
+                PilotInfo = new PilotCardInfo25(
                     "\"Deathfire\"",
+                    "Obstinate Bombardier",
+                    Faction.Imperial,
                     2,
-                    33,
-                     tags: new List<Tags>
+                    4,
+                    loadoutValue: 0,
+                    isStandardLayout: true,
+                    tags: new List<Tags>
                     {
-                        Tags.LsL
+                        Tags.Tie
                     },
                     charges: 2,
                     regensCharges: 1,
                     isLimited: true,
                     abilityType: typeof(Abilities.SecondEdition.DeathfireTBEAbility)
                 );
-                PilotNameCanonical = "deathfire-swz98-lsl";
+                PilotNameCanonical = "deathfire-swz98";
             }
         }
     }

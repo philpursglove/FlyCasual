@@ -13,13 +13,17 @@ namespace Ship
         {
             public TomaxBrenTBE() : base()
             {
-                PilotInfo = new PilotCardInfo(
+                PilotInfo = new PilotCardInfo25(
                     "Tomax Bren",
+                    "Scimitar Veteran",
+                    Faction.Imperial,
                     5,
-                    38,
+                    4,
+                    loadoutValue: 0,
+                    isStandardLayout: true,
                      tags: new List<Tags>
                     {
-                        Tags.LsL
+                        Tags.Tie
                     },
                     isLimited: true,
                     charges: 2,
@@ -27,7 +31,7 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.TomaxBrenTBEAbility),
                     extraUpgradeIcon: UpgradeType.Talent
                 );
-                PilotNameCanonical = "tomaxbren-swz98-lsl";
+                PilotNameCanonical = "tomaxbren-swz98";
             }
         }
     }

@@ -10,19 +10,23 @@ namespace Ship
         {
             public CaptainJonusTBE() : base()
             {
-                PilotInfo = new PilotCardInfo(
+                PilotInfo = new PilotCardInfo25(
                     "Captain Jonus",
+                    "Top Cover",
+                    Faction.Imperial,
                     4,
-                    36,
+                    5,
+                    loadoutValue:0,
+                    isStandardLayout:true,
                      tags: new List<Tags>
                     {
-                        Tags.LsL
+                        Tags.Tie
                     },
                     isLimited: true,
                     abilityType: typeof(Abilities.SecondEdition.CaptainJonusTBEAbility),
                     extraUpgradeIcon: UpgradeType.Talent
                 );
-                PilotNameCanonical = "captainjonus-swz98-lsl";
+                PilotNameCanonical = "captainjonus-swz98";
             }
         }
     }
