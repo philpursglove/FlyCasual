@@ -1,0 +1,73 @@
+﻿using Arcs;
+using Content;
+using Ship;
+using System.Collections.Generic;
+using Upgrade;
+
+namespace Ship
+{
+    namespace SecondEdition.TIESaBomber
+    {
+        public class MajorRhymerTBE : TIESaBomber
+        {
+            public MajorRhymerTBE() : base()
+            {
+                PilotInfo = new PilotCardInfo(
+                    "Major Rhymer",
+                    4,
+                    33,
+                     tags: new List<Tags>
+                    {
+                        Tags.LsL
+                    },
+                    isLimited: true,
+                    abilityType: typeof(Abilities.SecondEdition.MajorRhymerTBEAbility),
+                    extraUpgradeIcon: UpgradeType.Talent
+                );
+                PilotNameCanonical = "majorrhymer-swz98-lsl";
+            }
+        }
+    }
+}
+
+namespace Abilities.SecondEdition
+{
+    //While you perform a Torpedo attack, if the defender is in your bullseye, change 1 Focus result to a Crit result.
+    public class MajorRhymerTBEAbility : GenericAbility
+    {
+        public override void ActivateAbility()
+        {
+            AddDiceModification(
+                HostShip.PilotInfo.PilotName,
+                IsDiceModificationAvailable,
+                GetDiceModificationAiPriority,
+                DiceModificationType.Change,
+                1,
+                new List<DieSide>() { DieSide.Focus },
+                DieSide.Crit
+            );
+        }
+
+        public override void DeactivateAbility()
+        {
+            RemoveDiceModification();
+        }
+
+        private bool IsDiceModificationAvailable()
+        {
+            return (Combat.AttackStep == CombatStep.Attack
+                && Combat.Attacker == HostShip
+                && Combat.ChosenWeapon.WeaponType == WeaponTypes.Torpedo
+                && Combat.DiceRollAttack.Focuses > 0
+                && Combat.Attacker.SectorsInfo.IsShipInSector(Combat.Defender, ArcType.Bullseye)
+            );
+        }
+
+        private int GetDiceModificationAiPriority()
+        {
+            return 70;
+        }
+
+
+    }
+}
