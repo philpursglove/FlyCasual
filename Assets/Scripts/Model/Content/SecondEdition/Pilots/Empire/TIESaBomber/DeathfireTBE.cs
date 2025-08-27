@@ -16,8 +16,6 @@ namespace Ship
         {
             public DeathfireTBE()
             {
-                //TODO Standard points vs XWA points
-
                 PilotInfo = new PilotCardInfo25(
                     "\"Deathfire\"",
                     "Obstinate Bombardier",

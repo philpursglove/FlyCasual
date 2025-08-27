@@ -13,8 +13,6 @@ namespace Ship
         {
             public MajorRhymerTBE()
             {
-                //TODO Standard points vs XWA points
-
                 PilotInfo = new PilotCardInfo25(
                     "Major Rhymer",
                     "Precision Destruction",
