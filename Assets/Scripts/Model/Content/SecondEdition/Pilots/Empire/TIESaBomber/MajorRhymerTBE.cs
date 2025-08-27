@@ -11,15 +11,17 @@ namespace Ship
     {
         public class MajorRhymerTBE : TIESaBomber
         {
-            public MajorRhymerTBE() 
+            public MajorRhymerTBE()
             {
+                //TODO Standard points vs XWA points
+
                 PilotInfo = new PilotCardInfo25(
                     "Major Rhymer",
                     "Precision Destruction",
                     Faction.Imperial,
                     4,
-                    5,
-                    loadoutValue:0,
+                    4,
+                    loadoutValue: 0,
                     isStandardLayout: true,
                     tags: new List<Tags>
                     {
@@ -32,15 +34,26 @@ namespace Ship
                         UpgradeType.Torpedo,
                         UpgradeType.Modification,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> {Legality.StandardLegal, Legality.ExtendedLegal}
                 );
                 PilotNameCanonical = "majorrhymer-swz98";
-                
+
                 MustHaveUpgrades.Add(typeof(AdvProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(AfterBurners));
                 MustHaveUpgrades.Add(typeof(AutomatedLoaders));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
+            }
+        }
+
+        public class MajorRhymerTBEXWA : MajorRhymerTBE
+        {
+            public MajorRhymerTBEXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 5;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
             }
         }
     }
