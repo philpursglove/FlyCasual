@@ -2,6 +2,7 @@
 using ActionsList;
 using System;
 using System.Collections.Generic;
+using Actions;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -44,7 +45,8 @@ namespace Abilities.SecondEdition
         {
             if (Phases.CurrentPhase.Name != "System") return;
 
-            AskToPerformReposition();
+            RegisterAbilityTrigger(TriggerTypes.OnBombWasDropped, AskToPerformReposition);
+            RegisterAbilityTrigger(TriggerTypes.OnBombWasLaunched, AskToPerformReposition);
         }
 
         private void AskToPerformReposition(object sender, EventArgs e)
@@ -52,8 +54,8 @@ namespace Abilities.SecondEdition
             HostShip.AskPerformFreeAction(
                 new List<GenericAction>()
                 {
-                    new BarrelRollAction(){CanBePerformedWhileStressed = true},
-                    new BoostAction(){CanBePerformedWhileStressed = true}
+                    new BarrelRollAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White},
+                    new BoostAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White}
                 },
                 Triggers.FinishTrigger,
                 HostUpgrade.NamePostfix,
