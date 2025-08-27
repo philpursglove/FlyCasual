@@ -43,7 +43,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility()
         {
-            if (Phases.CurrentPhase.Name != "System") return;
+            if (Phases.CurrentPhase.Name != "Systems Phase") return;
 
             RegisterAbilityTrigger(TriggerTypes.OnBombWasDropped, AskToPerformReposition);
             RegisterAbilityTrigger(TriggerTypes.OnBombWasLaunched, AskToPerformReposition);
