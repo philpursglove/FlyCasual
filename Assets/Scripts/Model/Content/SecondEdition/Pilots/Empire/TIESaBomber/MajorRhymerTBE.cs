@@ -11,15 +11,17 @@ namespace Ship
     {
         public class MajorRhymerTBE : TIESaBomber
         {
-            public MajorRhymerTBE() 
+            public MajorRhymerTBE()
             {
+                //TODO Standard points vs XWA points
+
                 PilotInfo = new PilotCardInfo25(
                     "Major Rhymer",
                     "Precision Destruction",
                     Faction.Imperial,
                     4,
                     5,
-                    loadoutValue:0,
+                    loadoutValue: 0,
                     isStandardLayout: true,
                     tags: new List<Tags>
                     {
@@ -35,7 +37,7 @@ namespace Ship
                     }
                 );
                 PilotNameCanonical = "majorrhymer-swz98";
-                
+
                 MustHaveUpgrades.Add(typeof(AdvProtonTorpedoes));
                 MustHaveUpgrades.Add(typeof(AfterBurners));
 

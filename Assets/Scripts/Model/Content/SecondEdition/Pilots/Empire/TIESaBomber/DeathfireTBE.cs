@@ -14,8 +14,10 @@ namespace Ship
     {
         public class DeathfireTBE : TIESaBomber
         {
-            public DeathfireTBE() 
+            public DeathfireTBE()
             {
+                //TODO Standard points vs XWA points
+
                 PilotInfo = new PilotCardInfo25(
                     "\"Deathfire\"",
                     "Obstinate Bombardier",
@@ -40,7 +42,7 @@ namespace Ship
                     }
                 );
                 PilotNameCanonical = "deathfire-swz98";
-                
+
                 MustHaveUpgrades.Add(typeof(ProtonBombs));
                 MustHaveUpgrades.Add(typeof(ConnerNets));
 
