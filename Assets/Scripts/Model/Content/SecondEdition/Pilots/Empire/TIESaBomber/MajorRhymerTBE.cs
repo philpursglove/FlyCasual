@@ -20,7 +20,7 @@ namespace Ship
                     "Precision Destruction",
                     Faction.Imperial,
                     4,
-                    5,
+                    4,
                     loadoutValue: 0,
                     isStandardLayout: true,
                     tags: new List<Tags>
@@ -34,7 +34,8 @@ namespace Ship
                         UpgradeType.Torpedo,
                         UpgradeType.Modification,
                         UpgradeType.Modification
-                    }
+                    },
+                    legality: new List<Legality> {Legality.StandardLegal, Legality.ExtendedLegal}
                 );
                 PilotNameCanonical = "majorrhymer-swz98";
 
@@ -42,6 +43,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(AfterBurners));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
+            }
+        }
+
+        public class MajorRhymerTBEXWA : MajorRhymerTBE
+        {
+            public MajorRhymerTBEXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 5;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
             }
         }
     }

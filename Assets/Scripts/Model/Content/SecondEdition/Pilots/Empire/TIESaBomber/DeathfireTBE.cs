@@ -23,7 +23,7 @@ namespace Ship
                     "Obstinate Bombardier",
                     Faction.Imperial,
                     2,
-                    4,
+                    3,
                     loadoutValue: 0,
                     isStandardLayout: true,
                     tags: new List<Tags>
@@ -39,7 +39,8 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Device,
                         UpgradeType.Device
-                    }
+                    },
+                    legality:new List<Legality> {Legality.StandardLegal, Legality.ExtendedLegal}
                 );
                 PilotNameCanonical = "deathfire-swz98";
 
@@ -47,6 +48,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(ConnerNets));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/deathfire-swz98.png";
+            }
+        }
+
+        public class DeathfireTBEXWA : DeathfireTBE
+        {
+            public DeathfireTBEXWA(): base()
+            {
+                var pilot = (PilotCardInfo25) PilotInfo;
+                pilot.Cost = 4;
+                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
             }
         }
     }
