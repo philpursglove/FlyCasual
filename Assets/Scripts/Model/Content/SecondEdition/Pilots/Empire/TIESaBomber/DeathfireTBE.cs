@@ -44,6 +44,7 @@ namespace Ship
 
                 MustHaveUpgrades.Add(typeof(ProtonBombs));
                 MustHaveUpgrades.Add(typeof(ConnerNets));
+                MustHaveUpgrades.Add(typeof(SwiftApproach));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/deathfire-swz98.png";
             }
