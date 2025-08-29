@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Upgrade;
-using UnityEngine;
+﻿using Arcs;
+using BoardTools;
 using Ship;
 using SubPhases;
-using BoardTools;
-using Remote;
-using Arcs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Upgrade;
 
 namespace Bombs
 {
@@ -82,7 +80,7 @@ namespace Bombs
 
         public static void RegisterBombs(List<GenericDeviceGameObject> bombObjects, GenericBomb bombUpgrade)
         {
-            foreach (var bombObject in bombObjects)
+            foreach (GenericDeviceGameObject bombObject in bombObjects)
             {
                 if (!bombsList.ContainsKey(bombObject)) bombsList.Add(bombObject, bombUpgrade);
 
@@ -116,7 +114,7 @@ namespace Bombs
         {
             List<GenericShip> result = new List<GenericShip>();
 
-            foreach (var ship in Roster.AllShips.Select(n => n.Value))
+            foreach (GenericShip ship in Roster.AllShips.Select(n => n.Value))
             {
                 if (!ship.IsDestroyed && IsShipInRange(ship, bombObject, range)) result.Add(ship);
             }
@@ -128,7 +126,7 @@ namespace Bombs
         {
             List<GenericBomb> result = new List<GenericBomb>();
 
-            foreach (var bombHolder in bombsList)
+            foreach (KeyValuePair<GenericDeviceGameObject, GenericBomb> bombHolder in bombsList)
             {
                 if (IsShipInRange(ship, bombHolder.Key, bombHolder.Key.ParentUpgrade.detonationRange))
                 {
@@ -143,7 +141,6 @@ namespace Bombs
         {
             if (Arc.CannotBeUsedForAttackThisRound)  return false;
 
-            int minRange = Weapon.WeaponInfo.MinRange;
             int maxRange = Weapon.WeaponInfo.MaxRange;
 
             ColliderDistanceInfo distInfo = new ColliderDistanceInfo(ship, bombObject);
@@ -173,10 +170,10 @@ namespace Bombs
         {
             List<Vector3> bombPoints = GetBombPointsRelative();
 
-            foreach (var localBombPoint in bombPoints)
+            foreach (Vector3 localBombPoint in bombPoints)
             {
                 Vector3 globalBombPoint = bombObject.transform.TransformPoint(localBombPoint);
-                foreach (var globalShipBasePoint in ship.ShipBase.GetStandPoints().Select(n => n.Value))
+                foreach (Vector3 globalShipBasePoint in ship.ShipBase.GetStandPoints().Select(n => n.Value))
                 {
                     if (Board.GetRangeBetweenPoints(globalBombPoint, globalShipBasePoint) <= range)
                     {
@@ -424,7 +421,7 @@ namespace Bombs
         {
             return ship.UpgradeBar.GetUpgradesOnlyFaceup()
                 .Where(n => typeof(GenericBomb).IsAssignableFrom(n.GetType()) || n.UpgradeInfo.SubType == UpgradeSubType.Remote)
-                .Where(n => n.State.UsesCharges == false || (n.State.UsesCharges == true && n.State.Charges >= n.UpgradeInfo.ChargesCost))
+                .Where(n => !n.State.UsesCharges|| n.State.Charges >= n.UpgradeInfo.ChargesCost)
                 .Where(n => subType == UpgradeSubType.None || n.UpgradeInfo.SubType == subType)
                 .Where(n => type == null || n.GetType() == type).ToList();
         }
@@ -438,9 +435,5 @@ namespace Bombs
         {
             return bombsList;
         }
-
     }
 }
-
-
-
