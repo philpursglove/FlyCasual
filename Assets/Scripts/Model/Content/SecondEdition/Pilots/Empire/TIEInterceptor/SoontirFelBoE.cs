@@ -96,7 +96,7 @@ namespace Abilities.SecondEdition
                 },
                 CleanUp,
                 HostShip.PilotInfo.PilotName,
-                "After you perform an attack, you may spend 1 Charge and gain 1 Deplete token to perform a Barrel Roll or Boost action.",
+                "After you perform an attack, you may spend 1 Charge and gain 1 Deplete token to perform a Barrel Roll or Boost.",
                 HostShip
             );
         }
