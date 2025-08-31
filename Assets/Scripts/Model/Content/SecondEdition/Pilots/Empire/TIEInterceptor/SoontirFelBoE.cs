@@ -93,7 +93,7 @@ namespace Abilities.SecondEdition
             HostShip.AskPerformFreeAction(
                 new List<GenericAction>()
                 {
-                    new BoostAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White, },
+                    new BoostAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White},
                     new BarrelRollAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White}
                 },
                 CleanUp,
