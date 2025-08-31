@@ -83,6 +83,7 @@ namespace Abilities.SecondEdition
 
         private void GainOneStrainToken()
         {
+            // TODO Locks up here :-(
             HostShip.Tokens.AssignToken(typeof(StrainToken), Finish);
         }
 

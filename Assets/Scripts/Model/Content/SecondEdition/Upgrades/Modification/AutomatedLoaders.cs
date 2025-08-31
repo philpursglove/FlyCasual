@@ -1,12 +1,7 @@
-﻿using Abilities;
-using ActionsList;
-using Analytics;
+﻿using ActionsList;
 using Ship;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -52,6 +47,9 @@ namespace Abilities.SecondEdition
         private void AskUseAbility(object sender, EventArgs e)
         {
             HostShip.BeforeActionIsPerformed += RegisterSpendChargeTrigger;
+
+            //TODO Would be neat if this could check whether any ordnance upgrades are currently reloadable
+            
             HostShip.AskPerformFreeAction(
                 new ReloadAction() {CanBePerformedWhileStressed = false},
                 CleanUp,
