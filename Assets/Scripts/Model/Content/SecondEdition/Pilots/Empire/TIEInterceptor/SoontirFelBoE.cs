@@ -4,6 +4,7 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Actions;
 using Content;
 using Tokens;
 using Upgrade;
@@ -88,11 +89,12 @@ namespace Abilities.SecondEdition
         {
             HostShip.BeforeActionIsPerformed += RegisterSpendChargeTrigger;
             CameraScript.RestoreCamera();
+            
             HostShip.AskPerformFreeAction(
                 new List<GenericAction>()
                 {
-                    new BoostAction(),
-                    new BarrelRollAction()
+                    new BoostAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White, },
+                    new BarrelRollAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White}
                 },
                 CleanUp,
                 HostShip.PilotInfo.PilotName,
