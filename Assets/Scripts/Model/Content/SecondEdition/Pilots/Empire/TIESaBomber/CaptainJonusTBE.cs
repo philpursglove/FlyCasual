@@ -9,7 +9,7 @@ namespace Ship
     {
         public class CaptainJonusTBE : TIESaBomber
         {
-            public CaptainJonusTBE() 
+            public CaptainJonusTBE()
             {
                 PilotInfo = new PilotCardInfo25(
                     "Captain Jonus",
@@ -17,8 +17,8 @@ namespace Ship
                     Faction.Imperial,
                     4,
                     5,
-                    loadoutValue:0,
-                    isStandardLayout:true,
+                    loadoutValue: 0,
+                    isStandardLayout: true,
                     tags: new List<Tags>
                     {
                         Tags.Tie
@@ -29,13 +29,15 @@ namespace Ship
                     {
                         UpgradeType.Talent,
                         UpgradeType.Missile,
+                        UpgradeType.Missile,
                         UpgradeType.Device
                     }
                 );
                 PilotNameCanonical = "captainjonus-swz98";
-                
+
                 MustHaveUpgrades.Add(typeof(BarrageRockets));
                 MustHaveUpgrades.Add(typeof(ProtonBombs));
+                MustHaveUpgrades.Add(typeof(TopCover));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png";
             }
