@@ -1,9 +1,12 @@
 # Fly Casual 2.5 UO
-Fly Casual 2.5 UO is a fork of Sandrem's Fly Casual, inteded to update points, bugfixes, and additional gameplay mechanics as they are released by AMG. I intend to maintain the fork as long as necessary until Sandrem is able to continue his own project, and am submitting pull requests to keep them in sync.
+Fly Casual 2.5 UO is a fork of Sandrem's original Fly Casual, intended to update points, include bugfixes, and additional gameplay mechanics as they are released by AMG and XWA.
 
-Forked App Features:
-* Points updated to AMG September 2024 release documents
+App Features:
+* Points updated to final AMG November 2024 release documents
+* Includes XWA R2 Point Specification
 * Bug fixes
+* Online gameplay
+* Additional pilots and features
 
 # What is Fly Casual
 Fly Casual is a fan-made simulator for the ["Star Wars: X-Wing Miniatures Game"](https://www.fantasyflightgames.com/en/products/x-wing), maintained by [Atomic Mass Games](https://www.atomicmassgames.com/xwing-docs/).
