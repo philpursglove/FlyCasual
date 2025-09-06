@@ -169,7 +169,7 @@ namespace Abilities.SecondEdition
 
         private void CheckSpecialManeuvers(GenericShip ship)
         {
-            if (HostShip.RevealedManeuver == null) return;
+            if (HostShip.RevealedManeuver == null || HostShip.IsIonised()) return;
 
             if (!RevealedManeuverIs2FS() && IsOnObstacle())
             {
