@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Movement;
+﻿using Actions;
 using ActionsList;
-using Actions;
 using Arcs;
-using Tokens;
+using Movement;
 using Ship.CardInfo;
+using System.Collections.Generic;
+using Tokens;
 using UnityEngine;
 
 namespace Ship
@@ -17,23 +17,26 @@ namespace Ship
             {
                 ShipInfo = new ShipCardInfo25
                 (
-                    "TIE/ph Phantom",
-                    BaseSize.Small,
-                    new FactionData
+                    shipName: "TIE/ph Phantom",
+                    baseSize: BaseSize.Small,
+                    factionData: new FactionData
                     (
                         new Dictionary<Faction, System.Type>
                         {
                             { Faction.Imperial, typeof(Echo) }
                         }
                     ),
-                    new ShipArcsInfo(ArcType.Front, 3), 2, 2, 2,
-                    new ShipActionsInfo(
+                    arcInfo: new ShipArcsInfo(ArcType.Front, 3),
+                    agility: 2,
+                    hull: 3,
+                    shields: 2,
+                    actionIcons: new ShipActionsInfo(
                         new ActionInfo(typeof(FocusAction)),
                         new ActionInfo(typeof(EvadeAction)),
                         new ActionInfo(typeof(BarrelRollAction)),
                         new ActionInfo(typeof(CloakAction))
                     ),
-                    new ShipUpgradesInfo()
+                    upgradeIcons: new ShipUpgradesInfo()
                 );
 
                 ModelInfo = new ShipModelInfo
