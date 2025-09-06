@@ -9,6 +9,7 @@ using System.Linq;
 using UnityEngine;
 using ActionsList;
 using Movement;
+using Tokens;
 
 namespace Ship
 {
@@ -663,6 +664,20 @@ namespace Ship
             return result;
         }
 
+        public bool IsIonised()
+        {
+            var ionCount = Tokens.CountTokensByType(typeof(IonToken));
+
+            switch (ShipBase.Size)
+            {
+                case BaseSize.Small:
+                    return ionCount > 0;
+                case BaseSize.Medium:
+                    return ionCount > 1;
+                case BaseSize.Large:
+                    return ionCount > 2;
+            }
+        }
     }
 
 }
