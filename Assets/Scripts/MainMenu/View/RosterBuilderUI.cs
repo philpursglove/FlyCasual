@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Players;
+using SquadBuilderNS;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Players;
-using System.ComponentModel;
 
 public class RosterBuilderUI : MonoBehaviour {
 
@@ -208,6 +208,10 @@ public class RosterBuilderUI : MonoBehaviour {
         }
         
         Options.ChangeParameterValue("Format", Options.Format);
+
+        SquadLists squads = Global.SquadBuilder.SquadLists;
+        squads[PlayerNo.Player1].Format = Options.ListFormat;
+        squads[PlayerNo.Player2].Format = Options.ListFormat;
 
         Global.SquadBuilder.View.ShowCurrentFormat();
     }
