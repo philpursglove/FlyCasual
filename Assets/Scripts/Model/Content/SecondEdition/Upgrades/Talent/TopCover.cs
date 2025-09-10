@@ -21,7 +21,7 @@ namespace UpgradesList.SecondEdition
             IsHidden = true;
             IsWIP = true;
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png0;"
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png";
         }
     }
 }
