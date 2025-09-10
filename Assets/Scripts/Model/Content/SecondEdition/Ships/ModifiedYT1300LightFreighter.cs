@@ -24,15 +24,16 @@ namespace Ship.SecondEdition.ModifiedYT1300LightFreighter
                     }
                 ),
                 new ShipArcsInfo(ArcType.DoubleTurret, 3),
-                1, 8, 5,
-                new ShipActionsInfo
+                agility: 1, 
+                hull: 8, 
+                shields: 5,
+                actionIcons: new ShipActionsInfo
                 (
                     new ActionInfo(typeof(FocusAction)),
                     new ActionInfo(typeof(TargetLockAction)),
                     new ActionInfo(typeof(RotateArcAction)),
                     new ActionInfo(typeof(BoostAction), ActionColor.Red)
-                ),
-                new ShipUpgradesInfo()
+                )
             );
 
             ModelInfo = new ShipModelInfo
