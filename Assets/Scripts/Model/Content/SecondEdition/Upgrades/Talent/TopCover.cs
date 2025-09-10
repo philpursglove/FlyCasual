@@ -40,10 +40,9 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship)
         {
-            if (Tools.IsFriendly(ship, HostShip)
-                && Board.IsShipBetweenRange(HostShip, ship, 0, 3)
+            if (Tools.IsFriendly(Combat.Defender, HostShip)
+                && Board.IsShipBetweenRange(HostShip, Combat.Defender, 0, 3)
                 && (Combat.Defender != null)
-                && Tools.IsSameShip(ship, Combat.Defender)
                // Needs a condition about whether a device has been dropped/launched
                )
             {
