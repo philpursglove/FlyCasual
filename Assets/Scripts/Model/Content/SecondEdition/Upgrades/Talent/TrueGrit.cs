@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Abilities.SecondEdition;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Abilities.SecondEdition;
 using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
-    public class TrueGrit: GenericUpgrade
+    public class TrueGrit : GenericUpgrade
     {
         public TrueGrit()
         {
@@ -21,13 +21,15 @@ namespace UpgradesList.SecondEdition
             IsHidden = true;
 
             IsWIP = true;
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tomaxbren-swz98.png";
         }
     }
 }
 
 namespace Abilities.SecondEdition
 {
-    public class TrueGritAbility: GenericAbility
+    public class TrueGritAbility : GenericAbility
     {
         public override void ActivateAbility()
         {
@@ -44,7 +46,7 @@ namespace Abilities.SecondEdition
         {
             var tokens = HostShip.Tokens;
             if (tokens.HasToken<StrainToken>()) return;
-            
+
 
             if (tokens.GetNonLockRedOrangeTokens().Any())
             {

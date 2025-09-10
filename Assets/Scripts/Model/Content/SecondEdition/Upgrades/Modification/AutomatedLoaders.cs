@@ -1,7 +1,6 @@
 ﻿using ActionsList;
 using Ship;
 using System;
-using System.Linq;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -11,7 +10,7 @@ namespace UpgradesList.SecondEdition
         public AutomatedLoaders()
         {
             UpgradeInfo = new UpgradeCardInfo(
-                "Automated Loaders", 
+                "Automated Loaders",
                 UpgradeType.Modification,
                 cost: 0,
                 abilityType: typeof(Abilities.SecondEdition.AutomatedLoadersAbility),
@@ -19,6 +18,8 @@ namespace UpgradesList.SecondEdition
             );
 
             IsWIP = true; // Mark as Work In Progress if applicable
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
         }
     }
 }
@@ -49,9 +50,9 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed += RegisterSpendChargeTrigger;
 
             //TODO Would be neat if this could check whether any ordnance upgrades are currently reloadable
-            
+
             HostShip.AskPerformFreeAction(
-                new ReloadAction() {CanBePerformedWhileStressed = false},
+                new ReloadAction() { CanBePerformedWhileStressed = false },
                 CleanUp,
                 HostUpgrade.UpgradeInfo.Name,
                 "After you perform a primary attack you may spend 1 Charge to perform a Reload action.",
@@ -71,7 +72,7 @@ namespace Abilities.SecondEdition
                 }
             );
         }
-        
+
         private void CleanUp()
         {
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;

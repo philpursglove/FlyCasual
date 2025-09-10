@@ -20,6 +20,8 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(TopCoverAbility));
             IsHidden = true;
             IsWIP = true;
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png0;"
         }
     }
 }
