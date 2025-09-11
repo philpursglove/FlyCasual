@@ -6,10 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEngine;
-using ActionsList;
-using Movement;
 using Tokens;
+using UnityEngine;
 
 namespace Ship
 {
@@ -383,7 +381,7 @@ namespace Ship
 
         public void SetRaycastTarget(bool value)
         {
-            int layer = (value) ? LayerMask.NameToLayer("ShipId:" + ShipId) : LayerMask.NameToLayer("Ignore Raycast") ;
+            int layer = (value) ? LayerMask.NameToLayer("ShipId:" + ShipId) : LayerMask.NameToLayer("Ignore Raycast");
             SetLayerRecursive(Model.transform, layer);
         }
 
@@ -581,7 +579,7 @@ namespace Ship
                     Vector3 targetPoint = Selection.AnotherShip.GetModelCenter();
                     origin.LookAt(targetPoint);
                     ParticleSystem.MainModule particles = origin.GetComponentInChildren<ParticleSystem>().main;
-                    particles.startLifetimeMultiplier = (Vector3.Distance(origin.position, targetPoint) * 0.25f / (10/3));
+                    particles.startLifetimeMultiplier = (Vector3.Distance(origin.position, targetPoint) * 0.25f / (10 / 3));
                 }
 
                 shotsTransform.gameObject.SetActive(true);
@@ -676,6 +674,8 @@ namespace Ship
                     return ionCount > 1;
                 case BaseSize.Large:
                     return ionCount > 2;
+                default:
+                    return false;
             }
         }
     }
