@@ -1,6 +1,7 @@
 ﻿using Abilities.SecondEdition;
 using Actions;
 using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -26,6 +27,10 @@ namespace Ship
                     abilityType: typeof(LandoCalrissianBattleOverEndorAbility),
                     charges: 2,
                     isStandardLayout: true,
+                    tags: new() {
+                        Tags.Freighter,
+                        Tags.YT1300
+                    },
                     extraUpgradeIcons: new()
                     {
                         UpgradeType.Talent,
