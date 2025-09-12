@@ -1,11 +1,11 @@
 ﻿using Abilities.SecondEdition;
+using Actions;
 using ActionsList;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Actions;
-using Content;
 using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -49,7 +49,7 @@ namespace Ship
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
                 ModelInfo.SkinName = "Red Stripes";
-                
+
                 MustHaveUpgrades.Add(typeof(NoEscape));
                 MustHaveUpgrades.Add(typeof(ApexPredator));
                 MustHaveUpgrades.Add(typeof(BlankSignature));
@@ -89,12 +89,12 @@ namespace Abilities.SecondEdition
         {
             HostShip.BeforeActionIsPerformed += RegisterSpendChargeTrigger;
             CameraScript.RestoreCamera();
-            
+
             HostShip.AskPerformFreeAction(
                 new List<GenericAction>()
                 {
-                    new BoostAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White},
-                    new BarrelRollAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White}
+                    new SoontirFelBoost(){CanBePerformedWhileStressed = true, Color = ActionColor.White},
+                    new SoontirFelBarrelRoll(){CanBePerformedWhileStressed = true, Color = ActionColor.White}
                 },
                 CleanUp,
                 HostShip.PilotInfo.PilotName,
@@ -119,6 +119,22 @@ namespace Abilities.SecondEdition
         {
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             Triggers.FinishTrigger();
+        }
+    }
+
+    public class SoontirFelBoost : BoostAction
+    {
+        public SoontirFelBoost() : base()
+        {
+            Name = "Soontir Fel Boost";
+        }
+    }
+
+    public class SoontirFelBarrelRoll : BarrelRollAction
+    {
+        public SoontirFelBarrelRoll() : base()
+        {
+            Name = "Soontir Fel Barrel Roll";
         }
     }
 }
