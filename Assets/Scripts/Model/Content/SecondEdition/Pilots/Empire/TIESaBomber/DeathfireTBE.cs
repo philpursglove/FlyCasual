@@ -38,7 +38,7 @@ namespace Ship
                         UpgradeType.Device,
                         UpgradeType.Device
                     },
-                    legality:new List<Legality> {Legality.StandardLegal, Legality.ExtendedLegal}
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
                 PilotNameCanonical = "deathfire-swz98";
 
@@ -47,16 +47,18 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(SwiftApproach));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/deathfire-swz98.png";
+
+                IsWIP = true;
             }
         }
 
         public class DeathfireTBEXWA : DeathfireTBE
         {
-            public DeathfireTBEXWA(): base()
+            public DeathfireTBEXWA() : base()
             {
-                var pilot = (PilotCardInfo25) PilotInfo;
+                var pilot = (PilotCardInfo25)PilotInfo;
                 pilot.Cost = 4;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

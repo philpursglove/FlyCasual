@@ -12,7 +12,7 @@ namespace Ship
     {
         public class TomaxBrenTBE : TIESaBomber
         {
-            public TomaxBrenTBE() 
+            public TomaxBrenTBE()
             {
                 PilotInfo = new PilotCardInfo25(
                     "Tomax Bren",
@@ -38,12 +38,14 @@ namespace Ship
                     }
                 );
                 PilotNameCanonical = "tomaxbren-swz98";
-                
+
                 MustHaveUpgrades.Add(typeof(PlasmaTorpedoes));
                 MustHaveUpgrades.Add(typeof(IonBombs));
                 MustHaveUpgrades.Add(typeof(TrueGrit));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tomaxbren-swz98.png";
+
+                IsWIP = true;
             }
         }
     }

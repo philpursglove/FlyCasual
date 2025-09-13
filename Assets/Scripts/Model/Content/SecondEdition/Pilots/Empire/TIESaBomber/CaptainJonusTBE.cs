@@ -40,6 +40,8 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(TopCover));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png";
+
+                IsWIP = true;
             }
         }
     }
