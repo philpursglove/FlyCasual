@@ -60,8 +60,8 @@ namespace Abilities.SecondEdition
 
         public override void DeactivateAbility()
         {
-            HostShip.OnBombWasDropped += CheckAbilityOnDrop;
-            HostShip.OnBombWasLaunched += CheckAbilityOnLaunch;
+            HostShip.OnBombWasDropped -= CheckAbilityOnDrop;
+            HostShip.OnBombWasLaunched -= CheckAbilityOnLaunch;
         }
 
         private void CheckAbilityOnDrop()
