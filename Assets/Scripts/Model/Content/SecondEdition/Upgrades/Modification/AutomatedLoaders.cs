@@ -1,6 +1,7 @@
 ﻿using ActionsList;
 using Ship;
 using System;
+using System.Linq;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -42,7 +43,7 @@ namespace Abilities.SecondEdition
         {
             if (Combat.ShotInfo.Weapon.WeaponType != WeaponTypes.PrimaryWeapon) return;
 
-            if (HostUpgrade.UpgradeInfo.Charges > 0)
+            if (HostUpgrade.UpgradeInfo.Charges > 0 && HostShip.UpgradeBar.GetRechargableUpgrades().Any())
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskUseAbility);
             }
