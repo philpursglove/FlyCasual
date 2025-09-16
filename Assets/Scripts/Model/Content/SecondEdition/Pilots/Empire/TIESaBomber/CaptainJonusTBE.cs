@@ -1,4 +1,6 @@
-﻿using Content;
+﻿using Actions;
+using ActionsList;
+using Content;
 using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -39,9 +41,10 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(ProtonBombs));
                 MustHaveUpgrades.Add(typeof(TopCover));
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png";
+                ShipInfo.ActionIcons.RemoveActions(typeof(ReloadAction));
+                ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(ReloadAction), ActionColor.White));
 
-                IsWIP = true;
+                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png";
             }
         }
     }
