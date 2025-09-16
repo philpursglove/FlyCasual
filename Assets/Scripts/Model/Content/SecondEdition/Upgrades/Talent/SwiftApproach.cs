@@ -1,8 +1,8 @@
 ﻿using Abilities.SecondEdition;
+using Actions;
 using ActionsList;
 using System;
 using System.Collections.Generic;
-using Actions;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
