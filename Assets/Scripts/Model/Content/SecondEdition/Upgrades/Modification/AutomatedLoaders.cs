@@ -42,7 +42,10 @@ namespace Abilities.SecondEdition
         {
             if (Combat.ShotInfo.Weapon.WeaponType != WeaponTypes.PrimaryWeapon) return;
 
-            RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskUseAbility);
+            if (HostUpgrade.UpgradeInfo.Charges > 0)
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskUseAbility);
+            }
         }
 
         private void AskUseAbility(object sender, EventArgs e)
@@ -51,17 +54,14 @@ namespace Abilities.SecondEdition
 
             //TODO Would be neat if this could check whether any ordnance upgrades are currently reloadable
 
-            if (HostUpgrade.UpgradeInfo.Charges > 0)
-            {
-                HostShip.AskPerformFreeAction(
-                    new ReloadAction() { CanBePerformedWhileStressed = false },
-                    CleanUp,
-                    HostUpgrade.UpgradeInfo.Name,
-                    "After you perform a primary attack you may spend 1 Charge to perform a Reload action.",
-                    HostUpgrade
-                );
-            }
 
+            HostShip.AskPerformFreeAction(
+                new ReloadAction() { CanBePerformedWhileStressed = false },
+                CleanUp,
+                HostUpgrade.UpgradeInfo.Name,
+                "After you perform a primary attack you may spend 1 Charge to perform a Reload action.",
+                HostUpgrade
+            );
         }
 
         private void RegisterSpendChargeTrigger(GenericAction action, ref bool isFreeAction)
