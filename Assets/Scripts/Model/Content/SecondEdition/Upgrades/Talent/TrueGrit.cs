@@ -1,4 +1,5 @@
 ﻿using Abilities.SecondEdition;
+using SubPhases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,6 @@ namespace UpgradesList.SecondEdition
             );
 
             IsHidden = true;
-
-            IsWIP = true;
 
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tomaxbren-swz98.png";
         }
@@ -91,7 +90,7 @@ namespace Abilities.SecondEdition
 
         private void Finish()
         {
-            Triggers.FinishTrigger();
+            DecisionSubPhase.ConfirmDecision();
         }
     }
 }

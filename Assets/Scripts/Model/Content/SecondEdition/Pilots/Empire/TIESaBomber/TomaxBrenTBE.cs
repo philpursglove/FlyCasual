@@ -44,8 +44,6 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(TrueGrit));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tomaxbren-swz98.png";
-
-                IsWIP = true;
             }
         }
     }
