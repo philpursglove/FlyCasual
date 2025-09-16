@@ -191,6 +191,8 @@ public class RosterBuilderUI : MonoBehaviour {
 
     public void ToggleFormat()
     {
+        if (Global.SquadBuilder.CurrentPlayer != PlayerNo.Player1) return;
+
         switch(Options.Format)
         {
             case "Standard":
