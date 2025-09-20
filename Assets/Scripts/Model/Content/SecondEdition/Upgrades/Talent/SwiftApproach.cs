@@ -31,23 +31,30 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnBombWasDropped += CheckAbility;
-            HostShip.OnBombWasLaunched += CheckAbility;
+            HostShip.OnBombWasDropped += CheckDroppedAbility;
+            HostShip.OnBombWasLaunched += CheckLaunchedAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnBombWasDropped -= CheckAbility;
-            HostShip.OnBombWasLaunched -= CheckAbility;
+            HostShip.OnBombWasDropped -= CheckDroppedAbility;
+            HostShip.OnBombWasLaunched -= CheckLaunchedAbility;
         }
 
-        private void CheckAbility()
+        private void CheckDroppedAbility()
         {
             if (Phases.CurrentPhase.Name != "Systems Phase") return;
 
             RegisterAbilityTrigger(TriggerTypes.OnBombWasDropped, AskToPerformReposition);
+        }
+
+        private void CheckLaunchedAbility()
+        {
+            if (Phases.CurrentPhase.Name != "Systems Phase") return;
+
             RegisterAbilityTrigger(TriggerTypes.OnBombWasLaunched, AskToPerformReposition);
         }
+
 
         private void AskToPerformReposition(object sender, EventArgs e)
         {
