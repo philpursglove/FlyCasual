@@ -4,6 +4,7 @@ using Bombs;
 using Movement;
 using Ship;
 using SubPhases;
+using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -30,14 +31,33 @@ namespace Abilities.SecondEdition
 {
     public class TopCoverAbility : GenericAbility
     {
+        private bool deviceWasDroppedOrLaunched = false;
+
         public override void ActivateAbility()
         {
             GenericShip.OnAttackFinishGlobal += CheckAbility;
+            HostShip.OnBombWasDropped += SetBombFlag;
+            HostShip.OnBombWasLaunched += SetBombFlag;
+            HostShip.OnRoundEnd += ResetBombFlag;
+
         }
 
         public override void DeactivateAbility()
         {
             GenericShip.OnAttackFinishGlobal -= CheckAbility;
+            HostShip.OnBombWasDropped -= SetBombFlag;
+            HostShip.OnBombWasLaunched -= SetBombFlag;
+            HostShip.OnRoundEnd -= ResetBombFlag;
+        }
+
+        private void SetBombFlag()
+        {
+            deviceWasDroppedOrLaunched = true;
+        }
+
+        private void ResetBombFlag(GenericShip ship)
+        {
+            deviceWasDroppedOrLaunched = false;
         }
 
         private void CheckAbility(GenericShip ship)
@@ -45,7 +65,7 @@ namespace Abilities.SecondEdition
             if (Tools.IsFriendly(ship, HostShip)
                 && Board.IsShipBetweenRange(HostShip, ship, 0, 3)
                 && (Combat.Defender != null)
-               // Needs a condition about whether a device has been dropped/launched
+               && !deviceWasDroppedOrLaunched
                )
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskUseAbility);
