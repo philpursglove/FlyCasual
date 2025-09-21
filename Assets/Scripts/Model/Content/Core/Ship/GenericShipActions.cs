@@ -13,12 +13,12 @@ namespace Ship
 {
     public partial class GenericShip : ITargetLockable
     {
-        private     List<GenericAction> AvailableActionsList        = new List<GenericAction>();
-        private     List<GenericAction> AvailableFreeActionsList    = new List<GenericAction>();
-        private     List<GenericAction> AlreadyExecutedActions      = new List<GenericAction>();
+        private List<GenericAction> AvailableActionsList = new List<GenericAction>();
+        private List<GenericAction> AvailableFreeActionsList = new List<GenericAction>();
+        private List<GenericAction> AlreadyExecutedActions = new List<GenericAction>();
 
-        private     List<GenericAction> AvailableDiceModifications  = new List<GenericAction>();
-        private     List<GenericAction> AlreadUsedDiceModifications = new List<GenericAction>();
+        private List<GenericAction> AvailableDiceModifications = new List<GenericAction>();
+        private List<GenericAction> AlreadyUsedDiceModifications = new List<GenericAction>();
 
         public List<GenericAction> PlannedLinkedActions;
 
@@ -73,7 +73,7 @@ namespace Ship
         public static event EventHandlerShipTargetLockable OnTargetLockIsAcquiredGlobal;
 
         public event EventHandlerShip OnCoordinateTargetIsSelected;
-        public event EventHandlerShip OnJamTargetIsSelected;        
+        public event EventHandlerShip OnJamTargetIsSelected;
 
         public event EventHandlerShip OnRerollIsConfirmed;
 
@@ -146,7 +146,7 @@ namespace Ship
 
             GenerateAvailableActionsList();
 
-            foreach(GenericAction action in AvailableActionsList)
+            foreach (GenericAction action in AvailableActionsList)
             {
                 redActions.Add(GetActionAsRed(action));
             }
@@ -291,12 +291,14 @@ namespace Ship
                     Name = "Free action",
                     TriggerOwner = this.Owner.PlayerNo,
                     TriggerType = TriggerTypes.OnFreeAction,
-                    EventHandler = delegate {
+                    EventHandler = delegate
+                    {
                         FreeActionDecisonSubPhase newSubPhase = (FreeActionDecisonSubPhase)Phases.StartTemporarySubPhaseNew
                         (
                             "Free action decision",
                             typeof(FreeActionDecisonSubPhase),
-                            (Action)delegate {
+                            (Action)delegate
+                            {
                                 var phase = Phases.CurrentSubPhase as FreeActionDecisonSubPhase;
                                 if (phase != null && phase.ActionWasPerformed)
                                 {
@@ -535,24 +537,24 @@ namespace Ship
 
         public void AddAlreadyUsedDiceModification(GenericAction action)
         {
-            if (!action.CanBeUsedFewTimes) AlreadUsedDiceModifications.Add(action);
+            if (!action.CanBeUsedFewTimes) AlreadyUsedDiceModifications.Add(action);
         }
 
         public void RemoveAlreadyUsedDiceModification(GenericAction action)
         {
-            AlreadUsedDiceModifications.RemoveAll(a => a.Name == action.Name);
+            AlreadyUsedDiceModifications.RemoveAll(a => a.Name == action.Name);
         }
 
         public void ClearAlreadyUsedDiceModifications()
         {
-            AlreadUsedDiceModifications = new List<GenericAction>();
+            AlreadyUsedDiceModifications = new List<GenericAction>();
         }
 
         private bool IsDiceModificationAlreadyUsed(GenericAction action)
         {
             bool result = false;
 
-            foreach (var alreadyUsedAction in AlreadUsedDiceModifications)
+            foreach (var alreadyUsedAction in AlreadyUsedDiceModifications)
             {
                 if (alreadyUsedAction.DiceModificationName == action.DiceModificationName)
                 {
@@ -633,7 +635,8 @@ namespace Ship
             AcquireTargetLockSubPhase selectTargetLockSubPhase = (AcquireTargetLockSubPhase)Phases.StartTemporarySubPhaseNew(
                 "Select target for Target Lock",
                 typeof(AcquireTargetLockSubPhase),
-                delegate {
+                delegate
+                {
                     UI.HideSkipButton();
                     Phases.FinishSubPhase(typeof(AcquireTargetLockSubPhase));
                     callback();
@@ -756,7 +759,7 @@ namespace Ship
             if (OnActionIsReadyToBeFailed != null) OnActionIsReadyToBeFailed(action, failReasons, ref isDefaultFailOverwritten);
 
             Triggers.ResolveTriggers(
-                TriggerTypes.OnActionIsReadyToBeFailed, 
+                TriggerTypes.OnActionIsReadyToBeFailed,
                 delegate
                 {
                     CallOnActionIsReallyFailed(action, isDefaultFailOverwritten, hasSecondChance);
