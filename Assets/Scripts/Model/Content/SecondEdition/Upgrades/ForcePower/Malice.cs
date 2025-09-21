@@ -47,7 +47,7 @@ namespace Abilities.SecondEdition
         {
             RemoveDiceModification();
 
-            GenericShip.OnFaceupCritCardReadyToBeDealtGlobal += CheckRecoverForce;
+            GenericShip.OnFaceupCritCardReadyToBeDealtGlobal -= CheckRecoverForce;
         }
 
         private void CheckRecoverForce(GenericShip ship, GenericDamageCard crit, EventArgs e)
