@@ -54,7 +54,7 @@ namespace Abilities.SecondEdition
         {
             if (abilityUsed
                 && Combat.Defender != null
-                && (Tools.IsSameShip(Combat.Defender, HostShip) || Tools.IsSameShip(Combat.Attacker, HostShip))
+                && (Tools.IsSameShip(Combat.Attacker, HostShip))
                 && Combat.CurrentCriticalHitCard.IsFaceup && Combat.CurrentCriticalHitCard.Type == CriticalCardType.Pilot)
             {
                 abilityUsed = false;
