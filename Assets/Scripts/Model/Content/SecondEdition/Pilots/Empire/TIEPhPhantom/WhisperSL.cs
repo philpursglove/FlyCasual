@@ -1,4 +1,4 @@
-﻿using Abilities.SecondEdition;
+using Abilities.SecondEdition;
 using ActionsList;
 using Content;
 using Ship;

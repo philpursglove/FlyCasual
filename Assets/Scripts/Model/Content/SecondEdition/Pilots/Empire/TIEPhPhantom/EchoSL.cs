@@ -1,4 +1,4 @@
-﻿using ActionsList;
+using ActionsList;
 using Content;
 using Ship;
 using SubPhases;
