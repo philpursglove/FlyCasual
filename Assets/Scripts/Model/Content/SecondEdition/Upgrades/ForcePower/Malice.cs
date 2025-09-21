@@ -71,12 +71,7 @@ namespace Abilities.SecondEdition
 
         private bool IsDiceModificationAvailable()
         {
-            bool result = true;
-
-            if (Combat.AttackStep != CombatStep.Attack) result = false;
-            if (HostShip.State.Force < 1) result = false;
-
-            return result;
+            return (Combat.AttackStep == CombatStep.Attack) && (HostShip.State.Force >= 1);
         }
 
         private void payForce(Action<bool> callback)
