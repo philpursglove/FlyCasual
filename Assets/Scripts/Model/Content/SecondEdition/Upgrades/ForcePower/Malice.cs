@@ -15,7 +15,7 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.ForcePower,
                 cost: 4,
                 restriction: new TagRestriction(Content.Tags.DarkSide),
-                abilityType: typeof(Abilities.SecondEdition.MaliceAbility)       
+                abilityType: typeof(Abilities.SecondEdition.MaliceAbility)
             );
         }
     }
@@ -71,7 +71,7 @@ namespace Abilities.SecondEdition
 
         private bool IsDiceModificationAvailable()
         {
-            return (Combat.AttackStep == CombatStep.Attack) && (HostShip.State.Force >= 1);
+            return (Combat.AttackStep == CombatStep.Attack) && (HostShip.State.Force >= 1) && (Combat.Attacker == HostShip);
         }
 
         private void payForce(Action<bool> callback)
@@ -81,7 +81,8 @@ namespace Abilities.SecondEdition
                 HostShip.State.SpendForce
                 (
                     1,
-                    delegate {
+                    delegate
+                    {
                         abilityUsed = true;
                         callback(true);
                     }
