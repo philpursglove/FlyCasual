@@ -57,16 +57,8 @@ namespace Abilities.SecondEdition
                 && (Tools.IsSameShip(Combat.Defender, HostShip) || Tools.IsSameShip(Combat.Attacker, HostShip))
                 && Combat.CurrentCriticalHitCard.IsFaceup && Combat.CurrentCriticalHitCard.Type == CriticalCardType.Pilot)
             {
-                Triggers.RegisterTrigger
-                (
-                    new Trigger()
-                    {
-                        Name = "Recover Force",
-                        TriggerType = TriggerTypes.OnFaceupCritCardIsDealt,
-                        TriggerOwner = HostShip.Owner.PlayerNo,
-                        EventHandler = RecoverForce
-                    }
-                );
+                abilityUsed = false;
+                HostShip.State.RestoreForce(2);
             }
         }
 
