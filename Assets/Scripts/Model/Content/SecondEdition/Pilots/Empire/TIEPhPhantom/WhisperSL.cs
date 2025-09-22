@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Abilities.SecondEdition;
+using Content;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship.SecondEdition.TIEPhPhantom
 {
@@ -12,14 +12,15 @@ namespace Ship.SecondEdition.TIEPhPhantom
         {
             PilotInfo = new PilotCardInfo25
             (
-                "Whisper (SL)",
+                "Whisper",
                 "Unseen Assailant",
                 Faction.Imperial,
                 5,
-                5,
-                9,
+                6,
+                0,
                 isLimited: true,
-                abilityType: typeof(Abilities.SecondEdition.WhisperSLAbility),
+                isStandardLayout: true,
+                abilityType: typeof(WhisperSLAbility),
                 tags: new List<Tags>
                 {
                     Tags.Tie
@@ -27,17 +28,33 @@ namespace Ship.SecondEdition.TIEPhPhantom
                 extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Talent,
                     UpgradeType.Sensor,
-                    UpgradeType.Gunner,
                     UpgradeType.Modification
                 },
-                seImageNumber: 133,
-                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal },
+                charges: 2
             );
-            ModelInfo.SkinName = "Whisper SL";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/whisper-tiephphantom.png";
+
+            MustHaveUpgrades.Add(typeof(WithoutATrace));
+            MustHaveUpgrades.Add(typeof(RelaySystem));
+            MustHaveUpgrades.Add(typeof(StygiumReserve));
         }
     }
+}
+
+namespace Abilities.SecondEdition
+{
+    public class WhisperSLAbility : GenericAbility
     {
+        public override void ActivateAbility()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void DeactivateAbility()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Content;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship.SecondEdition.TIEPhPhantom
 {
@@ -12,13 +11,14 @@ namespace Ship.SecondEdition.TIEPhPhantom
         {
             PilotInfo = new PilotCardInfo25
             (
-                "\"Echo\" (SL)",
+                "\"Echo\"",
                 "Copycat",
                 Faction.Imperial,
                 4,
                 5,
-                9,
+                0,
                 isLimited: true,
+                isStandardLayout: true,
                 abilityType: typeof(Abilities.SecondEdition.EchoSLAbility),
                 tags: new List<Tags>
                 {
@@ -28,16 +28,29 @@ namespace Ship.SecondEdition.TIEPhPhantom
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
-                    UpgradeType.Sensor,
-                    UpgradeType.Gunner,
                     UpgradeType.Modification
-                },
-                seImageNumber: 134,
-                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                }
             );
-            ModelInfo.SkinName = "Echo SL";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/echo-tiephphantom.png";
+
+            MustHaveUpgrades.Add(typeof(SilentHunter));
+            MustHaveUpgrades.Add(typeof(StealthGambit));
+            MustHaveUpgrades.Add(typeof(ManualAilerons));
         }
     }
+}
+
+namespace Abilities.SecondEdition
+{
+    public class EchoSLAbility : GenericAbility
     {
+        public override void ActivateAbility()
+        {
+            // Ability implementation goes here
+        }
+        public override void DeactivateAbility()
+        {
+            // Ability deactivation logic goes here
+        }
     }
 }
