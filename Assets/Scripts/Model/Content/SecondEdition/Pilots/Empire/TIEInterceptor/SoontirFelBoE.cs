@@ -1,10 +1,11 @@
 ﻿using Abilities.SecondEdition;
+using Actions;
 using ActionsList;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Content;
 using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -48,7 +49,7 @@ namespace Ship
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsRealAbility());
                 ModelInfo.SkinName = "Red Stripes";
-                
+
                 MustHaveUpgrades.Add(typeof(NoEscape));
                 MustHaveUpgrades.Add(typeof(ApexPredator));
                 MustHaveUpgrades.Add(typeof(BlankSignature));
@@ -88,15 +89,16 @@ namespace Abilities.SecondEdition
         {
             HostShip.BeforeActionIsPerformed += RegisterSpendChargeTrigger;
             CameraScript.RestoreCamera();
+
             HostShip.AskPerformFreeAction(
                 new List<GenericAction>()
                 {
-                    new BoostAction(),
-                    new BarrelRollAction()
+                    new SoontirFelBoost(){CanBePerformedWhileStressed = true, Color = ActionColor.White},
+                    new SoontirFelBarrelRoll(){CanBePerformedWhileStressed = true, Color = ActionColor.White}
                 },
                 CleanUp,
                 HostShip.PilotInfo.PilotName,
-                "After you perform an attack, you may spend 1 Charge and gain 1 Deplete token to perform a Barrel Roll or Boost action.",
+                "After you perform an attack, you may spend 1 Charge and gain 1 Deplete token to perform a Barrel Roll or Boost.",
                 HostShip
             );
         }
@@ -117,6 +119,22 @@ namespace Abilities.SecondEdition
         {
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             Triggers.FinishTrigger();
+        }
+    }
+
+    public class SoontirFelBoost : BoostAction
+    {
+        public SoontirFelBoost() : base()
+        {
+            Name = "Soontir Fel Boost";
+        }
+    }
+
+    public class SoontirFelBarrelRoll : BarrelRollAction
+    {
+        public SoontirFelBarrelRoll() : base()
+        {
+            Name = "Soontir Fel Barrel Roll";
         }
     }
 }

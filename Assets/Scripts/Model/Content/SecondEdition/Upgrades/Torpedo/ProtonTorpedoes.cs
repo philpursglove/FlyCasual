@@ -44,7 +44,7 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnGenerateDiceModifications += AddProtonTorpedoesDiceMofification;
+            HostShip.OnGenerateDiceModifications += AddProtonTorpedoesDiceModification;
         }
 
         public override void DeactivateAbility()
@@ -56,10 +56,10 @@ namespace Abilities.SecondEdition
         private void DeactivateAbilityPlanned(GenericShip ship)
         {
             HostShip.OnCombatDeactivation -= DeactivateAbilityPlanned;
-            HostShip.OnGenerateDiceModifications -= AddProtonTorpedoesDiceMofification;
+            HostShip.OnGenerateDiceModifications -= AddProtonTorpedoesDiceModification;
         }
 
-        protected virtual void AddProtonTorpedoesDiceMofification(GenericShip host)
+        protected virtual void AddProtonTorpedoesDiceModification(GenericShip host)
         {
             ProtonTorpedoesDiceModificationSE action = new ProtonTorpedoesDiceModificationSE()
             {

@@ -15,7 +15,7 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.ForcePower,
                 cost: 4,
                 restriction: new TagRestriction(Content.Tags.DarkSide),
-                abilityType: typeof(Abilities.SecondEdition.MaliceAbility)       
+                abilityType: typeof(Abilities.SecondEdition.MaliceAbility)
             );
         }
     }
@@ -47,26 +47,18 @@ namespace Abilities.SecondEdition
         {
             RemoveDiceModification();
 
-            GenericShip.OnFaceupCritCardReadyToBeDealtGlobal += CheckRecoverForce;
+            GenericShip.OnFaceupCritCardReadyToBeDealtGlobal -= CheckRecoverForce;
         }
 
         private void CheckRecoverForce(GenericShip ship, GenericDamageCard crit, EventArgs e)
         {
             if (abilityUsed
                 && Combat.Defender != null
-                && (Tools.IsSameShip(Combat.Defender, HostShip) || Tools.IsSameShip(Combat.Attacker, HostShip))
+                && (Tools.IsSameShip(Combat.Attacker, HostShip))
                 && Combat.CurrentCriticalHitCard.IsFaceup && Combat.CurrentCriticalHitCard.Type == CriticalCardType.Pilot)
             {
-                Triggers.RegisterTrigger
-                (
-                    new Trigger()
-                    {
-                        Name = "Recover Force",
-                        TriggerType = TriggerTypes.OnFaceupCritCardIsDealt,
-                        TriggerOwner = HostShip.Owner.PlayerNo,
-                        EventHandler = RecoverForce
-                    }
-                );
+                abilityUsed = false;
+                HostShip.State.RestoreForce(2);
             }
         }
 
@@ -79,12 +71,7 @@ namespace Abilities.SecondEdition
 
         private bool IsDiceModificationAvailable()
         {
-            bool result = true;
-
-            if (Combat.AttackStep != CombatStep.Attack) result = false;
-            if (HostShip.State.Force < 1) result = false;
-
-            return result;
+            return (Combat.AttackStep == CombatStep.Attack) && (HostShip.State.Force >= 1) && (Combat.Attacker == HostShip);
         }
 
         private void payForce(Action<bool> callback)
@@ -94,7 +81,8 @@ namespace Abilities.SecondEdition
                 HostShip.State.SpendForce
                 (
                     1,
-                    delegate {
+                    delegate
+                    {
                         abilityUsed = true;
                         callback(true);
                     }
