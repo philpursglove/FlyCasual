@@ -16,7 +16,7 @@ namespace Ship.SecondEdition.TIEPhPhantom
                 "Unseen Assailant",
                 Faction.Imperial,
                 5,
-                6,
+                5,
                 0,
                 isLimited: true,
                 isStandardLayout: true,
@@ -39,6 +39,16 @@ namespace Ship.SecondEdition.TIEPhPhantom
             MustHaveUpgrades.Add(typeof(WithoutATrace));
             MustHaveUpgrades.Add(typeof(RelaySystem));
             MustHaveUpgrades.Add(typeof(StygiumReserve));
+        }
+    }
+
+    public class WhisperSLXWA : WhisperSL
+    {
+        public WhisperSLXWA() : base()
+        {
+            var pilotInfo = (PilotCardInfo25)PilotInfo;
+            pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            pilotInfo.Cost = 6;
         }
     }
 }
