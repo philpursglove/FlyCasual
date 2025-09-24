@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ship
 {
@@ -26,7 +24,7 @@ namespace Ship
 
         public void SetCenter(Vector3 position)
         {
-            position = position + Model.transform.TransformVector(0, 0, ShipBase.HALF_OF_SHIPSTAND_SIZE);
+            position += Model.transform.TransformVector(0, 0, ShipBase.HALF_OF_SHIPSTAND_SIZE);
             Model.transform.position = position;
         }
 
@@ -162,13 +160,13 @@ namespace Ship
 
         public void RotateModelDuringTurn(float progress, Movement.ManeuverDirection direction)
         {
-            float turningDirection = 0;
-            turningDirection = (direction == Movement.ManeuverDirection.Right) ? 1 : -1;
+            float turningDirection = (direction == Movement.ManeuverDirection.Right) ? 1 : -1;
 
             if (progress > 0.5f)
             {
                 progress = 1 - progress;
             }
+
             modelCenter.localEulerAngles = new Vector3(0, 0, Mathf.Lerp(0, 45 * turningDirection, progress));
         }
 
@@ -199,7 +197,7 @@ namespace Ship
 
         private void WingsChangePosition(string wingPosition)
         {
-            if (!(this is IMovableWings))
+            if (this is not IMovableWings)
             {
                 return;
             }
@@ -214,7 +212,5 @@ namespace Ship
                 wingAnimator.Play(transform.name + "_" + wingPosition);
             }
         }
-
     }
-
 }
