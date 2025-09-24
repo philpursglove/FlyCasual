@@ -11,6 +11,7 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Sensor,
                 abilityType: typeof(Abilities.SecondEdition.RelaySystemAbility)
             );
+            IsHidden = true;
         }
     }
 }

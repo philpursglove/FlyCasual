@@ -9,7 +9,8 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Without a Trace",
                 UpgradeType.Talent,
-                abilityType: typeof(Abilities.SecondEdition.WithoutATraceAbility)            );
+                abilityType: typeof(Abilities.SecondEdition.WithoutATraceAbility));
+            IsHidden = true;
         }
     }
 }
