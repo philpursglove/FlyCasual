@@ -52,7 +52,14 @@ namespace Ship
 
         public virtual Vector3 GetCenter()
         {
-            return Model.transform.TransformPoint(0, 0, -ShipBase.HALF_OF_SHIPSTAND_SIZE);
+            if (Model.transform == null)
+            {
+                return new Vector3(0, 0, 0);
+            }
+            else
+            {
+                return Model.transform.TransformPoint(0, 0, -ShipBase.HALF_OF_SHIPSTAND_SIZE);
+            }
         }
 
         public Vector3 GetBack()
