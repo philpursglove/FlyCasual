@@ -11,6 +11,7 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Modification,
                 abilityType: typeof(Abilities.SecondEdition.StygiumReserveAbility)
             );
+            IsHidden = true;
         }
     }
 }
