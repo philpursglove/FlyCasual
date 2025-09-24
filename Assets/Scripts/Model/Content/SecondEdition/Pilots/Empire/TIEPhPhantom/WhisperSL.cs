@@ -1,5 +1,8 @@
 ﻿using Abilities.SecondEdition;
+using ActionsList;
 using Content;
+using Ship;
+using System;
 using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -8,11 +11,11 @@ namespace Ship.SecondEdition.TIEPhPhantom
 {
     public class WhisperSL : TIEPhPhantom
     {
-        public WhisperSL() : base()
+        public WhisperSL()
         {
             PilotInfo = new PilotCardInfo25
             (
-                "Whisper",
+                "\"Whisper\"",
                 "Unseen Assailant",
                 Faction.Imperial,
                 5,
@@ -35,6 +38,8 @@ namespace Ship.SecondEdition.TIEPhPhantom
                 charges: 2
             );
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/whisper-tiephphantom.png";
+
+            PilotNameCanonical = "whisper-ssl";
 
             MustHaveUpgrades.Add(typeof(WithoutATrace));
             MustHaveUpgrades.Add(typeof(RelaySystem));
@@ -59,12 +64,52 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            throw new System.NotImplementedException();
+            HostShip.OnAttackFinishAsAttacker += RegisterAbility;
         }
 
         public override void DeactivateAbility()
         {
-            throw new System.NotImplementedException();
+            HostShip.OnAttackFinishAsAttacker -= RegisterAbility;
+        }
+
+        private void RegisterAbility(GenericShip ship)
+        {
+            if (HostShip.State.Charges > 0)
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskToUseAbility);
+            }
+
+        }
+
+        private void AskToUseAbility(object sender, EventArgs e)
+        {
+            HostShip.BeforeActionIsPerformed += RegisterSpendChargeTrigger;
+            CameraScript.RestoreCamera();
+
+            HostShip.AskPerformFreeAction(
+                new CloakAction(),
+                CleanUp,
+                HostShip.PilotInfo.PilotName,
+                "After you perform an attack, you may spend 1 Charge to perform a Cloak action.",
+                HostShip
+            );
+        }
+
+        private void RegisterSpendChargeTrigger(GenericAction action, ref bool isFreeAction)
+        {
+            HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
+            RegisterAbilityTrigger(
+                TriggerTypes.OnFreeAction,
+                delegate
+                {
+                    HostShip.SpendCharge();
+                }
+            );
+        }
+        private void CleanUp()
+        {
+            HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
+            Triggers.FinishTrigger();
         }
     }
 }
