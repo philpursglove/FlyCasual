@@ -67,10 +67,10 @@ namespace Abilities.SecondEdition
 
         public void RegisterWhisperAbility()
         {
-            RegisterAbilityTrigger(TriggerTypes.OnAttackHit, AskAssignFocus);
+            RegisterAbilityTrigger(TriggerTypes.OnAttackHit, AskAssignEvade);
         }
 
-        private void AskAssignFocus(object sender, System.EventArgs e)
+        private void AskAssignEvade(object sender, System.EventArgs e)
         {
             if (!alwaysUseAbility)
             {
