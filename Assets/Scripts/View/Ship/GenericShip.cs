@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Tokens;
 using UnityEngine;
 
 namespace Ship
@@ -660,23 +659,6 @@ namespace Ship
         {
             string result = inputName.Replace('/', ' ');
             return result;
-        }
-
-        public bool IsIonised()
-        {
-            var ionCount = Tokens.CountTokensByType(typeof(IonToken));
-
-            switch (ShipBase.Size)
-            {
-                case BaseSize.Small:
-                    return ionCount > 0;
-                case BaseSize.Medium:
-                    return ionCount > 1;
-                case BaseSize.Large:
-                    return ionCount > 2;
-                default:
-                    return false;
-            }
         }
     }
 
