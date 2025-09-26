@@ -91,7 +91,7 @@ namespace Abilities.SecondEdition
         {
             friendlyShip = ship;
 
-            if (HostShip.State.Charges > 0 && HasReasonToUseAbility() && (friendlyShip.Owner.PlayerNo == HostShip.Owner.PlayerNo))
+            if (HostShip.State.Charges > 0 && HasReasonToUseAbility() && friendlyShip.Owner.PlayerNo == HostShip.Owner.PlayerNo)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementActivationStart, AskToUseBoKatanAbility);
             }
