@@ -11,7 +11,7 @@ namespace Ship.SecondEdition.TIEPhPhantom
 {
     public class WhisperSL : TIEPhPhantom
     {
-        public WhisperSL()
+        public WhisperSL() : base()
         {
             PilotInfo = new PilotCardInfo25
             (
@@ -42,7 +42,7 @@ namespace Ship.SecondEdition.TIEPhPhantom
             PilotNameCanonical = "whisper-ssl";
 
             MustHaveUpgrades.Add(typeof(WithoutATrace));
-            MustHaveUpgrades.Add(typeof(RelaySystem));
+            //MustHaveUpgrades.Add(typeof(RelaySystem));
             MustHaveUpgrades.Add(typeof(StygiumReserve));
         }
     }
@@ -103,6 +103,7 @@ namespace Abilities.SecondEdition
                 delegate
                 {
                     HostShip.SpendCharge();
+                    Triggers.FinishTrigger();
                 }
             );
         }
