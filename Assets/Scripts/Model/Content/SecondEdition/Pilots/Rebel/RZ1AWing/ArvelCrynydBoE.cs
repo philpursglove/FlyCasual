@@ -1,7 +1,6 @@
 ﻿using Abilities.SecondEdition;
 using Actions;
 using ActionsList;
-using Arcs;
 using Content;
 using System;
 using System.Collections.Generic;
@@ -46,9 +45,6 @@ namespace Ship
                 
                 ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BarrelRollAction), typeof(FocusAction)));
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(SlamAction)));
-
-                ShipInfo.ArcInfo.Arcs.RemoveAll(n => n.ArcType == ArcType.Front);
-                ShipInfo.ArcInfo.Arcs.Add(new ShipArcInfo(ArcType.SingleTurret, 2));
                 
                 MustHaveUpgrades.Add(typeof(VectoredCannonsRZ1));
                 MustHaveUpgrades.Add(typeof(HeroicSacrifice));
