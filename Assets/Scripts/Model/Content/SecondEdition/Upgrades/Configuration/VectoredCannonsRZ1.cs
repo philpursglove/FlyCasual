@@ -79,7 +79,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship, ref bool flag)
         {
-            flag = true;
+            flag = !HostShip.IsStressed;
         }
 
         private void RegisterAbility(GenericShip ship)
