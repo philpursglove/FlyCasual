@@ -266,7 +266,7 @@ namespace SubPhases
                     Type actionType = kv.Key;
                     GenericAction linkedAction = kv.Value;
 
-                    if (action.GetType() == actionType)
+                    if (action.GetType() == actionType && (action.Color != Actions.ActionColor.Red || Selection.ThisShip.CallCheckCanPerformActionsWhileStressed()))
                     {
                         string linkedActionName = GetActionNameColored(kv.Value);
 
