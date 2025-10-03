@@ -2,6 +2,7 @@
 using Content;
 using Ship;
 using System.Collections.Generic;
+using System.Linq;
 using Tokens;
 using Upgrade;
 
@@ -82,7 +83,7 @@ namespace Abilities.SecondEdition
 
         private void RegisterCorranHornAbility()
         {
-            if (!HostShip.Tokens.HasToken(typeof(WeaponsDisabledToken)) && Phases.CurrentSubPhase.RequiredInitiative == 0)
+            if (!HostShip.Tokens.HasToken(typeof(WeaponsDisabledToken)) && Phases.CurrentSubPhase.RequiredInitiative == 0 && Roster.AllShips.Values.Any(n => Tools.IsAnotherTeam(HostShip, n) && HostShip.SectorsInfo.IsShipInSector(n, ArcType.Bullseye)))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnEngagementInitiativeChanged, UseCorranHornAbility);
             }
@@ -122,6 +123,7 @@ namespace Abilities.SecondEdition
         private bool IsBullsEyePrimary(GenericShip defender, IShipWeapon weapon, bool isSilent)
         {
             bool result = false;
+
             if (weapon.WeaponType == WeaponTypes.PrimaryWeapon && HostShip.SectorsInfo.IsShipInSector(defender, ArcType.Bullseye))
             {
                 result = true;
@@ -137,6 +139,7 @@ namespace Abilities.SecondEdition
                     if (!isSilent) Messages.ShowError("This attack must be performed against a target in the ship's Bullseye arc");
                 }
             }
+
             return result;
         }
     }
