@@ -5,6 +5,7 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Android.Gradle.Manifest;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -79,7 +80,8 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship, ref bool flag)
         {
-            flag = !HostShip.IsStressed;
+            flag = ship.CanPerformFreeAction(new BoostAction() { HostShip = ship, Color = ActionColor.Red }) 
+                   || ship.CanPerformFreeAction(new RotateArcAction() { HostShip = ship, Color = ActionColor.Red });
         }
 
         private void RegisterAbility(GenericShip ship)
