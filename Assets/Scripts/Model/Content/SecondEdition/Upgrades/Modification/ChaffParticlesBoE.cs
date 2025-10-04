@@ -66,7 +66,7 @@ namespace Abilities.SecondEdition
 
         private void UseAbility(object sender, EventArgs e)
         {
-            ChaffPartilcesAbilitySubphase subphase = Phases.StartTemporarySubPhaseNew<ChaffPartilcesAbilitySubphase>(
+            ChaffParticlesAbilitySubphase subphase = Phases.StartTemporarySubPhaseNew<ChaffParticlesAbilitySubphase>(
                 "Remove Token",
                 DecisionSubPhase.ConfirmDecision
             );
@@ -95,7 +95,7 @@ namespace Abilities.SecondEdition
             subphase.Start();
         }
 
-        private class ChaffPartilcesAbilitySubphase : DecisionSubPhase { }
+        private class ChaffParticlesAbilitySubphase : DecisionSubPhase { }
     }
 }
 
