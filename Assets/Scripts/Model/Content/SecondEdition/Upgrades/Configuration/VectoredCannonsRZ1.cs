@@ -79,7 +79,8 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship, ref bool flag)
         {
-            flag = true;
+            flag = ship.CanPerformFreeAction(new BoostAction() { HostShip = ship, Color = ActionColor.Red }) 
+                   || ship.CanPerformFreeAction(new RotateArcAction() { HostShip = ship, Color = ActionColor.Red });
         }
 
         private void RegisterAbility(GenericShip ship)
