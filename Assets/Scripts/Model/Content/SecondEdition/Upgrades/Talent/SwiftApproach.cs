@@ -19,8 +19,6 @@ namespace UpgradesList.SecondEdition
             );
 
             IsHidden = true;
-
-            IsWIP = true;
         }
     }
 }

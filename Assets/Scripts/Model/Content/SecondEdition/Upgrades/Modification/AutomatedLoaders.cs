@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
                 charges: 1
             );
 
-            IsWIP = true; // Mark as Work In Progress if applicable
+            IsHidden = true;
 
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
         }

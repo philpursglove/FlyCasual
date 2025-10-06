@@ -74,7 +74,7 @@ namespace Abilities.SecondEdition
             description: new AbilityDescription
             (
                 "Wes Janson",
-                "Do you want do assign the defender 1 jam token?",
+                "Do you want to assign the defender 1 jam token?",
                 HostShip
             ),
             onYes: new SpendPilotChargeAction
@@ -108,7 +108,7 @@ namespace Abilities.SecondEdition
             description: new AbilityDescription
             (
                 "Wes Janson",
-                "Do you want do assign the attacker 1 jam token?",
+                "Do you want to assign the attacker 1 jam token?",
                 HostShip
             ),
             onYes: new SpendPilotChargeAction

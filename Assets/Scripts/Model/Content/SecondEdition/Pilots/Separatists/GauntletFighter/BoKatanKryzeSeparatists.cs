@@ -39,7 +39,7 @@ namespace Ship.SecondEdition.GauntletFighter
                 },
                 tags: new List<Tags>()
                 {
-                    Tags.Mandalorian 
+                    Tags.Mandalorian
                 },
                 skinName: "CIS",
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -91,7 +91,7 @@ namespace Abilities.SecondEdition
         {
             friendlyShip = ship;
 
-            if (HostShip.State.Charges > 0 && HasReasonToUseAbility())
+            if (HostShip.State.Charges > 0 && HasReasonToUseAbility() && friendlyShip.Owner.PlayerNo == HostShip.Owner.PlayerNo)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementActivationStart, AskToUseBoKatanAbility);
             }
@@ -138,7 +138,8 @@ namespace Abilities.SecondEdition
             {
                 subphase.AddDecision(
                     token.Name + ((token.GetType() == typeof(RedTargetLockToken)) ? " \"" + (token as RedTargetLockToken).Letter + "\"" : ""),
-                    delegate {
+                    delegate
+                    {
                         tokensToRemove.Add(token);
                         ActionsHolder.RemoveTokens(tokensToRemove, delegate { friendlyShip.Tokens.AssignToken(typeof(StrainToken), DecisionSubPhase.ConfirmDecision); });
                     }

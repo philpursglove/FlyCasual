@@ -55,6 +55,8 @@ public class TokensChangePanel : MonoBehaviour
 
     void Update()
     {
+        if (Host is null) return;
+
         movementProgress += Time.deltaTime * MOVE_SPEED;
         transform.position = Camera.main.WorldToScreenPoint(Host.GetCenter() + ABOVE_SHIP) + CENTER_PANEL + new Vector3(0, movementProgress, 0);
 
