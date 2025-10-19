@@ -42,7 +42,7 @@ namespace Ship.SecondEdition.TIEPhPhantom
             PilotNameCanonical = "whisper-ssl";
 
             MustHaveUpgrades.Add(typeof(WithoutATrace));
-            //MustHaveUpgrades.Add(typeof(RelaySystem));
+            MustHaveUpgrades.Add(typeof(RelaySystem));
             MustHaveUpgrades.Add(typeof(StygiumReserve));
         }
     }
