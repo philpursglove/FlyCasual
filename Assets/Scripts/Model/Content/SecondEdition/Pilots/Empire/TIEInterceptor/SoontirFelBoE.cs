@@ -58,6 +58,16 @@ namespace Ship
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/soontirfel-battleoverendor.png";
             }
         }
+
+        public class SoontirFelBoEXWA : SoontirFelBoE
+        {
+            public SoontirFelBoEXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 5;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

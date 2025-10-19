@@ -47,6 +47,15 @@ namespace Ship
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scimitar3-battleoverendor.png";
             }
         }
+
+        public class Scimitar3BoEXWA : Scimitar3BoE
+        {
+            public Scimitar3BoEXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 
@@ -91,7 +100,8 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             RegisterAbilityTrigger(
                 TriggerTypes.OnFreeAction,
-                delegate {
+                delegate
+                {
                     HostShip.SpendCharge();
                     Triggers.FinishTrigger();
                 }

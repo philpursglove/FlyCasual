@@ -2,6 +2,7 @@
 using Actions;
 using ActionsList;
 using Arcs;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace Ship
                         UpgradeType.Missile,
                         UpgradeType.Modification
                     },
-                    isStandardLayout: true                    
+                    isStandardLayout: true
                 );
 
                 PilotNameCanonical = "lieutenantkarsabi-ssl";
@@ -40,10 +41,22 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.SaturationRockets));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ElectronicBaffle));
 
-                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(TargetLockAction), ActionColor.Red));
-                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(ReloadAction), ActionColor.Red));
+                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(TargetLockAction),
+                    ActionColor.Red));
+                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(ReloadAction),
+                    ActionColor.Red));
 
                 ShipAbilities.Add(new AlphaClassStarWingSLAbility());
+            }
+        }
+
+        public class LieutenantKarsabiSLXWA : LieutenantKarsabiSL
+        {
+            public LieutenantKarsabiSLXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 9;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
@@ -86,7 +99,7 @@ namespace Abilities.SecondEdition
     public class SaturationRocketsAbility : GenericAbility
     {
         bool IsBonusAttack = false;
-        
+
         public override void ActivateAbility()
         {
             HostShip.OnAttackStartAsAttacker += RegisterSaturationRocketAbility;
@@ -101,10 +114,10 @@ namespace Abilities.SecondEdition
 
         public void RegisterSaturationRocketAbility()
         {
-            if(Combat.ChosenWeapon == HostUpgrade)
+            if (Combat.ChosenWeapon == HostUpgrade)
             {
                 RegisterAbilityTrigger(
-                    TriggerTypes.OnAttackStart, 
+                    TriggerTypes.OnAttackStart,
                     CheckFiringArc
                 );
             }
@@ -112,7 +125,7 @@ namespace Abilities.SecondEdition
 
         public void CheckFiringArc(object sender, System.EventArgs e)
         {
-            if(Combat.Defender != null
+            if (Combat.Defender != null
                 && HostUpgrade.State.Charges > 0)
             {
                 if (!IsBonusAttack) HostShip.OnCombatCheckExtraAttack += RegisterBonusAttack;
@@ -131,7 +144,7 @@ namespace Abilities.SecondEdition
                 else
                 {
                     Triggers.FinishTrigger();
-                }                
+                }
             }
             else
             {

@@ -46,6 +46,16 @@ namespace Ship
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tomaxbren-swz98.png";
             }
         }
+
+        public class TomaxBrenTBEXWA : TomaxBrenTBE
+        {
+            public TomaxBrenTBEXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

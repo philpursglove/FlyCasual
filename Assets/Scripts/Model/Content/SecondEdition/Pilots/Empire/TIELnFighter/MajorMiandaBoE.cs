@@ -51,6 +51,16 @@ namespace Ship
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majormianda-battleoverendor.png";
             }
         }
+
+        public class MajorMiandaBoEXWA : MajorMiandaBoE
+        {
+            public MajorMiandaBoEXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 4;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 
@@ -143,7 +153,7 @@ namespace Abilities.SecondEdition
             if (!eligibleShips.Contains(ship)) return false;
             if (ship.Equals(HostShip) && selfSelected) return false;
             if (!ship.Equals(HostShip) && selectedShips.Count >= 2) return false;
-            if (selectedShips.Contains(ship)) return false;            
+            if (selectedShips.Contains(ship)) return false;
             return true;
         }
 

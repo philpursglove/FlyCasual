@@ -46,6 +46,15 @@ namespace Ship
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scimitar1-battleoverendor.png";
             }
         }
+
+        public class Scimitar1BoEXWA : Scimitar1BoE
+        {
+            public Scimitar1BoEXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 
