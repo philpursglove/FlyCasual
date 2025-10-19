@@ -19,7 +19,7 @@ namespace Ship
                     3,
                     4,
                     extraUpgradeIcons: new List<UpgradeType>
-                    { 
+                    {
                         UpgradeType.Modification
                     },
                     seImageNumber: 190,
@@ -32,9 +32,15 @@ namespace Ship
         {
             public CartelSpacerXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).Limited = 3;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification
+                };
             }
         }
     }
