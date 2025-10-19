@@ -30,8 +30,7 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Device,
                         UpgradeType.Turret,
-                        UpgradeType.Missile,
-                        UpgradeType.Torpedo
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
@@ -47,8 +46,8 @@ namespace Ship
         {
             public DreaRenthalXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
