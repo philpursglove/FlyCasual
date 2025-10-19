@@ -30,7 +30,7 @@ namespace Ship
                         Tags.AWing
                     },
                     extraUpgradeIcons: new List<UpgradeType> {
-                        UpgradeType.Talent, 
+                        UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Missile,
                         UpgradeType.Modification,
@@ -55,6 +55,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(ChaffParticlesBoE));
             }
         }
+
+        public class TychoCelchuBoEXWA : TychoCelchuBoELSL
+        {
+            public TychoCelchuBoEXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 
@@ -72,7 +82,7 @@ namespace Abilities.SecondEdition
 
         public override void DeactivateAbility()
         {
-            HostShip.OnWeaponsDisabledCheck -= AllowMissileAttacks;        
+            HostShip.OnWeaponsDisabledCheck -= AllowMissileAttacks;
         }
 
         private void AllowMissileAttacks(ref bool result)
@@ -84,7 +94,7 @@ namespace Abilities.SecondEdition
             Messages.ShowInfo("The attack using " + secondaryWeapon.Name + " is allowed");
 
             result = false;
-            
+
             PrepareAttackDiceCap();
         }
 
@@ -98,7 +108,7 @@ namespace Abilities.SecondEdition
         private void PrepareAttackDiceCap()
         {
             HostShip.AfterGotNumberOfAttackDiceCap += SetAttackDiceCap;
-            
+
             HostShip.OnAttackFinish += RemoveAttackDiceCap;
         }
 
@@ -112,7 +122,7 @@ namespace Abilities.SecondEdition
         private void RemoveAttackDiceCap(GenericShip ship)
         {
             HostShip.AfterGotNumberOfAttackDiceCap -= SetAttackDiceCap;
-            
+
             HostShip.OnAttackFinish -= RemoveAttackDiceCap;
         }
     }

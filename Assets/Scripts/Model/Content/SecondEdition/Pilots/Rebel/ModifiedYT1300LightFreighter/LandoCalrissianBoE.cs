@@ -56,8 +56,18 @@ namespace Ship
                 PilotNameCanonical = "landocalrissian-battleoverendor";
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/landocalrissian-battleoverendor.png";
-            }            
-        }        
+            }
+        }
+
+        public class LandoCalrissianBoEXWA : LandoCalrissianBoE
+        {
+            public LandoCalrissianBoEXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 7;
+                pilot.LegalityInfo = new() { Legality.XWA };
+            }
+        }
     }
 }
 
@@ -130,7 +140,7 @@ namespace Abilities.SecondEdition
         }
 
         private void UpdateInitiative()
-        {            
+        {
             HostShip.State.AddPilotSkillModifier(this);
             Phases.Events.OnActivationPhaseEnd_NoTriggers += RemovePilotSkillModifieer;
             DecisionSubPhase.ConfirmDecision();

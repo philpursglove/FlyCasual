@@ -42,6 +42,16 @@ namespace Ship.SecondEdition.BTLA4YWing
             PilotNameCanonical = "hortonsalm-swz106";
         }
     }
+
+    public class HortonSalmSSPXWA : HortonSalmSSP
+    {
+        public HortonSalmSSPXWA() : base()
+        {
+            var pilotInfo = PilotInfo as PilotCardInfo25;
+            pilotInfo.Cost = 4;
+            pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

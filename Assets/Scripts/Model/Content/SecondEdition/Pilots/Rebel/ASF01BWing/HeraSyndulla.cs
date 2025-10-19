@@ -50,6 +50,16 @@ namespace Ship
                 PilotNameCanonical = "herasyndulla-asf01bwing";
             }
         }
+
+        public class HeraSyndullaXWA : HeraSyndulla
+        {
+            public HeraSyndullaXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 5;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

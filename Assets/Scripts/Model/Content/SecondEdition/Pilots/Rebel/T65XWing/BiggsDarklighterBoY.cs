@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using Ship;
-using SubPhases;
+﻿using Abilities.SecondEdition;
 using BoardTools;
 using Content;
-using Upgrade;
-using Abilities.SecondEdition;
+using Ship;
+using SubPhases;
 using System;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship
 {
@@ -49,6 +49,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R2F2BoY));
 
                 PilotNameCanonical = "biggsdarklighter-battleofyavin";
+            }
+        }
+
+        public class BiggsDarklighterBoYXWA : BiggsDarklighterBoY
+        {
+            public BiggsDarklighterBoYXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 5;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

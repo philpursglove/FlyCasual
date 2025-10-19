@@ -42,15 +42,25 @@ namespace Ship
                 PilotNameCanonical = "arvelcrynyd-battleoverendor";
 
                 ShipInfo.Shields++;
-                
+
                 ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BarrelRollAction), typeof(FocusAction)));
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(SlamAction)));
-                
+
                 MustHaveUpgrades.Add(typeof(VectoredCannonsRZ1));
                 MustHaveUpgrades.Add(typeof(HeroicSacrifice));
                 MustHaveUpgrades.Add(typeof(ItsATrap));
                 MustHaveUpgrades.Add(typeof(ProtonRockets));
-            }            
+            }
+        }
+
+        public class ArvelCrynydBoEXWA : ArvelCrynydBoE
+        {
+            public ArvelCrynydBoEXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
         }
     }
 }

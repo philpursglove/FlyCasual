@@ -1,9 +1,5 @@
 ﻿using Abilities.SecondEdition;
-using BoardTools;
-using Bombs;
 using Content;
-using Movement;
-using Ship;
 using System;
 using System.Collections.Generic;
 using Upgrade;
@@ -54,6 +50,16 @@ namespace Ship.SecondEdition.ASF01BWing
             DefaultUpgrades.Remove(typeof(UpgradesList.SecondEdition.StabilizedSFoilsOpen));
         }
     }
+
+    public class AdonFoxBoEXWA : AdonFoxBattleOverEndor
+    {
+        public AdonFoxBoEXWA() : base()
+        {
+            var pilot = (PilotCardInfo25)PilotInfo;
+            pilot.Cost = 5;
+            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition
@@ -71,7 +77,7 @@ namespace Abilities.SecondEdition
         }
         private void CheckAbility()
         {
-            if(HostShip.IsStressed)
+            if (HostShip.IsStressed)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnDefenseStart, UseAbility);
             }
@@ -79,7 +85,7 @@ namespace Abilities.SecondEdition
 
         private void UseAbility(object sender, EventArgs e)
         {
-            if(Combat.Defender == HostShip)
+            if (Combat.Defender == HostShip)
             {
                 Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} adds an extra defense die");
                 HostShip.AfterGotNumberOfDefenceDice += AddDefenseDie;

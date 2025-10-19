@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System;
-using Upgrade;
+﻿using BoardTools;
 using Content;
 using Ship;
-using BoardTools;
 using SubPhases;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using Upgrade;
 
 namespace Ship
 {
@@ -39,6 +39,16 @@ namespace Ship
                 );
 
                 PilotNameCanonical = "corranhorn-t65xwing";
+            }
+        }
+
+        public class CorranHornXWA : CorranHorn
+        {
+            public CorranHornXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 4;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

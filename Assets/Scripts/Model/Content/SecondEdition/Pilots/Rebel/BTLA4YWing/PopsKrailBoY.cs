@@ -41,6 +41,16 @@ namespace Ship.SecondEdition.BTLA4YWing
             PilotNameCanonical = "popskrail-battleofyavin";
         }
     }
+
+    public class PopsKrailBoYXWA : PopsKrailBoY
+    {
+        public PopsKrailBoYXWA() : base()
+        {
+            var pilot = (PilotCardInfo25)PilotInfo;
+            pilot.Cost = 4;
+            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

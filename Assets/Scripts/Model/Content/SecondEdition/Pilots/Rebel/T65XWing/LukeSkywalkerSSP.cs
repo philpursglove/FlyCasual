@@ -45,6 +45,16 @@ namespace Ship
                 PilotNameCanonical = "lukeskywalker-swz106";
             }
         }
+
+        public class LukeSkywalkerSSPXWA : LukeSkywalkerSSP
+        {
+            public LukeSkywalkerSSPXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 6;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

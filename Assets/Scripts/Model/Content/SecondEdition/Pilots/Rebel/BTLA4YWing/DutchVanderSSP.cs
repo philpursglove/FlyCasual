@@ -45,6 +45,16 @@ namespace Ship.SecondEdition.BTLA4YWing
             PilotNameCanonical = "dutchvander-swz106";
         }
     }
+
+    public class DutchVanderSSPXWA : DutchVanderSSP
+    {
+        public DutchVanderSSPXWA() : base()
+        {
+            var pilotInfo = PilotInfo as PilotCardInfo25;
+            pilotInfo.Cost = 4;
+            pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition
@@ -120,7 +130,7 @@ namespace Abilities.SecondEdition
             {
                 Messages.ShowInfo(TargetShip.PilotInfo.PilotName + " acquired a Target Lock on obstacle");
             }
-            
+
             ActionsHolder.AcquireTargetLock(TargetShip, LockedShip, SelectShipSubPhase.FinishSelection, SelectShipSubPhase.FinishSelection, ignoreRange: true);
         }
 

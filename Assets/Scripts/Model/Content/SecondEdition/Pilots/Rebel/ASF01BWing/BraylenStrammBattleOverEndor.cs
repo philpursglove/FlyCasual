@@ -58,6 +58,16 @@ namespace Ship.SecondEdition.ASF01BWing
 
         }
     }
+
+    public class BraylenStrammBoEXWA : BraylenStrammBattleOverEndor
+    {
+        public BraylenStrammBoEXWA() : base()
+        {
+            var pilot = (PilotCardInfo25)PilotInfo;
+            pilot.Cost = 5;
+            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

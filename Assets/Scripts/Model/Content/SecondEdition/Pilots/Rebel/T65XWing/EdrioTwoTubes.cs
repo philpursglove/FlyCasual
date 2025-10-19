@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Abilities.SecondEdition;
+﻿using Abilities.SecondEdition;
 using Content;
 using Ship;
+using System;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -38,6 +38,16 @@ namespace Ship
                     seImageNumber: 9,
                     skinName: "Partisan"
                 );
+            }
+        }
+
+        public class EdrioTwoTubesXWA : EdrioTwoTubes
+        {
+            public EdrioTwoTubesXWA() : base()
+            {
+                var pilotInfo = (PilotCardInfo25)PilotInfo;
+                pilotInfo.Cost = 4;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

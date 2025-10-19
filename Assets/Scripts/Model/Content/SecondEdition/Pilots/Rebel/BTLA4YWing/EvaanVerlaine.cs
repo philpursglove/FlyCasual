@@ -41,6 +41,16 @@ namespace Ship.SecondEdition.BTLA4YWing
             );
         }
     }
+
+    public class EvaanVerlaineXWA : EvaanVerlaine
+    {
+        public EvaanVerlaineXWA() : base()
+        {
+            var pilotInfo = PilotInfo as PilotCardInfo25;
+            pilotInfo.Cost = 3;
+            pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

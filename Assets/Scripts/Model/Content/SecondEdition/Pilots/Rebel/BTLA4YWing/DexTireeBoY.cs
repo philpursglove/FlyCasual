@@ -42,6 +42,16 @@ namespace Ship.SecondEdition.BTLA4YWing
             PilotNameCanonical = "dextiree-battleofyavin";
         }
     }
+
+    public class DexTireeBoYXWA : DexTireeBoY
+    {
+        public DexTireeBoYXWA() : base()
+        {
+            var pilot = (PilotCardInfo25)PilotInfo;
+            pilot.Cost = 4;
+            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

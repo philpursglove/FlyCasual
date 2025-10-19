@@ -46,6 +46,16 @@ namespace Ship.SecondEdition.BTLA4YWing
             PilotNameCanonical = "dutchvander-battleofyavin";
         }
     }
+
+    public class DutchVanderBoYXWA : DutchVanderBoY
+    {
+        public DutchVanderBoYXWA() : base()
+        {
+            var pilot = (PilotCardInfo25)PilotInfo;
+            pilot.Cost = 4;
+            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition

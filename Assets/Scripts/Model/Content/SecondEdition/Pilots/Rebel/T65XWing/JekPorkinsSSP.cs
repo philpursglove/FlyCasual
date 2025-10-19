@@ -47,6 +47,16 @@ namespace Ship
                 PilotNameCanonical = "jekporkins-swz106";
             }
         }
+
+        public class JekPorkinsSSPXWA : JekPorkinsSSP
+        {
+            public JekPorkinsSSPXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 5;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 

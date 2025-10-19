@@ -28,7 +28,7 @@ namespace Ship
                         Tags.AWing
                     },
                     extraUpgradeIcons: new List<UpgradeType> {
-                        UpgradeType.Talent, 
+                        UpgradeType.Talent,
                         UpgradeType.Cannon,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
@@ -46,7 +46,17 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(PrecisionTunedCannons));
                 MustHaveUpgrades.Add(typeof(ChaffParticlesBoE));
                 MustHaveUpgrades.Add(typeof(TargetAssistAlgorithm));
-            }            
+            }
+        }
+
+        public class GemmerSojanBoEXWA : GemmerSojanBoELSL
+        {
+            public GemmerSojanBoEXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 4;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            }
         }
     }
 }
@@ -84,7 +94,7 @@ namespace Abilities.SecondEdition
             int result = 0;
 
             if (Combat.DiceRollAttack.Successes > Combat.DiceRollDefence.Successes
-                && Combat.DiceRollDefence.Blanks > 0 
+                && Combat.DiceRollDefence.Blanks > 0
                 && HostShip.Tokens.HasToken(typeof(FocusToken))
                 && Combat.DiceRollAttack.Successes > Combat.DiceRollDefence.Focuses + Combat.DiceRollDefence.Successes)
             {
