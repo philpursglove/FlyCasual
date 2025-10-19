@@ -52,19 +52,16 @@ namespace Ship
         {
             public DoctorAphraXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).Cost = 16;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
+                    UpgradeType.Talent,
                         UpgradeType.Crew,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Illicit,
-                        UpgradeType.Illicit,
                         UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
