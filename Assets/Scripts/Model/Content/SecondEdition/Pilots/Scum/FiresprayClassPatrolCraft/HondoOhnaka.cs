@@ -49,9 +49,19 @@ namespace Ship
         {
             public HondoOhnakaXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).Cost = 17;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                };
             }
         }
     }
@@ -156,7 +166,8 @@ namespace Abilities.SecondEdition
 
                 Ability.TargetShip.AskPerformFreeAction(
                     GetPossibleActions(),
-                    delegate {
+                    delegate
+                    {
                         Selection.ChangeActiveShip(HostShip);
                         Selection.MultiSelectedShips.Remove(Ability.TargetShip);
                         AskToCoordinateSecondShip(callback);
@@ -260,7 +271,8 @@ namespace Abilities.SecondEdition
 
                 Ability.TargetShip.AskPerformFreeAction(
                     GetPossibleActions(),
-                    delegate {
+                    delegate
+                    {
                         Selection.ChangeActiveShip(HostShip);
                         Selection.MultiSelectedShips.Remove(Ability.TargetShip);
                         FinishAbility(callback);
