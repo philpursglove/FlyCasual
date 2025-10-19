@@ -39,12 +39,12 @@ namespace Ship
                     {
                         Tags.Jedi,
                         Tags.LightSide,
-                        Tags.Freighter                        
+                        Tags.Freighter
                     },
                     skinName: "Black",
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
-                
+
                 PilotNameCanonical = "kananjarrus-hwk290lightfreighter";
             }
         }
@@ -53,17 +53,15 @@ namespace Ship
         {
             public KananJarrusXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                         UpgradeType.ForcePower,
                         UpgradeType.Crew,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
-                        UpgradeType.Modification,
                         UpgradeType.Device,
-                        UpgradeType.Title
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
