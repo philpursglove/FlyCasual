@@ -42,6 +42,16 @@ namespace Ship.SecondEdition.DroidTriFighter
             PilotNameCanonical = "phlacarphoccprototype-siegeofcoruscant";
         }
     }
+
+    public class PhlacArphoccPrototypeSoCXWA : PhlacArphoccPrototypeSoC
+    {
+        public PhlacArphoccPrototypeSoCXWA() : base()
+        {
+            var pilotInfo = PilotInfo as PilotCardInfo25;
+            pilotInfo.Cost = 4;
+            pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition
