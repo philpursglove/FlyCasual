@@ -54,8 +54,8 @@ namespace Ship
         {
             public IG88AXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).Cost = 17;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
@@ -111,10 +111,12 @@ namespace Abilities.SecondEdition
         {
             TargetShip.Tokens.AssignToken(
                 typeof(CalculateToken),
-                delegate {
+                delegate
+                {
                     HostShip.Tokens.RemoveToken(
                         typeof(CalculateToken),
-                        delegate {
+                        delegate
+                        {
                             SelectShipSubPhase.FinishSelection();
                         }
                     );
