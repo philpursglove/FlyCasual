@@ -51,7 +51,7 @@ namespace Ship
                     UpgradeType.Modification
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-                (PilotInfo as PilotCardInfo25).Limited = 1
+                (PilotInfo as PilotCardInfo25).Limited = 1;
             }
         }
     }
