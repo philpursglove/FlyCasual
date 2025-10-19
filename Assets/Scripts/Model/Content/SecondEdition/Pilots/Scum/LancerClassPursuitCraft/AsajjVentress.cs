@@ -52,11 +52,10 @@ namespace Ship
         {
             public AsajjVentressXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+                (PilotInfo as PilotCardInfo25).Cost = 16;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
-                    UpgradeType.ForcePower,
                     UpgradeType.ForcePower,
                     UpgradeType.Crew,
                     UpgradeType.Illicit,
