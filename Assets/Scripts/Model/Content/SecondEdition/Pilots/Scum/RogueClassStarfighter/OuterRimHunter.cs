@@ -23,7 +23,7 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Cannon,
-                        UpgradeType.Cannon                        
+                        UpgradeType.Cannon
                     },
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
@@ -34,9 +34,17 @@ namespace Ship
         {
             public OuterRimHunterXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon
+                };
             }
         }
     }
