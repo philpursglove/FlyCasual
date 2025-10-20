@@ -43,15 +43,15 @@ namespace Ship
         {
             public ColonelJendonXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
+                    UpgradeType.Talent,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
                     UpgradeType.Sensor,
                     UpgradeType.Modification,
-                    UpgradeType.Cannon,
                     UpgradeType.Cannon,
                     UpgradeType.Title
                 };
