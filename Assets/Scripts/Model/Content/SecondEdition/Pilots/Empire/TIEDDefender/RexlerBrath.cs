@@ -44,9 +44,18 @@ namespace Ship
         {
             public RexlerBrathXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).Cost = 18;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Cannon,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                };
             }
         }
     }
@@ -75,7 +84,8 @@ namespace Abilities.SecondEdition
                     Name = HostShip.PilotInfo.PilotName + " exposes facedown card",
                     TriggerType = TriggerTypes.OnAttackHit,
                     TriggerOwner = Combat.Defender.Owner.PlayerNo,
-                    EventHandler = delegate {
+                    EventHandler = delegate
+                    {
                         Combat.Defender.Damage.ExposeRandomFacedownCard(Triggers.FinishTrigger);
                     }
                 });
