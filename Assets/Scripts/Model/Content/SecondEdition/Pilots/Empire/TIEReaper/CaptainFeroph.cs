@@ -44,9 +44,15 @@ namespace Ship
         {
             public CaptainFerophXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                };
             }
         }
     }
