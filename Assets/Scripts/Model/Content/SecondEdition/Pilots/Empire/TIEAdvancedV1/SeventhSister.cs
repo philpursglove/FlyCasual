@@ -45,11 +45,10 @@ namespace Ship
         {
             public SeventhSisterXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
-                    UpgradeType.ForcePower,
                     UpgradeType.ForcePower,
                     UpgradeType.Sensor,
                     UpgradeType.Modification,
