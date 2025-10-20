@@ -46,7 +46,7 @@ namespace Ship
 
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(TargetLockAction)));
 
-                AutoThrustersAbility oldAbility = (AutoThrustersAbility) ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
+                AutoThrustersAbility oldAbility = (AutoThrustersAbility)ShipAbilities.First(n => n.GetType() == typeof(AutoThrustersAbility));
                 ShipAbilities.Remove(oldAbility);
                 ShipAbilities.Add(new SensitiveControlsBoYRealAbility());
 
@@ -61,7 +61,7 @@ namespace Ship
         {
             public Sigma7BoYXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
@@ -104,7 +104,7 @@ namespace Abilities.SecondEdition
 
         private void AskToSelectShipForLock(object sender, EventArgs e)
         {
-            if (Board.GetShipsAtRange(HostShip, new UnityEngine.Vector2(0,1), Team.Type.Enemy).Count > 0)
+            if (Board.GetShipsAtRange(HostShip, new UnityEngine.Vector2(0, 1), Team.Type.Enemy).Count > 0)
             {
                 SelectTargetForAbility
                 (

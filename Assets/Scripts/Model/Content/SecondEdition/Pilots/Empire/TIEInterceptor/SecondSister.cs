@@ -46,14 +46,13 @@ namespace Ship
         {
             public SecondSisterXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,
-                    UpgradeType.ForcePower,
+                    UpgradeType.Sensor,
                     UpgradeType.Modification,
-                    UpgradeType.Missile,
                     UpgradeType.Configuration
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
