@@ -57,7 +57,7 @@ namespace Ship
             public MajorMiandaBoEXWA() : base()
             {
                 var pilotInfo = PilotInfo as PilotCardInfo25;
-                pilotInfo.Cost = 4;
+                pilotInfo.Cost = 10;
                 pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

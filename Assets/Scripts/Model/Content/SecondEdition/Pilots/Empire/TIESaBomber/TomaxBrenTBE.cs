@@ -52,7 +52,7 @@ namespace Ship
             public TomaxBrenTBEXWA() : base()
             {
                 var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 4;
+                pilot.Cost = 12;
                 pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

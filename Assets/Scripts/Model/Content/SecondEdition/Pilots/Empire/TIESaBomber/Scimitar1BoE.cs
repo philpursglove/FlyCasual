@@ -51,7 +51,7 @@ namespace Ship
         {
             public Scimitar1BoEXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

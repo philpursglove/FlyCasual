@@ -56,7 +56,7 @@ namespace Ship
         {
             public Sapphire2BoEXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
