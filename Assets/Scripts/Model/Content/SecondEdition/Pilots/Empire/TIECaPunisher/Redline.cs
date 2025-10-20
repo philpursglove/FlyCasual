@@ -47,14 +47,14 @@ namespace Ship
         {
             public RedlineXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 26;
+                (PilotInfo as PilotCardInfo25).Cost = 15;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
+                    UpgradeType.Talent,
                         UpgradeType.Sensor,
-                        UpgradeType.Gunner,
                         UpgradeType.Modification,
-                        UpgradeType.Modification,
+                        UpgradeType.Device,
                         UpgradeType.Device,
                         UpgradeType.Missile,
                         UpgradeType.Missile,
