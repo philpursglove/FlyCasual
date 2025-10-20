@@ -47,8 +47,8 @@ namespace Ship
         {
             public VedFosloXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
@@ -77,13 +77,16 @@ namespace Abilities.SecondEdition
             RegisterAbilityTrigger(TriggerTypes.OnManeuverIsRevealed, AskChangeManeuver);
         }
 
-        private void CleanUpMovements(GenericShip ship) {
+        private void CleanUpMovements(GenericShip ship)
+        {
             HostShip.Maneuvers = defaultManeuvers;
             HostShip.OnMovementExecuted -= CleanUpMovements;
         }
 
-        private void SetAbilityManeuvers() {
-            if (defaultManeuvers == null) {
+        private void SetAbilityManeuvers()
+        {
+            if (defaultManeuvers == null)
+            {
                 defaultManeuvers = new Dictionary<string, MovementComplexity>(HostShip.Maneuvers);
             }
             abilityManeuvers = new Dictionary<string, MovementComplexity>(HostShip.Maneuvers);
@@ -98,16 +101,20 @@ namespace Abilities.SecondEdition
             {
                 abilityManeuvers["1.F.S"] = MovementComplexity.Easy;
             }
-            if (HostShip.AssignedManeuver.ToString().Equals("3.F.S")) {
+            if (HostShip.AssignedManeuver.ToString().Equals("3.F.S"))
+            {
                 abilityManeuvers["4.F.S"] = MovementComplexity.Easy;
             }
-            if (HostShip.AssignedManeuver.ToString().Equals("4.F.S")) {
+            if (HostShip.AssignedManeuver.ToString().Equals("4.F.S"))
+            {
                 abilityManeuvers["3.F.S"] = MovementComplexity.Normal;
             }
-            if (HostShip.AssignedManeuver.ToString().Equals("2.L.B")) {
+            if (HostShip.AssignedManeuver.ToString().Equals("2.L.B"))
+            {
                 abilityManeuvers["3.L.B"] = MovementComplexity.Easy;
             }
-            if (HostShip.AssignedManeuver.ToString().Equals("2.R.B")) {
+            if (HostShip.AssignedManeuver.ToString().Equals("2.R.B"))
+            {
                 abilityManeuvers["3.R.B"] = MovementComplexity.Easy;
             }
             abilityManeuvers["5.F.R"] = MovementComplexity.Complex;
@@ -131,9 +138,10 @@ namespace Abilities.SecondEdition
                 && movementStruct.Direction == HostShip.AssignedManeuver.Direction
                 && movementStruct.ColorComplexity == HostShip.AssignedManeuver.ColorComplexity
                 && (
-                    movementStruct.Speed >= HostShip.AssignedManeuver.ManeuverSpeed - 1 && 
+                    movementStruct.Speed >= HostShip.AssignedManeuver.ManeuverSpeed - 1 &&
                     movementStruct.Speed <= HostShip.AssignedManeuver.ManeuverSpeed + 1)
-               ) {
+               )
+            {
                 result = true;
             }
             return result;
