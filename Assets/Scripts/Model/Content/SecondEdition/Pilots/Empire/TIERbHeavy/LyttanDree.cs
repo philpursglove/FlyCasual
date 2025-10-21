@@ -48,6 +48,14 @@ namespace Ship
                 (PilotInfo as PilotCardInfo25).Cost = 4;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Gunner,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Configuration
+                };
             }
         }
     }
