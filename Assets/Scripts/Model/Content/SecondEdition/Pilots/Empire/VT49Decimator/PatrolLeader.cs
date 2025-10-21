@@ -36,12 +36,13 @@ namespace Ship
         {
             public PatrolLeaderXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+                (PilotInfo as PilotCardInfo25).Cost = 16;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Crew,
                     UpgradeType.Crew,
+                    UpgradeType.Gunner,
                     UpgradeType.Gunner,
                     UpgradeType.Modification,
                     UpgradeType.Device,
