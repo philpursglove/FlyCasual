@@ -38,8 +38,8 @@ namespace Ship
         {
             public ImdaarTestPilotXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
