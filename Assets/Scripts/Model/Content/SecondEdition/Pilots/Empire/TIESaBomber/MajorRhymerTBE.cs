@@ -33,7 +33,7 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Modification
                     },
-                    legality: new List<Legality> {Legality.StandardLegal, Legality.ExtendedLegal}
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
                 PilotNameCanonical = "majorrhymer-swz98";
 
@@ -47,11 +47,11 @@ namespace Ship
 
         public class MajorRhymerTBEXWA : MajorRhymerTBE
         {
-            public MajorRhymerTBEXWA(): base()
+            public MajorRhymerTBEXWA() : base()
             {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.Cost = 5;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 11;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
