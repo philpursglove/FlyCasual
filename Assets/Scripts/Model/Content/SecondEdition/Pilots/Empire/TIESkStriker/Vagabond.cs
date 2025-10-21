@@ -45,9 +45,15 @@ namespace Ship
         {
             public VagabondXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Gunner,
+                    UpgradeType.Device,
+                    UpgradeType.Modification
+                };
             }
         }
     }
@@ -69,7 +75,7 @@ namespace Abilities.SecondEdition
         }
 
         private void RegisterAbility(GenericShip ship)
-    {
+        {
             if (HostShip.AssignedManeuver.GrantedBy == "Ailerons")
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, AskToDropDevice);
