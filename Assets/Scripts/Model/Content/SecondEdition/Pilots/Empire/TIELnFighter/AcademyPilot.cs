@@ -6,7 +6,7 @@ namespace Ship
 {
     namespace SecondEdition.TIELnFighter
     {
-        public class AcademyPilot: TIELnFighter
+        public class AcademyPilot : TIELnFighter
         {
             public AcademyPilot() : base()
             {
@@ -32,12 +32,9 @@ namespace Ship
         {
             public AcademyPilotXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 2;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
-                {
-                    UpgradeType.Modification
-                };
+                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>();
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

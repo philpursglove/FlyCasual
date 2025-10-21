@@ -50,7 +50,7 @@ namespace Ship
         {
             public BackstabberBoYXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
@@ -89,7 +89,7 @@ namespace Abilities.SecondEdition
                         }
                     }
                 }
-                
+
             }
         }
     }

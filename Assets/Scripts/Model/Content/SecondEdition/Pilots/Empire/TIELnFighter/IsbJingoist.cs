@@ -43,11 +43,10 @@ namespace Ship
         {
             public IsbJingoistXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).Cost = 8;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
-                    UpgradeType.Talent,
                     UpgradeType.Illicit,
                     UpgradeType.Modification
                 };
@@ -128,7 +127,7 @@ namespace Abilities.SecondEdition
             Selection.ThisShip = TargetShip;
             Selection.ActiveShip = HostShip;
 
-            IsbJingoistTokenRemovalDecisionSubphase subphase = Phases.StartTemporarySubPhaseNew<IsbJingoistTokenRemovalDecisionSubphase>("ISB Jingoist: Which token to remove",Triggers.FinishTrigger);
+            IsbJingoistTokenRemovalDecisionSubphase subphase = Phases.StartTemporarySubPhaseNew<IsbJingoistTokenRemovalDecisionSubphase>("ISB Jingoist: Which token to remove", Triggers.FinishTrigger);
             subphase.AbilitySource = HostShip;
             subphase.DoIfSkipped = AskWhichBadTokenToAssign;
             subphase.Start();
