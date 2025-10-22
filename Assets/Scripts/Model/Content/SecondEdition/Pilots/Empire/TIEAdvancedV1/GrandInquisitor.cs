@@ -103,10 +103,7 @@ namespace Abilities.SecondEdition
 
         private void RegisterInquisitorDefenseAbility()
         {
-            if (HostShip.State.Force < 1)
-                return;
-
-            if (Combat.ShotInfo.Range != 1)
+            if (HostShip.State.Force < 1 || Combat.ShotInfo.Range != 1)
                 return;
 
             RegisterAbilityTrigger(TriggerTypes.OnAttackStart, delegate
