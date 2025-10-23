@@ -33,7 +33,8 @@ namespace Ship.SecondEdition.BTLA4YWing
                     Tags.YWing
                 },
                 skinName: "Gray",
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(IonCannonTurret));
@@ -47,9 +48,8 @@ namespace Ship.SecondEdition.BTLA4YWing
     {
         public HortonSalmSSPXWA() : base()
         {
-            var pilotInfo = PilotInfo as PilotCardInfo25;
-            pilotInfo.Cost = 4;
-            pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

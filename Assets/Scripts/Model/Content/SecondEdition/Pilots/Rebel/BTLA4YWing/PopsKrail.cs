@@ -47,16 +47,14 @@ namespace Ship.SecondEdition.BTLA4YWing
     {
         public PopsKrailXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                UpgradeType.Talent,
                 UpgradeType.Astromech,
                 UpgradeType.Modification,
                 UpgradeType.Device,
                 UpgradeType.Turret,
-                UpgradeType.Missile,
                 UpgradeType.Torpedo
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
@@ -135,7 +133,8 @@ namespace Abilities.SecondEdition
         {
             TargetShip.AskPerformFreeAction(
                 new FocusAction(),
-                delegate {
+                delegate
+                {
                     Selection.ThisShip = HostShip;
                     Phases.CurrentSubPhase.Resume();
                     Triggers.FinishTrigger();

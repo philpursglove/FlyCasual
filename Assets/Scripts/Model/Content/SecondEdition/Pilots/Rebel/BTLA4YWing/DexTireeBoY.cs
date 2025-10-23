@@ -30,7 +30,8 @@ namespace Ship.SecondEdition.BTLA4YWing
                 {
                     Tags.YWing
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipAbilities.Add(new HopeAbility());
@@ -47,9 +48,8 @@ namespace Ship.SecondEdition.BTLA4YWing
     {
         public DexTireeBoYXWA() : base()
         {
-            var pilot = (PilotCardInfo25)PilotInfo;
-            pilot.Cost = 4;
-            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
