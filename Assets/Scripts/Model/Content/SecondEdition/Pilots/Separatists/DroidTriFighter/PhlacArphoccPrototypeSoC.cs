@@ -32,7 +32,8 @@ namespace Ship.SecondEdition.DroidTriFighter
                 {
                     Tags.Droid
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(AfterBurners));
