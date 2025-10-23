@@ -33,7 +33,7 @@ namespace Ship
                     },
                     tags: new List<Tags>()
                     {
-                        Tags.Mandalorian 
+                        Tags.Mandalorian
                     },
                     skinName: "Bodica Venj",
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -45,8 +45,8 @@ namespace Ship
         {
             public BodicaVenjXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
@@ -80,10 +80,10 @@ namespace Abilities.SecondEdition
         private void CheckBodicaVenjAbility(GenericShip ship)
         {
 
-            if (!HostShip.IsDepleted 
-                && !HostShip.IsCannotAttackSecondTime 
-                && Combat.Defender != null 
-                && Tools.IsFriendly(Combat.Defender, HostShip) 
+            if (!HostShip.IsDepleted
+                && !HostShip.IsCannotAttackSecondTime
+                && Combat.Defender != null
+                && Tools.IsFriendly(Combat.Defender, HostShip)
                 && !Tools.IsSameShip(Combat.Defender, HostShip))
             {
                 bonusAttackTarget = Combat.Attacker;

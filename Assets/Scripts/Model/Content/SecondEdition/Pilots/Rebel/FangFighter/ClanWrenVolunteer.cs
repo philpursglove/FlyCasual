@@ -43,17 +43,16 @@ namespace Ship
         {
             public ClanWrenVolunteerXWA() : base()
             {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 12;
-                pilot.ExtraUpgrades = new List<UpgradeType>()
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Torpedo,
                     UpgradeType.Modification,
-                    UpgradeType.Modification
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
                 };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
