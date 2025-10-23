@@ -198,14 +198,17 @@ public class RosterBuilderUI : MonoBehaviour {
             case "Standard":
             case "AMG Standard":
                 Options.Format = "AMG Extended";
+                MainMenu.SetEdition("SecondEdition");
                 break;
             case "Extended":
             case "AMG Extended":
                 Options.Format = "XWA";
+                MainMenu.SetEdition("XWAEdition"); 
                 break;
             case "XWA":
             default:
                 Options.Format = "AMG Standard";
+                MainMenu.SetEdition("SecondEdition");
                 break;
         }
         
