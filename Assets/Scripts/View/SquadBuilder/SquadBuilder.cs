@@ -201,7 +201,7 @@ namespace SquadBuilderNS
 
         public void ShowCurrentFormat()
         {
-            GameObject.Find("UI/Panels/SelectFactionPanel/BottomPanel/FormatButton/Text").GetComponent<Text>().text = Options.Format;
+            GameObject.Find("UI/Panels/SelectFactionPanel/BottomPanel/FormatButton/Text").GetComponent<Text>().text = Options.GetFormatAsString(Global.SquadBuilder.SquadLists[PlayerNo.Player1].Format);
         }
 
         private void ShowLoadingContentStub(string panelType)
