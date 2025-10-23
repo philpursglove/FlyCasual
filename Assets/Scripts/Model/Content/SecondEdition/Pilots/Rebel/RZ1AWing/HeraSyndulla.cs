@@ -2,63 +2,59 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class HeraSyndulla : RZ1AWing
     {
-        public class HeraSyndulla : RZ1AWing
+        public HeraSyndulla() : base()
         {
-            public HeraSyndulla() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Hera Syndulla",
-                    "Phoenix Leader",
-                    Faction.Rebel,
-                    6,
-                    4,
-                    5,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.HeraSyndullaABWingAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Hera Syndulla",
+                "Phoenix Leader",
+                Faction.Rebel,
+                6,
+                4,
+                5,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.HeraSyndullaABWingAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Sensor,
                         UpgradeType.Missile,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
+                },
+                tags: new List<Tags>
+                {
                         Tags.AWing,
                         Tags.Spectre
-                    },
-                    skinName: "Hera Syndulla",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+                },
+                skinName: "Hera Syndulla",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "herasyndulla-rz1awing";
-            }
+            PilotNameCanonical = "herasyndulla-rz1awing";
         }
+    }
 
-        public class HeraSyndullaXWA : HeraSyndulla
+    public class HeraSyndullaXWA : HeraSyndulla
+    {
+        public HeraSyndullaXWA() : base()
         {
-            public HeraSyndullaXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
-                    UpgradeType.Sensor,
                     UpgradeType.Modification,
                     UpgradeType.Missile,
                     UpgradeType.Configuration
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

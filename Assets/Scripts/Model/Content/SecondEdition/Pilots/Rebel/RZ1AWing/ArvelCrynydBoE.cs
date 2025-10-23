@@ -7,60 +7,57 @@ using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class ArvelCrynydBoE : RZ1AWing
     {
-        public class ArvelCrynydBoE : RZ1AWing
+        public ArvelCrynydBoE() : base()
         {
-            public ArvelCrynydBoE() : base()
-            {
-                PilotInfo = new PilotCardInfo25(
-                    "Arvel Crynyd",
-                    "Battle Over Endor",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(ArvelCrynydBattleOverEndorAbility),
-                    tags: new List<Tags>
-                    {
+            PilotInfo = new PilotCardInfo25(
+                "Arvel Crynyd",
+                "Battle Over Endor",
+                Faction.Rebel,
+                3,
+                4,
+                0,
+                isLimited: true,
+                abilityType: typeof(ArvelCrynydBattleOverEndorAbility),
+                tags: new List<Tags>
+                {
                         Tags.AWing
-                    },
-                    extraUpgradeIcons: new List<UpgradeType> {
+                },
+                extraUpgradeIcons: new List<UpgradeType> {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Missile,
                         UpgradeType.Configuration
-                    },
-                    isStandardLayout: true
-                );
+                },
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/arvelcrynyd-battleoverendor.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/arvelcrynyd-battleoverendor.png";
 
-                PilotNameCanonical = "arvelcrynyd-battleoverendor";
+            PilotNameCanonical = "arvelcrynyd-battleoverendor";
 
-                ShipInfo.Shields++;
+            ShipInfo.Shields++;
 
-                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BarrelRollAction), typeof(FocusAction)));
-                ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(SlamAction)));
+            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BarrelRollAction), typeof(FocusAction)));
+            ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(SlamAction)));
 
-                MustHaveUpgrades.Add(typeof(VectoredCannonsRZ1));
-                MustHaveUpgrades.Add(typeof(HeroicSacrifice));
-                MustHaveUpgrades.Add(typeof(ItsATrap));
-                MustHaveUpgrades.Add(typeof(ProtonRockets));
-            }
+            MustHaveUpgrades.Add(typeof(VectoredCannonsRZ1));
+            MustHaveUpgrades.Add(typeof(HeroicSacrifice));
+            MustHaveUpgrades.Add(typeof(ItsATrap));
+            MustHaveUpgrades.Add(typeof(ProtonRockets));
         }
+    }
 
-        public class ArvelCrynydBoEXWA : ArvelCrynydBoE
+    public class ArvelCrynydBoEXWA : ArvelCrynydBoE
+    {
+        public ArvelCrynydBoEXWA() : base()
         {
-            public ArvelCrynydBoEXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 4;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

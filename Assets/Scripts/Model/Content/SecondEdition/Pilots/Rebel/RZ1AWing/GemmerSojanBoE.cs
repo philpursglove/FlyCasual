@@ -6,57 +6,54 @@ using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class GemmerSojanBoELSL : RZ1AWing
     {
-        public class GemmerSojanBoELSL : RZ1AWing
+        public GemmerSojanBoELSL() : base()
         {
-            public GemmerSojanBoELSL() : base()
-            {
-                PilotInfo = new PilotCardInfo25(
-                    "Gemmer Sojan",
-                    "Battle Over Endor",
-                    Faction.Rebel,
-                    2,
-                    4,
-                    loadoutValue: 0,
-                    isLimited: true,
-                    abilityType: typeof(GemmerSojanBattleOverEndorAbility),
-                    tags: new List<Tags>
-                    {
+            PilotInfo = new PilotCardInfo25(
+                "Gemmer Sojan",
+                "Battle Over Endor",
+                Faction.Rebel,
+                2,
+                4,
+                loadoutValue: 0,
+                isLimited: true,
+                abilityType: typeof(GemmerSojanBattleOverEndorAbility),
+                tags: new List<Tags>
+                {
                         Tags.AWing
-                    },
-                    extraUpgradeIcons: new List<UpgradeType> {
+                },
+                extraUpgradeIcons: new List<UpgradeType> {
                         UpgradeType.Talent,
                         UpgradeType.Cannon,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
-                    },
-                    isStandardLayout: true
-                );
+                },
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/gemmersojan-battleoverendor.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/gemmersojan-battleoverendor.png";
 
-                PilotNameCanonical = "gemmersojan-battleoverendor";
+            PilotNameCanonical = "gemmersojan-battleoverendor";
 
-                MustHaveUpgrades.Add(typeof(VectoredCannonsRZ1));
-                MustHaveUpgrades.Add(typeof(ItsATrap));
-                MustHaveUpgrades.Add(typeof(PrecisionTunedCannons));
-                MustHaveUpgrades.Add(typeof(ChaffParticlesBoE));
-                MustHaveUpgrades.Add(typeof(TargetAssistAlgorithm));
-            }
+            MustHaveUpgrades.Add(typeof(VectoredCannonsRZ1));
+            MustHaveUpgrades.Add(typeof(ItsATrap));
+            MustHaveUpgrades.Add(typeof(PrecisionTunedCannons));
+            MustHaveUpgrades.Add(typeof(ChaffParticlesBoE));
+            MustHaveUpgrades.Add(typeof(TargetAssistAlgorithm));
         }
+    }
 
-        public class GemmerSojanBoEXWA : GemmerSojanBoELSL
+    public class GemmerSojanBoEXWA : GemmerSojanBoELSL
+    {
+        public GemmerSojanBoEXWA() : base()
         {
-            public GemmerSojanBoEXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 4;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
