@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.GauntletFighter
 {
-    namespace SecondEdition.GauntletFighter
+    public class Chopper : GauntletFighter
     {
-        public class Chopper : GauntletFighter
+        public Chopper() : base()
         {
-            public Chopper() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Chopper\"",
-                    "Spectre-3",
-                    Faction.Rebel,
-                    2,
-                    6,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ChopperPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Chopper\"",
+                "Spectre-3",
+                Faction.Rebel,
+                2,
+                6,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ChopperPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Device,
@@ -30,29 +28,29 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Configuration,
                         UpgradeType.Title
-                    },
-                    tags: new List<Tags>()
-                    {
+                },
+                tags: new List<Tags>()
+                {
                         Tags.Droid,
                         Tags.Spectre
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipInfo.ActionIcons.SwitchToDroidActions();
+            ShipInfo.ActionIcons.SwitchToDroidActions();
 
-                PilotNameCanonical = "chopper-gauntletfighter";
-            }
+            PilotNameCanonical = "chopper-gauntletfighter";
         }
+    }
 
-        public class ChopperXWA : Chopper
+    public class ChopperXWA : Chopper
+    {
+        public ChopperXWA() : base()
         {
-            public ChopperXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            (PilotInfo as PilotCardInfo25).Cost = 16;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
                 {
                     UpgradeType.Crew,
                     UpgradeType.Gunner,
@@ -63,8 +61,7 @@ namespace Ship
                     UpgradeType.Configuration,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
