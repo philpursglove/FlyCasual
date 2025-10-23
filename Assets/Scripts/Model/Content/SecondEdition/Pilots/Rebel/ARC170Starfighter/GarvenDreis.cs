@@ -39,16 +39,16 @@ namespace Ship.SecondEdition.ARC170Starfighter
     {
         public GarvenDreisXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
                 UpgradeType.Astromech,
                 UpgradeType.Gunner,
+                UpgradeType.Gunner,
                 UpgradeType.Modification,
-                UpgradeType.Cannon,
-                UpgradeType.Missile                        
+                UpgradeType.Missile
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }

@@ -37,15 +37,16 @@ namespace Ship.SecondEdition.ARC170Starfighter
     {
         public IbtisamXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
                 UpgradeType.Astromech,
                 UpgradeType.Gunner,
+                UpgradeType.Gunner,
                 UpgradeType.Modification,
-                UpgradeType.Torpedo                        
+                UpgradeType.Torpedo
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
@@ -96,7 +97,8 @@ namespace Abilities.SecondEdition
             Phases.StartTemporarySubPhaseOld(
                 HostShip.PilotInfo.PilotName + ": Try to remove stress",
                 typeof(SubPhases.BraylenStrammCheckSubPhase),
-                delegate {
+                delegate
+                {
                     //We have a BraylenStrammCheckSubPhase open, so finish it
                     Phases.FinishSubPhase(typeof(SubPhases.BraylenStrammCheckSubPhase));
 
