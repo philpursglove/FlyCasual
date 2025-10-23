@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Abilities.SecondEdition;
-using System.Linq;
+﻿using Abilities.SecondEdition;
 using Content;
+using System.Collections.Generic;
+using System.Linq;
 using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -21,7 +21,7 @@ namespace Ship
                     1,
                     4,
                     0,
-                    extraUpgradeIcons:new List<UpgradeType>()
+                    extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
@@ -34,7 +34,8 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
 
                 );
                 PilotNameCanonical = "sapphire2-battleoverendor";
@@ -48,6 +49,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(Reckless));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/sapphire2-battleoverendor.png";
+            }
+        }
+
+
+        public class Sapphire2BoEXWA : Sapphire2BoE
+        {
+            public Sapphire2BoEXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

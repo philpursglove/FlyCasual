@@ -35,7 +35,8 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    abilityType: typeof(Abilities.SecondEdition.MajorMiandaAbility)
+                    abilityType: typeof(Abilities.SecondEdition.MajorMiandaAbility),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipAbilities.Add(new Abilities.SecondEdition.FormedUpAbility());
@@ -49,6 +50,16 @@ namespace Ship
 
                 PilotNameCanonical = "majormianda-battleoverendor";
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majormianda-battleoverendor.png";
+            }
+        }
+
+        public class MajorMiandaBoEXWA : MajorMiandaBoE
+        {
+            public MajorMiandaBoEXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 10;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
@@ -143,7 +154,7 @@ namespace Abilities.SecondEdition
             if (!eligibleShips.Contains(ship)) return false;
             if (ship.Equals(HostShip) && selfSelected) return false;
             if (!ship.Equals(HostShip) && selectedShips.Count >= 2) return false;
-            if (selectedShips.Contains(ship)) return false;            
+            if (selectedShips.Contains(ship)) return false;
             return true;
         }
 

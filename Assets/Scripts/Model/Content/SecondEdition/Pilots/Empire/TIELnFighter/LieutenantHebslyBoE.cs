@@ -17,7 +17,7 @@ namespace Ship
                 PilotInfo = new PilotCardInfo25(
                     "Lieutenant Hebsly",
                     "Battle Over Endor",
-                    Faction.Imperial, 
+                    Faction.Imperial,
                     3,
                     3,
                     loadoutValue: 0,
@@ -33,7 +33,8 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    abilityType: typeof(Abilities.SecondEdition.LieutenantHebsly)
+                    abilityType: typeof(Abilities.SecondEdition.LieutenantHebsly),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipAbilities.Add(new Abilities.SecondEdition.FormedUpAbility());
@@ -49,6 +50,15 @@ namespace Ship
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/lieutenanthebsly-battleoverendor.png";
             }
         }
+
+        public class LieutenantHebslyBoEXWA : LieutenantHebslyBoE
+        {
+            public LieutenantHebslyBoEXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 8;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            }
+        }
     }
 }
 
@@ -57,7 +67,7 @@ namespace Abilities.SecondEdition
     //After you defend, you may perform a red boost action, even while stressed.
     public class LieutenantHebsly : GenericAbility
     {
-        
+
         public override void ActivateAbility()
         {
             HostShip.OnAttackFinishAsDefender += CheckAttackFinishCondition;
