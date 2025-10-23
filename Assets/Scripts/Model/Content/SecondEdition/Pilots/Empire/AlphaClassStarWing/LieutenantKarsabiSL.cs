@@ -32,7 +32,8 @@ namespace Ship
                         UpgradeType.Missile,
                         UpgradeType.Modification
                     },
-                    isStandardLayout: true
+                    isStandardLayout: true,
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "lieutenantkarsabi-ssl";

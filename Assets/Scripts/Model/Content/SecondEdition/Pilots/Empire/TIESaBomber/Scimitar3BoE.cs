@@ -35,7 +35,8 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Torpedo,
                         UpgradeType.Device
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(NoEscape));

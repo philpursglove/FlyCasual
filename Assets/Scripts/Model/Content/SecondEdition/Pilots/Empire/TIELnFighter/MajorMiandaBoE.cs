@@ -35,7 +35,8 @@ namespace Ship
                     {
                         Tags.Tie
                     },
-                    abilityType: typeof(Abilities.SecondEdition.MajorMiandaAbility)
+                    abilityType: typeof(Abilities.SecondEdition.MajorMiandaAbility),
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 ShipAbilities.Add(new Abilities.SecondEdition.FormedUpAbility());
