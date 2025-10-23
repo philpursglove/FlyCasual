@@ -40,12 +40,11 @@ namespace Ship.SecondEdition.AttackShuttle
     {
         public ZebOrreliosXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).Cost = 8;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
                 UpgradeType.Talent,
-                UpgradeType.Crew,
                 UpgradeType.Modification,
                 UpgradeType.Turret,
                 UpgradeType.Title
