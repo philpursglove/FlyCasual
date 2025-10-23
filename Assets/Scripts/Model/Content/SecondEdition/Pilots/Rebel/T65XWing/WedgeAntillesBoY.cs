@@ -7,61 +7,58 @@ using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class WedgeAntillesBoY : T65XWing
     {
-        public class WedgeAntillesBoY : T65XWing
+        public WedgeAntillesBoY() : base()
         {
-            public WedgeAntillesBoY() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Wedge Antilles",
-                    "Battle of Yavin",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(WedgeAntillesBoYAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                    UpgradeType.Talent,
-                    UpgradeType.Talent,
-                    UpgradeType.Astromech,
-                    UpgradeType.Modification,
-                    UpgradeType.Torpedo,
-                    UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                    Tags.XWing
-                    },
-                    seImageNumber: 1,
-                    skinName: "Wedge Antilles",
-                    isStandardLayout: true,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Wedge Antilles",
+                "Battle of Yavin",
+                Faction.Rebel,
+                5,
+                5,
+                0,
+                isLimited: true,
+                abilityType: typeof(WedgeAntillesBoYAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                Tags.XWing
+                },
+                seImageNumber: 1,
+                skinName: "Wedge Antilles",
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipAbilities.Add(new HopeAbility());
+            ShipAbilities.Add(new HopeAbility());
 
-                MustHaveUpgrades.Add(typeof(AttackSpeed));
-                MustHaveUpgrades.Add(typeof(Marksmanship));
-                MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
-                MustHaveUpgrades.Add(typeof(R2A3BoY));
+            MustHaveUpgrades.Add(typeof(AttackSpeed));
+            MustHaveUpgrades.Add(typeof(Marksmanship));
+            MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
+            MustHaveUpgrades.Add(typeof(R2A3BoY));
 
-                PilotNameCanonical = "wedgeantilles-battleofyavin";
-            }
+            PilotNameCanonical = "wedgeantilles-battleofyavin";
         }
+    }
 
-        public class WedgeAntillesBoYXWA : WedgeAntillesBoY
+    public class WedgeAntillesBoYXWA : WedgeAntillesBoY
+    {
+        public WedgeAntillesBoYXWA() : base()
         {
-            public WedgeAntillesBoYXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -8,54 +8,51 @@ using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class JekPorkinsSSP : T65XWing
     {
-        public class JekPorkinsSSP : T65XWing
+        public JekPorkinsSSP() : base()
         {
-            public JekPorkinsSSP() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jek Porkins",
-                    "Red Six",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(JekPorkinsSSPAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    skinName: "Jek Porkins",
-                    isStandardLayout: true
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Jek Porkins",
+                "Red Six",
+                Faction.Rebel,
+                4,
+                5,
+                0,
+                isLimited: true,
+                abilityType: typeof(JekPorkinsSSPAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Astromech
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                skinName: "Jek Porkins",
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                MustHaveUpgrades.Add(typeof(Predator));
-                MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
-                MustHaveUpgrades.Add(typeof(R5D8));
+            MustHaveUpgrades.Add(typeof(Predator));
+            MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
+            MustHaveUpgrades.Add(typeof(R5D8));
 
-                PilotNameCanonical = "jekporkins-swz106";
-            }
+            PilotNameCanonical = "jekporkins-swz106";
         }
+    }
 
-        public class JekPorkinsSSPXWA : JekPorkinsSSP
+    public class JekPorkinsSSPXWA : JekPorkinsSSP
+    {
+        public JekPorkinsSSPXWA() : base()
         {
-            public JekPorkinsSSPXWA() : base()
-            {
-                var pilotInfo = PilotInfo as PilotCardInfo25;
-                pilotInfo.Cost = 5;
-                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
