@@ -2,53 +2,55 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIELnFighter
 {
-    namespace SecondEdition.TIELnFighter
+    public class ZebOrrelios : TIELnFighter
     {
-        public class ZebOrrelios : TIELnFighter
+        public ZebOrrelios() : base()
         {
-            public ZebOrrelios() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Zeb\" Orrelios",
-                    "Spectre-4",
-                    Faction.Rebel,
-                    2,
-                    3,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ZebOrreliosPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Spectre,
-                        Tags.Tie
-                    },
-                    seImageNumber: 49,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Zeb\" Orrelios",
+                "Spectre-4",
+                Faction.Rebel,
+                2,
+                3,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ZebOrreliosPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Spectre,
+                    Tags.Tie
+                },
+                seImageNumber: 49,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "zeborrelios-tielnfighter";
+            PilotNameCanonical = "zeborrelios-tielnfighter";
 
-                ModelInfo.ModelName = "TIE Fighter Rebel";
-                ModelInfo.SkinName = "Rebel";
-            }
+            ModelInfo.ModelName = "TIE Fighter Rebel";
+            ModelInfo.SkinName = "Rebel";
         }
+    }
 
-        public class ZebOrreliosXWA : ZebOrrelios
+    public class ZebOrreliosXWA : ZebOrrelios
+    {
+        public ZebOrreliosXWA() : base()
         {
-            public ZebOrreliosXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Modification,
+                UpgradeType.Modification
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

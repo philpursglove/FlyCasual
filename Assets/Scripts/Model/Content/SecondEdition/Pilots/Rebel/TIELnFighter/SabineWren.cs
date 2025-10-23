@@ -4,58 +4,55 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIELnFighter
 {
-    namespace SecondEdition.TIELnFighter
+    public class SabineWren : TIELnFighter
     {
-        public class SabineWren : TIELnFighter
+        public SabineWren() : base()
         {
-            public SabineWren() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Sabine Wren",
-                    "Spectre-5",
-                    Faction.Rebel,
-                    3,
-                    2,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.SabineWrenPilotAbility),
-                    tags: new List<Tags>
-                    {
-                        Tags.Mandalorian,
-                        Tags.Tie,
-                        Tags.Spectre
-                    },
-                    seImageNumber: 47,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-
-                PilotNameCanonical = "sabinewren-tielnfighter";
-
-                ModelInfo.ModelName = "TIE Fighter Rebel";
-                ModelInfo.SkinName = "Rebel";
-            }
-        }
-
-        public class SabineWrenXWA : SabineWren
-        {
-            public SabineWrenXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Sabine Wren",
+                "Spectre-5",
+                Faction.Rebel,
+                3,
+                2,
+                0,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.SabineWrenPilotAbility),
+                tags: new List<Tags>
                 {
-                    UpgradeType.Talent,
-                    UpgradeType.Modification
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    Tags.Mandalorian,
+                    Tags.Tie,
+                    Tags.Spectre
+                },
+                seImageNumber: 47,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            PilotNameCanonical = "sabinewren-tielnfighter";
+
+            ModelInfo.ModelName = "TIE Fighter Rebel";
+            ModelInfo.SkinName = "Rebel";
+        }
+    }
+
+    public class SabineWrenXWA : SabineWren
+    {
+        public SabineWrenXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Modification
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
-
 
 namespace Abilities.SecondEdition
 {
