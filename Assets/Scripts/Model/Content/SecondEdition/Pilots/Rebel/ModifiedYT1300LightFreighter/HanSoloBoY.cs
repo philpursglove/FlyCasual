@@ -8,59 +8,56 @@ using UnityEngine;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.ModifiedYT1300LightFreighter
 {
-    namespace SecondEdition.ModifiedYT1300LightFreighter
+    public class HanSoloBoY : ModifiedYT1300LightFreighter
     {
-        public class HanSoloBoY : ModifiedYT1300LightFreighter
+        public HanSoloBoY() : base()
         {
-            public HanSoloBoY() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Han Solo",
-                    "Battle of Yavin",
-                    Faction.Rebel,
-                    6,
-                    7,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(HanSoloBoYAbility),
-                    charges: 4,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Han Solo",
+                "Battle of Yavin",
+                Faction.Rebel,
+                6,
+                7,
+                0,
+                isLimited: true,
+                abilityType: typeof(HanSoloBoYAbility),
+                charges: 4,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Crew,
                         UpgradeType.Illicit,
                         UpgradeType.Title,
                         UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
+                },
+                tags: new List<Tags>
+                {
                         Tags.Freighter,
                         Tags.YT1300
-                    },
-                    isStandardLayout: true,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+                },
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipAbilities.Add(new SoloAbility());
+            ShipAbilities.Add(new SoloAbility());
 
-                MustHaveUpgrades.Add(typeof(ChewbaccaBoY));
-                MustHaveUpgrades.Add(typeof(RiggedCargoChute));
-                MustHaveUpgrades.Add(typeof(MillenniumFalcon));
-                MustHaveUpgrades.Add(typeof(L337sProgramming));
+            MustHaveUpgrades.Add(typeof(ChewbaccaBoY));
+            MustHaveUpgrades.Add(typeof(RiggedCargoChute));
+            MustHaveUpgrades.Add(typeof(MillenniumFalcon));
+            MustHaveUpgrades.Add(typeof(L337sProgramming));
 
-                PilotNameCanonical = "hansolo-battleofyavin";
-            }
+            PilotNameCanonical = "hansolo-battleofyavin";
         }
+    }
 
-        public class HanSoloBoYXWA : HanSoloBoY
+    public class HanSoloBoYXWA : HanSoloBoY
+    {
+        public HanSoloBoYXWA() : base()
         {
-            public HanSoloBoYXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

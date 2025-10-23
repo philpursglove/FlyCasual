@@ -7,26 +7,24 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ModifiedYT1300LightFreighter
 {
-    namespace SecondEdition.ModifiedYT1300LightFreighter
+    public class LandoCalrissian : ModifiedYT1300LightFreighter
     {
-        public class LandoCalrissian : ModifiedYT1300LightFreighter
+        public LandoCalrissian() : base()
         {
-            public LandoCalrissian() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lando Calrissian",
-                    "General of the Alliance",
-                    Faction.Rebel,
-                    5,
-                    7,
-                    21,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LandoCalrissianRebelPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lando Calrissian",
+                "General of the Alliance",
+                Faction.Rebel,
+                5,
+                7,
+                21,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LandoCalrissianRebelPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Missile,
                         UpgradeType.Crew,
@@ -35,32 +33,33 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
-                        UpgradeType.Title                        
-                    },
-                    tags: new List<Tags>
-                    {
+                        UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
                         Tags.Freighter,
                         Tags.YT1300
-                    },
-                    seImageNumber: 70,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+                },
+                seImageNumber: 70,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "landocalrissian-modifiedyt1300lightfreighter";
-            }
+            PilotNameCanonical = "landocalrissian-modifiedyt1300lightfreighter";
         }
+    }
 
-        public class LandoCalrissianXWA : LandoCalrissian
+    public class LandoCalrissianXWA : LandoCalrissian
+    {
+        public LandoCalrissianXWA() : base()
         {
-            public LandoCalrissianXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 19;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
+                    UpgradeType.Gunner,
                     UpgradeType.Gunner,
                     UpgradeType.Illicit,
                     UpgradeType.Modification,
@@ -68,8 +67,7 @@ namespace Ship
                     UpgradeType.Missile,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -155,7 +153,8 @@ namespace Abilities.FirstEdition
 
             TargetShip.AskPerformFreeAction(
                 actionBarActions,
-                delegate {
+                delegate
+                {
                     Selection.ThisShip = HostShip;
                     Phases.CurrentSubPhase.Resume();
                     Triggers.FinishTrigger();
@@ -209,7 +208,8 @@ namespace Abilities.SecondEdition
 
             TargetShip.AskPerformFreeAction(
                 actions,
-                delegate {
+                delegate
+                {
                     Selection.ThisShip = HostShip;
                     Phases.CurrentSubPhase.Resume();
                     Triggers.FinishTrigger();
