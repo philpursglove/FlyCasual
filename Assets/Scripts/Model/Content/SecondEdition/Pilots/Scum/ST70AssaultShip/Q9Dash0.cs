@@ -113,7 +113,6 @@ namespace Abilities.SecondEdition
             {
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, GainStrainToken);
             }
-            ;
         }
 
         private void GainStrainToken(object sender, EventArgs e)
