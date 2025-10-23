@@ -1,11 +1,10 @@
-﻿using Players;
+﻿using Editions;
+using Players;
+using Ship;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Upgrade;
-using Ship;
-using Editions;
-using System;
 
 namespace SquadBuilderNS
 {
@@ -66,7 +65,7 @@ namespace SquadBuilderNS
         {
             Text targetText = GameObject.Find("UI/Panels/" + panelName + "/ControlsPanel/SquadCostText").GetComponent<Text>();
             targetText.text = Global.SquadBuilder.CurrentSquad.Points.ToString() + " / " + Edition.Current.MaxPoints;
-            targetText.color = (Global.SquadBuilder.CurrentSquad.Points > Edition.Current.MaxPoints) ? new Color(1, 0, 0, 200f/255f) : new Color(0, 0, 0, 200f / 255f);
+            targetText.color = (Global.SquadBuilder.CurrentSquad.Points > Edition.Current.MaxPoints) ? new Color(1, 0, 0, 200f / 255f) : new Color(0, 0, 0, 200f / 255f);
         }
 
         public void UpdateClearButtonVisibility(GenericShip ship)
@@ -206,7 +205,7 @@ namespace SquadBuilderNS
 
         private void ShowLoadingContentStub(string panelType)
         {
-            GameObject noContentText = GameObject.Find("UI/Panels/Select" + panelType +"Panel").transform.Find("NoContentText")?.gameObject;
+            GameObject noContentText = GameObject.Find("UI/Panels/Select" + panelType + "Panel").transform.Find("NoContentText")?.gameObject;
             if (noContentText != null) noContentText.SetActive(false);
 
             GameObject loadingText = GameObject.Find("UI/Panels/Select" + panelType + "Panel").transform.Find("LoadingText").gameObject;
