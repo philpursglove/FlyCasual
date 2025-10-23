@@ -44,7 +44,8 @@ namespace Ship
                         Tags.BWing,
                         Tags.Spectre
                     },
-                    skinName: "Prototype"
+                    skinName: "Prototype",
+                    legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "herasyndulla-asf01bwing";
@@ -55,9 +56,21 @@ namespace Ship
         {
             public HeraSyndullaXWA() : base()
             {
-                var pilotInfo = PilotInfo as PilotCardInfo25;
-                pilotInfo.Cost = 5;
-                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).Cost = 15;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>() {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration,
+                    UpgradeType.Title
+                };
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

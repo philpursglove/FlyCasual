@@ -39,13 +39,15 @@ namespace Ship.SecondEdition.ASF01BWing
     {
         public BladeSquadronVeteranXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 5;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Sensor,
+                UpgradeType.Modification,
                 UpgradeType.Cannon,
                 UpgradeType.Cannon,
+                UpgradeType.Missile,
                 UpgradeType.Torpedo,
                 UpgradeType.Configuration
             };

@@ -60,12 +60,12 @@ namespace Ship.SecondEdition.ASF01BWing
             DefaultUpgrades.Remove(typeof(UpgradesList.SecondEdition.StabilizedSFoilsOpen));
         }
     }
-        
+
     public class GinaMoonsongBattleOverEndorXWA : GinaMoonsongBattleOverEndor
     {
         public GinaMoonsongBattleOverEndorXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).Cost = 16;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -89,9 +89,9 @@ namespace Abilities.SecondEdition
             List<GenericShip> friendlyShipsAtRange = Board.GetShipsAtRange(HostShip, new Vector2(0, 2), Team.Type.Friendly);
             List<GenericShip> enemyShipsAtRange = Board.GetShipsAtRange(HostShip, new Vector2(0, 3), Team.Type.Enemy);
 
-            foreach(GenericShip ship in friendlyShipsAtRange)
+            foreach (GenericShip ship in friendlyShipsAtRange)
             {
-                if (ship.PilotInfo.PilotName.Equals("Braylen Stramm") && ship.IsStressed  && enemyShipsAtRange.Count > 0)
+                if (ship.PilotInfo.PilotName.Equals("Braylen Stramm") && ship.IsStressed && enemyShipsAtRange.Count > 0)
                 {
                     RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, SelectTarget);
                 }
@@ -192,8 +192,8 @@ namespace Abilities.SecondEdition
 
         private void RegisterEvadeAbility(GenericShip ship, GenericToken token)
         {
-            if(token.GetType() == typeof(StressToken))
-            { 
+            if (token.GetType() == typeof(StressToken))
+            {
                 RegisterAbilityTrigger(TriggerTypes.OnTokenIsAssigned, AskUseEvadeAbility);
             }
         }
@@ -289,7 +289,7 @@ namespace UpgradesList.SecondEdition
 
             IsHidden = true;
 
-            ImageUrl = HostShip != null? HostShip.ImageUrl : "https://infinitearenas.com/xw2/images/quickbuilds/ginamoonsong-battleoverendor.png";
+            ImageUrl = HostShip != null ? HostShip.ImageUrl : "https://infinitearenas.com/xw2/images/quickbuilds/ginamoonsong-battleoverendor.png";
         }
     }
 }

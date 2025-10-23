@@ -38,14 +38,17 @@ namespace Ship.SecondEdition.ASF01BWing
     {
         public BlueSquadronPilotXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
+                UpgradeType.Talent,
                 UpgradeType.Sensor,
-                UpgradeType.Device,
+                UpgradeType.Modification,
                 UpgradeType.Cannon,
                 UpgradeType.Cannon,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo,
                 UpgradeType.Configuration
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };

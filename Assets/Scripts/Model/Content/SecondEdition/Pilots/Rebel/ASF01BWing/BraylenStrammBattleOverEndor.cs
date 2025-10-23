@@ -38,7 +38,8 @@ namespace Ship.SecondEdition.ASF01BWing
                 skinName: "Braylen Stramm",
                 charges: 2,
                 regensCharges: 1,
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipInfo.Shields++;
@@ -63,9 +64,8 @@ namespace Ship.SecondEdition.ASF01BWing
     {
         public BraylenStrammBoEXWA() : base()
         {
-            var pilot = (PilotCardInfo25)PilotInfo;
-            pilot.Cost = 5;
-            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

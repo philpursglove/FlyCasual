@@ -33,7 +33,8 @@ namespace Ship.SecondEdition.ASF01BWing
                 },
                 charges: 2,
                 regensCharges: 1,
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/adonfox-battleoverendor.png";
@@ -55,9 +56,8 @@ namespace Ship.SecondEdition.ASF01BWing
     {
         public AdonFoxBoEXWA() : base()
         {
-            var pilot = (PilotCardInfo25)PilotInfo;
-            pilot.Cost = 5;
-            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
