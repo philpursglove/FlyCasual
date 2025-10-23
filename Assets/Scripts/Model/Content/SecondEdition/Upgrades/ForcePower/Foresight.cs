@@ -48,7 +48,7 @@ namespace Abilities.SecondEdition
                 GetAiPriority,
                 DiceModificationType.Change,
                 1,
-                sidesCanBeSelected: new List<DieSide>(){ DieSide.Focus },
+                sidesCanBeSelected: new List<DieSide>() { DieSide.Focus },
                 sideCanBeChangedTo: DieSide.Success
             );
         }
@@ -81,7 +81,7 @@ namespace Abilities.SecondEdition
             if (Combat.Attacker.ShipId == HostShip.ShipId && Combat.ChosenWeapon.GetType() == HostUpgrade.GetType())
             {
                 Combat.Attacker.OnTryAddAvailableDiceModification += ForesightRestrictionForAttacker;
-                Combat.Attacker.OnAttackFinish += RemoveFiresightRestrictionForAttacker;
+                Combat.Attacker.OnAttackFinish += RemoveForesightRestrictionForAttacker;
 
                 Combat.Defender.OnTryAddAvailableDiceModification += ForesightRestrictionForDefender;
                 Combat.Defender.OnAttackFinish += RemoveForesightRestrictionForDefender;
@@ -114,10 +114,10 @@ namespace Abilities.SecondEdition
             ship.OnAttackFinish -= RemoveForesightRestrictionForDefender;
         }
 
-        private void RemoveFiresightRestrictionForAttacker(GenericShip ship)
+        private void RemoveForesightRestrictionForAttacker(GenericShip ship)
         {
             ship.OnTryAddAvailableDiceModification -= ForesightRestrictionForAttacker;
-            ship.OnAttackFinish -= RemoveFiresightRestrictionForAttacker;
+            ship.OnAttackFinish -= RemoveForesightRestrictionForAttacker;
         }
 
         private void CleanUpForesightAbility()
@@ -131,7 +131,7 @@ namespace Abilities.SecondEdition
             DisableWeaponRange();
         }
 
-        public void AfterFiresightAttackSubPhase()
+        public void AfterForesightAttackSubPhase()
         {
             HostShip.IsAttackPerformed = true;
             //if bonus attack was skipped, allow bonus attacks again
@@ -185,7 +185,8 @@ namespace Abilities.SecondEdition
                 AlwaysUseByDefault,
                 PerformForesightShot,
                 dontUseAbility: CancelForesightShot,
-                callback: delegate {
+                callback: delegate
+                {
                     Selection.ChangeActiveShip(foresightTarget);
                     Triggers.FinishTrigger();
                 },
@@ -236,7 +237,7 @@ namespace Abilities.SecondEdition
                     {
                         Combat.StartSelectAttackTarget(
                             HostShip,
-                            AfterFiresightAttackSubPhase,
+                            AfterForesightAttackSubPhase,
                             ForesightAttackFilter,
                             HostUpgrade.UpgradeInfo.Name,
                             "You may perform a bonus Foresight attack against " + foresightTarget.PilotInfo.PilotName,
