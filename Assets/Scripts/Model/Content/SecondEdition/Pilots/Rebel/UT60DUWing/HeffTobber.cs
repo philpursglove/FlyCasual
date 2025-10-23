@@ -6,48 +6,54 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UT60DUWing
 {
-    namespace SecondEdition.UT60DUWing
+    public class HeffTobber : UT60DUWing
     {
-        public class HeffTobber : UT60DUWing
+        public HeffTobber() : base()
         {
-            public HeffTobber() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Heff Tobber",
-                    "Blue Eight",
-                    Faction.Rebel,
-                    2,
-                    5,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(HeffTobberAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    seImageNumber: 59,
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Heff Tobber",
+                "Blue Eight",
+                Faction.Rebel,
+                2,
+                5,
+                9,
+                isLimited: true,
+                abilityType: typeof(HeffTobberAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                seImageNumber: 59,
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class HeffToberXWA : HeffTobber
+    public class HeffToberXWA : HeffTobber
+    {
+        public HeffToberXWA() : base()
         {
-            public HeffToberXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -88,7 +94,8 @@ namespace Abilities.SecondEdition
 
             HostShip.AskPerformFreeAction(
                 actions,
-                delegate {
+                delegate
+                {
                     Selection.ChangeActiveShip(previousActiveShip);
                     Triggers.FinishTrigger();
                 },

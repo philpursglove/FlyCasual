@@ -6,53 +6,60 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UT60DUWing
 {
-    namespace SecondEdition.UT60DUWing
+    public class BenthicTwoTubes : UT60DUWing
     {
-        public class BenthicTwoTubes : UT60DUWing
+        public BenthicTwoTubes() : base()
         {
-            public BenthicTwoTubes() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Benthic Two Tubes",
-                    "Cavern Angels Marksman",
-                    Faction.Rebel,
-                    2,
-                    5,
-                    16,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.BenthicTwoTubesAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Partisan
-                    },
-                    seImageNumber: 58,
-                    skinName: "Partisan",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Benthic Two Tubes",
+                "Cavern Angels Marksman",
+                Faction.Rebel,
+                2,
+                5,
+                16,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.BenthicTwoTubesAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Partisan
+                },
+                seImageNumber: 58,
+                skinName: "Partisan",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class BenthicTwoTubesXWA : BenthicTwoTubes
+    public class BenthicTwoTubesXWA : BenthicTwoTubes
+    {
+        public BenthicTwoTubesXWA() : base()
         {
-            public BenthicTwoTubesXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

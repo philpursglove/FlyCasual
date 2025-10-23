@@ -7,46 +7,52 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UT60DUWing
 {
-    namespace SecondEdition.UT60DUWing
+    public class CassianAndor : UT60DUWing
     {
-        public class CassianAndor : UT60DUWing
+        public CassianAndor() : base()
         {
-            public CassianAndor() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Cassian Andor",
-                    "Raised by the Rebellion",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(CassianAndorAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    seImageNumber: 56,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Cassian Andor",
+                "Raised by the Rebellion",
+                Faction.Rebel,
+                3,
+                5,
+                12,
+                isLimited: true,
+                abilityType: typeof(CassianAndorAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                seImageNumber: 56,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class CassianAndorXWA : CassianAndor
+    public class CassianAndorXWA : CassianAndor
+    {
+        public CassianAndorXWA() : base()
         {
-            public CassianAndorXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

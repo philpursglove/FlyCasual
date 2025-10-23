@@ -5,53 +5,60 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UT60DUWing
 {
-    namespace SecondEdition.UT60DUWing
+    public class SawGerrera : UT60DUWing
     {
-        public class SawGerrera : UT60DUWing
+        public SawGerrera() : base()
         {
-            public SawGerrera() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Saw Gerrera",
-                    "Obsessive Outlaw",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    18,
-                    isLimited: true,
-                    abilityType: typeof(SawGerreraPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Partisan
-                    },
-                    seImageNumber: 55,
-                    skinName: "Partisan",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Saw Gerrera",
+                "Obsessive Outlaw",
+                Faction.Rebel,
+                4,
+                5,
+                18,
+                isLimited: true,
+                abilityType: typeof(SawGerreraPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Partisan
+                },
+                seImageNumber: 55,
+                skinName: "Partisan",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class SawGerreraXWA : SawGerrera
+    public class SawGerreraXWA : SawGerrera
+    {
+        public SawGerreraXWA() : base()
         {
-            public SawGerreraXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
