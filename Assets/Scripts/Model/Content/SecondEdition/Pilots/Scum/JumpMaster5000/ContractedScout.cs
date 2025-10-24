@@ -41,8 +41,8 @@ namespace Ship
                     UpgradeType.Crew,
                     UpgradeType.Gunner,
                     UpgradeType.Illicit,
+                    UpgradeType.Modification,
                     UpgradeType.Cannon,
-                    UpgradeType.Modification
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
                 (PilotInfo as PilotCardInfo25).Limited = 2;
