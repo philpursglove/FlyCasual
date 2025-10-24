@@ -4,28 +4,26 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ModifiedYT1300LightFreighter
 {
-    namespace SecondEdition.ModifiedYT1300LightFreighter
+    public class HanSolo : ModifiedYT1300LightFreighter
     {
-        public class HanSolo : ModifiedYT1300LightFreighter
+        public HanSolo() : base()
         {
-            public HanSolo() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Han Solo",
-                    "Scoundrel for Hire",
-                    Faction.Rebel,
-                    6,
-                    7,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.HanSoloRebelPilotAbility),
-                    charges: 1,
-                    regensCharges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Han Solo",
+                "Scoundrel for Hire",
+                Faction.Rebel,
+                6,
+                7,
+                15,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.HanSoloRebelPilotAbility),
+                charges: 1,
+                regensCharges: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Missile,
                         UpgradeType.Crew,
@@ -34,32 +32,34 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
-                        UpgradeType.Title                        
-                    },
-                    tags: new List<Tags>
-                    {
+                        UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
                         Tags.Freighter,
                         Tags.YT1300
-                    },
-                    seImageNumber: 69,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+                },
+                seImageNumber: 69,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "hansolo-modifiedyt1300lightfreighter";
-            }
+            PilotNameCanonical = "hansolo-modifiedyt1300lightfreighter";
         }
+    }
 
-        public class HanSoloXWA : HanSolo
+    public class HanSoloXWA : HanSolo
+    {
+        public HanSoloXWA() : base()
         {
-            public HanSoloXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 9;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 25;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 20;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
+                    UpgradeType.Talent,
                     UpgradeType.Talent,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
+                    UpgradeType.Gunner,
                     UpgradeType.Gunner,
                     UpgradeType.Illicit,
                     UpgradeType.Modification,
@@ -67,8 +67,7 @@ namespace Ship
                     UpgradeType.Missile,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

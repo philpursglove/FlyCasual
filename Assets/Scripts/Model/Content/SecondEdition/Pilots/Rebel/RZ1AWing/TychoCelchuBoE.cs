@@ -8,52 +8,60 @@ using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class TychoCelchuBoELSL : RZ1AWing
     {
-        public class TychoCelchuBoELSL : RZ1AWing
+        public TychoCelchuBoELSL() : base()
         {
-            public TychoCelchuBoELSL() : base()
-            {
-                PilotInfo = new PilotCardInfo25(
-                    "Tycho Celchu",
-                    "Battle Over Endor",
-                    Faction.Rebel,
-                    5,
-                    4,
-                    loadoutValue: 0,
-                    isLimited: true,
-                    abilityType: typeof(TychoCelchuBattleOverEndorAbility),
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    extraUpgradeIcons: new List<UpgradeType> {
-                        UpgradeType.Talent, 
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    isStandardLayout: true
-                );
+            PilotInfo = new PilotCardInfo25(
+                "Tycho Celchu",
+                "Battle Over Endor",
+                Faction.Rebel,
+                5,
+                4,
+                loadoutValue: 0,
+                isLimited: true,
+                abilityType: typeof(TychoCelchuBattleOverEndorAbility),
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                extraUpgradeIcons: new List<UpgradeType> 
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tychocelchu-battleoverendor.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tychocelchu-battleoverendor.png";
 
-                PilotNameCanonical = "tychocelchu-battleoverendor-lsl";
+            PilotNameCanonical = "tychocelchu-battleoverendor-lsl";
 
-                ShipInfo.Shields++;
+            ShipInfo.Shields++;
 
-                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(FocusAction), typeof(ReloadAction)));
-                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BoostAction), typeof(EvadeAction)));
+            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(FocusAction), typeof(ReloadAction)));
+            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BoostAction), typeof(EvadeAction)));
 
-                MustHaveUpgrades.Add(typeof(VectoredCannonsRZ1));
-                MustHaveUpgrades.Add(typeof(ItsATrap));
-                MustHaveUpgrades.Add(typeof(Juke));
-                MustHaveUpgrades.Add(typeof(ProtonRockets));
-                MustHaveUpgrades.Add(typeof(ChaffParticlesBoE));
-            }
+            MustHaveUpgrades.Add(typeof(VectoredCannonsRZ1));
+            MustHaveUpgrades.Add(typeof(ItsATrap));
+            MustHaveUpgrades.Add(typeof(Juke));
+            MustHaveUpgrades.Add(typeof(ProtonRockets));
+            MustHaveUpgrades.Add(typeof(ChaffParticlesBoE));
+        }
+    }
+
+    public class TychoCelchuBoEXWA : TychoCelchuBoELSL
+    {
+        public TychoCelchuBoEXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -72,7 +80,7 @@ namespace Abilities.SecondEdition
 
         public override void DeactivateAbility()
         {
-            HostShip.OnWeaponsDisabledCheck -= AllowMissileAttacks;        
+            HostShip.OnWeaponsDisabledCheck -= AllowMissileAttacks;
         }
 
         private void AllowMissileAttacks(ref bool result)
@@ -84,7 +92,7 @@ namespace Abilities.SecondEdition
             Messages.ShowInfo("The attack using " + secondaryWeapon.Name + " is allowed");
 
             result = false;
-            
+
             PrepareAttackDiceCap();
         }
 
@@ -98,7 +106,7 @@ namespace Abilities.SecondEdition
         private void PrepareAttackDiceCap()
         {
             HostShip.AfterGotNumberOfAttackDiceCap += SetAttackDiceCap;
-            
+
             HostShip.OnAttackFinish += RemoveAttackDiceCap;
         }
 
@@ -112,7 +120,7 @@ namespace Abilities.SecondEdition
         private void RemoveAttackDiceCap(GenericShip ship)
         {
             HostShip.AfterGotNumberOfAttackDiceCap -= SetAttackDiceCap;
-            
+
             HostShip.OnAttackFinish -= RemoveAttackDiceCap;
         }
     }

@@ -7,58 +7,67 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.VCX100LightFreighter
 {
-    namespace SecondEdition.VCX100LightFreighter
+    public class KananJarrus : VCX100LightFreighter
     {
-        public class KananJarrus : VCX100LightFreighter
+        public KananJarrus() : base()
         {
-            public KananJarrus() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Kanan Jarrus",
-                    "Spectre-1",
-                    Faction.Rebel,
-                    3,
-                    7,
-                    20,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.KananJarrusPilotAbility),
-                    force: 2,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.Jedi,
-                        Tags.LightSide,
-                        Tags.Spectre
-                    },
-                    seImageNumber: 74,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Kanan Jarrus",
+                "Spectre-1",
+                Faction.Rebel,
+                3,
+                7,
+                20,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.KananJarrusPilotAbility),
+                force: 2,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Freighter,
+                    Tags.Jedi,
+                    Tags.LightSide,
+                    Tags.Spectre
+                },
+                seImageNumber: 74,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class KananJarrusXWA : KananJarrus
+    public class KananJarrusXWA : KananJarrus
+    {
+        public KananJarrusXWA() : base()
         {
-            public KananJarrusXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 19;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.ForcePower,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Turret,
+                UpgradeType.Torpedo,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

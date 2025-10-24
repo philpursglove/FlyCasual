@@ -5,51 +5,56 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class WesJanson : T65XWing
     {
-        public class WesJanson : T65XWing
+        public WesJanson() : base()
         {
-            public WesJanson() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Wes Janson",
-                    "Wisecracking Wingman",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.WesJansonAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    charges: 1,
-                    regensCharges: 1,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Wes Janson",
+                "Wisecracking Wingman",
+                Faction.Rebel,
+                5,
+                5,
+                15,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.WesJansonAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                charges: 1,
+                regensCharges: 1,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class WesJansonXWA : WesJanson
+    public class WesJansonXWA : WesJanson
+    {
+        public WesJansonXWA() : base()
         {
-            public WesJansonXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

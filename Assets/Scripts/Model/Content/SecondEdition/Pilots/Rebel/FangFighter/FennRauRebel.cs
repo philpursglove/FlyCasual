@@ -34,7 +34,7 @@ namespace Ship
                     },
                     tags: new List<Tags>()
                     {
-                        Tags.Mandalorian 
+                        Tags.Mandalorian
                     },
                     skinName: "Fenn Rau",
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -50,8 +50,8 @@ namespace Ship
         {
             public FennRauRebelXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
                 {
                     UpgradeType.Talent,

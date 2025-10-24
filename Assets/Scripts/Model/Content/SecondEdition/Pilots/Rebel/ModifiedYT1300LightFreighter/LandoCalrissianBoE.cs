@@ -5,59 +5,67 @@ using Content;
 using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.ModifiedYT1300LightFreighter
 {
-    namespace SecondEdition.ModifiedYT1300LightFreighter
+    public class LandoCalrissianBoE : ModifiedYT1300LightFreighter
     {
-        public class LandoCalrissianBoE : ModifiedYT1300LightFreighter
+        public LandoCalrissianBoE() : base()
         {
-            public LandoCalrissianBoE() : base()
-            {
-                PilotInfo = new PilotCardInfo25(
-                    pilotName: "Lando Calrissian",
-                    pilotTitle: "Battle Over Endor",
-                    faction: Faction.Rebel,
-                    initiative: 5,
-                    cost: 7,
-                    loadoutValue: 0,
-                    isLimited: true,
-                    abilityType: typeof(LandoCalrissianBattleOverEndorAbility),
-                    charges: 2,
-                    isStandardLayout: true,
-                    tags: new() {
+            PilotInfo = new PilotCardInfo25(
+                pilotName: "Lando Calrissian",
+                pilotTitle: "Battle Over Endor",
+                faction: Faction.Rebel,
+                initiative: 5,
+                cost: 7,
+                loadoutValue: 0,
+                isLimited: true,
+                abilityType: typeof(LandoCalrissianBattleOverEndorAbility),
+                charges: 2,
+                isStandardLayout: true,
+                tags: new() {
                         Tags.Freighter,
                         Tags.YT1300
-                    },
-                    extraUpgradeIcons: new()
-                    {
+                },
+                extraUpgradeIcons: new()
+                {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Title
-                    }
-                );
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipAbilities.Add(new HighStakesAbility());
+            ShipAbilities.Add(new HighStakesAbility());
 
-                ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(EvadeAction)));
-                ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(CoordinateAction), ActionColor.Red));
-                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(CoordinateAction), typeof(FocusAction)));
+            ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(EvadeAction)));
+            ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(CoordinateAction), ActionColor.Red));
+            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(CoordinateAction), typeof(FocusAction)));
 
-                MustHaveUpgrades.Add(typeof(AceInTheHole));
-                MustHaveUpgrades.Add(typeof(ItsATrap));
-                MustHaveUpgrades.Add(typeof(NienNunb));
-                MustHaveUpgrades.Add(typeof(AirenCracken));
-                MustHaveUpgrades.Add(typeof(MillenniumFalconBoE));
+            MustHaveUpgrades.Add(typeof(AceInTheHole));
+            MustHaveUpgrades.Add(typeof(ItsATrap));
+            MustHaveUpgrades.Add(typeof(NienNunb));
+            MustHaveUpgrades.Add(typeof(AirenCracken));
+            MustHaveUpgrades.Add(typeof(MillenniumFalconBoE));
 
-                PilotNameCanonical = "landocalrissian-battleoverendor";
+            PilotNameCanonical = "landocalrissian-battleoverendor";
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/landocalrissian-battleoverendor.png";
-            }            
-        }        
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/landocalrissian-battleoverendor.png";
+        }
+    }
+
+    public class LandoCalrissianBoEXWA : LandoCalrissianBoE
+    {
+        public LandoCalrissianBoEXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 
@@ -130,7 +138,7 @@ namespace Abilities.SecondEdition
         }
 
         private void UpdateInitiative()
-        {            
+        {
             HostShip.State.AddPilotSkillModifier(this);
             Phases.Events.OnActivationPhaseEnd_NoTriggers += RemovePilotSkillModifieer;
             DecisionSubPhase.ConfirmDecision();

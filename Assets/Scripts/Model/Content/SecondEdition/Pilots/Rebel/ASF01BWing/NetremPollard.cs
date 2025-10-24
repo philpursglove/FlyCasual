@@ -50,17 +50,16 @@ namespace Ship.SecondEdition.ASF01BWing
     {
         public NetremPollardXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
-                UpgradeType.Sensor,
                 UpgradeType.Modification,
-                UpgradeType.Device,
                 UpgradeType.Cannon,
                 UpgradeType.Cannon,
                 UpgradeType.Missile,
+                UpgradeType.Torpedo,
                 UpgradeType.Configuration
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };

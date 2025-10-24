@@ -34,7 +34,8 @@ namespace Ship.SecondEdition.BTLA4YWing
                 {
                     Tags.YWing
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipAbilities.Add(new HopeAbility());
@@ -44,6 +45,15 @@ namespace Ship.SecondEdition.BTLA4YWing
             MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.TargetingAstromech));
 
             PilotNameCanonical = "dutchvander-battleofyavin";
+        }
+    }
+
+    public class DutchVanderBoYXWA : DutchVanderBoY
+    {
+        public DutchVanderBoYXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

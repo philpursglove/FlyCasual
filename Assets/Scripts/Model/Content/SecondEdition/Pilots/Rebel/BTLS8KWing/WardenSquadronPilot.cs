@@ -34,15 +34,18 @@ namespace Ship.SecondEdition.BTLS8KWing
     {
         public WardenSquadronPilotXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 5;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 25;
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
+                UpgradeType.Crew,
                 UpgradeType.Gunner,
+                UpgradeType.Modification,
                 UpgradeType.Device,
                 UpgradeType.Device,
                 UpgradeType.Missile,
-                UpgradeType.Torpedo                        
+                UpgradeType.Missile,
+                UpgradeType.Torpedo
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }

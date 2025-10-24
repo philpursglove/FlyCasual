@@ -7,60 +7,56 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Hwk290LightFreighter
 {
-    namespace SecondEdition.Hwk290LightFreighter
+    public class KyleKatarn : Hwk290LightFreighter
     {
-        public class KyleKatarn : Hwk290LightFreighter
+        public KyleKatarn() : base()
         {
-            public KyleKatarn() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Kyle Katarn",
-                    "Relentless Operative",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.KyleKatarnAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Kyle Katarn",
+                "Relentless Operative",
+                Faction.Rebel,
+                3,
+                5,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.KyleKatarnAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Crew,
                         UpgradeType.Device,
                         UpgradeType.Modification,
                         UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter
-                    },
-                    seImageNumber: 43,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class KyleKatarnXWA : KyleKatarn
-        {
-            public KyleKatarnXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                },
+                tags: new List<Tags>
                 {
-                    UpgradeType.Talent,
+                        Tags.Freighter
+                },
+                seImageNumber: 43,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class KyleKatarnXWA : KyleKatarn
+    {
+        public KyleKatarnXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
                     UpgradeType.Talent,
                     UpgradeType.Crew,
                     UpgradeType.Modification,
                     UpgradeType.Device,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -136,7 +132,8 @@ namespace Abilities.SecondEdition
         {
             HostShip.Tokens.RemoveToken(
                 GetTokenType(),
-                delegate {
+                delegate
+                {
                     TargetShip.Tokens.AssignToken(GetTokenType(), SelectShipSubPhase.FinishSelection);
                 }
             );

@@ -34,7 +34,7 @@ namespace Ship.SecondEdition.RZ1AWing
                     Tags.AWing
                 },
                 skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
     }
@@ -43,11 +43,12 @@ namespace Ship.SecondEdition.RZ1AWing
     {
         public DerekKlivianXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
+                UpgradeType.Modification,
                 UpgradeType.Missile,
                 UpgradeType.Configuration
             };

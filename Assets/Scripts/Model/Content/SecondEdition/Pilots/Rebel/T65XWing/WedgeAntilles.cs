@@ -5,52 +5,57 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class WedgeAntilles : T65XWing
     {
-        public class WedgeAntilles : T65XWing
+        public WedgeAntilles() : base()
         {
-            public WedgeAntilles() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Wedge Antilles",
-                    "Red Two",
-                    Faction.Rebel,
-                    6,
-                    5,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.WedgeAntillesAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    seImageNumber: 1,
-                    skinName: "Wedge Antilles",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Wedge Antilles",
+                "Red Two",
+                Faction.Rebel,
+                6,
+                5,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.WedgeAntillesAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                seImageNumber: 1,
+                skinName: "Wedge Antilles",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class WedgeAntillesXWA : WedgeAntilles
+    public class WedgeAntillesXWA : WedgeAntilles
+    {
+        public WedgeAntillesXWA() : base()
         {
-            public WedgeAntillesXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -72,7 +77,8 @@ namespace Abilities.SecondEdition
         public void AddWedgeAntillesAbility()
         {
             BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(HostShip, Combat.Defender);
-            if (distanceInfo.Range > 0) {
+            if (distanceInfo.Range > 0)
+            {
                 WedgeAntillesCondition condition = new WedgeAntillesCondition(Combat.Defender, HostShip);
                 Combat.Defender.Tokens.AssignCondition(condition);
             }

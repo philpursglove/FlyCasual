@@ -6,45 +6,48 @@ using System.Linq;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Z95AF4Headhunter
 {
-    namespace SecondEdition.Z95AF4Headhunter
+    public class AirenCracken : Z95AF4Headhunter
     {
-        public class AirenCracken : Z95AF4Headhunter
+        public AirenCracken() : base()
         {
-            public AirenCracken() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Airen Cracken",
-                    "Intelligence Chief",
-                    Faction.Rebel,
-                    5,
-                    4,
-                    11,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.AirenCrackenAbiliity),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Torpedo                        
-                    },
-                    seImageNumber: 27,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Airen Cracken",
+                "Intelligence Chief",
+                Faction.Rebel,
+                5,
+                4,
+                11,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.AirenCrackenAbiliity),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                },
+                seImageNumber: 27,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class AirenCrackenXWA : AirenCracken
+    public class AirenCrackenXWA : AirenCracken
+    {
+        public AirenCrackenXWA() : base()
         {
-            public AirenCrackenXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -115,7 +118,8 @@ namespace Abilities.SecondEdition
 
             TargetShip.AskPerformFreeAction(
                 TargetShip.GetAvailableActionsAsRed(),
-                delegate {
+                delegate
+                {
                     Selection.ThisShip = HostShip;
                     SelectShipSubPhase.FinishSelection();
                 },

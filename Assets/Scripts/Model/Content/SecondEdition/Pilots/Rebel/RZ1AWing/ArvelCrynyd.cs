@@ -8,54 +8,52 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class ArvelCrynyd : RZ1AWing
     {
-        public class ArvelCrynyd : RZ1AWing
+        public ArvelCrynyd() : base()
         {
-            public ArvelCrynyd() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Arvel Crynyd",
-                    "Green Leader",
-                    Faction.Rebel,
-                    3,
-                    3,
-                    5,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ArvelCrynydAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Arvel Crynyd",
+                "Green Leader",
+                Faction.Rebel,
+                3,
+                3,
+                5,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ArvelCrynydAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
+                },
+                tags: new List<Tags>
+                {
                         Tags.AWing
-                    },
-                    seImageNumber: 20,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+                },
+                seImageNumber: 20,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class ArvelCrynydXWA : ArvelCrynyd
+    public class ArvelCrynydXWA : ArvelCrynyd
+    {
+        public ArvelCrynydXWA() : base()
         {
-            public ArvelCrynydXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
                     UpgradeType.Configuration
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

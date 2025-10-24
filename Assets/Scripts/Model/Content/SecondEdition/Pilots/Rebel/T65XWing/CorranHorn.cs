@@ -1,48 +1,65 @@
-﻿using System.Collections.Generic;
-using System;
-using Upgrade;
+﻿using BoardTools;
 using Content;
 using Ship;
-using BoardTools;
 using SubPhases;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class CorranHorn : T65XWing
     {
-        public class CorranHorn : T65XWing
+        public CorranHorn() : base()
         {
-            public CorranHorn() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Corran Horn",
-                    "Rogue Nine",
-                    Faction.Rebel,
-                    5,
-                    4,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.CorranHornXWingAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Astromech,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Corran Horn",
+                "Rogue Nine",
+                Faction.Rebel,
+                5,
+                4,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.CorranHornXWingAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Astromech,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "corranhorn-t65xwing";
-            }
+            PilotNameCanonical = "corranhorn-t65xwing";
+        }
+    }
+
+    public class CorranHornXWA : CorranHorn
+    {
+        public CorranHornXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
+
 namespace Abilities.SecondEdition
 {
     public class CorranHornXWingAbility : GenericAbility

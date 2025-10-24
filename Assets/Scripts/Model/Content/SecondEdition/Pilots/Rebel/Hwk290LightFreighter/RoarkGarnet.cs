@@ -6,60 +6,56 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Hwk290LightFreighter
 {
-    namespace SecondEdition.Hwk290LightFreighter
+    public class RoarkGarnet : Hwk290LightFreighter
     {
-        public class RoarkGarnet : Hwk290LightFreighter
+        public RoarkGarnet() : base()
         {
-            public RoarkGarnet() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Roark Garnet",
-                    "Good-Hearted Smuggler",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.RoarkGarnetAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Roark Garnet",
+                "Good-Hearted Smuggler",
+                Faction.Rebel,
+                4,
+                5,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.RoarkGarnetAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Crew,
                         UpgradeType.Device,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
                         UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
+                },
+                tags: new List<Tags>
+                {
                         Tags.Freighter
-                    },
-                    seImageNumber: 44,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+                },
+                seImageNumber: 44,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class RoarkGarnetXWA : RoarkGarnet
+    public class RoarkGarnetXWA : RoarkGarnet
+    {
+        public RoarkGarnetXWA() : base()
         {
-            public RoarkGarnetXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Crew,
                     UpgradeType.Modification,
-                    UpgradeType.Modification,
                     UpgradeType.Device,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

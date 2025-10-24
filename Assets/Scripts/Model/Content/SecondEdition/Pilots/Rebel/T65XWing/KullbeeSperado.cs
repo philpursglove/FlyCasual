@@ -5,51 +5,58 @@ using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class KullbeeSperado : T65XWing
     {
-        public class KullbeeSperado : T65XWing
+        public KullbeeSperado() : base()
         {
-            public KullbeeSperado() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Kullbee Sperado",
-                    "Enigmatic Gunslinger",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(KullbeeSperadoAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Missile,
-                        UpgradeType.Illicit,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Partisan,
-                        Tags.XWing
-                    },
-                    seImageNumber: 6,
-                    skinName: "Partisan",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Kullbee Sperado",
+                "Enigmatic Gunslinger",
+                Faction.Rebel,
+                4,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(KullbeeSperadoAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Missile,
+                    UpgradeType.Illicit,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Partisan,
+                    Tags.XWing
+                },
+                seImageNumber: 6,
+                skinName: "Partisan",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class KullbeeSperadoXWA : KullbeeSperado
+    public class KullbeeSperadoXWA : KullbeeSperado
+    {
+        public KullbeeSperadoXWA() : base()
         {
-            public KullbeeSperadoXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

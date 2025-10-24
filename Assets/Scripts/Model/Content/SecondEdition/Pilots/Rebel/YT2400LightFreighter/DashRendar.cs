@@ -4,54 +4,61 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.YT2400LightFreighter
 {
-    namespace SecondEdition.YT2400LightFreighter
+    public class DashRendar : YT2400LightFreighter
     {
-        public class DashRendar : YT2400LightFreighter
+        public DashRendar() : base()
         {
-            public DashRendar() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Dash Rendar",
-                    "Freighter for Hire",
-                    Faction.Rebel,
-                    5,
-                    7,
-                    20,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.DashRendarAbility),
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter
-                    },
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Illicit,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Title
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Dash Rendar",
+                "Freighter for Hire",
+                Faction.Rebel,
+                5,
+                7,
+                20,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.DashRendarAbility),
+                tags: new List<Tags>
+                {
+                    Tags.Freighter
+                },
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dashrendar-freighterforhire.png";
-                PilotNameCanonical = "dashrendar-swz103-rebelalliance";
-            }
+            ImageUrl = "https://infinitearenas.com/xw2/images/pilots/dashrendar-freighterforhire.png";
+            PilotNameCanonical = "dashrendar-swz103-rebelalliance";
         }
+    }
 
-        public class DashRendarXWA : DashRendar
+    public class DashRendarXWA : DashRendar
+    {
+        public DashRendarXWA() : base()
         {
-            public DashRendarXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 19;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

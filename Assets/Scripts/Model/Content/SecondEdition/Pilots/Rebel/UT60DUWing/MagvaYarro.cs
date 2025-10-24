@@ -4,53 +4,60 @@ using Content;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UT60DUWing
 {
-    namespace SecondEdition.UT60DUWing
+    public class MagvaYarro : UT60DUWing
     {
-        public class MagvaYarro : UT60DUWing
+        public MagvaYarro() : base()
         {
-            public MagvaYarro() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Magva Yarro",
-                    "Cavern Angels Spotter",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    14,
-                    isLimited: true,
-                    abilityType: typeof(MagvaYarroPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Partisan
-                    },
-                    seImageNumber: 57,
-                    skinName: "Partisan",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Magva Yarro",
+                "Cavern Angels Spotter",
+                Faction.Rebel,
+                3,
+                5,
+                14,
+                isLimited: true,
+                abilityType: typeof(MagvaYarroPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Partisan
+                },
+                seImageNumber: 57,
+                skinName: "Partisan",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class MagvaYarroXWA : MagvaYarro
+    public class MagvaYarroXWA : MagvaYarro
+    {
+        public MagvaYarroXWA() : base()
         {
-            public MagvaYarroXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

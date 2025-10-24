@@ -51,17 +51,15 @@ namespace Ship.SecondEdition.BTLA4YWing
     {
         public DutchVanderXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Astromech,
                     UpgradeType.Modification,
                     UpgradeType.Device,
-                    UpgradeType.Device,
                     UpgradeType.Turret,
-                    UpgradeType.Missile,
                     UpgradeType.Torpedo
                 };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
@@ -142,7 +140,7 @@ namespace Abilities.SecondEdition
             {
                 Messages.ShowInfo(TargetShip.PilotInfo.PilotName + " acquired a Target Lock on obstacle");
             }
-            
+
             ActionsHolder.AcquireTargetLock(TargetShip, LockedShip, SelectShipSubPhase.FinishSelection, SelectShipSubPhase.FinishSelection, ignoreRange: true);
         }
 

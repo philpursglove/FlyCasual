@@ -4,46 +4,51 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UT60DUWing
 {
-    namespace SecondEdition.UT60DUWing
+    public class BodhiRook : UT60DUWing
     {
-        public class BodhiRook : UT60DUWing
+        public BodhiRook() : base()
         {
-            public BodhiRook() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Bodhi Rook",
-                    "Imperial Defector",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(BodhiRookAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    seImageNumber: 54,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Bodhi Rook",
+                "Imperial Defector",
+                Faction.Rebel,
+                4,
+                5,
+                10,
+                isLimited: true,
+                abilityType: typeof(BodhiRookAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                seImageNumber: 54,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class BodhiRookXWA : BodhiRook
+    public class BodhiRookXWA : BodhiRook
+    {
+        public BodhiRookXWA() : base()
         {
-            public BodhiRookXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -8,62 +8,59 @@ using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class LukeSkywalkerBoY : T65XWing
     {
-        public class LukeSkywalkerBoY : T65XWing
+        public LukeSkywalkerBoY() : base()
         {
-            public LukeSkywalkerBoY() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Luke Skywalker",
-                    "Battle of Yavin",
-                    Faction.Rebel,
-                    5,
-                    5,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(LukeSkywalkerAbility),
-                    force: 2,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.LightSide,
-                        Tags.XWing
-                    },
-                    seImageNumber: 2,
-                    skinName: "Luke Skywalker",
-                    isStandardLayout: true,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Luke Skywalker",
+                "Battle of Yavin",
+                Faction.Rebel,
+                5,
+                5,
+                0,
+                isLimited: true,
+                abilityType: typeof(LukeSkywalkerAbility),
+                force: 2,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Talent,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Astromech,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.LightSide,
+                    Tags.XWing
+                },
+                seImageNumber: 2,
+                skinName: "Luke Skywalker",
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipAbilities.Add(new HopeAbility());
+            ShipAbilities.Add(new HopeAbility());
 
-                MustHaveUpgrades.Add(typeof(AttackSpeed));
-                MustHaveUpgrades.Add(typeof(InstinctiveAim));
-                MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
-                MustHaveUpgrades.Add(typeof(R2D2BoY));
+            MustHaveUpgrades.Add(typeof(AttackSpeed));
+            MustHaveUpgrades.Add(typeof(InstinctiveAim));
+            MustHaveUpgrades.Add(typeof(ProtonTorpedoes));
+            MustHaveUpgrades.Add(typeof(R2D2BoY));
 
-                PilotNameCanonical = "lukeskywalker-battleofyavin";
-            }
+            PilotNameCanonical = "lukeskywalker-battleofyavin";
         }
+    }
 
-        public class LukeSkywalkerBoYXWA : LukeSkywalkerBoY
+    public class LukeSkywalkerBoYXWA : LukeSkywalkerBoY
+    {
+        public LukeSkywalkerBoYXWA() : base()
         {
-            public LukeSkywalkerBoYXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 16;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

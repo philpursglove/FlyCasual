@@ -4,59 +4,57 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class WedgeAntilles : RZ1AWing
     {
-        public class WedgeAntilles : RZ1AWing
+        public WedgeAntilles() : base()
         {
-            public WedgeAntilles() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Wedge Antilles",
-                    "Promising Pilot",
-                    Faction.Rebel,
-                    4,
-                    3,
-                    5,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.WedgeAntillesAWingAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    abilityText: "While you perform a primary attack, if the defender is your front arc. The defender rolls 1 fewer defense die.",
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-
-                PilotNameCanonical = "wedgeantilles-rz1awing";
-            }
-        }
-
-        public class WedgeAntillesXWA : WedgeAntilles
-        {
-            public WedgeAntillesXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Wedge Antilles",
+                "Promising Pilot",
+                Faction.Rebel,
+                4,
+                3,
+                5,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.WedgeAntillesAWingAbility),
+                extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
                     UpgradeType.Modification,
                     UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                abilityText: "While you perform a primary attack, if the defender is your front arc. The defender rolls 1 fewer defense die.",
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            PilotNameCanonical = "wedgeantilles-rz1awing";
+        }
+    }
+
+    public class WedgeAntillesXWA : WedgeAntilles
+    {
+        public WedgeAntillesXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

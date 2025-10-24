@@ -4,65 +4,63 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.YT2400LightFreighter
 {
-    namespace SecondEdition.YT2400LightFreighter
+    public class Leebo : YT2400LightFreighter
     {
-        public class Leebo : YT2400LightFreighter
+        public Leebo() : base()
         {
-            public Leebo() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Leebo",
-                    "Wisdom of Ages",
-                    Faction.Rebel,
-                    3,
-                    6,
-                    16,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LeeboAbility),
-                    tags: new List<Tags>
-                    {
-                        Tags.Droid,
-                        Tags.Freighter
-                    },
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Illicit,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-
-                ImageUrl = "https://infinitearenas.com/xw2/images/pilots/leebo-wisdomofages.png";
-                PilotNameCanonical = "leebo-swz103-rebelalliance";
-
-                ShipInfo.ActionIcons.SwitchToDroidActions();
-            }
-        }
-
-        public class LeeboXWA : Leebo
-        {
-            public LeeboXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
-                { 
+            PilotInfo = new PilotCardInfo25
+            (
+                "Leebo",
+                "Wisdom of Ages",
+                Faction.Rebel,
+                3,
+                6,
+                16,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LeeboAbility),
+                tags: new List<Tags>
+                {
+                    Tags.Droid,
+                    Tags.Freighter
+                },
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
                     UpgradeType.Talent,
-                    UpgradeType.Crew,
-                    UpgradeType.Illicit,
-                    UpgradeType.Illicit,
                     UpgradeType.Missile,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
                     UpgradeType.Title
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/pilots/leebo-wisdomofages.png";
+            PilotNameCanonical = "leebo-swz103-rebelalliance";
+
+            ShipInfo.ActionIcons.SwitchToDroidActions();
+        }
+    }
+
+    public class LeeboXWA : Leebo
+    {
+        public LeeboXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

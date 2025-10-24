@@ -5,56 +5,53 @@ using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class BiggsDarklighter : T65XWing
     {
-        public class BiggsDarklighter : T65XWing
+        public BiggsDarklighter() : base()
         {
-            public BiggsDarklighter() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Biggs Darklighter",
-                    "Red Three",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    18,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.BiggsDarklighterAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    seImageNumber: 7,
-                    skinName: "Biggs Darklighter",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class BiggsDarklighterXWA : BiggsDarklighter
-        {
-            public BiggsDarklighterXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Biggs Darklighter",
+                "Red Three",
+                Faction.Rebel,
+                3,
+                5,
+                18,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.BiggsDarklighterAbility),
+                extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Astromech,
                     UpgradeType.Modification,
-                    UpgradeType.Torpedo,
                     UpgradeType.Configuration
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                seImageNumber: 7,
+                skinName: "Biggs Darklighter",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class BiggsDarklighterXWA : BiggsDarklighter
+    {
+        public BiggsDarklighterXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

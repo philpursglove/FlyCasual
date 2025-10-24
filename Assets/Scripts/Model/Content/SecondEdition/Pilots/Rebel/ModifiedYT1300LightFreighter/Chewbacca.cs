@@ -4,28 +4,26 @@ using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ModifiedYT1300LightFreighter
 {
-    namespace SecondEdition.ModifiedYT1300LightFreighter
+    public class Chewbacca : ModifiedYT1300LightFreighter
     {
-        public class Chewbacca : ModifiedYT1300LightFreighter
+        public Chewbacca() : base()
         {
-            public Chewbacca() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Chewbacca",
-                    "The Mighty",
-                    Faction.Rebel,
-                    4,
-                    7,
-                    18,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ChewbaccaRebelPilotAbility),
-                    charges: 1,
-                    regensCharges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Chewbacca",
+                "The Mighty",
+                Faction.Rebel,
+                4,
+                7,
+                18,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ChewbaccaRebelPilotAbility),
+                charges: 1,
+                regensCharges: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Missile,
                         UpgradeType.Crew,
@@ -34,30 +32,31 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Modification,
-                        UpgradeType.Title                        
-                    },
-                    tags: new List<Tags>
-                    {
+                        UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
                         Tags.Freighter,
                         Tags.YT1300
-                    },
-                    seImageNumber: 71,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+                },
+                seImageNumber: 71,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class ChewbaccaXWA : Chewbacca
+    public class ChewbaccaXWA : Chewbacca
+    {
+        public ChewbaccaXWA() : base()
         {
-            public ChewbaccaXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
+                    UpgradeType.Gunner,
                     UpgradeType.Gunner,
                     UpgradeType.Illicit,
                     UpgradeType.Modification,
@@ -65,8 +64,7 @@ namespace Ship
                     UpgradeType.Missile,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -37,8 +37,27 @@ namespace Ship.SecondEdition.BTLA4YWing
                 {
                     Tags.YWing
                 },
-                seImageNumber: 16
+                seImageNumber: 16,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class EvaanVerlaineXWA : EvaanVerlaine
+    {
+        public EvaanVerlaineXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Turret,
+                UpgradeType.Torpedo
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

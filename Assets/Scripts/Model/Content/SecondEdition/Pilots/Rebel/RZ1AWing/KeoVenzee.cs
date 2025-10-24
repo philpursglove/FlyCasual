@@ -5,56 +5,54 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class KeoVenzee : RZ1AWing
     {
-        public class KeoVenzee : RZ1AWing
+        public KeoVenzee() : base()
         {
-            public KeoVenzee() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Keo Venzee",
-                    "Auspicious Ace",
-                    Faction.Rebel,
-                    3,
-                    3,
-                    7,
-                    force: 1,
-                    regensForce: 0,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.KeoVenzeeAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class KeoVenzeeXWA : KeoVenzee
-        {
-            public KeoVenzeeXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Keo Venzee",
+                "Auspicious Ace",
+                Faction.Rebel,
+                3,
+                3,
+                7,
+                force: 1,
+                regensForce: 0,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.KeoVenzeeAbility),
+                extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Missile,
                     UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class KeoVenzeeXWA : KeoVenzee
+    {
+        public KeoVenzeeXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -76,7 +74,7 @@ namespace Abilities.SecondEdition
         private void CheckRevealedManeuved(GenericShip ship)
         {
             if (ship.State.Force == 0
-                && ship.RevealedManeuver!=null
+                && ship.RevealedManeuver != null
                 && (ship.RevealedManeuver.Bearing == Movement.ManeuverBearing.Bank || ship.RevealedManeuver.Bearing == Movement.ManeuverBearing.Turn))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnManeuverIsRevealed, RegisterKeoVenziAbility);

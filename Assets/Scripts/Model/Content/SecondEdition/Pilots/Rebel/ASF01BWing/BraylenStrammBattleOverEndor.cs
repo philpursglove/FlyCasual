@@ -38,7 +38,8 @@ namespace Ship.SecondEdition.ASF01BWing
                 skinName: "Braylen Stramm",
                 charges: 2,
                 regensCharges: 1,
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipInfo.Shields++;
@@ -56,6 +57,15 @@ namespace Ship.SecondEdition.ASF01BWing
 
             DefaultUpgrades.Remove(typeof(UpgradesList.SecondEdition.StabilizedSFoilsOpen));
 
+        }
+    }
+
+    public class BraylenStrammBoEXWA : BraylenStrammBattleOverEndor
+    {
+        public BraylenStrammBoEXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

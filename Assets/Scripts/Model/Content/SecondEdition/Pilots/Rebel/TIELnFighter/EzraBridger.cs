@@ -2,56 +2,59 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIELnFighter
 {
-    namespace SecondEdition.TIELnFighter
+    public class EzraBridger : TIELnFighter
     {
-        public class EzraBridger : TIELnFighter
+        public EzraBridger() : base()
         {
-            public EzraBridger() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Ezra Bridger",
-                    "Spectre-6",
-                    Faction.Rebel,
-                    3,
-                    3,
-                    6,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.EzraBridgerPilotAbility),
-                    force: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.LightSide,
-                        Tags.Spectre,
-                        Tags.Tie                        
-                    },
-                    seImageNumber: 46,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Ezra Bridger",
+                "Spectre-6",
+                Faction.Rebel,
+                3,
+                3,
+                6,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.EzraBridgerPilotAbility),
+                force: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.LightSide,
+                    Tags.Spectre,
+                    Tags.Tie
+                },
+                seImageNumber: 46,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "ezrabridger-tielnfighter";
+            PilotNameCanonical = "ezrabridger-tielnfighter";
 
-                ModelInfo.ModelName = "TIE Fighter Rebel";
-                ModelInfo.SkinName = "Rebel";
-            }
+            ModelInfo.ModelName = "TIE Fighter Rebel";
+            ModelInfo.SkinName = "Rebel";
         }
+    }
 
-        public class EzraBridgerXWA : EzraBridger
+    public class EzraBridgerXWA : EzraBridger
+    {
+        public EzraBridgerXWA() : base()
         {
-            public EzraBridgerXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.ForcePower,
+                UpgradeType.Modification,
+                UpgradeType.Modification
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

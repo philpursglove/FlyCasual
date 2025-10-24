@@ -6,51 +6,58 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class ThaneKyrell : T65XWing
     {
-        public class ThaneKyrell : T65XWing
+        public ThaneKyrell() : base()
         {
-            public ThaneKyrell() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Thane Kyrell",
-                    "Corona Four",
-                    Faction.Rebel,
-                    5,
-                    4,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ThaneKyrellAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    seImageNumber: 3,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Thane Kyrell",
+                "Corona Four",
+                Faction.Rebel,
+                5,
+                4,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ThaneKyrellAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                seImageNumber: 3,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class ThaneKyrellXWA : ThaneKyrell
+    public class ThaneKyrellXWA : ThaneKyrell
+    {
+        public ThaneKyrellXWA() : base()
         {
-            public ThaneKyrellXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
+
 namespace Abilities.SecondEdition
 {
     public class ThaneKyrellAbility : GenericAbility
