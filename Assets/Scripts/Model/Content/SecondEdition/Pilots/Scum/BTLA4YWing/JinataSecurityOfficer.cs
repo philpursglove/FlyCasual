@@ -43,11 +43,10 @@ namespace Ship
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Astromech,
-                    UpgradeType.Illicit,
                     UpgradeType.Modification,
                     UpgradeType.Device,
                     UpgradeType.Turret,
-                    UpgradeType.Missile,
+                    UpgradeType.Torpedo,
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
