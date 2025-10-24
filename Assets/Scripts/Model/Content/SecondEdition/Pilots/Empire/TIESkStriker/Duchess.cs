@@ -48,9 +48,9 @@ namespace Ship
                 {
                     UpgradeType.Talent,
                     UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
                     UpgradeType.Device,
-                    UpgradeType.Device,
-                    UpgradeType.Modification
                 };
             }
         }
