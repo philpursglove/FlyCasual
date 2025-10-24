@@ -86,7 +86,7 @@ namespace Abilities.SecondEdition
             if (HostShip.State.Force < 1)
                 return;
 
-            if (Combat.ShotInfo.Range == 2 || Combat.ShotInfo.Range == 3)
+            if (Combat.ShotInfo.Range < 2 || Combat.ShotInfo.Range > 3)
                 return;
 
             RegisterAbilityTrigger(TriggerTypes.OnAttackStart, delegate
