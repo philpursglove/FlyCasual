@@ -55,8 +55,8 @@ namespace Ship
                     UpgradeType.Talent,
                     UpgradeType.Sensor,
                     UpgradeType.Modification,
-                    UpgradeType.Missile,
                     UpgradeType.Modification,
+                    UpgradeType.Missile,
                 };
             }
         }
