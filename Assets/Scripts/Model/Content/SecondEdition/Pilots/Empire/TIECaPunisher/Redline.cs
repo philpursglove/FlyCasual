@@ -52,13 +52,13 @@ namespace Ship
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
-                        UpgradeType.Torpedo
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
