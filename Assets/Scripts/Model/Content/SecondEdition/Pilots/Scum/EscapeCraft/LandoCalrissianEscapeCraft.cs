@@ -47,8 +47,8 @@ namespace Ship
                 {
                     UpgradeType.Talent,
                     UpgradeType.Crew,
+                    UpgradeType.Illicit,
                     UpgradeType.Modification,
-                    UpgradeType.Illicit
                 };
             }
         }
