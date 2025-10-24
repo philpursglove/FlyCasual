@@ -45,10 +45,10 @@ namespace Ship
                 {
                     UpgradeType.Talent,
                     UpgradeType.Astromech,
+                    UpgradeType.Modification,
                     UpgradeType.Device,
                     UpgradeType.Turret,
                     UpgradeType.Torpedo,
-                    UpgradeType.Modification
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
