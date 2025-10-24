@@ -52,8 +52,8 @@ namespace Ship
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Crew,
+                    UpgradeType.Illicit,
                     UpgradeType.Modification,
-                    UpgradeType.Illicit
                 };
             }
         }
