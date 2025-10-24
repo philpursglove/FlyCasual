@@ -50,8 +50,8 @@ namespace Ship
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
-                    UpgradeType.Modification,
                     UpgradeType.Gunner,
+                    UpgradeType.Modification,
                     UpgradeType.Cannon,
                     UpgradeType.Cannon,
                     UpgradeType.Configuration
