@@ -49,8 +49,8 @@ namespace Ship
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Sensor,
-                    UpgradeType.Missile,
                     UpgradeType.Modification,
+                    UpgradeType.Missile,
                 };
             }
         }
