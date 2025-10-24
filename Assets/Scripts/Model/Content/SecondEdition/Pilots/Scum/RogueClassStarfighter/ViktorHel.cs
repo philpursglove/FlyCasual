@@ -52,9 +52,9 @@ namespace Ship
                     UpgradeType.Talent,
                     UpgradeType.Illicit,
                     UpgradeType.Modification,
+                    UpgradeType.Modification,
                     UpgradeType.Cannon,
                     UpgradeType.Cannon,
-                    UpgradeType.Modification
                 };
             }
         }
