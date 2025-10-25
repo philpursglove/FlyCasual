@@ -3,59 +3,53 @@ using Content;
 using Ship;
 using SubPhases;
 using System.Collections.Generic;
-using Abilities.SecondEdition;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class LieutenantRivas : TIEFoFighter
     {
-        public class LieutenantRivas : TIEFoFighter
+        public LieutenantRivas() : base()
         {
-            public LieutenantRivas() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lieutenant Rivas",
-                    "Inconvenient Witness",
-                    Faction.FirstOrder,
-                    1,
-                    3,
-                    4,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LieutenantRivasAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LieutenantRivasXWA : LieutenantRivas
-        {
-            public LieutenantRivasXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 11;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lieutenant Rivas",
+                "Inconvenient Witness",
+                Faction.FirstOrder,
+                1,
+                3,
+                4,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LieutenantRivasAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Sensor,
                     UpgradeType.Tech,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LieutenantRivasXWA : LieutenantRivas
+    {
+        public LieutenantRivasXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -4,58 +4,53 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class Scorch : TIEFoFighter
     {
-        public class Scorch : TIEFoFighter
+        public Scorch() : base()
         {
-            public Scorch() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Scorch\"",
-                    "Zeta Leader",
-                    Faction.FirstOrder,
-                    4,
-                    3,
-                    6,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ScorchAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-        
-        public class ScorchXWA: Scorch
-        {
-            public ScorchXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 14;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Scorch\"",
+                "Zeta Leader",
+                Faction.FirstOrder,
+                4,
+                3,
+                6,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ScorchAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
-                    UpgradeType.Sensor,
                     UpgradeType.Tech,
-                    UpgradeType.Missile,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class ScorchXWA : Scorch
+    {
+        public ScorchXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

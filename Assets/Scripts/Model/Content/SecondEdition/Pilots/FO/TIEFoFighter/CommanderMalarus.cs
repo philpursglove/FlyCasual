@@ -6,60 +6,56 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class CommanderMalarus : TIEFoFighter
     {
-        public class CommanderMalarus : TIEFoFighter
+        public CommanderMalarus() : base()
         {
-            public CommanderMalarus() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Commander Malarus",
-                    "First Order Enforcer",
-                    Faction.FirstOrder,
-                    5,
-                    3,
-                    4,
-                    charges: 2,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.CommanderMalarusAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Tech,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class CommanderMalarusXWA : CommanderMalarus
-        {
-            public CommanderMalarusXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 19;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Commander Malarus",
+                "First Order Enforcer",
+                Faction.FirstOrder,
+                5,
+                3,
+                4,
+                charges: 2,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.CommanderMalarusAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
-                    UpgradeType.Sensor,
                     UpgradeType.Missile,
                     UpgradeType.Tech,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class CommanderMalarusXWA : CommanderMalarus
+    {
+        public CommanderMalarusXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -206,9 +202,7 @@ namespace SubPhases
         {
             ConfirmDecision();
         }
-
     }
-
 }
 
 namespace ActionsList
@@ -254,9 +248,7 @@ namespace ActionsList
             Combat.CurrentDiceRoll.ChangeAll(DieSide.Focus, DieSide.Success);
             callBack();
         }
-
     }
-
 }
 
 namespace Conditions

@@ -3,57 +3,51 @@ using Content;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class Longshot : TIEFoFighter
     {
-        public class Longshot : TIEFoFighter
+        public Longshot() : base()
         {
-            public Longshot() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Longshot\"",
-                    "Zeta Ace",
-                    Faction.FirstOrder,
-                    3,
-                    3,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LongshotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LongshotXWA : Longshot
-        {
-            public LongshotXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 9;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Longshot\"",
+                "Zeta Ace",
+                Faction.FirstOrder,
+                3,
+                3,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LongshotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Sensor,
                     UpgradeType.Tech,
                     UpgradeType.Tech,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LongshotXWA : Longshot
+    {
+        public LongshotXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
