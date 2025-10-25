@@ -5,69 +5,64 @@ using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEWiWhisperModifiedInterceptor
 {
-    namespace SecondEdition.TIEWiWhisperModifiedInterceptor
+    public class KyloRenWhisper : TIEWiWhisperModifiedInterceptor
     {
-        public class KyloRenWhisper : TIEWiWhisperModifiedInterceptor
+        public KyloRenWhisper() : base()
         {
-            public KyloRenWhisper() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Kylo Ren",
-                    "Supreme Leader of the First Order",
-                    Faction.FirstOrder,
-                    5,
-                    5,
-                    14,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.KyloRenWhisperPilotAbility),
-                    force: 3,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.ForcePower,
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.DarkSide,
-                        Tags.LightSide,
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-
-                PilotNameCanonical = "kyloren-tiewiwhispermodifiedinterceptor";
-            }
-        }
-
-        public class KyloRenWhisperXWA: KyloRenWhisper
-        {
-            public KyloRenWhisperXWA() : base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 12;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Kylo Ren",
+                "Supreme Leader of the First Order",
+                Faction.FirstOrder,
+                5,
+                5,
+                14,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.KyloRenWhisperPilotAbility),
+                force: 3,
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.ForcePower,
                     UpgradeType.ForcePower,
+                    UpgradeType.Talent,
                     UpgradeType.Missile,
                     UpgradeType.Tech,
                     UpgradeType.Tech,
                     UpgradeType.Modification,
-                    UpgradeType.Modification,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.DarkSide,
+                    Tags.LightSide,
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            PilotNameCanonical = "kyloren-tiewiwhispermodifiedinterceptor";
+        }
+    }
+
+    public class KyloRenWhisperXWA : KyloRenWhisper
+    {
+        public KyloRenWhisperXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.ForcePower,
+                UpgradeType.ForcePower,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

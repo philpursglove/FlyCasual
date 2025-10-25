@@ -4,58 +4,54 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEVnSilencer
 {
-    namespace SecondEdition.TIEVnSilencer
+    public class Rush : TIEVnSilencer
     {
-        public class Rush : TIEVnSilencer
+        public Rush() : base()
         {
-            public Rush() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Rush\"",
-                    "Adrenaline Junkie",
-                    Faction.FirstOrder,
-                    2,
-                    5,
-                    11,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.RushAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class RushXWA : Rush
-        {
-            public RushXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 8;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Rush\"",
+                "Adrenaline Junkie",
+                Faction.FirstOrder,
+                2,
+                5,
+                11,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.RushAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
                     UpgradeType.Tech,
                     UpgradeType.Missile,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class RushXWA : Rush
+    {
+        public RushXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

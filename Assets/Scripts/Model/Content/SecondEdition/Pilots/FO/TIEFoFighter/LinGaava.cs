@@ -8,57 +8,52 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class LinGaava : TIEFoFighter
     {
-        public class LinGaava : TIEFoFighter
+        public LinGaava() : base()
         {
-            public LinGaava() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lin Gaava",
-                    "Impetuous Mechanic",
-                    Faction.FirstOrder,
-                    3,
-                    3,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LinGaavaAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LinGaavaXWA : LinGaava
-        {
-            public LinGaavaXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 9;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lin Gaava",
+                "Impetuous Mechanic",
+                Faction.FirstOrder,
+                3,
+                3,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LinGaavaAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
                     UpgradeType.Tech,
-                    UpgradeType.Sensor,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LinGaavaXWA : LinGaava
+    {
+        public LinGaavaXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -120,6 +115,7 @@ namespace Abilities.SecondEdition
                     new Conditions.PrimedForSpeed(ship) { SourceUpgrade = HostUpgrade }
                 );
             }
+
             callback();
         }
 

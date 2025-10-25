@@ -5,55 +5,23 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIESeBomber
 {
-    namespace SecondEdition.TIESeBomber
+    public class Scorch : TIESeBomber
     {
-        public class Scorch : TIESeBomber
+        public Scorch() : base()
         {
-            public Scorch() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Scorch\"",
-                    "Jad Bean",
-                    Faction.FirstOrder,
-                    4,
-                    3,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ScorchBomberPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-
-                PilotNameCanonical = "scorch-tiesebomber";
-            }
-        }
-
-        public class ScorchXWA : Scorch
-        {
-            public ScorchXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 6;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Scorch\"",
+                "Jad Bean",
+                Faction.FirstOrder,
+                4,
+                3,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ScorchBomberPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
@@ -63,8 +31,36 @@ namespace Ship
                     UpgradeType.Device,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            PilotNameCanonical = "scorch-tiesebomber";
+        }
+    }
+
+    public class ScorchXWA : Scorch
+    {
+        public ScorchXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Device,
+                UpgradeType.Missile,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

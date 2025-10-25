@@ -5,56 +5,52 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class DT798 : TIEFoFighter
     {
-        public class DT798 : TIEFoFighter
+        public DT798() : base()
         {
-            public DT798() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "DT-798",
-                    "Jace Rucklin",
-                    Faction.FirstOrder,
-                    4,
-                    3,
-                    6,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.DT798PilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class DT798XWA : DT798
-        {
-            public DT798XWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality>() {Legality.XWA};
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 4;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "DT-798",
+                "Jace Rucklin",
+                Faction.FirstOrder,
+                4,
+                3,
+                6,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.DT798PilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
-                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class DT798XWA : DT798
+    {
+        public DT798XWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality>() { Legality.XWA };
         }
     }
 }

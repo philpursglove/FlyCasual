@@ -9,54 +9,58 @@ using Tokens;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEBaInterceptor
 {
-    namespace SecondEdition.TIEBaInterceptor
+    public class Holo : TIEBaInterceptor
     {
-        public class Holo : TIEBaInterceptor
+        public Holo() : base()
         {
-            public Holo() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Holo\"",
-                    "Trick of the Light",
-                    Faction.FirstOrder,
-                    5,
-                    5,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.HoloAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Holo\"",
+                "Trick of the Light",
+                Faction.FirstOrder,
+                5,
+                5,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.HoloAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class HoloXWA : Holo
+    public class HoloXWA : Holo
+    {
+        public HoloXWA() : base()
         {
-            public HoloXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                var pilot = (PilotInfo as PilotCardInfo25);
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 15;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
-
 
 namespace Abilities.SecondEdition
 {
@@ -93,7 +97,7 @@ namespace Abilities.SecondEdition
 
         private void AskToSelectToken(object sender, EventArgs e)
         {
-            var ownTokens = HostShip.Tokens.GetAllTokens().Where(n => n.GetType() != typeof(BlueTargetLockToken))
+            List<GenericToken> ownTokens = HostShip.Tokens.GetAllTokens().Where(n => n.GetType() != typeof(BlueTargetLockToken))
                 .Distinct(new TokenComparer())
                 .ToList();
 
