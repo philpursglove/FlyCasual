@@ -2,6 +2,7 @@
 using Movement;
 using Ship;
 using SubPhases;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -19,15 +20,23 @@ namespace UpgradesList.SecondEdition
                     new TagRestriction(Tags.Tie),
                     new StatValueRestriction(StatValueRestriction.Stats.Agility, StatValueRestriction.Conditions.HigherThanOrEqual, 3)
                 ),
-                abilityType: typeof(Abilities.SecondEdition.PrecisionIonEnginesAbility)
+                abilityType: typeof(Abilities.SecondEdition.PrecisionIonEnginesAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-
-            
         }
 
         public override bool IsAllowedForShip(GenericShip ship)
         {
             return ship.ShipInfo.Agility == 3;
+        }
+    }
+
+    public class PrecisionIonEnginesXWA : PrecisionIonEngines
+    {
+        public PrecisionIonEnginesXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -100,9 +109,9 @@ namespace Abilities.SecondEdition
         private bool IsSameSegnorsLoop(string maneuverString)
         {
             bool result = false;
-            
+
             ManeuverHolder movementStruct = new ManeuverHolder(maneuverString);
-            
+
             if (movementStruct.Speed == HostShip.RevealedManeuver.ManeuverSpeed
                 && movementStruct.Bearing == ManeuverBearing.SegnorsLoop
             )

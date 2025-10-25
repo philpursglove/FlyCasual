@@ -30,7 +30,8 @@ namespace UpgradesList.SecondEdition
         public StealthDeviceXWA() : base()
         {
             UpgradeInfo.Cost = 8;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Restrictions.Restrictions.Add(new BaseSizeRestriction(BaseSize.Medium, BaseSize.Large));
         }
     }
 }
