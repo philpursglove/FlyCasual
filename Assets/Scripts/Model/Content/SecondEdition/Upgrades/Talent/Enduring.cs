@@ -25,8 +25,8 @@ namespace UpgradesList.SecondEdition
     {
         public EnduringXWA() : base()
         {
-            UpgradeInfo.Cost = 4;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

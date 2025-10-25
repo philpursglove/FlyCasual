@@ -1,7 +1,6 @@
-﻿using Upgrade;
+﻿using Content;
 using System.Collections.Generic;
-using System.Linq;
-using System;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -14,9 +13,19 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Talent,
                 cost: 4,
                 abilityType: typeof(Abilities.SecondEdition.TrickShotAbility),
-                seImageNumber: 18
+                seImageNumber: 18,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class TrickShotXWA : TrickShot
+    {
+        public TrickShotXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

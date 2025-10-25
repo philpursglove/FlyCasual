@@ -2,6 +2,7 @@
 using Content;
 using SquadBuilderNS;
 using System;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -43,7 +44,7 @@ namespace UpgradesList.SecondEdition
         public BackwardsTailslideXWA() : base()
         {
             UpgradeInfo.Cost = 1;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
