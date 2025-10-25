@@ -1,10 +1,12 @@
 ﻿using ActionsList;
 using BoardTools;
+using Content;
 using Movement;
 using Obstacles;
 using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -18,11 +20,21 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Illicit,
                 cost: 3,
                 charges: 1,
-                restriction: new BaseSizeRestriction(BaseSize.Medium, BaseSize.Large), 
+                restriction: new BaseSizeRestriction(BaseSize.Medium, BaseSize.Large),
                 seImageNumber: 62,
-                abilityType: typeof(Abilities.SecondEdition.RiggedCargoChuteAbility)
+                abilityType: typeof(Abilities.SecondEdition.RiggedCargoChuteAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class RiggedCargoChuteXWA : RiggedCargoChute
+    {
+        public RiggedCargoChuteXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -80,7 +92,7 @@ namespace Abilities.SecondEdition
                     Callback();
                 }
             );
-            
+
         }
     }
 }

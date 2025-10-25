@@ -1,9 +1,6 @@
-﻿using BoardTools;
+﻿using Content;
 using Ship;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -23,10 +20,18 @@ namespace UpgradesList.SecondEdition
                     maxRange: 1,
                     arc: Arcs.ArcType.Rear,
                     charges: 2
-                )
+                ),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            
-        }        
+    public class HotshotTailBlasterXWA : HotshotTailBlaster
+    {
+        public HotshotTailBlasterXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
