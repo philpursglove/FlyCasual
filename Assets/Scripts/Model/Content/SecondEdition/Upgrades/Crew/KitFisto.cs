@@ -1,8 +1,10 @@
 ﻿using Actions;
 using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
 
@@ -20,14 +22,27 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Republic),
                 addAction: new ActionInfo(typeof(EvadeAction), ActionColor.Purple),
                 abilityType: typeof(Abilities.SecondEdition.KitFistoAbility),
-                addForce: 1
+                addForce: 1,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Republic,
                 new Vector2(261, 1)
             );
-        }        
+        }
+    }
+
+    public class KitFistoXWA : KitFisto
+    {
+        public KitFistoXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new List<Legality>
+            {
+                Legality.XWA
+            };
+        }
     }
 }
 
@@ -71,7 +86,7 @@ namespace Abilities.SecondEdition
         private void AskToPerformRedEvadeAction()
         {
             SelectShipSubPhase.FinishSelectionNoCallback();
-            
+
             Selection.ChangeActiveShip(TargetShip);
 
             HostShip.State.SpendForce(
@@ -101,6 +116,6 @@ namespace Abilities.SecondEdition
             return 0;
         }
 
-        
+
     }
 }
