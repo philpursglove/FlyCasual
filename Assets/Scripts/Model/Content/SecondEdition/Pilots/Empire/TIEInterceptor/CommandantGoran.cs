@@ -48,8 +48,8 @@ namespace Ship.SecondEdition.TIEInterceptor
     {
         public CommandantGoranXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -141,10 +141,11 @@ namespace Abilities.SecondEdition
         public bool MeetsCriteria(GenericShip ship)
         {
             DistanceInfo distInfo = new DistanceInfo(HostShip, ship);
-            
+
             bool isValid = (distInfo.Range <= 2 && ship.State.Initiative < HostShip.State.Initiative);
 
-            if(!isValid) {
+            if (!isValid)
+            {
                 Messages.ShowInfoToHuman("Choose a friendly target with a lower initiave between range 0 and 3");
             }
 

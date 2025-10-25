@@ -44,9 +44,17 @@ namespace Ship
         {
             public GideonHaskXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                };
             }
         }
     }

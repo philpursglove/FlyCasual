@@ -31,7 +31,7 @@ namespace Ship
                     },
                     tags: new List<Tags>()
                     {
-                        Tags.Mandalorian 
+                        Tags.Mandalorian
                     },
                     skinName: "Gray",
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -43,9 +43,19 @@ namespace Ship
         {
             public ImperialSuperCommandoXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).Cost = 15;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

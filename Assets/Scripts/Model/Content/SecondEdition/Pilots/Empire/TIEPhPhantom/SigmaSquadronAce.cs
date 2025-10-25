@@ -39,8 +39,8 @@ namespace Ship
         {
             public SigmaSquadronAceXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

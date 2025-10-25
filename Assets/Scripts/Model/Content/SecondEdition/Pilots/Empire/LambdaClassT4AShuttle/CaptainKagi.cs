@@ -43,9 +43,18 @@ namespace Ship
         {
             public CaptainKagiXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Talent
+                };
             }
         }
     }

@@ -55,7 +55,7 @@ namespace Ship
             public DeathfireTBEXWA() : base()
             {
                 var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 4;
+                pilot.Cost = 10;
                 pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

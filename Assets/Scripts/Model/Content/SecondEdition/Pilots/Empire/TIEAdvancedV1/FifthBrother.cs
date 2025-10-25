@@ -44,11 +44,10 @@ namespace Ship
         {
             public FifthBrotherXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
-                { 
-                    UpgradeType.ForcePower,
+                {
                     UpgradeType.ForcePower,
                     UpgradeType.Sensor,
                     UpgradeType.Modification,

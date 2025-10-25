@@ -44,9 +44,21 @@ namespace Ship
         {
             public CaptainOicunnXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).Cost = 17;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title
+                };
             }
         }
     }
@@ -69,7 +81,7 @@ namespace Abilities.SecondEdition
 
         private void SetMinRange(GenericShip thisShip, GenericShip anotherShip, IShipWeapon chosenWeapon, ref int range)
         {
-            if(Combat.Attacker == HostShip && thisShip == HostShip && range == 0)
+            if (Combat.Attacker == HostShip && thisShip == HostShip && range == 0)
             {
                 range = 1;
             }

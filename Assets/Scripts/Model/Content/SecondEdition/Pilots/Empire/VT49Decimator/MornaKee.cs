@@ -47,9 +47,21 @@ namespace Ship
         {
             public MornaKeeXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).Cost = 17;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title
+                };
             }
         }
     }
@@ -101,7 +113,8 @@ namespace Abilities.SecondEdition
             if (HostShip.Tokens.HasToken<ReinforceForeToken>())
                 decisionSubPhase.AddDecision(
                     "Fore > Aft",
-                    delegate {
+                    delegate
+                    {
                         FlipToken(true);
                     }
                 );
@@ -109,7 +122,8 @@ namespace Abilities.SecondEdition
             if (HostShip.Tokens.HasToken<ReinforceAftToken>())
                 decisionSubPhase.AddDecision(
                      "Aft > Fore",
-                     delegate {
+                     delegate
+                     {
                          FlipToken(false);
                      }
                  );
@@ -126,12 +140,12 @@ namespace Abilities.SecondEdition
         private void FlipToken(bool flipFore)
         {
             DecisionSubPhase.ConfirmDecisionNoCallback();
-            
+
             Type tokenToRemove = flipFore ? typeof(ReinforceForeToken) : typeof(ReinforceAftToken);
             Type tokenToAssign = flipFore ? typeof(ReinforceAftToken) : typeof(ReinforceForeToken);
 
             if (HostShip.State.Charges > 0 && HostShip.Tokens.HasToken(tokenToRemove))
-            { 
+            {
                 Messages.ShowInfo(HostName + " flips 1 " + (flipFore ? "fore" : "aft") + " reinforce to " + (flipFore ? "aft" : "fore"));
 
                 HostShip.BeforeRemovingTokenInEndPhase += KeepReinforce;

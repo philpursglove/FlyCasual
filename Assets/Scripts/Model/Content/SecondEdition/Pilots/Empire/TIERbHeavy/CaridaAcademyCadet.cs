@@ -37,9 +37,17 @@ namespace Ship
         {
             public CaridaAcademyCadetXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

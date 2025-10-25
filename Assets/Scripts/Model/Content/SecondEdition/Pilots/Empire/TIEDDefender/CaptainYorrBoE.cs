@@ -29,8 +29,8 @@ namespace Ship.SecondEdition.TIEDDefender
                 charges: 2,
                 abilityType: typeof(CaptainYorrBattleOverEndorAbility),
                 extraUpgradeIcons: new List<UpgradeType>()
-                { 
-                    UpgradeType.Talent, 
+                {
+                    UpgradeType.Talent,
                     UpgradeType.Talent,
                     UpgradeType.Cannon,
                     UpgradeType.Modification
@@ -42,7 +42,7 @@ namespace Ship.SecondEdition.TIEDDefender
 
             ShipInfo.UpgradeIcons.Upgrades.Remove(UpgradeType.Configuration);
             ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(EvadeAction), typeof(BarrelRollAction)));
-            
+
             FullThrottleAbility oldAbility = (FullThrottleAbility)ShipAbilities.First(n => n.GetType() == typeof(FullThrottleAbility));
             ShipAbilities.Remove(oldAbility);
             ShipAbilities.Add(new ChissEngineeringAbility());
@@ -60,7 +60,7 @@ namespace Ship.SecondEdition.TIEDDefender
     {
         public CaptainYorrBoEXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).Cost = 17;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }

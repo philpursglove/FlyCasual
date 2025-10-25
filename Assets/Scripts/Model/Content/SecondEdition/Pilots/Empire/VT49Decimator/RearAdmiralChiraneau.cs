@@ -45,9 +45,21 @@ namespace Ship
         {
             public RearAdmiralChiraneauXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 8;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 24;
+                (PilotInfo as PilotCardInfo25).Cost = 19;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 27;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title
+                };
             }
         }
     }
