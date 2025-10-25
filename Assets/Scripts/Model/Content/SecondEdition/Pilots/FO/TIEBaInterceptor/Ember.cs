@@ -4,55 +4,58 @@ using Content;
 using Ship;
 using System.Collections.Generic;
 using System.Linq;
-using Abilities.SecondEdition;
 using Tokens;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEBaInterceptor
 {
-    namespace SecondEdition.TIEBaInterceptor
+    public class Ember : TIEBaInterceptor
     {
-        public class Ember : TIEBaInterceptor
+        public Ember() : base()
         {
-            public Ember() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Ember\"",
-                    "Dying Flame",
-                    Faction.FirstOrder,
-                    4,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.EmberAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> {Legality.StandardLegal, Legality.ExtendedLegal}
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Ember\"",
+                "Dying Flame",
+                Faction.FirstOrder,
+                4,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.EmberAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class EmberXWA : Ember
+    public class EmberXWA : Ember
+    {
+        public EmberXWA() : base()
         {
-            public EmberXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                var pilot = (PilotInfo as PilotCardInfo25);
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 10;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-            }
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -76,7 +79,7 @@ namespace Abilities.SecondEdition
 
         private void CheckRestriction(GenericShip ship, GenericAction action, ref bool isAllowed)
         {
-            if (ship == Combat.Defender &&  Combat.Attacker != null && Combat.Attacker.ShipId == HostShip.ShipId)
+            if (ship == Combat.Defender && Combat.Attacker != null && Combat.Attacker.ShipId == HostShip.ShipId)
             {
                 if (ship.Damage.IsDamaged || Board.GetShipsAtRange(ship, new Vector2(0, 1), Team.Type.Friendly).Count(n => n.Damage.IsDamaged) > 0)
                 {

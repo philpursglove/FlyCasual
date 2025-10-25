@@ -7,52 +7,57 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEBaInterceptor
 {
-    namespace SecondEdition.TIEBaInterceptor
+    public class MajorVonreg : TIEBaInterceptor
     {
-        public class MajorVonreg : TIEBaInterceptor
+        public MajorVonreg() : base()
         {
-            public MajorVonreg() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Major Vonreg",
-                    "Red Baron",
-                    Faction.FirstOrder,
-                    6,
-                    5,
-                    14,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.MajorVonregAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Major Vonreg",
+                "Red Baron",
+                Faction.FirstOrder,
+                6,
+                5,
+                14,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.MajorVonregAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
 
-                );
-            }
+            );
         }
+    }
 
-        public class MajorVonregXWA : MajorVonreg
+    public class MajorVonregXWA : MajorVonreg
+    {
+        public MajorVonregXWA() : base()
         {
-            public MajorVonregXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                var pilot = (PilotInfo as PilotCardInfo25);
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 11;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
