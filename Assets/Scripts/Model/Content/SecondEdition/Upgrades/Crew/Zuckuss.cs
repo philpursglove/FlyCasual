@@ -36,7 +36,7 @@ namespace UpgradesList.SecondEdition
         public ZuckussXWA() : base()
         {
             UpgradeInfo.Cost = 5;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality>() { Legality.XWA };
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Content;
 using Ship;
+using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -33,7 +34,7 @@ namespace UpgradesList.SecondEdition
         public LattsRazziXWA() : base()
         {
             UpgradeInfo.Cost = 4;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
