@@ -4,60 +4,57 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UpsilonClassCommandShuttle
 {
-    namespace SecondEdition.UpsilonClassCommandShuttle
+    public class LieutenantTavson : UpsilonClassCommandShuttle
     {
-        public class LieutenantTavson : UpsilonClassCommandShuttle
+        public LieutenantTavson() : base()
         {
-            public LieutenantTavson() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lieutenant Tavson",
-                    "Obedient Shuttle Pilot",
-                    Faction.FirstOrder,
-                    3,
-                    8,
-                    17,
-                    isLimited: true,
-                    charges: 2,
-                    regensCharges: 1,
-                    abilityType: typeof(Abilities.SecondEdition.LieutenantTavsonPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LieutenantTavsonXWA : LieutenantTavson
-        {
-            public LieutenantTavsonXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.Cost = 7;
-                pilot.LoadoutValue = 25;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lieutenant Tavson",
+                "Obedient Shuttle Pilot",
+                Faction.FirstOrder,
+                3,
+                8,
+                17,
+                isLimited: true,
+                charges: 2,
+                regensCharges: 1,
+                abilityType: typeof(Abilities.SecondEdition.LieutenantTavsonPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Sensor,
                     UpgradeType.Tech,
                     UpgradeType.Tech,
+                    UpgradeType.Cannon,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
-                    UpgradeType.Modification,
-                    UpgradeType.Cannon
-                };
-            }
+                    UpgradeType.Modification
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LieutenantTavsonXWA : LieutenantTavson
+    {
+        public LieutenantTavsonXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Cannon
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -86,7 +83,7 @@ namespace Abilities.SecondEdition
         }
         private void PerformAction(object sender, System.EventArgs e)
         {
-            var previousSelectedShip = Selection.ThisShip;
+            GenericShip previousSelectedShip = Selection.ThisShip;
             Selection.ThisShip = HostShip;
 
             Messages.ShowInfoToHuman(HostName + ": you may spend 1 charge to perform an action");

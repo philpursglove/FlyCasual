@@ -4,60 +4,57 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UpsilonClassCommandShuttle
 {
-    namespace SecondEdition.UpsilonClassCommandShuttle
+    public class MajorStridan : UpsilonClassCommandShuttle
     {
-        public class MajorStridan : UpsilonClassCommandShuttle
+        public MajorStridan() : base()
         {
-            public MajorStridan() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Major Stridan",
-                    "Stentorian Commander",
-                    Faction.FirstOrder,
-                    4,
-                    7,
-                    13,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.MajorStridanAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class MajorStridanXWA : MajorStridan
-        {
-            public MajorStridanXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.Cost = 6;
-                pilot.LoadoutValue = 17;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Major Stridan",
+                "Stentorian Commander",
+                Faction.FirstOrder,
+                4,
+                7,
+                13,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.MajorStridanAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Sensor,
                     UpgradeType.Tech,
                     UpgradeType.Tech,
-                    UpgradeType.Crew,
-                    UpgradeType.Crew,
-                    UpgradeType.Crew,
                     UpgradeType.Cannon,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
                     UpgradeType.Modification
-                };
-            }
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class MajorStridanXWA : MajorStridan
+    {
+        public MajorStridanXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 25;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Cannon
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

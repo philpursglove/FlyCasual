@@ -5,62 +5,57 @@ using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UpsilonClassCommandShuttle
 {
-    namespace SecondEdition.UpsilonClassCommandShuttle
+    public class LieutenantDormitz : UpsilonClassCommandShuttle
     {
-        public class LieutenantDormitz : UpsilonClassCommandShuttle
+        public LieutenantDormitz() : base()
         {
-            public LieutenantDormitz() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lieutenant Dormitz",
-                    "Hypercomms Specialist",
-                    Faction.FirstOrder,
-                    2,
-                    8,
-                    20,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LieutenantDormitzAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Sensor,
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LieutenantDormitzXWA : LieutenantDormitz
-        {
-            public LieutenantDormitzXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.Cost = 7;
-                pilot.LoadoutValue = 18;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lieutenant Dormitz",
+                "Hypercomms Specialist",
+                Faction.FirstOrder,
+                2,
+                8,
+                20,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LieutenantDormitzAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Sensor,
                     UpgradeType.Sensor,
                     UpgradeType.Tech,
                     UpgradeType.Tech,
-                    UpgradeType.Crew,
-                    UpgradeType.Crew,
-                    UpgradeType.Crew,
                     UpgradeType.Cannon,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
                     UpgradeType.Modification
-                };
-            }
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LieutenantDormitzXWA : LieutenantDormitz
+    {
+        public LieutenantDormitzXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Cannon
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -112,7 +107,6 @@ namespace Abilities.SecondEdition
             {
                 MovementTemplates.ShowRangeRulerR2(distInfo.MinDistance.Point1, distInfo.MinDistance.Point2);
             }
-
         }
 
         private bool LieutenantDormitzRestrictions()
@@ -121,8 +115,10 @@ namespace Abilities.SecondEdition
             if (distInfo.Range > 2 && !SetupSubPhase.IsShipInStartingZone(Selection.ThisShip))
             {
                 Messages.ShowError("The range to " + HostShip.PilotInfo.PilotName + " is " + distInfo.Range);
+
                 return false;
             }
+
             return true;
         }
 
