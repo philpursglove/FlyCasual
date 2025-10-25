@@ -28,7 +28,7 @@ namespace UpgradesList.SecondEdition
         public AblativePlatingXWA() : base()
         {
             UpgradeInfo.Cost = 2;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

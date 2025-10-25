@@ -16,7 +16,6 @@ namespace UpgradesList.SecondEdition
                 restriction: new TagRestriction(Tags.DarkSide),
                 abilityType: typeof(Abilities.SecondEdition.HateAbility),
                 legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-
             );
         }
     }
