@@ -4,58 +4,54 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEVnSilencer
 {
-    namespace SecondEdition.TIEVnSilencer
+    public class Avenger : TIEVnSilencer
     {
-        public class Avenger : TIEVnSilencer
+        public Avenger() : base()
         {
-            public Avenger() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Avenger\"",
-                    "Wrathful Wingmate",
-                    Faction.FirstOrder,
-                    3,
-                    5,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.AvengerAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality>{Legality.StandardLegal, Legality.ExtendedLegal}
-                );
-            }
-        }
-
-        public class AvengerXWA : Avenger
-        {
-            public AvengerXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 9;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Avenger\"",
+                "Wrathful Wingmate",
+                Faction.FirstOrder,
+                3,
+                5,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.AvengerAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
-                    UpgradeType.Missile,
                     UpgradeType.Torpedo,
+                    UpgradeType.Missile,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class AvengerXWA : Avenger
+    {
+        public AvengerXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -103,7 +99,8 @@ namespace Abilities.SecondEdition
 
             HostShip.AskPerformFreeAction(
                 actions,
-                delegate {
+                delegate
+                {
                     Roster.HighlightPlayer(ship.Owner.PlayerNo);
                     Selection.ChangeActiveShip(ship);
                     Triggers.FinishTrigger();

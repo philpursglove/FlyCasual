@@ -2,60 +2,56 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEVnSilencer
 {
-    namespace SecondEdition.TIEVnSilencer
+    public class Blackout : TIEVnSilencer
     {
-        public class Blackout : TIEVnSilencer
+        public Blackout() : base()
         {
-            public Blackout() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Blackout\"",
-                    "Ill-Fated Test Pilot",
-                    Faction.FirstOrder,
-                    5,
-                    5,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.TestPilotBlackoutAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class BlackoutXWA : Blackout
-        {
-            public BlackoutXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 6;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Blackout\"",
+                "Ill-Fated Test Pilot",
+                Faction.FirstOrder,
+                5,
+                5,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.TestPilotBlackoutAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
                     UpgradeType.Tech,
-                    UpgradeType.Missile,
                     UpgradeType.Torpedo,
+                    UpgradeType.Missile,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class BlackoutXWA : Blackout
+    {
+        public BlackoutXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
