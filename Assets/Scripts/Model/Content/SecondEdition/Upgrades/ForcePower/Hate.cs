@@ -14,8 +14,19 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.ForcePower,
                 cost: 5,
                 restriction: new TagRestriction(Tags.DarkSide),
-                abilityType: typeof(Abilities.SecondEdition.HateAbility)
+                abilityType: typeof(Abilities.SecondEdition.HateAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+
             );
+        }
+    }
+
+    public class HateXWA : Hate
+    {
+        public HateXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

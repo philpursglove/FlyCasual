@@ -20,10 +20,18 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>
                 {
                     Legality.StandardBanned,
-                    Legality.ExtendedLegal,
-                    Legality.XWA
+                    Legality.ExtendedLegal
                 }
             );
+        }
+    }
+
+    public class PrecognitiveReflexesXWA : PrecognitiveReflexes
+    {
+        public PrecognitiveReflexesXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
