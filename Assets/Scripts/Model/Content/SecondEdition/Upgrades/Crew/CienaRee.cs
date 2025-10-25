@@ -1,12 +1,12 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
-using Actions;
-using ActionsList;
+﻿using ActionsList;
+using Content;
+using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -24,13 +24,27 @@ namespace UpgradesList.SecondEdition
                     new ActionBarRestriction(typeof(CoordinateAction))
                 ),
                 abilityType: typeof(Abilities.SecondEdition.CienaReeCrewAbility),
-                seImageNumber: 111
+                seImageNumber: 111,
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Imperial,
                 new Vector2(445, 12)
             );
+        }
+    }
+
+    public class CienaReeXWA : CienaRee
+    {
+        public CienaReeXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

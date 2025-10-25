@@ -1,9 +1,11 @@
-﻿using Ship;
-using Upgrade;
-using SubPhases;
-using BoardTools;
+﻿using BoardTools;
+using Content;
+using Ship;
 using SquadBuilderNS;
+using SubPhases;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,7 +20,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum, Faction.Imperial),
                 abilityType: typeof(Abilities.SecondEdition.ZeroDashZeroDashZeroAbility),
-                seImageNumber: 127
+                seImageNumber: 127,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -46,6 +49,15 @@ namespace UpgradesList.SecondEdition
             }
 
             return false;
+        }
+    }
+
+    public class ZeroDashZeroDashZeroXWA : ZeroDashZeroDashZero
+    {
+        public ZeroDashZeroDashZeroXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

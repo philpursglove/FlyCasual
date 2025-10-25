@@ -1,5 +1,6 @@
 ﻿using Abilities.Parameters;
 using ActionsList;
+using Content;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
@@ -18,9 +19,19 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum, Faction.Imperial, Faction.FirstOrder),
                 addAction: new Actions.ActionInfo(typeof(CoordinateAction), Actions.ActionColor.Red),
-                abilityType: typeof(Abilities.SecondEdition.ProtectorateGlebAbility)
+                abilityType: typeof(Abilities.SecondEdition.ProtectorateGlebAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class ProtectorateGlebXWA : ProtectorateGleb
+    {
+        public ProtectorateGlebXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -39,7 +50,7 @@ namespace Abilities.SecondEdition
                 "You may transfer 1 orange or red token to the ship you coordinated",
                 HostUpgrade
             ),
-            colorsFilter: new List<TokenColors>() {TokenColors.Orange, TokenColors.Red },
+            colorsFilter: new List<TokenColors>() { TokenColors.Orange, TokenColors.Red },
             decisionOwner: HostShip.Owner,
             next: new TransferToken
             (
