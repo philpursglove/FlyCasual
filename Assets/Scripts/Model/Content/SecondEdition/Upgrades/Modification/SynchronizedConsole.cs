@@ -3,6 +3,7 @@ using Content;
 using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using Upgrade;
@@ -22,7 +23,7 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.Republic),
                     new ActionBarRestriction(typeof(TargetLockAction))),
                 abilityType: typeof(Abilities.SecondEdition.SynchronizedConsoleAbility),
-                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 //seImageNumber: ??
             );
         }
@@ -33,7 +34,7 @@ namespace UpgradesList.SecondEdition
         public SynchronizedConsoleXWA() : base()
         {
             UpgradeInfo.Cost = 2;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
