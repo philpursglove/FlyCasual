@@ -1,8 +1,9 @@
-﻿using Upgrade;
+﻿using Content;
 using SquadBuilderNS;
 using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,7 +18,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.BT1Ability),
                 restriction: new FactionRestriction(Faction.Scum, Faction.Imperial),
-                seImageNumber: 140
+                seImageNumber: 140,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -46,7 +48,15 @@ namespace UpgradesList.SecondEdition
 
             return false;
         }
+    }
 
+    public class BT1XWA : BT1
+    {
+        public BT1XWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
