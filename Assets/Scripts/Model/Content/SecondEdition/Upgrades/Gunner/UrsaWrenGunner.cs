@@ -1,9 +1,8 @@
-﻿using Upgrade;
+﻿using Content;
 using Ship;
-using ActionsList;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,9 +15,22 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Gunner,
                 cost: 4,
                 restriction: new FactionRestriction(Faction.Republic, Faction.Separatists),
-                abilityType: typeof(Abilities.SecondEdition.UrsaWrenGunnerAbility)
+                abilityType: typeof(Abilities.SecondEdition.UrsaWrenGunnerAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
             NameCanonical = "ursawren-gunner";
+        }
+    }
+
+    public class UrsaWrenGunnerXWA : UrsaWrenGunner
+    {
+        public UrsaWrenGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality>
+            {
+                Legality.XWA
+            };
         }
     }
 }
@@ -41,7 +53,7 @@ namespace Abilities.SecondEdition
 
         private void RegisterTrigger(ITargetLockable target)
         {
-            if (target is GenericShip && BoardTools.Board.GetRangeOfShips(HostShip, target as GenericShip) > 2 && BoardTools.Board.GetShipsAtRange(target as GenericShip, new Vector2(0,1), Team.Type.Enemy).Count == 0)
+            if (target is GenericShip && BoardTools.Board.GetRangeOfShips(HostShip, target as GenericShip) > 2 && BoardTools.Board.GetShipsAtRange(target as GenericShip, new Vector2(0, 1), Team.Type.Enemy).Count == 0)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnTargetLockIsAcquired, delegate { GrantCalculate(); });
             }
