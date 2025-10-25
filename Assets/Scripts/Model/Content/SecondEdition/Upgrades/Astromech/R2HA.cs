@@ -1,7 +1,8 @@
-﻿using Upgrade;
-using System.Linq;
-using System.Collections.Generic;
+﻿using Content;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -15,8 +16,18 @@ namespace UpgradesList.SecondEdition
                 cost: 3,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.R2HAAbility)
+                abilityType: typeof(Abilities.SecondEdition.R2HAAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class R2HAXWA : R2HA
+    {
+        public R2HAXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }
