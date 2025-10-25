@@ -45,7 +45,7 @@ namespace UpgradesList.SecondEdition
         public PZ4COXWA() : base()
         {
             UpgradeInfo.Cost = 4;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

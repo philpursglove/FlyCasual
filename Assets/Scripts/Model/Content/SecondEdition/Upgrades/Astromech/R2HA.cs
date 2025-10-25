@@ -17,7 +17,7 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
                 abilityType: typeof(Abilities.SecondEdition.R2HAAbility),
-                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
     }
@@ -27,7 +27,7 @@ namespace UpgradesList.SecondEdition
         public R2HAXWA() : base()
         {
             UpgradeInfo.Cost = 2;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality>() { Legality.XWA };
         }
     }
 }
