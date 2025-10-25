@@ -1,7 +1,8 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
 
@@ -18,7 +19,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 abilityType: typeof(Abilities.SecondEdition.LandoCalrissianRebelAbility),
-                seImageNumber: 87
+                seImageNumber: 87,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -28,6 +30,15 @@ namespace UpgradesList.SecondEdition
             );
         }
     }
+
+    public class LandoCalrissianRebelXWA : LandoCalrissianRebelCrew
+    {
+        public LandoCalrissianRebelXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition
@@ -35,7 +46,7 @@ namespace Abilities.SecondEdition
     //Action: Roll 2 defense dice. For each focus result, gain 1 focus token. For each evade result, gain 1 evade token. 
     //If both results are blank, the opposing player chooses focus or evade. You gain 1 token of that type.
     public class LandoCalrissianRebelAbility : FirstEdition.LandoCalrissianCrewAbility
-    {        
+    {
         protected override void DiceCheckFinished()
         {
             if (DiceCheckRoll.Blanks == 2)
@@ -123,7 +134,8 @@ namespace Abilities.FirstEdition
 
         protected virtual void DiceCheckFinished()
         {
-            HostShip.Tokens.AssignTokens(() => new Tokens.FocusToken(HostShip), DiceCheckRoll.Focuses, () => {
+            HostShip.Tokens.AssignTokens(() => new Tokens.FocusToken(HostShip), DiceCheckRoll.Focuses, () =>
+            {
                 HostShip.Tokens.AssignTokens(() => new Tokens.EvadeToken(HostShip), DiceCheckRoll.Successes, () =>
                 {
                     AbilityDiceCheck.ConfirmCheck();

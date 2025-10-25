@@ -1,8 +1,9 @@
-﻿using Ship;
-using Upgrade;
+﻿using Content;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,7 +18,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 abilityType: typeof(Abilities.SecondEdition.R2D2CrewAbility),
-                seImageNumber: 91
+                seImageNumber: 91,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -27,7 +29,16 @@ namespace UpgradesList.SecondEdition
             );
 
             NameCanonical = "r2d2-crew";
-        }        
+        }
+    }
+
+    public class R2D2CrewXWA : R2D2Crew
+    {
+        public R2D2CrewXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -79,7 +90,8 @@ namespace Abilities.SecondEdition
             Phases.StartTemporarySubPhaseOld(
                 "R2-D2: Check expose of damage card",
                 typeof(R2D2CheckSubPhase),
-                delegate {
+                delegate
+                {
                     Phases.FinishSubPhase(typeof(R2D2CheckSubPhase));
                     Triggers.FinishTrigger();
                 }

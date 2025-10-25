@@ -1,9 +1,11 @@
-﻿using Ship;
-using Upgrade;
-using UnityEngine;
-using System;
-using Tokens;
+﻿using Content;
+using Ship;
 using SubPhases;
+using System;
+using System.Collections.Generic;
+using Tokens;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,14 +21,24 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Rebel),
                 abilityType: typeof(Abilities.SecondEdition.KananJarrusCrewAbility),
                 addForce: 1,
-                seImageNumber: 86
+                seImageNumber: 86,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Rebel,
                 new Vector2(409, 10)
             );
-        }        
+        }
+    }
+
+    public class KananJarrusXWA : KananJarrus
+    {
+        public KananJarrusXWA() : base()
+        {
+            UpgradeInfo.Cost = 10;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -83,11 +95,11 @@ namespace Abilities.SecondEdition
 
         private void RemoveStress(object sender, EventArgs e)
         {
-            HostShip.Tokens.SpendToken(typeof(ForceToken), () => 
+            HostShip.Tokens.SpendToken(typeof(ForceToken), () =>
                 ShipToRemoveStress.Tokens.RemoveToken(
                     typeof(StressToken),
                     DecisionSubPhase.ConfirmDecision
-                ));            
-        }                
+                ));
+        }
     }
 }
