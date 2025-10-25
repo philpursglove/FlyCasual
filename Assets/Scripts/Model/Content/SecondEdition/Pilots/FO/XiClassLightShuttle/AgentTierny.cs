@@ -1,58 +1,29 @@
 ﻿using BoardTools;
 using Conditions;
+using Content;
 using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
-using Content;
 using Tokens;
 using Upgrade;
-using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.XiClassLightShuttle
 {
-    namespace SecondEdition.XiClassLightShuttle
+    public class AgentTierny : XiClassLightShuttle
     {
-        public class AgentTierny : XiClassLightShuttle
+        public AgentTierny() : base()
         {
-            public AgentTierny() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Agent Tierny",
-                    "Persuasive Recruiter",
-                    Faction.FirstOrder,
-                    3,
-                    5,
-                    15,
-                    isLimited: true,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    abilityType: typeof(Abilities.SecondEdition.AgentTiernyAbility),
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-
-                PilotNameCanonical = "agenttierny";
-            }
-        }
-
-        public class AgentTiernyXWA : AgentTierny
-        {
-            public AgentTiernyXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 20;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Agent Tierny",
+                "Persuasive Recruiter",
+                Faction.FirstOrder,
+                3,
+                5,
+                15,
+                isLimited: true,
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
@@ -61,8 +32,31 @@ namespace Ship
                     UpgradeType.Crew,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                abilityType: typeof(Abilities.SecondEdition.AgentTiernyAbility),
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            PilotNameCanonical = "agenttierny";
+        }
+    }
+
+    public class AgentTiernyXWA : AgentTierny
+    {
+        public AgentTiernyXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -109,11 +103,12 @@ namespace Abilities.SecondEdition
         protected virtual void AssignBrokenTrust()
         {
             // Remove decoyed from all enemy ships
-            foreach (var kvp in Roster.AllShips)
+            foreach (KeyValuePair<string, GenericShip> kvp in Roster.AllShips)
             {
                 GenericShip ship = kvp.Value;
                 ship.Tokens.RemoveCondition(typeof(BrokenTrust));
             }
+
             TargetShip.Tokens.AssignCondition(new BrokenTrust(TargetShip) { SourceUpgrade = HostUpgrade });
             SelectShipSubPhase.FinishSelection();
         }
@@ -150,7 +145,7 @@ namespace Conditions
             GenericShip.OnFaceupCritCardReadyToBeDealtGlobal += CheckRemoveBrokenTrust;
             Host.OnAttackFinish += CheckRemoveBrokenTrust;
         }
-        
+
         public override void WhenRemoved()
         {
             Host.OnCheckIsFriendly -= TreatAsAllied;
@@ -161,7 +156,7 @@ namespace Conditions
 
         public void CheckRemoveBrokenTrust(GenericShip ship)
         {
-            if(Combat.Defender != null && Combat.Defender.IsDestroyed)
+            if (Combat.Defender != null && Combat.Defender.IsDestroyed)
             {
                 RemoveBrokenTrust(Host);
             }
@@ -219,7 +214,5 @@ namespace Conditions
         {
             friendly = false;
         }
-
-
     }
 }
