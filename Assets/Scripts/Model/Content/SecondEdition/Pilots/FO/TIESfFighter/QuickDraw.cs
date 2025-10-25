@@ -3,62 +3,60 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIESfFighter
 {
-    namespace SecondEdition.TIESfFighter
+    public class Quickdraw : TIESfFighter
     {
-        public class Quickdraw : TIESfFighter
+        public Quickdraw() : base()
         {
-            public Quickdraw() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Quickdraw\"",
-                    "Defiant Duelist",
-                    Faction.FirstOrder,
-                    6,
-                    5,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.QuickDrawPilotAbility),
-                    charges: 1,
-                    regensCharges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class QuickdrawXWA : Quickdraw
-        {
-            public QuickdrawXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 12;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>()
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Quickdraw\"",
+                "Defiant Duelist",
+                Faction.FirstOrder,
+                6,
+                5,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.QuickDrawPilotAbility),
+                charges: 1,
+                regensCharges: 1,
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
-                    UpgradeType.Tech,
                     UpgradeType.Sensor,
+                    UpgradeType.Tech,
                     UpgradeType.Gunner,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class QuickdrawXWA : Quickdraw
+    {
+        public QuickdrawXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 24;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -176,6 +174,5 @@ namespace Abilities.SecondEdition
         {
             HostShip.SpendCharge();
         }
-
     }
 }

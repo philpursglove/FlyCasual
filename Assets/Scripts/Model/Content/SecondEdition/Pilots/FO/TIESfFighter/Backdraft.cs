@@ -4,62 +4,57 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIESfFighter
 {
-    namespace SecondEdition.TIESfFighter
+    public class Backdraft : TIESfFighter
     {
-        public class Backdraft : TIESfFighter
+        public Backdraft() : base()
         {
-            public Backdraft() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Backdraft\"",
-                    "Fiery Fanatic",
-                    Faction.FirstOrder,
-                    4,
-                    4,
-                    5,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.BackdraftAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class BackdraftXWA : Backdraft
-        {
-            public BackdraftXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 8;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Backdraft\"",
+                "Fiery Fanatic",
+                Faction.FirstOrder,
+                4,
+                4,
+                5,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.BackdraftAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Tech,
                     UpgradeType.Sensor,
-                    UpgradeType.Missile,
+                    UpgradeType.Tech,
                     UpgradeType.Missile,
                     UpgradeType.Gunner,
-                    UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class BackdraftXWA : Backdraft
+    {
+        public BackdraftXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

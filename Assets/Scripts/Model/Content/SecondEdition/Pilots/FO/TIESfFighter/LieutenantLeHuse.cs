@@ -8,61 +8,58 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIESfFighter
 {
-    namespace SecondEdition.TIESfFighter
+    public class LieutenantLeHuse : TIESfFighter
     {
-        public class LieutenantLeHuse : TIESfFighter
+        public LieutenantLeHuse() : base()
         {
-            public LieutenantLeHuse() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lieutenant LeHuse",
-                    "Unflinching Executioner",
-                    Faction.FirstOrder,
-                    5,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LieutenantLeHuseAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LieutenantLeHuseXWA : LieutenantLeHuse
-        {
-            public LieutenantLeHuseXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 6;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lieutenant LeHuse",
+                "Unflinching Executioner",
+                Faction.FirstOrder,
+                5,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LieutenantLeHuseAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Tech,
                     UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
                     UpgradeType.Missile,
                     UpgradeType.Gunner,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LieutenantLeHuseXWA : LieutenantLeHuse
+    {
+        public LieutenantLeHuseXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 25;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
