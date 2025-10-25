@@ -1,8 +1,7 @@
-﻿using Ship;
+﻿using Content;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using Tokens;
-using UnityEngine;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -23,9 +22,20 @@ namespace UpgradesList.SecondEdition
                     charges: 2
                 ),
                 abilityType: typeof(Abilities.SecondEdition.HomingMissilesAbility),
-                seImageNumber: 39
+                seImageNumber: 39,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class HomingMissilesXWA : HomingMissiles
+    {
+        public HomingMissilesXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 2;
+        }
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using Arcs;
+using Content;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -30,9 +31,19 @@ namespace UpgradesList.SecondEdition
                         typeof(BlueTargetLockToken)
                     }
                 ),
-                abilityType: typeof(Abilities.SecondEdition.MultiMissilePodsAbility)
+                abilityType: typeof(Abilities.SecondEdition.MultiMissilePodsAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class MultiMissilePodsXWA : MultiMissilePods
+    {
+        public MultiMissilePodsXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -112,6 +123,6 @@ namespace Abilities.SecondEdition
             HostShip.AfterGotNumberOfAttackDice -= IncreaseByTwo;
         }
 
-        public class MultiMissilePodDecisionSubphase: DecisionSubPhase { }
+        public class MultiMissilePodDecisionSubphase : DecisionSubPhase { }
     }
 }

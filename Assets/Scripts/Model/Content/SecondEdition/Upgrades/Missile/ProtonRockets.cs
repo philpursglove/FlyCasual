@@ -31,8 +31,9 @@ namespace UpgradesList.SecondEdition
     {
         public ProtonRocketsXWA() : base()
         {
-            UpgradeInfo.Cost = 6;
+            UpgradeInfo.Cost = 7;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Limited = 3;
         }
     }
 }
