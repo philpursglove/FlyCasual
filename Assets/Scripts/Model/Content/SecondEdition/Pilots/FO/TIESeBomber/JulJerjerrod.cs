@@ -1,61 +1,28 @@
 ﻿using ActionsList;
-using BoardTools;
 using Content;
-using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIESeBomber
 {
-    namespace SecondEdition.TIESeBomber
+    public class JulJerjerrod : TIESeBomber
     {
-        public class JulJerjerrod : TIESeBomber
+        public JulJerjerrod() : base()
         {
-            public JulJerjerrod() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jul Jerjerrod",
-                    "Security Commander",
-                    Faction.FirstOrder,
-                    4,
-                    4,
-                    13,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.JulJerjerrodPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class JulJerjerrodXWA : JulJerjerrod
-        {
-            public JulJerjerrodXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 7;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Jul Jerjerrod",
+                "Security Commander",
+                Faction.FirstOrder,
+                4,
+                4,
+                13,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.JulJerjerrodPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
@@ -66,8 +33,34 @@ namespace Ship
                     UpgradeType.Device,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class JulJerjerrodXWA : JulJerjerrod
+    {
+        public JulJerjerrodXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Device,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -125,7 +118,8 @@ namespace Abilities.SecondEdition
             {
                 subphase.AddDecision(
                     token.Name,
-                    delegate {
+                    delegate
+                    {
                         tokensToRemove.Add(token);
                         ActionsHolder.RemoveTokens(tokensToRemove, DecisionSubPhase.ConfirmDecision);
                     }
