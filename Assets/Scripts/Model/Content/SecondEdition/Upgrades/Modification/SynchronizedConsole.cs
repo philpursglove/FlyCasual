@@ -1,10 +1,11 @@
-﻿using Upgrade;
+﻿using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
-using ActionsList;
-using Tokens;
-using System.Linq;
 using System;
+using System.Linq;
+using Tokens;
+using Upgrade;
 using UpgradesList.SecondEdition;
 
 namespace UpgradesList.SecondEdition
@@ -18,13 +19,21 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Modification,
                 cost: 1,
                 restrictions: new UpgradeCardRestrictions(
-                    new FactionRestriction(Faction.Republic), 
+                    new FactionRestriction(Faction.Republic),
                     new ActionBarRestriction(typeof(TargetLockAction))),
-                abilityType: typeof(Abilities.SecondEdition.SynchronizedConsoleAbility)
+                abilityType: typeof(Abilities.SecondEdition.SynchronizedConsoleAbility),
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
                 //seImageNumber: ??
             );
+        }
+    }
 
-            
+    public class SynchronizedConsoleXWA : SynchronizedConsole
+    {
+        public SynchronizedConsoleXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
 }
@@ -33,7 +42,7 @@ namespace Abilities.SecondEdition
 {
     //After you perform an attack, you may choose a friendly ship at range 1 or a friendly ship with the Synchronized Console upgrade 
     //at range 1-3 and spend a lock you have on the defender. If you do, the friendly ship you chose may acquire a lock on the defender.
-    public class SynchronizedConsoleAbility : GenericAbility 
+    public class SynchronizedConsoleAbility : GenericAbility
     {
         public override void ActivateAbility()
         {
