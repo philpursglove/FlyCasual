@@ -38,16 +38,15 @@ namespace Ship
         {
             public TrandoshanSlaverXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 27;
+                (PilotInfo as PilotCardInfo25).Cost = 14;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Crew,
                     UpgradeType.Crew,
                     UpgradeType.Gunner,
+                    UpgradeType.Illicit,
                     UpgradeType.Modification,
-                    UpgradeType.Cannon,
-                    UpgradeType.Missile
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }

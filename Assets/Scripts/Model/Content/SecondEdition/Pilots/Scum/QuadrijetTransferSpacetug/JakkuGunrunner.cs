@@ -21,7 +21,7 @@ namespace Ship
                     extraUpgradeIcons: new List<UpgradeType>()
                     {
                         UpgradeType.Illicit,
-                        UpgradeType.Device                        
+                        UpgradeType.Device
                     },
                     seImageNumber: 164,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
@@ -33,9 +33,15 @@ namespace Ship
         {
             public JakkuGunrunnerXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification
+                };
             }
         }
     }

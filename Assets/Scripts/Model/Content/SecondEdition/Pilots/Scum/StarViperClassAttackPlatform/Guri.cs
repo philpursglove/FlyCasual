@@ -47,14 +47,14 @@ namespace Ship
         {
             public GuriXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Sensor,
+                    UpgradeType.Illicit,
                     UpgradeType.Modification,
-                    UpgradeType.Tech,
                     UpgradeType.Torpedo,
                     UpgradeType.Title
                 };

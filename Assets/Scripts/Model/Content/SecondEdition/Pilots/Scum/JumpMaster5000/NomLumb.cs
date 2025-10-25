@@ -48,9 +48,18 @@ namespace Ship
         {
             public NomLumbXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo
+                };
             }
         }
     }
@@ -81,7 +90,7 @@ namespace Abilities.SecondEdition
             if (!reverseShotInfo.InArcByType(ArcType.SingleTurret))
             {
                 Messages.ShowInfo(HostShip.PilotInfo.PilotName + ": Attacker is not in turret arc");
-                
+
                 FacingsToAttacker = GetFacingsToAttacker();
                 if (FacingsToAttacker.Count == 1)
                 {
@@ -114,7 +123,8 @@ namespace Abilities.SecondEdition
             {
                 subphase.AddDecision(
                     "Rotate to " + facing,
-                    delegate {
+                    delegate
+                    {
                         HostShip.ArcsInfo.GetArc<ArcSingleTurret>().RotateArc(facing);
                         DecisionSubPhase.ConfirmDecision();
                     }

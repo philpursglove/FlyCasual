@@ -44,9 +44,18 @@ namespace Ship
         {
             public PrinceXizorXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title
+                };
             }
         }
     }
@@ -164,7 +173,8 @@ namespace Abilities.SecondEdition
 
             subphase.AddDecision(
                 "Hit",
-                delegate {
+                delegate
+                {
                     DecisionSubPhase.ConfirmDecisionNoCallback();
                     DealDamageToTargetShip(DieSide.Success);
                 }
@@ -172,7 +182,8 @@ namespace Abilities.SecondEdition
 
             subphase.AddDecision(
                 "Crit",
-                delegate {
+                delegate
+                {
                     DecisionSubPhase.ConfirmDecisionNoCallback();
                     DealDamageToTargetShip(DieSide.Crit);
                 }

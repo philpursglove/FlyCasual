@@ -36,7 +36,7 @@ namespace Ship
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
                         UpgradeType.Missile,
-                        UpgradeType.Torpedo                        
+                        UpgradeType.Torpedo
                     },
                     seImageNumber: 207,
                     legality: new List<Legality>() { Legality.ExtendedLegal },
@@ -49,8 +49,8 @@ namespace Ship
         {
             public ToraniKuldaXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
@@ -67,7 +67,8 @@ namespace Abilities.SecondEdition
 
             ToraniKuldaAbilityDecisionSubPhaseSE subphase = Phases.StartTemporarySubPhaseNew<ToraniKuldaAbilityDecisionSubPhaseSE>(
                 "Select effect of " + HostShip.PilotInfo.PilotName + "'s ability",
-                delegate {
+                delegate
+                {
                     Selection.ThisShip = HostShip;
                     Triggers.FinishTrigger();
                 }
@@ -157,7 +158,8 @@ namespace Abilities.FirstEdition
 
             ToraniKuldaAbilityDecisionSubPhase subphase = Phases.StartTemporarySubPhaseNew<ToraniKuldaAbilityDecisionSubPhase>(
                 "Select effect of " + HostShip.PilotInfo.PilotName + "'s ability",
-                delegate {
+                delegate
+                {
                     Selection.ThisShip = HostShip;
                     Triggers.FinishTrigger();
                 }

@@ -44,12 +44,12 @@ namespace Ship
         {
             public OverseerYushynXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
-                    UpgradeType.Talent,
                     UpgradeType.Illicit,
+                    UpgradeType.Modification,
                     UpgradeType.Modification
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };

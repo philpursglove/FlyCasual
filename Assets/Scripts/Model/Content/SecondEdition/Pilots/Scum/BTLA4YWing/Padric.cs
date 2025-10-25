@@ -49,9 +49,18 @@ namespace Ship
         {
             public PadricXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).Cost = 8;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo
+                };
             }
         }
     }

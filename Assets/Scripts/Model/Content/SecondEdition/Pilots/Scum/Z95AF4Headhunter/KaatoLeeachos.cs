@@ -29,7 +29,7 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Illicit,
                         UpgradeType.Modification,
-                        UpgradeType.Missile                        
+                        UpgradeType.Missile
                     },
                     tags: new List<Tags>
                     {
@@ -46,8 +46,8 @@ namespace Ship
         {
             public KaatoLeeachosXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

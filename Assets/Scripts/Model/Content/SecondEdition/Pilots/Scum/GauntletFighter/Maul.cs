@@ -41,7 +41,7 @@ namespace Ship
                     },
                     tags: new List<Tags>()
                     {
-                        Tags.DarkSide 
+                        Tags.DarkSide
                     },
                     skinName: "Red Old",
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -53,7 +53,7 @@ namespace Ship
         {
             public MaulXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).Cost = 18;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {

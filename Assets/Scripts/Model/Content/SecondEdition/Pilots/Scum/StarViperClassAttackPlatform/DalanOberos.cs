@@ -33,7 +33,7 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Modification,
                         UpgradeType.Tech,
-                        UpgradeType.Torpedo                        
+                        UpgradeType.Torpedo
                     },
                     seImageNumber: 179,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
@@ -47,9 +47,17 @@ namespace Ship
         {
             public DalanOberosXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                };
             }
         }
     }

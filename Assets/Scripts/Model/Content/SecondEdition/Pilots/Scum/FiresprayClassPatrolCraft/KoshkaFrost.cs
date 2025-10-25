@@ -45,9 +45,19 @@ namespace Ship
         {
             public KoshkaFrostXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).Cost = 16;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile
+                };
             }
         }
     }

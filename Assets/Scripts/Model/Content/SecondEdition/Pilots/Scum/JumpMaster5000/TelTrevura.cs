@@ -45,9 +45,19 @@ namespace Ship
         {
             public TelTrevuraXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo
+                };
             }
         }
     }
@@ -115,7 +125,8 @@ namespace Abilities.SecondEdition
 
             var subphase = Phases.StartTemporarySubPhaseNew<SetupShipMidgameSubPhase>(
                 "Setup",
-                delegate {
+                delegate
+                {
                     Messages.ShowInfo(HostShip.PilotInfo.PilotName + " has returned to the play area");
                     Triggers.FinishTrigger();
                 }

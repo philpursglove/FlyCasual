@@ -43,12 +43,12 @@ namespace Ship
                 );
             }
         }
- 
+
         public class IG88BXWA : IG88B
         {
             public IG88BXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).Cost = 16;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }

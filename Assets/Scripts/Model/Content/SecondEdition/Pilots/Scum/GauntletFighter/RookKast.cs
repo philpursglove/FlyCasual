@@ -35,7 +35,7 @@ namespace Ship
                     },
                     tags: new List<Tags>()
                     {
-                        Tags.Mandalorian 
+                        Tags.Mandalorian
                     },
                     skinName: "Red",
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -47,9 +47,20 @@ namespace Ship
         {
             public RookKastXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).Cost = 17;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Configuration
+                };
             }
         }
     }

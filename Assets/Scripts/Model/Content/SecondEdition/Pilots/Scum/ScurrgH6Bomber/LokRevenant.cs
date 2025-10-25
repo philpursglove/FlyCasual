@@ -35,8 +35,8 @@ namespace Ship
         {
             public LokRevenantXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 25;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Crew,

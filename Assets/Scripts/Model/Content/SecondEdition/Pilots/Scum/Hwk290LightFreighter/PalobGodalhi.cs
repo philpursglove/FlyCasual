@@ -51,9 +51,18 @@ namespace Ship
         {
             public PalobGodalhiXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Title
+                };
             }
         }
     }
@@ -167,10 +176,12 @@ namespace Abilities.SecondEdition
         {
             TargetShip.Tokens.RemoveToken(
                 typeof(FocusToken),
-                delegate {
+                delegate
+                {
                     HostShip.Tokens.AssignToken(
                         typeof(FocusToken),
-                        delegate {
+                        delegate
+                        {
                             SelectShipSubPhase.FinishSelection();
                         }
                     );
@@ -182,10 +193,12 @@ namespace Abilities.SecondEdition
         {
             TargetShip.Tokens.RemoveToken(
                 typeof(EvadeToken),
-                delegate {
+                delegate
+                {
                     HostShip.Tokens.AssignToken(
                         typeof(EvadeToken),
-                        delegate {
+                        delegate
+                        {
                             SelectShipSubPhase.FinishSelection();
                         }
                     );
@@ -197,10 +210,12 @@ namespace Abilities.SecondEdition
         {
             TargetShip.Tokens.RemoveToken(
                 typeof(FocusToken),
-                delegate {
+                delegate
+                {
                     HostShip.Tokens.AssignToken(
                         typeof(FocusToken),
-                        delegate {
+                        delegate
+                        {
                             WhichTokenDecisionSubphase.ConfirmDecisionNoCallback();
                             SelectShipSubPhase.FinishSelection();
                         }
@@ -213,10 +228,12 @@ namespace Abilities.SecondEdition
         {
             TargetShip.Tokens.RemoveToken(
                 typeof(EvadeToken),
-                delegate {
+                delegate
+                {
                     HostShip.Tokens.AssignToken(
                         typeof(EvadeToken),
-                        delegate {
+                        delegate
+                        {
                             WhichTokenDecisionSubphase.ConfirmDecisionNoCallback();
                             SelectShipSubPhase.FinishSelection();
                         }

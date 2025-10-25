@@ -48,8 +48,8 @@ namespace Ship
         {
             public KetsuOnyoXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).Cost = 16;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

@@ -39,17 +39,19 @@ namespace Ship
         {
             public FreighterCaptainXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 24;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Crew,
                     UpgradeType.Crew,
                     UpgradeType.Gunner,
                     UpgradeType.Illicit,
-                    UpgradeType.Missile
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).Limited = 1;
             }
         }
     }

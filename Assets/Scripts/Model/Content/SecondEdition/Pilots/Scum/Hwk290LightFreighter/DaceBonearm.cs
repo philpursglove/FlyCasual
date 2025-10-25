@@ -51,9 +51,18 @@ namespace Ship
         {
             public DaceBonearmXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Title
+                };
             }
         }
     }
