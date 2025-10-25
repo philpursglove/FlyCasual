@@ -1,7 +1,8 @@
-﻿using Upgrade;
-using System.Collections.Generic;
+﻿using Content;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,7 +18,8 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.GreedoGunnerAbility),
                 restriction: new FactionRestriction(Faction.Scum),
                 charges: 1,
-                seImageNumber: 142
+                seImageNumber: 142,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -25,6 +27,15 @@ namespace UpgradesList.SecondEdition
                 new Vector2(497, 27),
                 new Vector2(150, 150)
             );
+        }
+    }
+
+    public class GreedoXWA : Greedo
+    {
+        public GreedoXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
