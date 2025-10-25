@@ -1,9 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
-using Tokens;
-using ActionsList;
+﻿using ActionsList;
+using Content;
+using Ship;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,7 +18,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.UnkarPluttCrewAbility),
-                seImageNumber: 137
+                seImageNumber: 137,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -26,7 +27,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(365, 3),
                 new Vector2(200, 200)
             );
-        }        
+        }
+    }
+
+    public class UnkarPluttXWA : UnkarPlutt
+    {
+        public UnkarPluttXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

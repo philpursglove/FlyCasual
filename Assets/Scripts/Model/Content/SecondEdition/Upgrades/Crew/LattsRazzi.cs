@@ -1,8 +1,8 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
-using UnityEngine;
+﻿using Content;
+using Ship;
 using Tokens;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,14 +17,24 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.LattsRazziCrewAbility),
-                seImageNumber: 135
+                seImageNumber: 135,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Scum,
                 new Vector2(376, 8)
             );
-        }        
+        }
+    }
+
+    public class LattsRazziXWA : LattsRazzi
+    {
+        public LattsRazziXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 
