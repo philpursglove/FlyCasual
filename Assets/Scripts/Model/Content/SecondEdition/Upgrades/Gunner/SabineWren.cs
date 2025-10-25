@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,20 @@ namespace UpgradesList.SecondEdition
                 cost: 2,
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.SabineWrenGunnerAbility),
-                restriction: new FactionRestriction(Faction.Rebel)
+                restriction: new FactionRestriction(Faction.Rebel),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            
-
             NameCanonical = "sabinewren-gunner";
+        }
+    }
+
+    public class SabineWrenGunnerXWA : SabineWrenGunner
+    {
+        public SabineWrenGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
