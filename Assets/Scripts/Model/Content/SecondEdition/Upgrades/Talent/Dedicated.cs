@@ -23,14 +23,14 @@ namespace UpgradesList.SecondEdition
                 ),
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
     }
 
     public class DedicatedXWA : Dedicated
     {
         public DedicatedXWA() : base()
         {
-            UpgradeInfo.Cost = 5;
+            UpgradeInfo.Cost = 2;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
