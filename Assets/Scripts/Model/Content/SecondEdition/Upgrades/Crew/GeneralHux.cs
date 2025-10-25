@@ -28,14 +28,14 @@ namespace UpgradesList.SecondEdition
                 Faction.FirstOrder,
                 new Vector2(326, 1)
             );
-        }        
+        }
     }
 
     public class GeneralHuxXWA : GeneralHux
     {
         public GeneralHuxXWA() : base()
         {
-            UpgradeInfo.Cost = 8;
+            UpgradeInfo.Cost = 6;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
