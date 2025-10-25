@@ -33,7 +33,7 @@ namespace UpgradesList.SecondEdition
     {
         public SpecialForcesGunnerXWA() : base()
         {
-            UpgradeInfo.Cost = 0;
+            UpgradeInfo.Cost = 9;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
@@ -91,7 +91,8 @@ namespace Abilities.SecondEdition
 
             Combat.StartSelectAttackTarget(
                 HostShip,
-                delegate {
+                delegate
+                {
                     Selection.ThisShip.IsAttackPerformed = true;
                     //if bonus attack was skipped, allow bonus attacks again
                     if (Selection.ThisShip.IsAttackSkipped) Selection.ThisShip.IsCannotAttackSecondTime = false;
