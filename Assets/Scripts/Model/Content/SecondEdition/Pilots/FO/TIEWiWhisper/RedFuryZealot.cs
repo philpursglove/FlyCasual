@@ -2,53 +2,51 @@ using Content;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEWiWhisperModifiedInterceptor
 {
-    namespace SecondEdition.TIEWiWhisperModifiedInterceptor
+    public class RedFuryZealot : TIEWiWhisperModifiedInterceptor
     {
-        public class RedFuryZealot : TIEWiWhisperModifiedInterceptor
+        public RedFuryZealot() : base()
         {
-            public RedFuryZealot() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Red Fury Zealot",
-                    "",
-                    Faction.FirstOrder,
-                    2,
-                    4,
-                    3,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class RedFuryZealotXWA : RedFuryZealot
-        {
-            public RedFuryZealotXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 7;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Red Fury Zealot",
+                "",
+                Faction.FirstOrder,
+                2,
+                4,
+                3,
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
-                    UpgradeType.Tech
-                };
-            }
+                    UpgradeType.Tech,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class RedFuryZealotXWA : RedFuryZealot
+    {
+        public RedFuryZealotXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
