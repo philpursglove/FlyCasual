@@ -36,8 +36,9 @@ namespace UpgradesList.SecondEdition
     {
         public VeteranTurretGunnerXWA() : base()
         {
-            UpgradeInfo.Cost = 4;
+            UpgradeInfo.Cost = 6;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Limited = 3;
         }
     }
 }

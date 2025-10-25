@@ -1,9 +1,9 @@
-﻿using Upgrade;
+﻿using Content;
+using SubPhases;
+using System;
 using System.Collections.Generic;
 using Tokens;
-using Ship;
-using System;
-using SubPhases;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -15,10 +15,23 @@ namespace UpgradesList.SecondEdition
                 "Suppressive Gunner",
                 UpgradeType.Gunner,
                 cost: 7,
-                abilityType: typeof(Abilities.SecondEdition.SuppressiveGunnerAbility)
+                abilityType: typeof(Abilities.SecondEdition.SuppressiveGunnerAbility),
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
+        }
+    }
 
-            
+    public class SuppressiveGunnerXWA : SuppressiveGunner
+    {
+        public SuppressiveGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 2;
         }
     }
 }
