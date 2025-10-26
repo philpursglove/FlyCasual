@@ -44,13 +44,14 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public AdiGalliaXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 5;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                     UpgradeType.ForcePower,
                     UpgradeType.ForcePower,
                     UpgradeType.Astromech,
+                    UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Configuration,
             };

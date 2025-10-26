@@ -48,8 +48,8 @@ namespace Ship.SecondEdition.Eta2Actis
     {
         public ShaakTiXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 5;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -71,7 +71,7 @@ namespace Abilities.SecondEdition
                 new TeamCondition(ShipTypes.Friendly),
                 new RangeToHostCondition(minRange: 0, maxRange: 2),
                 new CanSpendForceCondition(),
-                new HasTokenCondition(tokensList: new List<Type>() {typeof(FocusToken), typeof(EvadeToken)})
+                new HasTokenCondition(tokensList: new List<Type>() { typeof(FocusToken), typeof(EvadeToken) })
             ),
             description: new AbilityDescription
             (
@@ -113,7 +113,7 @@ namespace Abilities.SecondEdition
                         callback();
                     }
                 }
-            );            
+            );
         }
 
         private void KeepEvade(Action callback)

@@ -34,7 +34,7 @@ namespace Ship.SecondEdition.Delta7BAethersprite
                 skinName: "Plo Koon",
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            
+
             PilotNameCanonical = "adigallia-delta7baethersprite";
         }
     }
@@ -43,8 +43,8 @@ namespace Ship.SecondEdition.Delta7BAethersprite
     {
         public AdiGalliaXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 6;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,

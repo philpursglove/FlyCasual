@@ -47,9 +47,18 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public SaeseeTiinXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.ForcePower,
+                UpgradeType.ForcePower,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Configuration,
+            };
         }
     }
 }

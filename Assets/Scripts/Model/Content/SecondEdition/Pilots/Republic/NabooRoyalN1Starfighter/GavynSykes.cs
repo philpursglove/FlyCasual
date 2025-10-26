@@ -38,8 +38,8 @@ namespace Ship
         {
             public GavynSykesXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

@@ -43,15 +43,14 @@ namespace Ship.SecondEdition.Delta7BAethersprite
     {
         public ObiWanKenobi7BXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 6;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,
                     UpgradeType.ForcePower,
                     UpgradeType.Astromech,
                     UpgradeType.Modification,
-                    UpgradeType.Modification
                 };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }

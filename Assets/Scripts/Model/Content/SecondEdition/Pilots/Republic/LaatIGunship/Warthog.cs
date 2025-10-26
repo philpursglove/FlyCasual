@@ -48,9 +48,21 @@ namespace Ship
         {
             public WarthogXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 26;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
+                };
             }
         }
     }
@@ -79,7 +91,7 @@ namespace Abilities.SecondEdition
             if (!(Phases.CurrentPhase is CombatPhase))
                 return;
 
-            if (ship == HostShip || 
+            if (ship == HostShip ||
                 (ship.Owner == HostShip.Owner && !ship.PilotInfo.IsLimited && HostShip.GetRangeToShip(ship) <= 2))
             {
                 preventDestruction = true;
@@ -101,7 +113,7 @@ namespace Abilities.SecondEdition
         private void DestroyShips(object sender, EventArgs e)
         {
             Phases.Events.OnCombatPhaseEnd_NoTriggers -= RegisterTrigger;
-            
+
             DestroyShipsRecursively();
         }
 

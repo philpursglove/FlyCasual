@@ -48,8 +48,8 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public AnakinSkywalkerXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 5;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                     UpgradeType.ForcePower,
@@ -106,9 +106,9 @@ namespace Abilities.SecondEdition
             }
         }
 
-        private void UseAnakinAbility(object sender, System.EventArgs e) 
+        private void UseAnakinAbility(object sender, System.EventArgs e)
         {
-            HostShip.Tokens.SpendToken(typeof(ForceToken), () => 
+            HostShip.Tokens.SpendToken(typeof(ForceToken), () =>
                 HostShip.Tokens.RemoveToken(
                     typeof(StressToken),
                     DecisionSubPhase.ConfirmDecision
@@ -121,18 +121,21 @@ namespace Abilities.SecondEdition
             {
                 int enemies = 0;
                 enemies += Board.GetShipsInBullseyeArc(HostShip, Team.Type.Enemy).Count;
-                foreach(var s in Board.GetShipsAtRange(HostShip, new Vector2(0,1), Team.Type.Enemy)) {
-                    if (HostShip.SectorsInfo.RangeToShipBySector(s, Arcs.ArcType.Front) <= 1) {
+                foreach (var s in Board.GetShipsAtRange(HostShip, new Vector2(0, 1), Team.Type.Enemy))
+                {
+                    if (HostShip.SectorsInfo.RangeToShipBySector(s, Arcs.ArcType.Front) <= 1)
+                    {
                         enemies++;
                     }
                 }
-                
-                if (enemies > 0) {
+
+                if (enemies > 0)
+                {
                     return true;
                 }
             }
             return false;
         }
-        
+
     }
 }

@@ -43,9 +43,17 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public BarrissOffeeXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration,
+            };
         }
     }
 }
@@ -65,8 +73,8 @@ namespace Abilities.SecondEdition
                 IsAvailable,
                 () => 35,
                 DiceModificationType.Change,
-                1, 
-                new List<DieSide> { DieSide.Focus},
+                1,
+                new List<DieSide> { DieSide.Focus },
                 DieSide.Success,
                 isGlobal: true,
                 payAbilityCost: PayAbilityCost
@@ -101,7 +109,7 @@ namespace Abilities.SecondEdition
         protected virtual bool IsAvailable()
         {
             return
-                !IsAbilityUsed 
+                !IsAbilityUsed
                 && HostShip.State.Force > 0
                 && Combat.AttackStep == CombatStep.Attack
                 && Combat.Attacker.Owner == HostShip.Owner
