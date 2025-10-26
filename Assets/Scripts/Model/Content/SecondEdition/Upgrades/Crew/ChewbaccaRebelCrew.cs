@@ -1,5 +1,7 @@
-﻿using SubPhases;
+﻿using Content;
+using SubPhases;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Upgrade;
@@ -20,7 +22,12 @@ namespace UpgradesList.SecondEdition
                 chargesCost: 2,
                 regensCharges: true,
                 abilityType: typeof(Abilities.SecondEdition.ChewbaccaRebelCrewAbility),
-                seImageNumber: 82
+                seImageNumber: 82,
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
 
             Avatar = new AvatarInfo(
@@ -30,6 +37,15 @@ namespace UpgradesList.SecondEdition
             );
         }
     }
+
+    public class ChewbaccaRebelXWA : ChewbaccaRebel
+    {
+        public ChewbaccaRebelXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition
@@ -37,7 +53,7 @@ namespace Abilities.SecondEdition
     public class ChewbaccaRebelCrewAbility : GenericAbility
     {
         public override void ActivateAbility()
-        {            
+        {
             Phases.Events.OnCombatPhaseStart_Triggers += CheckAbility;
         }
 
@@ -48,7 +64,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility()
         {
-            if(HostUpgrade.State.Charges >= HostUpgrade.UpgradeInfo.ChargesCost && HostShip.Damage.HasFaceupCards)
+            if (HostUpgrade.State.Charges >= HostUpgrade.UpgradeInfo.ChargesCost && HostShip.Damage.HasFaceupCards)
             {
                 Triggers.RegisterTrigger(new Trigger()
                 {

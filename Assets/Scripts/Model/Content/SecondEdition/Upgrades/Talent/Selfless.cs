@@ -1,6 +1,8 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -15,9 +17,19 @@ namespace UpgradesList.SecondEdition
                 cost: 4,
                 abilityType: typeof(Abilities.SecondEdition.SelflessAbility),
                 restriction: new FactionRestriction(Faction.Rebel),
-                seImageNumber: 15
+                seImageNumber: 15,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class SelflessXWA : Selfless
+    {
+        public SelflessXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

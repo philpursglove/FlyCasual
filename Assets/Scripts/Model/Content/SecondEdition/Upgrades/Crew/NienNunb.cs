@@ -1,7 +1,9 @@
-﻿using Ship;
-using Upgrade;
-using UnityEngine;
+﻿using Content;
 using Movement;
+using Ship;
+using System.Collections.Generic;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,7 +18,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 abilityType: typeof(Abilities.SecondEdition.NienNunbCrewAbility),
-                seImageNumber: 90
+                seImageNumber: 90,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -24,7 +27,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(429, 21),
                 new Vector2(150, 150)
             );
-        }        
+        }
+    }
+
+    public class NienNunbXWA : NienNunb
+    {
+        public NienNunbXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

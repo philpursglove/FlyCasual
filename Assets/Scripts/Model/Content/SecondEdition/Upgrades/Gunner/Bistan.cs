@@ -36,7 +36,7 @@ namespace UpgradesList.SecondEdition
     {
         public BistanGunnerXWA() : base()
         {
-            UpgradeInfo.Cost = 12;
+            UpgradeInfo.Cost = 16;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }

@@ -1,9 +1,11 @@
-﻿using Ship;
-using Upgrade;
-using System;
-using Tokens;
+﻿using Content;
+using Ship;
 using SubPhases;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using Tokens;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,10 +19,20 @@ namespace UpgradesList.SecondEdition
                 cost: 4,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel, Faction.Scum),
-                abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRebelScumAbility)
+                abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRebelScumAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             NameCanonical = "bokatankryze-rebel-scum";
+        }
+    }
+
+    public class BoKatanKryzeRebelScumXWA : BoKatanKryzeRebelScum
+    {
+        public BoKatanKryzeRebelScumXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
