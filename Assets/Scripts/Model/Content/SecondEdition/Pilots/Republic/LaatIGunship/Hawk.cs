@@ -48,9 +48,21 @@ namespace Ship
         {
             public HawkXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
+                };
             }
         }
     }
@@ -91,7 +103,7 @@ namespace Abilities.SecondEdition
                     ship.AskPerformFreeAction
                     (
                         new List<GenericAction>()
-                        { 
+                        {
                             new BarrelRollAction(){ HostShip = ship },
                             new BoostAction(){ HostShip = ship },
                         },
