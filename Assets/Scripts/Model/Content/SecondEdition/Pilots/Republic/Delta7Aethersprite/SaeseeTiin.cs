@@ -52,12 +52,12 @@ namespace Ship.SecondEdition.Delta7Aethersprite
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                    UpgradeType.ForcePower,
-                    UpgradeType.ForcePower,
-                    UpgradeType.Astromech,
-                    UpgradeType.Modification,
-                    UpgradeType.Modification,
-                    UpgradeType.Configuration,
+                UpgradeType.ForcePower,
+                UpgradeType.ForcePower,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Configuration,
             };
         }
     }
