@@ -46,17 +46,15 @@ namespace Ship
         {
             public GeonosianPrototypeXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Modification,
+                    UpgradeType.Device,
                     UpgradeType.Cannon,
                     UpgradeType.Cannon,
-                    UpgradeType.Missile,
-                    UpgradeType.Missile,
                     UpgradeType.Configuration,
-                    UpgradeType.TacticalRelay,
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
@@ -113,7 +111,7 @@ namespace Abilities.SecondEdition
             else
             {
                 callback(false);
-            }            
+            }
         }
 
         public override void DeactivateAbility()
