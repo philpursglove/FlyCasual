@@ -46,7 +46,7 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public ObiWanKenobiXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 5;
+            (PilotInfo as PilotCardInfo25).Cost = 13;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
@@ -79,8 +79,8 @@ namespace Abilities.SecondEdition
 
         private void RegisterAbility(GenericShip ship, GenericToken token)
         {
-            if (HostShip.State.Force > 0 
-                && ship.Owner == HostShip.Owner 
+            if (HostShip.State.Force > 0
+                && ship.Owner == HostShip.Owner
                 && token is FocusToken
                 && new BoardTools.DistanceInfo(ship, HostShip).Range < 3)
             {
@@ -105,14 +105,15 @@ namespace Abilities.SecondEdition
             Messages.ShowInfo(HostShip.PilotInfo.PilotName + ": " + TargetShip.PilotInfo.PilotName + " gains Focus token");
             HostShip.State.SpendForce(
                 1,
-                delegate {
+                delegate
+                {
                     TargetShip.Tokens.AssignToken(
                         new Tokens.FocusToken(TargetShip),
                         SubPhases.DecisionSubPhase.ConfirmDecision
                     );
                 }
             );
-            
+
         }
     }
 }

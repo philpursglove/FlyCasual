@@ -44,9 +44,18 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public LuminaraUnduliXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration,
+            };
         }
     }
 }
@@ -66,8 +75,8 @@ namespace Abilities.SecondEdition
                 IsAvailable,
                 GetAICritModPriority,
                 DiceModificationType.Change,
-                1, 
-                new List<DieSide> { DieSide.Crit},
+                1,
+                new List<DieSide> { DieSide.Crit },
                 DieSide.Success,
                 DiceModificationTimingType.Opposite,
                 isGlobal: true,
@@ -104,7 +113,7 @@ namespace Abilities.SecondEdition
         protected virtual bool IsAvailable()
         {
             return
-                !IsAbilityUsed 
+                !IsAbilityUsed
                 && HostShip.State.Force > 0
                 && Combat.AttackStep == CombatStep.Attack
                 && Combat.Defender.Owner == HostShip.Owner

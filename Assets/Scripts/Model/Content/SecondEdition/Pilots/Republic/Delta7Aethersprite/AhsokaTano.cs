@@ -45,9 +45,17 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public AhsokaTanoXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration,
+            };
         }
     }
 }
@@ -121,7 +129,8 @@ namespace Abilities.SecondEdition
 
             TargetShip.AskPerformFreeAction(
                 actions,
-                delegate {
+                delegate
+                {
                     TargetShip.OnCheckCanPerformActionsWhileStressed -= ConfirmThatIsPossible;
                     TargetShip.OnCanPerformActionWhileStressed -= AlwaysAllow;
 
@@ -155,7 +164,7 @@ namespace Abilities.SecondEdition
         private int GetAiPriority(GenericShip ship)
         {
             int priority = 0;
-            
+
             if (!ship.Tokens.HasToken(typeof(Tokens.FocusToken))) priority += 100;
 
             priority += ship.PilotInfo.Cost;

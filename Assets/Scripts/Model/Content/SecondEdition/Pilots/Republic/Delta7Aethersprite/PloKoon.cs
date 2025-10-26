@@ -44,13 +44,14 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public PloKoonXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                     UpgradeType.ForcePower,
                     UpgradeType.ForcePower,
                     UpgradeType.Astromech,
+                    UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Configuration,
             };
