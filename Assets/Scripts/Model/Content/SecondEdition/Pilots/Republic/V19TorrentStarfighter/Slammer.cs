@@ -50,7 +50,7 @@ namespace Ship.SecondEdition.V19TorrentStarfighter
             {
                 UpgradeType.Modification,
                 UpgradeType.Modification,
-                UpgradeType.Missile
+                UpgradeType.Missile,
             };
 
         }

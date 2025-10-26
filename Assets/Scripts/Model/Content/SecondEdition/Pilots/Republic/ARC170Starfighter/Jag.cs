@@ -55,7 +55,7 @@ namespace Ship
                     UpgradeType.Crew,
                     UpgradeType.Gunner,
                     UpgradeType.Modification,
-                    UpgradeType.Torpedo,
+                    UpgradeType.Torpedo
                 };
             }
         }

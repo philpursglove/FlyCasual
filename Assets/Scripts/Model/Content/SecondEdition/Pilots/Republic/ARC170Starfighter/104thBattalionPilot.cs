@@ -49,7 +49,7 @@ namespace Ship
                     UpgradeType.Crew,
                     UpgradeType.Gunner,
                     UpgradeType.Modification,
-                    UpgradeType.Torpedo,
+                    UpgradeType.Torpedo
                 };
                 (PilotInfo as PilotCardInfo25).Limited = 3;
             }
