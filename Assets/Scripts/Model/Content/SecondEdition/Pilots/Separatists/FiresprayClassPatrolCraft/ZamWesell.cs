@@ -50,8 +50,8 @@ namespace Ship.SecondEdition.FiresprayClassPatrolCraft
     {
         public ZamWesellXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 8;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).Cost = 19;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
@@ -76,7 +76,7 @@ namespace Abilities.SecondEdition
         private GenericShip ShipToPunish;
         private bool IsPerformedRegularAttack;
 
-        protected virtual string AbilityHostName { get{ return HostShip.PilotInfo.PilotName;} }
+        protected virtual string AbilityHostName { get { return HostShip.PilotInfo.PilotName; } }
 
         public override void ActivateAbility()
         {
@@ -127,7 +127,7 @@ namespace Abilities.SecondEdition
                 },
                 defaultDecision: GetDefaultDecision(),
                 requiredPlayer: HostShip.Owner.PlayerNo
-            );;
+            ); ;
         }
 
         protected virtual void AssignSecretCondition(Type conditionType)
