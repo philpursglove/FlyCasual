@@ -51,10 +51,11 @@ namespace Ship
         {
             public IG101XWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
+                    UpgradeType.Talent,
                     UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Cannon,

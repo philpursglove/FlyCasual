@@ -51,13 +51,13 @@ namespace Ship
         {
             public CadBaneSeparatistXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Illicit,
-                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Cannon,
                     UpgradeType.Cannon,
@@ -116,7 +116,8 @@ namespace Abilities.SecondEdition
 
             HostShip.AskPerformFreeAction(
                 actions,
-                delegate {
+                delegate
+                {
                     Roster.HighlightPlayer(ship.Owner.PlayerNo);
                     Selection.ChangeActiveShip(ship);
                     Triggers.FinishTrigger();
