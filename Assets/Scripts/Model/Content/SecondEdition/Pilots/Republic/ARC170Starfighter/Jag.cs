@@ -33,7 +33,7 @@ namespace Ship
                     },
                     tags: new List<Tags>
                     {
-                        Tags.Clone 
+                        Tags.Clone
                     },
                     abilityType: typeof(Abilities.SecondEdition.JagAbility),
                     skinName: "Red",
@@ -46,9 +46,17 @@ namespace Ship
         {
             public JagXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo,
+                };
             }
         }
     }
@@ -69,7 +77,7 @@ namespace Abilities.SecondEdition
         }
 
         private void CheckAbility(GenericShip ship)
-    {
+        {
             var rangeLeft = HostShip.SectorsInfo.RangeToShipBySector(Combat.Defender, Arcs.ArcType.Left);
             var rangeRight = HostShip.SectorsInfo.RangeToShipBySector(Combat.Defender, Arcs.ArcType.Right);
 
@@ -86,7 +94,7 @@ namespace Abilities.SecondEdition
                         descriptionLong: "Do you want to acquire a lock on the attacker?",
                         imageHolder: HostShip
                     );
-                });                
+                });
             }
         }
 

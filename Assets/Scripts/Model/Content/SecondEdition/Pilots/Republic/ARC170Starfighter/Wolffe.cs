@@ -48,8 +48,8 @@ namespace Ship
         {
             public WolffeXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
@@ -133,7 +133,8 @@ namespace Abilities.SecondEdition
 
         private void payFrontArcAbilityCost(Action<bool> callback)
         {
-            if (HostShip.State.Charges > 0) {
+            if (HostShip.State.Charges > 0)
+            {
                 HostShip.State.Charges--;
                 callback(true);
             }

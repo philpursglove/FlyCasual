@@ -51,7 +51,7 @@ namespace Ship
         {
             public JagSoCXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
@@ -73,7 +73,7 @@ namespace Abilities.SecondEdition
         }
 
         private void CheckAbility(GenericShip ship)
-    {
+        {
             if (Tools.IsFriendly(Combat.Attacker, HostShip)
                 && !HostShip.IsStrained
                 && ((HostShip.SectorsInfo.IsShipInSector(Combat.Attacker, Arcs.ArcType.Left) && HostShip.SectorsInfo.RangeToShipBySector(Combat.Attacker, Arcs.ArcType.Left) <= 2)
@@ -88,7 +88,7 @@ namespace Abilities.SecondEdition
                         descriptionLong: "Do you want to acquire a lock on the Defender?",
                         imageHolder: HostShip
                     );
-                });                
+                });
             }
         }
 

@@ -33,7 +33,7 @@ namespace Ship
                         Tags.Clone
                     },
                     extraUpgradeIcons: new List<UpgradeType>
-                    { 
+                    {
                         UpgradeType.Talent,
                         UpgradeType.Gunner,
                         UpgradeType.Astromech
@@ -43,7 +43,7 @@ namespace Ship
                 );
 
                 ShipInfo.Shields++;
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Selfless)); 
+                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Selfless));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.VeteranTailGunner));
                 MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R4PAstromech));
 
@@ -59,7 +59,7 @@ namespace Ship
         {
             public OddballSoCXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
