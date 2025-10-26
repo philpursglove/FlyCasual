@@ -46,12 +46,13 @@ namespace Ship.SecondEdition.Eta2Actis
     {
         public KitFistoXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.ForcePower,
                 UpgradeType.ForcePower,
+                UpgradeType.Talent,
                 UpgradeType.Astromech,
                 UpgradeType.Modification,
                 UpgradeType.Cannon
