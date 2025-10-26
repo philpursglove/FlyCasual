@@ -48,9 +48,19 @@ namespace Ship.SecondEdition.DroidTriFighter
     {
         public PhlacArphoccPrototypeXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Cannon,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
         }
     }
 }
@@ -107,12 +117,12 @@ namespace Abilities.SecondEdition
 
             BlueTargetLockToken lockToken = HostShip.Tokens.GetToken<BlueTargetLockToken>('*');
             GenericShip targetShip = lockToken.OtherTargetLockTokenOwner as GenericShip;
-            
+
             HostShip.Tokens.RemoveToken(lockToken, delegate { SeeDial(targetShip); });
         }
 
         private void SeeDial(GenericShip targetShip)
-        { 
+        {
             Roster.ToggleManeuverVisibility(targetShip, true);
             targetShip.AlwaysShowAssignedManeuver = true;
 
