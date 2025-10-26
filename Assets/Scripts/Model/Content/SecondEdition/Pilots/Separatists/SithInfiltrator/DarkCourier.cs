@@ -32,14 +32,15 @@ namespace Ship.SecondEdition.SithInfiltrator
     {
         public DarkCourierXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 6;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
                 UpgradeType.Modification,
                 UpgradeType.Device,
-                UpgradeType.Cannon,
-                UpgradeType.Torpedo,
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
