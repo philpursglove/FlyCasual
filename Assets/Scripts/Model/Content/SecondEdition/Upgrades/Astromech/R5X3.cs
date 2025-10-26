@@ -1,6 +1,8 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -16,8 +18,18 @@ namespace UpgradesList.SecondEdition
                 cost: 5,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.R5X3)
+                abilityType: typeof(Abilities.SecondEdition.R5X3),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class R5X3XWA : R5X3
+    {
+        public R5X3XWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
