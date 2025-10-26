@@ -52,7 +52,7 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
     {
         public DBS32CSoCXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }

@@ -46,12 +46,14 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
     {
         public DBS32CXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Sensor,
                 UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Missile,
                 UpgradeType.Configuration,
                 UpgradeType.TacticalRelay,
             };

@@ -36,8 +36,8 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
     {
         public TechnoUnionBomberXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Modification,
