@@ -41,8 +41,8 @@ namespace Ship
         {
             public WarthogXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
