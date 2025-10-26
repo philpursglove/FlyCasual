@@ -39,12 +39,13 @@ namespace Ship
         {
             public GorgolXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).Cost = 8;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Modification,
+                    UpgradeType.Modification
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
