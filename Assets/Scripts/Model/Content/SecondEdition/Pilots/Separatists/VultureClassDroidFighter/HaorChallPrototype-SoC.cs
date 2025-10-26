@@ -50,7 +50,7 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
     {
         public HaorChallPrototypeSoCXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 2;
+            (PilotInfo as PilotCardInfo25).Cost = 6;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -91,7 +91,8 @@ namespace Abilities.SecondEdition
             List<GenericAction> actions = new List<GenericAction>() { new CalculateAction(), new TargetLockAction() };
             HostShip.AskPerformFreeAction(
                 actions,
-                delegate {
+                delegate
+                {
                     Selection.ChangeActiveShip(previousActiveShip);
                     Triggers.FinishTrigger();
                 },
