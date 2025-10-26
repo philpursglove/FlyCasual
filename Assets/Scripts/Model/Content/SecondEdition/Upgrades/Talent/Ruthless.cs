@@ -1,12 +1,13 @@
-﻿using Upgrade;
-using System.Collections.Generic;
-using Ship;
+﻿using ActionsList;
 using BoardTools;
-using ActionsList;
-using System;
+using Content;
+using Ship;
 using SubPhases;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -20,9 +21,19 @@ namespace UpgradesList.SecondEdition
                 cost: 1,
                 abilityType: typeof(Abilities.SecondEdition.RuthlessAbility),
                 restriction: new FactionRestriction(Faction.Imperial),
-                seImageNumber: 13
+                seImageNumber: 13,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class RuthlessXWA : Ruthless
+    {
+        public RuthlessXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

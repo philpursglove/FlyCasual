@@ -37,7 +37,7 @@ namespace UpgradesList.SecondEdition
     {
         public AdmiralSloaneXWA() : base()
         {
-            UpgradeInfo.Cost = 25;
+            UpgradeInfo.Cost = 50;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -81,8 +81,8 @@ namespace Abilities.SecondEdition
         private void AssignStressToAttacker(object sender, System.EventArgs e)
         {
             Combat.Attacker.Tokens.AssignTokens(
-                () => new Tokens.StressToken(Combat.Attacker), 
-                2, 
+                () => new Tokens.StressToken(Combat.Attacker),
+                2,
                 Triggers.FinishTrigger);
         }
 

@@ -1,10 +1,11 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
+﻿using ActionsList;
+using Content;
+using Ship;
 using System;
 using System.Collections.Generic;
-using ActionsList;
+using System.Linq;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -24,7 +25,8 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.MoffJerjerrodAbility),
                 charges: 2,
                 regensCharges: true,
-                seImageNumber: 120
+                seImageNumber: 120,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -34,7 +36,17 @@ namespace UpgradesList.SecondEdition
             );
         }
     }
+
+    public class MoffJerjerrodXWA : MoffJerjerrod
+    {
+        public MoffJerjerrodXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
+
 namespace Abilities.SecondEdition
 {
 
@@ -146,7 +158,8 @@ namespace Abilities.SecondEdition
         {
             Selection.ChangeActiveShip(TargetShip);
             Selection.ThisShip.AskPerformFreeAction(
-                new BoostAction() {
+                new BoostAction()
+                {
                     Color = Actions.ActionColor.Red,
                     SelectedBoostTemplate = SelectedTemplateName
                 },
