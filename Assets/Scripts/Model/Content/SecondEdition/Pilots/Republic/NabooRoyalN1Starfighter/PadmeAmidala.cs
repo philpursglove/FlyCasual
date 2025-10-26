@@ -49,9 +49,18 @@ namespace Ship
         {
             public PadmeAmidalaXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo,
+                };
+
             }
         }
     }
@@ -60,46 +69,46 @@ namespace Ship
 namespace Abilities.SecondEdition
 {
     public class PadmeAmidalaAbility : GenericAbility
-  {
-    public override void ActivateAbility()
     {
-      GenericShip.OnAttackStartAsAttackerGlobal += CheckPadmeAbilityAttacker;
-      GenericShip.OnAttackStartAsDefenderGlobal += CheckPadmeAbilityDefender;
-    }
+        public override void ActivateAbility()
+        {
+            GenericShip.OnAttackStartAsAttackerGlobal += CheckPadmeAbilityAttacker;
+            GenericShip.OnAttackStartAsDefenderGlobal += CheckPadmeAbilityDefender;
+        }
 
-    public override void DeactivateAbility()
-    {
-      GenericShip.OnAttackStartAsAttackerGlobal -= CheckPadmeAbilityAttacker;
-      GenericShip.OnAttackStartAsDefenderGlobal -= CheckPadmeAbilityDefender;
-      
+        public override void DeactivateAbility()
+        {
+            GenericShip.OnAttackStartAsAttackerGlobal -= CheckPadmeAbilityAttacker;
+            GenericShip.OnAttackStartAsDefenderGlobal -= CheckPadmeAbilityDefender;
+
+        }
+        public void CheckPadmeAbilityDefender()
+        {
+            CheckPadmeAbility(false);
+        }
+
+        public void CheckPadmeAbilityAttacker()
+        {
+            CheckPadmeAbility(true);
+        }
+        public void CheckPadmeAbility(bool isAttacker)
+        {
+            if (!isAttacker &&
+                Combat.Defender.Owner != HostShip.Owner &&
+                HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Front))
+            {
+                PadmeAmidalaCondition condition = new PadmeAmidalaCondition(Combat.Defender, HostShip);
+                Combat.Defender.Tokens.AssignCondition(condition);
+            }
+            if (isAttacker &&
+                Combat.Attacker.Owner != HostShip.Owner &&
+                HostShip.SectorsInfo.IsShipInSector(Combat.Attacker, Arcs.ArcType.Front))
+            {
+                PadmeAmidalaCondition condition = new PadmeAmidalaCondition(Combat.Attacker, HostShip);
+                Combat.Attacker.Tokens.AssignCondition(condition);
+            }
+        }
     }
-    public void CheckPadmeAbilityDefender()
-    {
-      CheckPadmeAbility(false);
-    }
-    
-    public void CheckPadmeAbilityAttacker()
-    {
-      CheckPadmeAbility(true);
-    }
-    public void CheckPadmeAbility(bool isAttacker)
-    {
-      if (!isAttacker &&
-          Combat.Defender.Owner != HostShip.Owner && 
-          HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Front))
-      {
-        PadmeAmidalaCondition condition = new PadmeAmidalaCondition(Combat.Defender, HostShip);
-        Combat.Defender.Tokens.AssignCondition(condition);
-      }
-      if (isAttacker &&
-          Combat.Attacker.Owner != HostShip.Owner &&
-          HostShip.SectorsInfo.IsShipInSector(Combat.Attacker, Arcs.ArcType.Front))
-      {
-        PadmeAmidalaCondition condition = new PadmeAmidalaCondition(Combat.Attacker, HostShip);
-        Combat.Attacker.Tokens.AssignCondition(condition);
-      }
-    }
-  }
 }
 
 namespace Conditions
@@ -119,7 +128,7 @@ namespace Conditions
         {
             Messages.ShowInfo("Padmé Amidala: " + Host.PilotInfo.PilotName + " can only modify 1 focus result for this attack.");
             FocusHasBeenModified = false;
-            
+
             Host.OnTryDiceResultModification += CheckIfCanChangeDie;
             Host.OnTrySelectDie += CheckIfCanSelectDie;
 
@@ -132,31 +141,31 @@ namespace Conditions
         )
         // Add focus modification limitation code here.
         {
-          // set FocusHasBeenModified in some check in here
-          if (FocusHasBeenModified == true && die.Side == DieSide.Focus)
-          {
-            isAllowed = false;
-            Messages.ShowInfo("Padmé Amidala: Die modification is prevented");
-          }
-          else if (die.Side == DieSide.Focus)
-          {
-            FocusHasBeenModified = true;
-          }
+            // set FocusHasBeenModified in some check in here
+            if (FocusHasBeenModified == true && die.Side == DieSide.Focus)
+            {
+                isAllowed = false;
+                Messages.ShowInfo("Padmé Amidala: Die modification is prevented");
+            }
+            else if (die.Side == DieSide.Focus)
+            {
+                FocusHasBeenModified = true;
+            }
         }
 
         public void CheckIfCanSelectDie(
           Die die, ref bool isAllowed
         )
         {
-          if (FocusHasBeenModified == true && die.Side == DieSide.Focus)
-          {
-            isAllowed = false;
-            Messages.ShowErrorToHuman("Padmé Amidala: Unable to select focus results");
-          }
-          else if (die.Side == DieSide.Focus)
-          {
-            FocusHasBeenModified = true;
-          }
+            if (FocusHasBeenModified == true && die.Side == DieSide.Focus)
+            {
+                isAllowed = false;
+                Messages.ShowErrorToHuman("Padmé Amidala: Unable to select focus results");
+            }
+            else if (die.Side == DieSide.Focus)
+            {
+                FocusHasBeenModified = true;
+            }
         }
         public void RemovePadmeAmidalaCondition(GenericShip ship)
         {
