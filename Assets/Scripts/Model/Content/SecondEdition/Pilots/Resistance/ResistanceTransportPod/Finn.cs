@@ -39,8 +39,15 @@ namespace Ship.SecondEdition.ResistanceTransportPod
     {
         public FinnXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Tech
+            };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -63,14 +70,16 @@ namespace Abilities.SecondEdition
         private void AddFinnDiceModifications(GenericShip ship)
         {
             ship.AddAvailableDiceModificationOwn(
-                new FinnTransportPodDiceModificationBlank() {
+                new FinnTransportPodDiceModificationBlank()
+                {
                     HostShip = HostShip,
                     ImageUrl = HostShip.ImageUrl
                 }
             );
 
             ship.AddAvailableDiceModificationOwn(
-                new FinnTransportPodDiceModificationFocus() {
+                new FinnTransportPodDiceModificationFocus()
+                {
                     HostShip = HostShip,
                     ImageUrl = HostShip.ImageUrl
                 }

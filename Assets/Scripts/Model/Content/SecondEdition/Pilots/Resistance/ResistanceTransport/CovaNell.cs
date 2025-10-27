@@ -4,50 +4,59 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ResistanceTransport
 {
-    namespace SecondEdition.ResistanceTransport
+    public class CovaNell : ResistanceTransport
     {
-        public class CovaNell : ResistanceTransport
+        public CovaNell() : base()
         {
-            public CovaNell() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Cova Nell",
-                    "Evacuation Escort",
-                    Faction.Resistance,
-                    4,
-                    5,
-                    20,
-                    isLimited: true,
-                    abilityText: "While you defend or perform a primary attack, if your revealed maneuver is red, roll 1 additional die.",
-                    abilityType: typeof(CovaNellAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Cova Nell",
+                "Evacuation Escort",
+                Faction.Resistance,
+                4,
+                5,
+                20,
+                isLimited: true,
+                abilityText: "While you defend or perform a primary attack, if your revealed maneuver is red, roll 1 additional die.",
+                abilityType: typeof(CovaNellAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class CovaNellXWA : CovaNell
+    public class CovaNellXWA : CovaNell
+    {
+        public CovaNellXWA() : base()
         {
-            public CovaNellXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Cannon,
+                UpgradeType.Cannon,
+                UpgradeType.Torpedo
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

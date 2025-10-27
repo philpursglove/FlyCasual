@@ -5,50 +5,55 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ2AWing
 {
-    namespace SecondEdition.RZ2AWing
+    public class SeftinVanik : RZ2AWing
     {
-        public class SeftinVanik : RZ2AWing
+        public SeftinVanik() : base()
         {
-            public SeftinVanik() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Seftin Vanik",
-                    "Skillful Wingmate",
-                    Faction.Resistance,
-                    5,
-                    4,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.SeftinVanikAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Green (HoH)",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Seftin Vanik",
+                "Skillful Wingmate",
+                Faction.Resistance,
+                5,
+                4,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.SeftinVanikAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Green (HoH)",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class SeftinVanikXWA : SeftinVanik
+    public class SeftinVanikXWA : SeftinVanik
+    {
+        public SeftinVanikXWA() : base()
         {
-            public SeftinVanikXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

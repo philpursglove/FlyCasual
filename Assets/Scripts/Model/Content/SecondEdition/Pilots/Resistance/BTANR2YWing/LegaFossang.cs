@@ -6,63 +6,59 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTANR2YWing
 {
-    namespace SecondEdition.BTANR2YWing
+    public class LegaFossang : BTANR2YWing
     {
-        public class LegaFossang : BTANR2YWing
+        public LegaFossang() : base()
         {
-            public LegaFossang() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lega Fossang",
-                    "Hero of Humbarine",
-                    Faction.Resistance,
-                    3,
-                    3,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LegaFossangAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Turret,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LegaFossangXWA : LegaFossang
-        {
-            public LegaFossangXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lega Fossang",
+                "Hero of Humbarine",
+                Faction.Resistance,
+                3,
+                3,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LegaFossangAbility),
+                extraUpgradeIcons: new List<UpgradeType>
                 {
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Turret,
-                        UpgradeType.Missile
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LegaFossangXWA : LegaFossang
+    {
+        public LegaFossangXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -112,7 +108,7 @@ namespace Abilities.SecondEdition
                 }
             }
 
-            foreach (var bombHolder in BombsManager.GetBombsOnBoard())
+            foreach (KeyValuePair<GenericDeviceGameObject, GenericBomb> bombHolder in BombsManager.GetBombsOnBoard())
             {
                 if (Tools.IsFriendly(bombHolder.Value.HostShip, HostShip))
                 {
@@ -122,6 +118,7 @@ namespace Abilities.SecondEdition
                     }
                 }
             }
+
             return friendlies;
         }
     }

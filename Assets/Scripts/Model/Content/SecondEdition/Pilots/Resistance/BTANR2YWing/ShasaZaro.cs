@@ -7,61 +7,59 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTANR2YWing
 {
-    namespace SecondEdition.BTANR2YWing
+    public class ShasaZaro : BTANR2YWing
     {
-        public class ShasaZaro : BTANR2YWing
+        public ShasaZaro() : base()
         {
-            public ShasaZaro() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Shasa Zaro",
-                    "Artistic Ace",
-                    Faction.Resistance,
-                    3,
-                    3,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ShasaZaroAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Turret,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class ShasaZaroXWA : ShasaZaro
-        {
-            public ShasaZaroXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Shasa Zaro",
+                "Artistic Ace",
+                Faction.Resistance,
+                3,
+                3,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ShasaZaroAbility),
+                extraUpgradeIcons: new List<UpgradeType>
                 {
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Turret
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class ShasaZaroXWA : ShasaZaro
+    {
+        public ShasaZaroXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Turret
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -149,7 +147,8 @@ namespace Abilities.SecondEdition
                 {
                     subphase.AddDecision(
                         token.Name,
-                        delegate {
+                        delegate
+                        {
                             TargetShip.Tokens.AssignToken(token.GetType(), DecisionSubPhase.ConfirmDecision);
                         }
                     );

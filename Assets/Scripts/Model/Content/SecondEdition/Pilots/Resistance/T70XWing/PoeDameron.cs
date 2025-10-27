@@ -5,55 +5,62 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class PoeDameron : T70XWing
     {
-        public class PoeDameron : T70XWing
+        public PoeDameron() : base()
         {
-            public PoeDameron() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Poe Dameron",
-                    "Trigger-Happy Flyboy",
-                    Faction.Resistance,
-                    6,
-                    7,
-                    25,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.PoeDameronAbility),
-                    charges: 1,
-                    regensCharges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    skinName: "Black One",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Poe Dameron",
+                "Trigger-Happy Flyboy",
+                Faction.Resistance,
+                6,
+                7,
+                25,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.PoeDameronAbility),
+                charges: 1,
+                regensCharges: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                skinName: "Black One",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class PoeDameronXWA : PoeDameron
+    public class PoeDameronXWA : PoeDameron
+    {
+        public PoeDameronXWA() : base()
         {
-            public PoeDameronXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 24;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 26;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Configuration,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -118,6 +125,5 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed -= PayChargeCost;
             Triggers.FinishTrigger();
         }
-
     }
 }

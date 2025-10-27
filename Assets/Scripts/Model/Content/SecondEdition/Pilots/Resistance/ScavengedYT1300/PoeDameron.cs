@@ -7,57 +7,68 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ScavengedYT1300
 {
-    namespace SecondEdition.ScavengedYT1300
+    public class PoeDameron : ScavengedYT1300
     {
-        public class PoeDameron : ScavengedYT1300
+        public PoeDameron() : base()
         {
-            public PoeDameron() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Poe Dameron",
-                    "A Difficult Man",
-                    Faction.Resistance,
-                    6,
-                    7,
-                    25,
-                    isLimited: true,
-                    charges: 2,
-                    regensCharges: 1,
-                    abilityType: typeof(Abilities.SecondEdition.PoeDameronYT1300PilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Title,
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.YT1300
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Poe Dameron",
+                "A Difficult Man",
+                Faction.Resistance,
+                6,
+                7,
+                25,
+                isLimited: true,
+                charges: 2,
+                regensCharges: 1,
+                abilityType: typeof(Abilities.SecondEdition.PoeDameronYT1300PilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Title,
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Freighter,
+                    Tags.YT1300
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "poedameron-scavengedyt1300";
-            }
+            PilotNameCanonical = "poedameron-scavengedyt1300";
         }
+    }
 
-        public class PoeDameronXWA : PoeDameron
+    public class PoeDameronXWA : PoeDameron
+    {
+        public PoeDameronXWA() : base()
         {
-            public PoeDameronXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 20;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 24;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Gunner,
+                UpgradeType.Illicit,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -173,6 +184,5 @@ namespace Abilities.SecondEdition
             HostShip.IsIgnoreObstacleObstructionWhenAttacking = false;
             Phases.Events.OnActivationPhaseEnd_NoTriggers -= TurnOffIgnoreObstaclesActivationPhase;
         }
-
     }
 }

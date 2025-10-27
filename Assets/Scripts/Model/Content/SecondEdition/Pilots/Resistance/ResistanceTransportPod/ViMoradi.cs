@@ -43,8 +43,14 @@ namespace Ship.SecondEdition.ResistanceTransportPod
     {
         public ViMoradiXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Tech
+            };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -88,7 +94,7 @@ namespace Abilities.SecondEdition
             subphase.DescriptionLong = "Assign the Compromising Intel condition to 1 enemy ship";
             subphase.ImageSource = HostShip;
 
-            foreach (var enemyShip in Roster.GetPlayer(Roster.AnotherPlayer(HostShip.Owner.PlayerNo)).Ships)
+            foreach (KeyValuePair<string, GenericShip> enemyShip in Roster.GetPlayer(Roster.AnotherPlayer(HostShip.Owner.PlayerNo)).Ships)
             {
                 subphase.AddDecision(
                     enemyShip.Value.ShipId + ": " + enemyShip.Value.PilotInfo.PilotName,
@@ -120,7 +126,7 @@ namespace Abilities.SecondEdition
         {
             GenericShip bestAce = null;
             int maxPilotSkill = 0;
-            foreach (var enemyShip in Roster.GetPlayer(Roster.AnotherPlayer(HostShip.Owner.PlayerNo)).Ships)
+            foreach (KeyValuePair<string, GenericShip> enemyShip in Roster.GetPlayer(Roster.AnotherPlayer(HostShip.Owner.PlayerNo)).Ships)
             {
                 if (enemyShip.Value.State.Initiative > maxPilotSkill)
                 {
@@ -128,6 +134,7 @@ namespace Abilities.SecondEdition
                     maxPilotSkill = enemyShip.Value.State.Initiative;
                 }
             }
+
             return bestAce;
         }
 

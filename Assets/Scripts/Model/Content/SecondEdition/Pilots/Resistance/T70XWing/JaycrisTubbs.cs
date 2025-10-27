@@ -6,48 +6,52 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class JaycrisTubbs : T70XWing
     {
-        public class JaycrisTubbs : T70XWing
+        public JaycrisTubbs() : base()
         {
-            public JaycrisTubbs() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jaycris Tubbs",
-                    "Loving Father",
-                    Faction.Resistance,
-                    1,
-                    4,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.JaycrisTubbsAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Tech,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Jaycris Tubbs",
+                "Loving Father",
+                Faction.Resistance,
+                1,
+                4,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.JaycrisTubbsAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Tech,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class JaycrisTubbsXWA : JaycrisTubbs
+    public class JaycrisTubbsXWA : JaycrisTubbs
+    {
+        public JaycrisTubbsXWA() : base()
         {
-            public JaycrisTubbsXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -101,7 +105,7 @@ namespace Abilities.SecondEdition
         private int GetAiPriority(GenericShip ship)
         {
             int priority = 0;
-            
+
             if (ship.Tokens.HasToken(typeof(StressToken))) priority += 100;
 
             priority += ship.PilotInfo.Cost;

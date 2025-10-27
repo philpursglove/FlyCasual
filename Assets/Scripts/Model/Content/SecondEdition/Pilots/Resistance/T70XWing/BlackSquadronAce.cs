@@ -2,50 +2,56 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class BlackSquadronAce : T70XWing
     {
-        public class BlackSquadronAce : T70XWing
+        public BlackSquadronAce() : base()
         {
-            public BlackSquadronAce() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Black Squadron Ace",
-                    "",
-                    Faction.Resistance,
-                    4,
-                    5,
-                    10,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    skinName: "Black One",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Black Squadron Ace",
+                "",
+                Faction.Resistance,
+                4,
+                5,
+                10,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                skinName: "Black One",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "blacksquadronace-t70xwing";
-            }
+            PilotNameCanonical = "blacksquadronace-t70xwing";
         }
+    }
 
-        public class BlackSquadronAceXWA : BlackSquadronAce
+    public class BlackSquadronAceXWA : BlackSquadronAce
+    {
+        public BlackSquadronAceXWA() : base()
         {
-            public BlackSquadronAceXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

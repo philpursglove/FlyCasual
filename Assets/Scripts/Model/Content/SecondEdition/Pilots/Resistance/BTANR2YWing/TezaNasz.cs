@@ -5,54 +5,61 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTANR2YWing
 {
-    namespace SecondEdition.BTANR2YWing
+    public class TezaNasz : BTANR2YWing
     {
-        public class TezaNasz : BTANR2YWing
+        public TezaNasz() : base()
         {
-            public TezaNasz() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Teza Nasz",
-                    "Old Soldier",
-                    Faction.Resistance,
-                    4,
-                    4,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.TezaNaszAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Turret,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Teza Nasz",
+                "Old Soldier",
+                Faction.Resistance,
+                4,
+                4,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.TezaNaszAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class TezaNaszXWA : TezaNasz
+    public class TezaNaszXWA : TezaNasz
+    {
+        public TezaNaszXWA() : base()
         {
-            public TezaNaszXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Turret
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

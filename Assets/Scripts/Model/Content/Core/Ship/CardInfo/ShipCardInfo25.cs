@@ -13,8 +13,8 @@ namespace Ship
         private static Faction subFaction; // TODO: Remove
         private static List<Faction> factionsAll; // TODO: Remove
         private static string description; // TODO: Remove
-        public List<Legality> LegalityInfo { get; }
-        public FactionData FactionData { get; }
+        public List<Legality> LegalityInfo { get; set; }
+        public FactionData FactionData { get; set; }
         public override Type IconicPilot(Faction faction) => FactionData.IconicPilot(faction);
 
         public ShipCardInfo25(

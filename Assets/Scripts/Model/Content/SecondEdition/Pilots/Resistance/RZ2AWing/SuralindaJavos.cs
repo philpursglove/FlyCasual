@@ -4,50 +4,54 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ2AWing
 {
-    namespace SecondEdition.RZ2AWing
+    public class SuralindaJavos : RZ2AWing
     {
-        public class SuralindaJavos  : RZ2AWing
+        public SuralindaJavos() : base()
         {
-            public SuralindaJavos() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Suralinda Javos",
-                    "Inquisitive Journalist",
-                    Faction.Resistance,
-                    3,
-                    4,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.SuralindaJavosAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Suralinda Javos",
+                "Inquisitive Journalist",
+                Faction.Resistance,
+                3,
+                4,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.SuralindaJavosAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Cannon
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class SuralindaJavosXWA : SuralindaJavos
+    public class SuralindaJavosXWA : SuralindaJavos
+    {
+        public SuralindaJavosXWA() : base()
         {
-            public SuralindaJavosXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

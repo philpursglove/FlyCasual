@@ -4,49 +4,53 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ2AWing
 {
-    namespace SecondEdition.RZ2AWing
+    public class WrobieTyce : RZ2AWing
     {
-        public class WrobieTyce : RZ2AWing
+        public WrobieTyce() : base()
         {
-            public WrobieTyce() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Wrobie Tyce",
-                    "Dynamic Aerialist",
-                    Faction.Resistance,
-                    4,
-                    3,
-                    4,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.WrobieTyceAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Green (HoH)",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Wrobie Tyce",
+                "Dynamic Aerialist",
+                Faction.Resistance,
+                4,
+                3,
+                4,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.WrobieTyceAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Green (HoH)",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class WrobieTyceXWA : WrobieTyce
+    public class WrobieTyceXWA : WrobieTyce
+    {
+        public WrobieTyceXWA() : base()
         {
-            public WrobieTyceXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

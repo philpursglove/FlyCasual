@@ -5,50 +5,55 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class TemminWexley : T70XWing
     {
-        public class TemminWexley : T70XWing
+        public TemminWexley() : base()
         {
-            public TemminWexley() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Temmin Wexley",
-                    "Snap",
-                    Faction.Resistance,
-                    4,
-                    4,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.SnapWexleyAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Temmin Wexley",
+                "Snap",
+                Faction.Resistance,
+                4,
+                4,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.SnapWexleyAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class TemminWexleyXWA : TemminWexley
+    public class TemminWexleyXWA : TemminWexley
+    {
+        public TemminWexleyXWA() : base()
         {
-            public TemminWexleyXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

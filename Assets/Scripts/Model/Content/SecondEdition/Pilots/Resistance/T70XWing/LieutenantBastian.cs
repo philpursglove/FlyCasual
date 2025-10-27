@@ -6,48 +6,52 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class LieutenantBastian : T70XWing
     {
-        public class LieutenantBastian : T70XWing
+        public LieutenantBastian() : base()
         {
-            public LieutenantBastian() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lieutenant Bastian",
-                    "Optimistic Analyst",
-                    Faction.Resistance,
-                    2,
-                    5,
-                    14,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LieutenantBastianAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Tech,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lieutenant Bastian",
+                "Optimistic Analyst",
+                Faction.Resistance,
+                2,
+                5,
+                14,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LieutenantBastianAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Tech,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class LieutenantBastianXWA : LieutenantBastian
+    public class LieutenantBastianXWA : LieutenantBastian
+    {
+        public LieutenantBastianXWA() : base()
         {
-            public LieutenantBastianXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
