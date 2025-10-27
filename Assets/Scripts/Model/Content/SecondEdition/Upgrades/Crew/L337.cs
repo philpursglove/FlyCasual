@@ -1,14 +1,12 @@
-﻿using Upgrade;
-using Ship;
-using ActionsList;
-using System;
-using SubPhases;
-using Actions;
-using BoardTools;
-using System.Linq;
+﻿using Content;
 using Movement;
+using Ship;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -22,7 +20,12 @@ namespace UpgradesList.SecondEdition
                 cost: 4,
                 restriction: new FactionRestriction(Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.L337CrewAbility),
-                seImageNumber: 158
+                seImageNumber: 158,
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
 
             Avatar = new AvatarInfo(
@@ -56,6 +59,18 @@ namespace UpgradesList.SecondEdition
             NameCanonical = "l337-sideb";
 
             IsSecondSide = true;
+        }
+    }
+
+    public class L337CrewXWA : L337Crew
+    {
+        public L337CrewXWA()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality>
+            {
+                Legality.XWA
+            };
         }
     }
 }
@@ -99,7 +114,7 @@ namespace Abilities.SecondEdition
             {
                 var forceAndCalculates = Combat.Attacker.Tokens.CountTokensByType<CalculateToken>() + Combat.Attacker.Tokens.CountTokensByType<ForceToken>();
                 expectedEvades += Math.Min(forceAndCalculates, HostShip.State.Agility) * 2 / 8.0;
-            }            
+            }
 
             double expectedHits = Combat.CurrentDiceRoll.Successes;
             var misses = Combat.CurrentDiceRoll.Blanks;
@@ -121,7 +136,7 @@ namespace Abilities.SecondEdition
             if (expectedHits > expectedEvades)
                 return 100;
             else
-                return 0; 
+                return 0;
         }
 
         private bool IsDiceModificationAvailable()
