@@ -63,7 +63,6 @@ namespace Ship.SecondEdition.ScavengedYT1300
                 UpgradeType.Illicit,
                 UpgradeType.Modification,
                 UpgradeType.Missile,
-                UpgradeType.Missile,
                 UpgradeType.Title
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
