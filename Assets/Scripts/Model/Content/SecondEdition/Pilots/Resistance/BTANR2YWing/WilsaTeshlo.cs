@@ -6,65 +6,61 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTANR2YWing
 {
-    namespace SecondEdition.BTANR2YWing
+    public class WilsaTeshlo : BTANR2YWing
     {
-        public class WilsaTeshlo : BTANR2YWing
+        public WilsaTeshlo() : base()
         {
-            public WilsaTeshlo() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Wilsa Teshlo",
-                    "Veiled Sorority Privateer",
-                    Faction.Resistance,
-                    4,
-                    4,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.WilsaTeshloAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Turret,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    skinName: "Orange",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class WilsaTeshloXWA : WilsaTeshlo
-        {
-            public WilsaTeshloXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Wilsa Teshlo",
+                "Veiled Sorority Privateer",
+                Faction.Resistance,
+                4,
+                4,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.WilsaTeshloAbility),
+                extraUpgradeIcons: new List<UpgradeType>
                 {
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Turret,
-                        UpgradeType.Missile
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                skinName: "Orange",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class WilsaTeshloXWA : WilsaTeshlo
+    {
+        public WilsaTeshloXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Turret
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -100,6 +96,7 @@ namespace Abilities.SecondEdition
             {
                 if (upgrade.State.Charges > 0 && upgrade.UpgradeInfo.RegensChargesCount == 0) return true;
             }
+
             return false;
         }
 
@@ -125,6 +122,7 @@ namespace Abilities.SecondEdition
                     upgrade.State.Charges
                 );
             }
+
             subphase.DefaultDecisionName = subphase.GetDecisions().First().Name;
             subphase.Start();
         }

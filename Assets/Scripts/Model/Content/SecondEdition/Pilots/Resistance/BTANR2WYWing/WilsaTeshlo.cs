@@ -26,9 +26,7 @@ namespace Ship.SecondEdition.BTANR2WYWing
                     UpgradeType.Modification,
                     UpgradeType.Tech,
                     UpgradeType.Device,
-                    UpgradeType.Turret,
-                    UpgradeType.Missile,
-                    UpgradeType.Torpedo
+                    UpgradeType.Turret
                 },
                 tags: new List<Tags>
                 {

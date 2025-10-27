@@ -5,53 +5,59 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTANR2YWing
 {
-    namespace SecondEdition.BTANR2YWing
+    public class AftabAckbar : BTANR2YWing
     {
-        public class AftabAckbar : BTANR2YWing
+        public AftabAckbar() : base()
         {
-            public AftabAckbar() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Aftab Ackbar",
-                    "\"Junior\"",
-                    Faction.Resistance,
-                    2,
-                    4,
-                    13,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.AftabAckbarAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Turret,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Aftab Ackbar",
+                "\"Junior\"",
+                Faction.Resistance,
+                2,
+                4,
+                13,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.AftabAckbarAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class AftabAckbarXWA : AftabAckbar
+    public class AftabAckbarXWA : AftabAckbar
+    {
+        public AftabAckbarXWA() : base()
         {
-            public AftabAckbarXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Turret
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
