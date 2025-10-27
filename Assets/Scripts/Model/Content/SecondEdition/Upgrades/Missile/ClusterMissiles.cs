@@ -27,14 +27,14 @@ namespace UpgradesList.SecondEdition
                 seImageNumber: 37,
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
     }
 
     public class ClusterMissilesXWA : ClusterMissiles
     {
         public ClusterMissilesXWA() : base()
         {
-            UpgradeInfo.Cost = 6;
+            UpgradeInfo.Cost = 5;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }

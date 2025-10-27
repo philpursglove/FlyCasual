@@ -1,7 +1,8 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
-using System;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -16,9 +17,19 @@ namespace UpgradesList.SecondEdition
                 cost: 3,
                 abilityType: typeof(Abilities.SecondEdition.ContrabandCyberneticsAbility),
                 charges: 1,
-                seImageNumber: 58
+                seImageNumber: 58,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class ContrabandCyberneticsXWA : ContrabandCybernetics
+    {
+        public ContrabandCyberneticsXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

@@ -24,14 +24,15 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
-        }        
+        }
     }
 
     public class SenseXWA : Sense
     {
         public SenseXWA() : base()
         {
-            UpgradeInfo.Cost = 10;
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.Limited = 1;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
@@ -123,7 +124,8 @@ namespace Abilities.FirstEdition
             AskToUseAbility(
                 HostUpgrade.UpgradeInfo.Name,
                 NeverUseByDefault,
-                delegate {
+                delegate
+                {
                     DecisionSubPhase.ConfirmDecisionNoCallback();
                     StartSelectTargetForAbility(sender, e);
                 },

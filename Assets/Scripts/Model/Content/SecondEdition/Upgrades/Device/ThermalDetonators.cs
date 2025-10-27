@@ -1,5 +1,6 @@
 ﻿using BoardTools;
 using Bombs;
+using Content;
 using Movement;
 using Ship;
 using SubPhases;
@@ -22,7 +23,8 @@ namespace UpgradesList.SecondEdition
                 cost: 5,
                 charges: 4,
                 abilityType: typeof(Abilities.SecondEdition.ThermalDetonatorsAbility),
-                subType: UpgradeSubType.Bomb
+                subType: UpgradeSubType.Bomb,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             bombPrefabPath = "Prefabs/Bombs/ThermalDetonator";
@@ -33,7 +35,8 @@ namespace UpgradesList.SecondEdition
             Selection.ActiveShip = ship;
             ThermalDetonatorsCheckSubPhase sufferBombletDamageSubphase = Phases.StartTemporarySubPhaseNew<ThermalDetonatorsCheckSubPhase>(
                 "Damage from " + UpgradeInfo.Name,
-                () => {
+                () =>
+                {
                     Phases.FinishSubPhase(typeof(ThermalDetonatorsCheckSubPhase));
                     callBack();
                 }
@@ -51,9 +54,16 @@ namespace UpgradesList.SecondEdition
 
             GameManagerScript.Wait(1, delegate { callBack(); });
         }
-
     }
 
+    public class ThermalDetonatorsXWA : ThermalDetonators
+    {
+        public ThermalDetonatorsXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
 
 namespace Abilities.SecondEdition
@@ -189,7 +199,7 @@ namespace SubPhases.SecondEdition
         private void AssignStrain()
         {
             Messages.ShowInfo($"Thermal Detonators: " +
-                $"{ Selection.ActiveShip.PilotInfo.PilotName} (ID:{ Selection.ActiveShip.ShipId}) " +
+                $"{Selection.ActiveShip.PilotInfo.PilotName} (ID:{Selection.ActiveShip.ShipId}) " +
                 $"assigned Strain token");
 
             Selection.ActiveShip.Tokens.AssignToken(
@@ -219,7 +229,7 @@ namespace SubPhases.SecondEdition
         private void NoDamage()
         {
             Messages.ShowInfo($"Thermal Detonators: " +
-                $"{ Selection.ActiveShip.PilotInfo.PilotName} (ID:{ Selection.ActiveShip.ShipId}) " +
+                $"{Selection.ActiveShip.PilotInfo.PilotName} (ID:{Selection.ActiveShip.ShipId}) " +
                 $"didn't suffer any effects");
             CallBack();
         }

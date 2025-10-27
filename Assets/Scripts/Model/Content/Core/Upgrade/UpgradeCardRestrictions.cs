@@ -1,10 +1,10 @@
-﻿using Ship;
+﻿using Actions;
+using Arcs;
+using Content;
+using Ship;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Actions;
-using Arcs;
-using System;
-using Content;
 
 namespace Upgrade
 {
@@ -13,7 +13,7 @@ namespace Upgrade
         public abstract bool IsAllowedForShip(GenericShip ship);
     }
 
-    public class FactionRestriction: UpgradeCardRestriction
+    public class FactionRestriction : UpgradeCardRestriction
     {
         public List<Faction> Factions { get; private set; }
 
@@ -42,7 +42,7 @@ namespace Upgrade
             return BaseSizes.Contains(ship.ShipInfo.BaseSize);
         }
     }
-    
+
     public class UpgradeBarRestriction : UpgradeCardRestriction
     {
         public List<UpgradeType> UpgradeSlots { get; private set; }
@@ -157,10 +157,10 @@ namespace Upgrade
 
     public class StatValueRestriction : UpgradeCardRestriction
     {
-        public enum Stats { Attack, Agility, Hull, Shields, Force, Charges, Initiative}
+        public enum Stats { Attack, Agility, Hull, Shields, Force, Charges, Initiative }
         public Stats Stat { get; private set; }
 
-        public enum Conditions { EqualTo, LowerThan, HigherThan, LowerThanOrEqual, HigherThanOrEqual, DifferentOf}
+        public enum Conditions { EqualTo, LowerThan, HigherThan, LowerThanOrEqual, HigherThanOrEqual, DifferentOf }
         public Conditions Condition { get; private set; }
 
         public int Value { get; private set; }
@@ -231,6 +231,18 @@ namespace Upgrade
             }
 
             return result;
+        }
+
+        public void AddRestriction(UpgradeCardRestriction restriction)
+        {
+            if (Restrictions == null)
+            {
+                Restrictions = new List<UpgradeCardRestriction> { restriction };
+            }
+            else
+            {
+                Restrictions.Add(restriction);
+            }
         }
     }
 }

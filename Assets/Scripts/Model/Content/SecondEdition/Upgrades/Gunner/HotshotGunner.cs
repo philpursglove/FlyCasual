@@ -1,6 +1,7 @@
 ﻿using Content;
 using Ship;
 using System;
+using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -17,7 +18,7 @@ namespace UpgradesList.SecondEdition
                 cost: 6,
                 abilityType: typeof(Abilities.SecondEdition.HotshotGunnerAbility),
                 seImageNumber: 49,
-                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -25,15 +26,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(355, 9),
                 new Vector2(125, 125)
             );
-        }        
+        }
     }
 
     public class HotshotGunnerXWA : HotshotGunner
     {
         public HotshotGunnerXWA() : base()
         {
-            UpgradeInfo.Cost = 5;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 2;
         }
     }
 }
@@ -96,11 +98,13 @@ namespace Abilities.SecondEdition
             AskToUseAbility(
                 HostUpgrade.UpgradeInfo.Name,
                 AlwaysUseByDefault,
-                delegate {
+                delegate
+                {
                     SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
                     RemoveTokenAndFinish(typeof(CalculateToken));
                 },
-                delegate {
+                delegate
+                {
                     SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
                     RemoveTokenAndFinish(typeof(FocusToken));
                 },

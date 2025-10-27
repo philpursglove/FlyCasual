@@ -33,6 +33,7 @@ namespace UpgradesList.SecondEdition
         {
             UpgradeInfo.Cost = 7;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Limited = 3;
         }
     }
 }
@@ -165,7 +166,8 @@ namespace Abilities.SecondEdition
                 AlwaysUseByDefault,
                 PerformSnapShot,
                 dontUseAbility: CancelSnapShot,
-                callback: delegate {
+                callback: delegate
+                {
                     Selection.ChangeActiveShip(snapShotTarget);
                     Triggers.FinishTrigger();
                 },

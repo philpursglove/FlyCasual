@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using Bombs;
+using Content;
+using Ship;
+using SubPhases.SecondEdition;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
-using Ship;
-using System.Linq;
-using SubPhases;
-using SubPhases.SecondEdition;
-using Bombs;
 
 namespace UpgradesList.SecondEdition
 {
@@ -21,7 +19,8 @@ namespace UpgradesList.SecondEdition
                 cost: 7,
                 charges: 1,
                 cannotBeRecharged: true,
-                subType: UpgradeSubType.Mine
+                subType: UpgradeSubType.Mine,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             bombPrefabPath = "Prefabs/Bombs/ClusterMinesCentral";
@@ -37,7 +36,8 @@ namespace UpgradesList.SecondEdition
 
             ClusterMinesCheckSubPhase subphase = Phases.StartTemporarySubPhaseNew<ClusterMinesCheckSubPhase>(
                 "Damage from " + UpgradeInfo.Name,
-                delegate {
+                delegate
+                {
                     Phases.FinishSubPhase(typeof(ClusterMinesCheckSubPhase));
                     callBack();
                 }
@@ -54,6 +54,15 @@ namespace UpgradesList.SecondEdition
             bombObject.transform.Find("Explosion/Ring").GetComponent<ParticleSystem>().Play();
 
             GameManagerScript.Wait(1, delegate { callBack(); });
+        }
+    }
+
+    public class ClusterMinesXWA : ClusterMines
+    {
+        public ClusterMinesXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

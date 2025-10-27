@@ -25,14 +25,14 @@ namespace UpgradesList.SecondEdition
                 seImageNumber: 38,
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
     }
 
     public class ConcussionMissilesXWA : ConcussionMissiles
     {
         public ConcussionMissilesXWA() : base()
         {
-            UpgradeInfo.Cost = 7;
+            UpgradeInfo.Cost = 6;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
@@ -68,7 +68,8 @@ namespace Abilities.SecondEdition
                     Name = "Concussion Missile Hit",
                     TriggerType = TriggerTypes.OnShotHit,
                     TriggerOwner = Combat.Attacker.Owner.PlayerNo,
-                    EventHandler = delegate {
+                    EventHandler = delegate
+                    {
                         ConcussionMissileHit();
                     }
                 });
@@ -88,7 +89,8 @@ namespace Abilities.SecondEdition
                         Name = "Concussion Missile exposes a damage card",
                         TriggerType = TriggerTypes.OnAbilityDirect,
                         TriggerOwner = Combat.Defender.Owner.PlayerNo,
-                        EventHandler = delegate {
+                        EventHandler = delegate
+                        {
                             ship.Damage.ExposeRandomFacedownCard(Triggers.FinishTrigger);
                         }
                     });

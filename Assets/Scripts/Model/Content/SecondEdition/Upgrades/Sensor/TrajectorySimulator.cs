@@ -26,7 +26,7 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
-        }        
+        }
     }
 
     public class TrajectorySimulatorXWA : TrajectorySimulator
@@ -34,7 +34,8 @@ namespace UpgradesList.SecondEdition
         public TrajectorySimulatorXWA() : base()
         {
             UpgradeInfo.Cost = 10;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 2;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System;
 using System.Collections.Generic;
 using Upgrade;
@@ -15,8 +16,18 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.ForcePower,
                 cost: 4,
                 restriction: new TagRestriction(Content.Tags.DarkSide),
-                abilityType: typeof(Abilities.SecondEdition.MaliceAbility)
+                abilityType: typeof(Abilities.SecondEdition.MaliceAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class MaliceXWA : Malice
+    {
+        public MaliceXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

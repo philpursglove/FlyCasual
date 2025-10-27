@@ -1,5 +1,6 @@
 ﻿using ActionsList;
 using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -19,14 +20,24 @@ namespace UpgradesList.SecondEdition
                 "Hondo Ohnaka",
                 UpgradeType.Crew,
                 cost: 8,
-                abilityType: typeof(Abilities.SecondEdition.HondoOhnakaAbility)
+                abilityType: typeof(Abilities.SecondEdition.HondoOhnakaAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Scum,
                 new Vector2(237, 1)
             );
-        }        
+        }
+    }
+
+    public class HondoOhnakaXWA : HondoOhnaka
+    {
+        public HondoOhnakaXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -124,7 +135,8 @@ namespace Abilities.SecondEdition
 
                 Ability.TargetShip.AskPerformFreeAction(
                     GetPossibleActions(),
-                    delegate {
+                    delegate
+                    {
                         Selection.ChangeActiveShip(HostShip);
                         Selection.MultiSelectedShips.Remove(Ability.TargetShip);
                         AskToChooseSecondToJam(callback);
@@ -170,7 +182,8 @@ namespace Abilities.SecondEdition
 
                 Ability.TargetShip.Tokens.AssignToken(
                     new JamToken(Ability.TargetShip, HostShip.Owner),
-                    delegate {
+                    delegate
+                    {
                         Selection.MultiSelectedShips.Remove(Ability.TargetShip);
                         callback();
                     }

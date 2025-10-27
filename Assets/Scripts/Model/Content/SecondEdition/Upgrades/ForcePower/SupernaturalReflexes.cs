@@ -21,10 +21,18 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>
                 {
                     Legality.StandardBanned,
-                    Legality.ExtendedLegal,
-                    Legality.XWA
+                    Legality.ExtendedLegal
                 }
             );
+        }
+    }
+
+    public class SupernaturalReflexesXWA : SupernaturalReflexes
+    {
+        public SupernaturalReflexesXWA() : base()
+        {
+            UpgradeInfo.Cost = 50;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

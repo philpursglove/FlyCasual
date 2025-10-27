@@ -26,7 +26,7 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
-        }        
+        }
     }
 
     public class AutoblastersXWA : Autoblasters
@@ -34,7 +34,8 @@ namespace UpgradesList.SecondEdition
         public AutoblastersXWA() : base()
         {
             UpgradeInfo.Cost = 7;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 2;
         }
     }
 }
@@ -44,7 +45,7 @@ namespace Abilities.SecondEdition
     public class AutoblastersAbility : GenericAbility
     {
         public override void ActivateAbility()
-        {            
+        {
             HostShip.AfterGotNumberOfAttackDice += CheckForExtraDie;
             HostShip.OnDefenceStartAsAttacker += MakeCritsUncancellable;
         }
@@ -59,7 +60,7 @@ namespace Abilities.SecondEdition
         private void CheckForExtraDie(ref int diceAmount)
         {
             if (Combat.ChosenWeapon.GetType() == HostUpgrade.GetType())
-            {   
+            {
                 if (Combat.Attacker.SectorsInfo.IsShipInSector(Combat.Defender, ArcType.Bullseye))
                 {
                     Messages.ShowInfo("Target is in bullseye arc, Autoblaster rolls +1 attack die");
