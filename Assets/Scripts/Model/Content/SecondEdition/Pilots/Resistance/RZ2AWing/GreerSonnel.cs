@@ -5,49 +5,53 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ2AWing
 {
-    namespace SecondEdition.RZ2AWing
+    public class GreerSonnel : RZ2AWing
     {
-        public class GreerSonnel : RZ2AWing
+        public GreerSonnel() : base()
         {
-            public GreerSonnel() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Greer Sonnel",
-                    "Kothan Si",
-                    Faction.Resistance,
-                    4,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.GreerSonnelAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Greer Sonnel",
+                "Kothan Si",
+                Faction.Resistance,
+                4,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.GreerSonnelAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class GreerSonnelXWA : GreerSonnel
+    public class GreerSonnelXWA : GreerSonnel
+    {
+        public GreerSonnelXWA() : base()
         {
-            public GreerSonnelXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
