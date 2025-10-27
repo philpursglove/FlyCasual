@@ -36,7 +36,8 @@ namespace Abilities.SecondEdition
         {
             if (HostShip.State.Force > 0 &&
                 HostShip.IsCanUseForceNow() &&
-                HostShip.SectorsInfo.IsShipInSector(Combat.Defender, ArcType.Bullseye)
+                HostShip.SectorsInfo.IsShipInSector(Combat.Defender, ArcType.Bullseye) &&
+                Combat.ShotInfo.Range > 0
             )
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackStart, AskUsePredictiveShot);
