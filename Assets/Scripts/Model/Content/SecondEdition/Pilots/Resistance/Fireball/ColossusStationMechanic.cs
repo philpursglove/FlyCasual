@@ -2,40 +2,44 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Fireball
 {
-    namespace SecondEdition.Fireball
+    public class ColossusStationMechanic : Fireball
     {
-        public class ColossusStationMechanic : Fireball
+        public ColossusStationMechanic() : base()
         {
-            public ColossusStationMechanic() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Colossus Station Mechanic",
-                    "",
-                    Faction.Resistance,
-                    2,
-                    3,
-                    5,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Modification,
-                        UpgradeType.Missile                        
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Colossus Station Mechanic",
+                "",
+                Faction.Resistance,
+                2,
+                3,
+                5,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class ColossusStationMechanicXWA : ColossusStationMechanic
+    public class ColossusStationMechanicXWA : ColossusStationMechanic
+    {
+        public ColossusStationMechanicXWA() : base()
         {
-            public ColossusStationMechanicXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -5,50 +5,55 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Fireball
 {
-    namespace SecondEdition.Fireball
+    public class R1J5 : Fireball
     {
-        public class R1J5 : Fireball
+        public R1J5() : base()
         {
-            public R1J5() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "R1-J5",
-                    "Bucket",
-                    Faction.Resistance,
-                    1,
-                    3,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.R1J5PilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Droid
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "R1-J5",
+                "Bucket",
+                Faction.Resistance,
+                1,
+                3,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.R1J5PilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Droid
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipInfo.ActionIcons.SwitchToDroidActions();
-            }
+            ShipInfo.ActionIcons.SwitchToDroidActions();
         }
+    }
 
-        public class R1J5XWA : R1J5
+    public class R1J5XWA : R1J5
+    {
+        public R1J5XWA() : base()
         {
-            public R1J5XWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -94,7 +99,7 @@ namespace Abilities.SecondEdition
                 Triggers.FinishTrigger
             );
 
-            foreach (var card in HostShip.Damage.DamageCards)
+            foreach (GenericDamageCard card in HostShip.Damage.DamageCards)
             {
                 Decision existingDecision = subphase.GetDecisions().Find(n => n.Name == card.Name);
                 if (existingDecision == null)
