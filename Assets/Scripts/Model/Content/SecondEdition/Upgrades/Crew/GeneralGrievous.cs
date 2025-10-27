@@ -1,9 +1,11 @@
-﻿using Ship;
-using Upgrade;
+﻿using Content;
+using Ship;
+using SubPhases;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System;
-using SubPhases;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,7 +20,8 @@ namespace UpgradesList.SecondEdition
                 charges: 1,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Separatists),
-                abilityType: typeof(Abilities.SecondEdition.GeneralGrievousCrewAbility)
+                abilityType: typeof(Abilities.SecondEdition.GeneralGrievousCrewAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -27,7 +30,17 @@ namespace UpgradesList.SecondEdition
             );
         }
     }
+
+    public class GeneralGrievousXWA : GeneralGrievous
+    {
+        public GeneralGrievousXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
 }
+
 namespace Abilities.SecondEdition
 {
     //While you defend, after the Neutralize Results step, if there are 2 or more hit or crit results, you may spend 1 charge to cancel 1 hit or crit result. 
@@ -87,11 +100,11 @@ namespace Abilities.SecondEdition
         private void PreventDamage(DieSide type)
         {
             if (HostUpgrade.State.Charges > 0)
-            { 
+            {
                 Die dieToRemove = HostShip.AssignedDamageDiceroll.DiceList.Find(n => n.Side == type);
                 HostShip.AssignedDamageDiceroll.DiceList.Remove(dieToRemove);
                 HostUpgrade.State.SpendCharge();
-                Messages.ShowInfo($"{HostName} cancels 1 {(type == DieSide.Crit ? "Crit" : "Hit" )} result");
+                Messages.ShowInfo($"{HostName} cancels 1 {(type == DieSide.Crit ? "Crit" : "Hit")} result");
             }
 
             DecisionSubPhase.ConfirmDecision();

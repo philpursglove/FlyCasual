@@ -1,8 +1,9 @@
-﻿using Upgrade;
-using System.Collections.Generic;
+﻿using BoardTools;
+using Content;
 using Ship;
+using System.Collections.Generic;
 using System.Linq;
-using BoardTools;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -15,10 +16,19 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Talent,
                 cost: 10,
                 abilityType: typeof(Abilities.SecondEdition.EnsnareAbility),
-                restriction: new ShipRestriction(typeof(Ship.SecondEdition.NantexClassStarfighter.NantexClassStarfighter))
+                restriction: new ShipRestriction(typeof(Ship.SecondEdition.NantexClassStarfighter.NantexClassStarfighter)),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            
+    public class EnsnareXWA : Ensnare
+    {
+        public EnsnareXWA() : base()
+        {
+            UpgradeInfo.Limited = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Cost = 10;
         }
     }
 }

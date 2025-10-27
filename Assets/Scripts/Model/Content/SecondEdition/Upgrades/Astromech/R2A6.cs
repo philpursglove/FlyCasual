@@ -20,10 +20,21 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>
                 {
                     Legality.StandardBanned,
-                    Legality.ExtendedLegal,
-                    Legality.XWA
+                    Legality.ExtendedLegal
                 }
             );
+        }
+    }
+
+    public class R2A6XWA : R2A6
+    {
+        public R2A6XWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality>
+            {
+                Legality.XWA
+            };
         }
     }
 }
@@ -55,7 +66,8 @@ namespace Abilities.SecondEdition
             Messages.ShowInfoToHuman(HostShip.PilotInfo.PilotName + " : You can change your maneuver");
 
             HostShip.Owner.ChangeManeuver(
-                (maneuverCode) => {
+                (maneuverCode) =>
+                {
                     ShipMovementScript.SendAssignManeuverCommand(maneuverCode);
                 },
                 Triggers.FinishTrigger,

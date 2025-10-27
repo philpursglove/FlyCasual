@@ -1,5 +1,6 @@
 ﻿using ActionsList;
 using BoardTools;
+using Content;
 using Ship;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +20,24 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 isSolitary: true,
                 restriction: new FactionRestriction(Faction.Separatists),
-                abilityType: typeof(Abilities.SecondEdition.TA175Ability)
+                abilityType: typeof(Abilities.SecondEdition.TA175Ability),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Separatists,
                 new Vector2(211, 14)
             );
+        }
+    }
 
-            
-        }        
+    public class TA175XWA : TA175
+    {
+        public TA175XWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -82,7 +91,7 @@ namespace Abilities.SecondEdition
 
                 shipToAssign.Tokens.AssignToken(
                     typeof(Tokens.CalculateToken),
-                    delegate{ AssignCalculateTokensRecursive(friendlyShipsInRange); }
+                    delegate { AssignCalculateTokensRecursive(friendlyShipsInRange); }
                 );
             }
             else

@@ -19,7 +19,7 @@ namespace Upgrade
         public List<UpgradeType> UpgradeTypes { get; private set; }
         public UpgradeSubType SubType { get; private set; }
         public int Cost { get; set; }
-        public int Limited { get; private set; }
+        public int Limited { get; set; }
         public bool IsLimited { get { return Limited != 0; } }
         public bool FeIsLimitedPerShip { get; private set; }
         public bool IsSolitary { get; private set; }
@@ -196,7 +196,8 @@ namespace Upgrade
 
         private void AddSlots()
         {
-            AddedSlots.ForEach(slot => {
+            AddedSlots.ForEach(slot =>
+            {
                 slot.GrantedBy = this;
                 HostUpgrade.HostShip.UpgradeBar.AddSlot(slot);
             });

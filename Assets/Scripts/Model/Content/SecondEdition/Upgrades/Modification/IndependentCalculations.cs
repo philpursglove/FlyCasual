@@ -1,6 +1,8 @@
 ﻿using ActionsList;
+using Content;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
@@ -16,8 +18,18 @@ namespace UpgradesList.SecondEdition
                 cost: 2,
                 restriction: new AbilityPresenceRestriction(typeof(Abilities.SecondEdition.NetworkedCalculationsAbility)),
                 abilityType: typeof(Abilities.SecondEdition.IndependentCalculationsWrapperAbility),
-                isStandardized: true
+                isStandardized: true,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class IndependentCalculationsXWA : IndependentCalculations
+    {
+        public IndependentCalculationsXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
