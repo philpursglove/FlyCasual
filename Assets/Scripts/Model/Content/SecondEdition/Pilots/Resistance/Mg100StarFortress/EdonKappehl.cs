@@ -6,51 +6,59 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Mg100StarFortress
 {
-    namespace SecondEdition.Mg100StarFortress
+    public class EdonKappehl : Mg100StarFortress
     {
-        public class EdonKappehl : Mg100StarFortress
+        public EdonKappehl() : base()
         {
-            public EdonKappehl() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Edon Kappehl",
-                    "Crimson Hailstorm",
-                    Faction.Resistance,
-                    3,
-                    6,
-                    22,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.EdonKappehlAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Gunner,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Cannon
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Edon Kappehl",
+                "Crimson Hailstorm",
+                Faction.Resistance,
+                3,
+                6,
+                22,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.EdonKappehlAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Cannon
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
 
-                ModelInfo.SkinName = "Crimson";
-            }
+            ModelInfo.SkinName = "Crimson";
         }
+    }
 
-        public class EdonKappehlXWA : EdonKappehl
+    public class EdonKappehlXWA : EdonKappehl
+    {
+        public EdonKappehlXWA() : base()
         {
-            public EdonKappehlXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 16;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Device
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -71,11 +79,12 @@ namespace Abilities.SecondEdition
 
         private void CheckEdonKappehlAbility(GenericShip ship)
         {
-            if(ship.AssignedManeuver.ColorComplexity != Movement.MovementComplexity.Easy &&
+            if (ship.AssignedManeuver.ColorComplexity != Movement.MovementComplexity.Easy &&
                 ship.AssignedManeuver.ColorComplexity != Movement.MovementComplexity.Normal)
             {
                 return;
             }
+
             if (ship.IsBombAlreadyDropped || !BombsManager.HasBombsToDrop(ship))
             {
                 return;

@@ -8,50 +8,57 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Mg100StarFortress
 {
-    namespace SecondEdition.Mg100StarFortress
+    public class BenTeene : Mg100StarFortress
     {
-        public class BenTeene : Mg100StarFortress
+        public BenTeene() : base()
         {
-            public BenTeene() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Ben Teene",
-                    "Crimson Bolide",
-                    Faction.Resistance,
-                    3,
-                    5,
-                    19,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.BenTeeneAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Gunner,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Device
-                    },
-                    skinName: "Crimson",
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Ben Teene",
+                "Crimson Bolide",
+                Faction.Resistance,
+                3,
+                5,
+                19,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.BenTeeneAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Device
+                },
+                skinName: "Crimson",
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class BenTeeneXWA : BenTeene
+    public class BenTeeneXWA : BenTeene
+    {
+        public BenTeeneXWA() : base()
         {
-            public BenTeeneXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Device
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -198,7 +205,5 @@ namespace ActionsList
         {
             return BombsManager.GetBombsInRange(HostShip).Count == 0;
         }
-
     }
-
 }

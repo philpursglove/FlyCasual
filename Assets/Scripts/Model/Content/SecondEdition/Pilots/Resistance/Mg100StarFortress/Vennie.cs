@@ -6,61 +6,57 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Mg100StarFortress
 {
-    namespace SecondEdition.Mg100StarFortress
+    public class Vennie : Mg100StarFortress
     {
-        public class Vennie : Mg100StarFortress
+        public Vennie() : base()
         {
-            public Vennie() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Vennie",
-                    "Crimson Cutter",
-                    Faction.Resistance,
-                    2,
-                    6,
-                    18,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.VennieAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Gunner,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Torpedo
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-
-                ModelInfo.SkinName = "Crimson";
-            }
-        }
-
-        public class VennieXWA : Vennie
-        {
-            public VennieXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Vennie",
+                "Crimson Cutter",
+                Faction.Resistance,
+                2,
+                6,
+                18,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.VennieAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Torpedo
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Torpedo
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
+
+            ModelInfo.SkinName = "Crimson";
+        }
+    }
+
+    public class VennieXWA : Vennie
+    {
+        public VennieXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 27;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Device
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -82,7 +78,7 @@ namespace Abilities.SecondEdition
 
         private void AddVennieAbility(GenericShip ship)
         {
-            ship.AddAvailableDiceModificationOwn(new VennieDiceModification() 
+            ship.AddAvailableDiceModificationOwn(new VennieDiceModification()
             {
                 ImageUrl = HostShip.ImageUrl
             });
@@ -111,6 +107,7 @@ namespace Abilities.SecondEdition
                         if (shotInfo.InArcByType(ArcType.SingleTurret)) return true;
                     }
                 }
+
                 return false;
             }
 
@@ -119,6 +116,5 @@ namespace Abilities.SecondEdition
                 return 110;
             }
         }
-
     }
 }
