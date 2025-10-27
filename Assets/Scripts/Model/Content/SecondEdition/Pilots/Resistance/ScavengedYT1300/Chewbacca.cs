@@ -5,57 +5,68 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ScavengedYT1300
 {
-    namespace SecondEdition.ScavengedYT1300
+    public class Chewbacca : ScavengedYT1300
     {
-        public class Chewbacca : ScavengedYT1300
+        public Chewbacca() : base()
         {
-            public Chewbacca() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Chewbacca",
-                    "Loyal Companion",
-                    Faction.Resistance,
-                    4,
-                    6,
-                    18,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ChewbaccaPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Illicit,
-                        UpgradeType.Illicit,                        
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.YT1300
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Chewbacca",
+                "Loyal Companion",
+                Faction.Resistance,
+                4,
+                6,
+                18,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ChewbaccaPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Freighter,
+                    Tags.YT1300
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "chewbacca-scavengedyt1300";
-            }
+            PilotNameCanonical = "chewbacca-scavengedyt1300";
         }
+    }
 
-        public class ChewbaccaXWA : Chewbacca
+    public class ChewbaccaXWA : Chewbacca
+    {
+        public ChewbaccaXWA() : base()
         {
-            public ChewbaccaXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Gunner,
+                UpgradeType.Illicit,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -96,8 +107,9 @@ namespace Abilities.SecondEdition
             CameraScript.RestoreCamera();
 
             HostShip.AskPerformFreeAction(
-                actions, 
-                delegate {
+                actions,
+                delegate
+                {
                     Roster.HighlightPlayer(selectedShip.Owner.PlayerNo);
                     Selection.ChangeActiveShip(selectedShip);
                     Triggers.FinishTrigger();
