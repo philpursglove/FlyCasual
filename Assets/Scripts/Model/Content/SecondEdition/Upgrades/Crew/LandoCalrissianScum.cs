@@ -1,7 +1,7 @@
-﻿using Ship;
+﻿using Content;
 using SubPhases;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
 
@@ -18,7 +18,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.LandoCalrissianScumAbility),
-                seImageNumber: 159
+                seImageNumber: 159,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -27,6 +28,15 @@ namespace UpgradesList.SecondEdition
             );
 
             NameCanonical = "landocalrissian-crew";
+        }
+    }
+
+    public class LandoCalrissianScumCrewXWA : LandoCalrissianScumCrew
+    {
+        public LandoCalrissianScumCrewXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -101,5 +111,5 @@ namespace Abilities.SecondEdition
 
 namespace SubPhases
 {
-    public class LandoCalrissianScumAbilityDecisionSubPhase : SpendGreenTokenDecisionSubPhase {}
+    public class LandoCalrissianScumAbilityDecisionSubPhase : SpendGreenTokenDecisionSubPhase { }
 }

@@ -1,6 +1,8 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
+using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
 
@@ -11,19 +13,29 @@ namespace UpgradesList.SecondEdition
         public KetsuOnyo()
         {
             UpgradeInfo = new UpgradeCardInfo(
-            "Ketsu Onyo",
-            UpgradeType.Crew,
+                "Ketsu Onyo",
+                UpgradeType.Crew,
                 cost: 4,
                 abilityType: typeof(Abilities.SecondEdition.KetsuOnyoAbility),
                 seImageNumber: 134,
                 isLimited: true,
-                restriction: new FactionRestriction(Faction.Scum)
+                restriction: new FactionRestriction(Faction.Scum),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Scum,
                 new Vector2(424, 6)
             );
+        }
+    }
+
+    public class KetsuOnyoXWA : KetsuOnyo
+    {
+        public KetsuOnyoXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -63,10 +75,10 @@ namespace Abilities.SecondEdition
         }
 
         private void TargetIsSelected()
-        { 
+        {
             TargetShip.BeforeRemovingTokenInEndPhase += BeforeRemovingTokenInEndPhase;
             TargetShip.OnSystemsPhaseStart += RemoveEvents;
-           
+
             SelectShipSubPhase.FinishSelectionNoCallback();
             Triggers.FinishTrigger();
 
@@ -74,7 +86,7 @@ namespace Abilities.SecondEdition
 
         void BeforeRemovingTokenInEndPhase(GenericShip ship, Tokens.GenericToken token, ref bool remove)
         {
-            if (token is Tokens.TractorBeamToken) 
+            if (token is Tokens.TractorBeamToken)
             {
                 remove = false;
             }
@@ -96,7 +108,8 @@ namespace Abilities.SecondEdition
                 && otherShip.Tokens.HasToken<Tokens.TractorBeamToken>();
         }
 
-        private int GetAiPriority(GenericShip otherShip) {
+        private int GetAiPriority(GenericShip otherShip)
+        {
             return 1;
         }
     }

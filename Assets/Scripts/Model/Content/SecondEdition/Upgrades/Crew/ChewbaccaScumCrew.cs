@@ -1,9 +1,10 @@
-﻿using Ship;
-using Upgrade;
+﻿using Content;
 using System;
-using Tokens;
+using System.Collections.Generic;
 using System.Linq;
+using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -18,7 +19,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.ChewbaccaScumCrewAbility),
-                seImageNumber: 157
+                seImageNumber: 157,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -28,6 +30,15 @@ namespace UpgradesList.SecondEdition
             );
 
             NameCanonical = "chewbacca-crew";
+        }
+    }
+
+    public class ChewbaccaScumXWA : ChewbaccaScum
+    {
+        public ChewbaccaScumXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

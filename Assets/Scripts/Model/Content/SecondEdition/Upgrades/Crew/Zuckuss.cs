@@ -1,8 +1,10 @@
-﻿using Ship;
-using Upgrade;
+﻿using Content;
+using Ship;
+using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,7 +19,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 abilityType: typeof(Abilities.SecondEdition.ZuckussCrewAbility),
-                seImageNumber: 138
+                seImageNumber: 138,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -25,7 +28,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(467, 1),
                 new Vector2(125, 125)
             );
-        }        
+        }
+    }
+
+    public class ZuckussXWA : Zuckuss
+    {
+        public ZuckussXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality>() { Legality.XWA };
+        }
     }
 }
 
@@ -91,7 +103,8 @@ namespace ActionsList
             {
                 NumberOfDiceCanBeRerolled = 1,
                 IsOpposite = true,
-                CallBack = delegate {
+                CallBack = delegate
+                {
                     if (Combat.CurrentDiceRoll.DiceRerolled.Any())
                         AssignStress(callBack);
                     else
