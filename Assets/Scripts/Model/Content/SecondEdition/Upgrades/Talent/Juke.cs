@@ -27,7 +27,7 @@ namespace UpgradesList.SecondEdition
     {
         public JukeXWA() : base()
         {
-            UpgradeInfo.Cost = 5;
+            UpgradeInfo.Cost = 7;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             UpgradeInfo.Limited = 2;
         }
