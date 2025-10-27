@@ -48,7 +48,7 @@ namespace UpgradesList.SecondEdition
     {
         public DiscordMissilesXWA() : base()
         {
-            UpgradeInfo.Cost = 4;
+            UpgradeInfo.Cost = 2;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
@@ -111,7 +111,7 @@ namespace Abilities.SecondEdition
             else
             {
                 Triggers.FinishTrigger();
-            }            
+            }
         }
 
         private void StartRemoteDeployment(object sender, EventArgs e)
