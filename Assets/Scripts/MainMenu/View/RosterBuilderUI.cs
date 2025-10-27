@@ -4,8 +4,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RosterBuilderUI : MonoBehaviour {
-
+public class RosterBuilderUI : MonoBehaviour
+{
     public void CopyToClipboard()
     {
         GUIUtility.systemCopyBuffer = GameObject.Find("UI/Panels/ImportExportPanel/Content/InputField").GetComponent<InputField>().text;
@@ -27,7 +27,7 @@ public class RosterBuilderUI : MonoBehaviour {
 
     public void SetCurrentPlayerFactionAndNext(string factionText)
     {
-        Faction faction = (Faction) Enum.Parse(typeof(Faction), factionText);
+        Faction faction = (Faction)Enum.Parse(typeof(Faction), factionText);
         Global.SquadBuilder.CurrentSquad.SquadFaction = faction;
 
         Global.SquadBuilder.View.ReturnToSquadBuilder();
@@ -193,22 +193,25 @@ public class RosterBuilderUI : MonoBehaviour {
     {
         if (Global.SquadBuilder.CurrentPlayer != PlayerNo.Player1) return;
 
-        switch(Options.Format)
+        switch (Options.Format)
         {
             case "Standard":
             case "AMG Standard":
                 Options.Format = "AMG Extended";
+                MainMenu.SetEdition("SecondEdition");
                 break;
             case "Extended":
             case "AMG Extended":
                 Options.Format = "XWA";
+                MainMenu.SetEdition("XWAEdition");
                 break;
             case "XWA":
             default:
                 Options.Format = "AMG Standard";
+                MainMenu.SetEdition("SecondEdition");
                 break;
         }
-        
+
         Options.ChangeParameterValue("Format", Options.Format);
 
         SquadLists squads = Global.SquadBuilder.SquadLists;

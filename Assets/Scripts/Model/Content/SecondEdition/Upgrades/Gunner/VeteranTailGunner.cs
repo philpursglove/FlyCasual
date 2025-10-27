@@ -32,7 +32,7 @@ namespace UpgradesList.SecondEdition
     {
         public VeteranTailGunnerXWA() : base()
         {
-            UpgradeInfo.Cost = 6;
+            UpgradeInfo.Cost = 5;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }

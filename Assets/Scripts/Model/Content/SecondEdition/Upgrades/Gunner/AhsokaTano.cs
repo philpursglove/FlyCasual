@@ -1,13 +1,11 @@
-﻿using Upgrade;
+﻿using ActionsList;
+using Content;
 using Ship;
-using Arcs;
-using System.Linq;
-using BoardTools;
-using System.Collections.Generic;
-using System;
 using SubPhases;
-using ActionsList;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -22,15 +20,26 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 addForce: 1,
                 abilityType: typeof(Abilities.SecondEdition.AhsokaTanoGunnerAbility),
-                restriction: new FactionRestriction(Faction.Republic)
+                restriction: new FactionRestriction(Faction.Republic),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Republic,
                 new Vector2(194, 10)
             );
+        }
+    }
 
-            
+    public class AhsokaTanoGunnerXWA : AhsokaTanoGunner
+    {
+        public AhsokaTanoGunnerXWA() : base()
+        {
+            UpgradeInfo.Cost = 11;
+            UpgradeInfo.LegalityInfo = new List<Legality>
+            {
+                Legality.XWA
+            };
         }
     }
 }

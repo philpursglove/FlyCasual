@@ -43,8 +43,18 @@ namespace Ship.SecondEdition.ResistanceTransport
     {
         public NodinChavdriXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Astromech,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Cannon,
+                UpgradeType.Torpedo
+            };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -72,7 +82,7 @@ namespace Abilities.SecondEdition
                 {
                     RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, AskPerformActionAsRed);
                 }
-            }            
+            }
         }
 
         private void AskPerformActionAsRed(object sender, EventArgs e)

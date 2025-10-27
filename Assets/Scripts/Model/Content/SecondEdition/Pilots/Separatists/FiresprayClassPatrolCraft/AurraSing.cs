@@ -50,16 +50,17 @@ namespace Ship.SecondEdition.FiresprayClassPatrolCraft
     {
         public AurraSingXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 7;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                UpgradeType.Talent,
+                UpgradeType.ForcePower,
+                UpgradeType.Crew,
                 UpgradeType.Illicit,
                 UpgradeType.Modification,
                 UpgradeType.Device,
                 UpgradeType.Cannon,
-                UpgradeType.Cannon,
+                UpgradeType.Missile,
                 UpgradeType.Title
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
@@ -141,7 +142,7 @@ namespace Abilities.SecondEdition
                 SelectedShips.AddRange(Selection.MultiSelectedShips);
                 ShipTokens.AddRange(SelectedShips[0].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange));
                 ShipTokens.AddRange(SelectedShips[1].Tokens.GetTokensByColor(TokenColors.Red, TokenColors.Orange));
-                if(ShipTokens.Count() > 0)
+                if (ShipTokens.Count() > 0)
                 {
                     AskTransferToken(TokenIndex, callback);
                 }
@@ -150,7 +151,7 @@ namespace Abilities.SecondEdition
                     Messages.ShowError("No applicable tokens to transfer.");
                     callback();
                 }
-                
+
             }
         }
 

@@ -32,11 +32,13 @@ namespace Ship
         {
             public CartelMarauderXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Missile
                 };

@@ -53,7 +53,7 @@ namespace Ship.SecondEdition.BTLA4YWing
     {
         public HolOkandBoYXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }

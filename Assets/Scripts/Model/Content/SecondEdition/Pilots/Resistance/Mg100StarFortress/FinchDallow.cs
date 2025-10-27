@@ -11,62 +11,60 @@ using System.Globalization;
 using UnityEngine;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Mg100StarFortress
 {
-    namespace SecondEdition.Mg100StarFortress
+    public class FinchDallow : Mg100StarFortress
     {
-        public class FinchDallow : Mg100StarFortress
+        public FinchDallow() : base()
         {
-            public FinchDallow() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Finch Dallow",
-                    "Cobalt Hammer",
-                    Faction.Resistance,
-                    4,
-                    6,
-                    22,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.FinchDallowAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Gunner,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Missile
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-
-                ModelInfo.SkinName = "Cobalt";
-            }
-        }
-
-        public class FinchDallowXWA : FinchDallow
-        {
-            public FinchDallowXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Finch Dallow",
+                "Cobalt Hammer",
+                Faction.Resistance,
+                4,
+                6,
+                22,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.FinchDallowAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Device,
-                        UpgradeType.Missile
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Missile
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
+
+            ModelInfo.SkinName = "Cobalt";
+        }
+    }
+
+    public class FinchDallowXWA : FinchDallow
+    {
+        public FinchDallowXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 28;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Device
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -130,7 +128,7 @@ namespace SubPhases
 
         public override List<GameCommandTypes> AllowedGameCommandTypes
         {
-            get { return new List<GameCommandTypes>() { GameCommandTypes.BombPlacement };}
+            get { return new List<GameCommandTypes>() { GameCommandTypes.BombPlacement }; }
         }
 
         public override void Start()
@@ -203,10 +201,9 @@ namespace SubPhases
 
         private void PerformDrag()
         {
-            RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Vector3 pointerPosition = new Vector3(hit.point.x, 0f, hit.point.z);
                 Vector3 bombCenterOffset = BombGO.transform.position - BombGO.transform.Find("Model").position;

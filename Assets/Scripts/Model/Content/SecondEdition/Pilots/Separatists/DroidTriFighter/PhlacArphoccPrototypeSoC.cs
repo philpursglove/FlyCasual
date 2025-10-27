@@ -32,7 +32,8 @@ namespace Ship.SecondEdition.DroidTriFighter
                 {
                     Tags.Droid
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(AfterBurners));
@@ -40,6 +41,16 @@ namespace Ship.SecondEdition.DroidTriFighter
             MustHaveUpgrades.Add(typeof(EvasionSequence7));
 
             PilotNameCanonical = "phlacarphoccprototype-siegeofcoruscant";
+        }
+    }
+
+    public class PhlacArphoccPrototypeSoCXWA : PhlacArphoccPrototypeSoC
+    {
+        public PhlacArphoccPrototypeSoCXWA() : base()
+        {
+            var pilotInfo = PilotInfo as PilotCardInfo25;
+            pilotInfo.Cost = 10;
+            pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

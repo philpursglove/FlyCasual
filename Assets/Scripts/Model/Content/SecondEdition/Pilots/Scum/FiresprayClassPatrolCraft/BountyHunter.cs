@@ -40,12 +40,13 @@ namespace Ship
         {
             public BountyHunterXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).Cost = 14;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
-                        UpgradeType.Gunner,
+                        UpgradeType.Crew,
                         UpgradeType.Illicit,
+                        UpgradeType.Modification,
                         UpgradeType.Device,
                         UpgradeType.Cannon,
                         UpgradeType.Missile

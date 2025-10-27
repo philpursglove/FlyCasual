@@ -38,15 +38,15 @@ namespace Ship
         {
             public JinataSecurityOfficerXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).Cost = 8;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Astromech,
+                    UpgradeType.Modification,
                     UpgradeType.Device,
                     UpgradeType.Turret,
-                    UpgradeType.Missile,
-                    UpgradeType.Torpedo
+                    UpgradeType.Torpedo,
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }

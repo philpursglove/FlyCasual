@@ -52,13 +52,12 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
     {
         public KelrodoAiHoldoutXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                UpgradeType.Talent,
                 UpgradeType.Modification,
-                UpgradeType.Missile,
+                UpgradeType.Modification,
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }

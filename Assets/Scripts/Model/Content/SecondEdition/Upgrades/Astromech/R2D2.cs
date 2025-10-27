@@ -26,7 +26,7 @@ namespace UpgradesList.SecondEdition
     {
         public R2D2XWA() : base()
         {
-            UpgradeInfo.Cost = 10;
+            UpgradeInfo.Cost = 8;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }

@@ -1,44 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using Abilities.SecondEdition;
+﻿using Abilities.SecondEdition;
 using Content;
 using Ship;
+using System;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class EdrioTwoTubes : T65XWing
     {
-        public class EdrioTwoTubes : T65XWing
+        public EdrioTwoTubes() : base()
         {
-            public EdrioTwoTubes() : base()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Edrio Two Tubes",
+                "Cavern Angels Veteran",
+                Faction.Rebel,
+                2,
+                4,
+                10,
+                isLimited: true,
+                abilityType: typeof(EdrioTwoTubesAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Missile,
+                    UpgradeType.Illicit,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Partisan,
+                    Tags.XWing
+                },
+                seImageNumber: 9,
+                skinName: "Partisan",
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class EdrioTwoTubesXWA : EdrioTwoTubes
+    {
+        public EdrioTwoTubesXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Edrio Two Tubes",
-                    "Cavern Angels Veteran",
-                    Faction.Rebel,
-                    2,
-                    4,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(EdrioTwoTubesAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Missile,
-                        UpgradeType.Illicit,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Partisan,
-                        Tags.XWing
-                    },
-                    seImageNumber: 9,
-                    skinName: "Partisan"
-                );
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

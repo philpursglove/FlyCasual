@@ -6,50 +6,54 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class JessikaPava : T70XWing
     {
-        public class JessikaPava : T70XWing
+        public JessikaPava() : base()
         {
-            public JessikaPava() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jessika Pava",
-                    "The Great Destroyer",
-                    Faction.Resistance,
-                    3,
-                    4,
-                    6,
-                    isLimited: true,
-                    charges: 1,
-                    regensCharges: 1,
-                    abilityType: typeof(Abilities.SecondEdition.JessikaPavaAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Tech,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Jessika Pava",
+                "The Great Destroyer",
+                Faction.Resistance,
+                3,
+                4,
+                6,
+                isLimited: true,
+                charges: 1,
+                regensCharges: 1,
+                abilityType: typeof(Abilities.SecondEdition.JessikaPavaAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Tech,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class JessikaPavaXWA : JessikaPava
+    public class JessikaPavaXWA : JessikaPava
+    {
+        public JessikaPavaXWA() : base()
         {
-            public JessikaPavaXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -130,9 +134,7 @@ namespace ActionsList.SecondEdition
 
             base.ActionEffect(callBack);
         }
-
     }
-
 }
 
 namespace Abilities.FirstEdition
@@ -152,7 +154,7 @@ namespace Abilities.FirstEdition
 
         private void AddJessPavaActionEffect(GenericShip host)
         {
-            ActionsList.GenericAction newAction = new ActionsList.FirstEdition.JessPavaActionEffect();
+            GenericAction newAction = new ActionsList.FirstEdition.JessPavaActionEffect();
             newAction.HostShip = host;
             newAction.ImageUrl = host.ImageUrl;
             host.AddAvailableDiceModificationOwn(newAction);
@@ -173,10 +175,10 @@ namespace ActionsList.FirstEdition
             IsReroll = true;
         }
 
-        private int getDices()
+        private int GetDice()
         {
-            int dices = Roster.AllShips.Values.Where(ship => FilterTargets(ship)).Count();
-            return dices;
+            int dice = Roster.AllShips.Values.Where(ship => FilterTargets(ship)).Count();
+            return dice;
         }
 
         public override bool IsDiceModificationAvailable()
@@ -185,8 +187,9 @@ namespace ActionsList.FirstEdition
             if ((Combat.AttackStep == CombatStep.Attack) ||
                 (Combat.AttackStep == CombatStep.Defence))
             {
-                if (getDices() > 0) result = true;
+                if (GetDice() > 0) result = true;
             }
+
             return result;
         }
 
@@ -211,7 +214,7 @@ namespace ActionsList.FirstEdition
 
         public override void ActionEffect(System.Action callBack)
         {
-            int dices = getDices();
+            int dices = GetDice();
             if (dices > 0)
             {
                 DiceRerollManager diceRerollManager = new DiceRerollManager
@@ -222,7 +225,5 @@ namespace ActionsList.FirstEdition
                 diceRerollManager.Start();
             }
         }
-
     }
-
 }

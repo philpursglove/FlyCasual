@@ -6,73 +6,70 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ScavengedYT1300
 {
-    namespace SecondEdition.ScavengedYT1300
+    public class HanSolo : ScavengedYT1300
     {
-        public class HanSolo : ScavengedYT1300
+        public HanSolo() : base()
         {
-            public HanSolo() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Han Solo",
-                    "Jaded Smuggler",
-                    Faction.Resistance,
-                    6,
-                    6,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.HanSoloResistancePilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Illicit,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.YT1300
-                    },
-                    legality: new List<Legality>
-                    {
-                        Legality.StandardBanned,
-                        Legality.ExtendedLegal
-                    }
-                );
-
-                PilotNameCanonical = "hansolo-scavengedyt1300";
-            }
-        }
-
-        public class HanSoloXWA : HanSolo
-        {
-            public HanSoloXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Han Solo",
+                "Jaded Smuggler",
+                Faction.Resistance,
+                6,
+                6,
+                15,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.HanSoloResistancePilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
+                    UpgradeType.Missile,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
                     UpgradeType.Gunner,
                     UpgradeType.Illicit,
                     UpgradeType.Illicit,
                     UpgradeType.Modification,
-                    UpgradeType.Modification,
-                    UpgradeType.Missile,
-                    UpgradeType.Title
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Freighter,
+                    Tags.YT1300
+                },
+                legality: new List<Legality>
+                {
+                    Legality.StandardBanned,
+                    Legality.ExtendedLegal
+                }
+            );
+
+            PilotNameCanonical = "hansolo-scavengedyt1300";
+        }
+    }
+
+    public class HanSoloXWA : HanSolo
+    {
+        public HanSoloXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Gunner,
+                UpgradeType.Illicit,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

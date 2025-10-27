@@ -30,7 +30,7 @@ namespace UpgradesList.SecondEdition
     {
         public SquadLeaderXWA() : base()
         {
-            UpgradeInfo.Cost = 4;
+            UpgradeInfo.Cost = 5;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
@@ -125,7 +125,8 @@ namespace Abilities.SecondEdition
 
                 MovementTemplates.ReturnRangeRuler();
 
-                Triggers.ResolveTriggers(TriggerTypes.OnFreeActionPlanned, (System.Action)delegate {
+                Triggers.ResolveTriggers(TriggerTypes.OnFreeActionPlanned, (System.Action)delegate
+                {
                     Selection.ThisShip = coordinatingShip;
                     ActionsHolder.CurrentAction = currentAction;
                     Phases.FinishSubPhase(typeof(SquadLeaderTargetSubPhase));

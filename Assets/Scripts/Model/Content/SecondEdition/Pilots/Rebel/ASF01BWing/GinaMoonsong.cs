@@ -49,16 +49,16 @@ namespace Ship.SecondEdition.ASF01BWing
     {
         public GinaMoonsongXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
                 UpgradeType.Sensor,
                 UpgradeType.Modification,
-                UpgradeType.Device,
                 UpgradeType.Cannon,
                 UpgradeType.Cannon,
+                UpgradeType.Missile,
                 UpgradeType.Torpedo,
                 UpgradeType.Configuration
             };
@@ -98,7 +98,7 @@ namespace Abilities.SecondEdition
                 Triggers.FinishTrigger();
                 return;
             }
-            
+
             SelectTargetForAbility(
                 TargetIsSelected,
                 FilterAbilityTargets,
@@ -106,7 +106,7 @@ namespace Abilities.SecondEdition
                 HostShip.Owner.PlayerNo,
                 HostShip.PilotInfo.PilotName,
                 "Transfer 1 of your stress tokens to a friendly ship at range 0-2",
-                HostShip, 
+                HostShip,
                 showSkipButton: false
             );
         }

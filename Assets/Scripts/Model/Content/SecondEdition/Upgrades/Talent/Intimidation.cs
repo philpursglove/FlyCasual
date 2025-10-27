@@ -22,7 +22,7 @@ namespace UpgradesList.SecondEdition
                     Legality.ExtendedLegal
                 }
             );
-        }        
+        }
     }
 
     public class IntimidationXWA : Intimidation
@@ -30,7 +30,9 @@ namespace UpgradesList.SecondEdition
         public IntimidationXWA() : base()
         {
             UpgradeInfo.Cost = 7;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 1;
+            UpgradeInfo.Restrictions.AddRestriction(new BaseSizeRestriction(BaseSize.Small, BaseSize.Medium));
         }
     }
 }

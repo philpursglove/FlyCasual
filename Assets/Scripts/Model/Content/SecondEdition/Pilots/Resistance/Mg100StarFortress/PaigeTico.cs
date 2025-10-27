@@ -5,61 +5,61 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Mg100StarFortress
 {
-    namespace SecondEdition.Mg100StarFortress
+    public class PaigeTico : Mg100StarFortress
     {
-        public class PaigeTico : Mg100StarFortress
+        public PaigeTico() : base()
         {
-            public PaigeTico() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Paige Tico",
-                    "Hero",
-                    Faction.Resistance,
-                    5,
-                    6,
-                    23,
-                    isLimited: true,
-                    charges: 1,
-                    regensCharges: 1,
-                    abilityType: typeof(Abilities.SecondEdition.PaigeTicoPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Device
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal },
-                    skinName: "Cobalt"
-                );
-            }
-        }
-
-        public class PaigeTicoXWA : PaigeTico
-        {
-            public PaigeTicoXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Paige Tico",
+                "Hero",
+                Faction.Resistance,
+                5,
+                6,
+                23,
+                isLimited: true,
+                charges: 1,
+                regensCharges: 1,
+                abilityType: typeof(Abilities.SecondEdition.PaigeTicoPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Device
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Device
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal },
+                skinName: "Cobalt"
+            );
+        }
+    }
+
+    public class PaigeTicoXWA : PaigeTico
+    {
+        public PaigeTicoXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 16;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 21;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Device,
+                UpgradeType.Device
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

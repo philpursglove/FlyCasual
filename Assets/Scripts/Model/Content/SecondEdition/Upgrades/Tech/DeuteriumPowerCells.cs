@@ -28,7 +28,7 @@ namespace UpgradesList.SecondEdition
     {
         public DeuteriumPowerCellsXWA() : base()
         {
-            UpgradeInfo.Cost = 8;
+            UpgradeInfo.Cost = 7;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
@@ -125,7 +125,8 @@ namespace Abilities.SecondEdition
 
             HostShip.Tokens.AssignToken(
                 typeof(Tokens.WeaponsDisabledToken),
-                delegate {
+                delegate
+                {
                     HostShip.TryRegenShields();
                     Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": " + HostShip.PilotInfo.PilotName + " recovered 1 shield");
                     Triggers.FinishTrigger();

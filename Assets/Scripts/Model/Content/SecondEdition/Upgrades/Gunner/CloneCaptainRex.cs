@@ -1,9 +1,11 @@
-﻿using Ship;
-using Upgrade;
+﻿using Abilities;
 using ActionsList;
+using Content;
+using Ship;
 using System;
-using Abilities;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -17,7 +19,8 @@ namespace UpgradesList.SecondEdition
                 cost: 2,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Republic),
-                abilityType: typeof(Abilities.SecondEdition.CloneCaptainRexAbility)
+                abilityType: typeof(Abilities.SecondEdition.CloneCaptainRexAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -25,9 +28,19 @@ namespace UpgradesList.SecondEdition
                 new Vector2(235, 1),
                 new Vector2(75, 75)
             );
+        }
+    }
 
-            
-        }        
+    public class CloneCaptainRexXWA : CloneCaptainRex
+    {
+        public CloneCaptainRexXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new List<Legality>
+            {
+                Legality.XWA
+            };
+        }
     }
 }
 
@@ -63,7 +76,7 @@ namespace ActionsList.SecondEdition
 {
     public class CloneCaptainRexEffect : GenericAction
     {
-        public GenericUpgrade HostUpgrade {get; set;}
+        public GenericUpgrade HostUpgrade { get; set; }
         public GenericAbility Ability { get; set; }
 
         public CloneCaptainRexEffect()
@@ -74,11 +87,12 @@ namespace ActionsList.SecondEdition
         public override void ActionEffect(Action callBack)
         {
             Combat.DiceRollAttack.RemoveType(DieSide.Focus);
-            
+
             EachShipCanDoAction action = new EachShipCanDoAction
             (
                 EachShipAction,
-                onFinish: delegate {
+                onFinish: delegate
+                {
                     Selection.ChangeActiveShip(HostShip);
                     callBack();
                 },

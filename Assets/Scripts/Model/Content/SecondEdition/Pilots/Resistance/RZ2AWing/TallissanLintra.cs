@@ -4,53 +4,59 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ2AWing
 {
-    namespace SecondEdition.RZ2AWing
+    public class TallissanLintra : RZ2AWing
     {
-        public class TallissanLintra : RZ2AWing
+        public TallissanLintra() : base()
         {
-            public TallissanLintra() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Tallissan Lintra",
-                    "Deadly Approach",
-                    Faction.Resistance,
-                    5,
-                    4,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.TallissanLintraAbility),
-                    charges: 1,
-                    regensCharges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Tallissan Lintra",
+                "Deadly Approach",
+                Faction.Resistance,
+                5,
+                4,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.TallissanLintraAbility),
+                charges: 1,
+                regensCharges: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class TallissanLintraXWA : TallissanLintra
+    public class TallissanLintraXWA : TallissanLintra
+    {
+        public TallissanLintraXWA() : base()
         {
-            public TallissanLintraXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

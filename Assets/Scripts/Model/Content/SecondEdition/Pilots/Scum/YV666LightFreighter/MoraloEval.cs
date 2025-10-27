@@ -48,9 +48,18 @@ namespace Ship
         {
             public MoraloEvalXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).Cost = 15;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                };
             }
         }
     }
@@ -102,7 +111,8 @@ namespace Abilities.SecondEdition
 
             var subphase = Phases.StartTemporarySubPhaseNew<SetupShipMidgameSubPhase>(
                 "Setup",
-                delegate {
+                delegate
+                {
                     Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} has returned to the play area");
                     Triggers.FinishTrigger();
                 }

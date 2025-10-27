@@ -23,7 +23,7 @@ namespace Ship
                     3,
                     9,
                     extraUpgradeIcons: new List<UpgradeType>
-                    { 
+                    {
                         UpgradeType.Modification
                     },
                     tags: new List<Tags>
@@ -43,8 +43,8 @@ namespace Ship
         {
             public G4RGORVMXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

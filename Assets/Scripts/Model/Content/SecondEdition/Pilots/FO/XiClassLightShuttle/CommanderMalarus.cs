@@ -1,54 +1,27 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
-using Content;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.XiClassLightShuttle
 {
-    namespace SecondEdition.XiClassLightShuttle
+    public class CommanderMalarus : XiClassLightShuttle
     {
-        public class CommanderMalarus : XiClassLightShuttle
+        public CommanderMalarus() : base()
         {
-            public CommanderMalarus() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Commander Malarus",
-                    "Vindictive Taskmaster",
-                    Faction.FirstOrder,
-                    5,
-                    4,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.CommanderMalarusXiClassLightShuttleAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-
-                PilotNameCanonical = "commandermalarus-xiclasslightshuttle";
-            }
-        }
-
-        public class CommanderMalarusXWA : CommanderMalarus
-        {
-            public CommanderMalarusXWA(): base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 14;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Commander Malarus",
+                "Vindictive Taskmaster",
+                Faction.FirstOrder,
+                5,
+                4,
+                15,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.CommanderMalarusXiClassLightShuttleAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
@@ -57,8 +30,30 @@ namespace Ship
                     UpgradeType.Crew,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+
+            PilotNameCanonical = "commandermalarus-xiclasslightshuttle";
+        }
+    }
+
+    public class CommanderMalarusXWA : CommanderMalarus
+    {
+        public CommanderMalarusXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

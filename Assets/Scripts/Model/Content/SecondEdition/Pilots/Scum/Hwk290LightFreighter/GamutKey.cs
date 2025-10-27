@@ -48,17 +48,15 @@ namespace Ship.SecondEdition.Hwk290LightFreighter
     {
         public GamutKeyXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 5;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
                 UpgradeType.Crew,
                 UpgradeType.Illicit,
                 UpgradeType.Modification,
-                UpgradeType.Modification,
                 UpgradeType.Device,
-                UpgradeType.Title
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }

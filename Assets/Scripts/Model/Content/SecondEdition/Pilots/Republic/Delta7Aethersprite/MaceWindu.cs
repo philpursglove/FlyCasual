@@ -46,9 +46,18 @@ namespace Ship.SecondEdition.Delta7Aethersprite
     {
         public MaceWinduXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 3;
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration,
+            };
         }
     }
 }
@@ -75,7 +84,7 @@ namespace Abilities.SecondEdition
                 RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, AssignTokens);
             }
         }
-        
+
         private void AssignTokens(object sender, EventArgs e)
         {
             HostShip.State.RestoreForce();

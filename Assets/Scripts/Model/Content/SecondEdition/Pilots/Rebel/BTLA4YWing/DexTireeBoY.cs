@@ -30,7 +30,8 @@ namespace Ship.SecondEdition.BTLA4YWing
                 {
                     Tags.YWing
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ShipAbilities.Add(new HopeAbility());
@@ -40,6 +41,15 @@ namespace Ship.SecondEdition.BTLA4YWing
             MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R4Astromech));
 
             PilotNameCanonical = "dextiree-battleofyavin";
+        }
+    }
+
+    public class DexTireeBoYXWA : DexTireeBoY
+    {
+        public DexTireeBoYXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

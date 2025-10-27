@@ -35,13 +35,14 @@ namespace Ship.SecondEdition.AuzituckGunship
     {
         public WullffwarroXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Crew,
-                    UpgradeType.Crew
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
                 };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }

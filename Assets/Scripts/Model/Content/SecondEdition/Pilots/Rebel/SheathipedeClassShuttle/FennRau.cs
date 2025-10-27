@@ -8,52 +8,50 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.SheathipedeClassShuttle
 {
-    namespace SecondEdition.SheathipedeClassShuttle
+    public class FennRau : SheathipedeClassShuttle
     {
-        public class FennRau : SheathipedeClassShuttle
+        public FennRau() : base()
         {
-            public FennRau() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Fenn Rau",
-                    "Reluctant Rebel",
-                    Faction.Rebel,
-                    6,
-                    5,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.FennRauRebelAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Spectre,
-                        Tags.Mandalorian
-                    },
-                    seImageNumber: 38,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Fenn Rau",
+                "Reluctant Rebel",
+                Faction.Rebel,
+                6,
+                5,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.FennRauRebelAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Spectre,
+                    Tags.Mandalorian
+                },
+                seImageNumber: 38,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "fennrau-sheathipedeclassshuttle";
-            }
+            PilotNameCanonical = "fennrau-sheathipedeclassshuttle";
         }
+    }
 
-        public class FennRauXWA : FennRau
+    public class FennRauXWA : FennRau
+    {
+        public FennRauXWA() : base()
         {
-            public FennRauXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Astromech,
@@ -61,8 +59,7 @@ namespace Ship
                     UpgradeType.Modification,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

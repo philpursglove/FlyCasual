@@ -1,11 +1,11 @@
-﻿using Ship;
-using Upgrade;
-using ActionsList;
+﻿using ActionsList;
+using Content;
+using Ship;
 using SubPhases;
-using Actions;
-using Tokens;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -20,7 +20,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 abilityType: typeof(Abilities.SecondEdition.ChopperCrewAbility),
-                seImageNumber: 83
+                seImageNumber: 83,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -29,7 +30,16 @@ namespace UpgradesList.SecondEdition
             );
 
             NameCanonical = "chopper-crew";
-        }        
+        }
+    }
+
+    public class ChopperCrewXWA : ChopperCrew
+    {
+        public ChopperCrewXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -73,11 +83,13 @@ namespace Abilities.SecondEdition
                 AskToUseAbility(
                     HostUpgrade.UpgradeInfo.Name,
                     AlwaysUseByDefault,
-                    delegate {
+                    delegate
+                    {
                         DecisionSubPhase.ConfirmDecisionNoCallback();
                         SufferDamage();
                     },
-                    delegate {
+                    delegate
+                    {
                         DecisionSubPhase.ConfirmDecisionNoCallback();
                         ExposeDamageCard();
                     },

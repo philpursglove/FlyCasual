@@ -4,61 +4,71 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.VCX100LightFreighter
 {
-    namespace SecondEdition.VCX100LightFreighter
+    public class HeraSyndulla : VCX100LightFreighter
     {
-        public class HeraSyndulla : VCX100LightFreighter
+        public HeraSyndulla() : base()
         {
-            public HeraSyndulla() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Hera Syndulla",
-                    "Spectre-2",
-                    Faction.Rebel,
-                    5,
-                    7,
-                    20,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.HeraSyndullaAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Turret,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Title                        
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.Spectre
-                    },
-                    legality: new List<Legality>
-                    {
-                        Legality.StandardBanned,
-                        Legality.ExtendedLegal
-                    },
-                    seImageNumber: 73
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Hera Syndulla",
+                "Spectre-2",
+                Faction.Rebel,
+                5,
+                7,
+                20,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.HeraSyndullaAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Freighter,
+                    Tags.Spectre
+                },
+                legality: new List<Legality>
+                {
+                    Legality.StandardBanned,
+                    Legality.ExtendedLegal
+                },
+                seImageNumber: 73
+            );
 
-                PilotNameCanonical = "herasyndulla-vcx100lightfreighter";
-            }
+            PilotNameCanonical = "herasyndulla-vcx100lightfreighter";
         }
+    }
 
-        public class HeraSyndullaXWA : HeraSyndulla
+    public class HeraSyndullaXWA : HeraSyndulla
+    {
+        public HeraSyndullaXWA() : base()
         {
-            public HeraSyndullaXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 22;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Turret,
+                UpgradeType.Torpedo,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

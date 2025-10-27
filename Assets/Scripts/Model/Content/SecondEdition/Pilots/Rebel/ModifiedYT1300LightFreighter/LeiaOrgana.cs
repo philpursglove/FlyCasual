@@ -6,27 +6,25 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ModifiedYT1300LightFreighter
 {
-    namespace SecondEdition.ModifiedYT1300LightFreighter
+    public class LeiaOrgana : ModifiedYT1300LightFreighter
     {
-        public class LeiaOrgana : ModifiedYT1300LightFreighter
+        public LeiaOrgana() : base()
         {
-            public LeiaOrgana() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Leia Organa",
-                    "There Is Another",
-                    Faction.Rebel,
-                    5,
-                    7,
-                    24,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LeiaOrganaPilotAbility),
-                    force: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Leia Organa",
+                "There Is Another",
+                Faction.Rebel,
+                5,
+                7,
+                24,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LeiaOrganaPilotAbility),
+                force: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.ForcePower,
                         UpgradeType.Missile,
                         UpgradeType.Crew,
@@ -35,37 +33,38 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Modification,
                         UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
+                },
+                tags: new List<Tags>
+                {
                         Tags.Freighter,
                         Tags.YT1300,
                         Tags.LightSide
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class LeiaOrganaXWA : LeiaOrgana
+    public class LeiaOrganaXWA : LeiaOrgana
+    {
+        public LeiaOrganaXWA() : base()
         {
-            public LeiaOrganaXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
                     UpgradeType.Gunner,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
                     UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Missile,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -124,7 +123,7 @@ namespace Abilities.SecondEdition
                     AskToUseAbility(
                        HostShip.PilotInfo.PilotName,
                        ShouldUseAbility,
-                       GainFocus,                       
+                       GainFocus,
                        descriptionLong: "Spend 1 force to let " + TargetShip.PilotInfo.PilotName + " gain 1 focus token?",
                        imageHolder: HostShip
                    );
@@ -134,7 +133,7 @@ namespace Abilities.SecondEdition
             {
                 Triggers.FinishTrigger();
             }
-               
+
         }
 
         private bool ShouldUseAbility()
@@ -157,7 +156,8 @@ namespace Abilities.SecondEdition
             DecisionSubPhase.ConfirmDecisionNoCallback();
             TargetShip.Tokens.AssignToken(
                 typeof(Tokens.FocusToken),
-                delegate {
+                delegate
+                {
                     TargetShip = null;
                     HostShip.State.SpendForce(1, Triggers.FinishTrigger);
                 }

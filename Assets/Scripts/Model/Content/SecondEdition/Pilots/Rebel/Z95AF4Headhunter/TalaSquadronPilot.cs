@@ -2,41 +2,44 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Z95AF4Headhunter
 {
-    namespace SecondEdition.Z95AF4Headhunter
+    public class TalaSquadronPilot : Z95AF4Headhunter
     {
-        public class TalaSquadronPilot : Z95AF4Headhunter
+        public TalaSquadronPilot() : base()
         {
-            public TalaSquadronPilot() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Tala Squadron Pilot",
-                    "",
-                    Faction.Rebel,
-                    2,
-                    3,
-                    4,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Modification
-                    },
-                    seImageNumber: 29,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Tala Squadron Pilot",
+                "",
+                Faction.Rebel,
+                2,
+                3,
+                4,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification
+                },
+                seImageNumber: 29,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class TalaSquadronPilotXWA : TalaSquadronPilot
+    public class TalaSquadronPilotXWA : TalaSquadronPilot
+    {
+        public TalaSquadronPilotXWA() : base()
         {
-            public TalaSquadronPilotXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BoardTools;
 using Content;
+using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
@@ -20,8 +21,8 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.Separatists)
                 ),
                 abilityType: typeof(Abilities.SecondEdition.SoullessOneAbility),
-                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
-            );            
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
     }
 
@@ -30,7 +31,7 @@ namespace UpgradesList.SecondEdition
         public SoullessOneXWA() : base()
         {
             UpgradeInfo.Cost = 9;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

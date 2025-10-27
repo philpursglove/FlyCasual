@@ -1,51 +1,24 @@
 ﻿using Abilities.Parameters;
-using System.Collections.Generic;
 using Content;
+using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.XiClassLightShuttle
 {
-    namespace SecondEdition.XiClassLightShuttle
+    public class AgentTerex : XiClassLightShuttle
     {
-        public class AgentTerex : XiClassLightShuttle
+        public AgentTerex() : base()
         {
-            public AgentTerex() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Agent Terex",
-                    "Devious Provocateur",
-                    Faction.FirstOrder,
-                    3,
-                    4,
-                    13,
-                    isLimited: true,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Crew,
-                        UpgradeType.Illicit,
-                        UpgradeType.Illicit,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification
-                    },
-                    abilityType: typeof(Abilities.SecondEdition.AgentTerexPilotAbility),
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class AgentTerexXWA : AgentTerex
-        {
-            public AgentTerexXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 8;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Agent Terex",
+                "Devious Provocateur",
+                Faction.FirstOrder,
+                3,
+                4,
+                13,
+                isLimited: true,
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
@@ -55,8 +28,31 @@ namespace Ship
                     UpgradeType.Illicit,
                     UpgradeType.Illicit,
                     UpgradeType.Modification
-                };
-            }
+                },
+                abilityType: typeof(Abilities.SecondEdition.AgentTerexPilotAbility),
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class AgentTerexXWA : AgentTerex
+    {
+        public AgentTerexXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Illicit,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

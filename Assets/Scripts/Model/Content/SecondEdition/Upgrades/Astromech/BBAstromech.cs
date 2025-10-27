@@ -1,4 +1,5 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,18 @@ namespace UpgradesList.SecondEdition
                 charges: 2,
                 cost: 4,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.BBAstromechAbility)
+                abilityType: typeof(Abilities.SecondEdition.BBAstromechAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class BBAstromechXWA : BBAstromech
+    {
+        public BBAstromechXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

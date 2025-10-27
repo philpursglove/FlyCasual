@@ -7,51 +7,48 @@ using System.Linq;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class ArvelCrynydSSP : RZ1AWing
     {
-        public class ArvelCrynydSSP : RZ1AWing
+        public ArvelCrynydSSP() : base()
         {
-            public ArvelCrynydSSP() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Arvel Crynyd",
-                    "Green Leader",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ArvelCrynydSSPAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Arvel Crynyd",
+                "Green Leader",
+                Faction.Rebel,
+                3,
+                4,
+                0,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ArvelCrynydSSPAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
+                },
+                tags: new List<Tags>
+                {
                         Tags.AWing
-                    },
-                    isStandardLayout: true,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+                },
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                MustHaveUpgrades.Add(typeof(Predator));
-                MustHaveUpgrades.Add(typeof(AfterBurners));
+            MustHaveUpgrades.Add(typeof(Predator));
+            MustHaveUpgrades.Add(typeof(AfterBurners));
 
-                PilotNameCanonical = "arvelcrynyd-swz106";
-            }
+            PilotNameCanonical = "arvelcrynyd-swz106";
         }
+    }
 
-        public class ArvelCrynydSSPXWA: ArvelCrynydSSP
+    public class ArvelCrynydSSPXWA : ArvelCrynydSSP
+    {
+        public ArvelCrynydSSPXWA() : base()
         {
-            public ArvelCrynydSSPXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -79,7 +76,7 @@ namespace Abilities.SecondEdition
 
             HostShip.OnActionIsReadyToBeFailed += CheckAbility;
         }
-        
+
         private void CheckAbility(GenericAction action, List<ActionFailReason> failReasons, ref bool isDefaultFailOverwritten)
         {
             // TODO: Real fail reasons

@@ -4,52 +4,58 @@ using Content;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class LeevanTenza : T65XWing
     {
-        public class LeevanTenza : T65XWing
+        public LeevanTenza() : base()
         {
-            public LeevanTenza() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Leevan Tenza",
-                    "Rebel Alliance Defector",
-                    Faction.Rebel,
-                    3,
-                    4,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LeevanTenzaAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Illicit,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Partisan,
-                        Tags.XWing
-                    },
-                    seImageNumber: 8,
-                    skinName: "Partisan",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Leevan Tenza",
+                "Rebel Alliance Defector",
+                Faction.Rebel,
+                3,
+                4,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LeevanTenzaAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Partisan,
+                    Tags.XWing
+                },
+                seImageNumber: 8,
+                skinName: "Partisan",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class LeevanTenzaXWA : LeevanTenza
+    public class LeevanTenzaXWA : LeevanTenza
+    {
+        public LeevanTenzaXWA() : base()
         {
-            public LeevanTenzaXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -18,7 +20,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 abilityType: typeof(Abilities.SecondEdition.JynErsoCrewAbility),
-                seImageNumber: 85
+                seImageNumber: 85,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
@@ -26,7 +29,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(426, 18),
                 new Vector2(125, 125)
             );
-        }        
+        }
+    }
+
+    public class JynErsoXWA : JynErso
+    {
+        public JynErsoXWA() : base()
+        {
+            UpgradeInfo.Cost = 6;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

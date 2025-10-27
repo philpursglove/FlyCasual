@@ -1,5 +1,7 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using System;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -14,11 +16,20 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Illicit,
                 cost: 5,
                 abilityType: typeof(Abilities.SecondEdition.FalseTransponderCodesAbility),
-                charges: 1
+                charges: 1,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            
-        }        
+    public class FalseTransponderCodesXWA : FalseTransponderCodes
+    {
+        public FalseTransponderCodesXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 3;
+        }
     }
 }
 
@@ -69,7 +80,7 @@ namespace Abilities.SecondEdition
                 Messages.ShowInfo($"False Transponder Codes: non-ship object is not Jammed");
                 Triggers.FinishTrigger();
             }
-            
+
         }
     }
 }

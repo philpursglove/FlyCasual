@@ -37,7 +37,7 @@ namespace Ship
         {
             public SunFacXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
@@ -45,6 +45,7 @@ namespace Ship
                     UpgradeType.Talent,
                     UpgradeType.Talent,
                     UpgradeType.Modification,
+                    UpgradeType.Modification
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }

@@ -21,17 +21,17 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.Republic),
                     new TagRestriction(Content.Tags.Clone)
                 ),
-                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
     }
 
     public class DedicatedXWA : Dedicated
     {
         public DedicatedXWA() : base()
         {
-            UpgradeInfo.Cost = 5;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

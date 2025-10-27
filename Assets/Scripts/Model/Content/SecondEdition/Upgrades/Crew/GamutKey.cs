@@ -28,7 +28,7 @@ namespace UpgradesList.SecondEdition
     {
         public GamutKeyXWA() : base()
         {
-            UpgradeInfo.Cost = 7;
+            UpgradeInfo.Cost = 5;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }

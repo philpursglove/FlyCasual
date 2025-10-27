@@ -31,7 +31,7 @@ namespace UpgradesList.SecondEdition
     {
         public R5AstromechXWA() : base()
         {
-            UpgradeInfo.Cost = 7;
+            UpgradeInfo.Cost = 6;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }

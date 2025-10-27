@@ -32,7 +32,7 @@ namespace Ship.SecondEdition.GauntletFighter
                 },
                 tags: new List<Tags>()
                 {
-                    Tags.Mandalorian 
+                    Tags.Mandalorian
                 },
                 skinName: "CIS Light",
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -44,14 +44,15 @@ namespace Ship.SecondEdition.GauntletFighter
     {
         public PreVizslaXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 7;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 25;
+            (PilotInfo as PilotCardInfo25).Cost = 16;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
                 UpgradeType.Crew,
                 UpgradeType.Gunner,
                 UpgradeType.Illicit,
+                UpgradeType.Modification,
                 UpgradeType.Modification,
                 UpgradeType.Device,
                 UpgradeType.Configuration

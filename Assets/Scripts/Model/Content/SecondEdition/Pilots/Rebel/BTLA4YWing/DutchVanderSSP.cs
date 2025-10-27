@@ -36,13 +36,23 @@ namespace Ship.SecondEdition.BTLA4YWing
                 {
                     Tags.YWing
                 },
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(IonCannonTurret));
             MustHaveUpgrades.Add(typeof(ProtonBombs));
 
             PilotNameCanonical = "dutchvander-swz106";
+        }
+    }
+
+    public class DutchVanderSSPXWA : DutchVanderSSP
+    {
+        public DutchVanderSSPXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -120,7 +130,7 @@ namespace Abilities.SecondEdition
             {
                 Messages.ShowInfo(TargetShip.PilotInfo.PilotName + " acquired a Target Lock on obstacle");
             }
-            
+
             ActionsHolder.AcquireTargetLock(TargetShip, LockedShip, SelectShipSubPhase.FinishSelection, SelectShipSubPhase.FinishSelection, ignoreRange: true);
         }
 

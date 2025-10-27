@@ -27,7 +27,7 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Illicit,
                         UpgradeType.Missile,
-                        UpgradeType.Missile                        
+                        UpgradeType.Missile
                     },
                     seImageNumber: 169,
                     skinName: "N'dru Suhlak",
@@ -40,9 +40,16 @@ namespace Ship
         {
             public NdruSuhlakXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).Cost = 8;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile
+                };
             }
         }
     }

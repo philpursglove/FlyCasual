@@ -28,7 +28,7 @@ namespace UpgradesList.SecondEdition
     {
         public ExtremeManeuversXWA() : base()
         {
-            UpgradeInfo.Cost = 5;
+            UpgradeInfo.Cost = 3;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -15,7 +16,8 @@ namespace UpgradesList.SecondEdition
                     UpgradeType.Cannon
                 },
                 cost: 6,
-                weaponInfo: new SyncedLaserCannonsWeaponInfo(this)                
+                weaponInfo: new SyncedLaserCannonsWeaponInfo(this),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
 
@@ -26,20 +28,28 @@ namespace UpgradesList.SecondEdition
             {
                 HostUpgrade = hostUpgrade;
             }
-                
-            public override bool NoRangeBonus 
-            { 
-                get 
+
+            public override bool NoRangeBonus
+            {
+                get
                 {
                     if (Combat.AttackStep == CombatStep.Defence
                         && Combat.Attacker == HostUpgrade.HostShip
                         && HostUpgrade.HostShip.Tokens.HasToken<Tokens.CalculateToken>())
                         return true;
-                    else 
+                    else
                         return false;
-                } 
+                }
             }
-        
+        }
+    }
+
+    public class SyncedLaserCannonsXWA : SyncedLaserCannons
+    {
+        public SyncedLaserCannonsXWA() : base()
+        {
+            UpgradeInfo.Cost = 8;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -46,8 +46,8 @@ namespace Ship
         {
             public GrandInquisitorXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,
@@ -86,7 +86,7 @@ namespace Abilities.SecondEdition
             if (HostShip.State.Force < 1)
                 return;
 
-            if (Combat.ShotInfo.Range == 1)
+            if (Combat.ShotInfo.Range < 2 || Combat.ShotInfo.Range > 3)
                 return;
 
             RegisterAbilityTrigger(TriggerTypes.OnAttackStart, delegate
@@ -103,10 +103,7 @@ namespace Abilities.SecondEdition
 
         private void RegisterInquisitorDefenseAbility()
         {
-            if (HostShip.State.Force < 1)
-                return;
-
-            if (Combat.ShotInfo.Range > 1)
+            if (HostShip.State.Force < 1 || Combat.ShotInfo.Range != 1)
                 return;
 
             RegisterAbilityTrigger(TriggerTypes.OnAttackStart, delegate

@@ -7,50 +7,55 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class JekPorkins : T65XWing
     {
-        public class JekPorkins : T65XWing
+        public JekPorkins() : base()
         {
-            public JekPorkins() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jek Porkins",
-                    "Red Six",
-                    Faction.Rebel,
-                    4,
-                    5,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(JekPorkinsAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    seImageNumber: 5,
-                    skinName: "Jek Porkins",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Jek Porkins",
+                "Red Six",
+                Faction.Rebel,
+                4,
+                5,
+                15,
+                isLimited: true,
+                abilityType: typeof(JekPorkinsAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                seImageNumber: 5,
+                skinName: "Jek Porkins",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class JekPorkinsXWA : JekPorkins
+    public class JekPorkinsXWA : JekPorkins
+    {
+        public JekPorkinsXWA() : base()
         {
-            public JekPorkinsXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

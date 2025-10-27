@@ -6,50 +6,48 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ1AWing
 {
-    namespace SecondEdition.RZ1AWing
+    public class JakeFarrell : RZ1AWing
     {
-        public class JakeFarrell : RZ1AWing
+        public JakeFarrell() : base()
         {
-            public JakeFarrell() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jake Farrell",
-                    "Sage Instructor",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    11,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.JakeFarrellAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Jake Farrell",
+                "Sage Instructor",
+                Faction.Rebel,
+                4,
+                4,
+                11,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.JakeFarrellAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Missile,
                         UpgradeType.Modification,
                         UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
+                },
+                tags: new List<Tags>
+                {
                         Tags.AWing
-                    },
-                    seImageNumber: 19,
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+                },
+                seImageNumber: 19,
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class JakeFarrellXWA : JakeFarrell
+    public class JakeFarrellXWA : JakeFarrell
+    {
+        public JakeFarrellXWA() : base()
         {
-            public JakeFarrellXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
@@ -57,8 +55,7 @@ namespace Ship
                     UpgradeType.Missile,
                     UpgradeType.Configuration
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

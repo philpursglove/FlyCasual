@@ -51,19 +51,18 @@ namespace Ship.SecondEdition.SithInfiltrator
     {
         public CountDookuXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 6;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
+                    UpgradeType.Sensor,
                     UpgradeType.Modification,
                     UpgradeType.Device,
-                    UpgradeType.Cannon,
-                    UpgradeType.Torpedo,
                     UpgradeType.Title,
-                    UpgradeType.TacticalRelay,
                 };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
@@ -118,7 +117,8 @@ namespace Abilities.SecondEdition
 
             HostShip.State.SpendForce(
                 1,
-                delegate {
+                delegate
+                {
                     HostShip.AskPerformFreeAction(
                          HostShip.GetAvailableActions(),
                          Triggers.FinishTrigger,

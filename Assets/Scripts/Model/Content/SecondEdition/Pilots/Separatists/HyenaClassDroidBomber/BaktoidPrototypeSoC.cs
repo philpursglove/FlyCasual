@@ -32,7 +32,7 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
                 isStandardLayout: true,
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            
+
             MustHaveUpgrades.Add(typeof(HomingMissiles));
             MustHaveUpgrades.Add(typeof(ContingencyProtocol));
             MustHaveUpgrades.Add(typeof(StrutLockOverride));
@@ -45,7 +45,7 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
     {
         public BaktoidPrototypeSoCXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).Cost = 7;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }

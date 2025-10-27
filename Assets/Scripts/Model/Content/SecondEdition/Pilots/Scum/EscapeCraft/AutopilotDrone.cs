@@ -39,7 +39,7 @@ namespace Ship
         {
             public AutopilotDroneXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 1;
+                (PilotInfo as PilotCardInfo25).Cost = 3;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
@@ -96,6 +96,6 @@ namespace Abilities.SecondEdition
 
             Messages.ShowInfo("Autopilot Drone is destroyed");
             HostShip.DestroyShipForced(delegate { DealDamageToShips(sufferedShips, 1, true, Triggers.FinishTrigger); });
-        }        
+        }
     }
 }

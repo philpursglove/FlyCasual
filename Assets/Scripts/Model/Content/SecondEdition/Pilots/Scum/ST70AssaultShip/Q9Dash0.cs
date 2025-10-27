@@ -47,9 +47,19 @@ namespace Ship
         {
             public Q9Dash0XWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).Cost = 15;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                };
             }
         }
     }
@@ -102,7 +112,7 @@ namespace Abilities.SecondEdition
             if (action != null)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, GainStrainToken);
-            };
+            }
         }
 
         private void GainStrainToken(object sender, EventArgs e)

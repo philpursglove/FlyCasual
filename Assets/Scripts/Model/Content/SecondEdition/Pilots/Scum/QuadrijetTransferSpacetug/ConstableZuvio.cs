@@ -30,7 +30,7 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Tech,
                         UpgradeType.Device,
-                        UpgradeType.Device                        
+                        UpgradeType.Device
                     },
                     seImageNumber: 161,
                     legality: new List<Legality>() { Legality.ExtendedLegal }
@@ -42,9 +42,17 @@ namespace Ship
         {
             public ConstableZuvioXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Device
+                };
             }
         }
     }

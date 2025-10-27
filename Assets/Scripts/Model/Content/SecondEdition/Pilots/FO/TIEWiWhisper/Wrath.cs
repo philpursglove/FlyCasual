@@ -7,60 +7,57 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEWiWhisperModifiedInterceptor
 {
-    namespace SecondEdition.TIEWiWhisperModifiedInterceptor
+    public class Wrath : TIEWiWhisperModifiedInterceptor
     {
-        public class Wrath : TIEWiWhisperModifiedInterceptor
+        public Wrath() : base()
         {
-            public Wrath() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Wrath\"",
-                    "Herald of Destruction",
-                    Faction.FirstOrder,
-                    5,
-                    5,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.WrathPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class WrathXWA : Wrath
-        {
-            public WrathXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 17;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Wrath\"",
+                "Herald of Destruction",
+                Faction.FirstOrder,
+                5,
+                5,
+                15,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.WrathPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
-                    UpgradeType.Tech,
-                    UpgradeType.Tech,
                     UpgradeType.Cannon,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class WrathXWA : Wrath
+    {
+        public WrathXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Cannon,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -105,7 +102,7 @@ namespace Abilities.SecondEdition
         private bool HasOrangeOrRedeNonLockTokens()
         {
             if (HostShip.Tokens.CountTokensByColor(TokenColors.Orange) > 0) return true;
-            if (HostShip.Tokens.GetTokensByColor(TokenColors.Red).Count(n => !(n is RedTargetLockToken)) > 0) return true;
+            if (HostShip.Tokens.GetTokensByColor(TokenColors.Red).Count(n => n is not RedTargetLockToken) > 0) return true;
             return false;
         }
 
@@ -120,7 +117,7 @@ namespace Abilities.SecondEdition
         {
             bool result = false;
 
-            foreach (var ship in HostShip.Owner.EnemyShips.Values)
+            foreach (GenericShip ship in HostShip.Owner.EnemyShips.Values)
             {
                 if (Tools.IsSameShip(ship, OriginalDefender)) continue;
 

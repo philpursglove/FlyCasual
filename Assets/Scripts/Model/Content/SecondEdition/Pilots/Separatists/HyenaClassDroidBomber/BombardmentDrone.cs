@@ -40,13 +40,13 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
     {
         public BombardmentDroneXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                UpgradeType.Device,
-                UpgradeType.Device,
                 UpgradeType.Modification,
+                UpgradeType.Device,
+                UpgradeType.Device,
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }

@@ -3,7 +3,7 @@ using Content;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
-{ 
+{
     public class BoKatanKryzeRepublic : GenericUpgrade
     {
         public BoKatanKryzeRepublic()
@@ -11,7 +11,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Bo-Katan Kryze",
                 UpgradeType.Crew,
-                cost: 8,
+                cost: 6,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Republic),
                 abilityType: typeof(Abilities.SecondEdition.BoKatanKryzeRepublicSeparatistsAbility),

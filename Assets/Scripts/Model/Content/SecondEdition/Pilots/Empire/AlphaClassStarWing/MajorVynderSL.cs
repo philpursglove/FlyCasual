@@ -55,7 +55,7 @@ namespace Ship
         {
             public MajorVynderSLXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
+                (PilotInfo as PilotCardInfo25).Cost = 14;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
@@ -64,7 +64,7 @@ namespace Ship
 
 namespace UpgradesList.SecondEdition
 {
-    public class LongRangeScanners :GenericUpgrade
+    public class LongRangeScanners : GenericUpgrade
     {
         public LongRangeScanners() : base()
         {
@@ -140,8 +140,8 @@ namespace Abilities.SecondEdition
         {
             usedBonusAttack = true;
 
-            if(prevWeapon.WeaponType == WeaponTypes.Missile)
-            { 
+            if (prevWeapon.WeaponType == WeaponTypes.Missile)
+            {
                 RegisterAbilityTrigger(TriggerTypes.OnCombatCheckExtraAttack, PerformBonusAttack);
             }
 
@@ -260,7 +260,7 @@ namespace Abilities.SecondEdition
 
         public void RegisterHeavyPlasmaMissileAbility()
         {
-            if(Combat.ChosenWeapon == HostUpgrade)
+            if (Combat.ChosenWeapon == HostUpgrade)
             {
                 RegisterAbilityTrigger(
                     TriggerTypes.OnAttackHit,
@@ -271,7 +271,7 @@ namespace Abilities.SecondEdition
 
         public void RemoveTargetShield(object sender, EventArgs e)
         {
-            if(Combat.Defender != null && Combat.ChosenWeapon == HostUpgrade && Combat.Defender.State.ShieldsCurrent > 0)
+            if (Combat.Defender != null && Combat.ChosenWeapon == HostUpgrade && Combat.Defender.State.ShieldsCurrent > 0)
             {
                 DamageSourceEventArgs shieldDamage = new DamageSourceEventArgs()
                 {

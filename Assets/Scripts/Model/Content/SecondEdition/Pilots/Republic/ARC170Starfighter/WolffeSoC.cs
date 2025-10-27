@@ -21,7 +21,7 @@ namespace Ship
                     abilityType: typeof(Abilities.SecondEdition.WolffeAbility),
                     charges: 1,
                     extraUpgradeIcons: new List<UpgradeType>
-                    { 
+                    {
                         UpgradeType.Crew,
                         UpgradeType.Gunner,
                         UpgradeType.Gunner,
@@ -51,7 +51,7 @@ namespace Ship
         {
             public WolffeSoCXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

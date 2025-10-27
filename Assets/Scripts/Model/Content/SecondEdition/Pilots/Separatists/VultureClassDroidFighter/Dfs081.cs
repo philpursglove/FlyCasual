@@ -38,8 +38,8 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
     {
         public Dfs081XWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Modification,
@@ -64,7 +64,7 @@ namespace Abilities.SecondEdition
                 GetDiceModificationAiPriority,
                 DiceModificationType.Change,
                 0,
-                new List<DieSide> { DieSide.Crit }, 
+                new List<DieSide> { DieSide.Crit },
                 DieSide.Success,
                 DiceModificationTimingType.Opposite,
                 isGlobal: true,

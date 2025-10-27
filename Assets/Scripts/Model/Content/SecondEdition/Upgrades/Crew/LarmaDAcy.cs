@@ -1,11 +1,12 @@
-﻿using Ship;
-using Upgrade;
+﻿using Actions;
 using ActionsList;
+using Content;
+using Ship;
 using System;
 using System.Collections.Generic;
-using Actions;
-using UnityEngine;
 using Tokens;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,14 +20,28 @@ namespace UpgradesList.SecondEdition
                 cost: 4,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.LarmaDAcyAbility)
+                abilityType: typeof(Abilities.SecondEdition.LarmaDAcyAbility),
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Resistance,
                 new Vector2(261, 1)
             );
-        }        
+        }
+    }
+
+    public class LarmaDAcyXWA : LarmaDAcy
+    {
+        public LarmaDAcyXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

@@ -52,7 +52,7 @@ namespace Ship.SecondEdition.TIELnFighter
     {
         public ScytheBoEXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
@@ -74,7 +74,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(ref int value)
         {
-            if (Combat.ShotInfo.Range >= 1 && Combat.ShotInfo.Range <= 2 )
+            if (Combat.ShotInfo.Range >= 1 && Combat.ShotInfo.Range <= 2)
             {
                 Messages.ShowInfo(HostShip.PilotInfo.PilotName + ": The attack is at range 1-2, attacker gains +1 attack die");
                 value++;

@@ -1,5 +1,7 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -14,11 +16,19 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Tech,
                 cost: 6,
                 abilityType: typeof(Abilities.SecondEdition.PrimedThrustersAbility),
-                restriction: new BaseSizeRestriction(BaseSize.Small)
+                restriction: new BaseSizeRestriction(BaseSize.Small),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 //seImageNumber: 69
             );
+        }
+    }
 
-            
+    public class PrimedThrustersXWA : PrimedThrusters
+    {
+        public PrimedThrustersXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

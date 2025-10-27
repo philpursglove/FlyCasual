@@ -1,11 +1,12 @@
-﻿using Ship;
-using Upgrade;
+﻿using BoardTools;
+using Content;
+using Ship;
 using SubPhases;
 using System;
-using BoardTools;
 using System.Linq;
-using UnityEngine;
 using Tokens;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -21,14 +22,24 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Imperial),
                 addForce: 1,
                 abilityType: typeof(Abilities.SecondEdition.SeventhSisterCrewAbility),
-                seImageNumber: 121
+                seImageNumber: 121,
+                legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Imperial,
                 new Vector2(479, 6)
             );
-        }        
+        }
+    }
+
+    public class SeventhSisterXWA : SeventhSister
+    {
+        public SeventhSisterXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Ship;
 using SquadBuilderNS;
 using System;
@@ -20,7 +21,8 @@ namespace UpgradesList.SecondEdition
                 charges: 1,
                 regensCharges: true,
                 restriction: new FactionRestriction(Faction.Rebel, Faction.Scum, Faction.Imperial),
-                abilityType: typeof(Abilities.SecondEdition.TristanWrenCrewAbility)
+                abilityType: typeof(Abilities.SecondEdition.TristanWrenCrewAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
 
@@ -58,6 +60,15 @@ namespace UpgradesList.SecondEdition
             }
 
             return result;
+        }
+    }
+
+    public class TristanWrenXWA : TristanWren
+    {
+        public TristanWrenXWA() : base()
+        {
+            UpgradeInfo.Cost = 1;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

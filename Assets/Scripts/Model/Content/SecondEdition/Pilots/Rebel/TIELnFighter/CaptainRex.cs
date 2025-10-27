@@ -5,52 +5,55 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIELnFighter
 {
-    namespace SecondEdition.TIELnFighter
+    public class CaptainRex : TIELnFighter
     {
-        public class CaptainRex : TIELnFighter
+        public CaptainRex() : base()
         {
-            public CaptainRex() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Captain Rex",
-                    "Clone Wars Veteran",
-                    Faction.Rebel,
-                    2,
-                    3,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.CaptainRexPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Clone,
-                        Tags.Tie
-                    },
-                    seImageNumber: 48,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Captain Rex",
+                "Clone Wars Veteran",
+                Faction.Rebel,
+                2,
+                3,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.CaptainRexPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Clone,
+                    Tags.Tie
+                },
+                seImageNumber: 48,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ModelInfo.ModelName = "TIE Fighter Rebel";
-                ModelInfo.SkinName = "Rebel";
-            }
+            ModelInfo.ModelName = "TIE Fighter Rebel";
+            ModelInfo.SkinName = "Rebel";
         }
+    }
 
-        public class CaptainRexXWA : CaptainRex
+    public class CaptainRexXWA : CaptainRex
+    {
+        public CaptainRexXWA() : base()
         {
-            public CaptainRexXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Modification
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -3,62 +3,57 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIESfFighter
 {
-    namespace SecondEdition.TIESfFighter
+    public class CaptainPhasma : TIESfFighter
     {
-        public class CaptainPhasma : TIESfFighter
+        public CaptainPhasma() : base()
         {
-            public CaptainPhasma() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Captain Phasma",
-                    "Scyre Survivor",
-                    Faction.FirstOrder,
-                    4,
-                    4,
-                    6,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.CaptainPhasmaPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class CaptainPhasmaXWA: CaptainPhasma
-        {
-            public CaptainPhasmaXWA() : base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 9;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Captain Phasma",
+                "Scyre Survivor",
+                Faction.FirstOrder,
+                4,
+                4,
+                6,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.CaptainPhasmaPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Tech,
                     UpgradeType.Sensor,
+                    UpgradeType.Tech,
                     UpgradeType.Missile,
                     UpgradeType.Gunner,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class CaptainPhasmaXWA : CaptainPhasma
+    {
+        public CaptainPhasmaXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -5,26 +5,24 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Hwk290LightFreighter
 {
-    namespace SecondEdition.Hwk290LightFreighter
+    public class JanOrs : Hwk290LightFreighter
     {
-        public class JanOrs : Hwk290LightFreighter
+        public JanOrs() : base()
         {
-            public JanOrs() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jan Ors",
-                    "Espionage Expert",
-                    Faction.Rebel,
-                    5,
-                    6,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.JanOrsAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
+            PilotInfo = new PilotCardInfo25
+            (
+                "Jan Ors",
+                "Espionage Expert",
+                Faction.Rebel,
+                5,
+                6,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.JanOrsAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
                         UpgradeType.Talent,
                         UpgradeType.Crew,
                         UpgradeType.Device,
@@ -32,35 +30,32 @@ namespace Ship
                         UpgradeType.Modification,
                         UpgradeType.Modification,
                         UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
+                },
+                tags: new List<Tags>
+                {
                         Tags.Freighter
-                    },
-                    seImageNumber: 42,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+                },
+                seImageNumber: 42,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class JanOrsXWA : JanOrs
+    public class JanOrsXWA : JanOrs
+    {
+        public JanOrsXWA() : base()
         {
-            public JanOrsXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Crew,
                     UpgradeType.Modification,
-                    UpgradeType.Modification,
-                    UpgradeType.Device,
                     UpgradeType.Device,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

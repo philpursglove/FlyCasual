@@ -30,15 +30,15 @@ namespace UpgradesList.SecondEdition
             Avatar = new AvatarInfo(
                 Faction.Separatists,
                 new Vector2(209, 1)
-            );            
-        }        
+            );
+        }
     }
 
     public class KrakenXWA : Kraken
     {
         public KrakenXWA() : base()
         {
-            UpgradeInfo.Cost = 6;
+            UpgradeInfo.Cost = 7;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }

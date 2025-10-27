@@ -41,11 +41,13 @@ namespace Ship
         {
             public ShadowSquadronVeteranXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
+                    UpgradeType.Talent,
                     UpgradeType.Astromech,
+                    UpgradeType.Gunner,
                     UpgradeType.Modification,
                     UpgradeType.Device,
                     UpgradeType.Turret,

@@ -47,9 +47,17 @@ namespace Ship
         {
             public DeathfireXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Device,
+                    UpgradeType.Missile,
+                    UpgradeType.Torpedo
+                };
             }
         }
     }
@@ -105,7 +113,8 @@ namespace Abilities.SecondEdition
             DecisionSubPhase.ConfirmDecisionNoCallback();
             GenericShip AttackerBeforeAbility = Combat.Attacker;
             GenericShip DefenderBeforeAbility = Combat.Defender;
-            Combat.StartSelectAttackTarget(HostShip, () => {
+            Combat.StartSelectAttackTarget(HostShip, () =>
+            {
                 Combat.Attacker = AttackerBeforeAbility;
                 Combat.Defender = DefenderBeforeAbility;
                 Triggers.FinishTrigger();
@@ -120,6 +129,6 @@ namespace Abilities.SecondEdition
             Triggers.ResolveTriggers(TriggerTypes.OnAbilityDirect, Triggers.FinishTrigger);
         }
 
-        private class DeathfireAbilityDecision: DecisionSubPhase { };
+        private class DeathfireAbilityDecision : DecisionSubPhase { };
     }
 }

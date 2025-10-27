@@ -28,7 +28,7 @@ namespace UpgradesList.SecondEdition
                 seImageNumber: 36,
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
     }
 
     public class BarrageRocketsXWA : BarrageRockets
@@ -37,6 +37,7 @@ namespace UpgradesList.SecondEdition
         {
             UpgradeInfo.Cost = 8;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Limited = 2;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -20,11 +21,21 @@ namespace UpgradesList.SecondEdition
                     charges: 1
                 ),
                 abilityType: typeof(Abilities.SecondEdition.AdvProtonTorpedoesAbility),
-                seImageNumber: 33
+                seImageNumber: 33,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             NameCanonical = "advprotontorpedoes";
-        }        
+        }
+    }
+
+    public class AdvProtonTorpedoesXWA : AdvProtonTorpedoes
+    {
+        public AdvProtonTorpedoesXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

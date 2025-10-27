@@ -43,9 +43,15 @@ namespace Ship
         {
             public QuinnJastXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification
+                };
             }
         }
     }
@@ -77,14 +83,15 @@ namespace Abilities.SecondEdition
         {
             return HostShip.UpgradeBar.GetUpgradesAll()
                 .Where(upgrade => upgrade.State.UsesCharges && !upgrade.UpgradeInfo.CannotBeRecharged && upgrade.State.Charges < upgrade.State.MaxCharges)
-                .ToList();            
+                .ToList();
         }
 
         private void UseQuinnJastAbility(object sender, System.EventArgs e)
         {
             var upgrades = GetUpgradesSpentCharges();
 
-            if (upgrades.Any()) {
+            if (upgrades.Any())
+            {
 
                 var phase = Phases.StartTemporarySubPhaseNew<DecisionSubPhase>(
                     HostName + ": Select upgrade to recover 1 charge",
@@ -96,7 +103,8 @@ namespace Abilities.SecondEdition
 
                 upgrades.ForEach(upgrade =>
                 {
-                    phase.AddDecision(upgrade.UpgradeInfo.Name, delegate {
+                    phase.AddDecision(upgrade.UpgradeInfo.Name, delegate
+                    {
                         DecisionSubPhase.ConfirmDecisionNoCallback();
                         upgrade.State.RestoreCharge();
                         HostShip.Tokens.AssignToken(typeof(WeaponsDisabledToken), Triggers.FinishTrigger);

@@ -7,51 +7,23 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEWiWhisperModifiedInterceptor
 {
-    namespace SecondEdition.TIEWiWhisperModifiedInterceptor
+    public class Whirlwind : TIEWiWhisperModifiedInterceptor
     {
-        public class Whirlwind : TIEWiWhisperModifiedInterceptor
+        public Whirlwind() : base()
         {
-            public Whirlwind() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Whirlwind\"",
-                    "Reap What You Sow",
-                    Faction.FirstOrder,
-                    3,
-                    4,
-                    12,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.WhirlwindPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class WhirlwindXWA : Whirlwind
-        {
-            public WhirlwindXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 5;
-                pilot.LoadoutValue = 20;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Whirlwind\"",
+                "Reap What You Sow",
+                Faction.FirstOrder,
+                3,
+                4,
+                12,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.WhirlwindPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
@@ -59,8 +31,33 @@ namespace Ship
                     UpgradeType.Tech,
                     UpgradeType.Tech,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class WhirlwindXWA : Whirlwind
+    {
+        public WhirlwindXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -109,7 +106,7 @@ namespace Abilities.SecondEdition
                 subphase.ImageSource = HostShip;
 
                 subphase.AddDecision("Remove all", delegate { DoRemoveJamTokens(jamTokensCount, callback); });
-                subphase.AddDecision("Leave 1", delegate { DoRemoveJamTokens(jamTokensCount-1, callback); });
+                subphase.AddDecision("Leave 1", delegate { DoRemoveJamTokens(jamTokensCount - 1, callback); });
 
                 subphase.DefaultDecisionName = subphase.GetDecisions().First().Name;
                 subphase.DecisionOwner = HostShip.Owner;
@@ -122,7 +119,7 @@ namespace Abilities.SecondEdition
         {
             Messages.ShowInfo($"{HostShip.PilotInfo.PilotName}: {count} Jam token(s) are removed");
 
-            List<GenericToken> tokensToRemove = HostShip.Tokens.GetAllTokens().Where( n => n is JamToken).Take(count).ToList();
+            List<GenericToken> tokensToRemove = HostShip.Tokens.GetAllTokens().Where(n => n is JamToken).Take(count).ToList();
             HostShip.Tokens.RemoveTokens(tokensToRemove, callback);
         }
 
@@ -157,7 +154,7 @@ namespace Abilities.SecondEdition
                 (
                     HostShip.PilotInfo.PilotName,
                     AlwaysUseByDefault,
-                    delegate { DoGetFocusTokens(count);},
+                    delegate { DoGetFocusTokens(count); },
                     showAlwaysUseOption: true,
                     descriptionLong: $"Do you want to get {count} Focus Token(s)?",
                     imageHolder: HostShip,
@@ -169,7 +166,7 @@ namespace Abilities.SecondEdition
         private void DoGetFocusTokens(int count)
         {
             DecisionSubPhase.ConfirmDecisionNoCallback();
-            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} gains {count} Focus Token{(count > 1 ? "s": "")}");
+            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} gains {count} Focus Token{(count > 1 ? "s" : "")}");
             HostShip.Tokens.AssignTokens(CreateFocusToken, count, Triggers.FinishTrigger);
         }
 

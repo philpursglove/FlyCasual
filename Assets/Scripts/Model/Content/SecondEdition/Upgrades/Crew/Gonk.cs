@@ -1,6 +1,7 @@
-﻿using System;
-using ActionsList;
+﻿using ActionsList;
+using Content;
 using Ship;
+using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
 
@@ -16,7 +17,12 @@ namespace UpgradesList.SecondEdition
                 cost: 5,
                 abilityType: typeof(Abilities.SecondEdition.GonkCrewAbility),
                 charges: 1,
-                seImageNumber: 43
+                seImageNumber: 43,
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
 
             Avatar = new AvatarInfo(
@@ -24,7 +30,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(342, 2),
                 new Vector2(200, 200)
             );
-        }        
+        }
+    }
+
+    public class GonkXWA : Gonk
+    {
+        public GonkXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -64,7 +79,7 @@ namespace Abilities.SecondEdition
                     Name = "Gonk: Spend 1 charge to recover 1 shield"
                 });
             }
-            
+
             if (HostUpgrade.State.Charges == 0)
             {
                 ship.AddAvailableAction(new RecoverChargeAction()
@@ -78,7 +93,7 @@ namespace Abilities.SecondEdition
         }
 
         private class RecoverChargeAction : GenericAction
-        {            
+        {
             public override void ActionTake()
             {
                 if (Source.State.Charges == 0)

@@ -1,11 +1,10 @@
-﻿using Upgrade;
-using System.Collections.Generic;
-using ActionsList;
-using Ship;
-using System;
+﻿using BoardTools;
 using Bombs;
-using BoardTools;
+using Content;
 using Movement;
+using System;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -23,7 +22,8 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Separatists),
                 abilityType: typeof(Abilities.SecondEdition.Drk1ProbeDroidsAbility),
-                remoteType: typeof(Remote.Drk1ProbeDroid)
+                remoteType: typeof(Remote.Drk1ProbeDroid),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
 
@@ -50,6 +50,15 @@ namespace UpgradesList.SecondEdition
                 new ManeuverTemplate(ManeuverBearing.Turn, ManeuverDirection.Right, ManeuverSpeed.Speed3)
             };
 
+        }
+    }
+
+    public class Drk1ProbeDroidsXWA : Drk1ProbeDroids
+    {
+        public Drk1ProbeDroidsXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -108,7 +117,8 @@ namespace Abilities.SecondEdition
 
             Triggers.ResolveTriggers(
                 TriggerTypes.OnAbilityDirect,
-                delegate {
+                delegate
+                {
                     HostUpgrade.State.SpendCharge();
                     Triggers.FinishTrigger();
                 }

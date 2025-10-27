@@ -1,9 +1,7 @@
-﻿using BoardTools;
+﻿using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -19,8 +17,18 @@ namespace UpgradesList.SecondEdition
                 restriction: new BaseSizeRestriction(BaseSize.Medium, BaseSize.Large),
                 abilityType: typeof(Abilities.SecondEdition.AblativePlatingAbility),
                 charges: 2,
-                seImageNumber: 68
+                seImageNumber: 68,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class AblativePlatingXWA : AblativePlating
+    {
+        public AblativePlatingXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

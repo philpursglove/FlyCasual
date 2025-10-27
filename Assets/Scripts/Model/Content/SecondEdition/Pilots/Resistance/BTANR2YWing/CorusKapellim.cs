@@ -7,63 +7,60 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.BTANR2YWing
 {
-    namespace SecondEdition.BTANR2YWing
+    public class CorusKapellim : BTANR2YWing
     {
-        public class CorusKapellim : BTANR2YWing
+        public CorusKapellim() : base()
         {
-            public CorusKapellim() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Corus Kapellim",
-                    "\"Gentleman Flyer\"",
-                    Faction.Resistance,
-                    1,
-                    3,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.CorusKapellimAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Astromech,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Turret,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.YWing
-                    },
-                    skinName: "Blue",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class CorusKapellimXWA : CorusKapellim
-        {
-            public CorusKapellimXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Corus Kapellim",
+                "\"Gentleman Flyer\"",
+                Faction.Resistance,
+                1,
+                3,
+                8,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.CorusKapellimAbility),
+                extraUpgradeIcons: new List<UpgradeType>
                 {
-                        UpgradeType.Astromech,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Device,
-                        UpgradeType.Turret
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.YWing
+                },
+                skinName: "Blue",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class CorusKapellimXWA : CorusKapellim
+    {
+        public CorusKapellimXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Device,
+                    UpgradeType.Turret
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -132,7 +129,6 @@ namespace Abilities.SecondEdition
         {
             SelectShipSubPhase.FinishSelectionNoCallback();
 
-            GenericShip sufferedShip = TargetShip;
             List<GenericToken> sufferedTokens = TargetShip.Tokens.GetTokensByColor(TokenColors.Green);
 
             if (sufferedTokens.Count == 1)
@@ -164,7 +160,8 @@ namespace Abilities.SecondEdition
 
             TargetShip.Tokens.RemoveToken(
                 token,
-                delegate {
+                delegate
+                {
                     HostShip.Tokens.AssignToken(
                         token.GetType(),
                         Triggers.FinishTrigger
@@ -194,9 +191,10 @@ namespace Abilities.SecondEdition
                     subphase.AddDecision
                     (
                         token.Name,
-                        delegate {
+                        delegate
+                        {
                             DecisionSubPhase.ConfirmDecisionNoCallback();
-                            TakeToken(token); 
+                            TakeToken(token);
                         }
                     );
                 }
@@ -208,6 +206,5 @@ namespace Abilities.SecondEdition
         }
 
         private class WhichTokenDecisionSubphase : DecisionSubPhase { }
-
     }
 }

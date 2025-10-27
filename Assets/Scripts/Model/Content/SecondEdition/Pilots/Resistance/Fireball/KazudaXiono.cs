@@ -2,47 +2,54 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Fireball
 {
-    namespace SecondEdition.Fireball
+    public class KazudaXiono : Fireball
     {
-        public class KazudaXiono : Fireball
+        public KazudaXiono() : base()
         {
-            public KazudaXiono() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Kazuda Xiono",
-                    "Best Pilot in the Galaxy",
-                    Faction.Resistance,
-                    4,
-                    4,
-                    14,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.KazudaXionoAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Title
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Kazuda Xiono",
+                "Best Pilot in the Galaxy",
+                Faction.Resistance,
+                4,
+                4,
+                14,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.KazudaXionoAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class KazudaXionoXWA : KazudaXiono
+    public class KazudaXionoXWA : KazudaXiono
+    {
+        public KazudaXionoXWA() : base()
         {
-            public KazudaXionoXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -43,9 +43,16 @@ namespace Ship.SecondEdition.V19TorrentStarfighter
     {
         public SlammerXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+            };
+
         }
     }
 }
@@ -93,7 +100,8 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             RegisterAbilityTrigger(
                 TriggerTypes.OnFreeAction,
-                delegate {
+                delegate
+                {
                     HostShip.SpendCharges(2);
                     Triggers.FinishTrigger();
                 }

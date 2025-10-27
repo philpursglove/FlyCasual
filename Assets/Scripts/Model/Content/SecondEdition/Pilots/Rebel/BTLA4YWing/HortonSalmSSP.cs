@@ -33,13 +33,23 @@ namespace Ship.SecondEdition.BTLA4YWing
                     Tags.YWing
                 },
                 skinName: "Gray",
-                isStandardLayout: true
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             MustHaveUpgrades.Add(typeof(IonCannonTurret));
             MustHaveUpgrades.Add(typeof(ProximityMines));
 
             PilotNameCanonical = "hortonsalm-swz106";
+        }
+    }
+
+    public class HortonSalmSSPXWA : HortonSalmSSP
+    {
+        public HortonSalmSSPXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

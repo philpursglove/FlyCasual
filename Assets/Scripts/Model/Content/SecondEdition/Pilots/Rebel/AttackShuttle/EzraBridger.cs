@@ -32,7 +32,7 @@ namespace Ship.SecondEdition.AttackShuttle
                 tags: new List<Tags>
                 {
                     Tags.LightSide,
-                    Tags.Spectre                        
+                    Tags.Spectre
                 },
                 legality: new List<Legality>() { Legality.ExtendedLegal }
             );
@@ -43,8 +43,8 @@ namespace Ship.SecondEdition.AttackShuttle
     {
         public EzraBridgerXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
                 UpgradeType.ForcePower,

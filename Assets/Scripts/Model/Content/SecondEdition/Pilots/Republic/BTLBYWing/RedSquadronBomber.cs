@@ -40,14 +40,16 @@ namespace Ship
         {
             public RedSquadronBomberXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
+                (PilotInfo as PilotCardInfo25).Cost = 8;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                         UpgradeType.Astromech,
+                        UpgradeType.Gunner,
+                        UpgradeType.Modification,
                         UpgradeType.Device,
                         UpgradeType.Turret,
-                        UpgradeType.Torpedo                        
+                        UpgradeType.Torpedo
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }

@@ -1,5 +1,7 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -15,8 +17,19 @@ namespace UpgradesList.SecondEdition
                 cost: 7,
                 abilityType: typeof(Abilities.SecondEdition.JukeAbility),
                 restriction: new BaseSizeRestriction(BaseSize.Small, BaseSize.Medium),
-                seImageNumber: 8
+                seImageNumber: 8,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class JukeXWA : Juke
+    {
+        public JukeXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 2;
         }
     }
 }

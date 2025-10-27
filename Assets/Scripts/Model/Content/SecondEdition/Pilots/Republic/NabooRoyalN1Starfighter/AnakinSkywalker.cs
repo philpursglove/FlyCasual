@@ -48,11 +48,12 @@ namespace Ship
         {
             public AnakinSkywalkerXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 12;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,
+                    UpgradeType.Talent,
                     UpgradeType.Astromech,
                     UpgradeType.Sensor,
                     UpgradeType.Modification,
@@ -123,7 +124,7 @@ namespace Abilities.SecondEdition
                         isForced: true
                     );
                 }
-            );            
+            );
         }
     }
 }

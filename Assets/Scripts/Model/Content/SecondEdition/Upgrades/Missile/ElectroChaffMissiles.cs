@@ -42,7 +42,7 @@ namespace UpgradesList.SecondEdition
 
         public override List<ManeuverTemplate> GetDefaultLaunchTemplates()
         {
-           return new List<ManeuverTemplate>()
+            return new List<ManeuverTemplate>()
             {
                 new (ManeuverBearing.Straight, ManeuverDirection.Forward, ManeuverSpeed.Speed4),
                 new (ManeuverBearing.Bank, ManeuverDirection.Left, ManeuverSpeed.Speed3),
@@ -84,7 +84,7 @@ namespace UpgradesList.SecondEdition
     {
         public ElectroChaffMissilesXWA() : base()
         {
-            UpgradeInfo.Cost = 11;
+            UpgradeInfo.Cost = 10;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }

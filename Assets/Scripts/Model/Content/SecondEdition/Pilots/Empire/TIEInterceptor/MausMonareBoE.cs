@@ -58,7 +58,7 @@ namespace Ship
             public MausMonareBoEXWA() : base()
             {
                 var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 4;
+                pilot.Cost = 11;
                 pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

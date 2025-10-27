@@ -3,49 +3,54 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ2AWing
 {
-    namespace SecondEdition.RZ2AWing
+    public class LuloLampar : RZ2AWing
     {
-        public class LuloLampar : RZ2AWing
+        public LuloLampar() : base()
         {
-            public LuloLampar() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "L'ulo L'ampar",
-                    "Luminous Mentor",
-                    Faction.Resistance,
-                    5,
-                    4,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LuloLamparAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "L'ulo L'ampar",
+                "Luminous Mentor",
+                Faction.Resistance,
+                5,
+                4,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LuloLamparAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class LuloLamparXWA : LuloLampar
+    public class LuloLamparXWA : LuloLampar
+    {
+        public LuloLamparXWA() : base()
         {
-            public LuloLamparXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

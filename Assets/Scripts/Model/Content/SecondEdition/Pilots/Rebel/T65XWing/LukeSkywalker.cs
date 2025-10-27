@@ -3,63 +3,60 @@ using Content;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class LukeSkywalker : T65XWing
     {
-        public class LukeSkywalker : T65XWing
+        public LukeSkywalker() : base()
         {
-            public LukeSkywalker() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Luke Skywalker",
-                    "Red Five",
-                    Faction.Rebel,
-                    5,
-                    6,
-                    24,
-                    isLimited: true,
-                    abilityType: typeof(LukeSkywalkerAbility),
-                    force: 2,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.LightSide,
-                        Tags.XWing
-                    },
-                    seImageNumber: 2,
-                    skinName: "Luke Skywalker",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LukeSkywalkerXWA : LukeSkywalker
-        {
-            public LukeSkywalkerXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Luke Skywalker",
+                "Red Five",
+                Faction.Rebel,
+                5,
+                6,
+                24,
+                isLimited: true,
+                abilityType: typeof(LukeSkywalkerAbility),
+                force: 2,
+                extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,
-                    UpgradeType.ForcePower,
+                    UpgradeType.Talent,
+                    UpgradeType.Torpedo,
                     UpgradeType.Astromech,
                     UpgradeType.Modification,
-                    UpgradeType.Torpedo,
                     UpgradeType.Configuration
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.LightSide,
+                    Tags.XWing
+                },
+                seImageNumber: 2,
+                skinName: "Luke Skywalker",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LukeSkywalkerXWA : LukeSkywalker
+    {
+        public LukeSkywalkerXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.ForcePower,
+                UpgradeType.ForcePower,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -45,10 +45,11 @@ namespace Ship
         {
             public SoontirFelXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 0;
+                (PilotInfo as PilotCardInfo25).Cost = 12;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
+                        UpgradeType.Talent,
                         UpgradeType.Talent,
                         UpgradeType.Modification,
                         UpgradeType.Configuration

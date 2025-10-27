@@ -45,9 +45,16 @@ namespace Ship
         {
             public TorPhunXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                };
             }
         }
     }
@@ -109,7 +116,7 @@ namespace Abilities.SecondEdition
             HostShip.OnCanPerformActionWhileStressed -= TemporaryAllowAnyActionsWhileStressed;
             HostShip.OnCheckCanPerformActionsWhileStressed -= TemporaryAllowActionsWhileStressed;
             HostShip.OnActionIsPerformed -= DisallowActionsWhileStressed;
-            HostShip.OnActionIsSkipped-= DisallowActionsWhileStressedAlt;
+            HostShip.OnActionIsSkipped -= DisallowActionsWhileStressedAlt;
         }
 
         private void DisallowActionsWhileStressedAlt(GenericShip ship)

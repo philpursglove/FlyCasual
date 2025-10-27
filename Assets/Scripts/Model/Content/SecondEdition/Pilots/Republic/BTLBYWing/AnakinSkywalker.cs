@@ -49,13 +49,15 @@ namespace Ship
         {
             public AnakinSkywalkerXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
                     UpgradeType.Astromech,
                     UpgradeType.Gunner,
+                    UpgradeType.Modification,
                     UpgradeType.Device,
                     UpgradeType.Turret,
                     UpgradeType.Torpedo

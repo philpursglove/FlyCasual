@@ -41,9 +41,15 @@ namespace Ship.SecondEdition.V19TorrentStarfighter
     {
         public TuckerXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).Cost = 8;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+            };
         }
     }
 }
@@ -67,7 +73,7 @@ namespace Abilities.SecondEdition
         {
             var range = new BoardTools.DistanceInfo(HostShip, Combat.Attacker).Range;
 
-            if (Combat.Attacker.Owner == HostShip.Owner 
+            if (Combat.Attacker.Owner == HostShip.Owner
                 && Combat.Defender.Owner != HostShip.Owner
                 && HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Front)
                 && range >= 1 && range <= 2)
@@ -83,7 +89,8 @@ namespace Abilities.SecondEdition
 
             HostShip.AskPerformFreeAction(
                 new FocusAction(),
-                () => {
+                () =>
+                {
                     Selection.ChangeActiveShip(previousActiveShip);
                     Triggers.FinishTrigger();
                 },

@@ -44,18 +44,19 @@ namespace Ship.SecondEdition.TIEWiWhisperModifiedInterceptor
     {
         public NightfallXWA() : base()
         {
-            var pilot = (PilotCardInfo25)PilotInfo;
-            pilot.Cost = 4;
-            pilot.LoadoutValue = 11;
-            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-            pilot.ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
                 UpgradeType.Missile,
-                UpgradeType.Tech,
-                UpgradeType.Tech,
                 UpgradeType.Configuration
             };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -65,7 +66,7 @@ namespace Abilities.SecondEdition
     public class NightfallPilotAbility : GenericAbility
     {
         private GenericShip SufferedShip;
-        
+
         public override void ActivateAbility()
         {
             HostShip.OnMovementFinishSuccessfully += RegisterAssignJamToShipsInFlightPath;

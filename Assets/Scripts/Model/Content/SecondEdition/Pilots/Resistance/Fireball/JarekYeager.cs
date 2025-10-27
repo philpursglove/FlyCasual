@@ -2,48 +2,55 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.Fireball
 {
-    namespace SecondEdition.Fireball
+    public class JarekYeager : Fireball
     {
-        public class JarekYeager : Fireball
+        public JarekYeager() : base()
         {
-            public JarekYeager() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Jarek Yeager",
-                    "Too Old for This",
-                    Faction.Resistance,
-                    5,
-                    3,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.JarekYeagerAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Astromech,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Missile,
-                        UpgradeType.Title
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Jarek Yeager",
+                "Too Old for This",
+                Faction.Resistance,
+                5,
+                3,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.JarekYeagerAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Missile,
+                    UpgradeType.Title
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class JarekYeagerXWA : JarekYeager
+    public class JarekYeagerXWA : JarekYeager
+    {
+        public JarekYeagerXWA() : base()
         {
-            public JarekYeagerXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

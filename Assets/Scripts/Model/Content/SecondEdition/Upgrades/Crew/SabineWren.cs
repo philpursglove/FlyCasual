@@ -33,14 +33,14 @@ namespace UpgradesList.SecondEdition
                 Faction.Rebel,
                 new Vector2(474, 13)
             );
-        }        
+        }
     }
 
     public class SabineWrenXWA : SabineWren
     {
         public SabineWrenXWA() : base()
         {
-            UpgradeInfo.Cost = 5;
+            UpgradeInfo.Cost = 6;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }

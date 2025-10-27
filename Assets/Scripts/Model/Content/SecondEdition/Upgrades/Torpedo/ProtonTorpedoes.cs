@@ -25,7 +25,7 @@ namespace UpgradesList.SecondEdition
                 seImageNumber: 35,
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
     }
 
     public class ProtonTorpedoesXWA : ProtonTorpedoes
@@ -34,6 +34,7 @@ namespace UpgradesList.SecondEdition
         {
             UpgradeInfo.Cost = 14;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Limited = 3;
         }
     }
 }

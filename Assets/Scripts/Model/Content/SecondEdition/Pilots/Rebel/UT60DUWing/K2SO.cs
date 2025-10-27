@@ -6,51 +6,56 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UT60DUWing
 {
-    namespace SecondEdition.UT60DUWing
+    public class K2SO : UT60DUWing
     {
-        public class K2SO : UT60DUWing
+        public K2SO() : base()
         {
-            public K2SO() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "K-2SO",
-                    "Cassian Said I Had To",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(K2SOPilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Sensor,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Droid
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "K-2SO",
+                "Cassian Said I Had To",
+                Faction.Rebel,
+                3,
+                5,
+                10,
+                isLimited: true,
+                abilityType: typeof(K2SOPilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Droid
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipInfo.ActionIcons.SwitchToDroidActions();
-            }
+            ShipInfo.ActionIcons.SwitchToDroidActions();
         }
+    }
 
-        public class K2SOXWA : K2SO
+    public class K2SOXWA : K2SO
+    {
+        public K2SOXWA() : base()
         {
-            public K2SOXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

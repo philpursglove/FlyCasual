@@ -8,62 +8,58 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEVnSilencer
 {
-    namespace SecondEdition.TIEVnSilencer
+    public class KyloRen : TIEVnSilencer
     {
-        public class KyloRen : TIEVnSilencer
+        public KyloRen() : base()
         {
-            public KyloRen() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Kylo Ren",
-                    "Tormented Apprentice",
-                    Faction.FirstOrder,
-                    5,
-                    7,
-                    24,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.KyloRenPilotAbility),
-                    force: 2,
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.ForcePower,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Missile,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.DarkSide,
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class KyloRenXWA : KyloRen
-        {
-            public KyloRenXWA() : base()
-            {
-                var pilot = (PilotCardInfo25)PilotInfo;
-                pilot.Cost = 6;
-                pilot.LoadoutValue = 8;
-                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Kylo Ren",
+                "Tormented Apprentice",
+                Faction.FirstOrder,
+                5,
+                7,
+                24,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.KyloRenPilotAbility),
+                force: 2,
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.ForcePower,
-                    UpgradeType.ForcePower,
+                    UpgradeType.Talent,
                     UpgradeType.Tech,
                     UpgradeType.Torpedo,
                     UpgradeType.Missile,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.DarkSide,
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class KyloRenXWA : KyloRen
+    {
+        public KyloRenXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 16;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.ForcePower,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile,
+                UpgradeType.Torpedo,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -128,7 +124,7 @@ namespace Abilities.SecondEdition
             );
 
             List<GenericDamageCard> opponentDeck = DamageDecks.GetDamageDeck(Roster.AnotherPlayer(HostShip.Owner.PlayerNo)).Deck;
-            foreach (var card in opponentDeck.Where(n => n.Type == CriticalCardType.Pilot))
+            foreach (GenericDamageCard card in opponentDeck.Where(n => n.Type == CriticalCardType.Pilot))
             {
                 Decision existingDecision = selectPilotCritSubphase.GetDecisions().Find(n => n.Name == card.Name);
                 if (existingDecision == null)
@@ -209,7 +205,7 @@ namespace Abilities.FirstEdition
             );
 
             List<GenericDamageCard> opponentDeck = DamageDecks.GetDamageDeck(Roster.AnotherPlayer(HostShip.Owner.PlayerNo)).Deck;
-            foreach (var card in opponentDeck.Where(n => n.Type == CriticalCardType.Pilot))
+            foreach (GenericDamageCard card in opponentDeck.Where(n => n.Type == CriticalCardType.Pilot))
             {
                 Decision existingDecision = selectPilotCritSubphase.GetDecisions().Find(n => n.Name == card.Name);
                 if (existingDecision == null)

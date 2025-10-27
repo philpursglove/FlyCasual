@@ -33,7 +33,9 @@ namespace Ship
                         UpgradeType.Missile,
                         UpgradeType.Missile,
                         UpgradeType.Device
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+
                 );
                 PilotNameCanonical = "captainjonus-swz98";
 
@@ -45,6 +47,16 @@ namespace Ship
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(ReloadAction), ActionColor.White));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/captainjonus-swz98.png";
+            }
+        }
+
+        public class CaptainJonusTBEXWA : CaptainJonusTBE
+        {
+            public CaptainJonusTBEXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 11;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

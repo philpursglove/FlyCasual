@@ -37,18 +37,19 @@ namespace Ship.SecondEdition.BTLS8KWing
             );
         }
     }
-        
+
     public class EsegeTuketuXWA : EsegeTuketu
     {
         public EsegeTuketuXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 12;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
                 UpgradeType.Crew,
                 UpgradeType.Gunner,
                 UpgradeType.Modification,
+                UpgradeType.Device,
                 UpgradeType.Device,
                 UpgradeType.Missile,
                 UpgradeType.Missile,

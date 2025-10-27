@@ -6,52 +6,58 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ2AWing
 {
-    namespace SecondEdition.RZ2AWing
+    public class ZiziTlo : RZ2AWing
     {
-        public class ZiziTlo : RZ2AWing
+        public ZiziTlo() : base()
         {
-            public ZiziTlo() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Zizi Tlo",
-                    "Committed to the Cause",
-                    Faction.Resistance,
-                    5,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.ZiziTloAbility),
-                    charges: 1,
-                    regensCharges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Zizi Tlo",
+                "Committed to the Cause",
+                Faction.Resistance,
+                5,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.ZiziTloAbility),
+                charges: 1,
+                regensCharges: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class ZiziTloXWA : ZiziTlo
+    public class ZiziTloXWA : ZiziTlo
+    {
+        public ZiziTloXWA() : base()
         {
-            public ZiziTloXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -83,7 +89,7 @@ namespace Abilities.SecondEdition
         {
             if (HostShip.State.Charges > 0)
             {
-                var decisionSubPhase = Phases.StartTemporarySubPhaseNew<DecisionSubPhase>(
+                DecisionSubPhase decisionSubPhase = Phases.StartTemporarySubPhaseNew<DecisionSubPhase>(
                     Name,
                     Triggers.FinishTrigger
                 );
@@ -92,13 +98,15 @@ namespace Abilities.SecondEdition
 
                 decisionSubPhase.AddDecision(
                     "Focus",
-                    delegate {
+                    delegate
+                    {
                         GainToken("Focus");
                     }
                 );
                 decisionSubPhase.AddDecision(
                      "Evade",
-                     delegate {
+                     delegate
+                     {
                          GainToken("Evade");
                      }
                  );
@@ -120,7 +128,7 @@ namespace Abilities.SecondEdition
             DecisionSubPhase.ConfirmDecisionNoCallback();
             if (HostShip.State.Charges > 0)
             {
-                var tokenType = tokenName == "Focus" ? typeof(FocusToken) : typeof(EvadeToken);
+                Type tokenType = tokenName == "Focus" ? typeof(FocusToken) : typeof(EvadeToken);
 
                 Messages.ShowInfo(HostName + " gains 1 " + tokenName + " token");
                 HostShip.State.Charges--;

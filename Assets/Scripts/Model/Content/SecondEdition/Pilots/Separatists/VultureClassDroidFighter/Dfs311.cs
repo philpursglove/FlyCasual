@@ -41,11 +41,10 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
     {
         public Dfs311XWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 2;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 2;
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
-                    UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Missile,
                     UpgradeType.Configuration

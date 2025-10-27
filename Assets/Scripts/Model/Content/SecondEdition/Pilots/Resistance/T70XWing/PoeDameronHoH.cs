@@ -6,56 +6,63 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class PoeDameronHoH : T70XWing
     {
-        public class PoeDameronHoH : T70XWing
+        public PoeDameronHoH() : base()
         {
-            public PoeDameronHoH() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Poe Dameron",
-                    "Resistance Commander",
-                    Faction.Resistance,
-                    6,
-                    6,
-                    19,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.PoeDameronHoHAbility),
-                    charges: 2,
-                    regensCharges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    skinName: "Poe Dameron (RoS)",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Poe Dameron",
+                "Resistance Commander",
+                Faction.Resistance,
+                6,
+                6,
+                19,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.PoeDameronHoHAbility),
+                charges: 2,
+                regensCharges: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                skinName: "Poe Dameron (RoS)",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "poedameron-swz68";
-            }
+            PilotNameCanonical = "poedameron-swz68";
         }
+    }
 
-        public class PoeDameronHoHXWA : PoeDameronHoH
+    public class PoeDameronHoHXWA : PoeDameronHoH
+    {
+        public PoeDameronHoHXWA() : base()
         {
-            public PoeDameronHoHXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -127,6 +134,5 @@ namespace Abilities.SecondEdition
             Selection.ThisShip.BeforeActionIsPerformed -= PayChargeCost;
             Triggers.FinishTrigger();
         }
-
     }
 }

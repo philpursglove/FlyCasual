@@ -1,8 +1,8 @@
-﻿using BoardTools;
+﻿using ActionsList;
+using BoardTools;
 using Content;
 using Movement;
 using System.Collections.Generic;
-using ActionsList;
 using Upgrade;
 
 namespace Ship
@@ -44,8 +44,8 @@ namespace Ship
         {
             public LieutenantLorrirXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

@@ -1,55 +1,62 @@
-﻿using System.Collections.Generic;
-using Ship;
-using SubPhases;
+﻿using Abilities.SecondEdition;
 using BoardTools;
 using Content;
-using Upgrade;
-using Abilities.SecondEdition;
+using Ship;
+using SubPhases;
 using System;
+using System.Collections.Generic;
+using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T65XWing
 {
-    namespace SecondEdition.T65XWing
+    public class BiggsDarklighterBoY : T65XWing
     {
-        public class BiggsDarklighterBoY : T65XWing
+        public BiggsDarklighterBoY() : base()
         {
-            public BiggsDarklighterBoY() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Biggs Darklighter",
-                    "Battle of Yavin",
-                    Faction.Rebel,
-                    3,
-                    5,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.BiggsDarklighterBoYAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    skinName: "Biggs Darklighter",
-                    isStandardLayout: true
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Biggs Darklighter",
+                "Battle of Yavin",
+                Faction.Rebel,
+                3,
+                5,
+                0,
+                isLimited: true,
+                abilityType: typeof(BiggsDarklighterBoYAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Astromech,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                skinName: "Biggs Darklighter",
+                isStandardLayout: true,
+                legality: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipAbilities.Add(new HopeAbility());
+            ShipAbilities.Add(new HopeAbility());
 
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.AttackSpeed));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Selfless));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ProtonTorpedoes));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R2F2BoY));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.AttackSpeed));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Selfless));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ProtonTorpedoes));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.R2F2BoY));
 
-                PilotNameCanonical = "biggsdarklighter-battleofyavin";
-            }
+            PilotNameCanonical = "biggsdarklighter-battleofyavin";
+        }
+    }
+
+    public class BiggsDarklighterBoYXWA : BiggsDarklighterBoY
+    {
+        public BiggsDarklighterBoYXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

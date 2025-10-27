@@ -26,14 +26,14 @@ namespace UpgradesList.SecondEdition
                 Faction.FirstOrder,
                 new Vector2(308, 1)
             );
-        }        
+        }
     }
 
     public class PettyOfficerThanissonXWA : PettyOfficerThanisson
     {
         public PettyOfficerThanissonXWA() : base()
         {
-            UpgradeInfo.Cost = 5;
+            UpgradeInfo.Cost = 4;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
@@ -50,7 +50,7 @@ namespace Abilities.SecondEdition
         {
             GenericShip.OnTokenIsAssignedGlobal += PettyOfficerThanissonEffect;
         }
-                
+
         public override void DeactivateAbility()
         {
             GenericShip.OnTokenIsAssignedGlobal -= PettyOfficerThanissonEffect;
@@ -63,7 +63,7 @@ namespace Abilities.SecondEdition
             //During the Activation or Engagement Phase, after an enemy ship in your "arc standard
             //front" at range 0-1 gains a red or orange token, if you are not stressed, you may gain 1 stress 
             //token. If you do, that ship gains 1 additional token of the type that it gained.          
-            if ((Phases.CurrentPhase is MainPhases.ActivationPhase || Phases.CurrentPhase is MainPhases.CombatPhase) 
+            if ((Phases.CurrentPhase is MainPhases.ActivationPhase || Phases.CurrentPhase is MainPhases.CombatPhase)
                 && (tokenColor == TokenColors.Red || tokenColor == TokenColors.Orange)
                 && token.GetType() != typeof(RedTargetLockToken)
                 && !HostShip.Tokens.HasToken(typeof(StressToken))
@@ -88,7 +88,7 @@ namespace Abilities.SecondEdition
                     descriptionLong: "Do you want to gain a Stress Token to assign an additional " + Token.Name + " to " + ShipWithToken.PilotInfo.PilotName + "?",
                     imageHolder: HostUpgrade
                 );
-            } 
+            }
             else
             {
                 Triggers.FinishTrigger();
@@ -103,7 +103,7 @@ namespace Abilities.SecondEdition
         private void UseAbility(object sender, System.EventArgs e)
         {
             DecisionSubPhase.ConfirmDecisionNoCallback();
-         
+
             HostShip.Tokens.AssignToken(
                 typeof(StressToken), delegate { AssignExtraToken(Token.GetType()); }
             );
@@ -115,13 +115,13 @@ namespace Abilities.SecondEdition
             {
                 GenericToken tractorToken = new TractorBeamToken(ShipWithToken, HostShip.Owner);
                 ShipWithToken.Tokens.AssignToken(tractorToken, Triggers.FinishTrigger);
-            } 
-            else 
+            }
+            else
             {
                 ShipWithToken.Tokens.AssignToken(tokenToAssign, Triggers.FinishTrigger);
             }
-            
-            Messages.ShowInfo(HostShip.PilotInfo.PilotName + ": Gained a Stress Token to assign an additional " + tokenToAssign.Name 
+
+            Messages.ShowInfo(HostShip.PilotInfo.PilotName + ": Gained a Stress Token to assign an additional " + tokenToAssign.Name
                 + " to " + ShipWithToken.PilotInfo.PilotName + ".");
         }
     }

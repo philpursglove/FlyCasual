@@ -40,8 +40,8 @@ namespace Ship
                     tags: new List<Tags>
                     {
                         Tags.Tie
-                    }
-
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 PilotNameCanonical = "soontirfel-battleoverendor";
@@ -56,6 +56,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(FeedbackEmitter));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/soontirfel-battleoverendor.png";
+            }
+        }
+
+        public class SoontirFelBoEXWA : SoontirFelBoE
+        {
+            public SoontirFelBoEXWA() : base()
+            {
+                var pilotInfo = PilotInfo as PilotCardInfo25;
+                pilotInfo.Cost = 14;
+                pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }

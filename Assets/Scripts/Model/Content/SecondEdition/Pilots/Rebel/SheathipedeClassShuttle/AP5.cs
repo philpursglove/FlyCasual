@@ -5,59 +5,56 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.SheathipedeClassShuttle
 {
-    namespace SecondEdition.SheathipedeClassShuttle
+    public class AP5 : SheathipedeClassShuttle
     {
-        public class AP5 : SheathipedeClassShuttle
+        public AP5() : base()
         {
-            public AP5() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "AP-5",
-                    "Escaped Analyst Droid",
-                    Faction.Rebel,
-                    1,
-                    3,
-                    5,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.AP5PilotAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Crew,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Spectre,
-                        Tags.Droid
-                    },
-                    seImageNumber: 41,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "AP-5",
+                "Escaped Analyst Droid",
+                Faction.Rebel,
+                1,
+                3,
+                5,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.AP5PilotAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Crew,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Spectre,
+                    Tags.Droid
+                },
+                seImageNumber: 41,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                ShipInfo.ActionIcons.SwitchToDroidActions();
-            }
+            ShipInfo.ActionIcons.SwitchToDroidActions();
         }
+    }
 
-        public class AP5XWA : AP5
+    public class AP5XWA : AP5
+    {
+        public AP5XWA() : base()
         {
-            public AP5XWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
                     UpgradeType.Astromech,
                     UpgradeType.Crew,
                     UpgradeType.Modification,
                     UpgradeType.Title
                 };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

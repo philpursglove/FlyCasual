@@ -6,48 +6,54 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ResistanceTransport
 {
-    namespace SecondEdition.ResistanceTransport
+    public class TakaJamoreesa : ResistanceTransport
     {
-        public class TakaJamoreesa : ResistanceTransport
+        public TakaJamoreesa() : base()
         {
-            public TakaJamoreesa() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Taka Jamoreesa",
-                    "Snograth Enthusiast",
-                    Faction.Resistance,
-                    2,
-                    4,
-                    15,
-                    isLimited: true,
-                    abilityType: typeof(TakaJamoreesaAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Astromech,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Taka Jamoreesa",
+                "Snograth Enthusiast",
+                Faction.Resistance,
+                2,
+                4,
+                15,
+                isLimited: true,
+                abilityType: typeof(TakaJamoreesaAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Cannon,
+                    UpgradeType.Cannon,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class TakaJamoreesaXWA : TakaJamoreesa
+    public class TakaJamoreesaXWA : TakaJamoreesa
+    {
+        public TakaJamoreesaXWA() : base()
         {
-            public TakaJamoreesaXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Torpedo
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

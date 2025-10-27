@@ -35,7 +35,8 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Torpedo,
                         UpgradeType.Device
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
 
                 MustHaveUpgrades.Add(typeof(NoEscape));
@@ -45,6 +46,15 @@ namespace Ship
 
                 PilotNameCanonical = "scimitar3-battleoverendor";
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scimitar3-battleoverendor.png";
+            }
+        }
+
+        public class Scimitar3BoEXWA : Scimitar3BoE
+        {
+            public Scimitar3BoEXWA() : base()
+            {
+                (PilotInfo as PilotCardInfo25).Cost = 10;
+                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
@@ -91,7 +101,8 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             RegisterAbilityTrigger(
                 TriggerTypes.OnFreeAction,
-                delegate {
+                delegate
+                {
                     HostShip.SpendCharge();
                     Triggers.FinishTrigger();
                 }

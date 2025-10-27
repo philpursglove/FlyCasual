@@ -1,7 +1,9 @@
-﻿using Upgrade;
+﻿using Content;
 using Ship;
+using System.Collections.Generic;
 using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,14 +18,24 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Rebel),
                 abilityType: typeof(Abilities.SecondEdition.HeraSyndullaCrewAbility),
-                seImageNumber: 84
+                seImageNumber: 84,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.Rebel,
                 new Vector2(408, 1)
             );
-        }        
+        }
+    }
+
+    public class HeraSyndullaXWA : HeraSyndulla
+    {
+        public HeraSyndullaXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

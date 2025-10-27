@@ -3,7 +3,6 @@ using BoardTools;
 using Content;
 using Ship;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Upgrade;
@@ -38,7 +37,7 @@ namespace UpgradesList.SecondEdition
     {
         public GrandInquisitorXWA() : base()
         {
-            UpgradeInfo.Cost = 12;
+            UpgradeInfo.Cost = 10;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }

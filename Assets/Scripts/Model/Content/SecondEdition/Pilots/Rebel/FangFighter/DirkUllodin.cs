@@ -34,7 +34,7 @@ namespace Ship.SecondEdition.FangFighter
                 },
                 tags: new List<Tags>()
                 {
-                    Tags.Mandalorian 
+                    Tags.Mandalorian
                 },
                 skinName: "Dirk Ullodin",
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -42,20 +42,20 @@ namespace Ship.SecondEdition.FangFighter
         }
     }
 
-    public class DirkUllodinXWA: DirkUllodin
+    public class DirkUllodinXWA : DirkUllodin
     {
         public DirkUllodinXWA() : base()
         {
-            var pilot = (PilotCardInfo25) PilotInfo;
-            pilot.LegalityInfo = new List<Legality> { Legality.XWA };
-            pilot.Cost = 4;
-            pilot.LoadoutValue = 9;
-            pilot.ExtraUpgrades = new List<UpgradeType>()
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                UpgradeType.Torpedo,
+                UpgradeType.Talent,
                 UpgradeType.Modification,
-                UpgradeType.Modification
+                UpgradeType.Modification,
+                UpgradeType.Torpedo
             };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

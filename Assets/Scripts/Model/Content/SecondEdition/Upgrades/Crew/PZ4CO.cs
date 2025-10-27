@@ -1,14 +1,15 @@
-﻿using Ship;
-using Upgrade;
+﻿using Actions;
 using ActionsList;
-using SubPhases;
-using Actions;
-using Tokens;
-using System;
 using BoardTools;
+using Content;
+using Ship;
+using SubPhases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -23,7 +24,12 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
                 addAction: new ActionInfo(typeof(CalculateAction)),
-                abilityType: typeof(Abilities.SecondEdition.PZ4COAbility)
+                abilityType: typeof(Abilities.SecondEdition.PZ4COAbility),
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
 
             Avatar = new AvatarInfo(
@@ -31,7 +37,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(269, 7),
                 new Vector2(125, 125)
             );
-        }        
+        }
+    }
+
+    public class PZ4COXWA : PZ4CO
+    {
+        public PZ4COXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -43,7 +58,7 @@ namespace Abilities.SecondEdition
         {
             Phases.Events.OnActivationPhaseEnd_Triggers += RegisterOwnTrigger;
         }
-                
+
         public override void DeactivateAbility()
         {
             Phases.Events.OnActivationPhaseEnd_Triggers -= RegisterOwnTrigger;
@@ -125,10 +140,12 @@ namespace Abilities.SecondEdition
 
             HostShip.Tokens.RemoveToken(
                 typeof(CalculateToken),
-                delegate{
+                delegate
+                {
                     TargetShip.Tokens.AssignToken(
                         typeof(CalculateToken),
-                        delegate {
+                        delegate
+                        {
                             Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": Calculate Token is reassigned to " + TargetShip.PilotInfo.PilotName);
                             Triggers.FinishTrigger();
                         }
@@ -143,10 +160,12 @@ namespace Abilities.SecondEdition
 
             HostShip.Tokens.RemoveToken(
                 typeof(FocusToken),
-                delegate {
+                delegate
+                {
                     TargetShip.Tokens.AssignToken(
                         typeof(FocusToken),
-                        delegate {
+                        delegate
+                        {
                             Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": Focus Token is reassigned to " + TargetShip.PilotInfo.PilotName);
                             Triggers.FinishTrigger();
                         }

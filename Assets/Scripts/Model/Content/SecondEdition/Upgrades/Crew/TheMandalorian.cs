@@ -1,5 +1,7 @@
 ﻿using Actions;
 using ActionsList;
+using Content;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -15,9 +17,19 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Scum),
                 addAction: new ActionInfo(typeof(ReinforceAction)),
-                abilityType: typeof(Abilities.SecondEdition.TheMandalorianCrewAbility)
+                abilityType: typeof(Abilities.SecondEdition.TheMandalorianCrewAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
+    }
+
+    public class TheMandalorianXWA : TheMandalorian
+    {
+        public TheMandalorianXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -47,7 +59,7 @@ namespace Abilities.SecondEdition
 
         private void RecoverForce()
         {
-            if(!didDefend && !HostShip.IsForceRecurring && HostShip.State.Force < HostShip.State.MaxForce)
+            if (!didDefend && !HostShip.IsForceRecurring && HostShip.State.Force < HostShip.State.MaxForce)
             {
                 Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: {HostShip.PilotInfo.PilotName} recovers 1 Force");
                 HostShip.State.RestoreForce();

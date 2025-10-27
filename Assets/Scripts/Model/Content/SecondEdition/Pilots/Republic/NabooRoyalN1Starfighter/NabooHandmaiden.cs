@@ -44,9 +44,18 @@ namespace Ship
         {
             public NabooHandmaidenXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
+                (PilotInfo as PilotCardInfo25).Cost = 9;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Torpedo
+                };
+
             }
         }
     }
@@ -99,7 +108,7 @@ namespace Abilities.SecondEdition
         protected virtual void AssignDecoyed()
         {
             // Remove decoyed from all friendly ships
-            foreach(var kvp in Roster.AllShips)
+            foreach (var kvp in Roster.AllShips)
             {
                 GenericShip ship = kvp.Value;
                 ship.Tokens.RemoveCondition(typeof(Decoyed));
@@ -121,10 +130,10 @@ namespace Abilities.SecondEdition
             int isN1 = 0;
             if (ship.ShipInfo.ShipName == "Naboo Royal N-1 Starfighter") isN1 = 1;
 
-            result += (ship.PilotInfo.Cost + ship.UpgradeBar.GetUpgradesOnlyFaceup().Sum(n => n.UpgradeInfo.Cost))*(1+isN1);
+            result += (ship.PilotInfo.Cost + ship.UpgradeBar.GetUpgradesOnlyFaceup().Sum(n => n.UpgradeInfo.Cost)) * (1 + isN1);
 
             return result;
-        }        
+        }
     }
 }
 
@@ -153,7 +162,7 @@ namespace Conditions
 
         private void AddDecoyedResultModification(GenericShip ship)
         {
-            foreach(var kvp in Roster.AllShips.Where(v => v.Value.PilotInfo.PilotName == "Naboo Handmaiden"))
+            foreach (var kvp in Roster.AllShips.Where(v => v.Value.PilotInfo.PilotName == "Naboo Handmaiden"))
             {
                 RegisterDecoy(kvp.Value);
             }
@@ -180,7 +189,7 @@ namespace ActionsList
     {
         public GenericShip SourceShip;
 
-        public DecoyedAction() {}
+        public DecoyedAction() { }
 
         public override bool IsDiceModificationAvailable()
         {

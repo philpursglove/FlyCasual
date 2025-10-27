@@ -1,7 +1,9 @@
 ﻿using Actions;
 using ActionsList;
+using Content;
 using Ship;
 using SubPhases;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -21,9 +23,19 @@ namespace UpgradesList.SecondEdition
                 ),
                 charges: 1,
                 addAction: new ActionInfo(typeof(SlamAction)),
-                abilityType: typeof(Abilities.SecondEdition.BurnoutThrustersAbility)
-            );            
-        }        
+                abilityType: typeof(Abilities.SecondEdition.BurnoutThrustersAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class BurnoutThrustersXWA : BurnoutThrusters
+    {
+        public BurnoutThrustersXWA() : base()
+        {
+            UpgradeInfo.Cost = 5;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

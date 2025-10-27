@@ -6,7 +6,7 @@ using Upgrade;
 
 namespace Ship.SecondEdition.SithInfiltrator
 {
-    public class DarthMaulPilot: SithInfiltrator
+    public class DarthMaulPilot : SithInfiltrator
     {
         public DarthMaulPilot()
         {
@@ -48,7 +48,7 @@ namespace Ship.SecondEdition.SithInfiltrator
     {
         public DarthMaulPilotXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 7;
+            (PilotInfo as PilotCardInfo25).Cost = 17;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
@@ -56,12 +56,11 @@ namespace Ship.SecondEdition.SithInfiltrator
                     UpgradeType.ForcePower,
                     UpgradeType.Crew,
                     UpgradeType.Crew,
+                    UpgradeType.Sensor,
                     UpgradeType.Modification,
                     UpgradeType.Device,
-                    UpgradeType.Cannon,
                     UpgradeType.Torpedo,
                     UpgradeType.Title,
-                    UpgradeType.TacticalRelay,
                 };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }

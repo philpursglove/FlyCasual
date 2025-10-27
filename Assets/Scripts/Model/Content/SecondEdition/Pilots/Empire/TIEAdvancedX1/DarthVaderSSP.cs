@@ -57,7 +57,7 @@ namespace Ship
         {
             public DarthVaderSSPXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
+                (PilotInfo as PilotCardInfo25).Cost = 17;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

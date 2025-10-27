@@ -8,58 +8,68 @@ using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ScavengedYT1300
 {
-    namespace SecondEdition.ScavengedYT1300
+    public class LandoCalrissian : ScavengedYT1300
     {
-        public class LandoCalrissian : ScavengedYT1300
+        public LandoCalrissian() : base()
         {
-            public LandoCalrissian() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lando Calrissian",
-                    "Old General",
-                    Faction.Resistance,
-                    5,
-                    7,
-                    20,
-                    isLimited: true,
-                    charges: 3,
-                    regensCharges: 1,
-                    abilityType: typeof(Abilities.SecondEdition.LandoCalrissianScavengedYT1300Ability),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Gunner,
-                        UpgradeType.Illicit,
-                        UpgradeType.Illicit,
-                        UpgradeType.Modification,
-                        UpgradeType.Title
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.YT1300
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lando Calrissian",
+                "Old General",
+                Faction.Resistance,
+                5,
+                7,
+                20,
+                isLimited: true,
+                charges: 3,
+                regensCharges: 1,
+                abilityType: typeof(Abilities.SecondEdition.LandoCalrissianScavengedYT1300Ability),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Freighter,
+                    Tags.YT1300
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "landocalrissian-scavengedyt1300";
-            }
+            PilotNameCanonical = "landocalrissian-scavengedyt1300";
         }
+    }
 
-        public class LandoCalrissianXWA : LandoCalrissian
+    public class LandoCalrissianXWA : LandoCalrissian
+    {
+        public LandoCalrissianXWA() : base()
         {
-            public LandoCalrissianXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 18;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 7;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Gunner,
+                UpgradeType.Gunner,
+                UpgradeType.Illicit,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+                UpgradeType.Title
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -92,6 +102,7 @@ namespace Abilities.SecondEdition
                 {
                     DecisionSubPhase.ConfirmDecisionNoCallback();
                 }
+
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, StartMultiSelectionSubphase);
             }
         }
@@ -141,7 +152,7 @@ namespace Abilities.SecondEdition
                 currentShip.OnCheckCanPerformActionsWhileStressed += ConfirmThatIsPossible;
                 currentShip.OnCanPerformActionWhileStressed += AlwaysAllow;
 
-                var actions = currentShip.GetAvailableActions();
+                List<GenericAction> actions = currentShip.GetAvailableActions();
 
                 currentShip.AskPerformFreeAction(
                     actions,
@@ -184,11 +195,12 @@ namespace Abilities.SecondEdition
             ship.OnCheckCanPerformActionsWhileStressed += ConfirmThatIsPossible;
             ship.OnCanPerformActionWhileStressed += AlwaysAllow;
 
-            var actions = ship.GetAvailableActions();
+            List<GenericAction> actions = ship.GetAvailableActions();
 
             ship.AskPerformFreeAction(
                 actions,
-                delegate {
+                delegate
+                {
                     ship.OnCheckCanPerformActionsWhileStressed -= ConfirmThatIsPossible;
                     ship.OnCanPerformActionWhileStressed -= AlwaysAllow;
                     Selection.DeselectAllShips();
@@ -259,6 +271,5 @@ namespace Abilities.SecondEdition
         {
             isAllowed = true;
         }
-
     }
 }

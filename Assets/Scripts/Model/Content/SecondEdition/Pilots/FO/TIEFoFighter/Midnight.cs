@@ -1,63 +1,57 @@
 ﻿using Content;
 using Ship;
 using System.Collections.Generic;
-using Abilities.SecondEdition;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class Midnight : TIEFoFighter
     {
-        public class Midnight : TIEFoFighter
+        public Midnight() : base()
         {
-            public Midnight() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Midnight\"",
-                    "Omega Leader",
-                    Faction.FirstOrder,
-                    6,
-                    3,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.MidnightAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class MidnightXWA : Midnight
-        {
-            public MidnightXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 17;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Midnight\"",
+                "Omega Leader",
+                Faction.FirstOrder,
+                6,
+                3,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.MidnightAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
-                    UpgradeType.Sensor,
                     UpgradeType.Tech,
-                    UpgradeType.Missile,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class MidnightXWA : Midnight
+    {
+        public MidnightXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

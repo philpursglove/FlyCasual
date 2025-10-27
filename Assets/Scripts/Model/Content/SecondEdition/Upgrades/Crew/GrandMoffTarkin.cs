@@ -1,13 +1,13 @@
-﻿using Ship;
-using Upgrade;
+﻿using ActionsList;
+using Content;
+using Ship;
 using SubPhases;
-using Conditions;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tokens;
-using ActionsList;
-using System;
-using Actions;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -19,15 +19,20 @@ namespace UpgradesList.SecondEdition
                 "Grand Moff Tarkin",
                 UpgradeType.Crew,
                 cost: 4,
-                isLimited: true,                
+                isLimited: true,
                 restrictions: new UpgradeCardRestrictions(
-                    new FactionRestriction(Faction.Imperial), 
+                    new FactionRestriction(Faction.Imperial),
                     new ActionBarRestriction(typeof(TargetLockAction))
                     ),
                 abilityType: typeof(Abilities.SecondEdition.GrandMoffTarkinAbility),
                 seImageNumber: 117,
                 charges: 2,
-                regensCharges: true
+                regensCharges: true,
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
 
             Avatar = new AvatarInfo(
@@ -35,7 +40,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(436, 10),
                 new Vector2(150, 150)
             );
-        }        
+        }
+    }
+
+    public class GrandMoffTarkinXWA : GrandMoffTarkin
+    {
+        public GrandMoffTarkinXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -72,9 +86,9 @@ namespace Abilities.SecondEdition
         {
             AskToUseAbility(
                 HostUpgrade.UpgradeInfo.Name,
-                AlwaysUseByDefault, 
+                AlwaysUseByDefault,
                 UseAbility,
-                dontUseAbility: delegate { DecisionSubPhase.ConfirmDecision(); },                
+                dontUseAbility: delegate { DecisionSubPhase.ConfirmDecision(); },
                 descriptionLong: "Do you want to spend 2 Charges? (If you do, each friendly ship may acquire a target lock on a ship that you have locked)",
                 imageHolder: HostUpgrade
             );
@@ -130,7 +144,7 @@ namespace Abilities.SecondEdition
         {
             public GenericShip tarkinsShip;
             public GenericShip tarkinsFriend;
-            public ITargetLockable[] tarkinsLocks;            
+            public ITargetLockable[] tarkinsLocks;
         }
 
         protected void AskToAcquireTarkinsLock(object sender, EventArgs e)

@@ -3,6 +3,7 @@ using Content;
 using Ship;
 using SubPhases.SecondEdition;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Upgrade;
 
@@ -32,7 +33,8 @@ namespace UpgradesList.SecondEdition
 
             ProximityMinesCheckSubPhase subphase = Phases.StartTemporarySubPhaseNew<ProximityMinesCheckSubPhase>(
                 "Damage from " + UpgradeInfo.Name,
-                delegate {
+                delegate
+                {
                     Phases.FinishSubPhase(typeof(ProximityMinesCheckSubPhase));
                     callBack();
                 }
@@ -57,7 +59,8 @@ namespace UpgradesList.SecondEdition
         public ProximityMinesXWA() : base()
         {
             UpgradeInfo.Cost = 9;
-            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Limited = 3;
         }
     }
 }

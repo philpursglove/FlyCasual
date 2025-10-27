@@ -1,5 +1,5 @@
-﻿using Ship;
-using System.Linq;
+﻿using Content;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -19,9 +19,23 @@ namespace UpgradesList.SecondEdition
                     maxRange: 3
                 ),
                 abilityType: typeof(Abilities.SecondEdition.TractorBeamAbility),
-                seImageNumber: 30
+                seImageNumber: 30,
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
-        }        
+        }
+    }
+
+    public class TractorBeamXWA : TractorBeam
+    {
+        public TractorBeamXWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

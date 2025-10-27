@@ -27,7 +27,7 @@ namespace UpgradesList.SecondEdition
                 ),
                 restrictions: new UpgradeCardRestrictions(
                     new FactionRestriction(Faction.Separatists),
-                    new ActionBarRestriction(typeof(CalculateAction))                    
+                    new ActionBarRestriction(typeof(CalculateAction))
                 ),
                 abilityType: typeof(Abilities.SecondEdition.EnergyShellChargesAbility),
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -39,7 +39,7 @@ namespace UpgradesList.SecondEdition
     {
         public EnergyShellChargesXWA() : base()
         {
-            UpgradeInfo.Cost = 2;
+            UpgradeInfo.Cost = 3;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
         }
     }
@@ -57,8 +57,8 @@ namespace Abilities.SecondEdition
                 GetAiPriority,
                 DiceModificationType.Change,
                 1,
-                payAbilityCost: PayAbilityCost,                
-                sidesCanBeSelected: new List<DieSide> { DieSide.Focus},
+                payAbilityCost: PayAbilityCost,
+                sidesCanBeSelected: new List<DieSide> { DieSide.Focus },
                 sideCanBeChangedTo: DieSide.Crit
             );
             HostShip.OnGenerateActions += AddEnergyShellChargesAction;
@@ -66,7 +66,7 @@ namespace Abilities.SecondEdition
 
         private bool IsAvailable()
         {
-            return Combat.ChosenWeapon == HostUpgrade                
+            return Combat.ChosenWeapon == HostUpgrade
                 && HostShip.Tokens.CountTokensByType<CalculateToken>() > 0
                 && Combat.AttackStep == CombatStep.Attack
                 && Combat.DiceRollAttack.Focuses > 0;
@@ -76,7 +76,7 @@ namespace Abilities.SecondEdition
         {
             return 42; // Just above Calculate's default priority
         }
-                
+
         private void PayAbilityCost(Action<bool> callback)
         {
             if (HostShip.Tokens.HasToken<CalculateToken>())

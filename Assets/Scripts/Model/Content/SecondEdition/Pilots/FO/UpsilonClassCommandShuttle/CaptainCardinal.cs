@@ -4,63 +4,59 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.UpsilonClassCommandShuttle
 {
-    namespace SecondEdition.UpsilonClassCommandShuttle
+    public class CaptainCardinal : UpsilonClassCommandShuttle
     {
-        public class CaptainCardinal : UpsilonClassCommandShuttle
+        public CaptainCardinal() : base()
         {
-            public CaptainCardinal() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Captain Cardinal",
-                    "Principled Instructor",
-                    Faction.FirstOrder,
-                    4,
-                    7,
-                    12,
-                    isLimited: true,
-                    charges: 2,
-                    abilityType: typeof(Abilities.SecondEdition.CaptainCardinalAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Sensor,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Crew,
-                        UpgradeType.Modification
-                    },
-                    legality: new List<Legality>() { Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class CaptainCardinalXWA : CaptainCardinal
-        {
-            public CaptainCardinalXWA(): base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 6;
-                pilot.LoadoutValue = 16;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Captain Cardinal",
+                "Principled Instructor",
+                Faction.FirstOrder,
+                4,
+                7,
+                12,
+                isLimited: true,
+                charges: 2,
+                abilityType: typeof(Abilities.SecondEdition.CaptainCardinalAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Tech,
-                    UpgradeType.Tech,
-                    UpgradeType.Crew,
-                    UpgradeType.Crew,
-                    UpgradeType.Crew,
-                    UpgradeType.Cannon,
                     UpgradeType.Sensor,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Cannon,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
                     UpgradeType.Modification
-                };
-            }
+                },
+                legality: new List<Legality>() { Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class CaptainCardinalXWA : CaptainCardinal
+    {
+        public CaptainCardinalXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Cannon
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -128,6 +124,5 @@ namespace Abilities.SecondEdition
                 }
             }
         }
-
     }
 }

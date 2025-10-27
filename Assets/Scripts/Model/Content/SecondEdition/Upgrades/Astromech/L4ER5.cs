@@ -1,6 +1,7 @@
 ﻿using Actions;
 using ActionsList;
 using BoardTools;
+using Content;
 using Ship;
 using SubPhases;
 using System;
@@ -26,8 +27,18 @@ namespace UpgradesList.SecondEdition
                     new FactionRestriction(Faction.Resistance),
                     new ActionBarRestriction(typeof(RotateArcAction))
                 ),
-                addActionLink: new LinkedActionInfo(typeof(RotateArcAction), typeof(CalculateAction), linkedColor: ActionColor.White)
+                addActionLink: new LinkedActionInfo(typeof(RotateArcAction), typeof(CalculateAction), linkedColor: ActionColor.White),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class L4ER5XWA : L4ER5
+    {
+        public L4ER5XWA() : base()
+        {
+            UpgradeInfo.Cost = 4;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

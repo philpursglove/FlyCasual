@@ -2,48 +2,51 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.ScavengedYT1300
 {
-    namespace SecondEdition.ScavengedYT1300
+    public class ResistanceSympathizer : ScavengedYT1300
     {
-        public class ResistanceSympathizer : ScavengedYT1300
+        public ResistanceSympathizer() : base()
         {
-            public ResistanceSympathizer() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Resistance Sympathizer",
-                    "",
-                    Faction.Resistance,
-                    2,
-                    6,
-                    10,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Missile,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Freighter,
-                        Tags.YT1300
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Resistance Sympathizer",
+                "",
+                Faction.Resistance,
+                2,
+                6,
+                10,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Missile,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Freighter,
+                    Tags.YT1300
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class ResistanceSympathizerXWA : ResistanceSympathizer
+    public class ResistanceSympathizerXWA : ResistanceSympathizer
+    {
+        public ResistanceSympathizerXWA() : base()
         {
-            public ResistanceSympathizerXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 6;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Modification
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

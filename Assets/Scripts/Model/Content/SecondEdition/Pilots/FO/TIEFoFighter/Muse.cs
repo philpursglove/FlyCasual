@@ -5,54 +5,50 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class Muse : TIEFoFighter
     {
-        public class Muse : TIEFoFighter
+        public Muse() : base()
         {
-            public Muse() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "\"Muse\"",
-                    "Epsilon Leader",
-                    Faction.FirstOrder,
-                    2,
-                    3,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.MuseAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Tech,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class MuseXWA : Muse
-        {
-            public MuseXWA() : base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 3;
-                pilot.LoadoutValue = 9;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "\"Muse\"",
+                "Epsilon Leader",
+                Faction.FirstOrder,
+                2,
+                3,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.MuseAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
-                    UpgradeType.Talent,
-                    UpgradeType.Sensor,
                     UpgradeType.Tech,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class MuseXWA : Muse
+    {
+        public MuseXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 8;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

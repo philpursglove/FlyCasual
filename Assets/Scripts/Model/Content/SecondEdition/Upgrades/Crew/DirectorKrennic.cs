@@ -1,13 +1,15 @@
-﻿using Ship;
-using Upgrade;
-using SubPhases;
+﻿using Actions;
+using ActionsList;
 using Conditions;
+using Content;
+using Ship;
+using SubPhases;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tokens;
-using ActionsList;
-using System;
-using Actions;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -23,7 +25,12 @@ namespace UpgradesList.SecondEdition
                 addAction: new ActionInfo(typeof(TargetLockAction)),
                 restriction: new FactionRestriction(Faction.Imperial),
                 abilityType: typeof(Abilities.SecondEdition.DirectorKrennicAbility),
-                seImageNumber: 114
+                seImageNumber: 114,
+                legalityInfo: new List<Legality>
+                {
+                    Legality.StandardLegal,
+                    Legality.ExtendedLegal
+                }
             );
 
             Avatar = new AvatarInfo(
@@ -31,7 +38,16 @@ namespace UpgradesList.SecondEdition
                 new Vector2(381, 0),
                 new Vector2(150, 150)
             );
-        }        
+        }
+    }
+
+    public class DirectorKrennicXWA : DirectorKrennic
+    {
+        public DirectorKrennicXWA() : base()
+        {
+            UpgradeInfo.Cost = 3;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 

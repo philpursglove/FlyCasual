@@ -23,7 +23,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.HomingTorpedoesAbility),
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-        }        
+        }
     }
 
     public class HomingTorpedoesXWA : HomingTorpedoes
@@ -32,6 +32,7 @@ namespace UpgradesList.SecondEdition
         {
             UpgradeInfo.Cost = 4;
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+            UpgradeInfo.Limited = 2;
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿using Ship;
-using Upgrade;
-using ActionsList;
+﻿using ActionsList;
+using Content;
+using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -15,11 +17,19 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Illicit,
                 cost: 4,
                 restriction: new ActionBarRestriction(typeof(SlamAction)),
-                abilityType: typeof(Abilities.SecondEdition.CoaxiumHyperfuelAbility)
+                abilityType: typeof(Abilities.SecondEdition.CoaxiumHyperfuelAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
 
-            
-        }        
+    public class CoaxiumHyperfuelXWA : CoaxiumHyperfuel
+    {
+        public CoaxiumHyperfuelXWA() : base()
+        {
+            UpgradeInfo.Cost = 2;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+        }
     }
 }
 
@@ -60,8 +70,8 @@ namespace Abilities.SecondEdition
 
         private void AskSlamAction(object sender, EventArgs e)
         {
-            HostShip.BeforeActionIsPerformed += RegisterSlamActionDamageTrigger; 
-            HostShip.AskPerformFreeAction(                
+            HostShip.BeforeActionIsPerformed += RegisterSlamActionDamageTrigger;
+            HostShip.AskPerformFreeAction(
                 new SlamAction(true),
                 delegate
                 {
@@ -89,11 +99,13 @@ namespace Abilities.SecondEdition
                 AskToUseAbility(
                     HostUpgrade.UpgradeInfo.Name,
                     AlwaysUseByDefault,
-                    delegate {
+                    delegate
+                    {
                         DecisionSubPhase.ConfirmDecisionNoCallback();
                         SufferDamage();
                     },
-                    delegate {
+                    delegate
+                    {
                         DecisionSubPhase.ConfirmDecisionNoCallback();
                         ExposeDamageCard();
                     },

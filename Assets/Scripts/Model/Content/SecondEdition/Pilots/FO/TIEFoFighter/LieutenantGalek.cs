@@ -9,59 +9,54 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIEFoFighter
 {
-    namespace SecondEdition.TIEFoFighter
+    public class LieutenantGalek : TIEFoFighter
     {
-        public class LieutenantGalek : TIEFoFighter
+        public LieutenantGalek() : base()
         {
-            public LieutenantGalek() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Lieutenant Galek",
-                    "Harsh Instructor",
-                    Faction.FirstOrder,
-                    5,
-                    3,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.LieutenantGalekAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Cannon,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class LieutenantGalekXWA : LieutenantGalek
-        {
-            public LieutenantGalekXWA() : base()
-            {
-                var pilot = (PilotCardInfo25) PilotInfo;
-                pilot.LegalityInfo = new List<Legality> {Legality.XWA};
-                pilot.Cost = 4;
-                pilot.LoadoutValue = 15;
-                pilot.ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Lieutenant Galek",
+                "Harsh Instructor",
+                Faction.FirstOrder,
+                5,
+                3,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.LieutenantGalekAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Tech,
                     UpgradeType.Tech,
-                    UpgradeType.Sensor,
-                    UpgradeType.Missile,
+                    UpgradeType.Cannon,
                     UpgradeType.Modification
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class LieutenantGalekXWA : LieutenantGalek
+    {
+        public LieutenantGalekXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

@@ -9,49 +9,53 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.RZ2AWing
 {
-    namespace SecondEdition.RZ2AWing
+    public class RonithBlario : RZ2AWing
     {
-        public class RonithBlario : RZ2AWing
+        public RonithBlario() : base()
         {
-            public RonithBlario() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Ronith Blario",
-                    "Reckless Rookie",
-                    Faction.Resistance,
-                    2,
-                    4,
-                    10,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.RonithBlarioAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Modification,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.AWing
-                    },
-                    skinName: "Red",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Ronith Blario",
+                "Reckless Rookie",
+                Faction.Resistance,
+                2,
+                4,
+                10,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.RonithBlarioAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile
+                },
+                tags: new List<Tags>
+                {
+                    Tags.AWing
+                },
+                skinName: "Red",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class RonithBlarioXWA : RonithBlario
+    public class RonithBlarioXWA : RonithBlario
+    {
+        public RonithBlarioXWA() : base()
         {
-            public RonithBlarioXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                (PilotInfo as PilotCardInfo25).Cost = 3;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -97,6 +101,7 @@ namespace Abilities.SecondEdition
             {
                 return GetFocusedShipsWithEnemyInTurretArc(EnemyShip).Any();
             }
+
             return false;
         }
 
@@ -110,7 +115,7 @@ namespace Abilities.SecondEdition
 
         private bool HasEnemyInTurretArc(GenericShip ship, GenericShip enemyShip)
         {
-            var turretArcs = ship.ArcsInfo.Arcs.Where(arc => arc is ArcSingleTurret || arc is ArcDualTurretA || arc is ArcDualTurretB);            
+            IEnumerable<GenericArc> turretArcs = ship.ArcsInfo.Arcs.Where(arc => arc is ArcSingleTurret || arc is ArcDualTurretA || arc is ArcDualTurretB);
             return turretArcs.Any(arc => new ShotInfoArc(ship, enemyShip, arc).InArc);
         }
 
@@ -145,8 +150,8 @@ namespace Abilities.SecondEdition
 
         private bool FilterAbilityTarget(GenericShip ship)
         {
-            return 
-                FilterByTargetType(ship, TargetTypes.OtherFriendly) && 
+            return
+                FilterByTargetType(ship, TargetTypes.OtherFriendly) &&
                 ship.Tokens.HasToken<FocusToken>() &&
                 HasEnemyInTurretArc(ship, EnemyShip);
         }

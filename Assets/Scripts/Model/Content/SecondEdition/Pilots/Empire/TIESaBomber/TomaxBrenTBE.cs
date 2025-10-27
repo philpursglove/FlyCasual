@@ -35,7 +35,8 @@ namespace Ship
                         UpgradeType.Talent,
                         UpgradeType.Torpedo,
                         UpgradeType.Device
-                    }
+                    },
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
                 PilotNameCanonical = "tomaxbren-swz98";
 
@@ -44,6 +45,16 @@ namespace Ship
                 MustHaveUpgrades.Add(typeof(TrueGrit));
 
                 ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/tomaxbren-swz98.png";
+            }
+        }
+
+        public class TomaxBrenTBEXWA : TomaxBrenTBE
+        {
+            public TomaxBrenTBEXWA() : base()
+            {
+                var pilot = (PilotCardInfo25)PilotInfo;
+                pilot.Cost = 12;
+                pilot.LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
     }
