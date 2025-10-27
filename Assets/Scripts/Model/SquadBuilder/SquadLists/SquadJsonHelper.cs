@@ -187,16 +187,26 @@ namespace SquadBuilderNS
                     squad.Name = squadJson["name"].str;
                 }
 
-                if (squadJson.HasField("ruleset"))
+                if (squad.PlayerNo == Players.PlayerNo.Player1)
                 {
-                    squad.Format = Options.GetFormatAsLegality(squadJson["ruleset"].str);
+
+                    if (squadJson.HasField("ruleset"))
+                    {
+                        squad.Format = Options.GetFormatAsLegality(squadJson["ruleset"].str);
+                    }
+                    else
+                    {
+                        squad.Format = Legality.ExtendedLegal;
+                    }
+
+                    Options.ListFormat = squad.Format; // Options.ListFormat keeps everything in sync for the saved list
+
+                    MainMenu.SetEdition(squad.Format);
                 }
                 else
                 {
-                    squad.Format = Legality.ExtendedLegal;
+                    squad.Format = Options.ListFormat; // ensures second player format is in sync with first player format
                 }
-
-                Options.ListFormat = squad.Format; // Options.ListFormat keeps everything in sync for the saved list
 
                 string factionNameXws = squadJson["faction"].str;
                 Faction faction = Edition.Current.XwsToFaction(factionNameXws);

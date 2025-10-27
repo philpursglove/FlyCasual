@@ -1,4 +1,5 @@
-﻿using Editions;
+﻿using Content;
+using Editions;
 using ExtraOptions;
 using Migrations;
 using Mods;
@@ -17,8 +18,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Upgrade;
 
-public class MainMenu : MonoBehaviour {
-
+public class MainMenu : MonoBehaviour
+{
     const string PatreonUrl = "https://www.patreon.com/Baledin";
     private Faction CurrentAvatarsFaction = Faction.Rebel;
     public GameObject CurrentPanel;
@@ -28,7 +29,7 @@ public class MainMenu : MonoBehaviour {
     public string PreviousPanelName;
     string NewVersionUrl;
 
-    void Start ()
+    void Start()
     {
         MigrationsManager.PerformMigrations();
         InitializeMenu();
@@ -367,7 +368,9 @@ public class MainMenu : MonoBehaviour {
         {
             Network.ServerUri = "tcp4://" + iPAddress.ToString();
             Network.JoinRoom(null);
-        } else {
+        }
+        else
+        {
             Messages.ShowError("Invalid IP Address.");
         }
     }
@@ -467,13 +470,30 @@ public class MainMenu : MonoBehaviour {
 
         switch (editionName)
         {
-            /*case "FirstEdition":
-                new FirstEdition();
-                break;*/
             case "SecondEdition":
                 new SecondEdition();
                 break;
+            case "XWAEdition":
+                new XWAEdition();
+                break;
             default:
+                break;
+        }
+    }
+
+    public static void SetEdition(Legality format)
+    {
+        switch (format)
+        {
+            case Legality.StandardLegal:
+            case Legality.ExtendedLegal:
+                SetEdition("SecondEdition");
+                break;
+            case Legality.XWA:
+                SetEdition("XWAEdition");
+                break;
+            default:
+                // Should never be hit, do not change edition
                 break;
         }
     }

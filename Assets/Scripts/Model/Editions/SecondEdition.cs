@@ -1,17 +1,12 @@
 ﻿using ActionsList;
 using Arcs;
-using BoardTools;
 using Bombs;
-using GameModes;
 using Movement;
-using Obstacles;
 using Ship;
-using SquadBuilderNS;
 using SubPhases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -53,7 +48,7 @@ namespace Editions
                     { typeof(DamageDeckCardSE.DamagedEngine),       2 },
                     { typeof(DamageDeckCardSE.DamagedSensorArray),  2 },
                     { typeof(DamageDeckCardSE.DirectHit),           5 },
-                    { typeof(DamageDeckCardSE.DisabledPowerRegulator),  2 },                    
+                    { typeof(DamageDeckCardSE.DisabledPowerRegulator),  2 },
                     { typeof(DamageDeckCardSE.FuelLeak),            4 },
                     { typeof(DamageDeckCardSE.HullBreach),          2 },
                     { typeof(DamageDeckCardSE.LooseStabilizer),     2 },
@@ -86,7 +81,7 @@ namespace Editions
             {
                 return new Dictionary<string, string>()
                 {
-                    
+
                 };
             }
         }
@@ -96,7 +91,7 @@ namespace Editions
             return 1;
         }
 
-        private bool HasYv666InSquad()
+        protected bool HasYv666InSquad()
         {
             return Global.SquadBuilder.CurrentSquad.Ships.Any(n => n.Instance is Ship.SecondEdition.YV666LightFreighter.YV666LightFreighter);
         }
@@ -137,7 +132,7 @@ namespace Editions
             }
         }
 
-        private bool IsTractorBeamFailed()
+        protected bool IsTractorBeamFailed()
         {
             return Phases.CurrentSubPhase is TractorBeamPlanningSubPhase;
         }
@@ -202,12 +197,12 @@ namespace Editions
             ship.OnMovementActivationFinish += DisableIonizationActionEffect;
         }
 
-        private void EnableIonizationActionEffect(GenericShip ship)
+        protected void EnableIonizationActionEffect(GenericShip ship)
         {
             ship.OnTryAddAction += IonizedShipCanDoOnlyFocus;
         }
 
-        private void DisableIonizationActionEffect(GenericShip ship)
+        protected void DisableIonizationActionEffect(GenericShip ship)
         {
             ship.OnTryAddAction -= IonizedShipCanDoOnlyFocus;
 
@@ -215,7 +210,7 @@ namespace Editions
             ship.OnMovementActivationFinish -= DisableIonizationActionEffect;
         }
 
-        private void IonizedShipCanDoOnlyFocus(GenericShip ship, GenericAction action, ref bool canBePerformed)
+        protected void IonizedShipCanDoOnlyFocus(GenericShip ship, GenericAction action, ref bool canBePerformed)
         {
             if (canBePerformed)
             {
