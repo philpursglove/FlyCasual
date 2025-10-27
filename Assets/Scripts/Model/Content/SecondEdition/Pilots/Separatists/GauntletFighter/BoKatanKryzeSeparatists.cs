@@ -53,8 +53,8 @@ namespace Ship.SecondEdition.GauntletFighter
     {
         public BoKatanKryzeSeparatistsXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 6;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+            (PilotInfo as PilotCardInfo25).Cost = 16;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,

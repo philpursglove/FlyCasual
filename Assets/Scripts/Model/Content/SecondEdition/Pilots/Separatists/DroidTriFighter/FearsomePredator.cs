@@ -46,9 +46,19 @@ namespace Ship.SecondEdition.DroidTriFighter
     {
         public FearsomePredatorXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 6;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Cannon,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
         }
     }
 }
@@ -140,7 +150,7 @@ namespace Conditions
             if (Combat.Attacker is Ship.SecondEdition.DroidTriFighter.FearsomePredator)
             {
                 if (!Combat.SpentTokens.ContainsKey(Host)
-                    || !Combat.SpentTokens[Host].Any(n => 
+                    || !Combat.SpentTokens[Host].Any(n =>
                         n == typeof(CalculateToken)
                         || n == typeof(FocusToken)
                         || n == typeof(EvadeToken)

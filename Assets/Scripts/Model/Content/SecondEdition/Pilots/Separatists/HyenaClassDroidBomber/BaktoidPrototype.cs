@@ -43,12 +43,12 @@ namespace Ship.SecondEdition.HyenaClassDroidBomber
     {
         public BaktoidPrototypeXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 3;
+            (PilotInfo as PilotCardInfo25).Cost = 8;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                UpgradeType.Sensor,
                 UpgradeType.Modification,
+                UpgradeType.Device,
                 UpgradeType.Missile,
                 UpgradeType.Missile,
                 UpgradeType.Configuration

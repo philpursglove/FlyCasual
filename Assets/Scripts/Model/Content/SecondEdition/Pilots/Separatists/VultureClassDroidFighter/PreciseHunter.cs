@@ -38,8 +38,8 @@ namespace Ship.SecondEdition.VultureClassDroidFighter
     {
         public PreciseHunterXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 2;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 4;
+            (PilotInfo as PilotCardInfo25).Cost = 6;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Modification,

@@ -27,7 +27,7 @@ namespace Ship.SecondEdition.Belbullab22Starfighter
                     UpgradeType.TacticalRelay,
                     UpgradeType.Modification,
                     UpgradeType.Modification
-                },                
+                },
                 skinName: "Wat Tambor",
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
@@ -38,14 +38,13 @@ namespace Ship.SecondEdition.Belbullab22Starfighter
     {
         public WatTamborXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
                 UpgradeType.Modification,
                 UpgradeType.Modification,
-                UpgradeType.Title,
                 UpgradeType.TacticalRelay,
             };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
@@ -77,12 +76,12 @@ namespace Abilities.SecondEdition
         private int GetNumberOfDiceToModify()
         {
             var count = Roster.AllShips.Values
-                .Where(ship => 
-                    ship.Owner == HostShip.Owner 
-                    && ship.Tokens.HasToken<Tokens.CalculateToken>() 
+                .Where(ship =>
+                    ship.Owner == HostShip.Owner
+                    && ship.Tokens.HasToken<Tokens.CalculateToken>()
                     && new DistanceInfo(Combat.Defender, ship).Range == 1)
                 .Count();
-            
+
             return count;
         }
 

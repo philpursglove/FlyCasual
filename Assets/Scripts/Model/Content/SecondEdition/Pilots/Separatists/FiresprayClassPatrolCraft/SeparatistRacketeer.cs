@@ -32,10 +32,13 @@ namespace Ship.SecondEdition.FiresprayClassPatrolCraft
     {
         public SeparatistRacketeerXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 6;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
+            (PilotInfo as PilotCardInfo25).Cost = 15;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 8;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
+                UpgradeType.Crew,
+                UpgradeType.Illicit,
+                UpgradeType.Modification,
                 UpgradeType.Device,
                 UpgradeType.Cannon,
                 UpgradeType.Missile,

@@ -47,8 +47,8 @@ namespace Ship.SecondEdition.FiresprayClassPatrolCraft
     {
         public BobaFettSepXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 6;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).Cost = 16;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Crew,
@@ -78,7 +78,7 @@ namespace Abilities.SecondEdition
                 DiceModificationType.Change,
                 count: 1,
                 sidesCanBeSelected: new List<DieSide>() { DieSide.Blank },
-                sideCanBeChangedTo: DieSide.Focus                
+                sideCanBeChangedTo: DieSide.Focus
             );
         }
 
