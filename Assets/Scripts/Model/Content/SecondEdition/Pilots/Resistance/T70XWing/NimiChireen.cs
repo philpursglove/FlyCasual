@@ -2,48 +2,52 @@
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class NimiChireen : T70XWing
     {
-        public class NimiChireen : T70XWing
+        public NimiChireen() : base()
         {
-            public NimiChireen() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Nimi Chireen",
-                    "Hopeful Hero",
-                    Faction.Resistance,
-                    2,
-                    4,
-                    9,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.NimiChireenAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Tech,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Nimi Chireen",
+                "Hopeful Hero",
+                Faction.Resistance,
+                2,
+                4,
+                9,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.NimiChireenAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Tech,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class NimiChireenXWA : NimiChireen
+    public class NimiChireenXWA : NimiChireen
+    {
+        public NimiChireenXWA() : base()
         {
-            public NimiChireenXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

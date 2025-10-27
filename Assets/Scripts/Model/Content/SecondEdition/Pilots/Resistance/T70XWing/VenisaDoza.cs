@@ -5,52 +5,58 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class VenisaDoza : T70XWing
     {
-        public class VenisaDoza : T70XWing
+        public VenisaDoza() : base()
         {
-            public VenisaDoza() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Venisa Doza",
-                    "Jade Leader",
-                    Faction.Resistance,
-                    4,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.VenisaDozaAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Missile,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Venisa Doza",
+                "Jade Leader",
+                Faction.Resistance,
+                4,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.VenisaDozaAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Missile,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class VenisaDozaXWA : VenisaDoza
+    public class VenisaDozaXWA : VenisaDoza
+    {
+        public VenisaDozaXWA() : base()
         {
-            public VenisaDozaXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 13;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 15;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Missile,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -75,7 +81,7 @@ namespace Abilities.SecondEdition
         {
             if (weapon is GenericSpecialWeapon)
             {
-                var specialWeapon = weapon as GenericSpecialWeapon;
+                GenericSpecialWeapon specialWeapon = weapon as GenericSpecialWeapon;
                 if (specialWeapon.UpgradeInfo.HasType(UpgradeType.Missile)
                     || specialWeapon.UpgradeInfo.HasType(UpgradeType.Torpedo)
                     && Board.GetShipsInArcAtRange(HostShip, ArcType.Rear, new UnityEngine.Vector2(0, 4), Team.Type.Enemy).Contains(target))

@@ -5,53 +5,58 @@ using System;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class TemminWexleyHoH : T70XWing
     {
-        public class TemminWexleyHoH : T70XWing
+        public TemminWexleyHoH() : base()
         {
-            public TemminWexleyHoH() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Temmin Wexley",
-                    "Black Two",
-                    Faction.Resistance,
-                    4,
-                    5,
-                    13,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.TemminWexleyHoHAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Tech,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    skinName: "Green (HoH)",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Temmin Wexley",
+                "Black Two",
+                Faction.Resistance,
+                4,
+                5,
+                13,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.TemminWexleyHoHAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Tech,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                skinName: "Green (HoH)",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                PilotNameCanonical = "temminwexley-swz68";
-            }
+            PilotNameCanonical = "temminwexley-swz68";
         }
+    }
 
-        public class TemminWexleyHoHXWA : TemminWexleyHoH
+    public class TemminWexleyHoHXWA : TemminWexleyHoH
+    {
+        public TemminWexleyHoHXWA() : base()
         {
-            public TemminWexleyHoHXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 11;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 5;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 4;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }

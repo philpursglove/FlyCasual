@@ -6,50 +6,56 @@ using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.T70XWing
 {
-    namespace SecondEdition.T70XWing
+    public class NienNunb : T70XWing
     {
-        public class NienNunb : T70XWing
+        public NienNunb() : base()
         {
-            public NienNunb() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Nien Nunb",
-                    "Sarcastic Survivor",
-                    Faction.Resistance,
-                    5,
-                    5,
-                    16,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.NienNunbAbility),
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Tech,
-                        UpgradeType.Missile,
-                        UpgradeType.Astromech,
-                        UpgradeType.Modification,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.XWing
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
+            PilotInfo = new PilotCardInfo25
+            (
+                "Nien Nunb",
+                "Sarcastic Survivor",
+                Faction.Resistance,
+                5,
+                5,
+                16,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.NienNunbAbility),
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>
+                {
+                    Tags.XWing
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
         }
+    }
 
-        public class NienNunbXWA : NienNunb
+    public class NienNunbXWA : NienNunb
+    {
+        public NienNunbXWA() : base()
         {
-            public NienNunbXWA() : base()
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 5;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 11;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                UpgradeType.Talent,
+                UpgradeType.Astromech,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Tech,
+                UpgradeType.Configuration
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -73,7 +79,7 @@ namespace Abilities.SecondEdition
         {
             if (token is StressToken)
             {
-                var shipCount = Roster.AllShips.Values
+                int shipCount = Roster.AllShips.Values
                     .Where(s => s.Owner.Id != HostShip.Owner.Id)
                     .Where(s =>
                     {
