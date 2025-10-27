@@ -1,11 +1,12 @@
-﻿using Ship;
-using Upgrade;
-using UnityEngine;
+﻿using Conditions;
+using Content;
+using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Conditions;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -20,14 +21,24 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.FirstOrder),
                 abilityType: typeof(Abilities.SecondEdition.KyloRenCrewAbility),
-                addForce: 1
+                addForce: 1,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             Avatar = new AvatarInfo(
                 Faction.FirstOrder,
                 new Vector2(286, 1)
             );
-        }        
+        }
+    }
+
+    public class KyloRenXWA : KyloRen
+    {
+        public KyloRenXWA() : base()
+        {
+            UpgradeInfo.Cost = 7;
+            UpgradeInfo.LegalityInfo = new() { Legality.XWA };
+        }
     }
 }
 
