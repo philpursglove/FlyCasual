@@ -32,8 +32,19 @@ namespace Ship.SecondEdition.ResistanceTransport
     {
         public LogisticsDivisionPilotXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 4;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 18;
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Astromech,
+                UpgradeType.Astromech,
+                UpgradeType.Crew,
+                UpgradeType.Crew,
+                UpgradeType.Modification,
+                UpgradeType.Tech,
+                UpgradeType.Cannon,
+                UpgradeType.Torpedo
+            };
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
