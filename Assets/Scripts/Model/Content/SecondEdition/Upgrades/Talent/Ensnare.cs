@@ -28,6 +28,7 @@ namespace UpgradesList.SecondEdition
         {
             UpgradeInfo.Limited = 2;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Cost = 10;
         }
     }
 }
