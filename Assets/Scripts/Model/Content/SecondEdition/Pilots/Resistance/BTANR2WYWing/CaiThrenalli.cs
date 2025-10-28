@@ -40,7 +40,7 @@ namespace Ship.SecondEdition.BTANR2WYWing
 
             PilotNameCanonical = "caithrenalli-btanr2wywing";
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/pilots/caithrenalli-btanr2ywing.png";
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/caithrenalli-wartime.png";
         }
     }
 }

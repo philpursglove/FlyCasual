@@ -36,6 +36,10 @@ namespace Ship.SecondEdition.BTANR2WYWing
                 skinName: "Red",
                 legality: new List<Legality> { Legality.XWA }
             );
+
+            PilotNameCanonical = "aftabackbar-btanr2wywing";
+
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/aftabackbar-wartime.png";
         }
     }
 }
