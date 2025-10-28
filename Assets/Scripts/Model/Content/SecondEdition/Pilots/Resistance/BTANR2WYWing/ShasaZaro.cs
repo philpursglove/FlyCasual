@@ -37,6 +37,10 @@ namespace Ship.SecondEdition.BTANR2WYWing
                 skinName: "Red",
                 legality: new List<Legality> { Legality.XWA }
             );
+
+            PilotNameCanonical = "shasazaro-btanr2wywing";
+
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/shasazaro-wartime.png";
         }
     }
 }
