@@ -121,6 +121,7 @@ namespace Abilities.SecondEdition
 
         private void RegisterDealDamageToEnemyShipsAtRange(GenericShip ship)
         {
+            CheckOverlap();
             RegisterAbilityTrigger(TriggerTypes.OnCombatActivation, DealDamageToEnemyShipsAtRange);
         }
 
