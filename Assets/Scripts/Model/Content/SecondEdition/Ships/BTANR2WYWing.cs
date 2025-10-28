@@ -15,13 +15,12 @@ namespace Ship.SecondEdition.BTANR2WYWing
         {
             ShipCardInfo25 shipInfo = ShipInfo as ShipCardInfo25;
             shipInfo.ShipName = "BTA-NR2-W Y-wing";
-            shipInfo.UpgradeIcons.Upgrades.Add(UpgradeType.Configuration);
             shipInfo.LegalityInfo = new List<Legality>() { Legality.XWA };
             shipInfo.FactionData = new FactionData(new Dictionary<Faction, Type> { { Faction.Resistance, typeof(ZoriiBliss) } });
+            shipInfo.Shields = 5;
 
             ShipAbilities.Remove(ShipAbilities.First(n => n.GetType() == typeof(IntuitiveInterfaceAbility)));
-
-            DefaultUpgrades.Add(typeof(WartimeLoadout));
+            ShipAbilities.Add(new DevastatingBarrageAbility());
         }
     }
 }
