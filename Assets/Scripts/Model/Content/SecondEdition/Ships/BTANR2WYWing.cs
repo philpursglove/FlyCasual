@@ -4,8 +4,6 @@ using Ship.CardInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Upgrade;
-using UpgradesList.SecondEdition;
 
 namespace Ship.SecondEdition.BTANR2WYWing
 {
