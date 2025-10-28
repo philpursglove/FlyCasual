@@ -1,8 +1,6 @@
 ﻿using BoardTools;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace Ship
@@ -194,21 +192,25 @@ namespace Ship
         private Dictionary<string, Vector3> GetPoints(Dictionary<string, Vector3> points)
         {
             Dictionary<string, Vector3> edges = new Dictionary<string, Vector3>();
-            foreach (var obj in points)
+            foreach (KeyValuePair<string, Vector3> obj in points)
             {
+                if (Host.Model.transform == null) continue;
+
                 Vector3 globalPosition = Host.Model.transform.TransformPoint(obj.Value);
                 edges.Add(obj.Key, globalPosition);
             }
+
             return edges;
         }
 
         public List<Vector3> GetGlobalPoints(List<Vector3> localPoints)
         {
             List<Vector3> globalPoints = new List<Vector3>();
-            foreach (var localPoint in localPoints)
+            foreach (Vector3 localPoint in localPoints)
             {
                 globalPoints.Add(GetGlobalPoint(localPoint));
             }
+
             return globalPoints;
         }
 
@@ -229,7 +231,7 @@ namespace Ship
             Vector3 zoneEnd = zone.transform.TransformPoint(0.5f, 0.5f, 0.5f);
             bool result = true;
 
-            foreach (var point in GetStandEdgePoints())
+            foreach (KeyValuePair<string, Vector3> point in GetStandEdgePoints())
             {
                 if ((point.Value.x < zoneStart.x) || (point.Value.z < zoneStart.z) || (point.Value.x > zoneEnd.x) || (point.Value.z > zoneEnd.z))
                 {
@@ -237,6 +239,7 @@ namespace Ship
                     break;
                 }
             }
+
             return result;
         }
 
