@@ -11,7 +11,7 @@ App Features:
 # What is Fly Casual
 Fly Casual is a fan-made simulator for the ["Star Wars: X-Wing Miniatures Game"](https://www.fantasyflightgames.com/en/products/x-wing), maintained by [Atomic Mass Games](https://www.atomicmassgames.com/xwing-docs/).
 
-Features (From [Fly Casual](https://github.com/Sandrem/FlyCasual/)):
+Features:
 * Available platforms: Windows, Mac, Linux, Android.
 * 3D (2D mode is supported).
 * Full automation of rules and abilities. Examples of gameplay: [v0.4.3](https://www.youtube.com/watch?v=YhYvjnKx1P8), [v0.2.0](https://www.youtube.com/watch?v=UhOgTgrdswM)
@@ -30,8 +30,8 @@ Notes:
 * This game is in development. Not all rules and content are present. Online multiplayer is not stable.
 * If you encounter a bug - please [report it](https://github.com/Baledin/FlyCasual/issues) (don't forget to provide a screenshot and description of how to reproduce the bug)
 * Tutorial is not included. If you don't know how to play the game, see [official tutorial](https://www.youtube.com/watch?v=PuhwSma960Y).
-* Code is open-source. If you want to help in development (programming, 3d-models, 2d-art, UI etc), contact me on [reddit](https://www.reddit.com/user/Sandrem_FlyCasual/) or [FFG forum](https://community.fantasyflightgames.com/profile/263695-sandrem/). Also some information about the code is present in [WIKI](https://github.com/Sandrem/FlyCasual/wiki/Developer-Support)
-* Please, don't forget to buy real models by FFG and play in real-life tournaments.
+* Code is open-source. If you want to help in development (programming, 3d-models, 2d-art, UI etc), contact me on [reddit](https://www.reddit.com/user/Baledin/) or [Discord](https://discord.gg/2GyxSg83UQ).
+* Please, don't forget to buy real models by FFG/AMG and play in real-life tournaments.
 
 Links:
 * [Download](https://github.com/Baledin/FlyCasual/releases)
