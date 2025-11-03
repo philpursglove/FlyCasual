@@ -37,6 +37,10 @@ namespace Ship.SecondEdition.BTANR2WYWing
                 skinName: "Orange",
                 legality: new List<Legality> { Legality.XWA }
             );
+
+            PilotNameCanonical = "wilsateshlo-btanr2wywing";
+
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/wilsateshlo-wartime.png";
         }
     }
 }

@@ -34,6 +34,10 @@ namespace Ship.SecondEdition.BTANR2WYWing
                 skinName: "Blue",
                 legality: new List<Legality> { Legality.XWA }
             );
+
+            PilotNameCanonical = "newrepublicpatrol-btanr2wywing";
+
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/newrepublicpatrol-wartime.png";
         }
     }
 }
