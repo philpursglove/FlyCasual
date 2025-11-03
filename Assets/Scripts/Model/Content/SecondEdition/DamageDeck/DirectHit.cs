@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
@@ -15,7 +12,7 @@ namespace DamageDeckCardSE
             Name = "Direct Hit";
             Type = CriticalCardType.Ship;
             AiAvoids = true;
-            ImageUrl = "https://i.imgur.com/hmybQQt.jpg";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/directhit.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)

@@ -1,8 +1,5 @@
 ﻿using Ship;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
@@ -13,7 +10,7 @@ namespace DamageDeckCardSE
         {
             Name = "Damaged Engine";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://i.imgur.com/5EbccV2.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/damagedengine.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)

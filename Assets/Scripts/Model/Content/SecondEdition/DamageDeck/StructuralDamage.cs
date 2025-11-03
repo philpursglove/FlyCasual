@@ -1,8 +1,5 @@
 ﻿using Ship;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
@@ -14,13 +11,13 @@ namespace DamageDeckCardSE
             Name = "Structural Damage";
             Type = CriticalCardType.Ship;
             CancelDiceResults.Add(DieSide.Success);
-            ImageUrl = "https://i.imgur.com/jINTEHu.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/structuraldamage.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
         {
             Host.AfterGotNumberOfDefenceDice += DebuffDefenceRolls;
-                        
+
             Host.Tokens.AssignCondition(typeof(Tokens.StructuralDamageSECritToken));
             Triggers.FinishTrigger();
         }
@@ -33,7 +30,7 @@ namespace DamageDeckCardSE
                 dice--;
             }
         }
-                
+
         public override void DiscardEffect()
         {
             base.DiscardEffect();

@@ -1,8 +1,5 @@
 ﻿using Ship;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
@@ -10,12 +7,12 @@ namespace DamageDeckCardSE
     {
         public ConsoleFire()
         {
-            ImageUrl = "https://i.imgur.com/Q1Te8M5.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/consolefire.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
         {
-            Host.OnCombatActivation += PlanRollForDamage;            
+            Host.OnCombatActivation += PlanRollForDamage;
             Host.OnGenerateActions += CallAddCancelCritAction;
             Host.OnShipIsDestroyed += DiscardEffect;
 
@@ -92,7 +89,8 @@ namespace DamageDeckCardSE
             Phases.StartTemporarySubPhaseOld(
                 "Console Fire",
                 typeof(SubPhases.ConsoleFireCheckSubPhase),
-                delegate {
+                delegate
+                {
                     Phases.FinishSubPhase(typeof(SubPhases.ConsoleFireCheckSubPhase));
                     Triggers.FinishTrigger();
                 });

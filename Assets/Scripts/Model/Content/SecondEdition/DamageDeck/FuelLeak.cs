@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Ship;
-using UnityEngine;
+﻿using Ship;
+using System;
 
 namespace DamageDeckCardSE
 {
@@ -15,7 +12,7 @@ namespace DamageDeckCardSE
         {
             Name = "Fuel Leak";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://i.imgur.com/cPQWoCr.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/fuelleak.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)

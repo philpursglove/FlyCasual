@@ -1,9 +1,6 @@
 ﻿using ActionsList;
 using Ship;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
@@ -14,7 +11,7 @@ namespace DamageDeckCardSE
         {
             Name = "Damaged Sensor Array";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://i.imgur.com/CjBmc82.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/damagedsensorarray.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)

@@ -1,8 +1,5 @@
 ﻿using Ship;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
@@ -13,7 +10,7 @@ namespace DamageDeckCardSE
         {
             Name = "Loose Stabilizer";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://i.imgur.com/GQsqgWs.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/loosestabilizer.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -30,7 +27,7 @@ namespace DamageDeckCardSE
             base.DiscardEffect();
 
             Messages.ShowInfo("The Loose Stabilizer has been locked down:  " + Host.PilotInfo.PilotName + " no longer takes damage after performing non-straight maneuvers");
-           
+
             Host.Tokens.RemoveCondition(typeof(Tokens.LooseStabilizerSECritToken));
             Host.OnMovementFinish -= PlanDamageAfterNonStraightManeuvers;
             Host.OnGenerateActions -= CallAddCancelCritAction;
@@ -71,7 +68,7 @@ namespace DamageDeckCardSE
         {
             DiscardEffect();
             Triggers.FinishTrigger();
-        }    
+        }
     }
 }
 

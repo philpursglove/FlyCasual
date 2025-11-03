@@ -1,9 +1,6 @@
 ﻿using Ship;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Tokens;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
@@ -13,7 +10,7 @@ namespace DamageDeckCardSE
         {
             Name = "Disabled Power Regulator";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://i.imgur.com/DB5EaO0.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/disabledpowerregulator.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
