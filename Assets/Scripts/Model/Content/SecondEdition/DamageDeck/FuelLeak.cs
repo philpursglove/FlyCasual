@@ -77,7 +77,7 @@ namespace Tokens
     {
         public FuelLeakCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/cPQWoCr.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/fuelleak.png";
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Tokens
     {
         public DamagedEngineSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/5EbccV2.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/damagedengine.png";
         }
     }
 }

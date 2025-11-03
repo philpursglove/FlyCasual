@@ -52,7 +52,7 @@ namespace Tokens
     {
         public DamagedSensorArraySECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/CjBmc82.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/damagedsensorarray.png";
         }
     }
 }

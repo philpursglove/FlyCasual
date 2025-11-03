@@ -53,7 +53,7 @@ namespace Tokens
     {
         public BlindedPilotSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/qYZJv8y.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/blindedpilot.png";
         }
     }
 }

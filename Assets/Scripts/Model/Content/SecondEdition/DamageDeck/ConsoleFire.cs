@@ -169,7 +169,7 @@ namespace Tokens
     {
         public ConsoleFireSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/Q1Te8M5.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/consolefire.png";
         }
     }
 }

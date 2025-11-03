@@ -48,7 +48,7 @@ namespace Tokens
     {
         public StructuralDamageSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/jINTEHu.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/structuraldamage.png";
         }
     }
 }

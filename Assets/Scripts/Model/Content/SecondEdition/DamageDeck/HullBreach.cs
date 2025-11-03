@@ -52,7 +52,7 @@ namespace Tokens
     {
         public HullBreachCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/7kMiJdl.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/hullbreach.png";
         }
     }
 }

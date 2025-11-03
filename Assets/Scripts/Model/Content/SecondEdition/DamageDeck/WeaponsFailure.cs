@@ -50,7 +50,7 @@ namespace Tokens
     {
         public WeaponsFailureSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/GmoA8km.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/weaponsfailure.png";
         }
     }
 }

@@ -78,7 +78,7 @@ namespace Tokens
     {
         public LooseStabilizerSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/GQsqgWs.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/loosestabilizer.png";
         }
     }
 }

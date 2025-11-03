@@ -71,7 +71,7 @@ namespace Tokens
     {
         public DisabledPowerRegulatorCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/DB5EaO0.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/disabledpowerregulator.png";
         }
     }
 }

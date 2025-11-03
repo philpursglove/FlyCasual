@@ -117,7 +117,7 @@ namespace Tokens
     {
         public WoundedPilotCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/t8QRIOh.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/woundedpilot.png";
         }
     }
 }
