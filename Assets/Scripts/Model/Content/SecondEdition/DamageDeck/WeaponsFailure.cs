@@ -3,14 +3,13 @@ using System;
 
 namespace DamageDeckCardSE
 {
-
     public class WeaponsFailure : GenericDamageCard
     {
         public WeaponsFailure()
         {
             Name = "Weapons Failure";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/weaponsfailure.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/13_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -39,9 +38,7 @@ namespace DamageDeckCardSE
 
             value--;
         }
-
     }
-
 }
 
 namespace Tokens
@@ -50,7 +47,7 @@ namespace Tokens
     {
         public WeaponsFailureSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/weaponsfailure.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/13_damagecard.png";
         }
     }
 }

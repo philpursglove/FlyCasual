@@ -11,7 +11,7 @@ namespace DamageDeckCardSE
         {
             Name = "Wounded Pilot";
             Type = CriticalCardType.Pilot;
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/woundedpilot.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/05_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -62,7 +62,6 @@ namespace DamageDeckCardSE
 
 namespace SubPhases
 {
-
     public class WoundedPilotCheckSubPhase : DiceRollCheckSubPhase
     {
         public GenericShip HostShip;
@@ -117,7 +116,7 @@ namespace Tokens
     {
         public WoundedPilotCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/woundedpilot.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/05_damagecard.png";
         }
     }
 }

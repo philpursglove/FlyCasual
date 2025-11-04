@@ -3,14 +3,13 @@ using System;
 
 namespace DamageDeckCardSE
 {
-
     public class StunnedPilot : GenericDamageCard
     {
         public StunnedPilot()
         {
             Name = "Stunned Pilot";
             Type = CriticalCardType.Pilot;
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/stunnedpilot.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/07_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -56,7 +55,6 @@ namespace DamageDeckCardSE
         }
 
     }
-
 }
 
 namespace Tokens
@@ -65,7 +63,7 @@ namespace Tokens
     {
         public StunnedPilotSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/stunnedpilot.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/07_damagecard.png";
         }
     }
 }

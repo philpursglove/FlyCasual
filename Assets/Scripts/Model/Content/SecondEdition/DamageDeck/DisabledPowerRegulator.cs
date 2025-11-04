@@ -10,7 +10,7 @@ namespace DamageDeckCardSE
         {
             Name = "Disabled Power Regulator";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/disabledpowerregulator.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/23_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace Tokens
     {
         public DisabledPowerRegulatorCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/disabledpowerregulator.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/23_damagecard.png";
         }
     }
 }

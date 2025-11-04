@@ -3,7 +3,6 @@ using System;
 
 namespace DamageDeckCardSE
 {
-
     public class StructuralDamage : GenericDamageCard
     {
         public StructuralDamage()
@@ -11,7 +10,7 @@ namespace DamageDeckCardSE
             Name = "Structural Damage";
             Type = CriticalCardType.Ship;
             CancelDiceResults.Add(DieSide.Success);
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/structuraldamage.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/17_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -39,7 +38,6 @@ namespace DamageDeckCardSE
             Host.AfterGotNumberOfDefenceDice -= DebuffDefenceRolls;
         }
     }
-
 }
 
 namespace Tokens
@@ -48,7 +46,7 @@ namespace Tokens
     {
         public StructuralDamageSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/structuraldamage.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/17_damagecard.png";
         }
     }
 }

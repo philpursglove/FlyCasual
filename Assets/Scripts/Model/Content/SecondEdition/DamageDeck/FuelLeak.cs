@@ -12,7 +12,7 @@ namespace DamageDeckCardSE
         {
             Name = "Fuel Leak";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/fuelleak.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/27_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace Tokens
     {
         public FuelLeakCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/fuelleak.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/27_damagecard.png";
         }
     }
 }

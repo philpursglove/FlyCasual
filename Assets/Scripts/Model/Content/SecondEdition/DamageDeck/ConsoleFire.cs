@@ -7,7 +7,7 @@ namespace DamageDeckCardSE
     {
         public ConsoleFire()
         {
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/consolefire.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/09_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -169,7 +169,7 @@ namespace Tokens
     {
         public ConsoleFireSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/consolefire.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/09_damagecard.png";
         }
     }
 }

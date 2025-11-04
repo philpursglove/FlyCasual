@@ -10,7 +10,7 @@ namespace DamageDeckCardSE
         {
             Name = "Damaged Engine";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/damagedengine.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/11_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace Tokens
     {
         public DamagedEngineSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/damagedengine.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/11_damagecard.png";
         }
     }
 }

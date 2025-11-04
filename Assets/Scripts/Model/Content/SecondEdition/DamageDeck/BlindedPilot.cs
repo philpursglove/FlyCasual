@@ -11,7 +11,7 @@ namespace DamageDeckCardSE
             Name = "Blinded Pilot";
             Type = CriticalCardType.Pilot;
             AiAvoids = true;
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/blindedpilot.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/03_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace Tokens
     {
         public BlindedPilotSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/blindedpilot.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/03_damagecard.png";
         }
     }
 }

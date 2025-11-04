@@ -3,14 +3,13 @@ using System;
 
 namespace DamageDeckCardSE
 {
-
     public class LooseStabilizer : GenericDamageCard
     {
         public LooseStabilizer()
         {
             Name = "Loose Stabilizer";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/loosestabilizer.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/21_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -78,7 +77,7 @@ namespace Tokens
     {
         public LooseStabilizerSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/loosestabilizer.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/21_damagecard.png";
         }
     }
 }
