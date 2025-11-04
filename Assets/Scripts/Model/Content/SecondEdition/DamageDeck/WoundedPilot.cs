@@ -1,10 +1,7 @@
 ﻿using Ship;
 using SubPhases;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Tokens;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
@@ -14,11 +11,11 @@ namespace DamageDeckCardSE
         {
             Name = "Wounded Pilot";
             Type = CriticalCardType.Pilot;
-            ImageUrl = "https://i.imgur.com/t8QRIOh.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/05_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
-        {            
+        {
             Host.OnGenerateActions += CallAddCancelCritAction;
             Host.OnActionIsPerformed += AfterPerformingActionRollForStress;
 
@@ -60,12 +57,10 @@ namespace DamageDeckCardSE
             Host.OnActionIsPerformed -= AfterPerformingActionRollForStress;
         }
     }
-
 }
 
 namespace SubPhases
 {
-
     public class WoundedPilotCheckSubPhase : DiceRollCheckSubPhase
     {
         public GenericShip HostShip;
@@ -86,7 +81,7 @@ namespace SubPhases
         {
             HideDiceResultMenu();
 
-            switch(CurrentDiceRoll.DiceList[0].Side)
+            switch (CurrentDiceRoll.DiceList[0].Side)
             {
                 case DieSide.Success:
                 case DieSide.Crit:
@@ -95,7 +90,7 @@ namespace SubPhases
                 default:
                     NoStress();
                     break;
-            }            
+            }
 
         }
 
@@ -120,7 +115,7 @@ namespace Tokens
     {
         public WoundedPilotCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/t8QRIOh.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/05_damagecard.png";
         }
     }
 }

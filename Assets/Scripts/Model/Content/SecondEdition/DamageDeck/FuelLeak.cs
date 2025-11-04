@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Ship;
-using UnityEngine;
+﻿using Ship;
+using System;
 
 namespace DamageDeckCardSE
 {
@@ -15,7 +12,7 @@ namespace DamageDeckCardSE
         {
             Name = "Fuel Leak";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://i.imgur.com/cPQWoCr.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/27_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -43,13 +40,13 @@ namespace DamageDeckCardSE
                         Name = "Fuel Leak",
                         TriggerType = TriggerTypes.OnDamageWasSuccessfullyDealt,
                         TriggerOwner = ship.Owner.PlayerNo,
-                        EventHandler = SufferAdditonalDamage,
+                        EventHandler = SufferAdditionalDamage,
                     });
                 }
             }
         }
 
-        private void SufferAdditonalDamage(object sender, System.EventArgs e)
+        private void SufferAdditionalDamage(object sender, System.EventArgs e)
         {
             Messages.ShowInfo("Fuel Leak causes " + Host.PilotInfo.PilotName + " to suffer 1 additional Hit");
 
@@ -80,7 +77,7 @@ namespace Tokens
     {
         public FuelLeakCritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/cPQWoCr.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/27_damagecard.png";
         }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
-
     public class DirectHit : GenericDamageCard
     {
         DiceRoll SavedAssignedDamageDiceRoll;
@@ -15,7 +11,7 @@ namespace DamageDeckCardSE
             Name = "Direct Hit";
             Type = CriticalCardType.Ship;
             AiAvoids = true;
-            ImageUrl = "https://i.imgur.com/hmybQQt.jpg";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/29_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
