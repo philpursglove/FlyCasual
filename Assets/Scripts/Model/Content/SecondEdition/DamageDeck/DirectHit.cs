@@ -2,7 +2,6 @@
 
 namespace DamageDeckCardSE
 {
-
     public class DirectHit : GenericDamageCard
     {
         DiceRoll SavedAssignedDamageDiceRoll;

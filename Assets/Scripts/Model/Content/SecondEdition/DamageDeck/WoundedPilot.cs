@@ -57,7 +57,6 @@ namespace DamageDeckCardSE
             Host.OnActionIsPerformed -= AfterPerformingActionRollForStress;
         }
     }
-
 }
 
 namespace SubPhases

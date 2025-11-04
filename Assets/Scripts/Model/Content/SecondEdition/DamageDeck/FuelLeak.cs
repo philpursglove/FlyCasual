@@ -40,13 +40,13 @@ namespace DamageDeckCardSE
                         Name = "Fuel Leak",
                         TriggerType = TriggerTypes.OnDamageWasSuccessfullyDealt,
                         TriggerOwner = ship.Owner.PlayerNo,
-                        EventHandler = SufferAdditonalDamage,
+                        EventHandler = SufferAdditionalDamage,
                     });
                 }
             }
         }
 
-        private void SufferAdditonalDamage(object sender, System.EventArgs e)
+        private void SufferAdditionalDamage(object sender, System.EventArgs e)
         {
             Messages.ShowInfo("Fuel Leak causes " + Host.PilotInfo.PilotName + " to suffer 1 additional Hit");
 
