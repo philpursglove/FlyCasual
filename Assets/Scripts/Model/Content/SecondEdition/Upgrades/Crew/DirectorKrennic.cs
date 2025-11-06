@@ -91,7 +91,7 @@ namespace Conditions
             Name = ImageName = "Optimized Prototype Condition";
             Temporary = false;
 
-            Tooltip = "https://raw.githubusercontent.com/Sandrem/xwing-data2-test/master/images/conditions/optimized-prototype.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/optimizedprototype.png";
         }
 
         public override void WhenAssigned()
@@ -397,7 +397,7 @@ namespace Conditions
         {
             Name = ImageName = "Optimized Prototype Condition";
             Temporary = false;
-            Tooltip = "https://raw.githubusercontent.com/guidokessels/xwing-data/master/images/conditions/optimized-prototype.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/optimizedprototype.png";
         }
 
         public override void WhenAssigned()

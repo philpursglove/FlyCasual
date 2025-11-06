@@ -57,7 +57,7 @@ namespace Abilities.SecondEdition
                             TriggerOwner = HostShip.Owner.PlayerNo,
                             EventHandler = ForceRegen
                         }
-                    );                
+                    );
             }
         }
 
@@ -132,7 +132,7 @@ namespace Conditions
             Name = ImageName = "Merciless Pursuit Condition";
             Temporary = false;
 
-            Tooltip = "https://i.imgur.com/K9qa95i.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/mercilesspursuit.png";
         }
 
         public override void WhenAssigned()

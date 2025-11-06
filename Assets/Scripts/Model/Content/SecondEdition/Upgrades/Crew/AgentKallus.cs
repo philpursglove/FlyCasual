@@ -1,10 +1,10 @@
-﻿using Ship;
-using Upgrade;
-using UnityEngine;
-using Tokens;
-using System.Linq;
-using Conditions;
+﻿using Conditions;
+using Ship;
 using System;
+using System.Linq;
+using Tokens;
+using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -27,7 +27,7 @@ namespace UpgradesList.SecondEdition
                 new Vector2(290, 10),
                 new Vector2(125, 125)
             );
-        }        
+        }
     }
 }
 
@@ -50,7 +50,7 @@ namespace Abilities.SecondEdition
             Messages.ShowInfo("Agent Kallus is hunting " + targetShip.PilotInfo.PilotName + " (" + targetShip.ShipId + ")");
 
             // The difference with First Edition is that we keep track of the target with a condition token
-            targetShip.Tokens.AssignCondition( new HuntedCondition(targetShip) { SourceUpgrade = HostUpgrade } );
+            targetShip.Tokens.AssignCondition(new HuntedCondition(targetShip) { SourceUpgrade = HostUpgrade });
 
             HostShip.OnGenerateDiceModifications += AddAgentKallusDiceModification;
 
@@ -105,14 +105,14 @@ namespace Conditions
             Name = ImageName = "Hunted Condition";
             Temporary = false;
 
-            Tooltip = "https://raw.githubusercontent.com/Sandrem/xwing-data2-test/master/images/conditions/hunted.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/hunted.png";
         }
 
         public override void WhenAssigned()
         {
-            Host.OnShipIsDestroyed += RegisterTrigger;            
+            Host.OnShipIsDestroyed += RegisterTrigger;
         }
-                
+
         public override void WhenRemoved()
         {
             Host.OnShipIsDestroyed -= RegisterTrigger;
@@ -140,7 +140,7 @@ namespace Conditions
         }
 
         private void AssignConditionToAnotherFriendly(object sender, EventArgs e)
-        {            
+        {
             var otherFriendlies = Roster.GetPlayer(Host.Owner.PlayerNo).Ships.Values
                 .Where(s => s != null && !s.IsDestroyed && s.ShipId != Host.ShipId)
                 .ToArray();
@@ -162,7 +162,7 @@ namespace Conditions
                 var friendly = friendlyShip;
                 selectAllyDecisionSubPhase.AddDecision(
                     friendlyShip.ShipId + ": " + friendlyShip.PilotInfo.PilotName,
-                    delegate 
+                    delegate
                     {
                         SelectTarget(friendly);
                     }
@@ -171,16 +171,16 @@ namespace Conditions
 
             selectAllyDecisionSubPhase.DescriptionShort = "Hunted: Select another friendly ship";
 
-            GenericShip leastWorthAlly = otherFriendlies                
+            GenericShip leastWorthAlly = otherFriendlies
                 .OrderBy(ally => ally.State.Initiative)
                 .FirstOrDefault();
             selectAllyDecisionSubPhase.DefaultDecisionName = leastWorthAlly.ShipId + ": " + leastWorthAlly.PilotInfo.PilotName;
             selectAllyDecisionSubPhase.RequiredPlayer = Host.Owner.PlayerNo;
-            selectAllyDecisionSubPhase.Start();            
+            selectAllyDecisionSubPhase.Start();
         }
 
         private class HuntedDecisionSubPhase : SubPhases.DecisionSubPhase { }
-                
+
         private void SelectTarget(GenericShip targetShip)
         {
             Messages.ShowInfo("Hunted: " + targetShip.PilotInfo.PilotName + " (" + targetShip.ShipId + ") is selected");

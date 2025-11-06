@@ -302,7 +302,7 @@ namespace Conditions
         {
             Name = ImageName = "I'll Show You The Dark Side Condition";
             Temporary = false;
-            Tooltip = "https://raw.githubusercontent.com/guidokessels/xwing-data/master/images/conditions/ill-show-you-the-dark-side.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/illshowyouthedarkside.png";
         }
     }
 

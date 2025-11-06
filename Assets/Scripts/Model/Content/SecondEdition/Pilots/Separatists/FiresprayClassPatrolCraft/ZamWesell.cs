@@ -122,8 +122,8 @@ namespace Abilities.SecondEdition
                 },
                 tooltips: new Dictionary<string, string>()
                 {
-                    { "You Should Thank Me", "https://images-cdn.fantasyflightgames.com/filer_public/30/68/3068be81-f299-4c69-b5ee-307ac1da9c89/swz82_a1_thank-me.png" },
-                    { "You'd Better Mean Business", "https://images-cdn.fantasyflightgames.com/filer_public/24/92/2492e698-3402-4ec8-9a8d-bc7e30aea98c/swz82_a1_mean-business.png" }
+                    { "You Should Thank Me", "https://infinitearenas.com/xw2/images/conditions/youshouldthankme.png" },
+                    { "You'd Better Mean Business", "https://infinitearenas.com/xw2/images/conditions/youdbettermeanbusiness.png" }
                 },
                 defaultDecision: GetDefaultDecision(),
                 requiredPlayer: HostShip.Owner.PlayerNo
@@ -466,7 +466,7 @@ namespace Conditions
         public YouShouldThankMeCondition(GenericShip host) : base(host)
         {
             Name = "You Should Thank Me";
-            Tooltip = (IsRevealed) ? "https://images-cdn.fantasyflightgames.com/filer_public/30/68/3068be81-f299-4c69-b5ee-307ac1da9c89/swz82_a1_thank-me.png" : null;
+            Tooltip = (IsRevealed) ? "https://infinitearenas.com/xw2/images/conditions/youshouldthankme.png" : null;
         }
     }
 
@@ -475,7 +475,7 @@ namespace Conditions
         public YoudBetterMeanBusiness(GenericShip host) : base(host)
         {
             Name = "You'd Better Mean Business";
-            Tooltip = (IsRevealed) ? "https://images-cdn.fantasyflightgames.com/filer_public/24/92/2492e698-3402-4ec8-9a8d-bc7e30aea98c/swz82_a1_mean-business.png" : null;
+            Tooltip = (IsRevealed) ? "https://infinitearenas.com/xw2/images/conditions/youdbettermeanbusiness.png" : null;
         }
     }
 }

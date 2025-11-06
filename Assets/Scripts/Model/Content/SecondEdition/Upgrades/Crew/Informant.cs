@@ -32,7 +32,7 @@ namespace UpgradesList.SecondEdition
                 Faction.Scum,
                 new Vector2(474, 20)
             );
-        }        
+        }
     }
 
     public class InformantXWA : Informant
@@ -48,7 +48,7 @@ namespace UpgradesList.SecondEdition
 namespace Abilities.SecondEdition
 {
     public class InformantAbility : GenericAbility
-    {       
+    {
         protected virtual string Prompt
         {
             get
@@ -68,7 +68,7 @@ namespace Abilities.SecondEdition
             Phases.Events.OnSetupEnd -= RegisterInformantAbility;
             Phases.Events.OnSystemsPhaseStart -= InformantRevealDial;
         }
-        
+
         private void RegisterInformantAbility()
         {
             Triggers.RegisterTrigger(new Trigger()
@@ -112,7 +112,7 @@ namespace Abilities.SecondEdition
             result = ship.State.Initiative;
             return result;
         }
-        
+
         private void InformantRevealDial()
         {
             // Listening Device: During the System Phase, if an enemy ship with the 
@@ -139,7 +139,7 @@ namespace Conditions
             Name = ImageName = "Debuff Token";
             Temporary = false;
 
-            Tooltip = "https://github.com/belk/xwing-data2-test/raw/listening-device/images/conditions/listening-device.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/listeningdevice.png";
         }
     }
 }

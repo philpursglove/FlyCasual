@@ -147,7 +147,7 @@ namespace Conditions
         {
             Name = ImageName = "Decoyed Condition";
             Temporary = false;
-            Tooltip = "https://images-cdn.fantasyflightgames.com/filer_public/7e/38/7e38aca8-b0ea-4ddc-8ec4-64efca1544c8/swz40_decoyed.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/decoyed.png";
         }
 
         public override void WhenAssigned()
