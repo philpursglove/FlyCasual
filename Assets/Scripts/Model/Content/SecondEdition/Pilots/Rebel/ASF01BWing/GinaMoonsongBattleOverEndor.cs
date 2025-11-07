@@ -5,7 +5,6 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -132,108 +131,4 @@ namespace Abilities.SecondEdition
             );
         }
     }
-
-    public class GyroCockpit : GenericAbility
-    {
-        // After you gain a stress token, you may spend 2 charges to gain an evade token.
-        // When you drop a device, you may spend 1 charge to set the template with its middle line aligned with the hashmark on your ship's left or right side instead of your rear guides
-
-        Direction selectedDirection = Direction.Bottom;
-
-        public override void ActivateAbility()
-        {
-            HostShip.OnTokenIsAssigned += RegisterEvadeAbility;
-            HostShip.BeforeBombWillBeDropped += RegisterDeviceDropAbility;
-        }
-
-        public override void DeactivateAbility()
-        {
-            HostShip.OnTokenIsAssigned -= RegisterEvadeAbility;
-            HostShip.BeforeBombWillBeDropped -= RegisterDeviceDropAbility;
-        }
-
-        private void RegisterEvadeAbility(GenericShip ship, GenericToken token)
-        {
-            if (token.GetType() == typeof(StressToken))
-            {
-                RegisterAbilityTrigger(TriggerTypes.OnTokenIsAssigned, AskUseEvadeAbility);
-            }
-        }
-
-        private void AskUseEvadeAbility(object sender, EventArgs e)
-        {
-            if (HostShip.State.Charges >= 2)
-            {
-                AskToUseAbility(
-                    descriptionShort: "Do you want to spend 2 charges to gain an evade token",
-                    useByDefault: NeverUseByDefault,
-                    useAbility: UseEvadeAbility,
-                    imageHolder: HostShip
-                );
-            }
-            else
-            {
-                Triggers.FinishTrigger();
-            }
-        }
-
-        private void UseEvadeAbility(object sender, EventArgs e)
-        {
-            HostShip.Tokens.AssignToken(new EvadeToken(HostShip), DecisionSubPhase.ConfirmDecision);
-            HostShip.SpendCharges(2);
-        }
-
-        private void RegisterDeviceDropAbility()
-        {
-            if (HostShip.State.Charges > 0)
-            {
-                RegisterAbilityTrigger(TriggerTypes.BeforeBombWillBeDropped, AskToUseDeviceDropAbility);
-            }
-        }
-
-        private void AskToUseDeviceDropAbility(object sender, EventArgs e)
-        {
-            AskForDecision(
-                descriptionShort: "Gyro-Cockpit",
-                descriptionLong: "Spend 1 ship charge to drop device using left or right side instead of rear guides?",
-                imageHolder: HostShip,
-                decisions: new() {
-                    { "Left", UseDeviceAbilityLeft },
-                    { "Right", UseDeviceAbilityRight }
-                },
-                tooltips: new(),
-                defaultDecision: "No",
-                callback: Triggers.FinishTrigger,
-                showSkipButton: true
-            );
-        }
-
-        private void UseDeviceAbility()
-        {
-            HostShip.OnGetBombTemplateDirection += GetDeviceDirection;
-            HostShip.SpendCharge();
-            Triggers.FinishTrigger();
-        }
-
-        private void UseDeviceAbilityLeft(object sender, EventArgs e)
-        {
-            selectedDirection = Direction.Left;
-            UseDeviceAbility();
-        }
-
-        private void UseDeviceAbilityRight(object sender, EventArgs e)
-        {
-            selectedDirection = Direction.Right;
-            UseDeviceAbility();
-        }
-
-        private void GetDeviceDirection(ref Direction direction)
-        {
-            HostShip.OnGetBombTemplateDirection -= GetDeviceDirection;
-            direction = selectedDirection;
-            selectedDirection = Direction.Bottom;
-        }
-    }
-}
-
 }
