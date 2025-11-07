@@ -108,7 +108,7 @@ namespace Abilities.SecondEdition
             return Combat.AttackStep == CombatStep.Attack
                 && Combat.Attacker == HostShip
                 && Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon
-                && (Combat.ShotInfo.InArcByType(Arcs.ArcType.Rear) || Combat.ShotInfo.InArcByType(Arcs.ArcType.Front))
+                && MeetsArcRequirements(Combat.Defender)
                 && (Combat.Defender.Tokens.HasTokenByColor(Tokens.TokenColors.Red) || Combat.Defender.Tokens.HasTokenByColor(Tokens.TokenColors.Orange));
         }
 
@@ -119,11 +119,15 @@ namespace Abilities.SecondEdition
 
             if (defender is GenericShip)
             {
-                GenericShip target = defender as GenericShip;
-                result = HostShip.SectorsInfo.GetSectorInfo(target, ArcType.Front).InArc || HostShip.SectorsInfo.GetSectorInfo(target, ArcType.Rear).InArc;
+                result = MeetsArcRequirements(defender as GenericShip);
             }
 
             return;
+        }
+
+        private bool MeetsArcRequirements(GenericShip target)
+        {
+            return HostShip.SectorsInfo.GetSectorInfo(target, ArcType.Front).InArc || HostShip.SectorsInfo.GetSectorInfo(target, ArcType.Rear).InArc;
         }
     }
 }
