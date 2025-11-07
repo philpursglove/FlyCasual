@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Arcs;
+using Ship;
 using SubPhases;
 using System;
 using Upgrade;
@@ -54,7 +55,7 @@ namespace Abilities.SecondEdition
 
         private void AskUseAbility(object sender, EventArgs e)
         {
-            
+
             AskToUseAbility(
                 HostUpgrade.UpgradeInfo.Name,
                 NeverUseByDefault,
@@ -81,7 +82,6 @@ namespace Abilities.SecondEdition
                 subphase.Start();
                 AllowRollAdditionalDie();
             }
-            
         }
 
         private void AllowRollAdditionalDie()
@@ -110,7 +110,6 @@ namespace Abilities.SecondEdition
                 && Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon
                 && (Combat.ShotInfo.InArcByType(Arcs.ArcType.Rear) || Combat.ShotInfo.InArcByType(Arcs.ArcType.Front))
                 && (Combat.Defender.Tokens.HasTokenByColor(Tokens.TokenColors.Red) || Combat.Defender.Tokens.HasTokenByColor(Tokens.TokenColors.Orange));
-                
         }
 
         private void CanPerformTargetLock(ref bool result, GenericShip ship, ITargetLockable defender)
@@ -120,7 +119,8 @@ namespace Abilities.SecondEdition
 
             if (defender is GenericShip)
             {
-                result = BoardTools.Board.IsShipInArcByType(HostShip, defender as GenericShip, Arcs.ArcType.Front) || BoardTools.Board.IsShipInArcByType(HostShip, defender as GenericShip, Arcs.ArcType.Rear);
+                GenericShip target = defender as GenericShip;
+                result = HostShip.SectorsInfo.GetSectorInfo(target, ArcType.Front).InArc || HostShip.SectorsInfo.GetSectorInfo(target, ArcType.Rear).InArc;
             }
 
             return;
