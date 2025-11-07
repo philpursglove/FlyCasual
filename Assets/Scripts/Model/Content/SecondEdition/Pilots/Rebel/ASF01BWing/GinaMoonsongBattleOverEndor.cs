@@ -1,4 +1,6 @@
 ﻿using Abilities.SecondEdition;
+using Actions;
+using ActionsList;
 using BoardTools;
 using Content;
 using Ship;
@@ -52,6 +54,9 @@ namespace Ship.SecondEdition.ASF01BWing
             MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Juke));
             MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ProtonTorpedoes));
             MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonBombs));
+
+            ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(ReloadAction), ActionColor.Red));
+            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BarrelRollAction), typeof(TargetLockAction)));
 
             ShipAbilities.Add(new GyroCockpit());
 
