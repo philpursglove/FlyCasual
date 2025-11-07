@@ -539,7 +539,7 @@ namespace SubPhases
 
             if (Phases.CurrentSubPhase.GetType() == typeof(SetupSubPhase))
             {
-                if (Selection.ThisShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlapedShips.Count > 0)
+                if (Selection.ThisShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlappedShips.Count > 0)
                 {
                     Messages.ShowErrorToHuman("This ship shouldn't overlap other ships");
                     result = false;

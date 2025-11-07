@@ -105,7 +105,7 @@ namespace Abilities.SecondEdition
         {
             bool result = true;
 
-            if (HostShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlapedAsteroids.Count == 0)
+            if (HostShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlappedAsteroids.Count == 0)
             {
                 Messages.ShowErrorToHuman("Boba Fett: Invalid location for this ship, the ship must be placed at range 0 of an asteroid");
                 return false;

@@ -95,7 +95,7 @@ namespace Movement
                     {
                         // Save information in which ships we are bumped
                         lastShipBumpDetector = obstacleStayDetector;
-                        if (ShipsBumpedOnTheEnd.Count == 0) ShipsBumpedOnTheEnd.AddRange(obstacleStayDetector.OverlapedShips);
+                        if (ShipsBumpedOnTheEnd.Count == 0) ShipsBumpedOnTheEnd.AddRange(obstacleStayDetector.OverlappedShips);
                     }
                     else
                     {
@@ -160,7 +160,7 @@ namespace Movement
         {
             if (lastShipBumpDetector != null)
             {
-                foreach (var overlapedShip in lastShipBumpDetector.OverlapedShips)
+                foreach (var overlapedShip in lastShipBumpDetector.OverlappedShips)
                 {
                     if (!ShipsBumped.Contains(overlapedShip))
                     {
@@ -177,12 +177,12 @@ namespace Movement
 
         private void ProcessObstaclesLanded(ObstaclesStayDetector obstacleStayDetector)
         {
-            LandedOnObstacles = new List<GenericObstacle>(obstacleStayDetector.OverlapedAsteroids);
+            LandedOnObstacles = new List<GenericObstacle>(obstacleStayDetector.OverlappedAsteroids);
         }
 
         private void ProcessRemotesOverlaps(ObstaclesStayDetector obstacleStayDetector)
         {
-            foreach (var overlapedRemote in obstacleStayDetector.OverlapedRemotes)
+            foreach (var overlapedRemote in obstacleStayDetector.OverlappedRemotes)
             {
                 if (!RemotesOverlapped.Contains(overlapedRemote))
                 {
@@ -193,7 +193,7 @@ namespace Movement
 
         private void ProcessObstaclesHit(ObstaclesStayDetector obstacleStayDetector)
         {
-            foreach (var asteroidHit in obstacleStayDetector.OverlapedAsteroids)
+            foreach (var asteroidHit in obstacleStayDetector.OverlappedAsteroids)
             {
                 if (!AsteroidsHit.Contains(asteroidHit))
                 {
@@ -204,7 +204,7 @@ namespace Movement
 
         private void ProcessMines(ObstaclesStayDetector obstacleStayDetector)
         {
-            foreach (var mineHit in obstacleStayDetector.OverlapedMines)
+            foreach (var mineHit in obstacleStayDetector.OverlappedMines)
             {
                 GenericDeviceGameObject MineObject = mineHit.transform.parent.GetComponent<GenericDeviceGameObject>();
                 if (!MinesHit.Contains(MineObject))
