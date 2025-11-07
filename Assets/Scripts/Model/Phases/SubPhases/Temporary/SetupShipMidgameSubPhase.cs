@@ -251,7 +251,7 @@ namespace SubPhases
             Roster.SetRaycastTargets(false);
             Roster.AllShipsHighlightOff();
             Board.HighlightStartingZones(SetupSide);
-            Selection.ThisShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlapedShips.Clear();
+            Selection.ThisShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlappedShips.Clear();
             Selection.ThisShip.Model.GetComponentInChildren<ObstaclesStayDetector>().checkCollisions = true;
             inReposition = true;
 
@@ -423,7 +423,7 @@ namespace SubPhases
                     result = false;
                 }
 
-                if (Selection.ThisShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlapedShips.Count > 0)
+                if (Selection.ThisShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlappedShips.Count > 0)
                 {
                     Messages.ShowErrorToHuman("This ship overlaps another ship, please try placing it again");
                     result = false;
