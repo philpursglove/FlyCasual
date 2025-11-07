@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 using Upgrade;
 
-
 namespace UpgradesList.SecondEdition
 {
     public class ItsATrap : GenericUpgrade
@@ -55,7 +54,7 @@ namespace Abilities.SecondEdition
             List<GenericShip> friendlyShipsInRangeOne = Board.GetShipsAtRange(HostShip, new Vector2(0, 1), Team.Type.Friendly).Where(ship => ship != HostShip).ToList();
             List<GenericShip> enemyShipsInRangeOne = Board.GetShipsAtRange(HostShip, new Vector2(0, 1), Team.Type.Enemy);
 
-            return friendlyShipsInRangeOne.Count > enemyShipsInRangeOne.Count && Combat.DiceRollDefence.Blanks > 0;
+            return Combat.Defender == HostShip && friendlyShipsInRangeOne.Count > enemyShipsInRangeOne.Count && Combat.DiceRollDefence.Blanks > 0;
         }
 
         private int GetDiceModificationAiPriority()
