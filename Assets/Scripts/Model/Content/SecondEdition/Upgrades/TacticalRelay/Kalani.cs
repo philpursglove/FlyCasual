@@ -33,8 +33,8 @@ namespace UpgradesList.SecondEdition
                 new Vector2(250, 1)
             );
 
-
-        }
+            
+        }        
     }
 }
 
@@ -99,17 +99,13 @@ namespace Abilities.SecondEdition
 
             HostUpgrade.State.SpendCharge();
             ActionsHolder.AcquireTargetLock(TargetShip, LastMovedShip, AssignStress, AssignStress);
+
+            Selection.ChangeActiveShip(LastMovedShip);
         }
 
         private void AssignStress()
         {
-            TargetShip.Tokens.AssignToken(typeof(StressToken), Cleanup);
-        }
-
-        private void Cleanup()
-        {
-            Selection.ChangeActiveShip(LastMovedShip);
-            Triggers.FinishTrigger();
+            TargetShip.Tokens.AssignToken(typeof(StressToken), Triggers.FinishTrigger);
         }
 
         private bool FilterTargets(GenericShip ship)
