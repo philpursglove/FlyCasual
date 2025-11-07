@@ -1,4 +1,9 @@
-﻿using System;
+﻿using BoardTools;
+using Ship;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Upgrade;
 
 
 namespace UpgradesList.SecondEdition
@@ -11,7 +16,7 @@ namespace UpgradesList.SecondEdition
                 "It's a Trap!",
                 UpgradeType.Talent,
                 cost: 0,
-                abilityType: typeof(ItsATrapAbility)
+                abilityType: typeof(Abilities.SecondEdition.ItsATrapAbility)
             );
 
             IsHidden = true;
