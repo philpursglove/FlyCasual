@@ -49,7 +49,7 @@ namespace Ship.SecondEdition.SheathipedeClassShuttle
     {
         public FennRauXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).Cost = 11;
             (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
                 {
