@@ -50,7 +50,7 @@ namespace Ship
         {
             public FennRauRebelXWA() : base()
             {
-                (PilotInfo as PilotCardInfo25).Cost = 13;
+                (PilotInfo as PilotCardInfo25).Cost = 11;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
                 {
