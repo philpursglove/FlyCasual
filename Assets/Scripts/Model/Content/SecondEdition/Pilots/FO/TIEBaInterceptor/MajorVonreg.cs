@@ -80,7 +80,7 @@ namespace Abilities.SecondEdition
 
         private void CheckForAbility(GenericShip ship, ref bool isAbilityActive)
         {
-            isAbilityActive = true;
+            isAbilityActive = Roster.AllShips.Values.Any(n => FilterTargets(n));
         }
 
         private void RegisterTrigger(GenericShip ship)
@@ -90,23 +90,15 @@ namespace Abilities.SecondEdition
 
         private void StartSelectShip(object sender, EventArgs e)
         {
-            if (Roster.AllShips.Values.Any(n => FilterTargets(n)))
-            {
-                SelectTargetForAbility(
-                    SelectShip,
-                    FilterTargets,
-                    GetAiPriority,
-                    HostShip.Owner.PlayerNo,
-                    HostShip.PilotInfo.PilotName,
-                    "You may choose a ship in your bullseye arc to assign Strain or Deplete token to it",
-                    HostShip
-                );
-            }
-            else
-            {
-                Messages.ShowErrorToHuman("There is no ships in bullseye arc");
-                Triggers.FinishTrigger();
-            }
+            SelectTargetForAbility(
+                SelectShip,
+                FilterTargets,
+                GetAiPriority,
+                HostShip.Owner.PlayerNo,
+                HostShip.PilotInfo.PilotName,
+                "You may choose a ship in your bullseye arc to assign Strain or Deplete token to it",
+                HostShip
+            );
         }
 
         private void SelectShip()

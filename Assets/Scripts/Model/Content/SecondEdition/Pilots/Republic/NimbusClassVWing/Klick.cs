@@ -47,7 +47,7 @@ namespace Ship
             public KlickXWA() : base()
             {
                 (PilotInfo as PilotCardInfo25).Cost = 10;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }

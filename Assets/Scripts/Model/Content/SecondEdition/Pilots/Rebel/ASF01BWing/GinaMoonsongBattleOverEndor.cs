@@ -1,11 +1,12 @@
 ﻿using Abilities.SecondEdition;
+using Actions;
+using ActionsList;
 using BoardTools;
 using Content;
 using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -52,6 +53,9 @@ namespace Ship.SecondEdition.ASF01BWing
             MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Juke));
             MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.ProtonTorpedoes));
             MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.IonBombs));
+
+            ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(ReloadAction), ActionColor.Red));
+            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BarrelRollAction), typeof(TargetLockAction)));
 
             ShipAbilities.Add(new GyroCockpit());
 
@@ -130,166 +134,6 @@ namespace Abilities.SecondEdition
                 DecisionSubPhase.ConfirmDecision,
                 DecisionSubPhase.ConfirmDecision
             );
-        }
-    }
-
-    public class ItsATrapAbility : GenericAbility
-    {
-        public override void ActivateAbility()
-        {
-            HostShip.OnAttackStartAsDefender += RegisterAbility;
-        }
-
-        public override void DeactivateAbility()
-        {
-            HostShip.OnAttackStartAsDefender -= RegisterAbility;
-        }
-
-        private void RegisterAbility()
-        {
-            AddDiceModification(
-                "It's a Trap! ability",
-                IsDiceModificationAvailable,
-                GetDiceModificationAiPriority,
-                DiceModificationType.Reroll,
-                1,
-                new List<DieSide> { DieSide.Blank }
-            );
-        }
-
-        private bool IsDiceModificationAvailable()
-        {
-            List<GenericShip> friendlyShipsInRangeOne = Board.GetShipsAtRange(HostShip, new Vector2(0, 1), Team.Type.Friendly).Where(ship => ship != HostShip).ToList();
-            List<GenericShip> enemyShipsInRangeOne = Board.GetShipsAtRange(HostShip, new Vector2(0, 1), Team.Type.Enemy);
-
-            return friendlyShipsInRangeOne.Count > enemyShipsInRangeOne.Count && Combat.DiceRollDefence.Blanks > 0;
-        }
-
-        private int GetDiceModificationAiPriority()
-        {
-            return 1000;
-        }
-    }
-
-    public class GyroCockpit : GenericAbility
-    {
-        // After you gain a stress token, you may spend 2 charges to gain an evade token.
-        // When you drop a device, you may spend 1 charge to set the template with its middle line aligned with the hashmark on your ship's left or right side instead of your rear guides
-
-        Direction selectedDirection = Direction.Bottom;
-
-        public override void ActivateAbility()
-        {
-            HostShip.OnTokenIsAssigned += RegisterEvadeAbility;
-            HostShip.BeforeBombWillBeDropped += RegisterDeviceDropAbility;
-        }
-
-        public override void DeactivateAbility()
-        {
-            HostShip.OnTokenIsAssigned -= RegisterEvadeAbility;
-            HostShip.BeforeBombWillBeDropped -= RegisterDeviceDropAbility;
-        }
-
-        private void RegisterEvadeAbility(GenericShip ship, GenericToken token)
-        {
-            if (token.GetType() == typeof(StressToken))
-            {
-                RegisterAbilityTrigger(TriggerTypes.OnTokenIsAssigned, AskUseEvadeAbility);
-            }
-        }
-
-        private void AskUseEvadeAbility(object sender, EventArgs e)
-        {
-            if (HostShip.State.Charges >= 2)
-            {
-                AskToUseAbility(
-                    descriptionShort: "Do you want to spend 2 charges to gain an evade token",
-                    useByDefault: NeverUseByDefault,
-                    useAbility: UseEvadeAbility,
-                    imageHolder: HostShip
-                );
-            }
-            else
-            {
-                Triggers.FinishTrigger();
-            }
-        }
-
-        private void UseEvadeAbility(object sender, EventArgs e)
-        {
-            HostShip.Tokens.AssignToken(new EvadeToken(HostShip), DecisionSubPhase.ConfirmDecision);
-            HostShip.SpendCharges(2);
-        }
-
-        private void RegisterDeviceDropAbility()
-        {
-            if (HostShip.State.Charges > 0)
-            {
-                RegisterAbilityTrigger(TriggerTypes.BeforeBombWillBeDropped, AskToUseDeviceDropAbility);
-            }
-        }
-
-        private void AskToUseDeviceDropAbility(object sender, EventArgs e)
-        {
-            AskForDecision(
-                descriptionShort: "Gyro-Cockpit",
-                descriptionLong: "Spend 1 ship charge to drop device using left or right side instead of rear guides?",
-                imageHolder: HostShip,
-                decisions: new() {
-                    { "Left", UseDeviceAbilityLeft },
-                    { "Right", UseDeviceAbilityRight }
-                },
-                tooltips: new(),
-                defaultDecision: "No",
-                callback: Triggers.FinishTrigger,
-                showSkipButton: true
-            );
-        }
-
-        private void UseDeviceAbility()
-        {
-            HostShip.OnGetBombTemplateDirection += GetDeviceDirection;
-            HostShip.SpendCharge();
-            Triggers.FinishTrigger();
-        }
-
-        private void UseDeviceAbilityLeft(object sender, EventArgs e)
-        {
-            selectedDirection = Direction.Left;
-            UseDeviceAbility();
-        }
-
-        private void UseDeviceAbilityRight(object sender, EventArgs e)
-        {
-            selectedDirection = Direction.Right;
-            UseDeviceAbility();
-        }
-
-        private void GetDeviceDirection(ref Direction direction)
-        {
-            HostShip.OnGetBombTemplateDirection -= GetDeviceDirection;
-            direction = selectedDirection;
-            selectedDirection = Direction.Bottom;
-        }
-    }
-}
-
-namespace UpgradesList.SecondEdition
-{
-    public class ItsATrap : GenericUpgrade
-    {
-        public ItsATrap() : base()
-        {
-            UpgradeInfo = new UpgradeCardInfo(
-                "It's a Trap!",
-                UpgradeType.Talent,
-                cost: 0,
-                abilityType: typeof(ItsATrapAbility)
-            );
-
-            IsHidden = true;
-
-            ImageUrl = HostShip != null ? HostShip.ImageUrl : "https://infinitearenas.com/xw2/images/quickbuilds/ginamoonsong-battleoverendor.png";
         }
     }
 }

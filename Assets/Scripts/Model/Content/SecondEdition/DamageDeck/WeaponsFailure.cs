@@ -1,19 +1,15 @@
 ﻿using Ship;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DamageDeckCardSE
 {
-
     public class WeaponsFailure : GenericDamageCard
     {
         public WeaponsFailure()
         {
             Name = "Weapons Failure";
             Type = CriticalCardType.Ship;
-            ImageUrl = "https://i.imgur.com/GmoA8km.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/13_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -42,9 +38,7 @@ namespace DamageDeckCardSE
 
             value--;
         }
-
     }
-
 }
 
 namespace Tokens
@@ -53,7 +47,7 @@ namespace Tokens
     {
         public WeaponsFailureSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/GmoA8km.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/13_damagecard.png";
         }
     }
 }

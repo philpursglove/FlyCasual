@@ -1,6 +1,8 @@
-﻿using Ship;
+﻿using Content;
+using Ship;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -17,8 +19,18 @@ namespace UpgradesList.SecondEdition
                 cost: 7,
                 abilityType: typeof(Abilities.SecondEdition.TheChildAbility),
                 restriction: new FactionRestriction(Faction.Imperial, Faction.Rebel, Faction.Scum),
-                addForce: 2
+                addForce: 2,
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+        }
+    }
+
+    public class TheChildXWA : TheChild
+    {
+        public TheChildXWA() : base()
+        {
+            UpgradeInfo.Cost = 9;
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -57,7 +69,7 @@ namespace Abilities.SecondEdition
                             TriggerOwner = HostShip.Owner.PlayerNo,
                             EventHandler = ForceRegen
                         }
-                    );                
+                    );
             }
         }
 
@@ -132,7 +144,7 @@ namespace Conditions
             Name = ImageName = "Merciless Pursuit Condition";
             Temporary = false;
 
-            Tooltip = "https://i.imgur.com/K9qa95i.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/mercilesspursuit.png";
         }
 
         public override void WhenAssigned()

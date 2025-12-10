@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using ActionsList;
+﻿using ActionsList;
 using Ship;
-using UnityEngine;
+using System;
 
 namespace DamageDeckCardSE
 {
@@ -14,7 +11,7 @@ namespace DamageDeckCardSE
             Name = "Blinded Pilot";
             Type = CriticalCardType.Pilot;
             AiAvoids = true;
-            ImageUrl = "https://i.imgur.com/qYZJv8y.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/damagecards/03_damagecard.png";
         }
 
         public override void ApplyEffect(object sender, EventArgs e)
@@ -27,7 +24,7 @@ namespace DamageDeckCardSE
         }
 
         private void RestrictActionEffectsToForceOnly(GenericShip ship, GenericAction diceModification, ref bool canBeUsed)
-        {            
+        {
             if (Combat.AttackStep == CombatStep.Attack
                 && Combat.Attacker.ShipId == Host.ShipId
                 && !(diceModification is ForceAction)
@@ -44,8 +41,8 @@ namespace DamageDeckCardSE
             Host.OnTryAddAvailableDiceModification -= RestrictActionEffectsToForceOnly;
             Host.OnGenerateActions -= CallAddCancelCritAction;
             Messages.ShowInfo(Host.PilotInfo.PilotName + " is no longer Blinded and may fully modify their attacks");
-            Host.Tokens.RemoveCondition(typeof(Tokens.BlindedPilotSECritToken));            
-        }         
+            Host.Tokens.RemoveCondition(typeof(Tokens.BlindedPilotSECritToken));
+        }
     }
 
 }
@@ -56,7 +53,7 @@ namespace Tokens
     {
         public BlindedPilotSECritToken(GenericShip host) : base(host)
         {
-            Tooltip = "https://i.imgur.com/qYZJv8y.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/damagecards/03_damagecard.png";
         }
     }
 }

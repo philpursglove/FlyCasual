@@ -114,7 +114,7 @@ namespace Conditions
         public RattledCondition(GenericShip host) : base(host)
         {
             Name = ImageName = "Debuff Token";
-            Tooltip = "https://i.imgur.com/GQqIKOn.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/rattled.png";
             Temporary = false;
         }
 

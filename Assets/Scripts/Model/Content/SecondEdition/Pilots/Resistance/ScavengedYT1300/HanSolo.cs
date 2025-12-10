@@ -55,7 +55,7 @@ namespace Ship.SecondEdition.ScavengedYT1300
         public HanSoloXWA() : base()
         {
             (PilotInfo as PilotCardInfo25).Cost = 18;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 23;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 19;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,

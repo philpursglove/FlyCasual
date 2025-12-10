@@ -1,15 +1,13 @@
-﻿using Ship;
-using Upgrade;
-using System.Linq;
+﻿using Actions;
 using ActionsList;
-using System;
-using System.Collections.Generic;
-using Actions;
-using SubPhases;
-using Tokens;
 using BoardTools;
 using Conditions;
+using Ship;
+using SubPhases;
+using System;
+using Tokens;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -33,7 +31,7 @@ namespace UpgradesList.SecondEdition
                 Faction.Republic,
                 new Vector2(339, 12)
             );
-        }        
+        }
     }
 }
 
@@ -198,7 +196,7 @@ namespace Conditions
             Name = ImageName = "It's The Resistance Condition";
             Temporary = false;
 
-            Tooltip = "https://vignette.wikia.nocookie.net/xwing-miniatures-second-edition/images/7/73/Swz45_its-the-resistance.png";
+            Tooltip = "https://infinitearenas.com/xw2/images/conditions/itstheresistance.png";
         }
 
         public override void WhenAssigned()
