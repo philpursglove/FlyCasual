@@ -5,58 +5,55 @@ using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.FangFighter
 {
-    namespace SecondEdition.FangFighter
+    public class BodicaVenj : FangFighter
     {
-        public class BodicaVenj : FangFighter
+        public BodicaVenj() : base()
         {
-            public BodicaVenj() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Bodica Venj",
-                    "Wrathful Warrior",
-                    Faction.Rebel,
-                    4,
-                    4,
-                    7,
-                    isLimited: true,
-                    abilityType: typeof(Abilities.SecondEdition.BodicaVenjAbility),
-                    extraUpgradeIcons: new List<UpgradeType>()
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Torpedo,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>()
-                    {
-                        Tags.Mandalorian
-                    },
-                    skinName: "Bodica Venj",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class BodicaVenjXWA : BodicaVenj
-        {
-            public BodicaVenjXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 12;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            PilotInfo = new PilotCardInfo25
+            (
+                "Bodica Venj",
+                "Wrathful Warrior",
+                Faction.Rebel,
+                4,
+                4,
+                7,
+                isLimited: true,
+                abilityType: typeof(Abilities.SecondEdition.BodicaVenjAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.Talent,
                     UpgradeType.Talent,
+                    UpgradeType.Torpedo,
                     UpgradeType.Modification,
-                    UpgradeType.Modification,
-                    UpgradeType.Torpedo
-                };
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Mandalorian
+                },
+                skinName: "Bodica Venj",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class BodicaVenjXWA : BodicaVenj
+    {
+        public BodicaVenjXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
+            {
+                UpgradeType.Talent,
+                UpgradeType.Talent,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Torpedo
+            };
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
@@ -66,26 +63,37 @@ namespace Abilities.SecondEdition
     public class BodicaVenjAbility : GenericAbility
     {
         GenericShip bonusAttackTarget;
+        bool hasActivated = false;
+        bool hasPerformedBonusAttack = false;
 
         public override void ActivateAbility()
         {
             GenericShip.OnAttackFinishGlobal += CheckBodicaVenjAbility;
+            Phases.Events.OnRoundEnd += ResetFlags;
         }
 
         public override void DeactivateAbility()
         {
             GenericShip.OnAttackFinishGlobal -= CheckBodicaVenjAbility;
+            Phases.Events.OnRoundEnd -= ResetFlags;
+        }
+
+        public void ResetFlags()
+        {
+            hasActivated = false;
+            hasPerformedBonusAttack = false;
         }
 
         private void CheckBodicaVenjAbility(GenericShip ship)
         {
-
-            if (!HostShip.IsDepleted
+            if (!hasPerformedBonusAttack
+                && !HostShip.IsDepleted
                 && !HostShip.IsCannotAttackSecondTime
                 && Combat.Defender != null
                 && Tools.IsFriendly(Combat.Defender, HostShip)
                 && !Tools.IsSameShip(Combat.Defender, HostShip))
             {
+                hasActivated = HostShip.IsAttackPerformed;
                 bonusAttackTarget = Combat.Attacker;
                 bonusAttackTarget.OnCombatCheckExtraAttack += RegisterBodicaVenjAbility;
             }
@@ -134,15 +142,20 @@ namespace Abilities.SecondEdition
         private void Cleanup()
         {
             bonusAttackTarget = null;
-            HostShip.IsAttackPerformed = true;
+
+            // If the bonus attacked occurred prior to activation, this lets Bodica get their normal activation
+            HostShip.IsAttackPerformed = hasActivated;
+
             //if bonus attack was skipped, allow bonus attacks again
             if (HostShip.IsAttackSkipped)
             {
+                hasPerformedBonusAttack = false;
                 HostShip.IsCannotAttackSecondTime = false;
                 Triggers.FinishTrigger();
             }
             else
             {
+                hasPerformedBonusAttack = true;
                 HostShip.IsCannotAttackSecondTime = true;
                 HostShip.Tokens.AssignToken(typeof(DepleteToken), Triggers.FinishTrigger);
             }
