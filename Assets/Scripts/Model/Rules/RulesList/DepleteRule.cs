@@ -22,19 +22,16 @@ namespace RulesList
         {
             List<DepleteToken> depleteTokens = Combat.Attacker.Tokens.GetTokens<DepleteToken>().Where(t => t.WasApplied).ToList();
 
-            if (depleteTokens.Count > 0)
-            {
-                foreach(DepleteToken token in depleteTokens) {
-                    Triggers.RegisterTrigger(
-                        new Trigger()
-                        {
-                            Name = "Remove Deplete token",
-                            TriggerOwner = Combat.Attacker.Owner.PlayerNo,
-                            TriggerType = TriggerTypes.OnAttackFinish,
-                            EventHandler = delegate { RemoveDepleteToken(Combat.Attacker, token); }
-                        }
-                    );
-                }
+            foreach(DepleteToken token in depleteTokens) {
+                Triggers.RegisterTrigger(
+                    new Trigger()
+                    {
+                        Name = "Remove Deplete token",
+                        TriggerOwner = Combat.Attacker.Owner.PlayerNo,
+                        TriggerType = TriggerTypes.OnAttackFinish,
+                        EventHandler = delegate { RemoveDepleteToken(Combat.Attacker, token); }
+                    }
+                );
             }
         }
 
