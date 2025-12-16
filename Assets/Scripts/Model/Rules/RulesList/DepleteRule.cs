@@ -1,10 +1,8 @@
-﻿using UnityEngine;
+﻿using Movement;
 using Ship;
+using System.Collections.Generic;
+using System.Linq;
 using Tokens;
-using ActionsList;
-using Players;
-using Movement;
-using System;
 
 namespace RulesList
 {
@@ -14,6 +12,7 @@ namespace RulesList
         {
             if (Combat.Attacker.IsDepleted)
             {
+                Combat.Attacker.Tokens.GetTokens<DepleteToken>().FirstOrDefault().IsApplied = true;
                 Messages.ShowInfo("Depleted: Attacker rolls -1 attack die");
                 count--;
             }
@@ -21,17 +20,21 @@ namespace RulesList
 
         public void TryRemoveDepleteTokenAfterAttack(GenericShip ship)
         {
-            if (Combat.Attacker.IsDepleted)
+            List<DepleteToken> depleteTokens = Combat.Attacker.Tokens.GetTokens<DepleteToken>().Where(t => t.IsApplied).ToList();
+
+            if (depleteTokens.Count > 0)
             {
-                Triggers.RegisterTrigger(
-                    new Trigger()
-                    {
-                        Name = "Remove Deplete token",
-                        TriggerOwner = Combat.Attacker.Owner.PlayerNo,
-                        TriggerType = TriggerTypes.OnAttackFinish,
-                        EventHandler = delegate { RemoveDepleteToken(Combat.Attacker); }
-                    }
-                );
+                foreach(DepleteToken token in depleteTokens) {
+                    Triggers.RegisterTrigger(
+                        new Trigger()
+                        {
+                            Name = "Remove Deplete token",
+                            TriggerOwner = Combat.Attacker.Owner.PlayerNo,
+                            TriggerType = TriggerTypes.OnAttackFinish,
+                            EventHandler = delegate { RemoveDepleteToken(Combat.Attacker, token); }
+                        }
+                    );
+                }
             }
         }
 
@@ -54,6 +57,11 @@ namespace RulesList
         private void RemoveDepleteToken(GenericShip ship)
         {
             ship.Tokens.RemoveToken(typeof(DepleteToken), Triggers.FinishTrigger);
+        }
+
+        private void RemoveDepleteToken(GenericShip ship, GenericToken token)
+        {
+            ship.Tokens.RemoveToken(token, Triggers.FinishTrigger);
         }
     }
 }

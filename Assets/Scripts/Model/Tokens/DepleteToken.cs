@@ -1,13 +1,11 @@
 ﻿using Ship;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Tokens
 {
-
     public class DepleteToken : GenericToken
     {
+        public bool IsApplied = false;
+
         public DepleteToken(GenericShip host) : base(host)
         {
             Name = ImageName = "Deplete Token";
@@ -16,7 +14,5 @@ namespace Tokens
             TokenColor = TokenColors.Red;
             TokenShape = TokenShapes.Square;
         }
-
     }
-
 }
