@@ -12,7 +12,7 @@ namespace RulesList
         {
             if (Combat.Attacker.IsDepleted)
             {
-                Combat.Attacker.Tokens.GetTokens<DepleteToken>().FirstOrDefault().IsApplied = true;
+                Combat.Attacker.Tokens.GetTokens<DepleteToken>().FirstOrDefault().WasApplied = true;
                 Messages.ShowInfo("Depleted: Attacker rolls -1 attack die");
                 count--;
             }
@@ -20,7 +20,7 @@ namespace RulesList
 
         public void TryRemoveDepleteTokenAfterAttack(GenericShip ship)
         {
-            List<DepleteToken> depleteTokens = Combat.Attacker.Tokens.GetTokens<DepleteToken>().Where(t => t.IsApplied).ToList();
+            List<DepleteToken> depleteTokens = Combat.Attacker.Tokens.GetTokens<DepleteToken>().Where(t => t.WasApplied).ToList();
 
             if (depleteTokens.Count > 0)
             {

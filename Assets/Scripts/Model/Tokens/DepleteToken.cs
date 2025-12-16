@@ -4,7 +4,7 @@ namespace Tokens
 {
     public class DepleteToken : GenericToken
     {
-        public bool IsApplied = false;
+        public bool WasApplied = false;
 
         public DepleteToken(GenericShip host) : base(host)
         {
