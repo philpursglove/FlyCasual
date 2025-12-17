@@ -54,7 +54,7 @@ namespace Ship.SecondEdition.ASF01BWing
             (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
-                UpgradeType.Talent,
+                UpgradeType.Sensor,
                 UpgradeType.Modification,
                 UpgradeType.Cannon,
                 UpgradeType.Cannon,
