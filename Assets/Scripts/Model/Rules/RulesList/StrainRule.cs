@@ -1,11 +1,8 @@
-﻿using UnityEngine;
+﻿using Movement;
 using Ship;
-using Tokens;
-using ActionsList;
-using Players;
-using Movement;
-using System;
+using System.Collections.Generic;
 using System.Linq;
+using Tokens;
 
 namespace RulesList
 {
@@ -23,7 +20,9 @@ namespace RulesList
 
         public void TryRemoveAppliedStrainTokenAfterAttack(GenericShip ship)
         {
-            if (Combat.Defender.IsStrained)
+            List<StrainToken> strainTokens = Combat.Attacker.Tokens.GetTokens<StrainToken>().Where(t => t.WasApplied).ToList();
+
+            foreach (StrainToken token in strainTokens)
             {
                 Triggers.RegisterTrigger(
                     new Trigger()
@@ -31,25 +30,15 @@ namespace RulesList
                         Name = "Remove Strain token",
                         TriggerOwner = Combat.Defender.Owner.PlayerNo,
                         TriggerType = TriggerTypes.OnAttackFinish,
-                        EventHandler = delegate { RemoveAppliedStrainToken(Combat.Defender); }
+                        EventHandler = delegate { RemoveAppliedStrainToken(Combat.Defender, token); }
                     }
                 );
             }
         }
 
-        private void RemoveAppliedStrainToken(GenericShip ship)
+        private void RemoveAppliedStrainToken(GenericShip ship, StrainToken token)
         {
-            StrainToken appliedToken = ship.Tokens.GetTokens<StrainToken>().FirstOrDefault(n => n.WasApplied);
-            
-            if (appliedToken != null)
-            {
-                ship.Tokens.RemoveToken(typeof(StrainToken), Triggers.FinishTrigger);
-            }
-            else
-            {
-                // Sometimes Strain Token is assigned after defense dice roll and before finish of attack (example: Finn)
-                Triggers.FinishTrigger();
-            }
+            ship.Tokens.RemoveToken(token, Triggers.FinishTrigger);
         }
 
         public void TryRemoveStrainTokenAfterManeuver(GenericShip ship)
