@@ -66,7 +66,7 @@ namespace Abilities.SecondEdition
             if (abilityUsed
                 && Combat.Defender != null
                 && (Tools.IsSameShip(Combat.Attacker, HostShip))
-                && Combat.CurrentCriticalHitCard.IsFaceup && Combat.CurrentCriticalHitCard.Type == CriticalCardType.Pilot)
+                && Combat.CurrentCriticalHitCard.IsFaceup && (Combat.CurrentCriticalHitCard.Type == CriticalCardType.Pilot || Combat.CurrentCriticalHitCard.Type == CriticalCardType.Crew))
             {
                 abilityUsed = false;
                 HostShip.State.RestoreForce(2);
