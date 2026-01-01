@@ -1,11 +1,10 @@
-﻿using GameModes;
+﻿using Actions;
+using ActionsList;
+using GameModes;
 using Ship;
 using SubPhases;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Players
 {
@@ -99,12 +98,28 @@ namespace Players
             Dictionary<ActionsList.GenericAction, int> actionsPriority = new Dictionary<ActionsList.GenericAction, int>();
 
             foreach (var action in availableActionsList)
+            foreach (GenericAction action in availableActionsList)
             {
+                Selection.ThisShip.CallOnCheckActionComplexity(action, ref action.Color);
+                Selection.ThisShip.CallOnCheckActionColor(action, ref action.Color);
+
                 int priority = action.GetActionPriority();
                 Selection.ThisShip.Ai.CallGetActionPriority(action, ref priority);
 
-                //Do not perform red action if this is not rotate arc action
-                if (action.IsRed && !(action is ActionsList.RotateArcAction)) priority = int.MinValue;
+                // De-prioritize red actions unless overriden
+                if (action.IsRed)
+                {
+                    if (Selection.ThisShip.IsStressed && !Selection.ThisShip.CallCanPerformActionWhileStressed(action))
+                    {
+                        priority = int.MinValue;
+                    }
+                    else
+                    {
+                        double redActionPriorityModifier = 0.2;
+                        Selection.ThisShip.Ai.CallGetRedActionPriorityModifier(action, ref redActionPriorityModifier);
+                        priority = (int)(priority * redActionPriorityModifier);
+                    }                    
+                }
 
                 actionsPriority.Add(action, priority);
             }
