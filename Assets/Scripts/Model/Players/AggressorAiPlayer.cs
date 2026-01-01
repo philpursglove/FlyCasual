@@ -1,5 +1,4 @@
-﻿using Actions;
-using ActionsList;
+﻿using ActionsList;
 using GameModes;
 using Ship;
 using SubPhases;
@@ -8,10 +7,8 @@ using System.Linq;
 
 namespace Players
 {
-
     public partial class AggressorAiPlayer : GenericAiPlayer
     {
-
         public AggressorAiPlayer() : base()
         {
             Name = "Aggressor AI";
@@ -89,15 +86,14 @@ namespace Players
             return AI.Aggressor.TargetingSubSystem.SelectTargetAndWeapon(Selection.ThisShip);
         }
 
-        protected override void PerformActionFromList(List<ActionsList.GenericAction> actionsList)
+        protected override void PerformActionFromList(List<GenericAction> actionsList)
         {
             bool isActionTaken = false;
 
-            List<ActionsList.GenericAction> availableActionsList = actionsList;
+            List<GenericAction> availableActionsList = actionsList;
 
-            Dictionary<ActionsList.GenericAction, int> actionsPriority = new Dictionary<ActionsList.GenericAction, int>();
+            Dictionary<GenericAction, int> actionsPriority = new();
 
-            foreach (var action in availableActionsList)
             foreach (GenericAction action in availableActionsList)
             {
                 Selection.ThisShip.CallOnCheckActionComplexity(action, ref action.Color);
@@ -118,7 +114,7 @@ namespace Players
                         double redActionPriorityModifier = 0.2;
                         Selection.ThisShip.Ai.CallGetRedActionPriorityModifier(action, ref redActionPriorityModifier);
                         priority = (int)(priority * redActionPriorityModifier);
-                    }                    
+                    }
                 }
 
                 actionsPriority.Add(action, priority);
@@ -128,14 +124,13 @@ namespace Players
 
             if (actionsPriority.Count > 0)
             {
-                KeyValuePair<ActionsList.GenericAction, int> prioritizedActions = actionsPriority.First();
+                KeyValuePair<GenericAction, int> prioritizedActions = actionsPriority.First();
 
                 if (prioritizedActions.Value > 0)
                 {
                     isActionTaken = true;
 
-                    //Actions.TakeActionStart(prioritizedActions.Key);
-                    JSONObject parameters = new JSONObject();
+                    JSONObject parameters = new();
                     parameters.AddField("name", prioritizedActions.Key.Name);
                     GameController.SendCommand(
                         GameCommandTypes.Decision,
