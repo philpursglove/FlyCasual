@@ -55,8 +55,7 @@ namespace Players
         private GenericShip GetNextShipWithoutAssignedManeuver()
         {
             return Roster.GetPlayer(Phases.CurrentSubPhase.RequiredPlayer).Ships.Values
-                .Where(n => n.AssignedManeuver == null && !n.State.IsIonized)
-                .FirstOrDefault();
+                .FirstOrDefault(n => n.AssignedManeuver == null && !n.State.IsIonized);
         }
 
         private void OpenDirectionsUiSilent()
@@ -173,8 +172,7 @@ namespace Players
         private static GenericShip GetNextShipWithoutFinishedManeuver()
         {
             return Roster.GetPlayer(Phases.CurrentSubPhase.RequiredPlayer).Ships.Values
-                .Where(n => !n.IsManeuverPerformed)
-                .FirstOrDefault();
+                .FirstOrDefault(n => !n.IsManeuverPerformed);
         }
     }
 }
