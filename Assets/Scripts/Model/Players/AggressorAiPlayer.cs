@@ -95,25 +95,27 @@ namespace Players
 
             Dictionary<GenericAction, int> actionsPriority = new();
 
+            GenericShip ship = Selection.ThisShip;
+
             foreach (GenericAction action in availableActionsList)
             {
-                Selection.ThisShip.CallOnCheckActionComplexity(action, ref action.Color);
-                Selection.ThisShip.CallOnCheckActionColor(action, ref action.Color);
+                ship.CallOnCheckActionComplexity(action, ref action.Color);
+                ship.CallOnCheckActionColor(action, ref action.Color);
 
                 int priority = action.GetActionPriority();
-                Selection.ThisShip.Ai.CallGetActionPriority(action, ref priority);
+                ship.Ai.CallGetActionPriority(action, ref priority);
 
                 // De-prioritize red actions unless overriden
                 if (action.IsRed)
                 {
-                    if (Selection.ThisShip.IsStressed && !Selection.ThisShip.CallCanPerformActionWhileStressed(action))
+                    if (ship.IsStressed && !ship.CallCanPerformActionWhileStressed(action))
                     {
                         priority = int.MinValue;
                     }
                     else
                     {
                         double redActionPriorityModifier = 0.2;
-                        Selection.ThisShip.Ai.CallGetRedActionPriorityModifier(action, ref redActionPriorityModifier);
+                        ship.Ai.CallGetRedActionPriorityModifier(action, ref redActionPriorityModifier);
                         priority = (int)(priority * redActionPriorityModifier);
                     }
                 }
