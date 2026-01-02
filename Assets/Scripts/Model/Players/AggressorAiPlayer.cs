@@ -39,7 +39,9 @@ namespace Players
 
         private void AssignManeuversRecursive()
         {
-            GenericShip shipWithoutManeuver = (!DebugManager.DebugStraightToCombat) ? AI.Aggressor.NavigationSubSystem.GetNextShipWithoutAssignedManeuver() : GetNextShipWithoutAssignedManeuver();
+            GenericShip shipWithoutManeuver = (!DebugManager.DebugStraightToCombat) ?
+                AI.Aggressor.NavigationSubSystem.GetNextShipWithoutAssignedManeuver() :
+                GetNextShipWithoutAssignedManeuver();
 
             if (shipWithoutManeuver != null)
             {
@@ -119,7 +121,8 @@ namespace Players
                 actionsPriority.Add(action, priority);
             }
 
-            actionsPriority = actionsPriority.OrderByDescending(n => n.Value).ToDictionary(n => n.Key, n => n.Value);
+            actionsPriority = actionsPriority.OrderByDescending(n => n.Value)
+                .ToDictionary(n => n.Key, n => n.Value);
 
             if (actionsPriority.Count > 0)
             {
@@ -157,7 +160,10 @@ namespace Players
         {
             Roster.HighlightPlayer(PlayerNo);
 
-            GenericShip nextShip = (!DebugManager.DebugStraightToCombat) ? AI.Aggressor.NavigationSubSystem.GetNextShipWithoutFinishedManeuver() : GetNextShipWithoutFinishedManeuver();
+            GenericShip nextShip = (!DebugManager.DebugStraightToCombat) ?
+                AI.Aggressor.NavigationSubSystem.GetNextShipWithoutFinishedManeuver() :
+                GetNextShipWithoutFinishedManeuver();
+
             if (nextShip != null)
             {
                 Selection.ChangeActiveShip("ShipId:" + nextShip.ShipId);
