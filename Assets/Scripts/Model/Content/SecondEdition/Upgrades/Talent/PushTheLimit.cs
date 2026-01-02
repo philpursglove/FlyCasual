@@ -15,9 +15,9 @@ namespace UpgradesList.SecondEdition
                 cost: 0,
                 abilityType: typeof(Abilities.SecondEdition.PushTheLimitBoEAbility)
             );
-            
+
             IsHidden = true;
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/coloneljendon-battleoverendor.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/pushthelimit.png";
         }
     }
 }

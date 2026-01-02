@@ -19,8 +19,8 @@ namespace UpgradesList.SecondEdition
             );
 
             IsHidden = true;
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/coloneljendon-battleoverendor.png";
-        }        
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/computerassistedhandling.png";
+        }
     }
 }
 
@@ -71,7 +71,8 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             RegisterAbilityTrigger(
                 TriggerTypes.OnFreeAction,
-                delegate {
+                delegate
+                {
                     HostUpgrade.State.SpendCharge();
                     Triggers.FinishTrigger();
                 }
@@ -83,7 +84,6 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             Triggers.FinishTrigger();
         }
-
     }
 }
 
