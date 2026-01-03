@@ -5,7 +5,8 @@ using Ship;
 public enum CriticalCardType
 {
     Ship,
-    Pilot
+    Pilot,
+    Crew
 }
 
 public class GenericDamageCard
