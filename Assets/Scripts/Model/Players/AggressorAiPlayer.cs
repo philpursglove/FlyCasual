@@ -108,16 +108,11 @@ namespace Players
                 // De-prioritize red actions unless overriden
                 if (action.IsRed)
                 {
-                    if (ship.IsStressed && !ship.CallCanPerformActionWhileStressed(action))
-                    {
-                        priority = int.MinValue;
-                    }
-                    else
-                    {
-                        double redActionPriorityModifier = 0.2;
-                        ship.Ai.CallGetRedActionPriorityModifier(action, ref redActionPriorityModifier);
-                        priority = (int)(priority * redActionPriorityModifier);
-                    }
+                    if (ship.IsStressed && !ship.CallCanPerformActionWhileStressed(action)) continue;
+
+                    double redActionPriorityModifier = 0.2;
+                    ship.Ai.CallGetRedActionPriorityModifier(action, ref redActionPriorityModifier);
+                    priority = (int)(priority * redActionPriorityModifier);
                 }
 
                 actionsPriority.Add(action, priority);
