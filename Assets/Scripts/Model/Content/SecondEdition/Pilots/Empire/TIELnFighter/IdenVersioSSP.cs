@@ -6,63 +6,61 @@ using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
-namespace Ship
+namespace Ship.SecondEdition.TIELnFighter
 {
-    namespace SecondEdition.TIELnFighter
+    public class IdenVersioSSP : TIELnFighter
     {
-        public class IdenVersioSSP : TIELnFighter
+        public IdenVersioSSP() : base()
         {
-            public IdenVersioSSP() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Iden Versio",
-                    "Inferno Leader",
-                    Faction.Imperial,
-                    4,
-                    4,
-                    0,
-                    isLimited: true,
-                    abilityType: typeof(IdenVersioSSPAbility),
-                    charges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    skinName: "Inferno",
-                    isStandardLayout: true,
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
+            PilotInfo = new PilotCardInfo25
+            (
+                "Iden Versio",
+                "Inferno Leader",
+                Faction.Imperial,
+                4,
+                4,
+                0,
+                isLimited: true,
+                abilityType: typeof(IdenVersioSSPAbility),
+                charges: 1,
+                extraUpgradeIcons: new List<UpgradeType>
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                skinName: "Inferno",
+                isStandardLayout: true,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
 
-                MustHaveUpgrades.Add(typeof(Disciplined));
-                MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Elusive));
+            MustHaveUpgrades.Add(typeof(Disciplined));
+            MustHaveUpgrades.Add(typeof(UpgradesList.SecondEdition.Elusive));
 
-                PilotNameCanonical = "idenversio-swz105";
-                ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/idenversio-swz105.png";
-            }
+            PilotNameCanonical = "idenversio-swz105";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/idenversio-swz105.png";
         }
+    }
 
-        public class IdenVersioSSPXWA : IdenVersioSSP
+    public class IdenVersioSSPXWA : IdenVersioSSP
+    {
+        public IdenVersioSSPXWA() : base()
         {
-            public IdenVersioSSPXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 9;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-            }
+            (PilotInfo as PilotCardInfo25).Cost = 9;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
+
 
 namespace Abilities.SecondEdition
 {
     public class IdenVersioSSPAbility : GenericAbility
     {
-        private GenericShip curToDamage;
+        private GenericShip defender;
 
         public override void ActivateAbility()
         {
@@ -74,19 +72,19 @@ namespace Abilities.SecondEdition
             GenericShip.OnTryDamagePreventionGlobal -= CheckIdenVersioSSPAbilitySE;
         }
 
-        private void CheckIdenVersioSSPAbilitySE(GenericShip toDamage, DamageSourceEventArgs e)
+        private void CheckIdenVersioSSPAbilitySE(GenericShip ship, DamageSourceEventArgs e)
         {
-            curToDamage = toDamage;
+            defender = ship;
 
             // Is the defender on our team? If not return.
-            if (curToDamage.Owner.PlayerNo != HostShip.Owner.PlayerNo)
+            if (defender.Owner.PlayerNo != HostShip.Owner.PlayerNo)
                 return;
 
-            if (!(curToDamage is Ship.SecondEdition.TIELnFighter.TIELnFighter))
+            if (!(defender is Ship.SecondEdition.TIELnFighter.TIELnFighter))
                 return;
 
             // If the defender is at range one of us we register our trigger to prevent damage.
-            BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(curToDamage, HostShip);
+            BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(defender, HostShip);
             if (distanceInfo.Range <= 1)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnTryDamagePrevention, UseIdenVersioSSPAbilitySE);
@@ -115,10 +113,8 @@ namespace Abilities.SecondEdition
 
         private void BlankDamage()
         {
-            curToDamage.AssignedDamageDiceroll.RemoveAll();
+            defender.AssignedDamageDiceroll.RemoveAll();
             DecisionSubPhase.ConfirmDecision();
         }
-
-
     }
 }
