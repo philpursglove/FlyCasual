@@ -110,7 +110,7 @@ namespace Abilities.SecondEdition
                     HostShip.PilotInfo.PilotName,
                     AlwaysUseByDefault,
                     delegate { HostShip.SpendCharges(2); RemoveHit(hits.First()); },
-                    descriptionLong: "Do you want to spend 2 Charges to prevent damage?",
+                    descriptionLong: "Do you want to spend 2 Charges to prevent 1 damage?",
                     imageHolder: HostShip
                 );
             }
@@ -126,7 +126,5 @@ namespace Abilities.SecondEdition
 
             DecisionSubPhase.ConfirmDecision();
         }
-
-
     }
 }
