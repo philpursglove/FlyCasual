@@ -68,7 +68,7 @@ namespace Abilities.SecondEdition
 {
     public class IdenVersioBoYAbility : GenericAbility
     {
-        private GenericShip curToDamage;
+        private GenericShip defender;
 
         public override void ActivateAbility()
         {
@@ -80,19 +80,19 @@ namespace Abilities.SecondEdition
             GenericShip.OnTryDamagePreventionGlobal -= CheckIdenVersioAbilitySE;
         }
 
-        private void CheckIdenVersioAbilitySE(GenericShip toDamage, DamageSourceEventArgs e)
+        private void CheckIdenVersioAbilitySE(GenericShip ship, DamageSourceEventArgs e)
         {
-            curToDamage = toDamage;
+            defender = ship;
 
             // Is the defender on our team? If not return.
-            if (curToDamage.Owner.PlayerNo != HostShip.Owner.PlayerNo)
+            if (!Tools.IsSameTeam(HostShip, ship))
                 return;
 
-            if (!(curToDamage is Ship.SecondEdition.TIELnFighter.TIELnFighter))
+            if (!(ship.PilotInfo as PilotCardInfo25).Tags.Contains(Tags.Tie))
                 return;
 
             // If the defender is at range one of us we register our trigger to prevent damage.
-            BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(curToDamage, HostShip);
+            BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(defender, HostShip);
             if (distanceInfo.Range <= 1)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnTryDamagePrevention, UseIdenVersioAbilitySE);
@@ -101,15 +101,16 @@ namespace Abilities.SecondEdition
 
         private void UseIdenVersioAbilitySE(object sender, System.EventArgs e)
         {
-            // Are there any non-crit damage results in the damage queue?
-            if (HostShip.State.Charges >= 2)
+            List<Die> hits = defender.AssignedDamageDiceroll.DiceList.Where(d => (d.Side == DieSide.Success || (d.Side == DieSide.Crit && d.IsUncancelable == false))).OrderBy(o => o.Side == DieSide.Success ? 0 : 1).ToList();
+
+            if (HostShip.State.Charges >= 2 && hits.Count > 0)
             {
                 // If there are we prompt to see if they want to use the ability.
                 AskToUseAbility(
                     HostShip.PilotInfo.PilotName,
                     AlwaysUseByDefault,
-                    delegate { HostShip.SpendCharges(2); BlankDamage(); },
-                    descriptionLong: "Do you want to spend 2 Charges to prevent damage?",
+                    delegate { HostShip.SpendCharges(2); RemoveHit(hits.First()); },
+                    descriptionLong: "Do you want to spend 2 Charges to prevent 1 damage?",
                     imageHolder: HostShip
                 );
             }
@@ -119,12 +120,11 @@ namespace Abilities.SecondEdition
             }
         }
 
-        private void BlankDamage()
+        private void RemoveHit(Die dieToRemove)
         {
-            curToDamage.AssignedDamageDiceroll.RemoveAll();
+            defender.AssignedDamageDiceroll.DiceList.Remove(dieToRemove);
+
             DecisionSubPhase.ConfirmDecision();
         }
-
-
     }
 }
