@@ -5,69 +5,67 @@ using SubPhases;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIELnFighter
 {
-    namespace SecondEdition.TIELnFighter
+    public class IdenVersio : TIELnFighter
     {
-        public class IdenVersio : TIELnFighter
+        public IdenVersio() : base()
         {
-            public IdenVersio() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Iden Versio",
-                    "Inferno Leader",
-                    Faction.Imperial,
-                    4,
-                    4,
-                    8,
-                    isLimited: true,
-                    abilityType: typeof(IdenVersioAbility),
-                    charges: 1,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Talent,
-                        UpgradeType.Cannon,
-                        UpgradeType.Missile,
-                        UpgradeType.Modification
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    seImageNumber: 83,
-                    skinName: "Inferno",
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class IdenVersioXWA : IdenVersio
-        {
-            public IdenVersioXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 10;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Iden Versio",
+                "Inferno Leader",
+                Faction.Imperial,
+                4,
+                4,
+                8,
+                isLimited: true,
+                abilityType: typeof(IdenVersioAbility),
+                charges: 1,
+                extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
-                    UpgradeType.Sensor,
-                    UpgradeType.Modification,
-                    UpgradeType.Modification,
+                    UpgradeType.Talent,
+                    UpgradeType.Cannon,
                     UpgradeType.Missile,
-                };
-            }
+                    UpgradeType.Modification
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                seImageNumber: 83,
+                skinName: "Inferno",
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class IdenVersioXWA : IdenVersio
+    {
+        public IdenVersioXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 16;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Sensor,
+                UpgradeType.Modification,
+                UpgradeType.Modification,
+                UpgradeType.Missile,
+            };
         }
     }
 }
+
 
 namespace Abilities.SecondEdition
 {
     public class IdenVersioAbility : GenericAbility
     {
-        private GenericShip curToDamage;
+        private GenericShip defender;
 
         public override void ActivateAbility()
         {
@@ -79,19 +77,19 @@ namespace Abilities.SecondEdition
             GenericShip.OnTryDamagePreventionGlobal -= CheckIdenVersioAbilitySE;
         }
 
-        private void CheckIdenVersioAbilitySE(GenericShip toDamage, DamageSourceEventArgs e)
+        private void CheckIdenVersioAbilitySE(GenericShip ship, DamageSourceEventArgs e)
         {
-            curToDamage = toDamage;
+            defender = ship;
 
             // Is the defender on our team? If not return.
-            if (curToDamage.Owner.PlayerNo != HostShip.Owner.PlayerNo)
+            if (defender.Owner.PlayerNo != HostShip.Owner.PlayerNo)
                 return;
 
-            if (!(curToDamage is Ship.SecondEdition.TIELnFighter.TIELnFighter))
+            if (!(defender is Ship.SecondEdition.TIELnFighter.TIELnFighter))
                 return;
 
             // If the defender is at range one of us we register our trigger to prevent damage.
-            BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(curToDamage, HostShip);
+            BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(defender, HostShip);
             if (distanceInfo.Range <= 1)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnTryDamagePrevention, UseIdenVersioAbilitySE);
@@ -120,10 +118,8 @@ namespace Abilities.SecondEdition
 
         private void BlankDamage()
         {
-            curToDamage.AssignedDamageDiceroll.RemoveAll();
+            defender.AssignedDamageDiceroll.RemoveAll();
             DecisionSubPhase.ConfirmDecision();
         }
-
-
     }
 }

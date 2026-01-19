@@ -17,7 +17,7 @@ namespace UpgradesList.SecondEdition
             );
 
             IsHidden = true;
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/lieutenanthebsly-battleoverendor.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/upgrades/noescape.png";
         }
     }
 }
@@ -70,7 +70,7 @@ namespace Abilities.SecondEdition
                     {
                         friendlyShipsInRange++;
                     }
-                    else if(!Tools.IsFriendly(ship, anotherShip))
+                    else if (!Tools.IsFriendly(ship, anotherShip))
                     {
                         enemyShipsInRange++;
                     }

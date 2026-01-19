@@ -182,16 +182,16 @@ public static class Options
 
     public static Legality GetFormatAsLegality(string format)
     {
-        switch (format)
+        switch (format.ToLower())
         {
-            case "XWA":
+            case "xwa":
                 return Legality.XWA;
-            case "Standard":
-            case "AMG Standard":
+            case "standard":
+            case "amg standard":
                 return Legality.StandardLegal;
-            case "AMG":
-            case "Extended":
-            case "AMG Extended":
+            case "amg":
+            case "extended":
+            case "amg extended":
             default:
                 return Legality.ExtendedLegal;
         }
