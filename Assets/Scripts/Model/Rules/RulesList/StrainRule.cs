@@ -20,7 +20,7 @@ namespace RulesList
 
         public void TryRemoveAppliedStrainTokenAfterAttack(GenericShip ship)
         {
-            List<StrainToken> strainTokens = Combat.Attacker.Tokens.GetTokens<StrainToken>().Where(t => t.WasApplied).ToList();
+            List<StrainToken> strainTokens = Combat.Defender.Tokens.GetTokens<StrainToken>().Where(t => t.WasApplied).ToList();
 
             foreach (StrainToken token in strainTokens)
             {
