@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ActionsList;
+using Arcs;
+using BoardTools;
+using Players;
 using Ship;
 using SubPhases;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Tokens;
 using UnityEngine;
 using Upgrade;
-using Players;
-using System.Linq;
-using ActionsList;
-using BoardTools;
-using Arcs;
-using Tokens;
 
 namespace Abilities
 {
@@ -85,7 +85,7 @@ namespace Abilities
 
         private Func<GenericShip, bool> FilterDockableShips;
 
-        public GenericToken TargetToken {get; set;}
+        public GenericToken TargetToken { get; set; }
 
         public virtual void Initialize(GenericShip hostShip)
         {
@@ -171,7 +171,7 @@ namespace Abilities
 
             if (callback == null) callback = Triggers.FinishTrigger;
 
-            DecisionSubPhase pilotAbilityDecision = (DecisionSubPhase) Phases.StartTemporarySubPhaseNew(
+            DecisionSubPhase pilotAbilityDecision = (DecisionSubPhase)Phases.StartTemporarySubPhaseNew(
                 Name,
                 typeof(AbilityDecisionSubphase),
                 callback
@@ -452,7 +452,7 @@ namespace Abilities
             selectTargetAction();
         }
 
-        private class AbilitySelectTarget: SelectShipSubPhase
+        private class AbilitySelectTarget : SelectShipSubPhase
         {
             public override void RevertSubPhase() { }
 
@@ -575,7 +575,7 @@ namespace Abilities
                 sidesCanBeSelected,
                 sideCanBeChangedTo,
                 timing,
-                isGlobal, 
+                isGlobal,
                 payAbilityCost,
                 payAbilityPostCost,
                 isTrueReroll,
@@ -661,7 +661,7 @@ namespace Abilities
                     ship.AddAvailableDiceModification(diceModification, HostShip);
                 }
             };
-            
+
             if (!isGlobal)
             {
                 switch (timing)
@@ -718,7 +718,7 @@ namespace Abilities
             Action callback,
             DiceModificationType modificationType,
             Func<int> getCount,
-            List<DieSide> sidesCanBeSelected, 
+            List<DieSide> sidesCanBeSelected,
             DieSide newSide,
             DiceModificationTimingType timing,
             bool isTrueReroll = true,
@@ -881,7 +881,7 @@ namespace Abilities
             var damage = args.IsCritical ? 0 : args.Damage;
             var critDamage = args.IsCritical ? args.Damage : 0;
 
-            Messages.ShowInfo(ship.PilotInfo.PilotName + " has been dealt a " + (args.IsCritical ? "Critical " : "")  + "Hit by " + HostName);
+            Messages.ShowInfo(ship.PilotInfo.PilotName + " has been dealt a " + (args.IsCritical ? "Critical " : "") + "Hit by " + HostName);
 
             DamageSourceEventArgs damageArgs = new DamageSourceEventArgs()
             {
@@ -1026,12 +1026,12 @@ namespace Abilities
         {
             switch (shipRole)
             {
-                case ShipRole.HostShip : return HostShip;
-                case ShipRole.ThisShip : return Selection.ThisShip;
-                case ShipRole.Attacker : return Combat.Attacker;
-                case ShipRole.Defender : return Combat.Defender;
-                case ShipRole.TargetShip : return TargetShip;
-                case ShipRole.CoordinatedShip : return HostShip.State.LastCoordinatedShip;
+                case ShipRole.HostShip: return HostShip;
+                case ShipRole.ThisShip: return Selection.ThisShip;
+                case ShipRole.Attacker: return Combat.Attacker;
+                case ShipRole.Defender: return Combat.Defender;
+                case ShipRole.TargetShip: return TargetShip;
+                case ShipRole.CoordinatedShip: return HostShip.State.LastCoordinatedShip;
                 default: return null;
             }
         }
