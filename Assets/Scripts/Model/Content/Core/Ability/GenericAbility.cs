@@ -353,17 +353,19 @@ namespace Abilities
 
         protected bool FilterByTargetType(GenericShip ship, params TargetTypes[] targetTypes)
         {
-            bool result = false;
+            if (targetTypes.Contains(TargetTypes.Any)) return true;
 
-            if (targetTypes.Contains(TargetTypes.Enemy) && ship.Owner.PlayerNo != hostShip.Owner.PlayerNo) result = true;
+            if (targetTypes.Contains(TargetTypes.Enemy) && ship.Owner.PlayerNo != hostShip.Owner.PlayerNo) return true;
 
-            if (targetTypes.Contains(TargetTypes.This) && ship.ShipId == hostShip.ShipId) result = true;
+            if (targetTypes.Contains(TargetTypes.This) && ship.ShipId == hostShip.ShipId) return true;
 
-            if (targetTypes.Contains(TargetTypes.OtherAny) && ship.ShipId != hostShip.ShipId) result = true;
+            if (targetTypes.Contains(TargetTypes.OtherAny) && ship.ShipId != hostShip.ShipId) return true;
 
-            if (targetTypes.Contains(TargetTypes.OtherFriendly) && ship.Owner.PlayerNo == hostShip.Owner.PlayerNo && ship.ShipId != hostShip.ShipId) result = true;
+            if (targetTypes.Contains(TargetTypes.OtherFriendly) && ship.Owner.PlayerNo == hostShip.Owner.PlayerNo && ship.ShipId != hostShip.ShipId) return true;
 
-            return result;
+            if (targetTypes.Contains(TargetTypes.AnyFriendly) && ship.Owner.PlayerNo == HostShip.Owner.PlayerNo) return true;
+
+            return false;
         }
 
         public bool FilterTargetsByRange(GenericShip ship, int minRange, int maxRange)
