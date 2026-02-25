@@ -76,7 +76,7 @@ namespace Abilities.SecondEdition
 
         public void CheckAbility(GenericAction action, ref bool isAvailable)
         {
-            isAvailable = action is AdaptiveAileronsAction;
+            isAvailable = isAvailable || action is AdaptiveAileronsAction;
         }
     }
 }
