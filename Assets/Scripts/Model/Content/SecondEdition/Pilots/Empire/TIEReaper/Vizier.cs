@@ -59,19 +59,19 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            HostShip.OnMovementFinishSuccessfully += CheckAbility;
+            HostShip.OnActionIsPerformed += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnMovementFinishSuccessfully -= CheckAbility;
+            HostShip.OnActionIsPerformed -= CheckAbility;
         }
 
-        private void CheckAbility(GenericShip ship)
+        private void CheckAbility(GenericAction action)
         {
-            if (ship.AssignedManeuver.GrantedBy == "Ailerons")
+            if (action is ControlledAileronsAction)
             {
-                RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, AskToPerformCoordinate);
+                RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, AskToPerformCoordinate);
             }
         }
 
@@ -82,19 +82,19 @@ namespace Abilities.SecondEdition
             HostShip.OnMovementStart += ClearRestrictedAbility;
 
             HostShip.AskPerformFreeAction(
-                new CoordinateAction() { HostShip = HostShip },
+                new VizierCoordinateAction() { HostShip = HostShip },
                 Triggers.FinishTrigger,
                 HostShip.PilotInfo.PilotName,
-                "After you fully execute a speed 1 maneuver using your Adaptive Ailerons ship ability, you may perform a Coordinate action. If you do, skip your Perform Action step.",
+                "After you perform a boost using Controlled Ailerons, you may perform a Coordinate action. If you do, skip your Perform Action step.",
                 HostShip
             );
         }
 
         private void CheckActionRestriction(GenericAction action)
         {
-            if (action is CoordinateAction && RestrictedAbilityIsActivated)
+            if (action is VizierCoordinateAction && RestrictedAbilityIsActivated)
             {
-                Messages.ShowInfo(HostShip.PilotInfo.PilotName + " skips their Perform Action step");
+                Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} skips their Perform Action step");
                 HostShip.IsSkipsActionSubPhase = true;
             }
         }
@@ -106,5 +106,13 @@ namespace Abilities.SecondEdition
 
             RestrictedAbilityIsActivated = false;
         }
+    }
+}
+
+namespace ActionsList
+{
+    public class VizierCoordinateAction : CoordinateAction
+    {
+        public VizierCoordinateAction() : base() { }
     }
 }
