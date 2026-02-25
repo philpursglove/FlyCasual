@@ -1,5 +1,4 @@
-﻿using ActionList;
-using Actions;
+﻿using Actions;
 using ActionsList;
 using Arcs;
 using Movement;
@@ -132,10 +131,10 @@ namespace Abilities.SecondEdition
             HostShip.OnActionIsReallyFailed += CleanupFailedAction;
 
             HostShip.AskPerformFreeAction(
-                new AdaptiveAileronsAction() { HostShip = TargetShip, Color = ActionColor.White },
+                new BoostAction() { HostShip = TargetShip, Color = ActionColor.White },
                 Cleanup,
-                "Adaptive Ailerons",
-                $"You {(IsForced ? "must" : "may")} perform a maneuver",
+                HostShip.PilotInfo.PilotName,
+                $"You {(IsForced ? "must" : "may")} perform a Boost",
                 HostShip,
                 isForced: IsForced
             );
@@ -153,18 +152,5 @@ namespace Abilities.SecondEdition
             HostShip.OnActionIsReallyFailed -= CleanupFailedAction;
             Triggers.FinishTrigger();
         }
-    }
-}
-
-namespace ActionList
-{
-    public class AdaptiveAileronsAction : BoostAction
-    {
-        public AdaptiveAileronsAction() : base()
-        {
-            this.Name = "Adaptive Ailerons";
-        }
-
-
     }
 }
