@@ -134,7 +134,7 @@ namespace Abilities.SecondEdition
             HostShip.AskPerformFreeAction(
                 new AdaptiveAileronsAction() { HostShip = TargetShip, Color = ActionColor.White },
                 Cleanup,
-                "Adaptive Ailerons",
+                HostShip.PilotInfo.PilotName,
                 $"You {(IsForced ? "must" : "may")} perform a maneuver",
                 HostShip,
                 isForced: IsForced
