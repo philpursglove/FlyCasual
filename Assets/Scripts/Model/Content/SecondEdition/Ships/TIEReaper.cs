@@ -122,12 +122,23 @@ namespace Abilities.SecondEdition
         private void DoControlledAileronsAbility()
         {
             HostShip.AskPerformFreeAction(
-                new BoostAction() { HostShip = TargetShip, Color = Actions.ActionColor.White },
+                new ControlledAileronsAction() { HostShip = TargetShip, Color = Actions.ActionColor.White },
                 Triggers.FinishTrigger,
                 HostShip.PilotInfo.PilotName,
-                "Do you want to activate your Controlled Ailerons?",
+                "You may perform a free boost.",
                 HostShip
             );
+        }
+    }
+}
+
+namespace ActionsList
+{
+    public class ControlledAileronsAction : BoostAction
+    {
+        public ControlledAileronsAction() : base()
+        {
+            this.Name = "Controlled Ailerons";
         }
     }
 }
