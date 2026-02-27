@@ -66,7 +66,8 @@ namespace Abilities.SecondEdition
             // If only one possible recipient, skip the decision
             if (potentialRecipients.Count == 1)
             {
-                TransferTargetLock(lockedObject, potentialRecipients.First());
+                TargetShip = potentialRecipients.First();
+                TransferTargetLock();
             }
             else
             {
@@ -74,6 +75,8 @@ namespace Abilities.SecondEdition
                     TransferTargetLock,
                     potentialRecipients,
                     GetAiPriorityForTargetLockTransfer,
+                    HostShip.Owner.PlayerNo,
+                    HostShip.PilotInfo.PilotName,
                     description: "Select a ship to transfer the target lock to",
                     showSkipButton: true
                 );
@@ -96,11 +99,11 @@ namespace Abilities.SecondEdition
             return priority;
         }
 
-        private void TransferTargetLock(ITargetLockable lockedObject, GenericShip recipient)
+        private void TransferTargetLock()
         {
             BlueTargetLockToken existingToken = (BlueTargetLockToken)HostShip.Tokens.GetToken(typeof(BlueTargetLockToken));
             HostShip.RemoveToken(existingToken);
-            ActionsHolder.AcquireTargetLock(recipient, lockedObject, delegate { }, delegate { }, false);
+            ActionsHolder.AcquireTargetLock(TargetShip, lockedObject, delegate { }, delegate { }, false);
         }
 
         public override void DeactivateAbility()
