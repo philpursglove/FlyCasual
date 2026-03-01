@@ -1,3 +1,7 @@
+using BoardTools;
+using Movement;
+using System.Collections.Generic;
+using System.Linq;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -9,7 +13,8 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Manual Ailerons",
                 UpgradeType.Modification,
-                abilityType: typeof(Abilities.SecondEdition.ManualAileronsAbility)
+                abilityType: typeof(Abilities.SecondEdition.ManualAileronsAbility),
+                charges: 2
             );
         }
     }
@@ -21,10 +26,46 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
+            HostShip.OnGetAvailableDecloakTemplates += CheckAbility;
+        }
+
+        private void CheckAbility(List<ManeuverTemplate> availableTemplates)
+        {
+            // do we have any charges?
+            var chargesAreAvailable = HostUpgrade.State.Charges > 0;
+
+            if (chargesAreAvailable)
+            {
+                // Ask the player if they want to spend a charge to use a 2-speed template instead of the 1-speed template to barrel roll or boost
+                AskToUseAbility("Manual Ailerons",
+                    NeverUseByDefault,
+                    descriptionLong:
+                    "You may spend 1 charge to use a 2-speed template instead of the 1-speed template to barrel roll or boost",
+                    useAbility: delegate { UseManualAilerons(availableTemplates); }
+                );
+
+            }
+        }
+
+        private void UseManualAilerons(List<ManeuverTemplate> availableTemplates)
+        {
+            HostUpgrade.State.SpendCharge();
+
+            if (availableTemplates.Any(n => n.Name == "Straight 2"))
+            {
+                availableTemplates.RemoveAll(n => n.Name == "Straight 2");
+                availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Bank, ManeuverDirection.Left, ManeuverSpeed.Speed2));
+                availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Bank, ManeuverDirection.Right, ManeuverSpeed.Speed2));
+                availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.SideslipBank, ManeuverDirection.Left, ManeuverSpeed.Speed2));
+                availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.SideslipBank, ManeuverDirection.Right, ManeuverSpeed.Speed2));
+            }
+
+            Triggers.FinishTrigger();
         }
 
         public override void DeactivateAbility()
         {
+            HostShip.OnGetAvailableDecloakTemplates -= CheckAbility;
         }
     }
 }
