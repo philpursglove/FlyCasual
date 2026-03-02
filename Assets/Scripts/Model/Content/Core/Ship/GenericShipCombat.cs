@@ -77,6 +77,7 @@ namespace Ship
         public event EventHandlerShipDamage OnTryDamagePrevention;
 
         public event EventHandler OnAttackHitAsAttacker;
+        public static event EventHandler OnAttackHitAsAttackerGlobal;
         public event EventHandler OnAttackHitAsDefender;
         public static event EventHandler OnAttackHitAsDefenderGlobal;
         public event EventHandler OnAttackMissedAsAttacker;
@@ -312,6 +313,8 @@ namespace Ship
 
         public void CallOnAttackHitAsAttacker()
         {
+            OnAttackHitAsAttackerGlobal?.Invoke();
+
             OnAttackHitAsAttacker?.Invoke();
         }
 
@@ -384,7 +387,7 @@ namespace Ship
             GenericShip.OnModifyWeaponAttackRequirementGlobal?.Invoke(this, weapon, ref tokenTypeAttackRequirement, isSilent);
             OnModifyWeaponAttackRequirement?.Invoke(this, weapon, ref tokenTypeAttackRequirement, isSilent);
 
-            return tokenTypeAttackRequirement;            
+            return tokenTypeAttackRequirement;
         }
 
         public void CallOnGenerateAvailableAttackPaymentList(List<GenericToken> tokens)
@@ -510,7 +513,8 @@ namespace Ship
                 State.ShieldsCurrent++;
                 AnimateShields();
                 AfterAssignedDamageIsChanged(this);
-            };
+            }
+            ;
             return result;
         }
 
@@ -542,7 +546,7 @@ namespace Ship
         }
 
         private void SufferDamageByType(object sender, EventArgs e, bool isCritical)
-        {            
+        {
             if (State.ShieldsCurrent > 0)
             {
                 SufferShieldDamage(isCritical);
@@ -700,7 +704,8 @@ namespace Ship
                 IsDestroyed = true;
 
                 PlayDestroyedAnimSound(
-                    delegate {
+                    delegate
+                    {
                         CallShipDestruction(
                      delegate { PlanShipRemoval(callBack); },
                      isFled: false);
@@ -744,11 +749,14 @@ namespace Ship
             IsDestroyed = true;
 
             PlayDestroyedAnimSound(
-                delegate { CallShipDestruction(
+                delegate
+                {
+                    CallShipDestruction(
                     delegate { RemoveDestroyedShip(callback); },
                     isFled: isFled
-                ); }
-            );            
+                );
+                }
+            );
         }
 
         private void RegisterShipRemovalSimultaneous()
@@ -769,7 +777,7 @@ namespace Ship
             OnShipIsReadyToBeRemoved?.Invoke(this);
             OnShipIsReadyToBeRemovedGlobal?.Invoke(this);
 
-            Triggers.ResolveTriggers(TriggerTypes.OnShipIsReadyToBeRemoved, delegate{ RemoveDestroyedShip_System(callback); });
+            Triggers.ResolveTriggers(TriggerTypes.OnShipIsReadyToBeRemoved, delegate { RemoveDestroyedShip_System(callback); });
         }
 
         private void RemoveDestroyedShip_System(Action callback)
@@ -971,7 +979,7 @@ namespace Ship
 
         public void StartBonusAttack(Action callback, Func<GenericShip, IShipWeapon, bool, bool> bonusAttackFilter = null)
         {
-            if(IsCannotAttackSecondTime)
+            if (IsCannotAttackSecondTime)
             {
                 // We should never reach this but just in case.
                 Messages.ShowError(PilotInfo.PilotName + ": You have already performed a bonus attack!");
@@ -981,18 +989,18 @@ namespace Ship
             IsCannotAttackSecondTime = true;
 
             Combat.StartSelectAttackTarget(
-				this,
-				delegate
+                this,
+                delegate
                 {
                     //if bonus attack was skipped, allow bonus attacks again
                     if (IsAttackSkipped) IsCannotAttackSecondTime = false;
                     callback();
                 },
-				bonusAttackFilter,
+                bonusAttackFilter,
                 PilotInfo.PilotName,
-				"You may perform a bonus attack",
-				this
-			);
+                "You may perform a bonus attack",
+                this
+            );
         }
 
         public void CallBeforeDeviceWillBeDropped(Action callback)
@@ -1048,7 +1056,7 @@ namespace Ship
 
                 Triggers.ResolveTriggers(TriggerTypes.OnBombWasLaunched, callback);
             }
-            else if(Bombs.BombsManager.CurrentDevice.UpgradeInfo.SubType == UpgradeSubType.Remote)
+            else if (Bombs.BombsManager.CurrentDevice.UpgradeInfo.SubType == UpgradeSubType.Remote)
             {
                 OnRemoteWasLaunched?.Invoke();
                 OnRemoteWasLaunchedGlobal?.Invoke();
@@ -1061,7 +1069,7 @@ namespace Ship
             }
         }
 
-        public void CallUpdateWeaponRange(IShipWeapon weapon, ref int minRange, ref int maxRange, GenericShip target=null)
+        public void CallUpdateWeaponRange(IShipWeapon weapon, ref int minRange, ref int maxRange, GenericShip target = null)
         {
             OnUpdateWeaponRange?.Invoke(weapon, ref minRange, ref maxRange, target);
 
