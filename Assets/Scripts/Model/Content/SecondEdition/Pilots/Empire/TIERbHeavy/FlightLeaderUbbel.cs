@@ -4,60 +4,57 @@ using Ship;
 using System.Collections.Generic;
 using Upgrade;
 
-namespace Ship
+namespace Ship.SecondEdition.TIERbHeavy
 {
-    namespace SecondEdition.TIERbHeavy
+    public class FlightLeaderUbbel : TIERbHeavy
     {
-        public class FlightLeaderUbbel : TIERbHeavy
+        public FlightLeaderUbbel() : base()
         {
-            public FlightLeaderUbbel() : base()
-            {
-                PilotInfo = new PilotCardInfo25
-                (
-                    "Flight Leader Ubbel",
-                    "Onyx Leader",
-                    Faction.Imperial,
-                    5,
-                    5,
-                    12,
-                    abilityType: typeof(Abilities.SecondEdition.FlightLeaderUbbelAbility),
-                    isLimited: true,
-                    extraUpgradeIcons: new List<UpgradeType>
-                    {
-                        UpgradeType.Talent,
-                        UpgradeType.Gunner,
-                        UpgradeType.Modification,
-                        UpgradeType.Modification,
-                        UpgradeType.Cannon,
-                        UpgradeType.Cannon,
-                        UpgradeType.Configuration
-                    },
-                    tags: new List<Tags>
-                    {
-                        Tags.Tie
-                    },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
-                );
-            }
-        }
-
-        public class FlightLeaderUbbelXWA : FlightLeaderUbbel
-        {
-            public FlightLeaderUbbelXWA() : base()
-            {
-                (PilotInfo as PilotCardInfo25).Cost = 12;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
-                (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-                (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            PilotInfo = new PilotCardInfo25
+            (
+                "Flight Leader Ubbel",
+                "Onyx Leader",
+                Faction.Imperial,
+                5,
+                5,
+                12,
+                abilityType: typeof(Abilities.SecondEdition.FlightLeaderUbbelAbility),
+                isLimited: true,
+                extraUpgradeIcons: new List<UpgradeType>
                 {
                     UpgradeType.Talent,
                     UpgradeType.Gunner,
                     UpgradeType.Modification,
+                    UpgradeType.Modification,
                     UpgradeType.Cannon,
                     UpgradeType.Cannon,
                     UpgradeType.Configuration
-                };
-            }
+                },
+                tags: new List<Tags>
+                {
+                    Tags.Tie
+                },
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+            );
+        }
+    }
+
+    public class FlightLeaderUbbelXWA : FlightLeaderUbbel
+    {
+        public FlightLeaderUbbelXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+            (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
+            {
+                UpgradeType.Talent,
+                UpgradeType.Gunner,
+                UpgradeType.Modification,
+                UpgradeType.Cannon,
+                UpgradeType.Cannon,
+                UpgradeType.Configuration
+            };
         }
     }
 }
@@ -69,6 +66,7 @@ namespace Abilities.SecondEdition
         private GenericShip Attacker;
         private bool PerformedRegularAttack;
         private bool IsAlreadyRegistered;
+        private bool AttackerIsCannotAttackSecondTime;
 
         public override void ActivateAbility()
         {
@@ -90,6 +88,9 @@ namespace Abilities.SecondEdition
             )
             {
                 Attacker = Combat.Attacker;
+                AttackerIsCannotAttackSecondTime = Attacker.IsCannotAttackSecondTime;
+                // allows extra attack to be called outside norrmal flow
+                Attacker.IsCannotAttackSecondTime = false;
                 Attacker.OnCombatCheckExtraAttack += StartBonusAttack;
                 PerformedRegularAttack = HostShip.IsAttackPerformed;
                 IsAlreadyRegistered = true;
@@ -141,6 +142,7 @@ namespace Abilities.SecondEdition
         private void FinishBonusAttack()
         {
             // Restore previous value of "is already attacked" flag
+            Attacker.IsCannotAttackSecondTime = AttackerIsCannotAttackSecondTime;
             HostShip.IsAttackPerformed = PerformedRegularAttack;
             //if bonus attack was skipped, allow bonus attacks again
             if (HostShip.IsAttackSkipped) HostShip.IsCannotAttackSecondTime = false;
