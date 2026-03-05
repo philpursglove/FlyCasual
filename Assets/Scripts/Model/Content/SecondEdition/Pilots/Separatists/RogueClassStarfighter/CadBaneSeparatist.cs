@@ -94,15 +94,11 @@ namespace Abilities.SecondEdition
 
         private void PerformAction(object sender, System.EventArgs e)
         {
-            if (HostShip.State.Charges < 1 || Phases.CurrentPhase is not MainPhases.CombatPhase)
+            if (HostShip.State.Charges < 1 || Phases.CurrentPhase is not MainPhases.CombatPhase || new DistanceInfo(HostShip, destroyedShip).Range > 3)
             {
                 Triggers.FinishTrigger();
                 return;
             }
-
-
-            DistanceInfo distanceInfo = new DistanceInfo(HostShip, destroyedShip);
-            if (distanceInfo.Range > 3) return;
 
 
             GenericShip ship = Selection.ThisShip;
@@ -114,7 +110,7 @@ namespace Abilities.SecondEdition
             HostShip.OnCanPerformActionWhileStressed += TemporaryAllowAnyActionsWhileStressed;
             HostShip.OnCheckCanPerformActionsWhileStressed += TemporaryAllowActionsWhileStressed;
             HostShip.OnActionIsPerformed += DisallowActionsWhileStressed;
-            HostShip.OnActionIsSkipped += DisallowActionsWhileStressedAlt;
+            HostShip.OnActionIsSkipped += DisallowActionsWhileStressed;
 
             List<GenericAction> actions = Selection.ThisShip.GetAvailableActions();
 
@@ -144,17 +140,15 @@ namespace Abilities.SecondEdition
 
         private void DisallowActionsWhileStressed(GenericAction action)
         {
-            HostShip.OnCanPerformActionWhileStressed -= TemporaryAllowAnyActionsWhileStressed;
-            HostShip.OnCheckCanPerformActionsWhileStressed -= TemporaryAllowActionsWhileStressed;
-            HostShip.OnActionIsPerformed -= DisallowActionsWhileStressed;
+            DisallowActionsWhileStressed(HostShip);
         }
 
-        private void DisallowActionsWhileStressedAlt(GenericShip ship)
+        private void DisallowActionsWhileStressed(GenericShip ship)
         {
             HostShip.OnCanPerformActionWhileStressed -= TemporaryAllowAnyActionsWhileStressed;
             HostShip.OnCheckCanPerformActionsWhileStressed -= TemporaryAllowActionsWhileStressed;
             HostShip.OnActionIsPerformed -= DisallowActionsWhileStressed;
-            HostShip.OnActionIsSkipped -= DisallowActionsWhileStressedAlt;
+            HostShip.OnActionIsSkipped -= DisallowActionsWhileStressed;
         }
 
         private void TemporaryAllowAnyActionsWhileStressed(GenericAction action, ref bool isAllowed)
