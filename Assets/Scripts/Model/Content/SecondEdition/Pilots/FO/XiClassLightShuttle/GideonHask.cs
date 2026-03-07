@@ -69,7 +69,6 @@ namespace Abilities.SecondEdition
                 GetAiPriority,
                 DiceModificationType.Add,
                 1,
-                sideCanBeChangedTo: DieSide.Unknown,
                 isGlobal: true,
                 payAbilityCost: GainStrainToken
             );
