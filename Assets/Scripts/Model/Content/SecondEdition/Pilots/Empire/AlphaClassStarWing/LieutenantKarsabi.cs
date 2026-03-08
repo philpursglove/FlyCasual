@@ -98,7 +98,7 @@ namespace Abilities.SecondEdition
 
         private void UseAbility(object sender, System.EventArgs e)
         {
-            Messages.ShowInfo(HostShip.PilotInfo.PilotName + " recieved Stress token instead of Disarm Token");
+            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} received Stress token instead of Disarm Token");
 
             HostShip.Tokens.RemoveToken(
                 typeof(WeaponsDisabledToken),
