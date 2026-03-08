@@ -43,7 +43,7 @@ namespace Ship
                 (PilotInfo as PilotCardInfo25).Cost = 3;
                 (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
-                { 
+                {
                     UpgradeType.Talent,
                     UpgradeType.Sensor,
                     UpgradeType.Modification,
@@ -97,7 +97,7 @@ namespace Abilities.SecondEdition
 
         private void UseAbility(object sender, System.EventArgs e)
         {
-            Messages.ShowInfo(HostShip.PilotInfo.PilotName + " recieved Stress token instead of Disarm Token");
+            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} received Stress token instead of Disarm Token");
 
             HostShip.Tokens.RemoveToken(
                 typeof(WeaponsDisabledToken),
