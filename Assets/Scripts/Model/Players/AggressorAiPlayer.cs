@@ -1,18 +1,14 @@
-﻿using GameModes;
+﻿using ActionsList;
+using GameModes;
 using Ship;
 using SubPhases;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Players
 {
-
     public partial class AggressorAiPlayer : GenericAiPlayer
     {
-
         public AggressorAiPlayer() : base()
         {
             Name = "Aggressor AI";
@@ -43,7 +39,9 @@ namespace Players
 
         private void AssignManeuversRecursive()
         {
-            GenericShip shipWithoutManeuver = (!DebugManager.DebugStraightToCombat) ? AI.Aggressor.NavigationSubSystem.GetNextShipWithoutAssignedManeuver() : GetNextShipWithoutAssignedManeuver();
+            GenericShip shipWithoutManeuver = (!DebugManager.DebugStraightToCombat) ?
+                AI.Aggressor.NavigationSubSystem.GetNextShipWithoutAssignedManeuver() :
+                GetNextShipWithoutAssignedManeuver();
 
             if (shipWithoutManeuver != null)
             {
@@ -59,8 +57,7 @@ namespace Players
         private GenericShip GetNextShipWithoutAssignedManeuver()
         {
             return Roster.GetPlayer(Phases.CurrentSubPhase.RequiredPlayer).Ships.Values
-                .Where(n => n.AssignedManeuver == null && !n.State.IsIonized)
-                .FirstOrDefault();
+                .FirstOrDefault(n => n.AssignedManeuver == null && !n.State.IsIonized);
         }
 
         private void OpenDirectionsUiSilent()
@@ -90,37 +87,49 @@ namespace Players
             return AI.Aggressor.TargetingSubSystem.SelectTargetAndWeapon(Selection.ThisShip);
         }
 
-        protected override void PerformActionFromList(List<ActionsList.GenericAction> actionsList)
+        protected override void PerformActionFromList(List<GenericAction> actionsList)
         {
             bool isActionTaken = false;
 
-            List<ActionsList.GenericAction> availableActionsList = actionsList;
+            List<GenericAction> availableActionsList = actionsList;
 
-            Dictionary<ActionsList.GenericAction, int> actionsPriority = new Dictionary<ActionsList.GenericAction, int>();
+            Dictionary<GenericAction, int> actionsPriority = new();
 
-            foreach (var action in availableActionsList)
+            GenericShip ship = Selection.ThisShip;
+
+            foreach (GenericAction action in availableActionsList)
             {
-                int priority = action.GetActionPriority();
-                Selection.ThisShip.Ai.CallGetActionPriority(action, ref priority);
+                ship.CallOnCheckActionComplexity(action, ref action.Color);
+                ship.CallOnCheckActionColor(action, ref action.Color);
 
-                //Do not perform red action if this is not rotate arc action
-                if (action.IsRed && !(action is ActionsList.RotateArcAction)) priority = int.MinValue;
+                int priority = action.GetActionPriority();
+                ship.Ai.CallGetActionPriority(action, ref priority);
+
+                // De-prioritize red actions unless overriden
+                if (action.IsRed)
+                {
+                    if (ship.IsStressed && !ship.CallCanPerformActionWhileStressed(action)) continue;
+
+                    double redActionPriorityModifier = 0.2;
+                    ship.Ai.CallGetRedActionPriorityModifier(action, ref redActionPriorityModifier);
+                    priority = (int)(priority * redActionPriorityModifier);
+                }
 
                 actionsPriority.Add(action, priority);
             }
 
-            actionsPriority = actionsPriority.OrderByDescending(n => n.Value).ToDictionary(n => n.Key, n => n.Value);
+            actionsPriority = actionsPriority.OrderByDescending(n => n.Value)
+                .ToDictionary(n => n.Key, n => n.Value);
 
             if (actionsPriority.Count > 0)
             {
-                KeyValuePair<ActionsList.GenericAction, int> prioritizedActions = actionsPriority.First();
+                KeyValuePair<GenericAction, int> prioritizedActions = actionsPriority.First();
 
                 if (prioritizedActions.Value > 0)
                 {
                     isActionTaken = true;
 
-                    //Actions.TakeActionStart(prioritizedActions.Key);
-                    JSONObject parameters = new JSONObject();
+                    JSONObject parameters = new();
                     parameters.AddField("name", prioritizedActions.Key.Name);
                     GameController.SendCommand(
                         GameCommandTypes.Decision,
@@ -148,7 +157,10 @@ namespace Players
         {
             Roster.HighlightPlayer(PlayerNo);
 
-            GenericShip nextShip = (!DebugManager.DebugStraightToCombat) ? AI.Aggressor.NavigationSubSystem.GetNextShipWithoutFinishedManeuver() : GetNextShipWithoutFinishedManeuver();
+            GenericShip nextShip = (!DebugManager.DebugStraightToCombat) ?
+                AI.Aggressor.NavigationSubSystem.GetNextShipWithoutFinishedManeuver() :
+                GetNextShipWithoutFinishedManeuver();
+
             if (nextShip != null)
             {
                 Selection.ChangeActiveShip("ShipId:" + nextShip.ShipId);
@@ -163,8 +175,7 @@ namespace Players
         private static GenericShip GetNextShipWithoutFinishedManeuver()
         {
             return Roster.GetPlayer(Phases.CurrentSubPhase.RequiredPlayer).Ships.Values
-                .Where(n => !n.IsManeuverPerformed)
-                .FirstOrDefault();
+                .FirstOrDefault(n => !n.IsManeuverPerformed);
         }
     }
 }
