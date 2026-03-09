@@ -1,4 +1,6 @@
-﻿using Content;
+﻿using ActionList;
+using ActionsList;
+using Content;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -31,6 +33,7 @@ namespace Ship
                     {
                         Tags.Tie
                     },
+                    abilityType: typeof(Abilities.SecondEdition.DuchessAbility),
                     seImageNumber: 117,
                     legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
                 );
@@ -53,6 +56,27 @@ namespace Ship
                     UpgradeType.Device,
                 };
             }
+        }
+    }
+}
+
+namespace Abilities.SecondEdition
+{
+    public class DuchessAbility : GenericAbility
+    {
+        public override void ActivateAbility()
+        {
+            HostShip.OnCanPerformActionWhileStressed += CheckAbility;
+        }
+
+        public override void DeactivateAbility()
+        {
+            HostShip.OnCanPerformActionWhileStressed -= CheckAbility;
+        }
+
+        public void CheckAbility(GenericAction action, ref bool isAvailable)
+        {
+            isAvailable = isAvailable || action is AdaptiveAileronsAction;
         }
     }
 }

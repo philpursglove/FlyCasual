@@ -1,10 +1,5 @@
 ﻿using ActionsList;
 using Arcs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ship
 {
@@ -15,10 +10,12 @@ namespace Ship
         public delegate void EventHandlerShipWeaponInt(GenericShip targetShip, IShipWeapon weapon, ref int priority);
         public delegate void EventHandlerArcFacingInt(ArcFacing facing, ref int priority);
         public delegate void EventHandlerActionInt(GenericAction action, ref int priority);
+        public delegate void EventHandlerActionDbl(GenericAction action, ref double value);
 
         public event EventHandlerShipWeaponInt OnGetWeaponPriority;
         public event EventHandlerArcFacingInt OnGetRotateArcFacingPriority;
         public event EventHandlerActionInt OnGetActionPriority;
+        public event EventHandlerActionDbl OnRedActionPriorityModifier;
 
         public CustomizedAi(GenericShip host)
         {
@@ -38,6 +35,11 @@ namespace Ship
         public void CallGetActionPriority(GenericAction action, ref int priority)
         {
             OnGetActionPriority?.Invoke(action, ref priority);
+        }
+
+        public void CallGetRedActionPriorityModifier(GenericAction action, ref double value)
+        {
+            OnRedActionPriorityModifier?.Invoke(action, ref value);
         }
     }
 }

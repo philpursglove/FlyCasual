@@ -725,8 +725,6 @@ namespace Ship
             return color;
         }
 
-        // TODO: Added by sampson-matt, need to check difference against my CallOnCheckActionComplexity
-
         public ActionColor CallOnCheckActionColor(GenericAction action, ref ActionColor color)
         {
             OnCheckActionColor?.Invoke(action, ref color);

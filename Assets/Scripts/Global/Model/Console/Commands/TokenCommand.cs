@@ -1,4 +1,5 @@
-﻿using Ship;
+﻿using Players;
+using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,8 @@ namespace CommandsList
         public TokenCommand()
         {
             Keyword = "token";
-            Description =   "token assign id:<shipId> type:<type> [target:<targetShipId>]- assing token to ship\n" +
-                            "where type: focus, evade, stress, targetlock, ion, tractorbeam, jam, reinforceaft, reinforcefore, cloak, energy, calculate, force, charge, strain, deplete\n" +
+            Description =   "token assign id:<shipId> type:<type> [target:<targetShipId>]\n" +
+                            "Assign token to ship where type: focus, evade, stress, targetlock, ion, tractorbeam, jam, reinforceaft, reinforcefore, cloak, energy, calculate, force, charge, strain, deplete\n" +
                             "(target is used only for targetlock type)";
 
             Console.AddAvailableCommand(this);
@@ -103,7 +104,16 @@ namespace CommandsList
                 }
                 else
                 {
-                    GenericToken token = (GenericToken)System.Activator.CreateInstance(tokenType, ship);
+                    GenericToken token;
+                    if(tokenType == typeof(JamToken))
+                    {
+                        GenericPlayer assigner = ship.Owner == Roster.Player1 ? Roster.Player2 : Roster.Player1;
+                        token = (GenericToken)Activator.CreateInstance(tokenType, ship, assigner);
+                    }
+                    else
+                    {
+                        token = (GenericToken)Activator.CreateInstance(tokenType, ship);
+                    }
                     ship.Tokens.AssignToken(token, ShowMessage);
                 }
             }
