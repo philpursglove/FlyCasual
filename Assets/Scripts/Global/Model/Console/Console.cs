@@ -192,6 +192,10 @@ public class Console : MonoBehaviour {
 
         if (text == "Material doesn't have a color property '_Color'") return true;
 
+        // Offline client errors, no need to report to user
+        if (text.StartsWith("WebRequestException: Cannot resolve destination host")) return true;
+        if (text.StartsWith("Unable to perform online search:")) return true;
+
         return false;
     }
 
