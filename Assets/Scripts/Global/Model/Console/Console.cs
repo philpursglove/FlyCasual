@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using Unity.Services.Analytics;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class Console : MonoBehaviour {
+public class Console : MonoBehaviour
+{
 
     private static bool isAlreadyInitialized;
     private static float totalLogEntryHeight;
@@ -85,7 +85,7 @@ public class Console : MonoBehaviour {
 
         string logString = text;
         if (isBold) logString = "<b>" + logString + "</b>";
-        if (color != "") logString = "<color="+ color + ">" + logString + "</color>";
+        if (color != "") logString = "<color=" + color + ">" + logString + "</color>";
 
         LogEntry logEntry = new LogEntry(logString + "\n");
         Logs.Add(logEntry);
@@ -170,7 +170,7 @@ public class Console : MonoBehaviour {
         else
         {
             jsonData.AddField("replay", "None");
-        }        
+        }
 
         var request = new UnityWebRequest("https://flycasualdataserver.azurewebsites.net/api/crashreports/create", "POST");
         Debug.Log(jsonData.ToString());
