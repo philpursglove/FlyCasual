@@ -47,7 +47,23 @@ namespace Ship
             }
         }
 
-        public List<GenericObstacle> ObstaclesLanded = new List<GenericObstacle>();
+        public List<GenericObstacle> PreviousObstaclesLanded = new();
+
+        private List<GenericObstacle> obstaclesLanded = new();
+
+        public List<GenericObstacle> ObstaclesLanded
+        {
+            get
+            {
+                return obstaclesLanded;
+            }
+
+            set
+            {
+                PreviousObstaclesLanded = obstaclesLanded;
+                obstaclesLanded = value;
+            }
+        }
 
         public bool IsHitObstacles
         {
