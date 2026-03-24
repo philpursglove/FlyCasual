@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using Bombs;
 using Obstacles;
-using Ship;
-using Bombs;
 using Remote;
+using Ship;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Movement
 {
@@ -20,15 +19,16 @@ namespace Movement
         public float SuccessfullMovementProgress { get; private set; }
         public bool IsOffTheBoard;
         public bool IsBumped { get { return ShipsBumped.Count != 0; } }
-        public List<GenericShip> ShipsBumped = new List<GenericShip>();
-        public List<GenericShip> ShipsBumpedOnTheEnd = new List<GenericShip>();
-        public List<GenericRemote> RemotesOverlapped = new List<GenericRemote>();
-        public List<GenericRemote> RemotesMovedThrough = new List<GenericRemote>();
-        public List<GenericShip> ShipsMovedThrough = new List<GenericShip>();
-        public List<GenericObstacle> AsteroidsHit = new List<GenericObstacle>();
-        public List<GenericDeviceGameObject> MinesHit = new List<GenericDeviceGameObject>();
+        public List<GenericShip> ShipsBumped = new();
+        public List<GenericShip> ShipsBumpedOnTheEnd = new();
+        public List<GenericRemote> RemotesOverlapped = new();
+        public List<GenericRemote> RemotesMovedThrough = new();
+        public List<GenericShip> ShipsMovedThrough = new();
+        private static readonly List<GenericObstacle> genericObstacles = new();
+        public List<GenericObstacle> AsteroidsHit = genericObstacles;
+        public List<GenericDeviceGameObject> MinesHit = new();
         public bool IsLandedOnAsteroid { get { return LandedOnObstacles.Count > 0; } }
-        public List<GenericObstacle> LandedOnObstacles = new List<GenericObstacle>();
+        public List<GenericObstacle> LandedOnObstacles = new();
 
         private GameObject[] GeneratedShipStands;
 
@@ -116,7 +116,6 @@ namespace Movement
                 {
                     ProcessStandOnPath(obstacleHitsDetector);
                 }
-
             }
         }
 
@@ -143,6 +142,7 @@ namespace Movement
                 shipStand.transform.position,
                 shipStand.transform.eulerAngles
             );
+
             CurrentMovement.FinalPositionInfo = FinalPositionInfo;
         }
 
@@ -153,6 +153,7 @@ namespace Movement
                 shipStand.transform.position,
                 shipStand.transform.eulerAngles
             );
+
             CurrentMovement.FinalPositionInfoBeforeRotation = FinalPositionBeforeRotationInfo;
         }
 
@@ -160,11 +161,11 @@ namespace Movement
         {
             if (lastShipBumpDetector != null)
             {
-                foreach (var overlapedShip in lastShipBumpDetector.OverlappedShips)
+                foreach (GenericShip overlappedShip in lastShipBumpDetector.OverlappedShips)
                 {
-                    if (!ShipsBumped.Contains(overlapedShip))
+                    if (!ShipsBumped.Contains(overlappedShip))
                     {
-                        ShipsBumped.Add(overlapedShip);
+                        ShipsBumped.Add(overlappedShip);
                     }
                 }
             }
@@ -182,18 +183,18 @@ namespace Movement
 
         private void ProcessRemotesOverlaps(ObstaclesStayDetector obstacleStayDetector)
         {
-            foreach (var overlapedRemote in obstacleStayDetector.OverlappedRemotes)
+            foreach (GenericRemote overlappedRemote in obstacleStayDetector.OverlappedRemotes)
             {
-                if (!RemotesOverlapped.Contains(overlapedRemote))
+                if (!RemotesOverlapped.Contains(overlappedRemote))
                 {
-                    RemotesOverlapped.Add(overlapedRemote);
+                    RemotesOverlapped.Add(overlappedRemote);
                 }
             }
         }
 
         private void ProcessObstaclesHit(ObstaclesStayDetector obstacleStayDetector)
         {
-            foreach (var asteroidHit in obstacleStayDetector.OverlappedAsteroids)
+            foreach (GenericObstacle asteroidHit in obstacleStayDetector.OverlappedAsteroids)
             {
                 if (!AsteroidsHit.Contains(asteroidHit))
                 {
@@ -204,7 +205,7 @@ namespace Movement
 
         private void ProcessMines(ObstaclesStayDetector obstacleStayDetector)
         {
-            foreach (var mineHit in obstacleStayDetector.OverlappedMines)
+            foreach (Collider mineHit in obstacleStayDetector.OverlappedMines)
             {
                 GenericDeviceGameObject MineObject = mineHit.transform.parent.GetComponent<GenericDeviceGameObject>();
                 if (!MinesHit.Contains(MineObject))
@@ -216,7 +217,7 @@ namespace Movement
 
         private void ProcessStandOnPath(ObstaclesHitsDetector obstacleHitsDetector)
         {
-            foreach (GenericObstacle asteroidHit in obstacleHitsDetector.OverlapedAsteroids)
+            foreach (GenericObstacle asteroidHit in obstacleHitsDetector.OverlappedAsteroids)
             {
                 if (!AsteroidsHit.Contains(asteroidHit))
                 {
@@ -224,7 +225,7 @@ namespace Movement
                 }
             }
 
-            foreach (var mineHit in obstacleHitsDetector.OverlapedMines)
+            foreach (Collider mineHit in obstacleHitsDetector.OverlappedMines)
             {
                 GenericDeviceGameObject MineObject = mineHit.transform.parent.GetComponent<GenericDeviceGameObject>();
                 if (!MinesHit.Contains(MineObject))
@@ -233,7 +234,7 @@ namespace Movement
                 }
             }
 
-            foreach (var remoteMovedThrough in obstacleHitsDetector.RemotesMovedThrough)
+            foreach (GenericRemote remoteMovedThrough in obstacleHitsDetector.RemotesMovedThrough)
             {
                 if (!RemotesMovedThrough.Contains(remoteMovedThrough))
                 {
@@ -241,7 +242,7 @@ namespace Movement
                 }
             }
 
-            foreach (var shipsMovedThrough in obstacleHitsDetector.ShipsMovedThrough)
+            foreach (GenericShip shipsMovedThrough in obstacleHitsDetector.ShipsMovedThrough)
             {
                 if (!ShipsMovedThrough.Contains(shipsMovedThrough))
                 {
@@ -264,14 +265,14 @@ namespace Movement
 
         private void DestroyGeneratedShipStands()
         {
-            foreach (var shipStand in GeneratedShipStands)
+            foreach (GameObject shipStand in GeneratedShipStands)
             {
                 GameObject.Destroy(shipStand);
             }
         }
 
-        // Calculation of only final position
 
+        // Calculation of only final position
         public void CalculateOnlyFinalPositionIgnoringCollisions()
         {
             DisableCollisionDetectionAtCurrentPosition();
@@ -296,6 +297,4 @@ namespace Movement
             SaveFinalPositionInfo(GeneratedShipStands.Last());
         }
     }
-
 }
-

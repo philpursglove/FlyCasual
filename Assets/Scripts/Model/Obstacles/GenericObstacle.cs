@@ -44,7 +44,8 @@ namespace Obstacles
             }
         }
 
-        public virtual void OnShotObstructedExtra(GenericShip attacker, GenericShip defender, ref int result) {
+        public virtual void OnShotObstructedExtra(GenericShip attacker, GenericShip defender, ref int result)
+        {
             // Does nothing by default
         }
 
@@ -59,11 +60,11 @@ namespace Obstacles
             Board.RegisterObstacle(this);
         }
 
-        // ITargetLockable
 
+        // ITargetLockable
         public int GetRangeToShip(GenericShip fromShip)
         {
-            ShipObstacleDistance dist = new ShipObstacleDistance(fromShip, this);
+            ShipObstacleDistance dist = new(fromShip, this);
             return dist.Range;
         }
 

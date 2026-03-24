@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using Ship;
-using BoardTools;
-using GameModes;
+﻿using BoardTools;
 using GameCommands;
+using GameModes;
+using Ship;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using UnityEngine;
 
 namespace SubPhases
 {
@@ -21,7 +19,7 @@ namespace SubPhases
         private Transform StartingZone;
         private bool isInsideStartingZone;
 
-        private TouchObjectPlacementHandler touchObjectPlacementHandler = new TouchObjectPlacementHandler();
+        private TouchObjectPlacementHandler touchObjectPlacementHandler = new();
 
         public GenericShip ShipToSetup;
         public Direction SetupSide;
@@ -40,10 +38,7 @@ namespace SubPhases
             base.Start();
         }
 
-        public override void Prepare()
-        {
-            
-        }
+        public override void Prepare() { }
 
         public override void Initialize()
         {
@@ -61,19 +56,14 @@ namespace SubPhases
 
         private float GetDefaulRotationForSetupSide()
         {
-            switch (SetupSide)
+            return SetupSide switch
             {
-                case Direction.Bottom:
-                    return 0;
-                case Direction.Left:
-                    return 90;
-                case Direction.Top:
-                    return 180;
-                case Direction.Right:
-                    return 270;
-                default:
-                    return 0;
-            }
+                Direction.Bottom => 0,
+                Direction.Left => 90,
+                Direction.Top => 180,
+                Direction.Right => 270,
+                _ => 0,
+            };
         }
 
         public void ShowDescription()
@@ -111,7 +101,7 @@ namespace SubPhases
 
         public static GameCommand GeneratePlaceShipCommand(int shipId, Vector3 position, Vector3 angles)
         {
-            JSONObject parameters = new JSONObject();
+            JSONObject parameters = new();
 
             parameters.AddField("id", shipId.ToString());
 
@@ -147,9 +137,12 @@ namespace SubPhases
             if (inReposition)
             {
                 if (CameraScript.InputMouseIsEnabled) PerformDrag();
+
                 if (CameraScript.InputTouchIsEnabled) PerformTouchDragRotate();
+
                 CheckLimits();
             }
+
             if (Selection.ThisShip != null) CheckPerformRotation();
         }
 
@@ -164,7 +157,7 @@ namespace SubPhases
 
             foreach (GenericShip anotherShip in Selection.ThisShip.Owner.EnemyShips.Values)
             {
-                DistanceInfo distInfo = new DistanceInfo(Selection.ThisShip, anotherShip);
+                DistanceInfo distInfo = new(Selection.ThisShip, anotherShip);
                 if (distInfo.MinDistance.DistanceReal < nearestDistance)
                 {
                     nearestDistance = distInfo.MinDistance.DistanceReal;
@@ -172,7 +165,7 @@ namespace SubPhases
                 }
             }
 
-            DistanceInfo distInfoFinal = new DistanceInfo(Selection.ThisShip, nearestEnemyShip);
+            DistanceInfo distInfoFinal = new(Selection.ThisShip, nearestEnemyShip);
             if (distInfoFinal.Range < 4)
             {
                 MovementTemplates.ShowRangeRuler(distInfoFinal.MinDistance);
@@ -184,6 +177,7 @@ namespace SubPhases
             if (Console.IsActive) return;
 
             CheckResetRotation();
+
             if (Input.GetKey(KeyCode.LeftControl))
             {
                 RotateBy1();
@@ -264,15 +258,11 @@ namespace SubPhases
                 UI.ShowNextButton();
                 IsReadyForCommands = true;
             }
-
         }
 
         private void PerformDrag()
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
             {
                 Selection.ThisShip.SetCenter(new Vector3(hit.point.x, 0f, hit.point.z));
             }
@@ -312,7 +302,7 @@ namespace SubPhases
             {
                 HideSetupHelpers();
 
-                foreach (var ship in Selection.ThisShip.Owner.Ships)
+                foreach (KeyValuePair<string, GenericShip> ship in Selection.ThisShip.Owner.Ships)
                 {
                     if ((ship.Value.ShipId != Selection.ThisShip.ShipId) && (ship.Value.IsSetupPerformed))
                     {
@@ -327,6 +317,7 @@ namespace SubPhases
                             Selection.ThisShip.Model.transform.Find("RotationHelper/RotationHelper2/ShipSetupHelpers/Helper" + ((Selection.ThisShip.Owner.PlayerNo == Players.PlayerNo.Player1) ? "Left" : "Right")).gameObject.SetActive(true);
                             newPosition.x = newPosition.x - spaceBetweenList["Left"] + halfOfShipStandSize;
                         }
+
                         if ((spaceBetweenList["Right"] <= halfOfShipStandSize) && (spaceBetweenList["Right"] >= -oneOfShipStandSize) && ((-oneOfShipStandSize <= spaceBetweenList["Up"] && spaceBetweenList["Up"] <= 0) || (-oneOfShipStandSize <= spaceBetweenList["Down"] && spaceBetweenList["Down"] <= 0)))
                         {
                             Selection.ThisShip.Model.transform.Find("RotationHelper/RotationHelper2/ShipSetupHelpers/Helper" + ((Selection.ThisShip.Owner.PlayerNo == Players.PlayerNo.Player1) ? "Right" : "Left")).gameObject.SetActive(true);
@@ -338,6 +329,7 @@ namespace SubPhases
                             Selection.ThisShip.Model.transform.Find("RotationHelper/RotationHelper2/ShipSetupHelpers/Helper" + ((Selection.ThisShip.Owner.PlayerNo == Players.PlayerNo.Player1) ? "Top" : "Bottom")).gameObject.SetActive(true);
                             newPosition.z = newPosition.z + spaceBetweenList["Up"] - halfOfShipStandSize;
                         }
+
                         if ((spaceBetweenList["Down"] <= halfOfShipStandSize) && (spaceBetweenList["Down"] >= -oneOfShipStandSize) && ((-oneOfShipStandSize <= spaceBetweenList["Left"] && spaceBetweenList["Left"] <= 0) || (-oneOfShipStandSize <= spaceBetweenList["Right"] && spaceBetweenList["Right"] <= 0)))
                         {
                             Selection.ThisShip.Model.transform.Find("RotationHelper/RotationHelper2/ShipSetupHelpers/Helper" + ((Selection.ThisShip.Owner.PlayerNo == Players.PlayerNo.Player1) ? "Bottom" : "Top")).gameObject.SetActive(true);
@@ -360,7 +352,7 @@ namespace SubPhases
 
         private Dictionary<string, float> GetSpaceBetween(GenericShip thisShip, GenericShip anotherShip)
         {
-            Dictionary<string, float> result = new Dictionary<string, float>();
+            Dictionary<string, float> result = new();
 
             Dictionary<string, float> thisShipBounds = thisShip.ShipBase.GetBounds();
             Dictionary<string, float> anotherShipBounds = anotherShip.ShipBase.GetBounds();
@@ -407,7 +399,7 @@ namespace SubPhases
         {
             bool result = true;
 
-            if (Phases.CurrentSubPhase.GetType() == typeof(SetupShipMidgameSubPhase))
+            if (Phases.CurrentSubPhase is SetupShipMidgameSubPhase)
             {
                 if (!CheckIsInCorrectEdgeZone())
                 {
@@ -420,6 +412,7 @@ namespace SubPhases
                     {
                         Messages.ShowErrorToHuman("Place the ship in the highlighted area");
                     }
+
                     result = false;
                 }
 
@@ -445,7 +438,7 @@ namespace SubPhases
             }
             else
             {
-                List<Direction> directions = new List<Direction>() { Direction.Left, Direction.Right, Direction.Top, Direction.Bottom };
+                List<Direction> directions = new() { Direction.Left, Direction.Right, Direction.Top, Direction.Bottom };
                 foreach (Direction direction in directions)
                 {
                     Transform startZone = Board.GetStartingZone(direction);
@@ -482,7 +475,5 @@ namespace SubPhases
             GameCommand command = GeneratePlaceShipCommand(Selection.ThisShip.ShipId, Selection.ThisShip.GetPosition(), Selection.ThisShip.GetAngles());
             GameMode.CurrentGameMode.ExecuteCommand(command);
         }
-
     }
-
 }

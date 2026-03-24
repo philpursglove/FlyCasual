@@ -9,33 +9,33 @@ public class ObstaclesHitsDetector : MonoBehaviour {
 
     public bool checkCollisions = false;
 
-    public List<GenericObstacle> OverlapedAsteroids = new List<GenericObstacle>();
-    public List<Collider> OverlapedMines = new List<Collider>();
-    public List<GenericRemote> RemotesMovedThrough = new List<GenericRemote>();
-    public List<GenericShip> ShipsMovedThrough = new List<GenericShip>();
+    public List<GenericObstacle> OverlappedAsteroids = new();
+    public List<Collider> OverlappedMines = new();
+    public List<GenericRemote> RemotesMovedThrough = new();
+    public List<GenericShip> ShipsMovedThrough = new();
 
     void OnTriggerEnter(Collider collisionInfo)
     {
         if (checkCollisions)
         {
-            if (collisionInfo.tag == "Obstacle")
+            if (collisionInfo.CompareTag("Obstacle"))
             {
                 GenericObstacle obstacle = ObstaclesManager.GetChosenObstacle(collisionInfo.transform.name);
-                if (!OverlapedAsteroids.Contains(obstacle))
+                if (!OverlappedAsteroids.Contains(obstacle))
                 {
-                    OverlapedAsteroids.Add(obstacle);
+                    OverlappedAsteroids.Add(obstacle);
                 }
             }
-            else if(collisionInfo.tag == "Mine")
+            else if(collisionInfo.CompareTag("Mine"))
             {
-                if (!OverlapedMines.Contains(collisionInfo))
+                if (!OverlappedMines.Contains(collisionInfo))
                 {
-                    OverlapedMines.Add(collisionInfo);
+                    OverlappedMines.Add(collisionInfo);
                 }
             }
             else if (collisionInfo.name == "RemoteCollider")
             {
-                if (collisionInfo.tag != this.tag)
+                if (!this.CompareTag(collisionInfo.tag))
                 {
                     if (!RemotesMovedThrough.Contains(Roster.GetShipById(collisionInfo.tag) as GenericRemote))
                     {
@@ -45,7 +45,7 @@ public class ObstaclesHitsDetector : MonoBehaviour {
             }
             else if (collisionInfo.name == "ObstaclesStayDetector")
             {
-                if (collisionInfo.tag != this.tag)
+                if (!this.CompareTag(collisionInfo.tag))
                 {
                     if (!ShipsMovedThrough.Contains(Roster.GetShipById(collisionInfo.tag)))
                     {
@@ -55,5 +55,4 @@ public class ObstaclesHitsDetector : MonoBehaviour {
             }
         }
     }
-
 }
