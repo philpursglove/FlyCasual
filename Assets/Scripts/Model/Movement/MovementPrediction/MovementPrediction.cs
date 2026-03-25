@@ -24,8 +24,7 @@ namespace Movement
         public List<GenericRemote> RemotesOverlapped = new();
         public List<GenericRemote> RemotesMovedThrough = new();
         public List<GenericShip> ShipsMovedThrough = new();
-        private static readonly List<GenericObstacle> genericObstacles = new();
-        public List<GenericObstacle> AsteroidsHit = genericObstacles;
+        public List<GenericObstacle> AsteroidsHit = new();
         public List<GenericDeviceGameObject> MinesHit = new();
         public bool IsLandedOnAsteroid { get { return LandedOnObstacles.Count > 0; } }
         public List<GenericObstacle> LandedOnObstacles = new();
