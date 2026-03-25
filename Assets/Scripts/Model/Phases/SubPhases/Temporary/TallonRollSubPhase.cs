@@ -79,7 +79,7 @@ namespace SubPhases
 
                 subPhase.DecisionOwner = Selection.ThisShip.Owner;
                 subPhase.DefaultDecisionName = "Center";
-                subPhase.OnNextButtonIsPressed = FinishTallonRoll;
+                subPhase.OnNextButtonIsPressed = delegate { FinishTallonRoll(tallonRollHelper); };
 
                 subPhase.Start();
             }
@@ -89,8 +89,9 @@ namespace SubPhases
             }
         }
 
-        private void FinishTallonRoll()
+        private void FinishTallonRoll(TallonRollHelper helper)
         {
+            helper.DestroyTemporaryShipBases();
             DecisionSubPhase.ConfirmDecision();
         }
 
@@ -143,7 +144,7 @@ namespace SubPhases
     public class TallonRollShiftSubPhase : DecisionSubPhase { }
 }
 
-public class TallonRollHelper : IDisposable
+public class TallonRollHelper
 {
     private GenericShip Ship { get; }
     private Vector3 PositionInitial { get; }
@@ -197,7 +198,7 @@ public class TallonRollHelper : IDisposable
 
     private IEnumerator CheckCollisions()
     {
-        foreach (GameObject temporaryShipBase in TemporaryShipBases.Values)
+        foreach (GameObject temporaryShipBase in TemporaryShipBases.Values.ToList())
         {
             ObstaclesStayDetectorForced detector = temporaryShipBase.transform.Find("ShipBase").Find("ObstaclesStayDetector").gameObject.AddComponent<ObstaclesStayDetectorForced>();
 
@@ -225,7 +226,7 @@ public class TallonRollHelper : IDisposable
         Ship.ObstaclesLanded = TemporaryShipBases[direction].GetComponentInChildren<ObstaclesStayDetectorForced>().OverlappedAsteroidsNow;
     }
 
-    public void Dispose()
+    public void DestroyTemporaryShipBases()
     {
         foreach (GameObject temporaryShipBase in TemporaryShipBases.Values)
         {
