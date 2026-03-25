@@ -104,6 +104,8 @@ namespace SubPhases
 
             if (tallonRollHelper.IsPositionAllowed[direction])
             {
+                GameManagerScript.Instance.StartCoroutine(tallonRollHelper.GetObstaclesLanded(direction));
+
                 UI.ShowNextButton();
             }
             else
@@ -143,7 +145,7 @@ namespace SubPhases
 
 }
 
-public class TallonRollHelper
+public class TallonRollHelper : IDisposable
 {
     private GenericShip Ship { get; }
     private Vector3 PositionInitial { get; }
@@ -220,9 +222,15 @@ public class TallonRollHelper
         }
     }
 
-    private void DestroyTemporaryShipBases()
+    public IEnumerator GetObstaclesLanded(int direction)
     {
-        foreach (var temporaryShipBase in TemporaryShipBases.Values)
+        yield return CheckCollisions();
+        Ship.ObstaclesLanded = TemporaryShipBases[direction].GetComponentInChildren<ObstaclesStayDetectorForced>().OverlappedAsteroidsNow;
+    }
+
+    public void Dispose()
+    {
+        foreach (GameObject temporaryShipBase in TemporaryShipBases.Values)
         {
             GameObject.Destroy(temporaryShipBase);
         }
