@@ -78,8 +78,6 @@ namespace Remote
             SetSpotlightMask();
             SetShipIdText(Model);
             SetPlayerCustomization();
-
-            // InitializeShipBase();
         }
 
         protected virtual void SetPlayerCustomization()
@@ -118,7 +116,7 @@ namespace Remote
 
         public override Transform GetModelTransform()
         {
-            return ShipAllParts.Find("ShipModels/DRK-1 Probe Droid/ModelCenter/Lights");
+            return ShipAllParts.Find($"ShipModels/{RemoteInfo.Name}/ModelCenter");
         }
 
         public override Vector3 GetModelCenter()
