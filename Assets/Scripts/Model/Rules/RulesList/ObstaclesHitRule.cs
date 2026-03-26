@@ -26,9 +26,16 @@ namespace RulesList
         {
             if (ship.IsHitObstacles)
             {
-                foreach (var obstacle in ship.ObstaclesHit)
+                List<GenericObstacle> ProcessedObstacles = new();
+
+                foreach (GenericObstacle obstacle in ship.ObstaclesHit)
                 {
                     if (ship.IgnoreObstaclesList.Contains(obstacle)) continue;
+
+                    if (ProcessedObstacles.Contains(obstacle)) continue;
+
+                    // If ship started on an obstacle and is no longer on the obstacle after moving, do not process
+                    if (ship.PreviousObstaclesLanded.Contains(obstacle) && !ship.ObstaclesLanded.Contains(obstacle)) continue;
 
                     Triggers.RegisterTrigger(new Trigger()
                     {
@@ -37,10 +44,9 @@ namespace RulesList
                         TriggerType = TriggerTypes.OnPositionFinish,
                         EventHandler = delegate { obstacle.OnHit(ship); }
                     });
-                }
 
-                //HACK reset ObstaclesHit to ensure each obstacle hit is only processed once per movement
-                ship.ObstaclesHit = new List<GenericObstacle>();
+                    ProcessedObstacles.Add(obstacle);
+                }
             }
         }
     }

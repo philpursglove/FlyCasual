@@ -32,19 +32,20 @@ namespace Obstacles
 
         public void OnLanded(GenericShip ship)
         {
-            if (Editions.Edition.Current.RuleSet.GetType() == typeof(Editions.RuleSets.RuleSet25) || this is Asteroid)
+            if (Editions.Edition.Current.RuleSet is Editions.RuleSets.RuleSet25 || this is Asteroid)
             {
                 ship.OnTryPerformAttack += DenyAttack;
             }
 
-            if (Editions.Edition.Current.RuleSet.GetType() == typeof(Editions.RuleSets.RuleSet25))
+            if (Editions.Edition.Current.RuleSet is Editions.RuleSets.RuleSet25)
             {
                 Messages.ShowErrorToHuman(ship.PilotInfo.PilotName + " landed on an obstacle during movement, their action subphase is skipped");
                 Selection.ThisShip.IsSkipsActionSubPhase = true;
             }
         }
 
-        public virtual void OnShotObstructedExtra(GenericShip attacker, GenericShip defender, ref int result) {
+        public virtual void OnShotObstructedExtra(GenericShip attacker, GenericShip defender, ref int result)
+        {
             // Does nothing by default
         }
 
@@ -59,11 +60,11 @@ namespace Obstacles
             Board.RegisterObstacle(this);
         }
 
-        // ITargetLockable
 
+        // ITargetLockable
         public int GetRangeToShip(GenericShip fromShip)
         {
-            ShipObstacleDistance dist = new ShipObstacleDistance(fromShip, this);
+            ShipObstacleDistance dist = new(fromShip, this);
             return dist.Range;
         }
 

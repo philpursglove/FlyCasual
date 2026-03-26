@@ -10,25 +10,23 @@ using UnityEngine;
 
 namespace Ship
 {
-
     public partial class GenericShip
     {
-
         public Vector3 StartingPosition { get; private set; }
 
         public GenericMovement AssignedManeuver { get; private set; }
         public GenericMovement RevealedManeuver { get; set; }
 
-        public List<GenericRemote> RemotesOverlapped = new List<GenericRemote>();
-        public List<GenericRemote> RemotesMovedThrough = new List<GenericRemote>();
+        public List<GenericRemote> RemotesOverlapped = new();
+        public List<GenericRemote> RemotesMovedThrough = new();
 
         public bool IsIgnoreObstacles;
         public bool IsIgnoreObstacleObstructionWhenAttacking;
 
         public bool IsLandedModel;
 
-        public List<GenericObstacle> IgnoreObstaclesList = new List<GenericObstacle>();
-        public List<Type> IgnoreObstacleTypes = new List<Type>();
+        public List<GenericObstacle> IgnoreObstaclesList = new();
+        public List<Type> IgnoreObstacleTypes = new();
 
         public EventHandlerBool OnTryCanPerformRedManeuverWhileStressed;
         public EventHandlerBool OnCheckIgnoreObstaclesDuringBoost;
@@ -47,7 +45,23 @@ namespace Ship
             }
         }
 
-        public List<GenericObstacle> ObstaclesLanded = new List<GenericObstacle>();
+        public List<GenericObstacle> PreviousObstaclesLanded = new();
+
+        private List<GenericObstacle> obstaclesLanded = new();
+
+        public List<GenericObstacle> ObstaclesLanded
+        {
+            get
+            {
+                return obstaclesLanded;
+            }
+
+            set
+            {
+                PreviousObstaclesLanded = obstaclesLanded;
+                obstaclesLanded = value;
+            }
+        }
 
         public bool IsHitObstacles
         {
@@ -62,21 +76,21 @@ namespace Ship
             }
         }
 
-        public List<GenericObstacle> ObstaclesHit = new List<GenericObstacle>();
+        public List<GenericObstacle> ObstaclesHit = new();
 
-        public List<GenericDeviceGameObject> MinesHit = new List<GenericDeviceGameObject>();
+        public List<GenericDeviceGameObject> MinesHit = new();
 
         public bool IsBumped
         {
             get { return ShipsBumped.Count != 0; }
         }
 
-        public List<GenericShip> ShipsBumped = new List<GenericShip>();
+        public List<GenericShip> ShipsBumped = new();
 
-        public List<GenericShip> ShipsMovedThrough = new List<GenericShip>();
-        public List<GenericShip> ShipsBumpedOnTheEnd = new List<GenericShip>();
+        public List<GenericShip> ShipsMovedThrough = new();
+        public List<GenericShip> ShipsBumpedOnTheEnd = new();
 
-        public List<GenericShip> ShipsBoostedThrough = new List<GenericShip>();
+        public List<GenericShip> ShipsBoostedThrough = new();
 
         public GenericShip LastShipCollision { get; set; }
 
@@ -117,15 +131,15 @@ namespace Ship
 
         public void CallReadyToGetManeuvers()
         {
-            if (OnReadyGetManeuvers != null) OnReadyGetManeuvers(this);
+            OnReadyGetManeuvers?.Invoke(this);
         }
 
         public void CallManeuverIsReadyToBeRevealed(System.Action callBack)
         {
             if (Selection.ThisShip.AssignedManeuver != null && Selection.ThisShip.AssignedManeuver.IsRevealDial)
             {
-                if (OnManeuverIsReadyToBeRevealedGlobal != null) OnManeuverIsReadyToBeRevealedGlobal(this);
-                if (OnManeuverIsReadyToBeRevealed != null) OnManeuverIsReadyToBeRevealed(this);
+                OnManeuverIsReadyToBeRevealedGlobal?.Invoke(this);
+                OnManeuverIsReadyToBeRevealed?.Invoke(this);
 
                 // Do not trigger dial reveal abilities when ionized
                 if (!this.State.IsIonized)
@@ -181,7 +195,7 @@ namespace Ship
 
         public void StartMoving(System.Action callback)
         {
-            if (OnMovementStart != null) OnMovementStart(this);
+            OnMovementStart?.Invoke(this);
 
             Triggers.ResolveTriggers(TriggerTypes.OnMovementStart, callback);
         }
@@ -189,7 +203,7 @@ namespace Ship
 
         public void CallExecuteMoving(Action callback)
         {
-            if (OnMovementExecuted != null) OnMovementExecuted(this);
+            OnMovementExecuted?.Invoke(this);
 
             Triggers.ResolveTriggers(
                 TriggerTypes.OnMovementExecuted,
@@ -199,7 +213,7 @@ namespace Ship
 
         public void CallBeforeMovementIsExecuted(Action callback)
         {
-            if (BeforeMovementIsExecuted != null) BeforeMovementIsExecuted(this);
+            BeforeMovementIsExecuted?.Invoke(this);
 
             Triggers.ResolveTriggers(
                 TriggerTypes.BeforeMovementIsExecuted,
@@ -209,24 +223,24 @@ namespace Ship
 
         public void CallOnMovementBumped(GenericShip ship)
         {
-            if (OnMovementBumped != null) OnMovementBumped(ship);
+            OnMovementBumped?.Invoke(ship);
         }
 
         public void CallFinishMovement(Action callback)
         {
-            if (OnMovementFinish != null) OnMovementFinish(this);
-            if (OnMovementFinishGlobal != null) OnMovementFinishGlobal(this);
-            
+            OnMovementFinish?.Invoke(this);
+            OnMovementFinishGlobal?.Invoke(this);
+
             // If we didn't bump, or end up off the board then we have succesfully completed our manuever.
             if (CheckSuccessOfManeuver())
             {
-                if (OnMovementFinishSuccessfully != null) OnMovementFinishSuccessfully(this);
-                if (OnMovementFinishSuccessfullyGlobal != null) OnMovementFinishSuccessfullyGlobal(this);
+                OnMovementFinishSuccessfully?.Invoke(this);
+                OnMovementFinishSuccessfullyGlobal?.Invoke(this);
             }
             else if (IsBumped)
             {
-                if (OnMovementFinishUnsuccessfully != null) OnMovementFinishUnsuccessfully(this);
-                if (OnMovementFinishUnsuccessfullyGlobal != null) OnMovementFinishUnsuccessfullyGlobal(this);
+                OnMovementFinishUnsuccessfully?.Invoke(this);
+                OnMovementFinishUnsuccessfullyGlobal?.Invoke(this);
 
                 foreach (GenericShip ship in ShipsBumped)
                 {
@@ -236,7 +250,8 @@ namespace Ship
 
             Triggers.ResolveTriggers(
                 TriggerTypes.OnMovementFinish,
-                delegate () {
+                delegate ()
+                {
                     Roster.HideAssignedManeuverDial(this);
                     Selection.ThisShip.CallPositionIsReadyToFinish(callback);
                 }
@@ -250,8 +265,8 @@ namespace Ship
 
         public void CallPositionIsReadyToFinish(System.Action callback)
         {
-            if (OnPositionIsReadyToFinish != null) OnPositionIsReadyToFinish(this);
-            if (OnPositionIsReadyToFinishGlobal != null) OnPositionIsReadyToFinishGlobal(this);
+            OnPositionIsReadyToFinish?.Invoke(this);
+            OnPositionIsReadyToFinishGlobal?.Invoke(this);
 
             Triggers.ResolveTriggers(
                 TriggerTypes.OnPositionIsReadyToFinish,
@@ -264,8 +279,8 @@ namespace Ship
 
         public void CallFinishPosition(System.Action callback)
         {
-            if (OnPositionFinish != null) OnPositionFinish(this);
-            if (OnPositionFinishGlobal != null) OnPositionFinishGlobal(this);
+            OnPositionFinish?.Invoke(this);
+            OnPositionFinishGlobal?.Invoke(this);
 
             Triggers.ResolveTriggers(TriggerTypes.OnPositionFinish, callback);
         }
@@ -276,9 +291,9 @@ namespace Ship
         public MovementComplexity GetColorComplexityOfManeuver(ManeuverHolder movement)
         {
             if (IonizationRule.IsIonized(this)) return movement.ColorComplexity;
-            if (AfterGetManeuverColorDecreaseComplexity != null) AfterGetManeuverColorDecreaseComplexity(this, ref movement);
-            if (AfterGetManeuverColorIncreaseComplexity != null) AfterGetManeuverColorIncreaseComplexity(this, ref movement);
-            if (AfterGetManeuverAvailablity != null) AfterGetManeuverAvailablity(this, ref movement);
+            AfterGetManeuverColorDecreaseComplexity?.Invoke(this, ref movement);
+            AfterGetManeuverColorIncreaseComplexity?.Invoke(this, ref movement);
+            AfterGetManeuverAvailablity?.Invoke(this, ref movement);
 
             return movement.ColorComplexity;
         }
@@ -289,8 +304,8 @@ namespace Ship
         }
 
         public ManeuverBearing GetLastManeuverBearing()
-        {               
-            var result = AssignedManeuver.Bearing;
+        {
+            ManeuverBearing result = AssignedManeuver.Bearing;
             return result;
         }
 
@@ -303,7 +318,7 @@ namespace Ship
 
             Dictionary<string, MovementComplexity> result = new();
 
-            foreach (var maneuverHolder in maneuvers)
+            foreach (KeyValuePair<string, MovementComplexity> maneuverHolder in maneuvers)
             {
                 result.Add(maneuverHolder.Key, new ManeuverHolder(maneuverHolder.Key).ColorComplexity);
             }
@@ -318,9 +333,9 @@ namespace Ship
             CallReadyToGetManeuvers();
             OnGetManeuvers?.Invoke(maneuvers);
 
-            List<ManeuverHolder> result = new List<ManeuverHolder>();
+            List<ManeuverHolder> result = new();
 
-            foreach (var maneuverHolder in maneuvers)
+            foreach (KeyValuePair<string, MovementComplexity> maneuverHolder in maneuvers)
             {
                 result.Add(new ManeuverHolder(maneuverHolder.Key, this));
             }
@@ -335,12 +350,14 @@ namespace Ship
             {
                 result = (Maneuvers[maneuverString] != MovementComplexity.None);
             }
+
             return result;
         }
 
         public bool HasManeuver(ManeuverHolder maneuverStruct)
         {
             string maneuverString = maneuverStruct.ToString();
+
             return HasManeuver(maneuverString);
         }
 
@@ -404,5 +421,4 @@ namespace Ship
             return result;
         }
     }
-
 }

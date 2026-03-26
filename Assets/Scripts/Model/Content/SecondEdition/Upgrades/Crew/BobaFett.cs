@@ -33,10 +33,10 @@ namespace UpgradesList.SecondEdition
                 new Vector2(447, 1),
                 new Vector2(150, 150)
             );
-        }        
+        }
     }
 
-    public class BobaFettXWA: BobaFett
+    public class BobaFettXWA : BobaFett
     {
         public BobaFettXWA() : base()
         {
@@ -83,9 +83,10 @@ namespace Abilities.SecondEdition
         {
             Roster.ReturnFromReserve(HostShip);
 
-            var subphase = Phases.StartTemporarySubPhaseNew<SetupShipMidgameSubPhase>(
+            SetupShipMidgameSubPhase subphase = Phases.StartTemporarySubPhaseNew<SetupShipMidgameSubPhase>(
                 "Setup",
-                delegate {
+                delegate
+                {
                     Messages.ShowInfo(HostShip.PilotInfo.PilotName + " has been placed");
                     Triggers.FinishTrigger();
                 }
@@ -105,7 +106,7 @@ namespace Abilities.SecondEdition
         {
             bool result = true;
 
-            if (HostShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlapedAsteroids.Count == 0)
+            if (HostShip.Model.GetComponentInChildren<ObstaclesStayDetector>().OverlappedAsteroids.Count == 0)
             {
                 Messages.ShowErrorToHuman("Boba Fett: Invalid location for this ship, the ship must be placed at range 0 of an asteroid");
                 return false;
@@ -113,7 +114,7 @@ namespace Abilities.SecondEdition
 
             foreach (GenericShip enemyShip in Roster.GetPlayer(Roster.AnotherPlayer(HostShip.Owner.PlayerNo)).Ships.Values)
             {
-                DistanceInfo distInfo = new DistanceInfo(HostShip, enemyShip);
+                DistanceInfo distInfo = new(HostShip, enemyShip);
                 if (distInfo.Range < 4)
                 {
                     Messages.ShowErrorToHuman("Boba Fett: The range to the closest enemy is " + distInfo.Range + ", it must be beyond range 3");

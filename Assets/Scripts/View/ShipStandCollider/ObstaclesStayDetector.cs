@@ -1,20 +1,20 @@
 ﻿using Obstacles;
 using Remote;
 using Ship;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstaclesStayDetector: MonoBehaviour {
+public class ObstaclesStayDetector : MonoBehaviour
+{
 
     public bool checkCollisions = false;
 
     public bool OverlapsShip = false;
 
-    public List<GenericShip> OverlapedShips = new List<GenericShip>();
-    public List<GenericRemote> OverlapedRemotes = new List<GenericRemote>();
-    public List<GenericObstacle> OverlapedAsteroids = new List<GenericObstacle>();
-    public List<Collider> OverlapedMines = new List<Collider>();
+    public List<GenericShip> OverlappedShips = new();
+    public List<GenericRemote> OverlappedRemotes = new();
+    public List<GenericObstacle> OverlappedAsteroids = new();
+    public List<Collider> OverlappedMines = new();
 
     public bool OffTheBoard = false;
 
@@ -23,19 +23,19 @@ public class ObstaclesStayDetector: MonoBehaviour {
         if (checkCollisions)
         {
             GameManagerScript Game = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
-            if (collisionInfo.tag == "Obstacle")
+            if (collisionInfo.CompareTag("Obstacle"))
             {
                 GenericObstacle obstacle = ObstaclesManager.GetChosenObstacle(collisionInfo.transform.name);
-                if (!OverlapedAsteroids.Contains(obstacle))
+                if (!OverlappedAsteroids.Contains(obstacle))
                 {
-                    OverlapedAsteroids.Add(obstacle);
+                    OverlappedAsteroids.Add(obstacle);
                 }
             }
-            else if (collisionInfo.tag == "Mine")
+            else if (collisionInfo.CompareTag("Mine"))
             {
-                if (!OverlapedMines.Contains(collisionInfo))
+                if (!OverlappedMines.Contains(collisionInfo))
                 {
-                    OverlapedMines.Add(collisionInfo);
+                    OverlappedMines.Add(collisionInfo);
                 }
             }
             else if (collisionInfo.name == "OffTheBoard")
@@ -44,44 +44,35 @@ public class ObstaclesStayDetector: MonoBehaviour {
             }
             else if (collisionInfo.name == "ObstaclesStayDetector")
             {
-                if (collisionInfo.tag != this.tag)
+                if (!this.CompareTag(collisionInfo.tag))
                 {
                     Game.Movement.CollidedWith = collisionInfo;
                     OverlapsShip = true;
-                    if (!OverlapedShips.Contains(Roster.GetShipById(collisionInfo.tag)))
+
+                    if (!OverlappedShips.Contains(Roster.GetShipById(collisionInfo.tag)))
                     {
-                        OverlapedShips.Add(Roster.GetShipById(collisionInfo.tag));
+                        OverlappedShips.Add(Roster.GetShipById(collisionInfo.tag));
                     }
                 }
             }
-            else if (collisionInfo.name == "RemoteCollider")
+            else if (collisionInfo.name == "RemoteCollider"
+                && !this.CompareTag(collisionInfo.tag)
+                && !OverlappedRemotes.Contains(Roster.GetShipById(collisionInfo.tag) as GenericRemote))
             {
-                if (collisionInfo.tag != this.tag)
-                {
-                    if (!OverlapedRemotes.Contains(Roster.GetShipById(collisionInfo.tag) as GenericRemote))
-                    {
-                        OverlapedRemotes.Add(Roster.GetShipById(collisionInfo.tag) as GenericRemote);
-                    }
-                }
+                OverlappedRemotes.Add(Roster.GetShipById(collisionInfo.tag) as GenericRemote);
+
             }
         }
     }
 
     private void OnTriggerExit(Collider collisionInfo)
     {
-        if (checkCollisions)
+        if (checkCollisions
+            && collisionInfo.name == "ObstaclesStayDetector"
+            && !this.CompareTag(collisionInfo.tag)
+            && OverlappedShips.Contains(Roster.GetShipById(collisionInfo.tag)))
         {
-            if (collisionInfo.name == "ObstaclesStayDetector")
-            {
-                if (collisionInfo.tag != this.tag)
-                {
-                    if (OverlapedShips.Contains(Roster.GetShipById(collisionInfo.tag)))
-                    {
-                        OverlapedShips.Remove(Roster.GetShipById(collisionInfo.tag));
-                    }
-                }
-            }
+            OverlappedShips.Remove(Roster.GetShipById(collisionInfo.tag));
         }
     }
-
 }

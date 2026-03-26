@@ -1,6 +1,5 @@
-﻿using Ship;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Obstacles;
+using Ship;
 
 namespace RulesList
 {
@@ -26,7 +25,7 @@ namespace RulesList
         {
             if (ship.IsLandedOnObstacle)
             {
-                foreach (var obstacle in ship.ObstaclesLanded)
+                foreach (GenericObstacle obstacle in ship.ObstaclesLanded)
                 {
                     if (ship.IgnoreObstaclesList.Contains(obstacle)) continue;
 
