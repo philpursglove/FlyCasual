@@ -8,13 +8,26 @@ namespace Ship
     public class PilotCardInfo25 : PilotCardInfo
     {
         private static Faction factionOverride;
-
-        public int LoadoutValue { get; set; }
         public string SkinName { get; set; }
-        public List<Tags> Tags { get; set;  }
+        public List<Tags> Tags { get; set; }
         public List<Legality> LegalityInfo { get; set; }
         public bool IsStandardLayout { get; set; }
         public bool AffectedByStandardized { get; set; }
+
+        private int loadoutValue;
+
+        public int LoadoutValue
+        {
+            get
+            {
+                return (IsStandardLayout) ? int.MaxValue : loadoutValue;
+            }
+
+            set
+            {
+                loadoutValue = value;
+            }
+        }
 
         public PilotCardInfo25(
             string pilotName,
@@ -47,7 +60,7 @@ namespace Ship
 
             Initiative = initiative;
             Cost = cost;
-            LoadoutValue = (isStandardLayout) ? int.MaxValue : loadoutValue;
+            LoadoutValue = loadoutValue;
 
             if (isLimited)
             {
