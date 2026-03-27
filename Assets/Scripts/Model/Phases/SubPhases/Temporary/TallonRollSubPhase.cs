@@ -1,6 +1,5 @@
 ﻿using BoardTools;
 using Ship;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,10 +54,10 @@ namespace SubPhases
 
         private void EndTallonRollRotation()
         {
-            GameManagerScript.Instance.StartCoroutine(CheckAvailiblePositions());
+            GameManagerScript.Instance.StartCoroutine(CheckAvailablePositions());
         }
 
-        private IEnumerator CheckAvailiblePositions()
+        private IEnumerator CheckAvailablePositions()
         {
             TallonRollHelper tallonRollHelper = new(Selection.ThisShip);
             yield return tallonRollHelper.CheckPositions();
