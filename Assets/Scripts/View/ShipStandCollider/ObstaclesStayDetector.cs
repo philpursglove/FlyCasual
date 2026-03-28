@@ -23,6 +23,7 @@ public class ObstaclesStayDetector : MonoBehaviour
         if (checkCollisions)
         {
             GameManagerScript Game = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
+
             if (collisionInfo.CompareTag("Obstacle"))
             {
                 GenericObstacle obstacle = ObstaclesManager.GetChosenObstacle(collisionInfo.transform.name);
@@ -38,33 +39,35 @@ public class ObstaclesStayDetector : MonoBehaviour
                     OverlappedMines.Add(collisionInfo);
                 }
             }
-
-            switch (collisionInfo.name)
+            else
             {
-                case "OffTheBoard":
-                    OffTheBoard = true;
-                    break;
-                case "ObstaclesStayDetector":
-                    if (!this.CompareTag(collisionInfo.tag))
-                    {
-                        Game.Movement.CollidedWith = collisionInfo;
-                        OverlapsShip = true;
-
-                        if (!OverlappedShips.Contains(Roster.GetShipById(collisionInfo.tag)))
+                switch (collisionInfo.name)
+                {
+                    case "OffTheBoard":
+                        OffTheBoard = true;
+                        break;
+                    case "ObstaclesStayDetector":
+                        if (!this.CompareTag(collisionInfo.tag))
                         {
-                            OverlappedShips.Add(Roster.GetShipById(collisionInfo.tag));
+                            Game.Movement.CollidedWith = collisionInfo;
+                            OverlapsShip = true;
+
+                            if (!OverlappedShips.Contains(Roster.GetShipById(collisionInfo.tag)))
+                            {
+                                OverlappedShips.Add(Roster.GetShipById(collisionInfo.tag));
+                            }
                         }
-                    }
 
-                    break;
-                case "RemoteCollider":
-                    if (!this.CompareTag(collisionInfo.tag)
-                        && !OverlappedRemotes.Contains(Roster.GetShipById(collisionInfo.tag) as GenericRemote))
-                    {
-                        OverlappedRemotes.Add(Roster.GetShipById(collisionInfo.tag) as GenericRemote);
-                    }
+                        break;
+                    case "RemoteCollider":
+                        if (!this.CompareTag(collisionInfo.tag)
+                            && !OverlappedRemotes.Contains(Roster.GetShipById(collisionInfo.tag) as GenericRemote))
+                        {
+                            OverlappedRemotes.Add(Roster.GetShipById(collisionInfo.tag) as GenericRemote);
+                        }
 
-                    break;
+                        break;
+                }
             }
         }
     }
