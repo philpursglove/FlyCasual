@@ -38,7 +38,30 @@ public class ObstaclesStayDetector : MonoBehaviour
                     OverlappedMines.Add(collisionInfo);
                 }
             }
-            else if (collisionInfo.name == "OffTheBoard")
+            switch (collisionInfo.name)
+{
+    case "OffTheBoard":
+        OffTheBoard = true;
+        break;
+    case "ObstaclesStayDetector":
+        if (!this.CompareTag(collisionInfo.tag))
+        {
+            Game.Movement.CollidedWith = collisionInfo;
+            OverlapsShip = true;
+            if (!OverlappedShips.Contains(Roster.GetShipById(collisionInfo.tag)))
+            {
+                OverlappedShips.Add(Roster.GetShipById(collisionInfo.tag));
+            }
+        }
+        break;
+    case "RemoteCollider":
+        if (!this.CompareTag(collisionInfo.tag)
+            && !OverlappedRemotes.Contains(Roster.GetShipById(collisionInfo.tag) as GenericRemote))
+        {
+            OverlappedRemotes.Add(Roster.GetShipById(collisionInfo.tag) as GenericRemote);
+        }
+        break;
+}
             {
                 OffTheBoard = true;
             }
