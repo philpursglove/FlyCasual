@@ -38,6 +38,7 @@ public class ObstaclesStayDetector : MonoBehaviour
                     OverlappedMines.Add(collisionInfo);
                 }
             }
+
             switch (collisionInfo.name)
             {
                 case "OffTheBoard":
@@ -54,6 +55,7 @@ public class ObstaclesStayDetector : MonoBehaviour
                             OverlappedShips.Add(Roster.GetShipById(collisionInfo.tag));
                         }
                     }
+
                     break;
                 case "RemoteCollider":
                     if (!this.CompareTag(collisionInfo.tag)
@@ -61,6 +63,7 @@ public class ObstaclesStayDetector : MonoBehaviour
                     {
                         OverlappedRemotes.Add(Roster.GetShipById(collisionInfo.tag) as GenericRemote);
                     }
+
                     break;
             }
         }
