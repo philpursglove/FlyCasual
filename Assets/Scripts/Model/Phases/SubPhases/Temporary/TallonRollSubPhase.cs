@@ -1,6 +1,5 @@
 ﻿using BoardTools;
 using Ship;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace SubPhases
         private float progressTarget;
         private const float ANIMATION_SPEED = 700;
         private int direction;
-        private bool IsFinished;
+        private bool isFinished;
 
         public override void Start()
         {
@@ -26,21 +25,21 @@ namespace SubPhases
 
         public override void Update()
         {
-            if (!IsFinished)
+            if (!isFinished)
             {
                 float progressLeft = progressTarget - progressCurrent;
                 float progressStep = Mathf.Min(Time.deltaTime * ANIMATION_SPEED * Options.AnimationSpeed, progressLeft);
-                progressCurrent = progressCurrent + progressStep;
+                progressCurrent += progressStep;
 
                 Selection.ThisShip.RotateAround(Selection.ThisShip.GetCenter(), direction * progressStep);
 
                 float positionY = (progressCurrent < 45) ? progressCurrent : 90 - progressCurrent;
-                positionY = positionY / 90;
+                positionY /= 90;
                 Selection.ThisShip.SetHeight(positionY);
 
                 if (progressCurrent == progressTarget)
                 {
-                    IsFinished = true;
+                    isFinished = true;
                     EndTallonRollRotation();
                 }
             }
@@ -55,12 +54,12 @@ namespace SubPhases
 
         private void EndTallonRollRotation()
         {
-            GameManagerScript.Instance.StartCoroutine(CheckAwailiblePositions());
+            GameManagerScript.Instance.StartCoroutine(CheckAvailablePositions());
         }
 
-        private IEnumerator CheckAwailiblePositions()
+        private IEnumerator CheckAvailablePositions()
         {
-            TallonRollHelper tallonRollHelper = new TallonRollHelper(Selection.ThisShip);
+            TallonRollHelper tallonRollHelper = new(Selection.ThisShip);
             yield return tallonRollHelper.CheckPositions();
 
             bool isAnyPositionAvailable = tallonRollHelper.IsPositionAllowed.Values.Any(n => n == true);
@@ -79,7 +78,7 @@ namespace SubPhases
 
                 subPhase.DecisionOwner = Selection.ThisShip.Owner;
                 subPhase.DefaultDecisionName = "Center";
-                subPhase.OnNextButtonIsPressed = FinishTallonRoll;
+                subPhase.OnNextButtonIsPressed = delegate { FinishTallonRoll(tallonRollHelper); };
 
                 subPhase.Start();
             }
@@ -89,8 +88,9 @@ namespace SubPhases
             }
         }
 
-        private void FinishTallonRoll()
+        private void FinishTallonRoll(TallonRollHelper helper)
         {
+            helper.DestroyTemporaryShipBases();
             DecisionSubPhase.ConfirmDecision();
         }
 
@@ -104,6 +104,8 @@ namespace SubPhases
 
             if (tallonRollHelper.IsPositionAllowed[direction])
             {
+                GameManagerScript.Instance.StartCoroutine(tallonRollHelper.GetObstaclesLanded(direction));
+
                 UI.ShowNextButton();
             }
             else
@@ -136,11 +138,9 @@ namespace SubPhases
             bool result = false;
             return result;
         }
-
     }
 
-    public class TallonRollShiftSubPhase : DecisionSubPhase {}
-
+    public class TallonRollShiftSubPhase : DecisionSubPhase { }
 }
 
 public class TallonRollHelper
@@ -167,13 +167,12 @@ public class TallonRollHelper
 
     public IEnumerator CheckPositions()
     {
-        GeneratTemporaryShipBases();
+        GenerateTemporaryShipBases();
         yield return CheckCollisions();
         ProcessResults();
-        DestroyTemporaryShipBases();
     }
 
-    private void GeneratTemporaryShipBases()
+    private void GenerateTemporaryShipBases()
     {
         TemporaryShipBases = new Dictionary<int, GameObject>();
 
@@ -198,7 +197,7 @@ public class TallonRollHelper
 
     private IEnumerator CheckCollisions()
     {
-        foreach (var temporaryShipBase in TemporaryShipBases.Values)
+        foreach (GameObject temporaryShipBase in TemporaryShipBases.Values.ToList())
         {
             ObstaclesStayDetectorForced detector = temporaryShipBase.transform.Find("ShipBase").Find("ObstaclesStayDetector").gameObject.AddComponent<ObstaclesStayDetectorForced>();
 
@@ -220,12 +219,19 @@ public class TallonRollHelper
         }
     }
 
-    private void DestroyTemporaryShipBases()
+    public IEnumerator GetObstaclesLanded(int direction)
     {
-        foreach (var temporaryShipBase in TemporaryShipBases.Values)
+        yield return CheckCollisions();
+        Ship.ObstaclesLanded = TemporaryShipBases[direction].GetComponentInChildren<ObstaclesStayDetectorForced>().OverlappedAsteroidsNow;
+    }
+
+    public void DestroyTemporaryShipBases()
+    {
+        foreach (GameObject temporaryShipBase in TemporaryShipBases.Values)
         {
             GameObject.Destroy(temporaryShipBase);
         }
+
         TemporaryShipBases.Clear();
     }
 }
