@@ -126,8 +126,9 @@ namespace Abilities.SecondEdition
                     { "You'd Better Mean Business", "https://infinitearenas.com/xw2/images/conditions/youdbettermeanbusiness.png" }
                 },
                 defaultDecision: GetDefaultDecision(),
-                requiredPlayer: HostShip.Owner.PlayerNo
-            ); ;
+                requiredPlayer: HostShip.Owner.PlayerNo,
+                callback: Triggers.FinishTrigger
+            );
         }
 
         protected virtual void AssignSecretCondition(Type conditionType)
