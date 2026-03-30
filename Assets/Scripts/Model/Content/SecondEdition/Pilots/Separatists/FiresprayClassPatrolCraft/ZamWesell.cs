@@ -91,6 +91,19 @@ namespace Abilities.SecondEdition
             HostShip.OnSystemsPhaseStart += RemoveOwnConditions;
         }
 
+        public override void DeactivateAbility()
+        {
+            HostShip.OnSetupPlaced -= LoseChargesOnSetup;
+
+            HostShip.OnCheckSystemsAbilityActivation -= CheckAbility;
+            HostShip.OnSystemsAbilityActivation -= RegisterAbility;
+
+            HostShip.OnAttackFinishAsDefender -= CheckAttackFinishCondition;
+            Phases.Events.OnCombatPhaseEnd_Triggers -= CheckCombatFinishCondition;
+
+            HostShip.OnSystemsPhaseStart -= RemoveOwnConditions;
+        }
+
         protected virtual void LoseChargesOnSetup(GenericShip ship)
         {
             Messages.ShowInfo($"{HostShip.PilotInfo.PilotName}: 2 Charges are lost during Setup");
@@ -432,19 +445,6 @@ namespace Abilities.SecondEdition
             AssignedCondition = null;
 
             IsAbilityUsed = false;
-        }
-
-        public override void DeactivateAbility()
-        {
-            HostShip.OnSetupPlaced -= LoseChargesOnSetup;
-
-            HostShip.OnCheckSystemsAbilityActivation -= CheckAbility;
-            HostShip.OnSystemsAbilityActivation -= RegisterAbility;
-
-            HostShip.OnAttackFinishAsDefender -= CheckAttackFinishCondition;
-            Phases.Events.OnCombatPhaseEnd_Triggers -= CheckCombatFinishCondition;
-
-            HostShip.OnSystemsPhaseStart -= RemoveOwnConditions;
         }
     }
 }
