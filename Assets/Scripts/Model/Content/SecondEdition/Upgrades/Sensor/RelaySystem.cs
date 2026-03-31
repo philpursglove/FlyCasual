@@ -25,6 +25,8 @@ namespace Abilities.SecondEdition
 {
     public class RelaySystemAbility : GenericAbility
     {
+        ITargetLockable lockedObject;
+
         public override void ActivateAbility()
         {
             GenericShip.OnTokenIsAssignedGlobal += CheckReceiveTargetLockAbility;
@@ -52,7 +54,7 @@ namespace Abilities.SecondEdition
             if (HostShip.Tokens.HasToken<BlueTargetLockToken>() && friendlyShipsAtRange0To1.Any())
             {
                 BlueTargetLockToken existingToken = (BlueTargetLockToken)HostShip.Tokens.GetToken(typeof(BlueTargetLockToken));
-                ITargetLockable lockedObject = existingToken.OtherTargetLockTokenOwner;
+                lockedObject = existingToken.OtherTargetLockTokenOwner;
                 if (lockedObject != Combat.Defender) return;
                 AskToUseAbility("Relay System",
                     NeverUseByDefault,
@@ -64,23 +66,23 @@ namespace Abilities.SecondEdition
         private void PassTargetLock(ITargetLockable lockedObject, List<GenericShip> potentialRecipients)
         {
             // If only one possible recipient, skip the decision
-            if (potentialRecipients.Count == 1)
-            {
-                TargetShip = potentialRecipients.First();
-                TransferTargetLock();
-            }
-            else
-            {
-                SelectTargetForAbility(
-                    TransferTargetLock,
-                    potentialRecipients,
-                    GetAiPriorityForTargetLockTransfer,
-                    HostShip.Owner.PlayerNo,
-                    HostShip.PilotInfo.PilotName,
-                    description: "Select a ship to transfer the target lock to",
-                    showSkipButton: true
-                );
-            }
+            //if (potentialRecipients.Count == 1)
+            //{
+            //    TargetShip = potentialRecipients.First();
+            //    TransferTargetLock();
+            //}
+            //else
+            //{
+            //    SelectTargetForAbility(
+            //        TransferTargetLock,
+            //        potentialRecipients,
+            //        GetAiPriorityForTargetLockTransfer,
+            //        HostShip.Owner.PlayerNo,
+            //        HostShip.PilotInfo.PilotName,
+            //        description: "Select a ship to transfer the target lock to",
+            //        showSkipButton: true
+            //    );
+            //}
         }
 
         private int GetAiPriorityForTargetLockTransfer(GenericShip ship)
