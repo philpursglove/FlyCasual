@@ -2,7 +2,6 @@
 using ActionsList;
 using Content;
 using Ship;
-using Ship.SecondEdition.T65XWing;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -48,6 +47,8 @@ namespace Ship.SecondEdition.T65XWing
             MustHaveUpgrades.Add(typeof(ChaffParticlesBoE));
 
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/kendyidele-battleoverendor.png";
+
+            PilotNameCanonical = "kendyidele-battleoverendor";
         }
     }
 
