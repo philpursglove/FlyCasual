@@ -35,7 +35,8 @@ namespace Ship.SecondEdition.TIEPhPhantom
                     UpgradeType.Talent,
                     UpgradeType.Modification
                 },
-                charges: 1
+                charges: 1,
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/echo-tiephphantom.png";
 
@@ -44,7 +45,18 @@ namespace Ship.SecondEdition.TIEPhPhantom
             MustHaveUpgrades.Add(typeof(ManualAilerons));
         }
     }
+
+    public class EchoSLXWA : EchoSL
+    {
+        public EchoSLXWA() : base()
+        {
+            (PilotInfo as PilotCardInfo25).Cost = 14;
+            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+        }
+    }
+
 }
+
 
 namespace Abilities.SecondEdition
 {
