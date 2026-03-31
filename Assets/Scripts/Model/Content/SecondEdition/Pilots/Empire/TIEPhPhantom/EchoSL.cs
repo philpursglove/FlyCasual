@@ -39,6 +39,7 @@ namespace Ship.SecondEdition.TIEPhPhantom
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/echo-tiephphantom.png";
+            PilotNameCanonical = "echo-ssl";
 
             MustHaveUpgrades.Add(typeof(SilentHunter));
             MustHaveUpgrades.Add(typeof(StealthGambit));
