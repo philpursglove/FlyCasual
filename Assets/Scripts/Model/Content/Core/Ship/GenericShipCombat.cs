@@ -507,6 +507,7 @@ namespace Ship
         public bool TryRegenShields()
         {
             bool result = false;
+
             if (State.ShieldsCurrent < State.ShieldsMax)
             {
                 result = true;
@@ -514,7 +515,7 @@ namespace Ship
                 AnimateShields();
                 AfterAssignedDamageIsChanged(this);
             }
-            ;
+
             return result;
         }
 
@@ -752,9 +753,9 @@ namespace Ship
                 delegate
                 {
                     CallShipDestruction(
-                    delegate { RemoveDestroyedShip(callback); },
-                    isFled: isFled
-                );
+                        delegate { RemoveDestroyedShip(callback); },
+                        isFled: isFled
+                    );
                 }
             );
         }
