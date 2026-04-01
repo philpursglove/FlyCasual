@@ -21,6 +21,7 @@ namespace Ship.SecondEdition.TIEPhPhantom
                 5,
                 5,
                 0,
+                charges: 2,
                 isLimited: true,
                 isStandardLayout: true,
                 abilityType: typeof(WhisperSLAbility),
@@ -34,10 +35,10 @@ namespace Ship.SecondEdition.TIEPhPhantom
                     UpgradeType.Sensor,
                     UpgradeType.Modification
                 },
-                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal },
-                charges: 2
+                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/whisper-tiephphantom.png";
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/whisper-ssl.png";
 
             PilotNameCanonical = "whisper-ssl";
 
@@ -51,9 +52,11 @@ namespace Ship.SecondEdition.TIEPhPhantom
     {
         public WhisperSLXWA() : base()
         {
-            var pilotInfo = (PilotCardInfo25)PilotInfo;
+            PilotCardInfo25 pilotInfo = (PilotCardInfo25)PilotInfo;
             pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
-            pilotInfo.Cost = 6;
+            pilotInfo.Cost = 15;
+
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/quickbuilds/whisper-ssl.png";
         }
     }
 }
@@ -78,7 +81,6 @@ namespace Abilities.SecondEdition
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskToUseAbility);
             }
-
         }
 
         private void AskToUseAbility(object sender, EventArgs e)
@@ -97,16 +99,16 @@ namespace Abilities.SecondEdition
 
         private void RegisterSpendChargeTrigger(GenericAction action, ref bool isFreeAction)
         {
-            HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             RegisterAbilityTrigger(
                 TriggerTypes.OnFreeAction,
                 delegate
                 {
                     HostShip.SpendCharge();
-                    Triggers.FinishTrigger();
+                    CleanUp();
                 }
             );
         }
+
         private void CleanUp()
         {
             HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
