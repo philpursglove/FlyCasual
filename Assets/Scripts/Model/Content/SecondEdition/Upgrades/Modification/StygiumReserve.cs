@@ -2,8 +2,6 @@ using Actions;
 using ActionsList;
 using Ship;
 using System;
-using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -18,6 +16,7 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.StygiumReserveAbility),
                 charges: 1
             );
+
             IsHidden = true;
         }
     }
@@ -50,7 +49,7 @@ namespace Abilities.SecondEdition
             CameraScript.RestoreCamera();
 
             HostShip.AskPerformFreeAction(
-                new BoostAction(){CanBePerformedWhileStressed = true, Color = ActionColor.White},
+                new BoostAction() { CanBePerformedWhileStressed = true, Color = ActionColor.White },
                 CleanUp,
                 "Stygium Reserve",
                 "After you fully execute a maneuver, you may spend a charge to perform a Boost",
@@ -60,13 +59,12 @@ namespace Abilities.SecondEdition
 
         private void RegisterSpendChargeTrigger(GenericAction action, ref bool isFreeAction)
         {
-            HostShip.BeforeActionIsPerformed -= RegisterSpendChargeTrigger;
             RegisterAbilityTrigger(
                 TriggerTypes.OnFreeAction,
                 delegate
                 {
                     HostUpgrade.State.SpendCharge();
-                    Triggers.FinishTrigger();
+                    CleanUp();
                 }
             );
         }
