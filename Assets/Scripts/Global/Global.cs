@@ -6,7 +6,8 @@ using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Global : MonoBehaviour {
+public class Global : MonoBehaviour
+{
 
     public static Global Instance;
 
@@ -14,7 +15,7 @@ public class Global : MonoBehaviour {
 
     public static string CurrentVersion = "v2.5.20251209.05";
     public static int CurrentVersionInt = 102507005;  // literal(10) XwingVersion(25) MajorUpdate#(increments) MinorUpdate#(increments)
-    public static int LatestVersionInt  = 0;
+    public static int LatestVersionInt = 0;
 
     // Used for json exports, update when vendor version changes
     public static string CurrentXWAVersion = "50P-1.1";
@@ -65,15 +66,12 @@ public class Global : MonoBehaviour {
     {
         get
         {
-            switch (SceneManager.GetActiveScene().name)
+            return SceneManager.GetActiveScene().name switch
             {
-                case "MainMenu":
-                    return Scene.MainMenu;
-                case "Battle":
-                    return Scene.Battle;
-                default:
-                    return Scene.Undefined;
-            }
+                "MainMenu" => Scene.MainMenu,
+                "Battle" => Scene.Battle,
+                _ => Scene.Undefined,
+            };
         }
     }
 
@@ -125,18 +123,25 @@ public class Global : MonoBehaviour {
 
     public static bool IsVsNetworkOpponent
     {
-        get { return SquadBuilder.SquadLists[PlayerNo.Player2].PlayerType == typeof(NetworkOpponentPlayer); }
+        get
+        {
+            return SquadBuilder.SquadLists[PlayerNo.Player2].PlayerType == typeof(NetworkOpponentPlayer);
+        }
     }
 
     public static bool IsNetworkGame
     {
-        get { return SquadBuilder.SquadLists[PlayerNo.Player2].PlayerType == typeof(NetworkOpponentPlayer) 
-                || SquadBuilder.SquadLists[PlayerNo.Player1].PlayerType == typeof(NetworkOpponentPlayer); }
+        get
+        {
+            return SquadBuilder.SquadLists[PlayerNo.Player2].PlayerType == typeof(NetworkOpponentPlayer)
+                || SquadBuilder.SquadLists[PlayerNo.Player1].PlayerType == typeof(NetworkOpponentPlayer);
+        }
     }
 
     public static PlayerNo MyPlayer
     {
-        get {
+        get
+        {
             if (IsNetworkGame)
             {
                 if (SquadBuilder.SquadLists[PlayerNo.Player2].PlayerType == typeof(NetworkOpponentPlayer)) return PlayerNo.Player1;
@@ -149,7 +154,10 @@ public class Global : MonoBehaviour {
 
     public static bool IsVsAiGame
     {
-        get { return SquadBuilder.SquadLists[PlayerNo.Player2].PlayerType.IsSubclassOf(typeof(GenericAiPlayer)); }
+        get
+        {
+            return SquadBuilder.SquadLists[PlayerNo.Player2].PlayerType.IsSubclassOf(typeof(GenericAiPlayer));
+        }
     }
 
     public static void PrepareOnlineMatchLists(int playerInt, string playerName, string title, string avatar, string squadString)
@@ -170,11 +178,10 @@ public class Global : MonoBehaviour {
 
         squadList.SavedConfiguration = SquadBuilder.SquadLists[playerNo].GetSquadInJson();
 
-        JSONObject playerInfoJson = new JSONObject();
+        JSONObject playerInfoJson = new();
         playerInfoJson.AddField("NickName", playerName);
         playerInfoJson.AddField("Title", title);
         playerInfoJson.AddField("Avatar", avatar);
         squadList.SavedConfiguration.AddField("PlayerInfo", playerInfoJson);
     }
-
 }
