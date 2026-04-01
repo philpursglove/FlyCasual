@@ -15,7 +15,9 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Without a Trace",
                 UpgradeType.Talent,
-                abilityType: typeof(Abilities.SecondEdition.WithoutATraceAbility));
+                abilityType: typeof(Abilities.SecondEdition.WithoutATraceAbility)
+            );
+
             IsHidden = true;
         }
     }
@@ -42,13 +44,13 @@ namespace Abilities.SecondEdition
 
         private void ForbidLockOnMe(ref bool isAllowed, GenericShip lockSource, ITargetLockable lockTarget)
         {
-            if (lockTarget is GenericShip && (lockTarget as GenericShip) == HostShip
-                                          && HostShip.IsCloaked)
+            if (lockTarget is GenericShip 
+                && (lockTarget as GenericShip) == HostShip
+                && HostShip.IsCloaked)
             {
                 isAllowed = false;
             }
         }
-
 
         private void RegisterAbility(GenericShip ship, GenericToken token)
         {
@@ -71,7 +73,7 @@ namespace Abilities.SecondEdition
 
         private void UseAbility(object sender, EventArgs e)
         {
-            var subphase = Phases.StartTemporarySubPhaseNew<WithoutATraceRemoveRedTokenAbilityDecisionSubPhase>(
+            WithoutATraceRemoveRedTokenAbilityDecisionSubPhase subphase = Phases.StartTemporarySubPhaseNew<WithoutATraceRemoveRedTokenAbilityDecisionSubPhase>(
                 "Without A Trace: You may remove 1 red token",
                 Triggers.FinishTrigger
             );
