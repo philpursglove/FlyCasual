@@ -16,7 +16,11 @@ public class Global : MonoBehaviour {
     public static int CurrentVersionInt = 102507005;  // literal(10) XwingVersion(25) MajorUpdate#(increments) MinorUpdate#(increments)
     public static int LatestVersionInt  = 0;
 
-    public static SquadBuilder SquadBuilder { get; set;}
+    // Used for json exports, update when vendor version changes
+    public static string CurrentXWAVersion = "50P-1.1";
+    public static string CurrentAMGVersion = "2.8.0";
+
+    public static SquadBuilder SquadBuilder { get; set; }
 
     void Awake()
     {

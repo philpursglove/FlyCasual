@@ -20,7 +20,15 @@ namespace SquadBuilderNS
             squadJson.AddField("faction", Edition.Current.FactionToXws(squadList.SquadFaction));
             squadJson.AddField("ruleset", squadList.Format.ToString());
             squadJson.AddField("points", squadList.Points);
-            squadJson.AddField("version", Global.CurrentVersion);
+            squadJson.AddField("version", squadList.Format == Legality.XWA ? Global.CurrentXWAVersion : Global.CurrentAMGVersion );
+
+            JSONObject vendor = new();
+            JSONObject vendorFields = new();
+            vendorFields.AddField("version", Global.CurrentVersion);
+            vendorFields.AddField("versionInt", Global.CurrentVersionInt);
+            vendor.AddField("Baledin.FlyCasual", vendorFields);
+
+            squadJson.AddField("vendor", vendor);
 
             List<SquadListShip> playerShipConfigs = squadList.Ships;
             JSONObject[] squadPilotsArrayJson = new JSONObject[playerShipConfigs.Count];
@@ -55,7 +63,7 @@ namespace SquadBuilderNS
                     JSONObject pilotJsons = squadJson["pilots"];
                     foreach (JSONObject pilotJson in pilotJsons.list)
                     {
-                        if (result != "") result += "\n";
+                        if (result != "") result += " | ";
 
                         string shipNameXws = pilotJson["ship"].str;
                         string shipNameGeneral = SquadBuilder.Instance.Database.AllShips.Find(n => n.ShipNameCanonical == shipNameXws).ShipName;
