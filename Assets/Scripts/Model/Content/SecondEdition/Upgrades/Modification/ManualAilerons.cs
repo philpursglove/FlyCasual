@@ -29,12 +29,14 @@ namespace Abilities.SecondEdition
             HostShip.OnGetAvailableDecloakTemplates += CheckAbility;
         }
 
+        public override void DeactivateAbility()
+        {
+            HostShip.OnGetAvailableDecloakTemplates -= CheckAbility;
+        }
+
         private void CheckAbility(List<ManeuverTemplate> availableTemplates)
         {
-            // do we have any charges?
-            var chargesAreAvailable = HostUpgrade.State.Charges > 0;
-
-            if (chargesAreAvailable)
+            if (HostUpgrade.State.Charges > 0)
             {
                 // Ask the player if they want to spend a charge to use a 2-speed template instead of the 1-speed template to barrel roll or boost
                 AskToUseAbility("Manual Ailerons",
@@ -43,7 +45,6 @@ namespace Abilities.SecondEdition
                     "You may spend 1 charge to use a 2-speed template instead of the 1-speed template to barrel roll or boost",
                     useAbility: delegate { UseManualAilerons(availableTemplates); }
                 );
-
             }
         }
 
@@ -61,11 +62,6 @@ namespace Abilities.SecondEdition
             }
 
             Triggers.FinishTrigger();
-        }
-
-        public override void DeactivateAbility()
-        {
-            HostShip.OnGetAvailableDecloakTemplates -= CheckAbility;
         }
     }
 }
