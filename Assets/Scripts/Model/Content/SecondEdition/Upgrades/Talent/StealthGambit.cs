@@ -32,7 +32,7 @@ namespace Abilities.SecondEdition
         private void CheckAbility()
         {
             // Is the attacker on my side and is the defender in my front arc
-            if (Combat.Attacker.Owner.PlayerNo == HostShip.Owner.PlayerNo & BoardTools.Board.IsShipInArcByType(HostShip, Combat.Defender, ArcType.Front))
+            if (Tools.IsFriendly(Combat.Attacker, HostShip) & BoardTools.Board.IsShipInArcByType(HostShip, Combat.Defender, ArcType.Front))
             {
                 {
                     // Are we cloaked
