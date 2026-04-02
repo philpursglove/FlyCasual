@@ -89,7 +89,7 @@ namespace Abilities.SecondEdition
         private void MakeCritsUncancellable()
         {
             if ((Combat.ChosenWeapon.WeaponType == WeaponTypes.Torpedo || Combat.ChosenWeapon.WeaponType == WeaponTypes.Missile)
-                && Combat.Attacker.SectorsInfo.IsShipInSector(Combat.Defender, ArcType.Front))
+                && Combat.Attacker.SectorsInfo.IsShipInSector(Combat.Defender, ArcType.Bullseye))
             {
                 foreach (Die die in Combat.DiceRollAttack.DiceList)
                 {
