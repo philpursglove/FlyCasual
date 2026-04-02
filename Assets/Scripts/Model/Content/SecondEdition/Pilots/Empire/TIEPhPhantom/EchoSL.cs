@@ -73,7 +73,7 @@ namespace Abilities.SecondEdition
         private void CheckAbility(GenericAction action)
         {
             // Is the action by an enemy ship?
-            bool actionIsByEnemy = action.HostShip.Owner.PlayerNo != HostShip.Owner.PlayerNo;
+            bool actionIsByEnemy = !Tools.IsFriendly(action.HostShip, HostShip);
 
             //Is it range 0-1
             bool inRange = new BoardTools.DistanceInfo(HostShip, action.HostShip).Range < 2;
