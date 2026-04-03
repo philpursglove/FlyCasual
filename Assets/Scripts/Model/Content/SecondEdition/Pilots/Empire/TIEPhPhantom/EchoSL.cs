@@ -36,9 +36,12 @@ namespace Ship.SecondEdition.TIEPhPhantom
                     UpgradeType.Modification
                 },
                 charges: 1,
+                regensCharges: 1,
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/echo-tiephphantom.png";
+
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/echo-ssl.png";
+            
             PilotNameCanonical = "echo-ssl";
 
             MustHaveUpgrades.Add(typeof(SilentHunter));
@@ -53,9 +56,10 @@ namespace Ship.SecondEdition.TIEPhPhantom
         {
             (PilotInfo as PilotCardInfo25).Cost = 14;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
+
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/quickbuilds/echo-ssl.png";
         }
     }
-
 }
 
 
@@ -63,11 +67,14 @@ namespace Abilities.SecondEdition
 {
     public class EchoSLAbility : GenericAbility
     {
-        public GenericAction Action { get; set; }
+        // After an enemy ship at range 0-1 performs an action on its action bar,
+        // you may spend 1 charge to perform the same action, treating it as white.
+
+        GenericAction action;
+        
         public override void ActivateAbility()
         {
-            // Ability implementation goes here
-            GenericShip.OnActionIsPerformedGlobal += CheckAbility;
+             GenericShip.OnActionIsPerformedGlobal += CheckAbility;
         }
 
         private void CheckAbility(GenericAction action)
@@ -75,13 +82,14 @@ namespace Abilities.SecondEdition
             // Is the action by an enemy ship?
             bool actionIsByEnemy = !Tools.IsFriendly(action.HostShip, HostShip);
 
-            //Is it range 0-1
-            bool inRange = new BoardTools.DistanceInfo(HostShip, action.HostShip).Range < 2;
+            // Is it range 0-1
+            bool inRange = HostShip.GetRangeToShip(action.HostShip) < 2;
 
-            //Do we have a charge left
+            // Do we have a charge left
             bool chargeAvailable = HostShip.State.Charges > 0;
-            //Are we already stressed
-            bool stressed = HostShip.Tokens.HasToken<StressToken>();
+
+            // Are we already stressed
+            bool stressed = HostShip.IsStressed;
 
             if (actionIsByEnemy && inRange && chargeAvailable && !stressed)
             {
