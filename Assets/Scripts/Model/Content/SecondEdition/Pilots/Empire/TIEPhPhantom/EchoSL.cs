@@ -1,10 +1,8 @@
 using ActionsList;
 using Content;
 using Ship;
-using SubPhases;
 using System;
 using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -41,7 +39,7 @@ namespace Ship.SecondEdition.TIEPhPhantom
             );
 
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/echo-ssl.png";
-            
+
             PilotNameCanonical = "echo-ssl";
 
             MustHaveUpgrades.Add(typeof(SilentHunter));
@@ -70,11 +68,16 @@ namespace Abilities.SecondEdition
         // After an enemy ship at range 0-1 performs an action on its action bar,
         // you may spend 1 charge to perform the same action, treating it as white.
 
-        GenericAction action;
-        
+        GenericAction savedAction;
+
         public override void ActivateAbility()
         {
-             GenericShip.OnActionIsPerformedGlobal += CheckAbility;
+            GenericShip.OnActionIsPerformedGlobal += CheckAbility;
+        }
+
+        public override void DeactivateAbility()
+        {
+            GenericShip.OnActionIsPerformedGlobal -= CheckAbility;
         }
 
         private void CheckAbility(GenericAction action)
@@ -93,39 +96,27 @@ namespace Abilities.SecondEdition
 
             if (actionIsByEnemy && inRange && chargeAvailable && !stressed)
             {
-                Action = action;
+                savedAction = action;
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, AskToUseAbility);
             }
         }
 
         private void AskToUseAbility(object sender, EventArgs e)
         {
-            AskToUseAbility("Echo's ability",
-                NeverUseByDefault,
-                descriptionLong: "You may spend 1 charge to gain the same action that ship just performed",
-                useAbility: UseAbility);
+            HostShip.OnActionIsPerformed += SpendCharge;
 
-        }
-
-        private void UseAbility(object sender, EventArgs e)
-        {
-            HostShip.SpendCharge();
-            ActionHostActionSubPhase subphase = Phases.StartTemporarySubPhaseNew<ActionHostActionSubPhase>(
-                "Echo's ability",
-                Triggers.FinishTrigger
+            HostShip.AskPerformFreeAction(
+                savedAction,
+                Triggers.FinishTrigger,
+                HostShip.PilotInfo.PilotName,
+                descriptionLong: $"You may spend 1 charge to gain the same action that {savedAction.HostShip.PilotInfo.PilotName} just performed"
             );
-            subphase.Start();
-
         }
 
-        public override void DeactivateAbility()
+        private void SpendCharge(GenericAction action)
         {
-            // Ability deactivation logic goes here
-            GenericShip.OnActionIsPerformedGlobal -= CheckAbility;
+            HostShip.OnActionIsPerformed -= SpendCharge;
+            HostShip.SpendCharge();
         }
-    }
-
-    internal class ActionHostActionSubPhase : GenericSubPhase
-    {
     }
 }
