@@ -103,7 +103,7 @@ namespace Abilities.SecondEdition
 
         private void AssignToken(object sender, System.EventArgs e)
         {
-            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} gains Evade token");
+            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} gains Focus token");
             HostShip.Tokens.AssignToken(typeof(FocusToken), DecisionSubPhase.ConfirmDecision);
         }
     }
