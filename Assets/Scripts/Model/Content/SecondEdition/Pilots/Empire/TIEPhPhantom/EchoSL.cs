@@ -82,32 +82,30 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericAction action)
         {
-            // Is the action by an enemy ship?
-            bool actionIsByEnemy = !Tools.IsFriendly(action.HostShip, HostShip);
-
-            // Is it range 0-1
-            bool inRange = HostShip.GetRangeToShip(action.HostShip) < 2;
-
-            // Do we have a charge left
-            bool chargeAvailable = HostShip.State.Charges > 0;
-
-            // Are we already stressed
-            bool stressed = HostShip.IsStressed;
-
-            if (actionIsByEnemy && inRange && chargeAvailable && !stressed)
+            if (HostShip.State.Charges > 0 &&
+                !HostShip.IsStressed &&
+                !Tools.IsFriendly(action.HostShip, HostShip) &&
+                HostShip.GetRangeToShip(action.HostShip) < 2 &&
+                action.IsInActionBar &&
+                HostShip.ActionBar.HasAction(action.GetType()))
             {
                 savedAction = action;
+                savedAction.Color = Actions.ActionColor.White;
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, AskToUseAbility);
             }
         }
 
         private void AskToUseAbility(object sender, EventArgs e)
         {
+            if (HostShip.State.Charges < 1) return; // Linked actions may queue multiple abilities here
+
             HostShip.OnActionIsPerformed += SpendCharge;
+
+            Selection.ThisShip = HostShip;
 
             HostShip.AskPerformFreeAction(
                 savedAction,
-                Triggers.FinishTrigger,
+                CleanUp,
                 HostShip.PilotInfo.PilotName,
                 descriptionLong: $"You may spend 1 charge to gain the same action that {savedAction.HostShip.PilotInfo.PilotName} just performed"
             );
@@ -115,8 +113,16 @@ namespace Abilities.SecondEdition
 
         private void SpendCharge(GenericAction action)
         {
-            HostShip.OnActionIsPerformed -= SpendCharge;
             HostShip.SpendCharge();
+        }
+
+        private void CleanUp()
+        {
+            HostShip.OnActionIsPerformed -= SpendCharge;
+
+            Selection.ThisShip = savedAction.HostShip;
+
+            Triggers.FinishTrigger();
         }
     }
 }
