@@ -32,6 +32,7 @@ Notes:
 * Tutorial is not included. If you don't know how to play the game, see [official tutorial](https://www.youtube.com/watch?v=PuhwSma960Y).
 * Code is open-source. If you want to help in development (programming, 3d-models, 2d-art, UI etc), contact me on [reddit](https://www.reddit.com/user/BaledinRed/) or [Discord](https://discord.gg/2GyxSg83UQ).
 * Please, don't forget to buy real models by FFG/AMG and play in real-life tournaments.
+* Special shout out to [Sandrem](https://github.com/Sandrem), on whom made this work possible; and to [PhilPursglove](https://github.com/philpursglove) for lending assistance in updating code, resolving bugs, and testing everything thoroughly!
 
 Links:
 * [Download](https://github.com/Baledin/FlyCasual/releases)
