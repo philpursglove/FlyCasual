@@ -15,12 +15,21 @@ namespace SquadBuilderNS
     {
         public static JSONObject GetSquadInJson(SquadList squadList)
         {
-            JSONObject squadJson = new JSONObject();
+            JSONObject squadJson = new();
+
             squadJson.AddField("name", squadList.Name);
             squadJson.AddField("faction", Edition.Current.FactionToXws(squadList.SquadFaction));
             squadJson.AddField("ruleset", squadList.Format.ToString());
             squadJson.AddField("points", squadList.Points);
-            squadJson.AddField("version", Global.CurrentVersion);
+            squadJson.AddField("version", squadList.Format == Legality.XWA ? Global.CurrentXWAVersion : Global.CurrentAMGVersion );
+
+            JSONObject vendor = new();
+            JSONObject vendorFields = new();
+            vendorFields.AddField("version", Global.CurrentVersion);
+            vendorFields.AddField("versionInt", Global.CurrentVersionInt);
+            vendor.AddField("Baledin.FlyCasual", vendorFields);
+
+            squadJson.AddField("vendor", vendor);
 
             List<SquadListShip> playerShipConfigs = squadList.Ships;
             JSONObject[] squadPilotsArrayJson = new JSONObject[playerShipConfigs.Count];
@@ -29,10 +38,10 @@ namespace SquadBuilderNS
                 squadPilotsArrayJson[i] = GenerateSquadPilot(playerShipConfigs[i]);
             }
 
-            JSONObject squadPilotsJson = new JSONObject(squadPilotsArrayJson);
+            JSONObject squadPilotsJson = new(squadPilotsArrayJson);
             squadJson.AddField("pilots", squadPilotsJson);
 
-            JSONObject squadObstalesArrayJson = new JSONObject(JSONObject.Type.ARRAY);
+            JSONObject squadObstalesArrayJson = new(JSONObject.Type.ARRAY);
             for (int i = 0; i < squadList.ChosenObstacles.Count; i++)
             {
                 squadObstalesArrayJson.Add(squadList.ChosenObstacles[i].ShortName);
@@ -55,7 +64,7 @@ namespace SquadBuilderNS
                     JSONObject pilotJsons = squadJson["pilots"];
                     foreach (JSONObject pilotJson in pilotJsons.list)
                     {
-                        if (result != "") result += "\n";
+                        if (result != "") result += " | ";
 
                         string shipNameXws = pilotJson["ship"].str;
                         string shipNameGeneral = SquadBuilder.Instance.Database.AllShips.Find(n => n.ShipNameCanonical == shipNameXws).ShipName;
@@ -102,11 +111,11 @@ namespace SquadBuilderNS
 
         private static JSONObject GenerateSquadPilot(SquadListShip shipHolder)
         {
-            JSONObject pilotJson = new JSONObject();
+            JSONObject pilotJson = new();
             pilotJson.AddField("id", shipHolder.Instance.PilotNameCanonical);
             pilotJson.AddField("ship", shipHolder.Instance.ShipTypeCanonical);
 
-            Dictionary<string, JSONObject> upgradesDict = new Dictionary<string, JSONObject>();
+            Dictionary<string, JSONObject> upgradesDict = new();
             if (!(shipHolder.Instance.PilotInfo as PilotCardInfo25).IsStandardLayout)
             {
                 foreach (GenericUpgrade installedUpgrade in shipHolder.Instance.UpgradeBar.GetUpgradesAll())
@@ -114,7 +123,7 @@ namespace SquadBuilderNS
                     string slotName = Edition.Current.UpgradeTypeToXws(installedUpgrade.UpgradeInfo.UpgradeTypes[0]);
                     if (!upgradesDict.ContainsKey(slotName))
                     {
-                        JSONObject upgrade = new JSONObject();
+                        JSONObject upgrade = new();
                         upgrade.Add(installedUpgrade.NameCanonical);
                         upgradesDict.Add(slotName, upgrade);
                     }
@@ -125,11 +134,11 @@ namespace SquadBuilderNS
                 }
             }
 
-            JSONObject upgradesDictJson = new JSONObject(upgradesDict);
+            JSONObject upgradesDictJson = new(upgradesDict);
             pilotJson.AddField("upgrades", upgradesDictJson);
 
-            JSONObject vendorJson = new JSONObject();
-            JSONObject skinJson = new JSONObject();
+            JSONObject vendorJson = new();
+            JSONObject skinJson = new();
             skinJson.AddField("skin", (shipHolder.Instance.PilotInfo as PilotCardInfo25).SkinName);
             vendorJson.AddField("Baledin.FlyCasual", skinJson);
 
@@ -138,41 +147,9 @@ namespace SquadBuilderNS
             return pilotJson;
         }
 
-        /*public JSONObject GetSquadInJsonCompact(PlayerNo playerNo)
-        {
-            JSONObject squadJson = new JSONObject();
-
-            JSONObject[] squadPilotsArrayJson = new JSONObject[Ships.Count];
-            for (int i = 0; i < squadPilotsArrayJson.Length; i++)
-            {
-                squadPilotsArrayJson[i] = GenerateSquadPilotCompact(Ships[i]);
-            }
-            JSONObject squadPilotsJson = new JSONObject(squadPilotsArrayJson);
-            squadJson.AddField("pilots", squadPilotsJson);
-
-            return squadJson;
-        }
-
-        private JSONObject GenerateSquadPilotCompact(SquadListShip shipHolder)
-        {
-            JSONObject pilotJson = new JSONObject();
-            pilotJson.AddField("n", shipHolder.Instance.PilotNameCanonical);
-
-            string upgradesList = "";
-            foreach (var installedUpgrade in shipHolder.Instance.UpgradeBar.GetUpgradesAll())
-            {
-                upgradesList += installedUpgrade.NameCanonical + " ";
-            }
-            JSONObject upgradesDictJson = new JSONObject(upgradesList);
-
-            pilotJson.AddField("u", upgradesDictJson);
-
-            return pilotJson;
-        }*/
-
         public static void CreateSquadFromImportedJson(SquadList squad, string jsonString)
         {
-            JSONObject squadJson = new JSONObject(jsonString);
+            JSONObject squadJson = new(jsonString);
             SetPlayerSquadFromImportedJson(squad, squadJson);
         }
 
@@ -241,7 +218,7 @@ namespace SquadBuilderNS
                         Edition.Current.AdaptShipToRules(newShipInstance);
                         SquadListShip newShip = squad.AddPilotToSquad(newShipInstance);
 
-                        Dictionary<string, string> upgradesThatCannotBeInstalled = new Dictionary<string, string>();
+                        Dictionary<string, string> upgradesThatCannotBeInstalled = new();
 
                         if (pilotJson.HasField("upgrades"))
                         {
@@ -266,7 +243,7 @@ namespace SquadBuilderNS
 
                                 while (upgradeJsons.Count != 0)
                                 {
-                                    Dictionary<string, string> upgradesThatCannotBeInstalledCopy = new Dictionary<string, string>(upgradesThatCannotBeInstalled);
+                                    Dictionary<string, string> upgradesThatCannotBeInstalledCopy = new(upgradesThatCannotBeInstalled);
 
                                     bool wasSuccess = false;
                                     foreach (KeyValuePair<string, string> upgrade in upgradesThatCannotBeInstalledCopy)

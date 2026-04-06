@@ -1,10 +1,10 @@
 ﻿using BoardTools;
 using Editions;
+using Remote;
 using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Tokens;
 using UnityEngine;
 using Upgrade;
@@ -41,14 +41,14 @@ namespace AI.Aggressor
             const float defenceDiceChanceUnmodified = 0.375f;
             const float defenceDiceChanceFocusModification = 0.625f;
 
-            ShotInfo shotInfo = new ShotInfo(CurrentShip, TargetShip, Weapon);
+            ShotInfo shotInfo = new(CurrentShip, TargetShip, Weapon);
 
             // Attack dice
 
             float attackDiceThrown = Weapon.WeaponInfo.AttackValue;
             if (shotInfo.Range <= 1 && Edition.Current.IsWeaponHaveRangeBonus(Weapon)) attackDiceThrown++;
 
-            float attackDiceModifier = 0;
+            float attackDiceModifier;
             float criticalHitsModifier = potentialCritsNoReroll;
             if (CurrentShip.Tokens.HasToken<FocusToken>() && ActionsHolder.HasTargetLockOn(CurrentShip, TargetShip))
             {
@@ -72,7 +72,7 @@ namespace AI.Aggressor
             if (shotInfo.Range == 3 && !Edition.Current.IsWeaponHaveRangeBonus(Weapon)) defenceDiceThrown++;
             if (shotInfo.IsObstructedByObstacle) defenceDiceThrown++;
 
-            float defenceDiceModifier = 0;
+            float defenceDiceModifier;
             if (TargetShip.Tokens.HasToken<FocusToken>())
             {
                 defenceDiceModifier = defenceDiceChanceFocusModification;
@@ -95,7 +95,7 @@ namespace AI.Aggressor
             float targetHP = TargetShip.State.HullCurrent + TargetShip.State.ShieldsCurrent;
             float damageImpact = potentialDamage / targetHP;
             if (targetHP < potentialDamage) damageImpact *= 2;
-            
+
             float potentialCrits = attackDiceThrown * criticalHitsModifier;
             float shipCost = TargetShip.PilotInfo.Cost;
 
@@ -115,10 +115,15 @@ namespace AI.Aggressor
                     }
                 }
             }
+
             // If our current weapon uses charges and has inadequate charges available, don't use it.
             if (currentUpgrade != null && Weapon.WeaponInfo.UsesCharges && currentUpgrade.UpgradeInfo.Charges > currentUpgrade.State.Charges)
             {
                 Priority = 0;
+            }
+            else if (TargetShip is GenericRemote)
+            {
+                Priority = 1;
             }
             else
             {
@@ -173,33 +178,35 @@ namespace AI.Aggressor
 
         private static List<GenericShip> GetEnemyShipsAndDistance(GenericShip thisShip, bool ignoreCollided = false, bool inArcAndRange = false)
         {
-            Dictionary<GenericShip, float> results = new Dictionary<GenericShip, float>();
+            Dictionary<GenericShip, float> results = new();
 
-            foreach (GenericShip enemyShip in Roster.GetPlayer(Roster.AnotherPlayer(thisShip.Owner.PlayerNo)).Ships.Values)
+            List<GenericShip> enemyTargets = Roster.GetPlayer(Roster.AnotherPlayer(thisShip.Owner.PlayerNo)).Ships.Values.ToList();
+            enemyTargets.AddRange(Roster.GetPlayer(Roster.AnotherPlayer(thisShip.Owner.PlayerNo)).Units.Values.Where(n => n is GenericRemote).Cast<GenericShip>());
+
+            foreach (GenericShip enemyShip in enemyTargets)
             {
                 if (!enemyShip.IsDestroyed)
                 {
                     if (ignoreCollided)
                     {
-                        if (thisShip.LastShipCollision != null)
+                        if (thisShip.LastShipCollision != null
+                            && thisShip.LastShipCollision.ShipId == enemyShip.ShipId)
                         {
-                            if (thisShip.LastShipCollision.ShipId == enemyShip.ShipId)
-                            {
-                                continue;
-                            }
+                            continue;
                         }
-                        if (enemyShip.LastShipCollision != null)
+
+
+                        if (enemyShip.LastShipCollision != null
+                            && enemyShip.LastShipCollision.ShipId == thisShip.ShipId)
                         {
-                            if (enemyShip.LastShipCollision.ShipId == thisShip.ShipId)
-                            {
-                                continue;
-                            }
+                            continue;
                         }
                     }
 
                     if (inArcAndRange)
                     {
-                        DistanceInfo distanceInfo = new DistanceInfo(thisShip, enemyShip);
+                        DistanceInfo distanceInfo = new(thisShip, enemyShip);
+
                         if ((distanceInfo.Range > 3))
                         {
                             continue;
@@ -210,6 +217,7 @@ namespace AI.Aggressor
                     results.Add(enemyShip, distance);
                 }
             }
+
             results = results.OrderBy(n => n.Value).ToDictionary(n => n.Key, n => n.Value);
 
             return results.Select(n => n.Key).ToList();

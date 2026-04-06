@@ -23,8 +23,6 @@ namespace UpgradesList.SecondEdition
                 ),
                 abilityType: typeof(Abilities.SecondEdition.SensorBuoySuiteAbility)
             );
-
-            
         }
     }
 }
@@ -91,12 +89,11 @@ namespace Abilities.SecondEdition
 
         private bool HasLockTargets()
         {
-            foreach (SensorBuoy buoy in HostShip.Owner.Units.Values.Where(n => n is SensorBuoy))
+            foreach (SensorBuoy buoy in HostShip.Owner.Units.Values.Where(n => n is SensorBuoy).Cast<SensorBuoy>())
             {
                 foreach (GenericShip enemyShip in HostShip.Owner.EnemyShips.Values)
                 {
-                    DistanceInfo distInfo = new DistanceInfo(buoy, enemyShip);
-                    if (distInfo.Range <= 1) return true;
+                    if (new DistanceInfo(buoy, enemyShip).Range <= 1) return true;
                 }
             }
 
@@ -131,10 +128,10 @@ namespace Abilities.SecondEdition
 
         private bool FilterTargets(GenericShip ship)
         {
-            foreach (SensorBuoy buoy in HostShip.Owner.Units.Values.Where(n => n is SensorBuoy))
+            foreach (SensorBuoy buoy in HostShip.Owner.Units.Values.Where(n => n is SensorBuoy && !n.IsDestroyed).Cast<SensorBuoy>())
             {
-                DistanceInfo distInfo = new DistanceInfo(buoy, ship);
-                if (distInfo.Range <= 1) return true;
+                DistanceInfo distInfo = new(buoy, ship);
+                if (distInfo.Range <= 1 && !Tools.IsSameTeam(buoy, ship)) return true; // Second conditional prevents own Sensor Buoys from being selectable as TL targets
             }
 
             return false;
