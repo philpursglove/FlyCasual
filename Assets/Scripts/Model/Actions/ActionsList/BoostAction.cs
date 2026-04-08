@@ -1,5 +1,6 @@
 ﻿using Actions;
 using ActionsList;
+using Assets.Scripts.Model.Tools.Enums;
 using Bombs;
 using Movement;
 using Obstacles;
@@ -72,38 +73,12 @@ namespace ActionsList
             IsPurple = isPurple;
             IsForced = isForced;
 
-            Name = template switch
-            {
-                BoostTemplates.Straight1 => "Straight 1",
-                BoostTemplates.RightBank1 => "Bank 1 Right",
-                BoostTemplates.LeftBank1 => "Bank 1 Left",
-                BoostTemplates.RightTurn1 => "Turn 1 Right",
-                BoostTemplates.LeftTurn1 => "Turn 1 Left",
-                BoostTemplates.Straight2 => "Straight 2",
-                BoostTemplates.RightBank2 => "Bank 2 Right",
-                BoostTemplates.LeftBank2 => "Bank 2 Left",
-                BoostTemplates.RightTurn2 => "Turn 2 Right",
-                BoostTemplates.LeftTurn2 => "Turn 2 Left",
-                _ => "Straight 1",
-            };
+            Name = template.GetDescription();
         }
 
         public static BoostTemplates GetBoostTemplateFromName(string name)
         {
-            return name switch
-            {
-                "Straight 1" => BoostTemplates.Straight1,
-                "Bank 1 Right" => BoostTemplates.RightBank1,
-                "Bank 1 Left" => BoostTemplates.LeftBank1,
-                "Turn 1 Right" => BoostTemplates.RightTurn1,
-                "Turn 1 Left" => BoostTemplates.LeftTurn1,
-                "Straight 2" => BoostTemplates.Straight2,
-                "Bank 2 Right" => BoostTemplates.RightBank2,
-                "Bank 2 Left" => BoostTemplates.LeftBank2,
-                "Turn 2 Right" => BoostTemplates.RightTurn2,
-                "Turn 2 Left" => BoostTemplates.LeftTurn2,
-                _ => BoostTemplates.Straight1
-            };
+            return EnumExtensions.GetEnumValueFromDescription<BoostTemplates>(name);
         }
     }
 }
