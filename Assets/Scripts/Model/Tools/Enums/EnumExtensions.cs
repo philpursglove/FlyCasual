@@ -15,7 +15,7 @@ namespace Assets.Scripts.Model.Tools.Enums
 
         public static T GetEnumValueFromDescription<T>(string description) where T : Enum
         {
-            foreach (var field in typeof(T).GetFields())
+            foreach (FieldInfo field in typeof(T).GetFields())
             {
                 DescriptionAttribute attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
                 if (attribute != null && attribute.Description == description)
