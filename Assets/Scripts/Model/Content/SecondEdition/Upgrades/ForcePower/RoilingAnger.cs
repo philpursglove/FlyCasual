@@ -1,4 +1,4 @@
-﻿using BoardTools;
+﻿using Content;
 using Ship;
 using System;
 using Upgrade;
@@ -9,17 +9,17 @@ namespace UpgradesList.SecondEdition
     {
         public RoilingAnger() : base()
         {
-            IsHidden = true;
-
             UpgradeInfo = new UpgradeCardInfo
             (
                 "Roiling Anger",
                 UpgradeType.ForcePower,
-                cost: 0,
-                abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility)                
-            );
+                cost: 1, //TODO fix cost
+                abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility),
+                restriction: new TagRestriction(Tags.DarkSide)
 
-            
+            );
+            //TODO: Fix ImageUrl
+
         }
     }
 }
