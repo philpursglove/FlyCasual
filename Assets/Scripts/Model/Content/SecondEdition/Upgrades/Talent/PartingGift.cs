@@ -16,12 +16,11 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Parting Gift",
                 UpgradeType.Talent,
-                cost: 0,
+                cost: 1, //TODO fix cost
                 abilityType: typeof(PartingGiftAbility)
             );
 
-            IsHidden = true;
-
+            //TODO: Fix  ImageUrl
             ImageUrl = HostShip != null ? HostShip.ImageUrl : "https://infinitearenas.com/xw2/images/quickbuilds/adonfox-battleoverendor.png";
         }
     }
