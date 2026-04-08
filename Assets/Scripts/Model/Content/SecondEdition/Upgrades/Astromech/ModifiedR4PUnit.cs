@@ -1,7 +1,7 @@
-﻿using Upgrade;
+﻿using Movement;
 using Ship;
-using Movement;
 using System;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -9,16 +9,16 @@ namespace UpgradesList.SecondEdition
     {
         public ModifiedR4PUnit() : base()
         {
-            IsHidden = true;
-
             UpgradeInfo = new UpgradeCardInfo(
                 "Modified R4-P Unit",
                 UpgradeType.Astromech,
-                cost: 0,
+                cost: 1, //TODO fix cost
                 charges: 1,
-                abilityType: typeof(Abilities.SecondEdition.ModifiedR4PUnitAbility)
+                abilityType: typeof(Abilities.SecondEdition.ModifiedR4PUnitAbility),
+                restriction: new FactionRestriction(Faction.Rebel)
             );
 
+            //TODO: Fix ImageUrl
             ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/ModifiedR4PUnit.jpg";
         }
     }
