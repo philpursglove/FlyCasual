@@ -24,6 +24,7 @@ namespace UpgradesList.SecondEdition
                 restriction: new BaseSizeRestriction(BaseSize.Small),
                 abilityType: typeof(FlightAssistAstromechAbility),
                 legalityInfo: new List<Legality> { Legality.XWA }
+                //TODO Add ImageUrl
             );
         }
     }
