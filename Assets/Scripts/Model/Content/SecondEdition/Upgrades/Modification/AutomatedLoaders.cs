@@ -10,7 +10,7 @@ namespace UpgradesList.SecondEdition
 {
     public class AutomatedLoaders : GenericUpgrade
     {
-        public AutomatedLoaders()
+        public AutomatedLoaders() : base()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Automated Loaders",

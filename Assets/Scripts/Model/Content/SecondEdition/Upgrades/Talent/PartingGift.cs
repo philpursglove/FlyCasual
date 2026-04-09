@@ -12,7 +12,7 @@ namespace UpgradesList.SecondEdition
 {
     public class PartingGift : GenericUpgrade
     {
-        public PartingGift()
+        public PartingGift() : base()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Parting Gift",
