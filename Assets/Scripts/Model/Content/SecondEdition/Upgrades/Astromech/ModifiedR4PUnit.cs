@@ -11,17 +11,17 @@ namespace UpgradesList.SecondEdition
     {
         public ModifiedR4PUnit() : base()
         {
+            IsHidden = true;
+
             UpgradeInfo = new UpgradeCardInfo(
                 "Modified R4-P Unit",
                 UpgradeType.Astromech,
-                cost: 1, //TODO fix cost
+                cost: 0,
                 charges: 1,
                 abilityType: typeof(Abilities.SecondEdition.ModifiedR4PUnitAbility),
-                restriction: new FactionRestriction(Faction.Rebel),
                 legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            //TODO: Fix ImageUrl
             ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/ModifiedR4PUnit.jpg";
         }
     }
@@ -30,10 +30,13 @@ namespace UpgradesList.SecondEdition
     {
         public ModifiedR4PUnitXwa() : base()
         {
-            UpgradeInfo.Cost = 1;
+            UpgradeInfo.Cost = 1; //TODO fix cost
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             UpgradeInfo.Restrictions.AddRestriction(new FactionRestriction(Faction.Rebel));
             IsHidden = false;
+
+            //TODO: Fix ImageUrl
+
         }
     }
 }
