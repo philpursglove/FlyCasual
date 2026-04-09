@@ -1,6 +1,7 @@
 ﻿using Content;
 using Ship;
 using System;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -14,12 +15,21 @@ namespace UpgradesList.SecondEdition
                 "Roiling Anger",
                 UpgradeType.ForcePower,
                 cost: 1, //TODO fix cost
-                abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility),
-                restriction: new TagRestriction(Tags.DarkSide)
-
+                abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility)
             );
             //TODO: Fix ImageUrl
 
+        }
+    }
+
+    public class RoilingAngerXwa : RoilingAnger
+    {
+        public RoilingAngerXwa() : base()
+        {
+            UpgradeInfo.Cost = 1; //TODO fix cost
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Restrictions.AddRestriction(new TagRestriction(Tags.DarkSide));
+            IsHidden = false;
         }
     }
 }
