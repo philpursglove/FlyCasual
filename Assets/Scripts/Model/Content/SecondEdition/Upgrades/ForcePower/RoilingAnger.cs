@@ -10,12 +10,15 @@ namespace UpgradesList.SecondEdition
     {
         public RoilingAnger() : base()
         {
+            IsHidden = true;
+
             UpgradeInfo = new UpgradeCardInfo
             (
                 "Roiling Anger",
                 UpgradeType.ForcePower,
-                cost: 1, //TODO fix cost
-                abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility)
+                cost: 0, //TODO fix cost
+                abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
             //TODO: Fix ImageUrl
 
