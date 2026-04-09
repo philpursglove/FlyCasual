@@ -1,6 +1,8 @@
 ﻿using ActionsList;
+using Content;
 using Ship;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Upgrade;
 
@@ -21,6 +23,17 @@ namespace UpgradesList.SecondEdition
 
             //TODO: Fix  ImageUrl
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
+        }
+    }
+
+    public class AutomatedLoadersXwa : AutomatedLoaders
+    {
+        public AutomatedLoadersXwa() : base()
+        {
+            UpgradeInfo.Cost = 1; //TODO fix cost
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Restrictions.AddRestriction(new ActionBarRestriction(typeof(ReloadAction)));
+            IsHidden = false;
         }
     }
 }
