@@ -15,11 +15,13 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Automated Loaders",
                 UpgradeType.Modification,
-                cost: 1, //TODO fix cost
+                cost: 0,
                 abilityType: typeof(Abilities.SecondEdition.AutomatedLoadersAbility),
                 charges: 1,
-                restriction: new ActionBarRestriction(typeof(ReloadAction))
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+
+            IsHidden = true;
 
             //TODO: Fix  ImageUrl
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
