@@ -16,7 +16,7 @@ namespace UpgradesList.SecondEdition
             (
                 "Roiling Anger",
                 UpgradeType.ForcePower,
-                cost: 0, //TODO fix cost
+                cost: 0,
                 abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility),
                 legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
