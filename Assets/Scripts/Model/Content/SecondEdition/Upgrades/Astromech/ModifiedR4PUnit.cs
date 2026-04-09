@@ -1,7 +1,9 @@
-﻿using Upgrade;
-using Ship;
+﻿using Content;
 using Movement;
+using Ship;
 using System;
+using System.Collections.Generic;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
@@ -16,10 +18,25 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Astromech,
                 cost: 0,
                 charges: 1,
-                abilityType: typeof(Abilities.SecondEdition.ModifiedR4PUnitAbility)
+                abilityType: typeof(Abilities.SecondEdition.ModifiedR4PUnitAbility),
+                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
             ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/ModifiedR4PUnit.jpg";
+        }
+    }
+
+    public class ModifiedR4PUnitXwa : ModifiedR4PUnit
+    {
+        public ModifiedR4PUnitXwa() : base()
+        {
+            UpgradeInfo.Cost = 1; //TODO fix cost
+            UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
+            UpgradeInfo.Restrictions.AddRestriction(new FactionRestriction(Faction.Rebel));
+            IsHidden = false;
+
+            //TODO: Fix ImageUrl
+
         }
     }
 }
