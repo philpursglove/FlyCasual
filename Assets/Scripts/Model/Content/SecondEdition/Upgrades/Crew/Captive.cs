@@ -1,5 +1,5 @@
 ﻿using Content;
-using Ship;
+using System;
 using System.Collections.Generic;
 using Upgrade;
 
@@ -16,7 +16,9 @@ namespace UpgradesList.SecondEdition
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Imperial, Faction.FirstOrder, Faction.Separatists),
                 abilityType: typeof(Abilities.SecondEdition.CaptiveCrewAbility),
-                legalityInfo: new List<Legality> { Legality.XWA }
+                legalityInfo: new List<Legality> { Legality.XWA },
+                charges: 1,
+                regensCharges: true
             );
             IsHidden = false;
 
@@ -31,19 +33,37 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnDefenceStartAsDefender += UseAbility();
+            HostShip.OnDefenceStartAsDefender += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnDefenceStartAsDefender -= UseAbility();
+            HostShip.OnDefenceStartAsDefender -= CheckAbility;
         }
 
-        private GenericShip.EventHandler UseAbility()
+        private void CheckAbility()
         {
-            throw new System.NotImplementedException();
+            if (HostUpgrade.UpgradeInfo.Charges > 0)
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnDiceAboutToBeRolled, AskUseAbility);
+            }
         }
 
+        private void AskUseAbility(object sender, EventArgs e)
+        {
+            AskToUseAbility("Captive",
+                AlwaysUseByDefault,
+                UseAbility,
+                null,
+                descriptionLong: "Do you want to assign a Deplete token to the attacker?",
+                imageHolder: HostUpgrade);
 
+        }
+
+        private void UseAbility(object sender, EventArgs e)
+        {
+            Combat.Attacker.Tokens.AssignToken(typeof(Tokens.DepleteToken), null, Combat.Defender.Owner);
+            HostUpgrade.State.SpendCharge();
+        }
     }
 }
