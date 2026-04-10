@@ -38,7 +38,7 @@ namespace Abilities.SecondEdition
                 aiPriority: GetAiPriority,
                 modificationType: DiceModificationType.Add,
                 count: 2,
-                sidesCanBeSelected: new List<DieSide>() { DieSide.Success },
+                sidesCanBeSelected: new List<DieSide>() { DieSide.Crit },
                 payAbilityCost: PayCost
             );
         }
@@ -52,26 +52,26 @@ namespace Abilities.SecondEdition
         {
             return Combat.Attacker == HostShip &&
                 HostUpgrade.State.Charges > 0 &&
-                Combat.ChosenWeapon is PrimaryWeaponClass && 
+                Combat.ChosenWeapon is PrimaryWeaponClass &&
                 !Combat.Defender.Tokens.HasGreenTokens &&
                 Combat.DiceRollAttack.CriticalSuccesses > 0;
         }
 
         private int GetAiPriority()
         {
-            // Priority given to more hits if it will knock out shields
-            if (Combat.Defender.State.ShieldsCurrent >= (Combat.DiceRollAttack.RegularSuccesses + 1)) return 100;
+            // Don't use if crit would be eaten by shields
+            if (Combat.Defender.State.ShieldsCurrent >= (Combat.DiceRollAttack.RegularSuccesses + 1)) return 0;
 
-            // Extra hits will help ensure opponent is destroyed by attack
-            if ((Combat.Defender.State.HullCurrent + Combat.Defender.State.ShieldsCurrent) <= Combat.DiceRollAttack.Successes) return 50;
+            // Don't use if opponent would be dead anyway
+            if (Combat.Defender.State.HullCurrent <= (Combat.DiceRollAttack.Successes - Combat.Defender.GetNumberOfDefenceDice(Combat.Attacker))) return 0;
 
-            return 0;
+            return 100;
         }
 
         private void PayCost(Action<bool> callback)
         {
             HostUpgrade.State.SpendCharge();
-            Combat.DiceRollAttack.RemoveType(DieSide.Crit);
+            Combat.DiceRollAttack.RemoveType(DieSide.Success);
 
             callback(true);
         }
