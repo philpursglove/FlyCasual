@@ -54,16 +54,18 @@ namespace Abilities.SecondEdition
             AskToUseAbility("Captive",
                 AlwaysUseByDefault,
                 UseAbility,
-                null,
                 descriptionLong: "Do you want to assign a Deplete token to the attacker?",
                 imageHolder: HostUpgrade);
 
+            Triggers.FinishTrigger();
         }
 
         private void UseAbility(object sender, EventArgs e)
         {
             Combat.Attacker.Tokens.AssignToken(typeof(Tokens.DepleteToken), null, Combat.Defender.Owner);
             HostUpgrade.State.SpendCharge();
+
+            Triggers.FinishTrigger();
         }
     }
 }
