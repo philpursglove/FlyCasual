@@ -1,4 +1,5 @@
 ﻿using Content;
+using SubPhases;
 using System;
 using System.Collections.Generic;
 using Upgrade;
@@ -45,27 +46,24 @@ namespace Abilities.SecondEdition
         {
             if (HostUpgrade.UpgradeInfo.Charges > 0)
             {
-                RegisterAbilityTrigger(TriggerTypes.OnDiceAboutToBeRolled, AskUseAbility);
+                RegisterAbilityTrigger(TriggerTypes.OnDiceAboutToBeRolled, AskToDeplete);
             }
         }
 
-        private void AskUseAbility(object sender, EventArgs e)
+        private void AskToDeplete(object sender, EventArgs e)
         {
             AskToUseAbility("Captive",
                 AlwaysUseByDefault,
-                UseAbility,
+                DepleteAttacker,
                 descriptionLong: "Do you want to assign a Deplete token to the attacker?",
                 imageHolder: HostUpgrade);
 
-            Triggers.FinishTrigger();
         }
 
-        private void UseAbility(object sender, EventArgs e)
+        private void DepleteAttacker(object sender, EventArgs e)
         {
-            Combat.Attacker.Tokens.AssignToken(typeof(Tokens.DepleteToken), null, Combat.Defender.Owner);
+            Combat.Attacker.Tokens.AssignToken(typeof(Tokens.DepleteToken), DecisionSubPhase.ConfirmDecision);
             HostUpgrade.State.SpendCharge();
-
-            Triggers.FinishTrigger();
         }
     }
 }
