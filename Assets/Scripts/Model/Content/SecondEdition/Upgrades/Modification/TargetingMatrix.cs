@@ -1,6 +1,7 @@
-﻿using Ship;
+﻿using Content;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -16,10 +17,23 @@ namespace UpgradesList.SecondEdition
                 "Targeting Matrix",
                 UpgradeType.Modification,
                 cost: 0,
-                abilityType: typeof(Abilities.SecondEdition.TargetingMatrixAbility)
+                abilityType: typeof(Abilities.SecondEdition.TargetingMatrixAbility),
+                legalityInfo: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+
             ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scythe6-battleoverendor.png";
-        }        
+        }
+    }
+
+    public class TargetingMatrixXWA : TargetingMatrix
+    {
+        public TargetingMatrixXWA() : base()
+        {
+            IsHidden = false;
+
+            UpgradeInfo.Cost = 1; // TODO: Update cost
+            UpgradeInfo.LegalityInfo = new List<Legality>() { Legality.XWA };
+        }
     }
 }
 
@@ -64,4 +78,3 @@ namespace Abilities.SecondEdition
         }
     }
 }
-
