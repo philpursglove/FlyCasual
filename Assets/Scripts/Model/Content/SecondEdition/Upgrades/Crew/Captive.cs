@@ -22,7 +22,6 @@ namespace UpgradesList.SecondEdition
                 regensCharges: true,
                 limited: 1
             );
-            IsHidden = false;
 
             //TODO ImageUrl
         }
