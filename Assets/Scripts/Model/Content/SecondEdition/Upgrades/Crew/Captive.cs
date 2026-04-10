@@ -44,7 +44,7 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility()
         {
-            if (HostUpgrade.UpgradeInfo.Charges > 0)
+            if (HostUpgrade.State.Charges > 0)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackStart, AskToDeplete);
             }
