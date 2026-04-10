@@ -19,7 +19,8 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.CaptiveCrewAbility),
                 legalityInfo: new List<Legality> { Legality.XWA },
                 charges: 1,
-                regensCharges: true
+                regensCharges: true,
+                limited: 1
             );
             IsHidden = false;
 
