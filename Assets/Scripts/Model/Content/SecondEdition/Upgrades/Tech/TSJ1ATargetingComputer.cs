@@ -11,12 +11,11 @@ namespace UpgradesList.SecondEdition
     {
         public TSJ1ATargetingComputer() : base()
         {
-            // TODO: Update points
             UpgradeInfo = new UpgradeCardInfo(
                 "T-SJ1A Targeting Computer",
                 UpgradeType.Tech,
                 cost: 1,
-                charges: 1,
+                charges: 1, // TODO: Update points
                 abilityType: typeof(TSJ1ATargetingComputerAbility),
                 restriction: new FactionRestriction(Faction.FirstOrder),
                 legalityInfo: new List<Legality>() { Legality.XWA }
@@ -40,7 +39,7 @@ namespace Abilities.SecondEdition
                 modificationType: DiceModificationType.Add,
                 count: 2,
                 sidesCanBeSelected: new List<DieSide>() { DieSide.Success },
-                payAbilityCost: SpendCrit
+                payAbilityCost: PayCost
             );
         }
 
@@ -69,7 +68,7 @@ namespace Abilities.SecondEdition
             return 0;
         }
 
-        private void SpendCrit(Action<bool> callback)
+        private void PayCost(Action<bool> callback)
         {
             HostUpgrade.State.SpendCharge();
             Combat.DiceRollAttack.RemoveType(DieSide.Crit);
