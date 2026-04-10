@@ -56,7 +56,8 @@ namespace Abilities.SecondEdition
                 AlwaysUseByDefault,
                 DepleteAttacker,
                 descriptionLong: "Do you want to assign a Deplete token to the attacker?",
-                imageHolder: HostUpgrade);
+                imageHolder: HostUpgrade,
+                callback: Triggers.FinishTrigger);
 
         }
 
