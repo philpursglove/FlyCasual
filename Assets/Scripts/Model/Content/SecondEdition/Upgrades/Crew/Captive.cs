@@ -34,19 +34,19 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnDefenceStartAsDefender += CheckAbility;
+            HostShip.OnAttackStartAsDefender += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnDefenceStartAsDefender -= CheckAbility;
+            HostShip.OnAttackStartAsDefender -= CheckAbility;
         }
 
         private void CheckAbility()
         {
             if (HostUpgrade.UpgradeInfo.Charges > 0)
             {
-                RegisterAbilityTrigger(TriggerTypes.OnDiceAboutToBeRolled, AskToDeplete);
+                RegisterAbilityTrigger(TriggerTypes.OnAttackStart, AskToDeplete);
             }
         }
 
