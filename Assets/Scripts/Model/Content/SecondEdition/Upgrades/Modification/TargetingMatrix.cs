@@ -21,7 +21,7 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scythe6-battleoverendor.png";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scythe6-battleoverendor.png"; // TODO: Update image
         }
     }
 
@@ -41,7 +41,6 @@ namespace Abilities.SecondEdition
 {
     public class TargetingMatrixAbility : GenericAbility
     {
-
         public override void ActivateAbility()
         {
             HostShip.OnAfterNeutralizeResultsAttacker += CheckAbility;
@@ -62,18 +61,33 @@ namespace Abilities.SecondEdition
 
         private void AskToStrain(object sender, EventArgs e)
         {
+            if (alwaysUseAbility)
+            {
+                UseAbility();
+            }
+            else
+            {
+                AskToUseAbility(
+                    HostUpgrade.UpgradeInfo.Name,
+                    AlwaysUseByDefault,
+                    UseAbility,
+                    descriptionLong: "Do you want to spend one focus result to assign a strain token to the defender?",
+                    imageHolder: HostUpgrade,
+                    showAlwaysUseOption: true,
+                    callback: Triggers.FinishTrigger
+                );
+            }
+        }
 
-            AskToUseAbility(
-                HostUpgrade.UpgradeInfo.Name,
-                AlwaysUseByDefault,
-                UseAbility,
-                descriptionLong: "Do you want to spend one focus result to assign a strain token to the defender?",
-                imageHolder: HostUpgrade
-            );
+        private void UseAbility()
+        {
+            Combat.DiceRollAttack.RemoveType(DieSide.Focus);
+            Combat.Defender.Tokens.AssignToken(new StrainToken(Combat.Defender), Triggers.FinishTrigger);
         }
 
         private void UseAbility(object sender, EventArgs e)
         {
+            Combat.DiceRollAttack.RemoveType(DieSide.Focus);
             Combat.Defender.Tokens.AssignToken(new StrainToken(Combat.Defender), DecisionSubPhase.ConfirmDecision);
         }
     }
