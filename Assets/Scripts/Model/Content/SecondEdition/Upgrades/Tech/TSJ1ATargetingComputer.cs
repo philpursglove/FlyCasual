@@ -51,12 +51,11 @@ namespace Abilities.SecondEdition
 
         private bool IsDiceModificationAvailable()
         {
-            bool hasCharge = HostUpgrade.State.Charges > 0;
-            bool isPrimaryWeapon = Combat.ChosenWeapon is PrimaryWeaponClass;
-            bool enemyHasGreenTokens = Combat.Defender.Tokens.HasGreenTokens;
-            bool hasCritResult = Combat.DiceRollAttack.CriticalSuccesses > 0;
-
-            return hasCharge && isPrimaryWeapon && !enemyHasGreenTokens && hasCritResult;
+            return Combat.Attacker == HostShip &&
+                HostUpgrade.State.Charges > 0 &&
+                Combat.ChosenWeapon is PrimaryWeaponClass && 
+                !Combat.Defender.Tokens.HasGreenTokens &&
+                Combat.DiceRollAttack.CriticalSuccesses > 0;
         }
 
         private int GetAiPriority()
