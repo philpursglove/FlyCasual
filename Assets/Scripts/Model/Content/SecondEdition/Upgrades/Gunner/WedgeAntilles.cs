@@ -1,5 +1,4 @@
 ﻿using Conditions;
-using Ship;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -35,7 +34,7 @@ namespace Abilities.SecondEdition
         public void AddWedgeAntillesGunnerAbility()
         {
             BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(HostShip, Combat.Defender);
-            if (distanceInfo.Range > 0 && Combat.ChosenWeapon.WeaponType == WeaponTypes.Turret)
+            if (distanceInfo.Range > 0 && Combat.ArcForShot.IsTurretArc)
             {
                 WedgeAntillesCondition condition = new WedgeAntillesCondition(Combat.Defender, HostShip);
                 Combat.Defender.Tokens.AssignCondition(condition);
