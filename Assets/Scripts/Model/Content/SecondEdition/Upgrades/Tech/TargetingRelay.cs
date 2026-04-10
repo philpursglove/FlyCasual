@@ -66,7 +66,8 @@ namespace Abilities.SecondEdition
 
         private void UseAbility(object sender, EventArgs e)
         {
-            //HostShip.SpendCharge(); // TODO: Verify charge used automatically
+            HostShip.SpendCharge();
+
             HostShip.Tokens.AssignToken(typeof(StressToken), delegate
             {
                 friendlyShip.Tokens.AssignToken(typeof(CalculateToken), delegate
