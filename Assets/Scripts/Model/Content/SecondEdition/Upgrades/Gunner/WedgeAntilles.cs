@@ -13,7 +13,7 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Gunner,
                 cost: 1,
                 isLimited: true,
-                restriction: new FactionRestriction(Faction.Rebel),
+                restriction: new FactionRestriction(Faction.Resistance),
                 abilityType: typeof(Abilities.SecondEdition.WedgeAntillesGunnerAbility)
             );
         }
