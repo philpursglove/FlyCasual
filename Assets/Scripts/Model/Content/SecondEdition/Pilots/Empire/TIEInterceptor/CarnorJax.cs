@@ -69,7 +69,7 @@ namespace Abilities.SecondEdition
 
             ShotInfoArc shotArc = new(HostShip, targetShip, new ArcFront(HostShip.ShipBase));
 
-            if (HostShip.GetRangeToShip(targetShip) < 2 && shotArc.InArc)
+            if (HostShip.State.Force > 0 && HostShip.GetRangeToShip(targetShip) < 2 && shotArc.InArc)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackStart, AskUseAbility);
             }
@@ -96,7 +96,12 @@ namespace Abilities.SecondEdition
 
         private void PreventOwnDiceModification(GenericShip ship, GenericAction action, ref bool canBeUsed)
         {
-            canBeUsed = ship != targetShip && canBeUsed;
+            if (Combat.AttackStep == CombatStep.Attack && Combat.Attacker == targetShip ||
+                Combat.AttackStep == CombatStep.Defence && Combat.Defender == targetShip)
+            {
+                // Ability says only targetShip's dice can't be modified, nothing about modifying other ship's dice
+                canBeUsed = false;
+            }
         }
 
         private void RemovePreventOwnDiceModification()
