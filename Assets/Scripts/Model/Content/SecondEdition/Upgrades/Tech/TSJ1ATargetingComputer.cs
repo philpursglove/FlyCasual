@@ -38,8 +38,9 @@ namespace Abilities.SecondEdition
                 aiPriority: GetAiPriority,
                 modificationType: DiceModificationType.Add,
                 count: 2,
-                sidesCanBeSelected: new List<DieSide>() { DieSide.Crit },
-                payAbilityCost: PayCost
+                sidesCanBeSelected: new List<DieSide>() { DieSide.Success },
+                payAbilityCost: PayCost,
+                sideCanBeChangedTo: DieSide.Crit
             );
         }
 
