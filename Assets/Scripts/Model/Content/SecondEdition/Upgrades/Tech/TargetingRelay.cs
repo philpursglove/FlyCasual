@@ -66,7 +66,7 @@ namespace Abilities.SecondEdition
 
         private void UseAbility(object sender, EventArgs e)
         {
-            HostShip.SpendCharge();
+            HostUpgrade.State.SpendCharge();
 
             HostShip.Tokens.AssignToken(typeof(StressToken), delegate
             {
