@@ -99,6 +99,7 @@ namespace Abilities.SecondEdition
 
         protected void ReduceDefenseDice(ref int count)
         {
+            Messages.ShowInfo("Wedge Antilles: The defender's agility has been decreased by 1");
             Combat.Defender.AfterGotNumberOfDefenceDice -= ReduceDefenseDice;
 
             count--;

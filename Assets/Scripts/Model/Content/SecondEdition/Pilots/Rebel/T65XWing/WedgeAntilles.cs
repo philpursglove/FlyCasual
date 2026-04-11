@@ -1,8 +1,5 @@
-﻿using Conditions;
-using Content;
-using Ship;
+﻿using Content;
 using System.Collections.Generic;
-using Tokens;
 using Upgrade;
 
 namespace Ship.SecondEdition.T65XWing
@@ -81,6 +78,7 @@ namespace Abilities.SecondEdition
 
         protected void ReduceDefenseDice(ref int count)
         {
+            Messages.ShowInfo("Wedge Antilles: The defender's agility has been decreased by 1");
             Combat.Defender.AfterGotNumberOfDefenceDice += ReduceDefenseDice;
 
             count--;
