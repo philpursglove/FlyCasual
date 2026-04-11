@@ -54,7 +54,7 @@ namespace Abilities.SecondEdition
                 HostUpgrade.State.Charges > 0 &&
                 Combat.ChosenWeapon is PrimaryWeaponClass &&
                 !Combat.Defender.Tokens.HasGreenTokens &&
-                Combat.DiceRollAttack.CriticalSuccesses > 0;
+                Combat.DiceRollAttack.RegularSuccesses > 0;
         }
 
         private int GetAiPriority()
