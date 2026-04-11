@@ -47,7 +47,7 @@ namespace Abilities.SecondEdition
                 }
             }
 
-            if (Combat.ArcForShot.IsTurretArc && !inArc)
+            if (Combat.ArcForShot.IsTurretArc && !inArc && Combat.ShotInfo.Range > 0)
             {
                 Combat.Defender.AfterGotNumberOfDefenceDice += ReduceDefenseDice;
             }
