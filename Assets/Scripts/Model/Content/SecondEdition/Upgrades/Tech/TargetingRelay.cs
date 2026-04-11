@@ -56,12 +56,17 @@ namespace Abilities.SecondEdition
         {
             AskToUseAbility(
                 HostUpgrade.UpgradeInfo.Name,
-                NeverUseByDefault,
-                UseAbility,
+                CheckConditionsForAIUse,
+                useAbility: UseAbility,
                 descriptionLong: $"Do you want to spend 1 charge and gain a stress token to allow {friendlyShip.PilotInfo.PilotName} to gain a calculate token?",
                 imageHolder: HostUpgrade,
                 callback: Triggers.FinishTrigger
             );
+        }
+
+        private bool CheckConditionsForAIUse()
+        {
+            return !HostShip.IsStressed && !friendlyShip.Tokens.HasTokenByColor(TokenColors.Green);
         }
 
         private void UseAbility(object sender, EventArgs e)
