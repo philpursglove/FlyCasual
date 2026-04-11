@@ -1,5 +1,4 @@
-﻿using Conditions;
-using Content;
+﻿using Content;
 using Ship;
 using System.Collections.Generic;
 using Upgrade;
@@ -75,14 +74,19 @@ namespace Abilities.SecondEdition
 
         public void TryAddWedgeAntillesAbility()
         {
-            if (Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon)
+            if (Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon &&
+                HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Front) &&
+                Combat.ShotInfo.Range > 0)
             {
-                if (HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Front))
-                {
-                    WedgeAntillesCondition condition = new WedgeAntillesCondition(Combat.Defender, HostShip);
-                    Combat.Defender.Tokens.AssignCondition(condition);
-                }
+                Combat.Defender.AfterGotNumberOfDefenceDice += ReduceDefenseDice;
             }
+        }
+
+        private void ReduceDefenseDice(ref int count)
+        {
+            Combat.Defender.AfterGotNumberOfDefenceDice -= ReduceDefenseDice;
+
+            count--;
         }
     }
 }
