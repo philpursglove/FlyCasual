@@ -1,4 +1,4 @@
-﻿using Conditions;
+﻿using Ship;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -21,6 +21,8 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
+    // While you peform a turret attack, if you are not in the defender's firing arc, the defender rolls 1 fewer defense die.
+
     public class WedgeAntillesGunnerAbility : GenericAbility
     {
         public override void ActivateAbility()
@@ -33,12 +35,29 @@ namespace Abilities.SecondEdition
         }
         public void AddWedgeAntillesGunnerAbility()
         {
-            BoardTools.DistanceInfo distanceInfo = new BoardTools.DistanceInfo(HostShip, Combat.Defender);
-            if (distanceInfo.Range > 0 && Combat.ArcForShot.IsTurretArc)
+
+            bool inArc = false;
+
+            foreach (PrimaryWeaponClass weapon in Combat.Defender.PrimaryWeapons)
             {
-                WedgeAntillesCondition condition = new WedgeAntillesCondition(Combat.Defender, HostShip);
-                Combat.Defender.Tokens.AssignCondition(condition);
+                if (weapon.IsShotAvailable(HostShip))
+                {
+                    inArc = true;
+                    break;
+                }
             }
+
+            if (Combat.ArcForShot.IsTurretArc && !inArc)
+            {
+                Combat.Defender.AfterGotNumberOfDefenceDice += ReduceDefenseDice;
+            }
+        }
+
+        public void ReduceDefenseDice(ref int count)
+        {
+            Combat.Defender.AfterGotNumberOfDefenceDice += ReduceDefenseDice;
+
+            count--;
         }
     }
 }
