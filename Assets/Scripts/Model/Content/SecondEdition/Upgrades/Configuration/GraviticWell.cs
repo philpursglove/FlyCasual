@@ -77,11 +77,11 @@ namespace Abilities.SecondEdition
                 switch (ability)
                 {
                     case SunFacAbility:
-                        ReplaceAbility(ability, typeof(SunFacGravaticWellAbility));
+                        ReplaceAbility(ability, typeof(SunFacGraviticWellAbility));
                         break;
 
                     case ChertekAbility:
-                        ReplaceAbility(ability, typeof(ChertekGravaticWellAbility));
+                        ReplaceAbility(ability, typeof(ChertekGraviticWellAbility));
                         break;
                 }
             }
@@ -98,7 +98,7 @@ namespace Abilities.SecondEdition
         }
     }
 
-    public class SunFacGravaticWellAbility : SunFacAbility
+    public class SunFacGraviticWellAbility : SunFacAbility
     {
         protected override void CheckAbility(ref int count)
         {
@@ -110,7 +110,7 @@ namespace Abilities.SecondEdition
         }
     }
 
-    public class ChertekGravaticWellAbility : ChertekAbility
+    public class ChertekGraviticWellAbility : ChertekAbility
     {
         protected override bool IsAvailable()
         {
