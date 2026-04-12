@@ -30,7 +30,8 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    // At the start of the Engagement Phase, if you are tractored, each other small ship at range 0-1 gains 1 strain token. Replace any 'if the defender is tractored' in your pilot ability with 'if you are tractored'
+    // At the start of the Engagement Phase, if you are tractored, each other small ship at range 0-1 gains 1 strain token.
+    // Replace any 'if the defender is tractored' in your pilot ability with 'if you are tractored'
     public class GraviticWellAbility : GenericAbility
     {
         public override void ActivateAbility()
@@ -57,7 +58,7 @@ namespace Abilities.SecondEdition
         {
             List<GenericShip> nearbyShips = new();
 
-            foreach (GenericShip ship in Roster.AllShips.Values.ToList())
+            foreach (GenericShip ship in Roster.AllShips.Values.Except(new List<GenericShip> { HostShip }).ToList())
             {
                 if (HostShip.GetRangeToShip(ship) < 2)
                 {
