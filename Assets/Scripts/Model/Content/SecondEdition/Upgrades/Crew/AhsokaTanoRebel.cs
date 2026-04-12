@@ -101,7 +101,7 @@ namespace Abilities.SecondEdition
             HostShip.ChooseTargetToAcquireTargetLock(
                 Triggers.FinishTrigger,
                 "You may acquire a lock",
-                HostShip,
+                HostUpgrade,
                 shipFilter: IsEnemyShipInArcAtRangeOne
             );
         }
