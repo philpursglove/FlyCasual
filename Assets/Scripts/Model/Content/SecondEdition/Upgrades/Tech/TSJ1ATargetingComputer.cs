@@ -29,7 +29,7 @@ namespace Abilities.SecondEdition
     public class TSJ1ATargetingComputerAbility : GenericAbility
     {
         // While you perform a primary attack, if the defender does not have any green tokens,
-        // you may spend 1 charge and 1 crit result. If you do, add 2 hit results.
+        // you may spend 1 charge and 1 hit result. If you do, add 2 crit results.
         public override void ActivateAbility()
         {
             AddDiceModification(
@@ -38,7 +38,6 @@ namespace Abilities.SecondEdition
                 aiPriority: GetAiPriority,
                 modificationType: DiceModificationType.Add,
                 count: 2,
-                sidesCanBeSelected: new List<DieSide>() { DieSide.Success },
                 payAbilityCost: PayCost,
                 sideCanBeChangedTo: DieSide.Crit
             );
