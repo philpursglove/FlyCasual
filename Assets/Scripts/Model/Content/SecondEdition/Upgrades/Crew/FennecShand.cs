@@ -1,13 +1,15 @@
 using Abilities.SecondEdition;
+using ActionsList;
 using Arcs;
 using Content;
 using Ship;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tokens;
 using Upgrade;
 
-namespace UpgradeList.SecondEdition
+namespace UpgradesList.SecondEdition
 {
     public class FennecShand : GenericUpgrade
     {
@@ -38,16 +40,29 @@ namespace Abilities.SecondEdition
         public override void ActivateAbility()
         {
             HostShip.OnMovementFinishSuccessfully += AskUseAbility;
+            HostShip.OnActionIsPerformed += AskUseAbility;
         }
 
         public override void DeactivateAbility()
         {
             HostShip.OnMovementFinishSuccessfully -= AskUseAbility;
+            HostShip.OnActionIsPerformed -= AskUseAbility;
         }
 
         private void AskUseAbility(GenericShip ship)
         {
-            RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, UseAbility);
+            if (HostUpgrade.State.Charges > 0 && Roster.AllShips.Values.Where(s => Tools.IsAnotherTeam(HostShip, s) && IsInBullseye(s)).Any())
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, UseAbility);
+            }
+        }
+
+        private void AskUseAbility(GenericAction action)
+        {
+            if (HostUpgrade.State.Charges > 0 && (action is BarrelRollAction || action is BoostAction))
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, UseAbility);
+            }
         }
 
         private void UseAbility(object sender, EventArgs e)
@@ -67,7 +82,7 @@ namespace Abilities.SecondEdition
 
             HostShip.ChooseTargetToAcquireTargetLock(
                 Triggers.FinishTrigger,
-                "Choose a target to acquire lock and apply 1 strain.",
+                "Choose a target to acquire a lock and apply 1 strain.",
                 HostUpgrade,
                 IsInBullseye
             );
