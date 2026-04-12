@@ -3,12 +3,10 @@ using Abilities.SecondEdition;
 using Content;
 using Ship;
 using Ship.SecondEdition.NantexClassStarfighter;
-using Ship.SecondEdition.T65XWing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
-using UnityEditor.Playables;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
