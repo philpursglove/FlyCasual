@@ -89,8 +89,7 @@ namespace Abilities.SecondEdition
         {
             HostShip.OnMovementFinish -= CheckTargetLock;
 
-            // TODO: Verify landed obstacles should not allow ability
-            if (HostShip.ObstaclesHit.Any(o => !HostShip.ObstaclesLanded.Contains(o)) && Roster.AllShips.Values.Where(s => IsEnemyShipInArcAtRangeOne(s)).Any())
+            if (HostShip.ObstaclesHit.Any() && Roster.AllShips.Values.Where(s => IsEnemyShipInArcAtRangeOne(s)).Any())
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementActivationFinish, AcquireTargetLock);
             }
