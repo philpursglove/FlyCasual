@@ -10,10 +10,7 @@ namespace Content.SecondEdition
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Seeker Missiles",
-                types: new List<UpgradeType>()
-                {
-                    UpgradeType.Missile
-                },
+                UpgradeType.Missile,
                 cost: 0,
                 weaponInfo: new SpecialWeaponInfo(
                     attackValue: 3,
