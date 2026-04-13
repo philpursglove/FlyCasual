@@ -1,0 +1,77 @@
+using Abilities.SecondEdition;
+using Actions;
+using ActionsList;
+using Content;
+using Ship;
+using SubPhases;
+using System;
+using System.Collections.Generic;
+using Tokens;
+using Upgrade;
+
+namespace UpgradesList.SecondEdition
+{
+    public class ZoriiBliss : GenericUpgrade
+    {
+        public ZoriiBliss() : base()
+        {
+            UpgradeInfo = new UpgradeCardInfo(
+                "Zorii Bliss",
+                UpgradeType.Crew,
+                cost: 1, // TODO: Update cost
+                charges: 1,
+                regensChargesCount: 1,
+                abilityType: typeof(ZoriiBlissCrewAbility),
+                addAction: new ActionInfo(typeof(JamAction), ActionColor.White),
+                restrictions: new UpgradeCardRestrictions(
+                    new FactionRestriction(Faction.Resistance),
+                    new ActionBarRestriction(typeof(JamAction))),
+                legalityInfo: new List<Legality>() { Legality.XWA }
+            );
+        }
+    }
+}
+
+namespace Abilities.SecondEdition
+{
+    public class ZoriiBlissCrewAbility : GenericAbility
+    {
+        GenericToken savedToken;
+
+        public override void ActivateAbility()
+        {
+            GenericShip.OnBeforeTokenIsRemovedGlobal += CheckAbility;
+        }
+
+        public override void DeactivateAbility()
+        {
+            GenericShip.OnBeforeTokenIsRemovedGlobal -= CheckAbility;
+        }
+
+        public void CheckAbility(GenericShip ship, GenericToken token, ref bool isRemoved)
+        {
+            int rangeToShip = HostShip.GetRangeToShip(ship);
+            if (HostUpgrade.State.Charges > 0 && token.TokenColor == TokenColors.Green && rangeToShip > 0 && rangeToShip < 2)
+            {
+                savedToken = token;
+                RegisterAbilityTrigger(TriggerTypes.OnTokenIsRemoved, AskGainDuplicateToken);
+            }
+        }
+
+        public void AskGainDuplicateToken(object sender, EventArgs e)
+        {
+            AskToUseAbility(
+                HostUpgrade.UpgradeInfo.Name,
+                AlwaysUseByDefault,
+                GainDuplicateToken,
+                callback: Triggers.FinishTrigger,
+                descriptionLong: $"Spend 1 charge to gain a {savedToken.Name}?"
+            );
+        }
+
+        public void GainDuplicateToken(object sender, EventArgs e)
+        {
+            HostShip.Tokens.AssignToken(savedToken.GetType(), DecisionSubPhase.ConfirmDecision);
+        }
+    }
+}
