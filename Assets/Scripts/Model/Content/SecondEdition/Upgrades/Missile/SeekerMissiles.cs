@@ -23,6 +23,9 @@ namespace Content.SecondEdition
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
             IsHidden = true;
+
+            //TODO Fix imageurl
+            ImageUrl = "";
         }
     }
 
@@ -30,7 +33,7 @@ namespace Content.SecondEdition
     {
         public SeekerMissilesXWA() : base()
         {
-            UpgradeInfo.Cost = 1;
+            UpgradeInfo.Cost = 1; //TODO Fix points
             UpgradeInfo.LegalityInfo = new() { Legality.XWA };
             IsHidden = false;
         }
