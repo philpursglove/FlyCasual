@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Content;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
-namespace Content.SecondEdition
+namespace UpgradesList.SecondEdition
 {
     public class SeekerMissiles : GenericSpecialWeapon
     {
@@ -53,7 +54,7 @@ namespace Abilities.SecondEdition
                 sidesCanBeSelected: new List<DieSide>() { DieSide.Focus },
                 sideCanBeChangedTo: DieSide.Success,
                 payAbilityPostCost: PayAbilityCost,
-                count: 1);
+                count: 2);
         }
 
         public override void DeactivateAbility()
