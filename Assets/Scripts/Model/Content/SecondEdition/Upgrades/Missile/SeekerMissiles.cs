@@ -26,7 +26,7 @@ namespace UpgradesList.SecondEdition
             IsHidden = true;
 
             //TODO Fix imageurl
-            ImageUrl = "";
+            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/theta3-sl.png";
         }
     }
 
