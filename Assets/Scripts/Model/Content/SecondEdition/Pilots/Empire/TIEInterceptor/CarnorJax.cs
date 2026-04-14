@@ -6,6 +6,7 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
+using Tokens;
 using Upgrade;
 
 namespace Ship.SecondEdition.TIEInterceptor
@@ -75,12 +76,19 @@ namespace Abilities.SecondEdition
         {
             AskToUseAbility(
                 HostShip.PilotInfo.PilotName,
-                AlwaysUseByDefault,
+                IsModifiable,
                 UseCarnorJaxAbility,
                 callback: Triggers.FinishTrigger,
                 descriptionLong: $"You may spend 1 force to prevent {targetShip.PilotInfo.PilotName}'s dice from being modified.",
                 imageHolder: HostShip
             );
+        }
+
+        private bool IsModifiable()
+        {
+            return targetShip.Tokens.HasGreenTokens ||
+                targetShip.State.Force > 0 ||
+                (targetShip.Tokens.HasToken<BlueTargetLockToken>('*') && Combat.Attacker == targetShip);
         }
 
         private void UseCarnorJaxAbility(object sender, EventArgs e)
