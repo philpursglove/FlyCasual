@@ -55,7 +55,7 @@ namespace Abilities.SecondEdition
                 sidesCanBeSelected: new List<DieSide>() { DieSide.Focus },
                 sideCanBeChangedTo: DieSide.Success,
                 payAbilityPostCost: PayAbilityCost,
-                count: 2);
+                count: HostUpgrade.State.Charges >= 2 ? 2 : HostUpgrade.State.Charges);
         }
 
         public override void DeactivateAbility()
