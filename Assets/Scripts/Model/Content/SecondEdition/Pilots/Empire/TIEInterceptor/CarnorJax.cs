@@ -1,7 +1,6 @@
 using Abilities.SecondEdition;
 using ActionsList;
 using Arcs;
-using BoardTools;
 using Content;
 using Ship;
 using SubPhases;
@@ -36,8 +35,6 @@ namespace Ship.SecondEdition.TIEInterceptor
                 },
                 legality: new List<Legality> { Legality.XWA }
             );
-
-            //IsWIP = true;
         }
     }
 }
@@ -49,6 +46,7 @@ namespace Abilities.SecondEdition
         // While an enemy ship at range 0-1 in your front arc defends or performs an attack, before the Roll Attack Dice step,
         // you may spend 1 force. If you do, that ship's dice cannot be modified.
 
+        GenericShip savedShip;
         GenericShip targetShip;
 
         public override void ActivateAbility()
@@ -58,18 +56,16 @@ namespace Abilities.SecondEdition
 
         public override void DeactivateAbility()
         {
-            GenericShip.OnAttackStartAsAttackerGlobal += CheckAbility;
+            GenericShip.OnAttackStartAsAttackerGlobal -= CheckAbility;
         }
 
         private void CheckAbility()
         {
-            targetShip = Tools.IsAnotherTeam(HostShip, Combat.Defender) ? targetShip = Combat.Defender : Combat.Attacker;
+            targetShip = Tools.IsAnotherTeam(HostShip, Combat.Defender) ? Combat.Defender : Combat.Attacker;
 
-            if (Tools.IsFriendly(HostShip, targetShip)) return; // Possible if abilities temporarily turn friendlies into enemies
+            if (Tools.IsFriendly(HostShip, targetShip)) return; // Sanity check
 
-            ShotInfoArc shotArc = new(HostShip, targetShip, new ArcFront(HostShip.ShipBase));
-
-            if (HostShip.State.Force > 0 && HostShip.GetRangeToShip(targetShip) < 2 && shotArc.InArc)
+            if (HostShip.State.Force > 0 && HostShip.GetRangeToShip(targetShip) < 2 && HostShip.SectorsInfo.IsShipInSector(targetShip, ArcType.Front))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackStart, AskUseAbility);
             }
@@ -89,15 +85,16 @@ namespace Abilities.SecondEdition
 
         private void UseCarnorJaxAbility(object sender, EventArgs e)
         {
-            targetShip.OnTryAddAvailableDiceModification += PreventOwnDiceModification;
-            Phases.Events.OnRoundEnd += RemovePreventOwnDiceModification;
+            savedShip = targetShip;
+            savedShip.OnTryAddAvailableDiceModification += PreventOwnDiceModification;
+            Phases.Events.OnCombatPhaseEnd_NoTriggers += RemovePreventOwnDiceModification;
             HostShip.State.SpendForce(1, DecisionSubPhase.ConfirmDecision);
         }
 
         private void PreventOwnDiceModification(GenericShip ship, GenericAction action, ref bool canBeUsed)
         {
-            if (Combat.AttackStep == CombatStep.Attack && Combat.Attacker == targetShip ||
-                Combat.AttackStep == CombatStep.Defence && Combat.Defender == targetShip)
+            if (Combat.AttackStep == CombatStep.Attack && Combat.Attacker == savedShip ||
+                Combat.AttackStep == CombatStep.Defence && Combat.Defender == savedShip)
             {
                 // Ability says only targetShip's dice can't be modified, nothing about modifying other ship's dice
                 canBeUsed = false;
@@ -106,9 +103,9 @@ namespace Abilities.SecondEdition
 
         private void RemovePreventOwnDiceModification()
         {
-            Phases.Events.OnRoundEnd -= RemovePreventOwnDiceModification;
+            Phases.Events.OnCombatPhaseEnd_NoTriggers -= RemovePreventOwnDiceModification;
             targetShip.OnTryAddAvailableDiceModification -= PreventOwnDiceModification;
-            targetShip = null;
+            savedShip = null;
         }
     }
 }
