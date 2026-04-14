@@ -33,7 +33,7 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    // After you fully execute a maneuver, or perform a barrel roll or boost action, you may spend 1 charge. If you do, choose an enemy ship in your bullseye.
+    // After you fully execute a maneuver, or perform a barrel roll or boost action, you may spend 1 charge. If you do, choose an enemy ship in your front arc.
     // That ship gains 1 strain token, and you may acquire a lock on it.
     public class FennecShandAbility : GenericAbility
     {
@@ -51,7 +51,7 @@ namespace Abilities.SecondEdition
 
         private void AskUseAbility(GenericShip ship)
         {
-            if (HostUpgrade.State.Charges > 0 && Roster.AllShips.Values.Where(s => Tools.IsAnotherTeam(HostShip, s) && IsInBullseye(s)).Any())
+            if (HostUpgrade.State.Charges > 0 && Roster.AllShips.Values.Where(s => Tools.IsAnotherTeam(HostShip, s) && IsInArc(s)).Any())
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, UseAbility);
             }
@@ -72,7 +72,7 @@ namespace Abilities.SecondEdition
                 AlwaysUseByDefault,
                 StrainAndTargetLockShip,
                 callback: Triggers.FinishTrigger,
-                descriptionLong: $"You may spend 1 charge. If you do, you may strain 1 ship and acquire a target lock on it."
+                descriptionLong: $"You may spend 1 charge. If you do, you may strain 1 ship in your front arc and acquire a target lock on it."
             );
         }
 
@@ -84,7 +84,7 @@ namespace Abilities.SecondEdition
                 Triggers.FinishTrigger,
                 "Choose a target to acquire a lock and apply 1 strain.",
                 HostUpgrade,
-                IsInBullseye
+                IsInArc
             );
         }
 
@@ -95,9 +95,9 @@ namespace Abilities.SecondEdition
             (target as GenericShip).Tokens.AssignToken(typeof(StrainToken), delegate { });
         }
 
-        private bool IsInBullseye(GenericShip ship)
+        private bool IsInArc(GenericShip ship)
         {
-            return HostShip.SectorsInfo.IsShipInSector(ship, ArcType.Bullseye);
+            return HostShip.SectorsInfo.IsShipInSector(ship, ArcType.Front);
         }
     }
 }
