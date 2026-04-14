@@ -47,6 +47,7 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
+
             AddDiceModification(name: "Seeker Missiles",
                 isAvailable: IsAvailable,
                 aiPriority: GetAIPriority,
@@ -64,7 +65,10 @@ namespace Abilities.SecondEdition
 
         private bool IsAvailable()
         {
-            return Combat.DiceRollAttack.Focuses > 0;
+            return Combat.DiceRollAttack.Focuses > 0 &&
+                   Combat.ChosenWeapon == HostUpgrade &&
+                   HostShip.Tokens.HasToken<BlueTargetLockToken>() &&
+                   Combat.AttackStep == CombatStep.Attack;
         }
 
         private int GetAIPriority()
