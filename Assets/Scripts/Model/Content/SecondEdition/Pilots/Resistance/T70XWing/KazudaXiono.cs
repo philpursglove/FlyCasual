@@ -78,7 +78,7 @@ namespace Abilities.SecondEdition
 
         public int GetAiPriority()
         {
-            return 0;
+            return 50;
         }
     }
 }
