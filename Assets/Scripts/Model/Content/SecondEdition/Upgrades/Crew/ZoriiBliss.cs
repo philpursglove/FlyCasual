@@ -51,7 +51,7 @@ namespace Abilities.SecondEdition
         public void CheckAbility(GenericShip ship, GenericToken token, ref bool isRemoved)
         {
             int rangeToShip = HostShip.GetRangeToShip(ship);
-            if (HostUpgrade.State.Charges > 0 && token.TokenColor == TokenColors.Green && rangeToShip > 0 && rangeToShip < 2)
+            if (HostUpgrade.State.Charges > 0 && token.TokenColor == TokenColors.Green && rangeToShip is > 0 and < 2)
             {
                 savedToken = token;
                 RegisterAbilityTrigger(TriggerTypes.OnTokenIsRemoved, AskGainDuplicateToken);
