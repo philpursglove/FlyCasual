@@ -3,6 +3,7 @@ using ActionsList;
 using Arcs;
 using Content;
 using Ship;
+using SubPhases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,13 +82,15 @@ namespace Abilities.SecondEdition
             HostShip.OnTargetLockIsAcquired += ApplyStrain;
 
             HostShip.ChooseTargetToAcquireTargetLock(
-                Triggers.FinishTrigger,
+                delegate
+                {
+                    HostUpgrade.State.SpendCharge();
+                    DecisionSubPhase.ConfirmDecision();
+                },
                 "Choose a target to acquire a lock and apply 1 strain.",
                 HostUpgrade,
                 IsInArc
             );
-
-            HostUpgrade.State.SpendCharge();
         }
 
         private void ApplyStrain(ITargetLockable target)
