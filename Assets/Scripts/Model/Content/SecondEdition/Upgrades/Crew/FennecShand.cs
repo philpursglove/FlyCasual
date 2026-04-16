@@ -86,6 +86,8 @@ namespace Abilities.SecondEdition
                 HostUpgrade,
                 IsInArc
             );
+
+            HostUpgrade.State.SpendCharge();
         }
 
         private void ApplyStrain(ITargetLockable target)
