@@ -49,8 +49,8 @@ namespace Abilities.SecondEdition
         {
             if (HostUpgrade.State.Charges > 0 &&
                 ship.AssignedManeuver.Bearing == ManeuverBearing.Turn &&
-                HostShip.AssignedManeuver.ColorComplexity == MovementComplexity.Easy ||
-                (!HostShip.IsStressed && HostShip.AssignedManeuver.ColorComplexity != MovementComplexity.Complex))
+                (HostShip.AssignedManeuver.ColorComplexity == MovementComplexity.Easy ||
+                (!HostShip.IsStressed && HostShip.AssignedManeuver.ColorComplexity != MovementComplexity.Complex)))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnManeuverIsRevealed, RegisterAbility);
             }
