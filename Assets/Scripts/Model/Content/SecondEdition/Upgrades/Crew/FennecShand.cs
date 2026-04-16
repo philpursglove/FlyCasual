@@ -51,7 +51,7 @@ namespace Abilities.SecondEdition
 
         private void AskUseAbility(GenericShip ship)
         {
-            if (HostUpgrade.State.Charges > 0 && Roster.AllShips.Values.Where(s => Tools.IsAnotherTeam(HostShip, s) && IsInArc(s)).Any())
+            if (HostUpgrade.State.Charges > 0 && Roster.AllShips.Values.Any(s => Tools.IsAnotherTeam(HostShip, s) && IsInArc(s)))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, UseAbility);
             }
