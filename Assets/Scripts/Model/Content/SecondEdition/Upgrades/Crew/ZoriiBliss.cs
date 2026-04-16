@@ -72,6 +72,8 @@ namespace Abilities.SecondEdition
         public void GainDuplicateToken(object sender, EventArgs e)
         {
             HostShip.Tokens.AssignToken(savedToken.GetType(), DecisionSubPhase.ConfirmDecision);
+
+            HostUpgrade.State.SpendCharge();
         }
     }
 }
