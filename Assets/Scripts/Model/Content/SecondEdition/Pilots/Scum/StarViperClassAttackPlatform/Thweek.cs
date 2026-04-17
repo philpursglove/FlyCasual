@@ -68,7 +68,12 @@ namespace Abilities.SecondEdition
 
         private void GainTractorToken(object sender, EventArgs e)
         {
-            HostShip.Tokens.AssignToken(typeof(TractorBeamToken), DecisionSubPhase.ConfirmDecision);
+            DecisionSubPhase.ConfirmDecisionNoCallback();
+
+            Selection.ChangeActiveShip(HostShip);
+
+            TractorBeamToken tractor = new(HostShip, HostShip.Owner);
+            HostShip.Tokens.AssignToken(tractor, Triggers.FinishTrigger);
         }
 
         private void RegisterEngagementPhaseAbility()
@@ -83,7 +88,7 @@ namespace Abilities.SecondEdition
                 NeverUseByDefault,
                 GainDepleteAndRemoveTractorTokens,
                 callback: Triggers.FinishTrigger,
-                descriptionLong: $"Would you like to gain a tractor token?",
+                descriptionLong: $"Would you like to gain a deplete to remove a tractor token?",
                 imageHolder: HostShip,
                 requiredPlayer: HostShip.Owner.PlayerNo
             );
