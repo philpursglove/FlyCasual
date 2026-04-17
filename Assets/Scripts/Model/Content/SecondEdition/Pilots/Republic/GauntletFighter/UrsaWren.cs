@@ -1,5 +1,6 @@
 using Abilities.SecondEdition;
 using Content;
+using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -90,17 +91,17 @@ namespace Abilities.SecondEdition
             );
 
             decisionSubphase.DescriptionShort = "Reinforce: Select a side";
-            decisionSubphase.RequiredPlayer = Selection.ThisShip.Owner.PlayerNo;
+            decisionSubphase.RequiredPlayer = HostShip.Owner.PlayerNo;
 
             decisionSubphase.AddDecision(
                 "Fore side",
-                delegate { Selection.ThisShip.Tokens.AssignToken(typeof(ReinforceForeToken), DecisionSubPhase.ConfirmDecision); },
+                delegate { HostShip.Tokens.AssignToken(typeof(ReinforceForeToken), DecisionSubPhase.ConfirmDecision); },
                 isCentered: true
             );
 
             decisionSubphase.AddDecision(
                 "Aft side",
-                delegate { Selection.ThisShip.Tokens.AssignToken(typeof(ReinforceAftToken), DecisionSubPhase.ConfirmDecision); },
+                delegate { HostShip.Tokens.AssignToken(typeof(ReinforceAftToken), DecisionSubPhase.ConfirmDecision); },
                 isCentered: true
             );
 
