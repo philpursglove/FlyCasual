@@ -40,15 +40,15 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            GenericShip.OnBeforeTokenIsRemovedGlobal += CheckAbility;
+            GenericShip.OnTokenIsRemovedGlobal += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.OnBeforeTokenIsRemovedGlobal -= CheckAbility;
+            GenericShip.OnTokenIsRemovedGlobal -= CheckAbility;
         }
 
-        public void CheckAbility(GenericShip ship, GenericToken token, ref bool isRemoved)
+        public void CheckAbility(GenericShip ship, GenericToken token)
         {
             int rangeToShip = HostShip.GetRangeToShip(ship);
             if (HostUpgrade.State.Charges > 0 && token.TokenColor == TokenColors.Green && rangeToShip is > 0 and < 2)
