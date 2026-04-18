@@ -15,24 +15,27 @@ namespace Ship.SecondEdition.TIEInterceptor
     {
         public CarnorJax() : base()
         {
-            // TODO: Update points, loadout, Upgrade Icons, and Tags
             PilotInfo = new PilotCardInfo25
             (
                 "Carnor Jax",
                 "Thyrsian Sun Guard",
                 Faction.Imperial,
                 5,
-                50,
-                14,
+                12,
+                4,
                 isLimited: true,
                 force: 1,
                 regensForce: 1,
                 abilityType: typeof(CarnorJaxAbility),
                 extraUpgradeIcons: new List<UpgradeType>()
                 {
+                    UpgradeType.ForcePower,
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
                 },
                 tags: new List<Tags>
                 {
+                    Tags.Tie
                 },
                 legality: new List<Legality> { Legality.XWA }
             );
