@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Zorii Bliss",
                 UpgradeType.Crew,
-                cost: 1, // TODO: Update cost
+                cost: 5,
                 charges: 1,
                 regensChargesCount: 1,
                 abilityType: typeof(ZoriiBlissCrewAbility),
@@ -28,6 +28,8 @@ namespace UpgradesList.SecondEdition
                     new ActionBarRestriction(typeof(JamAction))),
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "zoriibliss-legendsandrelics";
         }
     }
 }
