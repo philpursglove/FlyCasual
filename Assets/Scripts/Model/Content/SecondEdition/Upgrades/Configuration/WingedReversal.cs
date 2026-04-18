@@ -1,10 +1,12 @@
 ﻿using Abilities.SecondEdition;
+using Content;
 using Movement;
 using Ship;
 using Ship.SecondEdition.GauntletFighter;
 using Ship.SecondEdition.UT60DUWing;
 using SubPhases;
 using System;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -17,11 +19,14 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 name: "Winged Reversal",
                 type: UpgradeType.Configuration,
-                cost: 1, // TODO: Update cost
+                cost: 0,
                 charges: 2,
                 abilityType: typeof(WingedReversalAbility),
-                restriction: new ShipRestriction(typeof(UT60DUWing), typeof(GauntletFighter))
+                restriction: new ShipRestriction(typeof(UT60DUWing), typeof(GauntletFighter)),
+                legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "wingedreversal-legendsandrelics";
         }
     }
 }

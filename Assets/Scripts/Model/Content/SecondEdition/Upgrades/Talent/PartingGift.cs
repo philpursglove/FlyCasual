@@ -23,8 +23,7 @@ namespace UpgradesList.SecondEdition
 
             IsHidden = true;
 
-            //TODO: Fix  ImageUrl
-            ImageUrl = HostShip != null ? HostShip.ImageUrl : "https://infinitearenas.com/xw2/images/quickbuilds/adonfox-battleoverendor.png";
+            NameCanonical = "partinggift-legendsandrelics";
         }
     }
 
@@ -32,7 +31,7 @@ namespace UpgradesList.SecondEdition
     {
         public PartingGiftXwa() : base()
         {
-            UpgradeInfo.Cost = 1; //TODO fix cost
+            UpgradeInfo.Cost = 2;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             IsHidden = false;
         }

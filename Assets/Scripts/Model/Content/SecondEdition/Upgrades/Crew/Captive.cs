@@ -13,7 +13,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Captive",
                 UpgradeType.Crew,
-                cost: 1, //TODO Fix cost
+                cost: 8,
                 isLimited: true,
                 charges: 1,
                 regensCharges: true,
@@ -23,7 +23,7 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality> { Legality.XWA }
             );
 
-            //TODO ImageUrl
+            NameCanonical = "captive-legendsandrelics";
         }
     }
 }
