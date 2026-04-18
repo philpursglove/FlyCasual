@@ -43,7 +43,8 @@ namespace Ship
                     UpgradeType.Talent,
                     UpgradeType.Talent,
                     UpgradeType.Modification,
-                    UpgradeType.Modification
+                    UpgradeType.Modification,
+                    UpgradeType.Configuration
                 };
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
