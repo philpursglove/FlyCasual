@@ -25,6 +25,8 @@ namespace UpgradesList.SecondEdition
                 restriction: new FactionRestriction(Faction.Imperial),
                 addAction: new ActionInfo(typeof(JamAction), ActionColor.Red)
             );
+
+            NameCanonical = "thrawn-legendsandrelics";
         }
     }
 }
