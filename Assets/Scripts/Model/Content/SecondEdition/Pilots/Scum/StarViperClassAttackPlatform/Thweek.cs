@@ -88,7 +88,10 @@ namespace Abilities.SecondEdition
 
         private void RegisterEngagementPhaseAbility()
         {
-            RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, AskGainDepleteTokenToRemoveTractor);
+            if (HostShip.Tokens.HasToken<TractorBeamToken>())
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, AskGainDepleteTokenToRemoveTractor);
+            }
         }
 
         private void AskGainDepleteTokenToRemoveTractor(object sender, EventArgs e)
