@@ -13,11 +13,10 @@ namespace UpgradesList.SecondEdition
     {
         public BurstLaserTurret() : base()
         {
-            // TODO: Update costs
             UpgradeInfo = new UpgradeCardInfo(
                 "Burst Laser Turret",
                 UpgradeType.Turret,
-                cost: 1,
+                cost: 4,
                 weaponInfo: new SpecialWeaponInfo(
                     attackValue: 2,
                     minRange: 1,
@@ -31,6 +30,8 @@ namespace UpgradesList.SecondEdition
                 addAction: new ActionInfo(typeof(RotateArcAction)),
                 legalityInfo: new() { Legality.XWA }
             );
+
+            NameCanonical = "burstlaserturret-legendsandrelics";
         }
     }
 }

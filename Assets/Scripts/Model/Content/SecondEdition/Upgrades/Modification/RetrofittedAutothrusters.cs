@@ -3,7 +3,6 @@ using ActionsList;
 using Content;
 using Movement;
 using Ship;
-using SubPhases;
 using System;
 using System.Collections.Generic;
 using Upgrade;
@@ -17,12 +16,14 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Retrofitted Autothrusters",
                 UpgradeType.Modification,
-                cost: 1, // TODO: Update cost
+                cost: 6,
                 charges: 2,
                 restriction: new BaseSizeRestriction(Ship.BaseSize.Small),
                 abilityType: typeof(RetrofittedAutothrustersAbility),
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "retrofittedautothrusters-legendsandrelics";
         }
     }
 }

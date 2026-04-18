@@ -14,10 +14,12 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Unhinged Astromech",
                 UpgradeType.Astromech,
-                cost: 1, // TODO: Update cost
+                cost: 3,
                 abilityType: typeof(Abilities.SecondEdition.UnhingedAstromechAbility),
                 legalityInfo: new() { Legality.XWA }
             );
+
+            NameCanonical = "unhingedastromech-legendsandrelics";
         }
     }
 }

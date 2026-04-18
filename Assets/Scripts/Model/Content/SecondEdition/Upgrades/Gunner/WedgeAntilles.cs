@@ -1,4 +1,7 @@
-﻿using Ship;
+﻿using Abilities.SecondEdition;
+using Content;
+using Ship;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -13,8 +16,11 @@ namespace UpgradesList.SecondEdition
                 cost: 1,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.WedgeAntillesGunnerAbility)
+                abilityType: typeof(WedgeAntillesGunnerAbility),
+                legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "wedgeantilles-legendsandrelics";
         }
     }
 }
