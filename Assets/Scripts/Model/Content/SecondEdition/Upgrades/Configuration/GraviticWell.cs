@@ -24,6 +24,8 @@ namespace UpgradesList.SecondEdition
                 restriction: new ShipRestriction(typeof(NantexClassStarfighter)),
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "grraviticwell-legendsandrelics";
         }
     }
 }
