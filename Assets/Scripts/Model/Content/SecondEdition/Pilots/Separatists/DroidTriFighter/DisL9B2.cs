@@ -40,9 +40,6 @@ namespace Ship.SecondEdition.DroidTriFighter
                 legality: new List<Legality>() { Legality.XWA }
             );
 
-            ShipInfo.ActionIcons.RemoveLinkedAction(typeof(BarrelRollAction), typeof(EvadeAction));
-            ShipInfo.ActionIcons.AddLinkedAction(new Actions.LinkedActionInfo(typeof(BarrelRollAction), typeof(CalculateAction)));
-
             PilotNameCanonical = "disl9b2-legendsandrelics";
         }
     }
