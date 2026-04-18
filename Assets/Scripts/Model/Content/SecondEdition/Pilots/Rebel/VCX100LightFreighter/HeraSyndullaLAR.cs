@@ -5,22 +5,41 @@ using Movement;
 using Ship;
 using System;
 using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship.SecondEdition.VCX100LightFreighter
 {
-    public class HeraSyndullaLegendsAndRelics : VCX100LightFreighter
+    public class HeraSyndullaLAR : VCX100LightFreighter
     {
-        public HeraSyndullaLegendsAndRelics() : base()
+        public HeraSyndullaLAR() : base()
         {
             PilotInfo = new PilotCardInfo25(
                 pilotName: "Hera Syndulla",
                 pilotTitle: "New Republic General",
                 faction: Faction.Rebel,
                 initiative: 6,
-                cost: 25, // TODO: Update
-                loadoutValue: 50, // TODO: Update
+                cost: 18,
+                loadoutValue: 20,
                 isLimited: true,
-                abilityType: typeof(HeraSyndullaLegendsAndRelicsAbility),
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Crew,
+                    UpgradeType.Sensor,
+                    UpgradeType.Gunner,
+                    UpgradeType.Modification,
+                    UpgradeType.Turret,
+                    UpgradeType.Torpedo,
+                    UpgradeType.Title
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Freighter,
+                    Tags.Spectre
+                },
+                abilityType: typeof(HeraSyndullaLARAbility),
                 legality: new List<Legality>() { Legality.XWA }
             );
 
@@ -31,7 +50,7 @@ namespace Ship.SecondEdition.VCX100LightFreighter
 
 namespace Abilities.SecondEdition
 {
-    public class HeraSyndullaLegendsAndRelicsAbility : GenericAbility
+    public class HeraSyndullaLARAbility : GenericAbility
     {
         // After you fully execute a red maneuver, you may coordinate a friendly ship at range 1-3.
 
