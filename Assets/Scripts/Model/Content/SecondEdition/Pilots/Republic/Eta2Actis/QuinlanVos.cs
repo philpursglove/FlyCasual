@@ -5,6 +5,7 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Upgrade;
 
 namespace Ship.SecondEdition.Eta2Actis
 {
@@ -17,13 +18,28 @@ namespace Ship.SecondEdition.Eta2Actis
                 pilotTitle: "Darkness Within",
                 faction: Faction.Republic,
                 initiative: 4,
-                cost: 25, // TODO: Update
-                loadoutValue: 50, // TODO: Update
+                cost: 11,
+                loadoutValue: 14,
                 force: 2,
                 regensForce: 1,
-                abilityType: typeof(QuinlanVosAbility),
                 isLimited: true,
-
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.ForcePower,
+                    UpgradeType.ForcePower,
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Jedi,
+                    Tags.LightSide,
+                    Tags.DarkSide
+                },
+                abilityType: typeof(QuinlanVosAbility),
                 legality: new List<Legality>() { Legality.XWA }
             );
 
