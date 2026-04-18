@@ -4,6 +4,7 @@ using Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Upgrade;
 
 namespace Ship.SecondEdition.DroidTriFighter
 {
@@ -16,17 +17,33 @@ namespace Ship.SecondEdition.DroidTriFighter
                 pilotTitle: "Calculated Risk",
                 faction: Faction.Separatists,
                 initiative: 6,
-                cost: 50, // TODO: Update
-                loadoutValue: 50, // TODO: Update
+                cost: 11,
+                loadoutValue: 11,
                 isLimited: true,
                 charges: 1,
                 regensCharges: 1,
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Cannon,
+                    UpgradeType.Missile,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Droid
+                },
                 abilityType: typeof(DisL9B2Ability),
                 legality: new List<Legality>() { Legality.XWA }
             );
 
             ShipInfo.ActionIcons.RemoveLinkedAction(typeof(BarrelRollAction), typeof(EvadeAction));
             ShipInfo.ActionIcons.AddLinkedAction(new Actions.LinkedActionInfo(typeof(BarrelRollAction), typeof(CalculateAction)));
+
+            PilotNameCanonical = "disl9b2-legendsandrelics";
         }
     }
 }
@@ -55,7 +72,7 @@ namespace Abilities.SecondEdition
 
         private void CheckChargeState(object sender, EventArgs e)
         {
-            if(HostShip.State.Charges > 0)
+            if (HostShip.State.Charges > 0)
             {
                 if (HasShipInBullseye())
                 {
@@ -65,7 +82,7 @@ namespace Abilities.SecondEdition
                 {
                     Messages.ShowInfoToHuman($"{HostShip.PilotInfo.PilotName} engages at initiative 1.");
                     HostShip.State.CombatActivationAtInitiative = 1;
-                }                
+                }
             }
 
             Triggers.FinishTrigger();
