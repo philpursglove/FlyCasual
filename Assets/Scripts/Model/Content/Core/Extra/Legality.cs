@@ -7,6 +7,6 @@
         StandardBanned,
         ExtendedBanned,
         XWA,
-        XWABanned
+        XWARestricted
     }
 }
