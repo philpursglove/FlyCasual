@@ -34,7 +34,7 @@ namespace Content
                 case Legality.ExtendedLegal:
                     return (ship.PilotInfo as PilotCardInfo25).LegalityInfo.Contains(Legality.ExtendedBanned);
                 case Legality.XWA:
-                    return (ship.PilotInfo as PilotCardInfo25).LegalityInfo.Contains(Legality.XWABanned);
+                    return (ship.PilotInfo as PilotCardInfo25).LegalityInfo.Contains(Legality.XWARestricted);
                 default:
                     return false;
             }
@@ -54,7 +54,7 @@ namespace Content
                 case Legality.ExtendedLegal:
                     return upgrade.UpgradeInfo.LegalityInfo.Contains(Legality.ExtendedBanned);
                 case Legality.XWA:
-                    return upgrade.UpgradeInfo.LegalityInfo.Contains(Legality.XWABanned);
+                    return upgrade.UpgradeInfo.LegalityInfo.Contains(Legality.XWARestricted);
                 default:
                     return false;
             }
