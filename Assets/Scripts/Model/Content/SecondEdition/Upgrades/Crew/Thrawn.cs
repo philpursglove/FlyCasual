@@ -17,7 +17,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Thrawn",
                 UpgradeType.Crew,
-                cost: 1, // TODO: Update cost
+                cost: 6,
                 isLimited: true,
                 charges: 2,
                 regensCharges: true,
@@ -119,7 +119,7 @@ namespace Abilities.SecondEdition
 
         private void AskPerformJamOrCooridinate(object sender, EventArgs e)
         {
-            HostShip.OnActionIsPerformed += SpendCharges;    
+            HostShip.OnActionIsPerformed += SpendCharges;
 
             HostShip.AskPerformFreeAction(
                 GetAbilityActions(),
