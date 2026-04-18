@@ -2,6 +2,7 @@ using Abilities.SecondEdition;
 using Content;
 using Ship;
 using System.Collections.Generic;
+using Upgrade;
 
 namespace Ship.SecondEdition.T70XWing
 {
@@ -14,9 +15,21 @@ namespace Ship.SecondEdition.T70XWing
                 pilotTitle: "Resistance Spy",
                 faction: Faction.Resistance,
                 initiative: 4,
-                cost: 25, // TODO: Update
-                loadoutValue: 25, // TODO: Update
+                cost: 12,
+                loadoutValue: 13,
                 isLimited: true,
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Astromech,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.XWing
+                },
                 abilityType: typeof(KazudaXionoLARAbility),
                 legality: new List<Legality>() { Legality.XWA }
             );
