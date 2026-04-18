@@ -14,12 +14,14 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "T-SJ1A Targeting Computer",
                 UpgradeType.Tech,
-                cost: 1,
+                cost: 4,
                 charges: 1, // TODO: Update points
                 abilityType: typeof(TSJ1ATargetingComputerAbility),
                 restriction: new FactionRestriction(Faction.FirstOrder),
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "tsj1atargetingcomputer-legendsandrelics";
         }
     }
 }
@@ -62,7 +64,7 @@ namespace Abilities.SecondEdition
             if (Combat.DiceRollAttack.Successes < Combat.Defender.State.ShieldsCurrent) return 100; // crit would be eaten by shield anyway
 
             if (Combat.DiceRollAttack.Successes - Combat.Defender.GetNumberOfDefenceDice(Combat.Attacker) == Combat.Defender.State.HullCurrent - 1) return 100; // The extra success would ensure a kill
-            
+
             return 0;
         }
 
