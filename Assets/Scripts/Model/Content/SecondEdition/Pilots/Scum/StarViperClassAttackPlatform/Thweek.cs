@@ -5,6 +5,7 @@ using SubPhases;
 using System;
 using System.Collections.Generic;
 using Tokens;
+using Upgrade;
 
 namespace Ship.SecondEdition.StarViperClassAttackPlatform
 {
@@ -17,9 +18,18 @@ namespace Ship.SecondEdition.StarViperClassAttackPlatform
                 pilotTitle: "Versatile Spy",
                 faction: Faction.Scum,
                 initiative: 4,
-                cost: 25, // TODO: Update
-                loadoutValue: 50, // TODO: Update
+                cost: 12,
+                loadoutValue: 11,
                 isLimited: true,
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Torpedo
+                },
                 abilityType: typeof(ThweekAbility),
                 legality: new List<Legality>() { Legality.XWA }
             );
