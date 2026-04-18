@@ -1,6 +1,5 @@
 using Abilities.SecondEdition;
 using Content;
-using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
@@ -19,16 +18,29 @@ namespace Ship.SecondEdition.GauntletFighter
                 pilotTitle: "Countess of Clan Wren",
                 faction: Faction.Republic,
                 initiative: 3,
-                cost: 50, // TODO: Update cost
-                loadoutValue: 50, // TODO: Update loadout
+                cost: 15,
+                loadoutValue: 17,
                 isLimited: true,
                 extraUpgradeIcons: new List<UpgradeType>()
                 {
-                // TODO: Update
+                    UpgradeType.Talent,
+                    UpgradeType.Crew,
+                    UpgradeType.Gunner,
+                    UpgradeType.Illicit,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Device,
+                    UpgradeType.Configuration
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Mandalorian
                 },
                 abilityType: typeof(UrsaWrenGauntletAbility),
                 legality: new List<Legality>() { Legality.XWA }
             );
+
+            PilotNameCanonical = "ursawren-legendsandrelics";
         }
     }
 }
