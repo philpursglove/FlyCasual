@@ -2,6 +2,7 @@ using Abilities.SecondEdition;
 using Content;
 using System.Collections.Generic;
 using Tokens;
+using Upgrade;
 
 namespace Ship.SecondEdition.TIEFoFighter
 {
@@ -14,12 +15,27 @@ namespace Ship.SecondEdition.TIEFoFighter
                 pilotTitle: "DT-533",
                 faction: Faction.FirstOrder,
                 initiative: 4,
-                cost: 50, // TODO: Update
-                loadoutValue: 50, // TODO: Update
+                cost: 9,
+                loadoutValue: 8,
                 isLimited: true,
+                extraUpgradeIcons: new List<UpgradeType>()
+                {
+                    UpgradeType.Talent,
+                    UpgradeType.Sensor,
+                    UpgradeType.Modification,
+                    UpgradeType.Modification,
+                    UpgradeType.Tech,
+                    UpgradeType.Missile
+                },
+                tags: new List<Tags>()
+                {
+                    Tags.Tie
+                },
                 abilityType: typeof(TamaraRyvoraAbility),
                 legality: new List<Legality>() { Legality.XWA }
             );
+
+            PilotNameCanonical = "tamararyvora-legendsandrelics";
         }
     }
 }
