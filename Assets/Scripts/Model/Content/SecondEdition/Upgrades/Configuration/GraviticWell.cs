@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 name: "Gravitic Well",
                 type: UpgradeType.Configuration,
-                cost: 1, // TODO: Update cost
+                cost: 5,
                 isStandardized: true,
                 abilityType: typeof(GraviticWellAbility),
                 restriction: new ShipRestriction(typeof(NantexClassStarfighter)),
