@@ -13,7 +13,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Wedge Antilles",
                 UpgradeType.Gunner,
-                cost: 1,
+                cost: 10,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
                 abilityType: typeof(WedgeAntillesGunnerAbility),
@@ -27,7 +27,7 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    // While you peform a turret attack, if you are not in the defender's firing arc, the defender rolls 1 fewer defense die.
+    // While you perform a turret attack, if you are not in the defender's firing arc, the defender rolls 1 fewer defense die.
 
     public class WedgeAntillesGunnerAbility : GenericAbility
     {
