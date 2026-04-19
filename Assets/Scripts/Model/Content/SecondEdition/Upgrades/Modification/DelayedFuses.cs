@@ -13,7 +13,7 @@ namespace UpgradesList.SecondEdition
         {
             UpgradeInfo = new UpgradeCardInfo("Delayed Fuses",
                 UpgradeType.Modification,
-                cost: 2,
+                cost: 1,
                 abilityType: typeof(Abilities.SecondEdition.DelayedFusesAbility),
                 seImageNumber: 74,
                 legalityInfo: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
