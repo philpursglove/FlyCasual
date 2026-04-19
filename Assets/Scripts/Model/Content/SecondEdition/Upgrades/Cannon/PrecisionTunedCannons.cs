@@ -34,7 +34,7 @@ namespace UpgradesList.SecondEdition
     {
         public PrecisionTunedCannonsXWA() : base()
         {
-            UpgradeInfo.Cost = 1; // TODO: Update cost
+            UpgradeInfo.Cost = 3;
             UpgradeInfo.LegalityInfo = new List<Legality>() { Legality.XWA };
             IsHidden = false;
         }
