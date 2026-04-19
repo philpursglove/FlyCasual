@@ -67,7 +67,6 @@ namespace Abilities.SecondEdition
         {
             return Combat.DiceRollAttack.Focuses > 0 &&
                    Combat.ChosenWeapon == HostUpgrade &&
-                   HostShip.Tokens.HasToken<BlueTargetLockToken>() &&
                    Combat.AttackStep == CombatStep.Attack;
         }
 
