@@ -21,7 +21,7 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/scythe6-battleoverendor.png"; // TODO: Update image
+            NameCanonical = "targetingmatrix-legendsandrelics";
         }
     }
 
@@ -31,7 +31,7 @@ namespace UpgradesList.SecondEdition
         {
             IsHidden = false;
 
-            UpgradeInfo.Cost = 1; // TODO: Update cost
+            UpgradeInfo.Cost = 4;
             UpgradeInfo.LegalityInfo = new List<Legality>() { Legality.XWA };
         }
     }

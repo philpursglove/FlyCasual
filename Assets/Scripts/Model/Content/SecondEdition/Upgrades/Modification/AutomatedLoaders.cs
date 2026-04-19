@@ -15,7 +15,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Automated Loaders",
                 UpgradeType.Modification,
-                cost: 0,
+                cost: 3,
                 abilityType: typeof(Abilities.SecondEdition.AutomatedLoadersAbility),
                 charges: 1,
                 legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
@@ -23,8 +23,7 @@ namespace UpgradesList.SecondEdition
 
             IsHidden = true;
 
-            //TODO: Fix  ImageUrl
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/majorrhymer-swz98.png";
+            NameCanonical = "automatedloaders-legendsandrelics";
         }
     }
 
@@ -32,7 +31,7 @@ namespace UpgradesList.SecondEdition
     {
         public AutomatedLoadersXwa() : base()
         {
-            UpgradeInfo.Cost = 1; //TODO fix cost
+            UpgradeInfo.Cost = 3;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             UpgradeInfo.Restrictions.AddRestriction(new ActionBarRestriction(typeof(ReloadAction)));
             IsHidden = false;

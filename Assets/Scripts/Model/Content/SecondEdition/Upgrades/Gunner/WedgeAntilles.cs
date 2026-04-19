@@ -1,4 +1,7 @@
-﻿using Ship;
+﻿using Abilities.SecondEdition;
+using Content;
+using Ship;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -10,18 +13,21 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Wedge Antilles",
                 UpgradeType.Gunner,
-                cost: 1,
+                cost: 10,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.WedgeAntillesGunnerAbility)
+                abilityType: typeof(WedgeAntillesGunnerAbility),
+                legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "wedgeantilles-legendsandrelics";
         }
     }
 }
 
 namespace Abilities.SecondEdition
 {
-    // While you peform a turret attack, if you are not in the defender's firing arc, the defender rolls 1 fewer defense die.
+    // While you perform a turret attack, if you are not in the defender's firing arc, the defender rolls 1 fewer defense die.
 
     public class WedgeAntillesGunnerAbility : GenericAbility
     {

@@ -22,7 +22,7 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/ModifiedR4PUnit.jpg";
+            NameCanonical = "modifiedr4punit-legendsandrelics";
         }
     }
 
@@ -30,13 +30,10 @@ namespace UpgradesList.SecondEdition
     {
         public ModifiedR4PUnitXwa() : base()
         {
-            UpgradeInfo.Cost = 1; //TODO fix cost
+            UpgradeInfo.Cost = 5;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             UpgradeInfo.Restrictions.AddRestriction(new FactionRestriction(Faction.Rebel));
             IsHidden = false;
-
-            //TODO: Fix ImageUrl
-
         }
     }
 }

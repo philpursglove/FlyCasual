@@ -14,11 +14,13 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Targeting Relay",
                 UpgradeType.Tech,
-                cost: 1, // TODO: update cost
+                cost: 3,
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.TargetingRelayAbility),
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "targetingrelay-legendsandrelics";
         }
     }
 }

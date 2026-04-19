@@ -15,7 +15,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Ahsoka Tano",
                 UpgradeType.Crew,
-                cost: 1, // TODO: update cost
+                cost: 10,
                 isLimited: true,
                 addForce: 1,
                 restriction: new FactionRestriction(Faction.Rebel),
@@ -23,8 +23,7 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
 
-            // TODO: Update NameCanonical & ImageUrl
-            NameCanonical = "ahsokatano-rebel";
+            NameCanonical = "ahsokatano-legendsandrelics";
         }
     }
 }

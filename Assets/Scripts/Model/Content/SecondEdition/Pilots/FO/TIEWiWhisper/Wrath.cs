@@ -45,8 +45,8 @@ namespace Ship.SecondEdition.TIEWiWhisperModifiedInterceptor
     {
         public WrathXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 13;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 17;
+            (PilotInfo as PilotCardInfo25).Cost = 12;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 14;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,

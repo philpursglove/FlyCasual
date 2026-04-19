@@ -19,7 +19,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Fennec Shand",
                 UpgradeType.Crew,
-                cost: 1, // TODO: Update cost
+                cost: 6,
                 isLimited: true,
                 charges: 2,
                 restriction: new FactionRestriction(Faction.Scum),
@@ -27,7 +27,7 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
 
-            // TODO: Update NameCanonical & ImageUrl
+            NameCanonical = "fennecshand-legendsandrelics";
         }
     }
 }
