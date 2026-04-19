@@ -15,7 +15,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Automated Loaders",
                 UpgradeType.Modification,
-                cost: 0,
+                cost: 3,
                 abilityType: typeof(Abilities.SecondEdition.AutomatedLoadersAbility),
                 charges: 1,
                 legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
