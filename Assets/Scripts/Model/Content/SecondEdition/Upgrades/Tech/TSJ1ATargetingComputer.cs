@@ -14,12 +14,14 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "T-SJ1A Targeting Computer",
                 UpgradeType.Tech,
-                cost: 1,
+                cost: 4,
                 charges: 1, // TODO: Update points
                 abilityType: typeof(TSJ1ATargetingComputerAbility),
                 restriction: new FactionRestriction(Faction.FirstOrder),
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
+
+            NameCanonical = "tsj1atargetingcomputer-legendsandrelics";
         }
     }
 }
@@ -29,7 +31,7 @@ namespace Abilities.SecondEdition
     public class TSJ1ATargetingComputerAbility : GenericAbility
     {
         // While you perform a primary attack, if the defender does not have any green tokens,
-        // you may spend 1 charge and 1 hit result. If you do, add 2 crit results.
+        // you may spend 1 charge and 1 crit result. If you do, add 2 hit results.
         public override void ActivateAbility()
         {
             AddDiceModification(
@@ -39,7 +41,7 @@ namespace Abilities.SecondEdition
                 modificationType: DiceModificationType.Add,
                 count: 2,
                 payAbilityCost: PayCost,
-                sideCanBeChangedTo: DieSide.Crit
+                sideCanBeChangedTo: DieSide.Success
             );
         }
 
@@ -54,24 +56,22 @@ namespace Abilities.SecondEdition
                 HostUpgrade.State.Charges > 0 &&
                 Combat.ChosenWeapon is PrimaryWeaponClass &&
                 !Combat.Defender.Tokens.HasGreenTokens &&
-                Combat.DiceRollAttack.RegularSuccesses > 0;
+                Combat.DiceRollAttack.CriticalSuccesses > 0;
         }
 
         private int GetAiPriority()
         {
-            // Don't use if crit would be eaten by shields
-            if (Combat.Defender.State.ShieldsCurrent >= (Combat.DiceRollAttack.RegularSuccesses + 1)) return 0;
+            if (Combat.DiceRollAttack.Successes < Combat.Defender.State.ShieldsCurrent) return 100; // crit would be eaten by shield anyway
 
-            // Don't use if opponent would be dead anyway
-            if (Combat.Defender.State.HullCurrent <= (Combat.DiceRollAttack.Successes - Combat.Defender.GetNumberOfDefenceDice(Combat.Attacker))) return 0;
+            if (Combat.DiceRollAttack.Successes - Combat.Defender.GetNumberOfDefenceDice(Combat.Attacker) == Combat.Defender.State.HullCurrent - 1) return 100; // The extra success would ensure a kill
 
-            return 100;
+            return 0;
         }
 
         private void PayCost(Action<bool> callback)
         {
             HostUpgrade.State.SpendCharge();
-            Combat.DiceRollAttack.RemoveType(DieSide.Success);
+            Combat.DiceRollAttack.RemoveType(DieSide.Crit);
 
             callback(true);
         }
