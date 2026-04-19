@@ -14,8 +14,8 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "T-SJ1A Targeting Computer",
                 UpgradeType.Tech,
-                cost: 1,
-                charges: 1, // TODO: Update points
+                cost: 4,
+                charges: 1,
                 abilityType: typeof(TSJ1ATargetingComputerAbility),
                 restriction: new FactionRestriction(Faction.FirstOrder),
                 legalityInfo: new List<Legality>() { Legality.XWA }
