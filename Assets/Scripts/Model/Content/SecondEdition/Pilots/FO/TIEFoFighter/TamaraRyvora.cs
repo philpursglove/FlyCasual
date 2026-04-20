@@ -67,6 +67,8 @@ namespace Abilities.SecondEdition
 
         public bool IsAvailable()
         {
+            if (Combat.AttackStep != CombatStep.Attack) return false;
+
             foreach (RedTargetLockToken token in Combat.Attacker.Tokens.GetTokens<RedTargetLockToken>('*'))
             {
                 if (token.OtherTargetLockTokenOwner == HostShip) return true;
