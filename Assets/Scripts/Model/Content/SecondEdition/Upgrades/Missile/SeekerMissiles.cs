@@ -18,15 +18,17 @@ namespace UpgradesList.SecondEdition
                     minRange: 2,
                     maxRange: 3,
                     charges: 4,
+                    chargesCost: 1,
+                    arc: Arcs.ArcType.Front,
                     requiresToken: typeof(BlueTargetLockToken)
                 ),
                 abilityType: typeof(Abilities.SecondEdition.SeekerMissilesAbility),
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+
             IsHidden = true;
 
-            //TODO Fix imageurl
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/theta3-sl.png";
+            NameCanonical = "seekermissiles-legendsandrelics";
         }
     }
 
@@ -47,7 +49,6 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-
             AddDiceModification(name: "Seeker Missiles",
                 isAvailable: IsAvailable,
                 aiPriority: GetAIPriority,
