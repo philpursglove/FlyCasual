@@ -53,7 +53,8 @@ namespace Abilities.SecondEdition
         public void CheckAbility(GenericShip ship, GenericToken token)
         {
             int rangeToShip = HostShip.GetRangeToShip(ship);
-            if (HostUpgrade.State.Charges > 0 && token.TokenColor == TokenColors.Green && rangeToShip is > 0 and < 2)
+
+            if (Tools.IsAnotherTeam(HostShip, ship) && HostUpgrade.State.Charges > 0 && token.TokenColor == TokenColors.Green && rangeToShip is > 0 and < 2)
             {
                 savedToken = token;
                 RegisterAbilityTrigger(TriggerTypes.OnTokenIsRemoved, AskGainDuplicateToken);
