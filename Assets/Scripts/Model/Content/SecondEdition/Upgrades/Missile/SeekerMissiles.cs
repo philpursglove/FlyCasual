@@ -1,4 +1,6 @@
 ﻿using Content;
+using Ship;
+using System;
 using System.Collections.Generic;
 using Tokens;
 using Upgrade;
@@ -47,28 +49,39 @@ namespace Abilities.SecondEdition
 {
     public class SeekerMissilesAbility : GenericAbility
     {
+        int currentUseCount = 0;
+
         public override void ActivateAbility()
         {
+            HostShip.OnAttackFinishAsAttacker += ResetCurrentUseCount;
+
             AddDiceModification(name: "Seeker Missiles",
                 isAvailable: IsAvailable,
                 aiPriority: GetAIPriority,
                 modificationType: DiceModificationType.Change,
                 sidesCanBeSelected: new List<DieSide>() { DieSide.Focus },
                 sideCanBeChangedTo: DieSide.Success,
-                payAbilityPostCost: PayAbilityCost,
-                count: HostUpgrade.State.Charges >= 2 ? 2 : HostUpgrade.State.Charges);
+                payAbilityCost: PayAbilityCost,
+                count: 1,
+                canBeUsedFewTimes: true
+            );
         }
 
         public override void DeactivateAbility()
         {
+            HostShip.OnAttackFinishAsAttacker -= ResetCurrentUseCount;
+
             RemoveDiceModification();
         }
 
         private bool IsAvailable()
         {
-            return Combat.DiceRollAttack.Focuses > 0 &&
-                   Combat.ChosenWeapon == HostUpgrade &&
-                   Combat.AttackStep == CombatStep.Attack;
+            return currentUseCount < 2 &&
+                Combat.Attacker == HostShip &&
+                Combat.AttackStep == CombatStep.Attack &&
+                Combat.ChosenWeapon == HostUpgrade &&
+                Combat.DiceRollAttack.Focuses > 0 &&
+                HostUpgrade.State.Charges > 0;
         }
 
         private int GetAIPriority()
@@ -76,12 +89,16 @@ namespace Abilities.SecondEdition
             return 80;
         }
 
-        private void PayAbilityCost()
+        private void PayAbilityCost(Action<bool> callback)
         {
-            for (int i = 0; i < DiceRoll.CurrentDiceRoll.DiceWereSelectedForRerollCount; i++)
-            {
-                HostUpgrade.State.SpendCharge();
-            }
+            currentUseCount++;
+            HostUpgrade.State.SpendCharge();
+            callback(true);
+        }
+
+        private void ResetCurrentUseCount(GenericShip ship)
+        {
+            currentUseCount = 0;
         }
     }
 }
