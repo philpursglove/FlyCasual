@@ -26,8 +26,7 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            // TODO: Fix ImageUrl
-            ImageUrl = "https://raw.githubusercontent.com/sampson-matt/FlyCasualLegacyCustomCards/refs/heads/main/BattleOverEndor/PrecisionTunedCannons.jpg";
+            NameCanonical = "precisiontunedcannons-legendsandrelics";
         } 
     }
 
@@ -35,7 +34,7 @@ namespace UpgradesList.SecondEdition
     {
         public PrecisionTunedCannonsXWA() : base()
         {
-            UpgradeInfo.Cost = 1; // TODO: Update cost
+            UpgradeInfo.Cost = 3;
             UpgradeInfo.LegalityInfo = new List<Legality>() { Legality.XWA };
             IsHidden = false;
         }

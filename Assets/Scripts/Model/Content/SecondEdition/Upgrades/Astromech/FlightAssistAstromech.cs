@@ -20,12 +20,13 @@ namespace UpgradesList.SecondEdition
                 "Flight-Assist Astromech",
                 UpgradeType.Astromech,
                 charges: 2,
-                cost: 1, // TODO: Update Cost
+                cost: 3,
                 restriction: new BaseSizeRestriction(BaseSize.Small),
                 abilityType: typeof(FlightAssistAstromechAbility),
                 legalityInfo: new List<Legality> { Legality.XWA }
-                //TODO Add ImageUrl
             );
+
+            NameCanonical = "flightassistastromech-legendsandrelics";
         }
     }
 }

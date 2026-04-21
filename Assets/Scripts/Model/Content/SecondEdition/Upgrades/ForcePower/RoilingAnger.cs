@@ -16,12 +16,12 @@ namespace UpgradesList.SecondEdition
             (
                 "Roiling Anger",
                 UpgradeType.ForcePower,
-                cost: 0,
+                cost: 2,
                 abilityType: typeof(Abilities.SecondEdition.RoilingAngerAbility),
                 legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
-            //TODO: Fix ImageUrl
 
+            NameCanonical = "roilinganger-legendsandrelics";
         }
     }
 
@@ -29,7 +29,7 @@ namespace UpgradesList.SecondEdition
     {
         public RoilingAngerXwa() : base()
         {
-            UpgradeInfo.Cost = 1; //TODO fix cost
+            UpgradeInfo.Cost = 2;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             UpgradeInfo.Restrictions.AddRestriction(new TagRestriction(Tags.DarkSide));
             IsHidden = false;
