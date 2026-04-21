@@ -35,6 +35,7 @@ namespace Ship.SecondEdition.TIEInterceptor
                 },
                 tags: new List<Tags>
                 {
+                    Tags.DarkSide,
                     Tags.Tie
                 },
                 legality: new List<Legality> { Legality.XWA }
