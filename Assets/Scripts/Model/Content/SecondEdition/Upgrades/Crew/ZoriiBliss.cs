@@ -57,7 +57,7 @@ namespace Abilities.SecondEdition
 
             int rangeToShip = HostShip.GetRangeToShip(ship);
 
-            if (Tools.IsAnotherTeam(HostShip, ship) && ship.IsJammed && HostUpgrade.State.Charges > 0 && token.TokenColor == TokenColors.Green && rangeToShip is > 0 and < 2)
+            if (Tools.IsAnotherTeam(HostShip, ship) && ship.IsJammed && HostUpgrade.State.Charges > 0 && token.TokenColor == TokenColors.Green && rangeToShip is >= 1 and <= 2)
             {
                 savedToken = token;
                 RegisterAbilityTrigger(TriggerTypes.OnTokenIsRemoved, AskGainDuplicateToken);
