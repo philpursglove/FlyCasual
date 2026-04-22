@@ -55,16 +55,23 @@ namespace Abilities.SecondEdition
         public override void ActivateAbility()
         {
             Phases.Events.OnCombatPhaseStart_Triggers += RegisterAbility;
+            Phases.Events.OnCombatPhaseEnd_Triggers += DeRegisterAbility;
         }
 
         public override void DeactivateAbility()
         {
             Phases.Events.OnCombatPhaseStart_Triggers -= RegisterAbility;
+            Phases.Events.OnCombatPhaseEnd_Triggers -= DeRegisterAbility;
         }
 
         private void RegisterAbility()
         {
             RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, CheckChargeState);
+        }
+
+        private void DeRegisterAbility()
+        {
+            RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseEnd, ResetInitiative);
         }
 
         private void CheckChargeState(object sender, EventArgs e)
@@ -88,6 +95,14 @@ namespace Abilities.SecondEdition
         private bool HasShipInBullseye()
         {
             return Roster.AllShips.Values.Any(s => HostShip.SectorsInfo.IsShipInSector(s, Arcs.ArcType.Bullseye));
+        }
+
+        private void ResetInitiative(object sender, EventArgs e)
+        {
+            Messages.ShowInfoToHuman($"{HostShip.PilotInfo.PilotName} initiative reset to {HostShip.PilotInfo.Initiative}.");
+            HostShip.State.CombatActivationAtInitiative = HostShip.PilotInfo.Initiative;
+
+            Triggers.FinishTrigger();
         }
     }
 }
