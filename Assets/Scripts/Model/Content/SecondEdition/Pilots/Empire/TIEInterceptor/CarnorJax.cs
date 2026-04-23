@@ -18,7 +18,7 @@ namespace Ship.SecondEdition.TIEInterceptor
             PilotInfo = new PilotCardInfo25
             (
                 "Carnor Jax",
-                "Thyrsian Sun Guard",
+                "Royal Guard",
                 Faction.Imperial,
                 5,
                 12,

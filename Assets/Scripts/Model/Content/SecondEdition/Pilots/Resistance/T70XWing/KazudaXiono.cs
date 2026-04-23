@@ -44,7 +44,7 @@ namespace Abilities.SecondEdition
     public class KazudaXionoLARAbility : GenericAbility
     {
         // While you defend or perform an attack, if the enemy ship has more damage cards than you have,
-        // you may change a focus result into an evade or hit result.
+        // you may change a focus result to an evade or hit result.
 
         public override void ActivateAbility()
         {
