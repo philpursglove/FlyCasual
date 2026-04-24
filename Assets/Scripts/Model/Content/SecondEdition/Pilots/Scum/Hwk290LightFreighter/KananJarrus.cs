@@ -87,7 +87,7 @@ namespace Abilities.SecondEdition
         {
             bool hasForceTokens = HostShip.State.Force > 0;
 
-            if (hasForceTokens && (IsDefenderMe() || IsDefenderInMyMobileArc()))
+            if (hasForceTokens && (IsDefenderMe() || IsDefenderInMyMobileArc()) && Tools.IsAnotherTeam(HostShip, Combat.Attacker))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackStart, AskDecreaseAttack);
             }
