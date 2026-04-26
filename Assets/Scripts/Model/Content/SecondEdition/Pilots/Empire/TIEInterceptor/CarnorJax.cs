@@ -40,6 +40,8 @@ namespace Ship.SecondEdition.TIEInterceptor
                 },
                 legality: new List<Legality> { Legality.XWA }
             );
+
+            PilotNameCanonical = "carnorjax-legendsandrelics";
         }
     }
 }

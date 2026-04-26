@@ -25,7 +25,7 @@ namespace UpgradesList.SecondEdition
                 legalityInfo: new List<Legality>() { Legality.XWA }
             );
 
-            NameCanonical = "grraviticwell-legendsandrelics";
+            NameCanonical = "graviticwell-legendsandrelics";
         }
     }
 }
