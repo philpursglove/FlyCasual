@@ -76,7 +76,7 @@ namespace Abilities.SecondEdition
 
         public void AskUseAbility(object sender, EventArgs e)
         {
-            if (Board.GetShipsAtRange(HostShip, new Vector2(0, 2), Team.Type.Friendly).Count > 0)
+            if (Board.GetShipsAtRange(HostShip, new Vector2(0, 3), Team.Type.Friendly).Count > 0)
             {
                 SelectTargetForAbility
                 (
