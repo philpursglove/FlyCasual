@@ -13,12 +13,12 @@ public class Global : MonoBehaviour
 
     private static bool isAlreadyInitialized;
 
-    public static string CurrentVersion = "v2.5.20251209.06";
-    public static int CurrentVersionInt = 102507006;  // literal(10) XwingVersion(25) MajorUpdate#(increments) MinorUpdate#(increments)
+    public static string CurrentVersion = "v2.5.20250426.01";
+    public static int CurrentVersionInt = 102508001;  // literal(10) XwingVersion(25) MajorUpdate#(increments) MinorUpdate#(increments)
     public static int LatestVersionInt = 0;
 
     // Used for json exports, update when vendor version changes
-    public static string CurrentXWAVersion = "50P-1.1";
+    public static string CurrentXWAVersion = "50P2.0";
     public static string CurrentAMGVersion = "2.8.0";
 
     public static SquadBuilder SquadBuilder { get; set; }
