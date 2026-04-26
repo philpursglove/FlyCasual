@@ -47,7 +47,7 @@ namespace UpgradesList.SecondEdition
     {
         public GrandMoffTarkinXWA() : base()
         {
-            UpgradeInfo.Cost = 3;
+            UpgradeInfo.Cost = 5;
             UpgradeInfo.LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }

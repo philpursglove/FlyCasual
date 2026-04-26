@@ -48,8 +48,8 @@ namespace Ship.SecondEdition.T70XWing
     {
         public PoeDameronXWA() : base()
         {
-            (PilotInfo as PilotCardInfo25).Cost = 18;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 24;
+            (PilotInfo as PilotCardInfo25).Cost = 17;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 20;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>()
             {
                 UpgradeType.Talent,

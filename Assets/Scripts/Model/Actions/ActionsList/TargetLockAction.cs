@@ -1,16 +1,13 @@
 ﻿using Actions;
-using ActionsList;
 using BoardTools;
 using Editions;
 using GameCommands;
 using GameModes;
 using Obstacles;
 using Players;
-using RulesList;
 using Ship;
 using SubPhases;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
@@ -175,9 +172,9 @@ namespace ActionsList
             // We have at least 2 Force and we haven't already decided to possibly perform a target lock action.
             // Jedi with 2 or more Force should target lock more often than they focus.
             if (Selection.ThisShip.State.Force > 1 && result == 0 && HasValidLockTargetsAndNoLockOnShipInRange(Selection.ThisShip))
-            {                
+            {
                 // We don't already have a target that is in range and locked, and we have targets available.
-                result += 55;                
+                result += 55;
             }
 
             return result;
@@ -249,7 +246,7 @@ namespace SubPhases
 
             PrepareByParameters(
                 TrySelectTargetLock,
-                FilterTargetLockTargets,
+                FilterShipTargets ?? FilterTargetLockTargets,
                 GetTargetLockAiPriority,
                 Selection.ThisShip.Owner.PlayerNo,
                 true,
@@ -281,7 +278,6 @@ namespace SubPhases
 
         private bool FilterTargetLockTargets(ITargetLockable target)
         {
-            // Don't include targets that are owned by the target locking player or ships that can't get target locks
             return Rules.TargetLocks.TargetLockIsAllowed(Selection.ThisShip, target);
         }
 

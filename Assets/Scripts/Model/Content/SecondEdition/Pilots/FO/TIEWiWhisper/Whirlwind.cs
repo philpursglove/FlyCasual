@@ -46,7 +46,7 @@ namespace Ship.SecondEdition.TIEWiWhisperModifiedInterceptor
         public WhirlwindXWA() : base()
         {
             (PilotInfo as PilotCardInfo25).Cost = 11;
-            (PilotInfo as PilotCardInfo25).LoadoutValue = 10;
+            (PilotInfo as PilotCardInfo25).LoadoutValue = 13;
             (PilotInfo as PilotCardInfo25).ExtraUpgrades = new List<UpgradeType>
             {
                 UpgradeType.Talent,
