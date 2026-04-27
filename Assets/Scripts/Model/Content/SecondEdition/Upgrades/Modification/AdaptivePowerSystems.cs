@@ -18,7 +18,6 @@ namespace UpgradesList.SecondEdition
                 "Adaptive Power Systems",
                 UpgradeType.Modification,
                 charges: 2,
-                restriction: new TagRestriction(Tags.Mandalorian),
                 abilityType: typeof(Abilities.SecondEdition.AdaptivePowerSystemsAbility),
                 legalityInfo: new() { Legality.XWA }
             );
