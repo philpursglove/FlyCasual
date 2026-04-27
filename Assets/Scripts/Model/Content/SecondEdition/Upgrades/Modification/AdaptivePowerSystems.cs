@@ -11,12 +11,12 @@ namespace UpgradesList.SecondEdition
             (
                 "Adaptive Power Systems",
                 UpgradeType.Modification,
-                cost: 3,
                 charges: 2,
                 restriction: new TagRestriction(Tags.Mandalorian),
                 abilityType: typeof(Abilities.SecondEdition.AdaptivePowerSystemsAbility),
                 legalityInfo: new() { Legality.StandardLegal, Legality.ExtendedLegal }
             );
+            IsHidden = true;
         }
     }
 }
