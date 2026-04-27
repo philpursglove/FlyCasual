@@ -37,7 +37,6 @@ namespace UpgradesList.SecondEdition
 namespace Abilities.SecondEdition
 {
     // During the System Phase, you may spend 1 charge and gain 1 disarm token to recover 1 shield.
-
     // Before you would gain 1 non-lock token, if you are not stressed, you may spend 1 charge to gain 1 stress token instead.
 
     public class DeuteriumPowerCellsAbility : GenericAbility
@@ -64,8 +63,8 @@ namespace Abilities.SecondEdition
         private void CheckTokenProtection(GenericShip ship, GenericToken token)
         {
             if (!HostShip.IsStressed && HostUpgrade.State.Charges > 0
-                && !(token is GenericTargetLockToken)
-                && !(token is StressToken)
+                && token is not GenericTargetLockToken
+                && token is not StressToken
             )
             {
                 RegisterAbilityTrigger(TriggerTypes.OnBeforeTokenIsAssigned, AskToReplaceToken);
@@ -80,14 +79,13 @@ namespace Abilities.SecondEdition
                 DoReplaceToken,
                 descriptionLong: "Do you want to spend 1 charge to gain 1 stress token instead of " + HostShip.Tokens.TokenToAssign.Name + "?",
                 imageHolder: HostUpgrade,
-                requiredPlayer: HostShip.Owner.PlayerNo
+                requiredPlayer: HostShip.Owner.PlayerNo,
+                callback: Triggers.FinishTrigger
             );
         }
 
         private void DoReplaceToken(object sender, EventArgs e)
         {
-            DecisionSubPhase.ConfirmDecisionNoCallback();
-
             HostUpgrade.State.SpendCharge();
 
             Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": Stress token is assigned instead of planned token");
@@ -95,7 +93,7 @@ namespace Abilities.SecondEdition
             HostShip.Tokens.AssignToken(typeof(Tokens.StressToken), delegate
             {
                 HostShip.Tokens.TokenToAssign = null;
-                Triggers.FinishTrigger();
+                DecisionSubPhase.ConfirmDecision();
             });
         }
 
@@ -114,22 +112,22 @@ namespace Abilities.SecondEdition
                 NeverUseByDefault,
                 DoRegen,
                 descriptionLong: "Do you want to spend 1 charge and gain 1 disarm token to recover 1 shield?",
-                imageHolder: HostUpgrade
+                imageHolder: HostUpgrade,
+                callback: Triggers.FinishTrigger
             );
         }
 
         private void DoRegen(object sender, EventArgs e)
         {
-            DecisionSubPhase.ConfirmDecisionNoCallback();
             HostUpgrade.State.SpendCharge();
 
             HostShip.Tokens.AssignToken(
-                typeof(Tokens.WeaponsDisabledToken),
+                typeof(WeaponsDisabledToken),
                 delegate
                 {
                     HostShip.TryRegenShields();
                     Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": " + HostShip.PilotInfo.PilotName + " recovered 1 shield");
-                    Triggers.FinishTrigger();
+                    DecisionSubPhase.ConfirmDecision();
                 }
             );
         }
