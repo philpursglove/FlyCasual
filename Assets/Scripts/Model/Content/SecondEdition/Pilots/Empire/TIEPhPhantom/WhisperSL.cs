@@ -38,8 +38,6 @@ namespace Ship.SecondEdition.TIEPhPhantom
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/whisper-ssl.png";
-
             PilotNameCanonical = "whisper-ssl";
 
             MustHaveUpgrades.Add(typeof(WithoutATrace));
@@ -55,8 +53,6 @@ namespace Ship.SecondEdition.TIEPhPhantom
             PilotCardInfo25 pilotInfo = (PilotCardInfo25)PilotInfo;
             pilotInfo.LegalityInfo = new List<Legality> { Legality.XWA };
             pilotInfo.Cost = 15;
-
-            ImageUrl = "https://infinitearenas.com/xw2xwa/images/quickbuilds/whisper-ssl.png";
         }
     }
 }
@@ -104,7 +100,7 @@ namespace Abilities.SecondEdition
                 delegate
                 {
                     HostShip.SpendCharge();
-                    CleanUp();
+                    Triggers.FinishTrigger();
                 }
             );
         }
