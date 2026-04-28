@@ -4,7 +4,6 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using Upgrade;
-using UpgradesList.SecondEdition;
 
 namespace Ship.SecondEdition.TIEPhPhantom
 {
@@ -38,8 +37,6 @@ namespace Ship.SecondEdition.TIEPhPhantom
                 legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
 
-            ImageUrl = "https://infinitearenas.com/xw2/images/quickbuilds/echo-ssl.png";
-
             PilotNameCanonical = "echo-ssl";
 
             MustHaveUpgrades.Add(typeof(SilentHunter));
@@ -54,8 +51,6 @@ namespace Ship.SecondEdition.TIEPhPhantom
         {
             (PilotInfo as PilotCardInfo25).Cost = 14;
             (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
-
-            ImageUrl = "https://infinitearenas.com/xw2xwa/images/quickbuilds/echo-ssl.png";
         }
     }
 }
@@ -89,8 +84,10 @@ namespace Abilities.SecondEdition
                 action.IsInActionBar &&
                 HostShip.ActionBar.HasAction(action.GetType()))
             {
-                savedAction = action;
+                // Generate a new copy of the action so that you don't modify the original action on the hostship
+                savedAction = (GenericAction)Activator.CreateInstance(action.GetType());
                 savedAction.Color = Actions.ActionColor.White;
+
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, AskToUseAbility);
             }
         }
@@ -101,28 +98,27 @@ namespace Abilities.SecondEdition
 
             HostShip.OnActionIsPerformed += SpendCharge;
 
+            GenericShip originalShip = Selection.ThisShip;
             Selection.ThisShip = HostShip;
 
             HostShip.AskPerformFreeAction(
                 savedAction,
-                CleanUp,
+                delegate
+                {
+                    HostShip.OnActionIsPerformed -= SpendCharge;
+
+                    Selection.ThisShip = originalShip;
+
+                    Triggers.FinishTrigger();
+                },
                 HostShip.PilotInfo.PilotName,
-                descriptionLong: $"You may spend 1 charge to gain the same action that {savedAction.HostShip.PilotInfo.PilotName} just performed"
+                descriptionLong: $"You may spend 1 charge to perform a {savedAction.Name} action."
             );
         }
 
         private void SpendCharge(GenericAction action)
         {
             HostShip.SpendCharge();
-        }
-
-        private void CleanUp()
-        {
-            HostShip.OnActionIsPerformed -= SpendCharge;
-
-            Selection.ThisShip = savedAction.HostShip;
-
-            Triggers.FinishTrigger();
         }
     }
 }
