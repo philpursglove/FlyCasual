@@ -33,7 +33,8 @@ namespace Ship.SecondEdition.FangFighter
                 seImageNumber: 155,
                 skinName: "Zealous Recruit",
                 legality: new List<Legality> { Legality.XWA },
-                isStandardLayout: true
+                isStandardLayout: true,
+                abilityText: "While you defend or perform an attack, if the attack range is 1, you may roll 1 additional die."
             );
             MustHaveUpgrades.Add(typeof(Fearless));
             MustHaveUpgrades.Add(typeof(BeskarReinforcedPlating));
