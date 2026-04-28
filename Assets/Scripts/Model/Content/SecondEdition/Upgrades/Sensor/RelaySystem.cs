@@ -1,9 +1,9 @@
 using ActionsList;
+using BoardTools;
 using Obstacles;
 using Ship;
 using SubPhases;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using Upgrade;
@@ -33,8 +33,6 @@ namespace Abilities.SecondEdition
     public class RelaySystemAbility : GenericAbility
     {
         GenericShip friendlyShip;
-        List<GenericShip> potentialRecipients;
-        BlueTargetLockToken targetLock;
 
         public override void ActivateAbility()
         {
@@ -52,7 +50,9 @@ namespace Abilities.SecondEdition
 
         private void RegisterTargetLockActionCheck(GenericAction action)
         {
-            if (IsValidFriendlyLockAction(action))
+            if ((action is TargetLockAction) &&
+                Tools.IsFriendly(HostShip, action.HostShip) &&
+                (HostShip.GetRangeToShip(action.HostShip) < 3))
             {
                 friendlyShip = action.HostShip;
 
@@ -60,86 +60,57 @@ namespace Abilities.SecondEdition
             }
         }
 
-        private bool IsValidFriendlyLockAction(GenericAction action)
-        {
-            return (action is TargetLockAction) &&
-                   Tools.IsFriendly(HostShip, action.HostShip) &&
-                   (action.HostShip.GetRangeToShip(HostShip) < 3);
-        }
-
         private void AskAcquireTargetLock(object sender, EventArgs e)
         {
             // Last lock should be the latest
             ITargetLockable lockedObject = friendlyShip.Tokens.GetTokens<BlueTargetLockToken>('*').Last().OtherTargetLockTokenOwner;
-
 
             string objectName = null;
 
             if (lockedObject is GenericShip)
             {
                 objectName = (lockedObject as GenericShip).PilotInfo.PilotName;
+
                 if (HostShip.GetRangeToShip((lockedObject as GenericShip)) > HostShip.TargetLockMaxRange)
                 {
-                    // Unable to acquire lock due to distance from lockedObject
                     Triggers.FinishTrigger();
                     return;
                 }
             }
             else if (lockedObject is GenericObstacle)
             {
-                // Need to figure out how to check range here
                 objectName = (lockedObject as GenericObstacle).Name;
+
+                if (new ShipObstacleDistance(HostShip, (lockedObject as GenericObstacle)).Range > HostShip.TargetLockMaxRange)
+                {
+                    Triggers.FinishTrigger();
+                    return;
+                }
             }
 
             AskToUseAbility(
                 HostShip.PilotInfo.PilotName,
-                GetAIPriorityToAcquireLock, // only use when doesn't already have a lock?
+                NeedsTargetlock,
                 delegate
                 {
                     ActionsHolder.AcquireTargetLock(HostShip, lockedObject, DecisionSubPhase.ConfirmDecision, DecisionSubPhase.ConfirmDecision);
                 },
-                descriptionLong: $"Do you want to acquire a Target Lock{(!String.IsNullOrWhiteSpace(objectName) ? $" on {objectName}" : "")}?",
-                imageHolder: HostShip
+                descriptionLong: $"Do you want to acquire a lock on {objectName}?",
+                imageHolder: HostShip,
+                callback: Triggers.FinishTrigger
             );
         }
 
-        private bool GetAIPriorityToAcquireLock()
+        private bool NeedsTargetlock()
         {
-            // Don't use if already have a target lock
             return !HostShip.Tokens.HasToken<BlueTargetLockToken>('*');
         }
 
         private void CheckPassOnTargetLockAbility()
         {
-            // Check for host ship having target lock on defender
-            targetLock = null;
+            if (!HostShip.GetTargetLockLetterPairsOn(Combat.Defender).Any()) return;
 
-            foreach (BlueTargetLockToken tl in HostShip.Tokens.GetTokens<BlueTargetLockToken>('*'))
-            {
-                if (tl.OtherTargetLockTokenOwner == Combat.Defender)
-                {
-                    targetLock = tl;
-                    break;
-                }
-            }
-
-            if (targetLock is null) return;
-
-
-            // Check for other friendly ship at range 0-1 who are in range of defender
-            potentialRecipients = new();
-
-            foreach (GenericShip friendlyShip in HostShip.Owner.Ships.Values)
-            {
-                if (friendlyShip != HostShip &&
-                    HostShip.GetRangeToShip(friendlyShip) < 2 &&
-                    friendlyShip.GetRangeToShip(Combat.Defender) <= friendlyShip.TargetLockMaxRange)
-                {
-                    potentialRecipients.Add(friendlyShip);
-                }
-            }
-
-            if (potentialRecipients.Any())
+            if (HostShip.Owner.Ships.Values.Any(s => FilterAbilityTargets(s)))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackHit, PassTargetLock);
             }
@@ -153,7 +124,7 @@ namespace Abilities.SecondEdition
                 GetAiPriorityForTargetLockTransfer,
                 HostShip.Owner.PlayerNo,
                 HostShip.PilotInfo.PilotName,
-                description: "You may spend a lock to allow a friendly ship at range 0-1 to acquire a target lock on the defender.",
+                description: "You may spend a lock to allow a friendly ship at range 0-1 to acquire a lock on the defender.",
                 showSkipButton: true,
                 callback: Triggers.FinishTrigger
             );
@@ -162,7 +133,7 @@ namespace Abilities.SecondEdition
         private void TransferTargetLock()
         {
             HostShip.Tokens.SpendToken(
-                targetLock,
+                HostShip.Tokens.GetTargetLockToken(HostShip.GetTargetLockLetterPairsOn(Combat.Defender).First()),
                 delegate
                 {
                     ActionsHolder.AcquireTargetLock(TargetShip, Combat.Defender, DecisionSubPhase.ConfirmDecision, DecisionSubPhase.ConfirmDecision);
@@ -172,10 +143,9 @@ namespace Abilities.SecondEdition
 
         private bool FilterAbilityTargets(GenericShip ship)
         {
-            if (potentialRecipients.Contains(ship))
-                return true;
-
-            return false;
+            return Tools.IsAnotherFriendly(HostShip, ship) &&
+                    HostShip.GetRangeToShip(ship) < 2 &&
+                    ship.GetRangeToShip(Combat.Defender) <= ship.TargetLockMaxRange;
         }
 
         private int GetAiPriorityForTargetLockTransfer(GenericShip ship)
