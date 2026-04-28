@@ -1,3 +1,4 @@
+using Abilities.SecondEdition;
 using RulesList;
 using Ship;
 using SubPhases;
@@ -15,7 +16,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Without a Trace",
                 UpgradeType.Talent,
-                abilityType: typeof(Abilities.SecondEdition.WithoutATraceAbility)
+                abilityType: typeof(WithoutATraceAbility)
             );
 
             IsHidden = true;
@@ -27,6 +28,9 @@ namespace Abilities.SecondEdition
 {
     public class WithoutATraceAbility : GenericAbility
     {
+        // After you gain a cloak token, you may remove 1 red token.
+        // While you are cloaked, enemy ships cannot acquire locks on you.
+
         public override void ActivateAbility()
         {
             HostShip.OnTokenIsAssigned += RegisterAbility;
@@ -44,7 +48,7 @@ namespace Abilities.SecondEdition
 
         private void ForbidLockOnMe(ref bool isAllowed, GenericShip lockSource, ITargetLockable lockTarget)
         {
-            if (lockTarget is GenericShip 
+            if (lockTarget is GenericShip
                 && (lockTarget as GenericShip) == HostShip
                 && HostShip.IsCloaked)
             {
@@ -56,29 +60,19 @@ namespace Abilities.SecondEdition
         {
             if (token is CloakToken && HostShip.Tokens.HasTokenByColor(TokenColors.Red))
             {
-                RegisterAbilityTrigger(TriggerTypes.OnTokenIsAssigned, AskToUseAbility);
+                RegisterAbilityTrigger(TriggerTypes.OnTokenIsAssigned, UseAbility);
             }
-        }
-
-        private void AskToUseAbility(object sender, EventArgs e)
-        {
-            AskToUseAbility(
-                HostShip.PilotInfo.PilotName,
-                AlwaysUseByDefault,
-                UseAbility,
-                descriptionLong: "After cloaking you may remove a red token",
-                imageHolder: HostShip
-            );
         }
 
         private void UseAbility(object sender, EventArgs e)
         {
             WithoutATraceRemoveRedTokenAbilityDecisionSubPhase subphase = Phases.StartTemporarySubPhaseNew<WithoutATraceRemoveRedTokenAbilityDecisionSubPhase>(
-                "Without A Trace: You may remove 1 red token",
+                $"{HostUpgrade.UpgradeInfo.Name}: After cloaking you may remove 1 red token",
                 Triggers.FinishTrigger
             );
             subphase.ImageSource = HostShip;
             subphase.AbilityHostShip = HostShip;
+            subphase.ShowSkipButton = false;
             subphase.Start();
         }
     }
