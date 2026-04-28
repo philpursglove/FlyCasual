@@ -31,6 +31,10 @@ namespace Abilities.SecondEdition
 {
     public class AdaptivePowerSystemsAbility : GenericAbility
     {
+        //After you fully execute a red maneuver or perform a red action, you may spend 1 charge. If you do, you may gain 1 deplete token to remove 1 stress token.
+        // 
+        // Before you engage, you may spend 1 charge. If you do, you may gain 1 strain token to remove 1 deplete token.
+
         public override void ActivateAbility()
         {
             HostShip.OnActionIsPerformed += CheckAbilityAction;
