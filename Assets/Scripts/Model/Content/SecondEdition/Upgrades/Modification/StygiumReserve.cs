@@ -64,7 +64,7 @@ namespace Abilities.SecondEdition
                 delegate
                 {
                     HostUpgrade.State.SpendCharge();
-                    CleanUp();
+                    Triggers.FinishTrigger();
                 }
             );
         }
