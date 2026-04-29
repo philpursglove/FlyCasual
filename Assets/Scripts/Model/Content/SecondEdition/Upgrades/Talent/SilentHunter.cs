@@ -2,6 +2,7 @@ using Arcs;
 using BoardTools;
 using Ship;
 using SubPhases;
+using System;
 using System.Linq;
 using Tokens;
 using Upgrade;
@@ -31,28 +32,35 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnDecloak += CheckAbility;
+            HostShip.OnDecloak += RegisterAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnDecloak -= CheckAbility;
+            HostShip.OnDecloak -= RegisterAbility;
         }
 
-        private void CheckAbility()
+        private void RegisterAbility()
         {
             if (HostShip.Owner.AnotherPlayer.Ships.Values.Any(s => FilterAbilityTargets(s)))
             {
-                SelectTargetForAbility(
-                    GrantFreeTargetLock,
-                    FilterAbilityTargets,
-                    GetAiAbilityPriority,
-                    HostShip.Owner.PlayerNo,
-                    HostUpgrade.State.Name,
-                    "You may spend 1 Charge to acquire a lock on an enemy ship in your bullseye",
-                    HostUpgrade
-                );
+                RegisterAbilityTrigger(TriggerTypes.OnDecloak, UseAbility);
+
             }
+        }
+
+        private void UseAbility(object sender, EventArgs e)
+        {
+            SelectTargetForAbility(
+                GrantFreeTargetLock,
+                FilterAbilityTargets,
+                GetAiAbilityPriority,
+                HostShip.Owner.PlayerNo,
+                HostUpgrade.State.Name,
+                "You may spend 1 Charge to acquire a lock on an enemy ship in your bullseye",
+                HostUpgrade,
+                callback: Triggers.FinishTrigger
+            );
         }
 
         private bool FilterAbilityTargets(GenericShip ship)
