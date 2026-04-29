@@ -24,11 +24,11 @@ namespace Ship
 
     public partial class GenericShip
     {
-        public List<PrimaryWeaponClass> PrimaryWeapons = new List<PrimaryWeaponClass>();
+        public List<PrimaryWeaponClass> PrimaryWeapons = new();
 
         public Damage Damage { get; protected set; }
 
-        public DiceRoll AssignedDamageDiceroll = new DiceRoll(DiceKind.Attack, 0, DiceRollCheckType.Virtual);
+        public DiceRoll AssignedDamageDiceroll = new(DiceKind.Attack, 0, DiceRollCheckType.Virtual);
 
         public bool IsCannotAttackSecondTime { get; set; }
         public bool CanAttackBumpedTargetAlways { get; set; }
@@ -415,11 +415,9 @@ namespace Ship
             Triggers.ResolveTriggers(TriggerTypes.OnShieldIsLost, callback);
         }
 
-        public void CallCombatCheckExtraAttack(Action callback)
+        public void CallCombatCheckExtraAttack()
         {
             OnCombatCheckExtraAttack?.Invoke(this);
-
-            Triggers.ResolveTriggers(TriggerTypes.OnCombatCheckExtraAttack, callback);
         }
 
         public void CallCombatActivation(Action callback)
@@ -809,7 +807,7 @@ namespace Ship
 
         public List<ManeuverTemplate> GetAvailableBombDropTemplates(GenericUpgrade upgrade)
         {
-            List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>();
+            List<ManeuverTemplate> availableTemplates = new();
             availableTemplates.AddRange(upgrade.GetDefaultDropTemplates());
 
             OnGetAvailableBombDropTemplatesNoConditions?.Invoke(availableTemplates, upgrade);
@@ -823,7 +821,7 @@ namespace Ship
 
         public List<ManeuverTemplate> GetAvailableDeviceLaunchTemplates(GenericUpgrade upgrade)
         {
-            List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>();
+            List<ManeuverTemplate> availableTemplates = new();
             availableTemplates.AddRange(upgrade.GetDefaultLaunchTemplates());
 
             OnGetAvailableBombLaunchTemplates?.Invoke(availableTemplates, upgrade);
@@ -840,7 +838,7 @@ namespace Ship
 
         public List<ManeuverTemplate> GetAvailableBarrelRollTemplates(GenericAction action)
         {
-            List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>(ShipBase.BarrelRollTemplatesAvailable);
+            List<ManeuverTemplate> availableTemplates = new(ShipBase.BarrelRollTemplatesAvailable);
 
             OnGetAvailableBarrelRollTemplates?.Invoke(availableTemplates, action);
 
@@ -849,7 +847,7 @@ namespace Ship
 
         public List<ManeuverTemplate> GetAvailableDecloakBarrelRollTemplates()
         {
-            List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>(ShipBase.DecloakBarrelRollTemplatesAvailable);
+            List<ManeuverTemplate> availableTemplates = new(ShipBase.DecloakBarrelRollTemplatesAvailable);
 
             OnGetAvailableDecloakTemplates?.Invoke(availableTemplates);
 
@@ -858,7 +856,7 @@ namespace Ship
 
         public List<BoostMove> GetAvailableBoostTemplates(GenericAction action)
         {
-            List<BoostMove> availableMoves = new List<BoostMove>
+            List<BoostMove> availableMoves = new()
             {
                 new BoostMove(ActionsHolder.BoostTemplates.Straight1),
                 new BoostMove(ActionsHolder.BoostTemplates.LeftBank1),
@@ -918,7 +916,7 @@ namespace Ship
 
         public List<IShipWeapon> GetAllWeapons()
         {
-            List<IShipWeapon> allWeapons = new List<IShipWeapon>();
+            List<IShipWeapon> allWeapons = new();
 
             foreach (PrimaryWeaponClass primaryWeapon in PrimaryWeapons)
             {
@@ -1070,8 +1068,7 @@ namespace Ship
 
         public void ShowAttackAnimationAndSound()
         {
-            GenericSpecialWeapon chosenSecondaryWeapon = Combat.ChosenWeapon as GenericSpecialWeapon;
-            if (chosenSecondaryWeapon == null || chosenSecondaryWeapon.HasType(UpgradeType.Cannon) || chosenSecondaryWeapon.HasType(UpgradeType.Illicit))
+            if (Combat.ChosenWeapon is not GenericSpecialWeapon chosenSecondaryWeapon || chosenSecondaryWeapon.HasType(UpgradeType.Cannon) || chosenSecondaryWeapon.HasType(UpgradeType.Illicit))
             { // Primary Weapons, Cannons, and Illicits (HotShotBlaster)
                 Sounds.PlayShots(SoundInfo.ShotsName, SoundInfo.ShotsCount);
                 AnimatePrimaryWeapon();
