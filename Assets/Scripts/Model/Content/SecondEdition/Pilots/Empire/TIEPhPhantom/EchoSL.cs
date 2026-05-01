@@ -4,6 +4,7 @@ using Ship;
 using System;
 using System.Collections.Generic;
 using Upgrade;
+using UpgradesList.SecondEdition;
 
 namespace Ship.SecondEdition.TIEPhPhantom
 {
@@ -94,7 +95,7 @@ namespace Abilities.SecondEdition
 
         private void AskToUseAbility(object sender, EventArgs e)
         {
-            if (HostShip.State.Charges < 1) return; // Linked actions may queue multiple abilities here
+            if (HostShip.State.Charges < 1) return; // Linked actions may queue multiple abilities here, ensure we still have a charge before asking
 
             HostShip.OnActionIsPerformed += SpendCharge;
 
