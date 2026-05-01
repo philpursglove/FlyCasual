@@ -3,6 +3,7 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tokens;
 using Upgrade;
 
@@ -41,8 +42,16 @@ namespace Abilities.SecondEdition
 
     public class DeuteriumPowerCellsAbility : GenericAbility
     {
+        readonly List<GenericToken> ignoreTokens = new();
+
         public override void ActivateAbility()
         {
+            ignoreTokens.Add(new GenericTargetLockToken(HostShip));
+            ignoreTokens.Add(new BlueTargetLockToken(HostShip));
+            ignoreTokens.Add(new RedTargetLockToken(HostShip));
+            ignoreTokens.Add(new StressToken(HostShip));
+            ignoreTokens.Add(new ChargeToken(HostShip));
+
             HostShip.OnSystemsAbilityActivation += CheckRegenerationAbility;
             HostShip.OnCheckSystemsAbilityActivation += CheckAbility;
             HostShip.BeforeTokenIsAssigned += CheckTokenProtection;
@@ -55,16 +64,20 @@ namespace Abilities.SecondEdition
             HostShip.BeforeTokenIsAssigned -= CheckTokenProtection;
         }
 
+        private bool IsRechargeAvailable()
+        {
+            return HostShip.State.ShieldsCurrent < HostShip.State.ShieldsMax && HostUpgrade.State.Charges > 0;
+        }
+
         private void CheckAbility(GenericShip ship, ref bool isAbilityActive)
         {
-            isAbilityActive = ((HostShip.State.ShieldsCurrent < HostShip.State.ShieldsMax) && (HostUpgrade.State.Charges > 0));
+            isAbilityActive = IsRechargeAvailable();
         }
 
         private void CheckTokenProtection(GenericShip ship, GenericToken token)
         {
             if (!HostShip.IsStressed && HostUpgrade.State.Charges > 0
-                && token is not GenericTargetLockToken
-                && token is not StressToken
+                && !ignoreTokens.Any(t => token.GetType() == t.GetType())
             )
             {
                 RegisterAbilityTrigger(TriggerTypes.OnBeforeTokenIsAssigned, AskToReplaceToken);
@@ -73,15 +86,39 @@ namespace Abilities.SecondEdition
 
         private void AskToReplaceToken(object sender, EventArgs e)
         {
-            AskToUseAbility(
-                HostUpgrade.UpgradeInfo.Name,
-                NeverUseByDefault,
-                DoReplaceToken,
-                descriptionLong: "Do you want to spend 1 charge to gain 1 stress token instead of " + HostShip.Tokens.TokenToAssign.Name + "?",
-                imageHolder: HostUpgrade,
-                requiredPlayer: HostShip.Owner.PlayerNo,
-                callback: Triggers.FinishTrigger
+            DeuteriumPowerCellsDecisionSubphase subphase = Phases.StartTemporarySubPhaseNew<DeuteriumPowerCellsDecisionSubphase>(
+                $"{HostUpgrade.UpgradeInfo.Name} Decision SubPhase",
+                delegate
+                {
+                    Phases.FinishSubPhase(typeof(DeuteriumPowerCellsDecisionSubphase));
+                    Triggers.FinishTrigger();
+                }
             );
+
+            subphase.DescriptionShort = $"{HostUpgrade.UpgradeInfo.Name} Decision";
+            subphase.DescriptionLong = $"Do you want to spend 1 charge to gain 1 stress token instead of {HostShip.Tokens.TokenToAssign.Name}?";
+            subphase.ImageSource = HostUpgrade;
+
+            subphase.AddDecision("Yes", DoReplaceToken);
+            subphase.AddDecision("No", delegate { DecisionSubPhase.ConfirmDecision(); });
+            subphase.AddDecision($"Always ignore {HostShip.Tokens.TokenToAssign.Name}", AlwaysIgnoreToken);
+
+            subphase.DefaultDecisionName = "No";
+            subphase.ShowSkipButton = false;
+
+            subphase.Start();
+        }
+
+        private void AlwaysIgnoreToken(object sender, EventArgs e)
+        {
+            GenericToken token = HostShip.Tokens.TokenToAssign switch
+            {
+                JamToken or TractorBeamToken => (GenericToken)Activator.CreateInstance(HostShip.Tokens.TokenToAssign.GetType(), HostShip, HostShip.Owner),
+                _ => (GenericToken)Activator.CreateInstance(HostShip.Tokens.TokenToAssign.GetType(), HostShip),
+            };
+
+            ignoreTokens.Add(token);
+            DecisionSubPhase.ConfirmDecision();
         }
 
         private void DoReplaceToken(object sender, EventArgs e)
@@ -90,16 +127,14 @@ namespace Abilities.SecondEdition
 
             Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": Stress token is assigned instead of planned token");
 
-            HostShip.Tokens.AssignToken(typeof(Tokens.StressToken), delegate
-            {
-                HostShip.Tokens.TokenToAssign = null;
-                DecisionSubPhase.ConfirmDecision();
-            });
+            HostShip.Tokens.TokenToAssign = null;
+
+            HostShip.Tokens.AssignToken(typeof(StressToken), DecisionSubPhase.ConfirmDecision);
         }
 
         private void CheckRegenerationAbility(GenericShip ship)
         {
-            if ((HostShip.State.ShieldsCurrent < HostShip.State.ShieldsMax) && (HostUpgrade.State.Charges > 0))
+            if (IsRechargeAvailable())
             {
                 RegisterAbilityTrigger(TriggerTypes.OnSystemsAbilityActivation, AskToRegen);
             }
@@ -119,17 +154,23 @@ namespace Abilities.SecondEdition
 
         private void DoRegen(object sender, EventArgs e)
         {
-            HostUpgrade.State.SpendCharge();
-
-            HostShip.Tokens.AssignToken(
-                typeof(WeaponsDisabledToken),
-                delegate
-                {
-                    HostShip.TryRegenShields();
-                    Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": " + HostShip.PilotInfo.PilotName + " recovered 1 shield");
-                    DecisionSubPhase.ConfirmDecision();
-                }
-            );
+            if (HostShip.TryRegenShields())
+            {
+                Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": " + HostShip.PilotInfo.PilotName + " recovered 1 shield");
+                HostShip.Tokens.AssignToken(
+                    typeof(WeaponsDisabledToken),
+                    delegate
+                    {
+                        HostUpgrade.State.SpendCharge();
+                        DecisionSubPhase.ConfirmDecision();
+                    });
+            }
+            else
+            {
+                Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": " + HostShip.PilotInfo.PilotName + " failed to recover 1 shield");
+            }
         }
+
+        private class DeuteriumPowerCellsDecisionSubphase : DecisionSubPhase { }
     }
 }
