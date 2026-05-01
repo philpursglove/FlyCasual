@@ -140,7 +140,8 @@ namespace Ship
         public event EventHandlerDirection OnGetBombTemplateDirection;
 
         public event EventHandlerBarrelRollTemplates OnGetAvailableBarrelRollTemplates;
-        public event EventHandlerDecloakTemplates OnGetAvailableDecloakTemplates;
+        public event EventHandlerDecloakTemplates OnGetAvailableDecloakBarrelRollTemplates;
+        public event EventHandlerDecloakTemplates OnGetAvailableDecloakBoostTemplates;
         public event EventHandlerBoostTemplates OnGetAvailableBoostTemplates;
         public event EventHandlerRefString OnUpdateChosenBoostTemplate;
         public event EventHandlerRefManeuverTemplate OnUpdateChosenBarrelRollTemplate;
@@ -860,7 +861,16 @@ namespace Ship
         {
             List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>(ShipBase.DecloakBarrelRollTemplatesAvailable);
 
-            OnGetAvailableDecloakTemplates?.Invoke(availableTemplates);
+            OnGetAvailableDecloakBarrelRollTemplates?.Invoke(availableTemplates);
+
+            return availableTemplates;
+        }
+
+        public List<ManeuverTemplate> GetAvailableDecloakBoostTemplates()
+        {
+            List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>(ShipBase.DecloakBoostTemplatesAvailable);
+
+            OnGetAvailableDecloakBoostTemplates?.Invoke(availableTemplates);
 
             return availableTemplates;
         }
@@ -1079,8 +1089,7 @@ namespace Ship
 
         public void ShowAttackAnimationAndSound()
         {
-            GenericSpecialWeapon chosenSecondaryWeapon = Combat.ChosenWeapon as GenericSpecialWeapon;
-            if (chosenSecondaryWeapon == null || chosenSecondaryWeapon.HasType(UpgradeType.Cannon) || chosenSecondaryWeapon.HasType(UpgradeType.Illicit))
+            if (Combat.ChosenWeapon is not GenericSpecialWeapon chosenSecondaryWeapon || chosenSecondaryWeapon.HasType(UpgradeType.Cannon) || chosenSecondaryWeapon.HasType(UpgradeType.Illicit))
             { // Primary Weapons, Cannons, and Illicits (HotShotBlaster)
                 Sounds.PlayShots(SoundInfo.ShotsName, SoundInfo.ShotsCount);
                 AnimatePrimaryWeapon();
