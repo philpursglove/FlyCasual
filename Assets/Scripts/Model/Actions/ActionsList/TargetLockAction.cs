@@ -26,7 +26,6 @@ public interface ITargetLockable
 
 namespace ActionsList
 {
-
     public class TargetLockAction : GenericAction
     {
         public TargetLockAction()
@@ -45,7 +44,7 @@ namespace ActionsList
 
                 if (Combat.Attacker.Tokens.GetToken(typeof(BlueTargetLockToken), letters.First()).CanBeUsed)
                 {
-                    DiceRerollManager diceRerollManager = new DiceRerollManager()
+                    DiceRerollManager diceRerollManager = new()
                     {
                         CallBack = callBack
                     };
@@ -68,6 +67,7 @@ namespace ActionsList
         public override bool IsDiceModificationAvailable()
         {
             bool result = false;
+
             if (Combat.AttackStep == CombatStep.Attack)
             {
                 if (ActionsHolder.HasTargetLockOn(Combat.Attacker, Combat.Defender))
@@ -75,6 +75,7 @@ namespace ActionsList
                     result = !Combat.DiceRollAttack.IsEmpty;
                 }
             }
+
             return result;
         }
 
@@ -130,13 +131,11 @@ namespace ActionsList
         {
             int result = 0;
 
-            result = 0;
-
             int maxOrdinanceRange = -1;
             int minOrdinanceRange = 99;
             int minShipTargetRange = HostShip.TargetLockMinRange;
-            int curOrdinanceMax = -1;
-            int curOrdinanceMin = -1;
+            int curOrdinanceMax;
+            int curOrdinanceMin;
 
             // Find the combined maximum and minimum range of all of our ordinance that currently has charges.
             foreach (GenericUpgrade currentUpgrade in Selection.ThisShip.UpgradeBar.GetUpgradesOnlyFaceup())
@@ -154,6 +153,7 @@ namespace ActionsList
                         {
                             minOrdinanceRange = curOrdinanceMin;
                         }
+
                         if (curOrdinanceMax > maxOrdinanceRange)
                         {
                             maxOrdinanceRange = curOrdinanceMax;
@@ -161,6 +161,7 @@ namespace ActionsList
                     }
                 }
             }
+
             // If our minimum range is less than 99, we have ordinance that is loaded and have set our min and max ranges.
             // Check all enemy ships to see if they are in range of our ordinance.
             if (minOrdinanceRange < 99 && HasValidLockTargetsAndNoLockOnShipInRange(Selection.ThisShip, minOrdinanceRange, maxOrdinanceRange))
@@ -185,12 +186,12 @@ namespace ActionsList
         /// </summary>
         public static bool HasValidLockTargetsAndNoLockOnShipInRange(GenericShip ship, int minRange = 1, int maxRange = 3)
         {
-            var validTargetLockedAlready = false;
-            var numTargetLockTargets = 0;
+            bool validTargetLockedAlready = false;
+            int numTargetLockTargets = 0;
 
-            foreach (var anotherShip in Roster.GetPlayer(Roster.AnotherPlayer(ship.Owner.PlayerNo)).Ships)
+            foreach (KeyValuePair<string, GenericShip> anotherShip in Roster.GetPlayer(Roster.AnotherPlayer(ship.Owner.PlayerNo)).Ships)
             {
-                ShotInfo shotInfo = new ShotInfo(ship, anotherShip.Value, ship.PrimaryWeapons);
+                ShotInfo shotInfo = new(ship, anotherShip.Value, ship.PrimaryWeapons);
                 if (shotInfo.Range >= minRange && shotInfo.Range <= maxRange && shotInfo.IsShotAvailable)
                 {
                     if (!ActionsHolder.HasTargetLockOn(ship, anotherShip.Value))
@@ -209,12 +210,10 @@ namespace ActionsList
             return (validTargetLockedAlready == false && numTargetLockTargets > 0);
         }
     }
-
 }
 
 namespace SubPhases
 {
-
     public class SelectTargetLockActionSubPhase : AcquireTargetLockSubPhase
     {
         protected override void CancelShipSelection()
@@ -236,13 +235,12 @@ namespace SubPhases
 
     public class AcquireTargetLockSubPhase : SelectTargetLockableSubPhase
     {
-
         public override void Prepare()
         {
             CanMeasureRangeBeforeSelection = (Edition.Current is Editions.SecondEdition);
 
-            if (DescriptionShort == null) DescriptionShort = "Target Lock";
-            if (DescriptionLong == null) DescriptionLong = "Choose a ship to acquire a target lock on it";
+            DescriptionShort ??= "Target Lock";
+            DescriptionLong ??= "Choose a ship to acquire a target lock on it";
 
             PrepareByParameters(
                 TrySelectTargetLock,
@@ -258,8 +256,7 @@ namespace SubPhases
 
         public void PrepareByParameters(Action selectTargetAction, Func<ITargetLockable, bool> filterTargets, Func<GenericShip, int> getAiPriority, PlayerNo subphaseOwnerPlayerNo, bool showSkipButton, string abilityName, string description, IImageHolder imageSource = null)
         {
-            FilterTargetLockableTargets = filterTargets;
-            FilterShipTargets = filterTargets;
+            if (filterTargets is not null) FilterShipTargets = filterTargets;
             GetAiPriority = getAiPriority;
             finishAction = selectTargetAction;
             RequiredPlayer = subphaseOwnerPlayerNo;
@@ -271,6 +268,7 @@ namespace SubPhases
             {
                 UI.HideSkipButton();
             }
+
             DescriptionShort = abilityName;
             DescriptionLong = description;
             ImageSource = imageSource;
@@ -287,7 +285,7 @@ namespace SubPhases
 
             if (ship.Owner.PlayerNo != Selection.ThisShip.Owner.PlayerNo)
             {
-                ShotInfo shotInfo = new ShotInfo(Selection.ThisShip, ship, Selection.ThisShip.PrimaryWeapons);
+                ShotInfo shotInfo = new(Selection.ThisShip, ship, Selection.ThisShip.PrimaryWeapons);
                 if (shotInfo.IsShotAvailable) result += 1000;
                 if (!ship.ShipsBumped.Contains(Selection.ThisShip)) result += 500;
                 if (shotInfo.Range <= 3) result += 250;
@@ -330,7 +328,6 @@ namespace SubPhases
         {
             CallBack();
         }
-
     }
 
     public class SelectTargetLockableSubPhase : SelectShipSubPhase
@@ -343,9 +340,20 @@ namespace SubPhases
             set { TargetLocked = value; }
         }
 
-        public Func<ITargetLockable, bool> FilterTargetLockableTargets { get; set; }
+        private Func<ITargetLockable, bool> filterTargetLockableTargets;
+
+        public Func<ITargetLockable, bool> FilterTargetLockableTargets
+        {
+            get { return filterTargetLockableTargets ?? FilterTargetLockTargets; }
+            set { filterTargetLockableTargets = value; }
+        }
 
         public override List<GameCommandTypes> AllowedGameCommandTypes { get { return new List<GameCommandTypes>() { GameCommandTypes.SelectShip, GameCommandTypes.SelectObstacle, GameCommandTypes.PressSkip, GameCommandTypes.CancelShipSelection }; } }
+
+        private bool FilterTargetLockTargets(ITargetLockable target)
+        {
+            return Rules.TargetLocks.TargetLockIsAllowed(Selection.ThisShip, target);
+        }
 
         public override void ProcessClick()
         {
@@ -361,8 +369,7 @@ namespace SubPhases
             {
                 if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
-                    RaycastHit hitInfo = new RaycastHit();
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo))
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo))
                     {
                         if (hitInfo.transform.tag.StartsWith("Obstacle"))
                         {
@@ -400,7 +407,7 @@ namespace SubPhases
 
         private GameCommand GenerateSelectObstacleCommand(string obstacleName)
         {
-            JSONObject parameters = new JSONObject();
+            JSONObject parameters = new();
             parameters.AddField("name", obstacleName);
             return GameController.GenerateGameCommand(
                 GameCommandTypes.SelectObstacle,
@@ -416,5 +423,4 @@ namespace SubPhases
             (Phases.CurrentSubPhase as SelectTargetLockableSubPhase).InvokeFinish();
         }
     }
-
 }
