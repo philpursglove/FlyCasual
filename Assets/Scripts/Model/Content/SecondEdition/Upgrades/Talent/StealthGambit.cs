@@ -1,5 +1,7 @@
 using Arcs;
 using Ship;
+using SubPhases;
+using System;
 using Tokens;
 using Upgrade;
 
@@ -20,45 +22,66 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
+    // After a friendly ship performs an attack that hits an enemy ship in your front arc, if you are cloaked, you may gain a strain token to remove your cloak token and perform a bonus primary attack targeting the defender.
+    // At the end of the Engagement Phase, if you are strained, gain an evade token.
+
     public class StealthGambitAbility : GenericAbility
     {
+        GenericShip defender;
+
         public bool PerformedRegularAttack { get; set; }
 
         public override void ActivateAbility()
         {
-            GenericShip.OnAttackHitAsAttackerGlobal += CheckAbility;
+            GenericShip.OnAttackHitAsAttackerGlobal += RegisterAbility;
+            Phases.Events.OnCombatPhaseEnd_NoTriggers += GainEvade;
         }
 
-        private void CheckAbility()
+        public override void DeactivateAbility()
         {
-            // Is the attacker on my side and is the defender in my front arc
-            if (Tools.IsFriendly(Combat.Attacker, HostShip) & BoardTools.Board.IsShipInArcByType(HostShip, Combat.Defender, ArcType.Front))
+            GenericShip.OnAttackHitAsAttackerGlobal -= RegisterAbility;
+            Phases.Events.OnCombatPhaseEnd_NoTriggers -= GainEvade;
+        }
+
+        private void GainEvade()
+        {
+            if (HostShip.IsStrained)
             {
-                {
-                    // Are we cloaked
-                    if (HostShip.IsCloaked)
-                    {
-                        // Offer to spend a charge to decloak and gain a strain token
-                        AskToUseAbility("Stealth Gambit",
-                            NeverUseByDefault,
-                            descriptionLong: "You may spend 1 charge to decloak and gain 1 strain token",
-                            useAbility: delegate { UseStealthGambit(); }
-                        );
-                    }
-                }
+                HostShip.Tokens.AssignToken(typeof(EvadeToken), delegate { });
             }
         }
 
-        private void UseStealthGambit()
+        private void RegisterAbility()
         {
+            if (Tools.IsFriendly(Combat.Attacker, HostShip) && BoardTools.Board.IsShipInArcByType(HostShip, Combat.Defender, ArcType.Front) && HostShip.IsCloaked)
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnAttackHit, AskUseAbility);
+            }
+        }
+
+        private void AskUseAbility(object sender, EventArgs e)
+        {
+            AskToUseAbility(HostUpgrade.UpgradeInfo.Name,
+                NeverUseByDefault,
+                descriptionLong: "Gain 1 strain token to remove your cloak token and perform a bonus primary attack targeting the defender?",
+                useAbility: UseStealthGambit,
+                callback: Triggers.FinishTrigger
+            );
+        }
+
+        private void UseStealthGambit(object sender, EventArgs e)
+        {
+            defender = Combat.Defender;
+
+            PerformedRegularAttack = HostShip.IsAttackPerformed;
+
+            HostShip.OnCombatCheckExtraAttack += StartBonusAttack;
+
             HostShip.Tokens.AssignToken(new StrainToken(HostShip), delegate
             {
                 HostShip.Tokens.RemoveToken(typeof(CloakToken), delegate
                 {
-                    HostUpgrade.State.SpendCharge();
-
-                    // ship may perform a bonus attack
-                    HostShip.OnCombatCheckExtraAttack += StartBonusAttack;
+                    DecisionSubPhase.ConfirmDecision();
                 });
             });
         }
@@ -66,7 +89,6 @@ namespace Abilities.SecondEdition
         private void StartBonusAttack(GenericShip ship)
         {
             HostShip.OnCombatCheckExtraAttack -= StartBonusAttack;
-            PerformedRegularAttack = HostShip.IsAttackPerformed;
 
             RegisterAbilityTrigger(TriggerTypes.OnCombatCheckExtraAttack, RegisterBonusAttack);
         }
@@ -80,9 +102,9 @@ namespace Abilities.SecondEdition
                 Combat.StartSelectAttackTarget(
                     HostShip,
                     FinishBonusAttack,
-                    null,
+                    BonusPrimaryAttackFilter,
                     HostShip.PilotInfo.PilotName,
-                    "You may perform a bonus attack",
+                    "Select a target for bonus primary attack",
                     HostShip
                 );
             }
@@ -93,18 +115,20 @@ namespace Abilities.SecondEdition
             }
         }
 
+        private bool BonusPrimaryAttackFilter(GenericShip ship, IShipWeapon weapon, bool isSilent)
+        {
+            return ship == defender && weapon is PrimaryWeaponClass;
+        }
+
         private void FinishBonusAttack()
         {
             // Restore previous value of "is already attacked" flag
             HostShip.IsAttackPerformed = PerformedRegularAttack;
+
             //if bonus attack was skipped, allow bonus attacks again
             if (HostShip.IsAttackSkipped) HostShip.IsCannotAttackSecondTime = false;
-            Triggers.FinishTrigger();
-        }
 
-        public override void DeactivateAbility()
-        {
-            GenericShip.OnAttackHitAsAttackerGlobal -= CheckAbility;
+            Triggers.FinishTrigger();
         }
     }
 }
