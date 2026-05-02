@@ -101,7 +101,7 @@ namespace Abilities.SecondEdition
         {
             savedShip = targetShip;
             savedShip.OnTryAddAvailableDiceModification += PreventOwnDiceModification;
-            Phases.Events.OnCombatPhaseEnd_NoTriggers += RemovePreventOwnDiceModification;
+            GenericShip.OnAttackFinishGlobal += RemovePreventOwnDiceModification;
             HostShip.State.SpendForce(1, DecisionSubPhase.ConfirmDecision);
         }
 
@@ -115,9 +115,9 @@ namespace Abilities.SecondEdition
             }
         }
 
-        private void RemovePreventOwnDiceModification()
+        private void RemovePreventOwnDiceModification(GenericShip ship)
         {
-            Phases.Events.OnCombatPhaseEnd_NoTriggers -= RemovePreventOwnDiceModification;
+            GenericShip.OnAttackFinishGlobal -= RemovePreventOwnDiceModification;
             targetShip.OnTryAddAvailableDiceModification -= PreventOwnDiceModification;
             savedShip = null;
         }
