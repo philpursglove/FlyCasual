@@ -22,6 +22,7 @@ public interface ITargetLockable
     List<char> GetTargetLockLetterPairsOn(ITargetLockable targetShip);
     GenericTargetLockToken GetAnotherToken(Type oppositeType, char letter);
     void RemoveToken(GenericToken otherTargetLockToken);
+    TokensManager GetTokens();
 }
 
 namespace ActionsList
