@@ -78,12 +78,17 @@ namespace Abilities.SecondEdition
         private void UseAdaptivePowerSystemsToRemoveStressToken(object sender, EventArgs e)
         {
             AskToUseAbility("Adaptive Power Systems",
-                useByDefault: AlwaysUseByDefault,
+                useByDefault: UseForManeuversButNotActions,
                 useAbility: RemoveStressTokenAndAddDeplete,
                 descriptionLong: "You may spend 1 charge to remove 1 Stress token and gain 1 Deplete token.",
                 imageHolder: HostShip,
                 callback: Triggers.FinishTrigger
             );
+        }
+
+        private bool UseForManeuversButNotActions()
+        {
+            return Phases.CurrentSubPhase.Name == "Activation Phase";
         }
 
         private void RemoveStressTokenAndAddDeplete(object sender, EventArgs e)
