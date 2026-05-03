@@ -132,13 +132,13 @@ namespace ActionsList
         {
             int result = 0;
 
-            int maxOrdinanceRange = -1;
-            int minOrdinanceRange = 99;
+            int maxOrdnanceRange = -1;
+            int minOrdnanceRange = 99;
             int minShipTargetRange = HostShip.TargetLockMinRange;
-            int curOrdinanceMax;
-            int curOrdinanceMin;
+            int curOrdnanceMax;
+            int curOrdnanceMin;
 
-            // Find the combined maximum and minimum range of all of our ordinance that currently has charges.
+            // Find the combined maximum and minimum range of all of our ordnance that currently has charges.
             foreach (GenericUpgrade currentUpgrade in Selection.ThisShip.UpgradeBar.GetUpgradesOnlyFaceup())
             {
                 if (currentUpgrade is IShipWeapon
@@ -147,27 +147,27 @@ namespace ActionsList
                 {
                     if (currentUpgrade.UpgradeInfo.WeaponInfo.RequiresTokens.Contains(typeof(BlueTargetLockToken)))
                     {
-                        curOrdinanceMax = currentUpgrade.UpgradeInfo.WeaponInfo.MaxRange;
-                        curOrdinanceMin = currentUpgrade.UpgradeInfo.WeaponInfo.MinRange;
+                        curOrdnanceMax = currentUpgrade.UpgradeInfo.WeaponInfo.MaxRange;
+                        curOrdnanceMin = currentUpgrade.UpgradeInfo.WeaponInfo.MinRange;
 
-                        if (curOrdinanceMin < minOrdinanceRange && curOrdinanceMin >= minShipTargetRange)
+                        if (curOrdnanceMin < minOrdnanceRange && curOrdnanceMin >= minShipTargetRange)
                         {
-                            minOrdinanceRange = curOrdinanceMin;
+                            minOrdnanceRange = curOrdnanceMin;
                         }
 
-                        if (curOrdinanceMax > maxOrdinanceRange)
+                        if (curOrdnanceMax > maxOrdnanceRange)
                         {
-                            maxOrdinanceRange = curOrdinanceMax;
+                            maxOrdnanceRange = curOrdnanceMax;
                         }
                     }
                 }
             }
 
-            // If our minimum range is less than 99, we have ordinance that is loaded and have set our min and max ranges.
-            // Check all enemy ships to see if they are in range of our ordinance.
-            if (minOrdinanceRange < 99 && HasValidLockTargetsAndNoLockOnShipInRange(Selection.ThisShip, minOrdinanceRange, maxOrdinanceRange))
+            // If our minimum range is less than 99, we have ordnance that is loaded and have set our min and max ranges.
+            // Check all enemy ships to see if they are in range of our ordnance.
+            if (minOrdnanceRange < 99 && HasValidLockTargetsAndNoLockOnShipInRange(Selection.ThisShip, minOrdnanceRange, maxOrdnanceRange))
             {
-                // We have ordinance, we have targets for that ordinance, and none of them have our target lock on them.
+                // We have ordnance, we have targets for that ordnance, and none of them have our target lock on them.
                 result += 55;
             }
 
