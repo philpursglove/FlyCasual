@@ -54,7 +54,7 @@ namespace Abilities.SecondEdition
         private void RegisterAbility()
         {
             // One charge used on attack by default, check if charges still exist to add an extra die.
-            if (HostUpgrade.State.Charges > 0 && Combat.ChosenWeapon == HostUpgrade && HostShip.GetNumberOfAttackDice(Combat.Defender) < 3)
+            if (HostUpgrade.State.Charges > 0 && Combat.ChosenWeapon == HostUpgrade && Combat.Attacker.GetNumberOfAttackDice() < 3)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackStart, AskToUseAbility);
             }

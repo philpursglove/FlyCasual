@@ -28,7 +28,7 @@ namespace Ship
 
         public List<GenericToken> GetNonLockRedOrangeTokens()
         {
-            return AssignedTokens.Where(n => (n.TokenColor==TokenColors.Red||n.TokenColor==TokenColors.Orange)&& n.GetType().BaseType != typeof(GenericTargetLockToken)).ToList();
+            return AssignedTokens.Where(n => (n.TokenColor == TokenColors.Red || n.TokenColor == TokenColors.Orange) && n.GetType().BaseType != typeof(GenericTargetLockToken)).ToList();
         }
 
         public List<GenericToken> GetNonLockRedTokens()
@@ -97,9 +97,9 @@ namespace Ship
             {
                 if (type.IsAssignableFrom(assignedToken.GetType()))
                 {
-                    if (assignedToken.GetType().BaseType == typeof(GenericTargetLockToken))
+                    if (assignedToken is GenericTargetLockToken)
                     {
-                        if (((assignedToken as GenericTargetLockToken).Letter == letter) || (letter == '*'))
+                        if ((assignedToken as GenericTargetLockToken).Letter == letter || letter == '*')
                         {
                             return assignedToken;
                         }
@@ -176,7 +176,7 @@ namespace Ship
             {
                 if (assigner == null)
                     throw new InvalidOperationException("assigner must be specified when assigning a " + tokenType.ToString());
-                
+
                 AssignToken((GenericToken)Activator.CreateInstance(tokenType, Host, assigner), callback);
             }
             else
@@ -256,9 +256,11 @@ namespace Ship
 
                     char letter = (tokenToRemove as GenericTargetLockToken).Letter;
                     GenericToken otherTargetLockToken = otherTokenOwner.GetAnotherToken(oppositeType, letter);
+
                     if (otherTargetLockToken != null)
                     {
                         otherTokenOwner.RemoveToken(otherTargetLockToken);
+
                         if (otherTokenOwner is GenericShip)
                         {
                             (otherTokenOwner as GenericShip).CallOnRemoveTokenEvent(otherTargetLockToken);
@@ -328,7 +330,7 @@ namespace Ship
             }
         }
 
-        public void SpendToken(Type type, Action callback, char letter = ' ')
+        public void SpendToken(GenericToken assignedToken, Action callback)
         {
             GenericToken assignedToken = GetToken(type, letter);
 
@@ -394,7 +396,7 @@ namespace Ship
 
         public void AssignCondition(Type tokenType)
         {
-            GenericToken token = (GenericToken) Activator.CreateInstance(tokenType, Host);
+            GenericToken token = (GenericToken)Activator.CreateInstance(tokenType, Host);
             AssignCondition(token);
         }
 
