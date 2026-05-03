@@ -332,8 +332,6 @@ namespace Ship
 
         public void SpendToken(GenericToken assignedToken, Action callback)
         {
-            GenericToken assignedToken = GetToken(type, letter);
-
             if (assignedToken != null)
             {
                 RemoveToken(
@@ -355,6 +353,11 @@ namespace Ship
             {
                 callback();
             }
+        }
+
+        public void SpendToken(Type type, Action callback, char letter = ' ')
+        {
+            SpendToken(GetToken(type, letter), callback);
         }
 
         public void TransferToken(Type tokenType, ITargetLockable targetShip, Action callback, Players.GenericPlayer assigner = null)
