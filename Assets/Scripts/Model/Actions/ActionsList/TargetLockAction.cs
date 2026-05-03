@@ -255,26 +255,6 @@ namespace SubPhases
             );
         }
 
-        public void PrepareByParameters(Action selectTargetAction, Func<ITargetLockable, bool> filterTargets, Func<GenericShip, int> getAiPriority, PlayerNo subphaseOwnerPlayerNo, bool showSkipButton, string abilityName, string description, IImageHolder imageSource = null)
-        {
-            if (filterTargets is not null) FilterShipTargets = filterTargets;
-            GetAiPriority = getAiPriority;
-            finishAction = selectTargetAction;
-            RequiredPlayer = subphaseOwnerPlayerNo;
-            if (showSkipButton)
-            {
-                UI.ShowSkipButton();
-            }
-            else
-            {
-                UI.HideSkipButton();
-            }
-
-            DescriptionShort = abilityName;
-            DescriptionLong = description;
-            ImageSource = imageSource;
-        }
-
         private bool FilterTargetLockTargets(ITargetLockable target)
         {
             return Rules.TargetLocks.TargetLockIsAllowed(Selection.ThisShip, target);
