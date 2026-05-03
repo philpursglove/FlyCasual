@@ -445,7 +445,7 @@ namespace Ship
 
         // DICE
 
-        public int GetNumberOfAttackDice(GenericShip targetShip)
+        public int GetNumberOfAttackDice()
         {
             int result = Combat.ChosenWeapon.WeaponInfo.AttackValue;
 
