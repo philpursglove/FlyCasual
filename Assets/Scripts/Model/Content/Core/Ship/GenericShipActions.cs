@@ -905,5 +905,10 @@ namespace Ship
             OnCheckCanPerformActionsWhileStressed?.Invoke(ref canPerformActionsWhileStressed);
             return canPerformActionsWhileStressed;
         }
+
+        public TokensManager GetTokens()
+        {
+            return this.Tokens;
+        }
     }
 }

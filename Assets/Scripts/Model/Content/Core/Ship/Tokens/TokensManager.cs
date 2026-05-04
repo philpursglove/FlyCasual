@@ -7,11 +7,11 @@ namespace Ship
 {
     public class TokensManager
     {
-        private GenericShip Host;
-        private List<GenericToken> AssignedTokens = new();
+        private readonly ITargetLockable Host;
+        private readonly List<GenericToken> AssignedTokens = new ();
         public GenericToken TokenToAssign;
 
-        public TokensManager(GenericShip host)
+        public TokensManager(ITargetLockable host)
         {
             Host = host;
         }
@@ -110,6 +110,7 @@ namespace Ship
                     }
                 }
             }
+
             return result;
         }
 
@@ -156,14 +157,17 @@ namespace Ship
             return result;
         }
 
-        public void AssignToken(GenericToken token, Action callBack, char letter = ' ')
+        public void AssignToken(GenericToken token, Action callBack)
         {
             TokenToAssign = token;
 
-            Host.CallBeforeAssignToken(
-                TokenToAssign,
-                delegate { FinalizeAssignToken(callBack); }
-            );
+            if(Host is GenericShip)
+            {
+                (Host as GenericShip).CallBeforeAssignToken(
+                    TokenToAssign,
+                    delegate { FinalizeAssignToken(callBack); }
+                );
+            }
         }
 
         public void AssignToken(Type tokenType, Action callback, Players.GenericPlayer assigner = null)
@@ -204,7 +208,11 @@ namespace Ship
 
             TokenToAssign.InitializeTooltip();
             TokenToAssign.WhenAssigned();
-            Host.CallOnTokenIsAssigned(TokenToAssign, callback);
+
+            if(Host is GenericShip)
+            {
+                (Host as GenericShip).CallOnTokenIsAssigned(TokenToAssign, callback);
+            }
         }
 
         public void RemoveCondition(GenericToken token)
@@ -212,7 +220,11 @@ namespace Ship
             if (AssignedTokens.Remove(token))
             {
                 token.WhenRemoved();
-                Host.CallOnConditionIsRemoved(token);
+
+                if (Host is GenericShip)
+                {
+                    (Host as GenericShip).CallOnConditionIsRemoved(token);
+                }
             }
         }
 
@@ -232,7 +244,7 @@ namespace Ship
 
         public void RemoveToken(GenericToken tokenToRemove, Action callback)
         {
-            if (Host.CanRemoveToken(tokenToRemove))
+            if (Host is not GenericShip || (Host as GenericShip).CanRemoveToken(tokenToRemove))
             {
                 AssignedTokens.Remove(tokenToRemove);
 
@@ -257,8 +269,13 @@ namespace Ship
                 }
 
                 tokenToRemove.WhenRemoved();
-                Host.CallOnRemoveTokenEvent(tokenToRemove);
+
+                if(Host is GenericShip)
+                {
+                    (Host as GenericShip).CallOnRemoveTokenEvent(tokenToRemove);
+                }
             }
+
             Triggers.ResolveTriggers(TriggerTypes.OnTokenIsRemoved, callback);
         }
 
@@ -319,7 +336,17 @@ namespace Ship
             {
                 RemoveToken(
                     assignedToken,
-                    delegate { Host.CallFinishSpendToken(assignedToken, callback); }
+                    delegate 
+                    {
+                        if(Host is GenericShip)
+                        {
+                            (Host as GenericShip).CallFinishSpendToken(assignedToken, callback);
+                        }
+                        else
+                        {
+                            callback();
+                        }
+                    }
                 );
             }
             else
@@ -333,19 +360,19 @@ namespace Ship
             SpendToken(GetToken(type, letter), callback);
         }
 
-        public void TransferToken(Type tokenType, GenericShip targetShip, Action callback, Players.GenericPlayer assigner = null)
+        public void TransferToken(Type tokenType, ITargetLockable targetShip, Action callback, Players.GenericPlayer assigner = null)
         {
-            Host.Tokens.RemoveToken(
+            Host.GetTokens().RemoveToken(
                 tokenType,
-                () => targetShip.Tokens.AssignToken(tokenType, callback, assigner)
+                () => targetShip.GetTokens().AssignToken(tokenType, callback, assigner)
             );
         }
 
-        public void TransferToken(GenericToken token, GenericShip targetShip, Action callback, Players.GenericPlayer assigner = null)
+        public void TransferToken(GenericToken token, ITargetLockable targetShip, Action callback)
         {
-            Host.Tokens.RemoveToken(
+            Host.GetTokens().RemoveToken(
                 token,
-                () => targetShip.Tokens.AssignToken(token, callback)
+                () => targetShip.GetTokens().AssignToken(token, callback)
             );
         }
 
@@ -363,7 +390,11 @@ namespace Ship
 
             token.InitializeTooltip();
             token.WhenAssigned();
-            Host.CallOnConditionIsAssigned(token);
+
+            if(Host is GenericShip)
+            {
+                (Host as GenericShip).CallOnConditionIsAssigned(token);
+            }
         }
 
         public void AssignCondition(Type tokenType)
