@@ -9,9 +9,9 @@ using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
-    public class AdaptivePowerSystems : GenericUpgrade
+    public class AdaptablePowerSystems : GenericUpgrade
     {
-        public AdaptivePowerSystems() : base()
+        public AdaptablePowerSystems() : base()
         {
             UpgradeInfo = new UpgradeCardInfo
             (
@@ -19,7 +19,7 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Modification,
                 charges: 2,
                 restriction: new TagRestriction(Tags.Mandalorian),
-                abilityType: typeof(Abilities.SecondEdition.AdaptivePowerSystemsAbility),
+                abilityType: typeof(Abilities.SecondEdition.AdaptablePowerSystemsAbility),
                 legalityInfo: new() { Legality.XWA }
             );
             IsHidden = true;
@@ -29,7 +29,7 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    public class AdaptivePowerSystemsAbility : GenericAbility
+    public class AdaptablePowerSystemsAbility : GenericAbility
     {
         //After you fully execute a red maneuver or perform a red action, you may spend 1 charge. If you do, you may gain 1 deplete token to remove 1 stress token.
         // 

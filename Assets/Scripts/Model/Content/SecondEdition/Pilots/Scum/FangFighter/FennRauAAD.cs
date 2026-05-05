@@ -38,7 +38,7 @@ namespace Ship.SecondEdition.FangFighter
             );
             MustHaveUpgrades.Add(typeof(Fearless));
             MustHaveUpgrades.Add(typeof(BeskarReinforcedPlating));
-            MustHaveUpgrades.Add(typeof(AdaptivePowerSystems));
+            MustHaveUpgrades.Add(typeof(AdaptablePowerSystems));
 
             PilotNameCanonical = "fennrau-armedanddangerous";
         }
