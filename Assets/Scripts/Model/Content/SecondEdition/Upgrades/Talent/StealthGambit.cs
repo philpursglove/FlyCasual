@@ -16,6 +16,7 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Talent,
                 abilityType: typeof(Abilities.SecondEdition.StealthGambitAbility)
             );
+            IsHidden = true;
         }
     }
 }
