@@ -157,13 +157,8 @@ namespace Abilities.SecondEdition
             if (HostShip.TryRegenShields())
             {
                 Messages.ShowInfo(HostUpgrade.UpgradeInfo.Name + ": " + HostShip.PilotInfo.PilotName + " recovered 1 shield");
-                HostShip.Tokens.AssignToken(
-                    typeof(WeaponsDisabledToken),
-                    delegate
-                    {
-                        HostUpgrade.State.SpendCharge();
-                        DecisionSubPhase.ConfirmDecision();
-                    });
+                HostUpgrade.State.SpendCharge();
+                HostShip.Tokens.AssignToken(typeof(WeaponsDisabledToken), DecisionSubPhase.ConfirmDecision);
             }
             else
             {
