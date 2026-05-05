@@ -15,7 +15,7 @@ namespace UpgradesList.SecondEdition
         {
             UpgradeInfo = new UpgradeCardInfo
             (
-                "Adaptive Power Systems",
+                "Adaptable Power Systems",
                 UpgradeType.Modification,
                 charges: 2,
                 abilityType: typeof(Abilities.SecondEdition.AdaptablePowerSystemsAbility),
@@ -53,10 +53,10 @@ namespace Abilities.SecondEdition
             {
                 Triggers.RegisterTrigger(new Trigger()
                 {
-                    Name = "Adaptive Power Systems",
+                    Name = "Adaptable Power Systems",
                     TriggerType = TriggerTypes.OnActionIsPerformed,
                     TriggerOwner = HostShip.Owner.PlayerNo,
-                    EventHandler = UseAdaptivePowerSystemsToRemoveStressToken
+                    EventHandler = UseAdaptablePowerSystemsToRemoveStressToken
                 });
             }
         }
@@ -67,17 +67,17 @@ namespace Abilities.SecondEdition
             {
                 Triggers.RegisterTrigger(new Trigger()
                 {
-                    Name = "Adaptive Power Systems",
+                    Name = "Adaptable Power Systems",
                     TriggerType = TriggerTypes.OnMovementFinish,
                     TriggerOwner = HostShip.Owner.PlayerNo,
-                    EventHandler = UseAdaptivePowerSystemsToRemoveStressToken
+                    EventHandler = UseAdaptablePowerSystemsToRemoveStressToken
                 });
             }
         }
 
-        private void UseAdaptivePowerSystemsToRemoveStressToken(object sender, EventArgs e)
+        private void UseAdaptablePowerSystemsToRemoveStressToken(object sender, EventArgs e)
         {
-            AskToUseAbility("Adaptive Power Systems",
+            AskToUseAbility("Adaptable Power Systems",
                 useByDefault: UseForManeuversButNotActions,
                 useAbility: RemoveStressTokenAndAddDeplete,
                 descriptionLong: "You may spend 1 charge to remove 1 Stress token and gain 1 Deplete token.",
@@ -106,17 +106,17 @@ namespace Abilities.SecondEdition
             {
                 Triggers.RegisterTrigger(new Trigger()
                 {
-                    Name = "Adaptive Power Systems",
+                    Name = "Adaptable Power Systems",
                     TriggerType = TriggerTypes.OnAttackStart,
                     TriggerOwner = HostShip.Owner.PlayerNo,
-                    EventHandler = UseAdaptivePowerSystemsToRemoveDepleteToken
+                    EventHandler = UseAdaptablePowerSystemsToRemoveDepleteToken
                 });
             }
         }
 
-        private void UseAdaptivePowerSystemsToRemoveDepleteToken(object sender, EventArgs e)
+        private void UseAdaptablePowerSystemsToRemoveDepleteToken(object sender, EventArgs e)
         {
-            AskToUseAbility("Adaptive Power Systems",
+            AskToUseAbility("Adaptable Power Systems",
                 useByDefault: AlwaysUseByDefault,
                 useAbility: RemoveDepleteTokenAndAddStrain,
                 descriptionLong: "You may spend 1 charge to remove 1 Deplete token and gain 1 Strain token.",
