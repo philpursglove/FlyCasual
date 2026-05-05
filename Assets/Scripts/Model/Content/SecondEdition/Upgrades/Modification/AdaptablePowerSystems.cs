@@ -18,7 +18,6 @@ namespace UpgradesList.SecondEdition
                 "Adaptive Power Systems",
                 UpgradeType.Modification,
                 charges: 2,
-                restriction: new TagRestriction(Tags.Mandalorian),
                 abilityType: typeof(Abilities.SecondEdition.AdaptablePowerSystemsAbility),
                 legalityInfo: new() { Legality.XWA }
             );
@@ -79,20 +78,26 @@ namespace Abilities.SecondEdition
         private void UseAdaptivePowerSystemsToRemoveStressToken(object sender, EventArgs e)
         {
             AskToUseAbility("Adaptive Power Systems",
-                AlwaysUseByDefault,
-                RemoveStressTokenAndAddDeplete,
+                useByDefault: UseForManeuversButNotActions,
+                useAbility: RemoveStressTokenAndAddDeplete,
                 descriptionLong: "You may spend 1 charge to remove 1 Stress token and gain 1 Deplete token.",
                 imageHolder: HostShip,
                 callback: Triggers.FinishTrigger
             );
         }
 
+        private bool UseForManeuversButNotActions()
+        {
+            return Phases.CurrentSubPhase.Name == "Activation Phase";
+        }
+
         private void RemoveStressTokenAndAddDeplete(object sender, EventArgs e)
         {
             HostShip.Tokens.RemoveToken(typeof(StressToken), null);
             HostShip.Tokens.AssignToken(new DepleteToken(HostShip), null);
-            DecisionSubPhase.ConfirmDecision();
             HostUpgrade.State.SpendCharge();
+
+            DecisionSubPhase.ConfirmDecision();
         }
 
         private void CheckAbilityAttack()
@@ -112,8 +117,8 @@ namespace Abilities.SecondEdition
         private void UseAdaptivePowerSystemsToRemoveDepleteToken(object sender, EventArgs e)
         {
             AskToUseAbility("Adaptive Power Systems",
-                AlwaysUseByDefault,
-                RemoveDepleteTokenAndAddStrain,
+                useByDefault: AlwaysUseByDefault,
+                useAbility: RemoveDepleteTokenAndAddStrain,
                 descriptionLong: "You may spend 1 charge to remove 1 Deplete token and gain 1 Strain token.",
                 imageHolder: HostShip,
                 callback: Triggers.FinishTrigger
@@ -124,8 +129,9 @@ namespace Abilities.SecondEdition
         {
             HostShip.Tokens.RemoveToken(typeof(DepleteToken), null);
             HostShip.Tokens.AssignToken(new StrainToken(HostShip), null);
-            DecisionSubPhase.ConfirmDecision();
             HostUpgrade.State.SpendCharge();
+
+            DecisionSubPhase.ConfirmDecision();
         }
     }
 }
