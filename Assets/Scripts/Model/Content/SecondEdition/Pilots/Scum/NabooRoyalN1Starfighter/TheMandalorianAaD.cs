@@ -1,4 +1,6 @@
 ﻿using Abilities.SecondEdition;
+using Actions;
+using ActionsList;
 using Content;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +53,8 @@ namespace Ship.SecondEdition.NabooRoyalN1Starfighter
             FullThrottleAbility fullThrottleAbility = ShipAbilities.First(a => a is FullThrottleAbility) as FullThrottleAbility;
             ShipAbilities.Remove(fullThrottleAbility);
             ShipAbilities.Add(new RestoredSpeedsterAbility());
+
+            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(TargetLockAction), ActionColor.Red));
         }
     }
 }
