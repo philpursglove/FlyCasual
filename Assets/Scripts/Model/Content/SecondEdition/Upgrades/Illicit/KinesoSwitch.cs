@@ -26,10 +26,12 @@ namespace Abilities.SecondEdition
         {
             HostShip.OnActionIsPerformed += RegisterKinesoSwitch;
         }
+
         public override void DeactivateAbility()
         {
             HostShip.OnActionIsPerformed -= RegisterKinesoSwitch;
         }
+
         private void RegisterKinesoSwitch(GenericAction action)
         {
             if (HostUpgrade.State.Charges > 0 && !HostShip.IsBumped)
