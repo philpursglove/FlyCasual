@@ -80,9 +80,6 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship)
         {
-            //AI doesn't use ability
-            if (HostShip.Owner.UsesHotacAiRules) return;
-
             if (HostShip.AssignedManeuver.Speed is >= 3 and <= 5
                 && !HostShip.IsBumped && HostShip.State.Charges > 1
                 && !HostShip.IsBombAlreadyDropped)
