@@ -1,4 +1,7 @@
 ﻿using ActionsList;
+using SubPhases;
+using System;
+using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -34,10 +37,25 @@ namespace Abilities.SecondEdition
 
         private void RegisterKinesoSwitch(GenericAction action)
         {
-            if (HostUpgrade.State.Charges > 0 && !HostShip.IsBumped)
+            if (HostUpgrade.State.Charges > 0 && !HostShip.IsBumped
+                                              && HostShip.Tokens.HasToken<RedTargetLockToken>())
             {
-
+                AskToUseAbility(
+                    descriptionShort: HostUpgrade.UpgradeInfo.Name,
+                    descriptionLong: "Do you want to spend 1 charge to break all target locks on you?",
+                    useByDefault: AlwaysUseByDefault,
+                    useAbility: BreakLocks,
+                    imageHolder: HostUpgrade
+                );
             }
+        }
+
+        private void BreakLocks(object sender, EventArgs e)
+        {
+            DecisionSubPhase.ConfirmDecision();
+
+            HostUpgrade.State.SpendCharge();
+            HostShip.Tokens.RemoveAllTokensByType(typeof(RedTargetLockToken), null);
         }
     }
 }
