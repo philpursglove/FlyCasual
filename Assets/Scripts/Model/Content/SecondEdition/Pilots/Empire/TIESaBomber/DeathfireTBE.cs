@@ -124,6 +124,8 @@ namespace Abilities.SecondEdition
             if (upgrade.UpgradeInfo.SubType != UpgradeSubType.Bomb) return;
             availableTemplates.Clear();
             availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Straight, ManeuverDirection.Forward, ManeuverSpeed.Speed3, isBombTemplate: true));
+
+            ResetDelegates();
         }
 
         protected virtual void AddLaunchTemplate(List<ManeuverTemplate> availableTemplates, GenericUpgrade upgrade)
@@ -131,6 +133,14 @@ namespace Abilities.SecondEdition
             if (upgrade.UpgradeInfo.SubType != UpgradeSubType.Bomb) return;
             availableTemplates.Clear();
             availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Straight, ManeuverDirection.Forward, ManeuverSpeed.Speed3));
+
+            ResetDelegates();
+        }
+
+        private void ResetDelegates()
+        {
+            HostShip.OnGetAvailableBombDropTemplatesNoConditions -= AddDropTemplate;
+            HostShip.OnGetAvailableBombLaunchTemplates -= AddLaunchTemplate;
         }
     }
 }
