@@ -21,7 +21,8 @@ namespace Ship.SecondEdition.NabooRoyalN1Starfighter
                 (
                     new Dictionary<Faction, Type>
                     {
-                        { Faction.Republic, typeof(RicOlie) }
+                        { Faction.Republic, typeof(RicOlie) },
+                        { Faction.Scum, typeof(TheMandalorianAaD) }
                     }
                 ),
                 new ShipArcsInfo(ArcType.Front, 2), 2, 3, 2,
