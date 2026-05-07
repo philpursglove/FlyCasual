@@ -70,18 +70,18 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnMovementFinish += CheckAbility;
+            HostShip.OnMovementFinishSuccessfully += CheckAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnMovementFinish -= CheckAbility;
+            HostShip.OnMovementFinishSuccessfully -= CheckAbility;
         }
 
         private void CheckAbility(GenericShip ship)
         {
             if (HostShip.AssignedManeuver.Speed is >= 3 and <= 5
-                && !HostShip.IsBumped && HostShip.State.Charges > 1
+                && HostShip.State.Charges > 1
                 && !HostShip.IsBombAlreadyDropped)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, AskUseAbility);
