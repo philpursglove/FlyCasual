@@ -37,8 +37,10 @@ namespace Abilities.SecondEdition
 
         private void RegisterKinesoSwitch(GenericAction action)
         {
-            if (HostUpgrade.State.Charges > 0 && !HostShip.IsBumped
-                                              && HostShip.Tokens.HasToken<RedTargetLockToken>())
+            if (action is SlamAction
+                && HostUpgrade.State.Charges > 0
+                && !HostShip.IsBumped
+                && HostShip.Tokens.HasToken<RedTargetLockToken>())
             {
                 AskToUseAbility(
                     descriptionShort: HostUpgrade.UpgradeInfo.Name,
