@@ -38,7 +38,8 @@ namespace Ship
                         UpgradeType.Device,
                         UpgradeType.Device
                     },
-                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
+                    legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal },
+                    abilityText: "After you fully execute a speed 3-5 maneuver, if you have not dropped or launched a device this round, you may spend 2 charges to drop or launch a bomb using the 3-speed forward template."
                 );
                 PilotNameCanonical = "deathfire-swz98";
 
