@@ -38,7 +38,7 @@ namespace Obstacles
                 ship.OnTryPerformAttack += DenyAttack;
             }
 
-            if (Editions.Edition.Current.RuleSet is Editions.RuleSets.RuleSet25)
+            if (Editions.Edition.Current.RuleSet is Editions.RuleSets.RuleSet25 && !Selection.ThisShip.IsIgnoreObstacles)
             {
                 Messages.ShowErrorToHuman(ship.PilotInfo.PilotName + " landed on an obstacle during movement, their action subphase is skipped");
                 Selection.ThisShip.IsSkipsActionSubPhase = true;
