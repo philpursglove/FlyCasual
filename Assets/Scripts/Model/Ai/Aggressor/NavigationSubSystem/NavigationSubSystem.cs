@@ -407,7 +407,7 @@ namespace AI.Aggressor
                 yield return prediction.CalculateMovementPredicition();
 
                 if (!prediction.IsOffTheBoard) HasAnyManeuverWithoutOffBoardFinish = true;
-                if (prediction.IsLandedOnAsteroid) HasAnyManeuverWithoutAsteroidCollision = true;
+                if (!prediction.IsLandedOnAsteroid) HasAnyManeuverWithoutAsteroidCollision = true;
             }
 
             CurrentNavigationResult.isOffTheBoardNextTurn = !HasAnyManeuverWithoutOffBoardFinish;
