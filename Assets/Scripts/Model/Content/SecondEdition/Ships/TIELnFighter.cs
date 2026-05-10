@@ -3,7 +3,6 @@ using ActionsList;
 using Arcs;
 using BoardTools;
 using Movement;
-using Ship;
 using Ship.CardInfo;
 using SubPhases;
 using System;
