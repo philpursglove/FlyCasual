@@ -94,7 +94,7 @@ namespace Abilities.SecondEdition
 
         private bool HasShipInBullseye()
         {
-            return Roster.AllShips.Values.Any(s => HostShip.SectorsInfo.IsShipInSector(s, Arcs.ArcType.Bullseye));
+            return Roster.AllShips.Values.Any(s => HostShip.SectorsInfo.IsShipInSector(s, Arcs.ArcType.Bullseye) && !Tools.IsFriendly(HostShip,s));
         }
 
         private void ResetInitiative(object sender, EventArgs e)
