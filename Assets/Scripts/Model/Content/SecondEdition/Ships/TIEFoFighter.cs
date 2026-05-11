@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
-using Movement;
+﻿using Actions;
 using ActionsList;
-using Actions;
 using Arcs;
-using System;
+using Movement;
+using Ship;
 using Ship.CardInfo;
+using Subphases;
+using SubPhases;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Tokens;
 
 namespace Ship.SecondEdition.TIEFoFighter
 {
@@ -84,6 +89,86 @@ namespace Ship.SecondEdition.TIEFoFighter
         }
     }
 }
+
+namespace Abilities.SecondEdition
+{
+    public class Merciless : GenericAbility
+    {
+        // Merciless: While you perform an attack, you may choose another friendly ship at range 0-1 of the defender. If you do, that ship gains a strain token and you may reroll a blank result.
+
+        public override void ActivateAbility()
+        {
+            AddDiceModification(
+                name: "Merciless",
+                isAvailable: IsAvailable,
+                aiPriority: AiPriority,
+                modificationType: DiceModificationType.Reroll,
+                count: 1,
+                sidesCanBeSelected: new() { DieSide.Blank },
+                payAbilityCost: StrainAnotherFriendly
+            );
+        }
+
+        public override void DeactivateAbility()
+        {
+            RemoveDiceModification();
+        }
+
+        private void StrainAnotherFriendly(Action<bool> callback)
+        {
+            MercilessSelectShipSubPhase subphase = Phases.StartTemporarySubPhaseNew<MercilessSelectShipSubPhase>(
+                "Select target to assign strain",
+                Phases.CurrentSubPhase.CallBack
+            );
+            subphase.Defender = Combat.Defender;
+            subphase.ShowSkipButton = false;
+            subphase.Start();
+        }
+
+        private bool IsAvailable()
+        {
+            return Combat.AttackStep == CombatStep.Attack && Combat.Attacker == HostShip && Roster.AllShips.Values.Any(s => Tools.IsAnotherFriendly(HostShip, s) && Combat.Defender.GetRangeToShip(s) < 2);
+        }
+
+        private int AiPriority()
+        {
+            return 0;
+        }
+    }
+}
+
+namespace Subphases
+{
+    public class MercilessSelectShipSubPhase : SelectShipSubPhase
+    {
+        public GenericShip Defender;
+
+        public override void Prepare()
+        {
+            PrepareByParameters(
+                SelectStrainTarget,
+                FilterTargets,
+                AiPriority,
+                Selection.ThisShip.Owner.PlayerNo,
+                false,
+                "Merciless: Assign Strain",
+                "Select another friendly ship.\nIt will gain a strain."
+            );
+        }
+
+        private int AiPriority(GenericShip ship)
+        {
+            return 100;
+        }
+
+        private bool FilterTargets(GenericShip ship)
+        {
+            return Tools.IsAnotherFriendly(Selection.ThisShip, ship) && Defender.GetRangeToShip(ship) < 2;
+        }
+
+        protected void SelectStrainTarget()
+        {
+            TargetShip.Tokens.AssignToken(new StrainToken(Selection.ThisShip), SelectShipSubPhase.FinishSelectionNoCallback);
         }
     }
 }
