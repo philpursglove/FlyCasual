@@ -48,7 +48,6 @@ namespace Abilities.SecondEdition
         {
             allowed = allowed || 
                 action.GetType() == typeof(FocusAction) &&
-                Combat.ShotInfo.Weapon.WeaponType == WeaponTypes.PrimaryWeapon &&
                 (Combat.Attacker == HostShip || Combat.Defender == HostShip);
         }
     }
