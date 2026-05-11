@@ -5,7 +5,6 @@ using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -91,13 +90,13 @@ namespace Abilities.SecondEdition
 
         private void UseDeterminationAbility(object sender, EventArgs e)
         {
-            HostShip.State.SpendForce (1, delegate 
+            HostShip.State.SpendForce(1, delegate
             {
                 Combat.CurrentCriticalHitCard.IsFaceup = true;
                 DecisionSubPhase.ConfirmDecision();
             });
         }
-        
+
         private bool IsValidTargetOfAbility(GenericShip ship)
         {
             return Tools.IsAnotherTeam(HostShip, ship)

@@ -49,7 +49,7 @@ namespace Abilities.SecondEdition
         {
             Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: {HostShip.PilotInfo.PilotName} ship suffered 1 damage.");
 
-            DamageSourceEventArgs determinationDamage = new ()
+            DamageSourceEventArgs determinationDamage = new()
             {
                 Source = "Determination Upgrade Ability",
                 DamageType = DamageTypes.CardAbility
@@ -59,7 +59,7 @@ namespace Abilities.SecondEdition
         }
 
         private int AiPriority()
-        {            
+        {
             return 0;
         }
 
