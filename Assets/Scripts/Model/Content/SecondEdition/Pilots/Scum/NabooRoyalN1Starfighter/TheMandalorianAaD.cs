@@ -2,6 +2,7 @@
 using Actions;
 using ActionsList;
 using Content;
+using Ship;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
@@ -70,21 +71,19 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnWeaponsDisabledCheck += AllowBullseyeAttacksWhileDisarmed;
+            HostShip.OnTryPerformAttack += AllowBullseyeAttacksWhileDisarmed;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnWeaponsDisabledCheck -= AllowBullseyeAttacksWhileDisarmed;
+            HostShip.OnTryPerformAttack -= AllowBullseyeAttacksWhileDisarmed;
         }
 
-        private void AllowBullseyeAttacksWhileDisarmed(ref bool allowed)
+        private void AllowBullseyeAttacksWhileDisarmed(ref bool allowed, List<string> stringList)
         {
-            allowed = HostShip.Tokens.CountTokensByType(typeof(WeaponsDisabledToken)) < 2 &&
-                   HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Bullseye);
-
+            allowed = (HostShip.Tokens.CountTokensByType(typeof(WeaponsDisabledToken))) < 2
+                      && (Combat.ChosenWeapon is PrimaryWeaponClass)
+                      && HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Bullseye);
         }
-
-
     }
 }
