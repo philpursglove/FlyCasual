@@ -2,6 +2,7 @@
 using Upgrade;
 using UnityEngine;
 using BoardTools;
+using ActionsList;
 
 namespace UpgradesList.SecondEdition
 {
@@ -35,20 +36,20 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            GenericShip.OnUpdateWeaponRangeGlobal += AllowRange0Primaries;
+            Rules.DiceModification.OnAllowRangeZeroAttackModifications += AllowRange0FocusModification;
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.OnUpdateWeaponRangeGlobal -= AllowRange0Primaries;
+            Rules.DiceModification.OnAllowRangeZeroAttackModifications -= AllowRange0FocusModification;
         }
 
-        private void AllowRange0Primaries(IShipWeapon weapon, ref int minRange, ref int maxRange, GenericShip target)
+        private void AllowRange0FocusModification(GenericAction action, ref bool allowed)
         {
-            if (weapon.WeaponType == WeaponTypes.PrimaryWeapon && (weapon.HostShip == HostShip || target == HostShip))
-            {
-                minRange = 0;
-            }
+            allowed = allowed || 
+                action.GetType() == typeof(FocusAction) &&
+                Combat.ShotInfo.Weapon.WeaponType == WeaponTypes.PrimaryWeapon &&
+                (Combat.Attacker == HostShip || Combat.Defender == HostShip);
         }
     }
 }
