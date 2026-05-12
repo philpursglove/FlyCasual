@@ -216,7 +216,7 @@ namespace Abilities.SecondEdition
         private static void StartSelectionSubphase(GenericToken token)
         {
             AgentTerexCyborgActionSubPhase subPhase = Phases.StartTemporarySubPhaseNew<AgentTerexCyborgActionSubPhase>(
-                "Agen Terex Target Selection",
+                "Agent Terex Target Selection",
                 Phases.CurrentSubPhase.CallBack
             );
 
@@ -236,6 +236,12 @@ namespace Abilities.SecondEdition
             }
 
             return result;
+        }
+        public override bool IsActionAvailable()
+        {
+            return (Selection.ThisShip.Tokens.HasToken<CalculateToken>()
+                || Selection.ThisShip.Tokens.HasToken<JamToken>())
+                && Roster.AllShips.Values.Any(s => !Tools.IsSameShip(HostShip, s) && HostShip.GetRangeToShip(s) <= 3);
         }
     }
 }
