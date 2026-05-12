@@ -1,5 +1,6 @@
 using Upgrade;
 using ActionsList;
+using BoardTools;
 
 namespace UpgradesList.SecondEdition
 {
