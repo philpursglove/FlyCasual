@@ -239,8 +239,9 @@ namespace Abilities.SecondEdition
         }
         public override bool IsActionAvailable()
         {
-            return Selection.ThisShip.Tokens.HasToken<CalculateToken>()
-                || Selection.ThisShip.Tokens.HasToken<JamToken>();
+            return (Selection.ThisShip.Tokens.HasToken<CalculateToken>()
+                || Selection.ThisShip.Tokens.HasToken<JamToken>())
+                && Roster.AllShips.Values.Any(s => !Tools.IsSameShip(HostShip, s) && HostShip.GetRangeToShip(s) <= 3);
         }
     }
 }
