@@ -1,6 +1,7 @@
 using Abilities.SecondEdition;
 using Ship;
 using System;
+using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -62,7 +63,27 @@ namespace Abilities.SecondEdition
 
         private int AiPriority()
         {
-            return 0;
+            if (HostShip.State.HullCurrent + HostShip.State.ShieldsCurrent < 2  // Don't kill self to use ability
+                || Combat.CurrentDiceRoll.Successes > Combat.Defender.State.Agility + Combat.Defender.State.HullCurrent)  // Overkill, don't use ability
+            {
+                return 0;
+            }
+
+            double result = 0;
+
+            result += HostShip.State.Force > Combat.CurrentDiceRoll.Focuses ? 50 : 0;
+
+            result += HostShip.Tokens.HasToken(typeof(FocusToken)) ? 100 : 0;
+
+            result += result > 0 && Combat.CurrentDiceRoll.Successes + 1 >= Combat.Defender.State.Agility + Combat.Defender.State.HullCurrent ? 100 : 0; // Has force/focus and an extra eyeball will ensure kill
+
+            result -= HostShip.State.ShieldsCurrent == 0 ? 100 : 0; // Reduce likelihood of use if no shields
+
+            result *= HostShip.PilotInfo.Cost < Combat.Defender.PilotInfo.Cost ? 2 : 1; // David and Goliath, taking a hit may be worth it for points
+
+            result *= HostShip.State.HullCurrent + HostShip.State.ShieldsCurrent < (HostShip.State.HullMax + HostShip.State.ShieldsMax) / 2 ? 0.5 : 1; // Limit use if below half health
+
+            return (int)Math.Round(result);
         }
 
         private bool IsAvailable()
