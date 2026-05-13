@@ -147,4 +147,36 @@ namespace Abilities.SecondEdition
             }
         }
     }
+
+    public class HeavyWeaponTurretEoD : HeavyWeaponTurret
+    {
+        // Adds free white rotate action after taking an action to standard Heavy Weapon Turret
+        // Do not remove HeavyWeaponTurret, this is used in conjunction with
+
+        public override void ActivateAbility()
+        {
+            HostShip.OnActionIsPerformed += RegisterFreeRotate;
+        }
+
+        public override void DeactivateAbility()
+        {
+            HostShip.OnActionIsPerformed -= RegisterFreeRotate;
+        }
+
+        private void RegisterFreeRotate(GenericAction action)
+        {
+            RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, AskFreeRotate);
+        }
+
+        private void AskFreeRotate(object sender, EventArgs e)
+        {
+            HostShip.AskPerformFreeAction(
+                new RotateArcAction(),
+                Triggers.FinishTrigger,
+                "Heavy Weapon Turret",
+                "You may perform a white rotate turret action",
+                HostShip
+            );
+        }
+    }
 }
