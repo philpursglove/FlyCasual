@@ -1,5 +1,4 @@
 ﻿using Abilities.SecondEdition;
-using BoardTools;
 using Content;
 using Ship;
 using SubPhases;
@@ -7,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tokens;
-using UnityEngine;
 using Upgrade;
 
 namespace Ship.SecondEdition.TIEInterceptor
@@ -106,7 +104,7 @@ namespace Abilities.SecondEdition
 
             if (redtokens.Count > 0)
             {
-                DecisionSubPhase pilotAbilityDecision = (DecisionSubPhase)Phases.StartTemporarySubPhaseNew(
+                CommandantgoranDecisionSubPhase pilotAbilityDecision = (CommandantgoranDecisionSubPhase)Phases.StartTemporarySubPhaseNew(
                     HostShip.PilotName,
                     typeof(CommandantgoranDecisionSubPhase),
                     SelectShipSubPhase.FinishSelection
@@ -118,13 +116,19 @@ namespace Abilities.SecondEdition
 
                 pilotAbilityDecision.RequiredPlayer = HostShip.Owner.PlayerNo;
 
-                foreach (GenericToken Token in redtokens)
+                foreach (GenericToken Token in redtokens.OrderBy(t => t switch 
+                    {
+                        RedTargetLockToken => TargetShip.GetRangeToShip((t as RedTargetLockToken).OtherTargetLockTokenOwner as GenericShip) <= 2 ? 0 : 1, // more nuance
+                        IonToken => 2,
+                        _ => 3
+                    }))
                 {
                     string name = Token is RedTargetLockToken ? $"{Token.Name} {(Token as RedTargetLockToken).Letter}" : Token.Name;
 
                     pilotAbilityDecision.AddDecision(name, delegate { TargetShip.Tokens.RemoveToken(Token, DecisionSubPhase.ConfirmDecision); });
                 }
 
+                pilotAbilityDecision.DefaultDecisionName = pilotAbilityDecision.GetDecisions().FirstOrDefault().Name;
                 pilotAbilityDecision.ShowSkipButton = true;
                 pilotAbilityDecision.Start();
             }
