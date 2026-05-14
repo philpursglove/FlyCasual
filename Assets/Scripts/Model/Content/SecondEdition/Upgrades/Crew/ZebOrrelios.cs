@@ -1,6 +1,6 @@
-using Upgrade;
 using ActionsList;
 using UnityEngine;
+using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
