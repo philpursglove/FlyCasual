@@ -118,9 +118,10 @@ namespace Abilities.SecondEdition
 
                 foreach (GenericToken Token in redtokens.OrderBy(t => t switch 
                     {
-                        RedTargetLockToken => TargetShip.GetRangeToShip((t as RedTargetLockToken).OtherTargetLockTokenOwner as GenericShip) <= 2 ? 0 : 1, // more nuance
-                        IonToken => 2,
-                        _ => 3
+                        // Target Locks are prioritized by range, times two to give gaps for other priorities without ties
+                        RedTargetLockToken => TargetShip.GetRangeToShip((t as RedTargetLockToken).OtherTargetLockTokenOwner as GenericShip) * 2,
+                        StrainToken => 5,
+                        _ => 7
                     }))
                 {
                     string name = Token is RedTargetLockToken ? $"{Token.Name} {(Token as RedTargetLockToken).Letter}" : Token.Name;
