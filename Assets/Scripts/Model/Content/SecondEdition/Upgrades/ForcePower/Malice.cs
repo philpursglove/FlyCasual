@@ -18,8 +18,8 @@ namespace UpgradesList.SecondEdition
                 "Malice",
                 UpgradeType.ForcePower,
                 cost: 4,
-                restriction: new TagRestriction(Content.Tags.DarkSide),
-                abilityType: typeof(Abilities.SecondEdition.MaliceAbility),
+                restriction: new TagRestriction(Tags.DarkSide),
+                abilityType: typeof(MaliceAbility),
                 legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal }
             );
         }
