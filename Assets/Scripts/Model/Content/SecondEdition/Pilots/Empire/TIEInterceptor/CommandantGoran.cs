@@ -120,7 +120,7 @@ namespace Abilities.SecondEdition
                     {
                         // Target Locks are prioritized by range, times two to give gaps for other priorities without ties
                         RedTargetLockToken => TargetShip.GetRangeToShip((t as RedTargetLockToken).OtherTargetLockTokenOwner as GenericShip) * 2,
-                        StrainToken => 5,
+                        StrainToken => 3,
                         _ => 7
                     }))
                 {
