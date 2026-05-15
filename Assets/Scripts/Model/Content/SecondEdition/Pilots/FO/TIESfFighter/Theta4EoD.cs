@@ -1,7 +1,6 @@
 ﻿using Abilities.SecondEdition;
-using ActionsList;
 using Content;
-using Ship;
+using System;
 using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
@@ -41,7 +40,7 @@ namespace Ship.SecondEdition.TIESfFighter
 
             PilotNameCanonical = "theta4-evacuationofdqar";
 
-            //MustHaveUpgrades.Add(typeof(Determination));
+            MustHaveUpgrades.Add(typeof(Determination));
             MustHaveUpgrades.Add(typeof(BarrageRockets));
             MustHaveUpgrades.Add(typeof(PatternAnalyzer));
 
@@ -61,63 +60,41 @@ namespace Abilities.SecondEdition
 
         public override void ActivateAbility()
         {
-            GenericShip.OnGenerateDiceModificationsOppositeGlobal += RegisterAbility;
+            AddDiceModification(
+                HostShip.PilotInfo.PilotName,
+                IsDiceModificationAvailable,
+                GetDiceModificationPriority,
+                DiceModificationType.Reroll,
+                2,
+                timing: DiceModificationTimingType.Opposite,
+                payAbilityCost: PayCost
+            );
         }
 
         public override void DeactivateAbility()
         {
-            GenericShip.OnGenerateDiceModificationsOppositeGlobal -= RegisterAbility;
+            RemoveDiceModification();
         }
 
-        private void RegisterAbility(GenericShip ship)
+        private bool IsDiceModificationAvailable()
         {
-            ship.AddAvailableDiceModification(
-                new Theta4DiceModification()
-                {
-                    HostShip = HostShip
-                },
-                HostShip
-            );
+            return Combat.AttackStep == CombatStep.Attack
+                && Tools.IsAnotherTeam(HostShip, Combat.Attacker)
+                && HostShip.State.Charges > 0
+                && HostShip.UpgradeBar.GetInstalledUpgrade(UpgradeType.Missile).State.Charges > 0
+                && HostShip.SectorsInfo.HasShipInTurretArc(Combat.Attacker);
         }
 
-        private class Theta4DiceModification : GenericAction
+        private int GetDiceModificationPriority()
         {
-            public Theta4DiceModification()
-            {
-                Name = "Theta 4";
+            return 50; // We may want to customize this
+        }
 
-                IsReroll = true;
-                DiceModificationTiming = DiceModificationTimingType.Opposite;
-            }
-
-            public override bool IsDiceModificationAvailable()
-            {
-                return HostShip.State.Charges > 0
-                    && HostShip.UpgradeBar.GetInstalledUpgrade(UpgradeType.Missile).State.Charges > 0
-                    && Combat.AttackStep == CombatStep.Attack
-                    && Tools.IsAnotherTeam(HostShip, Combat.Attacker)
-                    && HostShip.SectorsInfo.HasShipInTurretArc(Combat.Attacker);
-            }
-
-            public override int GetDiceModificationPriority()
-            {
-                return 50; // We may want to customize this
-            }
-
-            public override void ActionEffect(System.Action callBack)
-            {
-                HostShip.SpendCharge();
-                HostShip.UpgradeBar.GetInstalledUpgrade(UpgradeType.Missile).State.SpendCharge();
-
-                DiceRerollManager diceRerollManager = new DiceRerollManager
-                {
-                    NumberOfDiceCanBeRerolled = 2,
-                    IsOpposite = true,
-                    CallBack = callBack
-                };
-
-                diceRerollManager.Start();
-            }
+        private void PayCost(Action<bool> callback)
+        {
+            HostShip.SpendCharge();
+            HostShip.UpgradeBar.GetInstalledUpgrade(UpgradeType.Missile).State.SpendCharge();
+            callback(true);
         }
     }
 }
