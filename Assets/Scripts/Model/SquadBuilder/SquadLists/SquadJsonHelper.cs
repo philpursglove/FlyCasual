@@ -21,7 +21,7 @@ namespace SquadBuilderNS
             squadJson.AddField("faction", Edition.Current.FactionToXws(squadList.SquadFaction));
             squadJson.AddField("ruleset", squadList.Format.ToString());
             squadJson.AddField("points", squadList.Points);
-            squadJson.AddField("version", squadList.Format == Legality.XWA ? Global.CurrentXWAVersion : Global.CurrentAMGVersion );
+            squadJson.AddField("version", squadList.Format == Legality.XWA ? Global.CurrentXWAVersion : Global.CurrentAMGVersion);
 
             JSONObject vendor = new();
             JSONObject vendorFields = new();
@@ -103,7 +103,7 @@ namespace SquadBuilderNS
             }
             catch (Exception)
             {
-                Messages.ShowError("Error during creation of description os squadron");
+                Messages.ShowError("Error during creation of description of squadron");
             }
 
             return result;
@@ -164,9 +164,8 @@ namespace SquadBuilderNS
                     squad.Name = squadJson["name"].str;
                 }
 
-                if (squad.PlayerNo == Players.PlayerNo.Player1)
+                if (squad.PlayerNo == Players.PlayerNo.Player1 || squad.PlayerNo == Players.PlayerNo.PlayerNone)
                 {
-
                     if (squadJson.HasField("ruleset"))
                     {
                         squad.Format = Options.GetFormatAsLegality(squadJson["ruleset"].str);
