@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using Actions;
+using GameCommands;
+using GameModes;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Linq;
-using GameModes;
-using GameCommands;
-using Actions;
 
 namespace SubPhases
 {
@@ -73,7 +72,8 @@ namespace SubPhases
         private GameObject DecisionPanel;
         private GameObject ButtonsHolder;
         protected List<Decision> decisions = new();
-        public string DefaultDecisionName;
+        private string defaultDecisionName;
+        public string DefaultDecisionName { get { return defaultDecisionName ?? decisions.FirstOrDefault().Name; } set { defaultDecisionName = value; } }
         public Players.GenericPlayer DecisionOwner;
         public bool ShowSkipButton;
         public DecisionViewTypes DecisionViewType = DecisionViewTypes.TextButtons;
