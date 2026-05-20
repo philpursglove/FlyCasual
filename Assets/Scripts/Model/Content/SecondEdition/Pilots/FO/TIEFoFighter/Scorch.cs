@@ -61,17 +61,17 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnAttackStartAsAttacker += RegisterEpsilonLeaderAbility;
-            HostShip.OnAttackFinishAsAttacker += RemoveZetaLeaderAbility;
+            HostShip.OnAttackStartAsAttacker += RegisterScorchAbility;
+            HostShip.OnAttackFinishAsAttacker += RemoveScorchAbility;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnAttackStartAsAttacker -= RegisterEpsilonLeaderAbility;
-            HostShip.OnAttackFinishAsAttacker -= RemoveZetaLeaderAbility;
+            HostShip.OnAttackStartAsAttacker -= RegisterScorchAbility;
+            HostShip.OnAttackFinishAsAttacker -= RemoveScorchAbility;
         }
 
-        private void RegisterEpsilonLeaderAbility()
+        private void RegisterScorchAbility()
         {
             if (IsAvailable())
             {
@@ -106,21 +106,21 @@ namespace Abilities.SecondEdition
             // add an attack dice
             IsAbilityUsed = true;
             //HostShip.ChangeFirepowerBy(+1);
-            HostShip.AfterGotNumberOfPrimaryWeaponAttackDice += ZetaLeaderAddAttackDice;
+            HostShip.AfterGotNumberOfPrimaryWeaponAttackDice += ScorchAddAttackDice;
             HostShip.Tokens.AssignToken(typeof(StressToken), SubPhases.DecisionSubPhase.ConfirmDecision);
         }
 
-        private void RemoveZetaLeaderAbility(GenericShip genericShip)
+        private void RemoveScorchAbility(GenericShip genericShip)
         {
             // At the end of combat phase, need to remove attack value increase
             if (IsAbilityUsed)
             {
                 //HostShip.ChangeFirepowerBy(-1);
-                HostShip.AfterGotNumberOfPrimaryWeaponAttackDice -= ZetaLeaderAddAttackDice;
+                HostShip.AfterGotNumberOfPrimaryWeaponAttackDice -= ScorchAddAttackDice;
                 IsAbilityUsed = false;
             }
         }
-        private void ZetaLeaderAddAttackDice(ref int value)
+        private void ScorchAddAttackDice(ref int value)
         {
             value++;
         }
