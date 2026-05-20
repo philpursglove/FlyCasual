@@ -73,27 +73,31 @@ namespace Abilities.SecondEdition
 
         private void RegisterEpsilonLeaderAbility()
         {
-            RegisterAbilityTrigger(TriggerTypes.OnAttackStart, ShowDecision);
+            if (IsAvailable())
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnAttackStart, ShowDecision);
+            }
+        }
+
+        private bool IsAvailable()
+        {
+            if (HostShip.IsStressed) return false;
+            if (Combat.ChosenWeapon.WeaponType != WeaponTypes.PrimaryWeapon) return false;
+            if (Combat.ShotInfo.Range == 0) return false;
+
+            return true;
         }
 
         private void ShowDecision(object sender, System.EventArgs e)
         {
-            // check if this ship is stressed
-            if (!HostShip.Tokens.HasToken(typeof(StressToken)))
-            {
-                // give user the option to use ability
-                AskToUseAbility(
-                    HostShip.PilotInfo.PilotName,
-                    AlwaysUseByDefault,
-                    UseAbility,
-                    descriptionLong: "Do you want to receive 1 Stress token to roll 1 additional attack die?",
-                    imageHolder: HostShip
-                );
-            }
-            else
-            {
-                Triggers.FinishTrigger();
-            }
+            // give user the option to use ability
+            AskToUseAbility(
+                HostShip.PilotInfo.PilotName,
+                AlwaysUseByDefault,
+                UseAbility,
+                descriptionLong: "Do you want to receive 1 Stress token to roll 1 additional attack die?",
+                imageHolder: HostShip
+            );
         }
 
         private void UseAbility(object sender, System.EventArgs e)
