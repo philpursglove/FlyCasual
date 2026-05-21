@@ -42,7 +42,7 @@ namespace Ship.SecondEdition.TIESfFighter
 
             MustHaveUpgrades.Add(typeof(PassiveSensors));
             MustHaveUpgrades.Add(typeof(SeekerMissiles));
-            MustHaveUpgrades.Add(typeof(FirstOrderOrdnanceTech));
+            MustHaveUpgrades.Add(typeof(FirstOrderOrdnanceTechEoD));
 
             ShipAbilities.Add(new HeavyWeaponTurretEoD());
 
