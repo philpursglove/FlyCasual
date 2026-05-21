@@ -69,20 +69,24 @@ namespace Abilities.SecondEdition
 
         private void RegisterAbility()
         {
-            if (!HostShip.Tokens.HasGreenTokens)
-            {
-                RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, AskGainEvadeToken);
-            }
+            RegisterAbilityTrigger(TriggerTypes.OnCombatPhaseStart, AskGainEvadeToken);
         }
 
         private void AskGainEvadeToken(object sender, System.EventArgs e)
         {
-            AskToUseAbility(
-                HostShip.PilotInfo.PilotName,
-                AiCanUse,
-                GainEvadeToken,
-                descriptionLong: "Spend 1 charge to gain an evade token?"
-            );
+            if (!HostShip.Tokens.HasGreenTokens && HostShip.State.Charges > 0)
+            {
+                AskToUseAbility(
+                    HostShip.PilotInfo.PilotName,
+                    AiCanUse,
+                    GainEvadeToken,
+                    descriptionLong: "Spend 1 charge to gain an evade token?"
+                );
+            }
+            else
+            {
+                Triggers.FinishTrigger();
+            }
         }
 
         private void GainEvadeToken(object sender, System.EventArgs e)
