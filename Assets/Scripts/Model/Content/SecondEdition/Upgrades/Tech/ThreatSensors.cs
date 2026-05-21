@@ -1,5 +1,5 @@
 ﻿using Abilities.SecondEdition;
-using System;
+using Content;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -13,7 +13,8 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Tech,
                 cost: 0,
                 isLimited: true,
-                abilityType: typeof(ThreatSensorsAbility)
+                abilityType: typeof(ThreatSensorsAbility),
+                legalityInfo: new() { Legality.XWA }
             );
 
             IsHidden = true;
@@ -43,7 +44,7 @@ namespace Abilities.SecondEdition
 
         public override void DeactivateAbility()
         {
-            throw new NotImplementedException();
+            RemoveDiceModification();
         }
 
         private int GetAiPriority()
