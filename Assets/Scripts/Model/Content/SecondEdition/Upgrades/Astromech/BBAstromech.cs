@@ -39,6 +39,8 @@ namespace Abilities.SecondEdition
 
     public class BBAstromechAbility : GenericAbility
     {
+        protected List<GenericAction> AbilityActions = new() { new BarrelRollAction() };
+
         public override void ActivateAbility()
         {
             HostShip.OnSystemsPhaseStart += PlanAction;
@@ -65,7 +67,7 @@ namespace Abilities.SecondEdition
             HostShip.BeforeActionIsPerformed += SpendCharge;
 
             HostShip.AskPerformFreeAction(
-                new List<GenericAction> { new BarrelRollAction() },
+                AbilityActions,
                 CleanUp,
                 HostUpgrade.UpgradeInfo.Name,
                 "You may spend 1 Charge to perform a Barrel Roll action",
