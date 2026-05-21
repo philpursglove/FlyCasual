@@ -131,16 +131,16 @@ namespace ActionsList.SecondEdition
 
         public override void ActionEffect(Action callBack)
         {
-            if (Combat.DiceRollAttack.HasResult(DieSide.Focus)) {
-                Combat.DiceRollAttack.RemoveType(DieSide.Focus);
+            if (Combat.CurrentDiceRoll.HasResult(DieSide.Focus)) {
+                Combat.CurrentDiceRoll.RemoveType(DieSide.Focus);
             } 
             else
-            if (Combat.DiceRollAttack.HasResult(DieSide.Success)) {
-                Combat.DiceRollAttack.RemoveType(DieSide.Success);
+            if (Combat.CurrentDiceRoll.HasResult(DieSide.Success)) {
+                Combat.CurrentDiceRoll.RemoveType(DieSide.Success);
             }
             else
             {
-                Combat.DiceRollAttack.RemoveType(DieSide.Crit);
+                Combat.CurrentDiceRoll.RemoveType(DieSide.Crit);
             }
             base.ActionEffect(callBack);
         }
