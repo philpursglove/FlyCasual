@@ -112,7 +112,7 @@ namespace Abilities.SecondEdition
 
         private void AdaptiveSFoilsAttackAbility()
         {
-            if (!HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Bullseye))
+            if (HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Bullseye))
             {
                 HostShip.Tokens.RemoveToken(typeof(DepleteToken),()=>{});
             }
