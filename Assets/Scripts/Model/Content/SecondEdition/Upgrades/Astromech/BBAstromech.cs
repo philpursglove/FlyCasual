@@ -35,45 +35,46 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    //Before you execute a blue maneuver, you may spend 1 charge to perform a barrel roll action.
+    // During the system phase, you may spend 1 charge to perform a barrel roll action.
+
     public class BBAstromechAbility : GenericAbility
     {
-        protected List<GenericAction> AbilityActions = new List<GenericAction> { new BarrelRollAction() };
-
         public override void ActivateAbility()
         {
-            HostShip.BeforeMovementIsExecuted += PlanAction;
+            HostShip.OnSystemsPhaseStart += PlanAction;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.BeforeMovementIsExecuted -= PlanAction;
+            HostShip.OnSystemsPhaseStart -= PlanAction;
         }
 
-        private void PlanAction(GenericShip host)
+        private void PlanAction(GenericShip ship)
         {
-            if (host.AssignedManeuver.ColorComplexity == Movement.MovementComplexity.Easy && HostUpgrade.State.Charges > 0)
-            {
-                RegisterAbilityTrigger(TriggerTypes.BeforeMovementIsExecuted, AskPerformAction);
-            }
+            RegisterAbilityTrigger(TriggerTypes.OnSystemsPhaseStart, AskPerformAction);
         }
 
         private void AskPerformAction(object sender, EventArgs e)
         {
+            if (HostUpgrade.State.Charges < 1)
+            {
+                Triggers.FinishTrigger();
+                return;
+            }
+
             HostShip.BeforeActionIsPerformed += SpendCharge;
 
             HostShip.AskPerformFreeAction(
-                AbilityActions,
+                new List<GenericAction> { new BarrelRollAction() },
                 CleanUp,
                 HostUpgrade.UpgradeInfo.Name,
-                "Before you execute a blue maneuver, you may spend 1 Charge to perform a Barrel Roll action",
+                "You may spend 1 Charge to perform a Barrel Roll action",
                 HostUpgrade
             );
         }
 
         private void SpendCharge(GenericAction action, ref bool isFreeAction)
         {
-            HostShip.BeforeActionIsPerformed -= SpendCharge;
             Sounds.PlayShipSound("BB-8-Sound");
             HostUpgrade.State.SpendCharge();
         }
