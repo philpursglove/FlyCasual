@@ -23,7 +23,7 @@ namespace Ship.SecondEdition.T70XWing
                 "Evacuation of D'Qar",
                 Faction.Resistance,
                 1,
-                4, // todo!
+                10,
                 0,
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.JaycrisTubbsAbility),
@@ -36,7 +36,7 @@ namespace Ship.SecondEdition.T70XWing
                 {
                     Tags.XWing
                 },
-                legality: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal },
+                legality: new List<Legality> { Legality.XWA },
                 isStandardLayout: true
             );
             ShipAbilities.Add(new Abilities.SecondEdition.AdaptiveSFoils());
@@ -49,15 +49,6 @@ namespace Ship.SecondEdition.T70XWing
             ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BoostAction), typeof(FocusAction)));
 
             PilotNameCanonical = "jaycristubbs-evacuationofdqar";
-        }
-    }
-
-    public class JaycrisTubbsEoDXWA : JaycrisTubbsEoD
-    {
-        public JaycrisTubbsEoDXWA() : base()
-        {
-            (PilotInfo as PilotCardInfo25).Cost = 10;
-            (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
         }
     }
 }
