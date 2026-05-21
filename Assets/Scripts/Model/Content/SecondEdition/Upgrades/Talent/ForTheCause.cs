@@ -55,7 +55,7 @@ namespace Abilities.SecondEdition
             host.AddAvailableDiceModificationOwn(newAction);
         }
 
-        private void UseAbilityAction(Action action)
+        private void UseAbilityAction(Action callback)
         {
             SelectTargetForAbility(
                 AskRemoveStrainOrDeplete,
@@ -65,7 +65,8 @@ namespace Abilities.SecondEdition
                 HostName,
                 "Choose a ship, that ship will remove one strain or deplete token.",
                 HostUpgrade,
-                true
+                true,
+                callback
             );
         }
 
@@ -84,7 +85,7 @@ namespace Abilities.SecondEdition
             {
                 AskToUseAbility(
                     "Choose token to remove",
-                    AlwaysUseByDefault, // Ai Currently always removes a deplete.
+                    AlwaysUseByDefault, // Ai currently always removes a deplete.
                     useAbility: delegate { RemoveDeplete(); },
                     dontUseAbility: delegate { RemoveStrain(); },
                     descriptionLong: "Do you want to remove Deplete token (otherwise Strain token will be removed)",
@@ -146,8 +147,7 @@ namespace ActionsList.SecondEdition
 
         public override bool IsDiceModificationAvailable()
         {
-            return Combat.AttackStep == CombatStep.Attack
-                && (Combat.DiceRollAttack.HasResult(DieSide.Focus) || Combat.DiceRollAttack.HasResult(DieSide.Crit) || Combat.DiceRollAttack.HasResult(DieSide.Success));
+            return Combat.DiceRollAttack.HasResult(DieSide.Focus) || Combat.DiceRollAttack.HasResult(DieSide.Crit) || Combat.DiceRollAttack.HasResult(DieSide.Success);
         }
 
         public override int GetDiceModificationPriority()
