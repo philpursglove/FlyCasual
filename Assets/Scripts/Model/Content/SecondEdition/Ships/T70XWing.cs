@@ -1,11 +1,12 @@
-﻿using Actions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Actions;
 using ActionsList;
 using Arcs;
 using Movement;
 using Ship.CardInfo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Tokens;
 using UnityEngine;
 
 namespace Ship
@@ -102,6 +103,47 @@ namespace Ship
                 ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(FocusAction), typeof(BarrelRollAction)));
                 ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(BarrelRollAction)));
                 ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BoostAction), typeof(FocusAction)));
+            }
+        }
+    }
+}
+
+namespace Abilities.SecondEdition
+{
+    // After you perform a Barrel Roll action, gain a deplete token.
+    // While you perform an attack, before rolling attack dice, if the defender is in your bullseye, you may remove 1 deplete token.
+    public class AdaptiveSFoils : GenericAbility
+    {
+        public override void ActivateAbility()
+        {
+            HostShip.OnActionIsPerformed += CheckActionAbility;
+            HostShip.OnAttackStartAsAttacker += AdaptiveSFoilsAttackAbility;
+        }
+
+        public override void DeactivateAbility()
+        {
+            HostShip.OnActionIsPerformed -= CheckActionAbility;
+            HostShip.OnAttackStartAsAttacker -= AdaptiveSFoilsAttackAbility;
+        }
+
+        private void CheckActionAbility(GenericAction action)
+        {
+            if (action is BarrelRollAction)
+            {
+                RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, GainDeplete);
+            }
+        }
+
+        private void GainDeplete(object sender, EventArgs e)
+        {
+            HostShip.Tokens.AssignToken(new DepleteToken(HostShip),Triggers.FinishTrigger);
+        }
+
+        private void AdaptiveSFoilsAttackAbility()
+        {
+            if (HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Bullseye))
+            {
+                HostShip.Tokens.RemoveToken(typeof(DepleteToken),()=>{});
             }
         }
     }

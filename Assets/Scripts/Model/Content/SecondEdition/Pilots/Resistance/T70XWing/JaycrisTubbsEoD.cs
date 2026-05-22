@@ -1,15 +1,11 @@
-using Abilities.SecondEdition;
-using ActionsList;
+using System;
+using System.Collections.Generic;
 using Content;
 using Movement;
 using Ship;
-using SubPhases;
-using System;
-using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
-using Actions;
 
 namespace Ship.SecondEdition.T70XWing
 {
@@ -66,44 +62,6 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    // After you perform a Barrel Roll action, gain a deplete token.
-    // While you perform an attack, before rolling attack dice, if the defender is in your bullseye, you may remove 1 deplete token.
-    public class AdaptiveSFoils : GenericAbility
-    {
-        public override void ActivateAbility()
-        {
-            HostShip.OnActionIsPerformed += CheckActionAbility;
-            HostShip.OnAttackStartAsAttacker += AdaptiveSFoilsAttackAbility;
-        }
-
-        public override void DeactivateAbility()
-        {
-            HostShip.OnActionIsPerformed -= CheckActionAbility;
-            HostShip.OnAttackStartAsAttacker -= AdaptiveSFoilsAttackAbility;
-        }
-
-        private void CheckActionAbility(GenericAction action)
-        {
-            if (action is BarrelRollAction)
-            {
-                RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, GainDeplete);
-            }
-        }
-
-        private void GainDeplete(object sender, EventArgs e)
-        {
-            HostShip.Tokens.AssignToken(new DepleteToken(HostShip),Triggers.FinishTrigger);
-        }
-
-        private void AdaptiveSFoilsAttackAbility()
-        {
-            if (HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Bullseye))
-            {
-                HostShip.Tokens.RemoveToken(typeof(DepleteToken),()=>{});
-            }
-        }
-    }
-
     // After you reveal a basic maneuver, you may reduce its difficulty.
     // If you do, after the Check Difficulty step, gain 1 strain token.
     public class ROAstromechAbility : GenericAbility
