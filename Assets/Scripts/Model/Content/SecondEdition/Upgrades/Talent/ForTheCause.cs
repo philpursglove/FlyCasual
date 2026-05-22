@@ -147,7 +147,7 @@ namespace ActionsList.SecondEdition
 
         public override bool IsDiceModificationAvailable()
         {
-            return Combat.DiceRollAttack.HasResult(DieSide.Focus) || Combat.DiceRollAttack.HasResult(DieSide.Crit) || Combat.DiceRollAttack.HasResult(DieSide.Success);
+            return Combat.CurrentDiceRoll.HasResult(DieSide.Focus) || Combat.CurrentDiceRoll.HasResult(DieSide.Crit) || Combat.CurrentDiceRoll.HasResult(DieSide.Success);
         }
 
         public override int GetDiceModificationPriority()
