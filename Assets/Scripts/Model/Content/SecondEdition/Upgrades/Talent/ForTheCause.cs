@@ -86,8 +86,8 @@ namespace Abilities.SecondEdition
                 AskToUseAbility(
                     "Choose token to remove",
                     AlwaysUseByDefault, // Ai currently always removes a deplete.
-                    useAbility: delegate { RemoveDeplete(); },
-                    dontUseAbility: delegate { RemoveStrain(); },
+                    useAbility: RemoveDeplete,
+                    dontUseAbility: RemoveStrain,
                     descriptionLong: "Do you want to remove Deplete token (otherwise Strain token will be removed)",
                     showSkipButton: false,
                     requiredPlayer: HostShip.Owner.PlayerNo
@@ -95,21 +95,23 @@ namespace Abilities.SecondEdition
             }
             else if (TargetShip.Tokens.HasToken<DepleteToken>())
             {
-                RemoveDeplete();
+                TargetShip.Tokens.SpendToken(typeof(DepleteToken),()=>{});
             }
             else
             {
-                RemoveStrain();
+                TargetShip.Tokens.SpendToken(typeof(StrainToken),()=>{});
             }
         }
 
-        private void RemoveStrain()
+        private void RemoveStrain(object sender, EventArgs e)
         {
+            SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
             TargetShip.Tokens.SpendToken(typeof(StrainToken),()=>{});
         }
 
-        private void RemoveDeplete()
+        private void RemoveDeplete(object sender, EventArgs e)
         {
+            SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
             TargetShip.Tokens.SpendToken(typeof(DepleteToken),()=>{});
         }
 
