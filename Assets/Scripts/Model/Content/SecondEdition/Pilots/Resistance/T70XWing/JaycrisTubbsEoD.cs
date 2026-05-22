@@ -13,7 +13,7 @@ using Actions;
 
 namespace Ship.SecondEdition.T70XWing
 {
-    public class JaycrisTubbsEoD : T70XWing
+    public class JaycrisTubbsEoD : T70XWingEoD
     {
         public JaycrisTubbsEoD() : base()
         {
@@ -39,14 +39,8 @@ namespace Ship.SecondEdition.T70XWing
                 legality: new List<Legality> { Legality.XWA },
                 isStandardLayout: true
             );
-            ShipAbilities.Add(new Abilities.SecondEdition.AdaptiveSFoils());
-
             MustHaveUpgrades.Add(typeof(ForTheCause));
             MustHaveUpgrades.Add(typeof(ROAstromech));
-
-            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(FocusAction), typeof(BarrelRollAction)));
-            ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(BarrelRollAction)));
-            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BoostAction), typeof(FocusAction)));
 
             PilotNameCanonical = "jaycristubbs-evacuationofdqar";
         }

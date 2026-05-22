@@ -5,6 +5,7 @@ using Movement;
 using Ship.CardInfo;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Ship
@@ -86,6 +87,21 @@ namespace Ship
                 );
 
                 ShipIconLetter = 'w';
+            }
+        }
+
+        public class T70XWingEoD : T70XWing
+        {
+            public T70XWingEoD() : base()
+            {
+                DefaultUpgrades.Remove(typeof(UpgradesList.SecondEdition.IntegratedSFoilsClosed));
+
+                ShipAbilities.Remove(ShipAbilities.First(n => n.GetType() == typeof(Abilities.SecondEdition.HardPointAbility)));
+                ShipAbilities.Add(new Abilities.SecondEdition.AdaptiveSFoils());
+
+                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(FocusAction), typeof(BarrelRollAction)));
+                ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(BarrelRollAction)));
+                ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(BoostAction), typeof(FocusAction)));
             }
         }
     }
