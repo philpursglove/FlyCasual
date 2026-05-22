@@ -40,6 +40,7 @@ namespace Abilities.SecondEdition
     public class BBAstromechAbility : GenericAbility
     {
         protected List<GenericAction> AbilityActions = new() { new BarrelRollAction() };
+        protected GenericShip selectedShip;
 
         public override void ActivateAbility()
         {
@@ -64,7 +65,9 @@ namespace Abilities.SecondEdition
                 return;
             }
 
-            HostShip.BeforeActionIsPerformed += SpendCharge;
+            HostShip.OnActionIsPerformed += SpendCharge;
+
+            Selection.ThisShip = HostShip; // System phase doesn't have an active ship set yet
 
             HostShip.AskPerformFreeAction(
                 AbilityActions,
@@ -75,7 +78,7 @@ namespace Abilities.SecondEdition
             );
         }
 
-        private void SpendCharge(GenericAction action, ref bool isFreeAction)
+        private void SpendCharge(GenericAction action)
         {
             Sounds.PlayShipSound("BB-8-Sound");
             HostUpgrade.State.SpendCharge();
@@ -83,7 +86,7 @@ namespace Abilities.SecondEdition
 
         private void CleanUp()
         {
-            HostShip.BeforeActionIsPerformed -= SpendCharge;
+            HostShip.OnActionIsPerformed -= SpendCharge;
             Triggers.FinishTrigger();
         }
     }
