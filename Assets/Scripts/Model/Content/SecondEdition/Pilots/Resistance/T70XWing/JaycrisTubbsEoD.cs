@@ -91,7 +91,7 @@ namespace Abilities.SecondEdition
             AskToUseAbility
             (
                 HostUpgrade.UpgradeInfo.Name,
-                AlwaysUseByDefault,
+                DoesAiUse,
                 UseROAstromechAbility,
                 descriptionLong: "Do you want to reduce the difficulty of your maneuver? If you do, gain 1 Strain token after the check difficulty step.",
                 imageHolder: HostUpgrade
@@ -109,6 +109,13 @@ namespace Abilities.SecondEdition
         {
             HostShip.OnMovementFinish -= GainStrain;
             HostShip.Tokens.AssignToken(new StrainToken(HostShip),()=>{});
+        }
+
+        private bool DoesAiUse()
+        {
+            return HostShip.Tokens.HasToken<StressToken>()
+                || HostShip.Tokens.HasToken<StrainToken>()
+                || HostShip.Tokens.HasToken<DepleteToken>(); // This could be improved to only swap deplete for strain when it expects to attack this turn.
         }
     }
 }
