@@ -1,6 +1,7 @@
 ﻿using Abilities.SecondEdition;
 using Actions;
 using ActionsList;
+using BoardTools;
 using Content;
 using Ship;
 using System.Collections.Generic;
@@ -71,19 +72,25 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            HostShip.OnTryPerformAttack += AllowBullseyeAttacksWhileDisarmed;
+            HostShip.OnWeaponsDisabledCheck += AllowBullseyeAttacksWhileDisarmed;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnTryPerformAttack -= AllowBullseyeAttacksWhileDisarmed;
+            HostShip.OnWeaponsDisabledCheck -= AllowBullseyeAttacksWhileDisarmed;
         }
 
-        private void AllowBullseyeAttacksWhileDisarmed(ref bool allowed, List<string> stringList)
+        private void AllowBullseyeAttacksWhileDisarmed(ref bool allowed)
         {
-            allowed = (HostShip.Tokens.CountTokensByType(typeof(WeaponsDisabledToken))) < 2
-                      && (Combat.ChosenWeapon is PrimaryWeaponClass)
-                      && HostShip.SectorsInfo.IsShipInSector(Combat.Defender, Arcs.ArcType.Bullseye);
+            ShotInfo shotInformation = new(HostShip, Selection.AnotherShip, HostShip.PrimaryWeapons.First());
+
+            if (HostShip.Tokens.GetTokens<WeaponsDisabledToken>().Count == 1
+                && Combat.ChosenWeapon is PrimaryWeaponClass
+                && shotInformation.InArcByType(Arcs.ArcType.Bullseye))
+            {
+                Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: Primary weapon attacks in the bullseye arc are allowed while disarmed.");
+                allowed = false;
+            }
         }
     }
 }
