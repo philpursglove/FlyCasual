@@ -32,7 +32,7 @@ namespace Ship.SecondEdition.T70XWing
                 isStandardLayout: true
             );
             MustHaveUpgrades.Add(typeof(ForTheCause));
-            MustHaveUpgrades.Add(typeof(ROAstromech));
+            MustHaveUpgrades.Add(typeof(R0Astromech));
 
             PilotNameCanonical = "jaycristubbs-evacuationofdqar";
         }
