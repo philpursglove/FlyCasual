@@ -87,7 +87,7 @@ namespace Abilities.SecondEdition
                     }
                 );
                 subphase.DescriptionShort = $"{HostUpgrade.UpgradeInfo.Name} Decision";
-                subphase.DescriptionLong = $"Select one token to remove from ${TargetShip.PilotName} (${TargetShip.ShipId}).";
+                subphase.DescriptionLong = $"Select one token to remove from {TargetShip.PilotInfo.PilotName} (ID: {TargetShip.ShipId}).";
 
                 subphase.AddDecision("Deplete", RemoveDeplete);
                 subphase.AddDecision("Strain", RemoveStrain);
