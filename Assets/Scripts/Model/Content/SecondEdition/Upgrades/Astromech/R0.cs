@@ -1,8 +1,8 @@
-using System;
 using Content;
 using Movement;
 using Ship;
 using SubPhases;
+using System;
 using Tokens;
 using Upgrade;
 
@@ -18,7 +18,9 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.R0AstromechAbility),
                 legalityInfo: new() { Legality.XWA }
             );
+
             IsHidden = true;
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/jaycristubbs-evacuationofdqar.png";
         }
     }
 }
@@ -40,30 +42,27 @@ namespace Abilities.SecondEdition
 
         private void CheckManeuverForAbility(GenericShip ship)
         {
-            if (HostShip.AssignedManeuver.IsBasicManeuver
-                && (HostShip.AssignedManeuver.ColorComplexity == Movement.MovementComplexity.Normal || HostShip.AssignedManeuver.ColorComplexity == Movement.MovementComplexity.Complex)
-            )
+            if (HostShip.AssignedManeuver.IsBasicManeuver && (HostShip.AssignedManeuver.ColorComplexity == Movement.MovementComplexity.Normal || HostShip.AssignedManeuver.ColorComplexity == Movement.MovementComplexity.Complex))
             {
-                RegisterAbilityTrigger(TriggerTypes.OnManeuverIsRevealed, RegisterROAstromechAbility);
+                RegisterAbilityTrigger(TriggerTypes.OnManeuverIsRevealed, RegisterR0AstromechAbility);
             }
         }
 
-        private void RegisterROAstromechAbility(object sender, EventArgs e)
+        private void RegisterR0AstromechAbility(object sender, EventArgs e)
         {
             AskToUseAbility
             (
                 HostUpgrade.UpgradeInfo.Name,
                 DoesAiUse,
-                UseROAstromechAbility,
+                UseR0AstromechAbility,
                 descriptionLong: "Do you want to reduce the difficulty of your maneuver? If you do, gain 1 Strain token after the check difficulty step.",
                 imageHolder: HostUpgrade
             );
         }
 
-        private void UseROAstromechAbility(object sender, EventArgs e)
+        private void UseR0AstromechAbility(object sender, EventArgs e)
         {
             HostShip.AssignedManeuver.ColorComplexity = GenericMovement.ReduceComplexity(HostShip.AssignedManeuver.ColorComplexity);
-            // Triggers.FinishTrigger();
             HostShip.OnMovementFinish += GainStrain;
             DecisionSubPhase.ConfirmDecision();
         }
@@ -81,5 +80,4 @@ namespace Abilities.SecondEdition
                 || HostShip.Tokens.HasToken<DepleteToken>(); // This could be improved to only swap deplete for strain when it expects to attack this turn.
         }
     }
-
 }

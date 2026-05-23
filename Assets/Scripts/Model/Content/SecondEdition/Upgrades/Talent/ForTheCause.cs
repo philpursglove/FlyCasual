@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
 using ActionsList;
 using Content;
 using Ship;
 using SubPhases;
+using System;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -20,7 +20,9 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.ForTheCauseAbility),
                 legalityInfo: new List<Legality> { Legality.XWA }
             );
+
             IsHidden = true;
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/jaycristubbs-evacuationofdqar.png";
         }
     }
 }
@@ -71,7 +73,8 @@ namespace Abilities.SecondEdition
         {
             return FilterByTargetType(ship, new List<TargetTypes>() { TargetTypes.AnyFriendly })
                 && FilterTargetsByRange(ship, 1, 2)
-                && (ship.Tokens.HasToken<StrainToken>() || ship.Tokens.HasToken<DepleteToken>());
+                && (ship.Tokens.HasToken<StrainToken>()
+                    || ship.Tokens.HasToken<DepleteToken>());
         }
 
         private void AskRemoveStrainOrDeplete()
@@ -86,6 +89,7 @@ namespace Abilities.SecondEdition
                         SelectShipSubPhase.FinishSelection();
                     }
                 );
+
                 subphase.DescriptionShort = $"{HostUpgrade.UpgradeInfo.Name} Decision";
                 subphase.DescriptionLong = $"Select one token to remove from {TargetShip.PilotInfo.PilotName} (ID: {TargetShip.ShipId}).";
 
@@ -109,14 +113,12 @@ namespace Abilities.SecondEdition
 
         private void RemoveStrain(object sender, EventArgs e)
         {
-            SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
-            TargetShip.Tokens.SpendToken(typeof(StrainToken),DecisionSubPhase.ConfirmDecision);
+            TargetShip.Tokens.RemoveToken(typeof(StrainToken),DecisionSubPhase.ConfirmDecision);
         }
 
         private void RemoveDeplete(object sender, EventArgs e)
         {
-            SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
-            TargetShip.Tokens.SpendToken(typeof(DepleteToken),DecisionSubPhase.ConfirmDecision);
+            TargetShip.Tokens.RemoveToken(typeof(DepleteToken),DecisionSubPhase.ConfirmDecision);
         }
 
         private int ShipTargetAiPriority(GenericShip ship)

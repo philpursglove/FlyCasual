@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Content;
+using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -31,6 +31,7 @@ namespace Ship.SecondEdition.T70XWing
                 legality: new List<Legality> { Legality.XWA },
                 isStandardLayout: true
             );
+
             MustHaveUpgrades.Add(typeof(ForTheCause));
             MustHaveUpgrades.Add(typeof(R0Astromech));
 
