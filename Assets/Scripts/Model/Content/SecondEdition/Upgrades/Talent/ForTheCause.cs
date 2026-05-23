@@ -78,24 +78,32 @@ namespace Abilities.SecondEdition
         {            
             if (TargetShip.Tokens.HasToken<DepleteToken>() && TargetShip.Tokens.HasToken<StrainToken>())
             {
-                AskToUseAbility(
-                    "Choose token to remove",
-                    AlwaysUseByDefault, // Ai currently always removes a deplete.
-                    useAbility: RemoveDeplete,
-                    dontUseAbility: RemoveStrain,
-                    descriptionLong: "Do you want to remove Deplete token (otherwise Strain token will be removed)",
-                    showSkipButton: false,
-                    requiredPlayer: HostShip.Owner.PlayerNo,
-                    callback: SelectShipSubPhase.FinishSelection
+                ForTheCauseTokenDecisionSubPhase subphase = Phases.StartTemporarySubPhaseNew<ForTheCauseTokenDecisionSubPhase>(
+                    $"{HostUpgrade.UpgradeInfo.Name} Token Decision SubPhase",
+                    delegate
+                    {
+                        Phases.FinishSubPhase(typeof(ForTheCauseTokenDecisionSubPhase));
+                        SelectShipSubPhase.FinishSelection();
+                    }
                 );
+                subphase.DescriptionShort = $"{HostUpgrade.UpgradeInfo.Name} Decision";
+                subphase.DescriptionLong = $"Select one token to remove from ${TargetShip.PilotName} (${TargetShip.ShipId}).";
+
+                subphase.AddDecision("Deplete", RemoveDeplete);
+                subphase.AddDecision("Strain", RemoveStrain);
+
+                subphase.DefaultDecisionName = "Deplete";
+                subphase.ShowSkipButton = false;
+
+                subphase.Start();
             }
             else if (TargetShip.Tokens.HasToken<DepleteToken>())
             {
-                TargetShip.Tokens.SpendToken(typeof(DepleteToken),SelectShipSubPhase.FinishSelection);
+                TargetShip.Tokens.RemoveToken(typeof(DepleteToken),SelectShipSubPhase.FinishSelection);
             }
             else
             {
-                TargetShip.Tokens.SpendToken(typeof(StrainToken),SelectShipSubPhase.FinishSelection);
+                TargetShip.Tokens.RemoveToken(typeof(StrainToken),SelectShipSubPhase.FinishSelection);
             }
         }
 
@@ -115,6 +123,8 @@ namespace Abilities.SecondEdition
         {
             return 1; //todo!
         }
+        
+        private class ForTheCauseTokenDecisionSubPhase : DecisionSubPhase { }
     }
 }
 
