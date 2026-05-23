@@ -18,7 +18,7 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Talent,
                 cost: 0,
                 abilityType: typeof(Abilities.SecondEdition.ForTheCauseAbility),
-                legalityInfo: new List<Legality> { Legality.StandardLegal, Legality.ExtendedLegal, Legality.XWA }
+                legalityInfo: new List<Legality> { Legality.XWA }
             );
             IsHidden = true;
         }
@@ -75,9 +75,7 @@ namespace Abilities.SecondEdition
         }
 
         private void AskRemoveStrainOrDeplete()
-        {
-            SubPhases.SelectShipSubPhase.FinishSelectionNoCallback();
-            
+        {            
             if (TargetShip.Tokens.HasToken<DepleteToken>() && TargetShip.Tokens.HasToken<StrainToken>())
             {
                 AskToUseAbility(
@@ -87,29 +85,30 @@ namespace Abilities.SecondEdition
                     dontUseAbility: RemoveStrain,
                     descriptionLong: "Do you want to remove Deplete token (otherwise Strain token will be removed)",
                     showSkipButton: false,
-                    requiredPlayer: HostShip.Owner.PlayerNo
+                    requiredPlayer: HostShip.Owner.PlayerNo,
+                    callback: SelectShipSubPhase.FinishSelection
                 );
             }
             else if (TargetShip.Tokens.HasToken<DepleteToken>())
             {
-                TargetShip.Tokens.SpendToken(typeof(DepleteToken),()=>{});
+                TargetShip.Tokens.SpendToken(typeof(DepleteToken),SelectShipSubPhase.FinishSelection);
             }
             else
             {
-                TargetShip.Tokens.SpendToken(typeof(StrainToken),()=>{});
+                TargetShip.Tokens.SpendToken(typeof(StrainToken),SelectShipSubPhase.FinishSelection);
             }
         }
 
         private void RemoveStrain(object sender, EventArgs e)
         {
             SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
-            TargetShip.Tokens.SpendToken(typeof(StrainToken),()=>{});
+            TargetShip.Tokens.SpendToken(typeof(StrainToken),DecisionSubPhase.ConfirmDecision);
         }
 
         private void RemoveDeplete(object sender, EventArgs e)
         {
             SubPhases.DecisionSubPhase.ConfirmDecisionNoCallback();
-            TargetShip.Tokens.SpendToken(typeof(DepleteToken),()=>{});
+            TargetShip.Tokens.SpendToken(typeof(DepleteToken),DecisionSubPhase.ConfirmDecision);
         }
 
         private int ShipTargetAiPriority(GenericShip ship)
