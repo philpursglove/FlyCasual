@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
 using ActionsList;
 using Content;
 using Ship;
+using System;
+using System.Collections.Generic;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -18,7 +18,9 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.AcceleratedSensorArrayAbility),
                 legalityInfo: new List<Legality> { Legality.XWA }
             );
+
             IsHidden = true;
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/stomeronistarck-evacuationofdqar.png";
         }
     }
 }
@@ -44,6 +46,7 @@ namespace Abilities.SecondEdition
                 HostShip = host,
                 ImageUrl = HostUpgrade.ImageUrl,
             };
+
             host.AddAvailableDiceModificationOwn(newAction);
         }
     }
@@ -64,22 +67,25 @@ namespace ActionsList.SecondEdition
             if (HostShip.RevealedManeuver.IsAdvancedManeuver)
             {
                 diceRerollCount = 2;
-            } 
+            }
             else
             {
                 diceRerollCount = 1;
             }
+
             DiceRerollManager diceRerollManager = new DiceRerollManager
             {
                 NumberOfDiceCanBeRerolled = diceRerollCount,
                 CallBack = callBack
             };
+
             diceRerollManager.Start();
         }
 
         public override bool IsDiceModificationAvailable()
         {
-            return HostShip.RevealedManeuver.Speed >= 3 || HostShip.RevealedManeuver.IsAdvancedManeuver;
+            return (HostShip.RevealedManeuver.Speed >= 3 || HostShip.RevealedManeuver.IsAdvancedManeuver)
+                && !(Combat.Attacker == HostShip && Combat.ChosenWeapon.WeaponType != WeaponTypes.PrimaryWeapon);
         }
 
         public override int GetDiceModificationPriority()

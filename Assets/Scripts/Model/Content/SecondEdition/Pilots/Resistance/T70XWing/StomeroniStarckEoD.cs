@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using Content;
 using Ship.SecondEdition.RZ2AWing;
 using Ship.SecondEdition.T70XWing;
+using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -34,6 +34,7 @@ namespace Ship.SecondEdition.T70XWing
                 legality: new List<Legality> { Legality.XWA },
                 isStandardLayout: true
             );
+
             MustHaveUpgrades.Add(typeof(ForTheCause));
             MustHaveUpgrades.Add(typeof(AcceleratedSensorArray));
             MustHaveUpgrades.Add(typeof(R5X3XWA));
