@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using Content;
+using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
-
 
 namespace Ship.SecondEdition.T70XWing
 {

@@ -1,10 +1,9 @@
-
-using System;
-using System.Collections.Generic;
 using ActionsList;
 using BoardTools;
 using Content;
 using Movement;
+using System;
+using System.Collections.Generic;
 using Tokens;
 using Upgrade;
 
@@ -20,7 +19,9 @@ namespace UpgradesList.SecondEdition
                 abilityType: typeof(Abilities.SecondEdition.RepulsorliftEnginesAbility),
                 legalityInfo: new() { Legality.XWA }
             );
+
             IsHidden = true;
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/caithrenalli-evacuationofdqar.png";
         }
     }
 }
@@ -55,8 +56,7 @@ namespace Abilities.SecondEdition
             if (action is BarrelRollAction)
             {
                 if ((action as BarrelRollAction).SelectedTemplate.Name == "Bank 1 Left" ||
-                    (action as BarrelRollAction).SelectedTemplate.Name == "Bank 1 Right"
-                )
+                    (action as BarrelRollAction).SelectedTemplate.Name == "Bank 1 Right")
                 {
                     RegisterAbilityTrigger(TriggerTypes.OnFreeAction, GainStrain);
                 }
