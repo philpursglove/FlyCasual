@@ -11,7 +11,7 @@ namespace UpgradesList.SecondEdition
                 "Precision Holo-Targeter",
                 UpgradeType.Tech,
                 cost: 0,
-                abilityType: typeof(Abilities.SecondEdition.OutmaneuverAbility)
+                abilityType: typeof(Abilities.SecondEdition.PrecisionHoloTargeterAbility)
             );
 
             IsHidden = true;
@@ -56,7 +56,7 @@ namespace Abilities.SecondEdition
 
         private void ReduceDefenseDice(ref int count)
         {
-            Messages.ShowInfo($"{HostShip.PilotInfo.PilotName}: The defender's defense dice have been decreased by 1.");
+            Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: The defender's defense dice have been decreased by 1.");
             Combat.Defender.AfterGotNumberOfDefenceDice -= ReduceDefenseDice;
 
             count--;
