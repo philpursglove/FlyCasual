@@ -107,7 +107,14 @@ namespace Abilities
             HostReal = hostUpgrade;
             HostShip = hostUpgrade.HostShip;
             HostUpgrade = hostUpgrade;
-            Name = Name ?? hostUpgrade.UpgradeInfo.Name + "'s ability";
+            if (HostUpgrade.UpgradeInfo.Limited == 0)
+            {
+                Name ??= $"{hostUpgrade.UpgradeInfo.Name}'s ({HostShip.PilotInfo.PilotName}) ability";
+            }
+            else
+            {
+                Name ??= $"{hostUpgrade.UpgradeInfo.Name}'s ability";
+            }
 
             ActivateAbilityForSquadBuilder();
         }

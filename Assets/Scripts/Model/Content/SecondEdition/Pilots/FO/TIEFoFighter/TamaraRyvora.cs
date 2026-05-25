@@ -1,7 +1,8 @@
 using Abilities.SecondEdition;
 using Content;
+using Ship;
 using System.Collections.Generic;
-using Tokens;
+using System.Linq;
 using Upgrade;
 
 namespace Ship.SecondEdition.TIEFoFighter
@@ -49,35 +50,64 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
-            AddDiceModification(
-                HostShip.PilotInfo.PilotName,
-                IsAvailable,
-                GetAiPriority,
-                DiceModificationType.Reroll,
-                1,
-                timing: DiceModificationTimingType.Opposite,
-                isGlobal: true
-            );
+            GenericShip.OnAttackStartAsAttackerGlobal += RegisterDiceModification;
         }
 
         public override void DeactivateAbility()
         {
+            GenericShip.OnAttackStartAsAttackerGlobal -= RegisterDiceModification;
+        }
+
+        private void RegisterDiceModification()
+        {
+            if(HostShip.GetTargetLockLetterPairsOn(Combat.Attacker).Any())
+            {
+                GenericShip.OnAttackFinishGlobal += RemoveDiceModifications;
+
+                if (Tools.IsFriendly(HostShip, Combat.Attacker))
+                {
+                    AddDiceModification(
+                        HostShip.PilotInfo.PilotName,
+                        IsAvailable,
+                        GetAiPriority,
+                        DiceModificationType.Reroll,
+                        1,
+                        timing: DiceModificationTimingType.Normal,
+                        isGlobal: true
+                    );
+                }
+                else
+                {
+                    AddDiceModification(
+                        HostShip.PilotInfo.PilotName,
+                        IsAvailable,
+                        GetAiPriority,
+                        DiceModificationType.Reroll,
+                        1,
+                        timing: DiceModificationTimingType.Opposite,
+                        isGlobal: true
+                    );
+                }
+            }
+        }
+
+        private void RemoveDiceModifications(GenericShip ship)
+        {
+            GenericShip.OnAttackFinishGlobal -= RemoveDiceModifications;
+
             RemoveDiceModification();
         }
 
-        public bool IsAvailable()
+        private bool IsAvailable()
         {
             if (Combat.AttackStep != CombatStep.Attack) return false;
 
-            foreach (RedTargetLockToken token in Combat.Attacker.Tokens.GetTokens<RedTargetLockToken>('*'))
-            {
-                if (token.OtherTargetLockTokenOwner == HostShip) return true;
-            }
+            if (HostShip.GetTargetLockLetterPairsOn(Combat.Attacker).Any()) return true;
 
             return false;
         }
 
-        public int GetAiPriority()
+        private int GetAiPriority()
         {
             if (Combat.DiceRollAttack.Successes > 0)
                 return 100;
