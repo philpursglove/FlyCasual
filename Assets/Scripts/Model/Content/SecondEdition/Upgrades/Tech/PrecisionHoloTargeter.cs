@@ -11,7 +11,8 @@ namespace UpgradesList.SecondEdition
                 "Precision Holo-Targeter",
                 UpgradeType.Tech,
                 cost: 0,
-                abilityType: typeof(Abilities.SecondEdition.PrecisionHoloTargeterAbility)
+                abilityType: typeof(Abilities.SecondEdition.PrecisionHoloTargeterAbility),
+                legalityInfo: new () { Content.Legality.XWA }
             );
 
             IsHidden = true;
@@ -45,7 +46,7 @@ namespace Abilities.SecondEdition
 
         private bool CanAbilityBeUsed()
         {
-            if (Combat.ChosenWeapon.WeaponType != WeaponTypes.PrimaryWeapon)
+            if (Combat.ChosenWeapon.WeaponType != WeaponTypes.PrimaryWeapon || Combat.ShotInfo.Range < 1)
             {
                 return false;
             }
