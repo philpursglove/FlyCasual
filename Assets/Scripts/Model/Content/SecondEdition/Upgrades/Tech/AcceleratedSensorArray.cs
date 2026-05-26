@@ -85,7 +85,9 @@ namespace ActionsList.SecondEdition
         public override bool IsDiceModificationAvailable()
         {
             return (HostShip.RevealedManeuver.Speed >= 3 || HostShip.RevealedManeuver.IsAdvancedManeuver)
-                && !(Combat.Attacker == HostShip && Combat.ChosenWeapon.WeaponType != WeaponTypes.PrimaryWeapon);
+                && Combat.ShotInfo.Range > 0
+                && ((Combat.Attacker == HostShip && Combat.ChosenWeapon.WeaponType == WeaponTypes.PrimaryWeapon)
+                    || Combat.Defender == HostShip);
         }
 
         public override int GetDiceModificationPriority()
