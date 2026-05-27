@@ -1,3 +1,5 @@
+using Actions;
+using ActionsList;
 using Content;
 using System.Collections.Generic;
 using Upgrade;
@@ -41,6 +43,8 @@ namespace Ship.SecondEdition.RZ2AWing
             MustHaveUpgrades.Add(typeof(Heroic));
             MustHaveUpgrades.Add(typeof(PushTheLimit));
             MustHaveUpgrades.Add(typeof(XX23SThreadTracers));
+
+            ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(FocusAction), typeof(CoordinateAction), ActionColor.Red));
 
             PilotNameCanonical = "tallissanlintra-evacuationofdqar";
         }
