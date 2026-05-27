@@ -47,7 +47,7 @@ namespace SquadBuilderNS
 
         private bool ValidateMaxSameShipsCount(SquadList squad)
         {
-            Dictionary<string, int> shipTypesCount = new Dictionary<string, int>();
+            Dictionary<string, int> shipTypesCount = new();
 
             foreach (GenericShip ship in squad.Ships.Select(n => n.Instance))
             {
@@ -72,7 +72,7 @@ namespace SquadBuilderNS
 
         private bool ValidateLimitedCards(SquadList squad)
         {
-            Dictionary<string, int> uniqueCards = new Dictionary<string, int>();
+            Dictionary<string, int> uniqueCards = new();
             foreach (SquadListShip shipConfig in squad.Ships)
             {
                 if (shipConfig.Instance.PilotInfo.IsLimited)
@@ -91,7 +91,7 @@ namespace SquadBuilderNS
                 }
             }
 
-            foreach (KeyValuePair<string,int> uniqueCardInfo in uniqueCards)
+            foreach (KeyValuePair<string, int> uniqueCardInfo in uniqueCards)
             {
                 if (uniqueCardInfo.Value < 0)
                 {
@@ -162,7 +162,9 @@ namespace SquadBuilderNS
 
         private bool ValidateStandardizedCards(SquadList squad)
         {
-            Dictionary<string, GenericUpgrade> standardizedUpgradesFound = new Dictionary<string, GenericUpgrade>();
+            if (DebugManager.FreeMode && !Global.IsVsNetworkOpponent) return true;
+
+            Dictionary<string, GenericUpgrade> standardizedUpgradesFound = new();
 
             foreach (SquadListShip shipConfig in squad.Ships)
             {
