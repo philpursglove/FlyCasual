@@ -60,7 +60,7 @@ namespace Abilities.SecondEdition
 
         private void AskUseAbility(GenericAction action)
         {
-            if (HostUpgrade.State.Charges > 0 && (action is BarrelRollAction || action is BoostAction))
+            if (HostUpgrade.State.Charges > 0 && (action is BarrelRollAction || action is BoostAction) && Roster.AllShips.Values.Any(s => Tools.IsAnotherTeam(HostShip, s) && IsInArc(s)))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, UseAbility);
             }
