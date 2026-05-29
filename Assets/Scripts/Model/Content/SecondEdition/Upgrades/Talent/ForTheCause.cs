@@ -1,10 +1,13 @@
 using ActionsList;
+using BoardTools;
 using Content;
 using Ship;
 using SubPhases;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tokens;
+using UnityEngine;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
@@ -123,7 +126,38 @@ namespace Abilities.SecondEdition
 
         private int ShipTargetAiPriority(GenericShip ship)
         {
-            return 1; //todo!
+            if (!(ship.Tokens.HasToken<DepleteToken>() || ship.Tokens.HasToken<StrainToken>()))
+            {
+                return 0;
+            }
+            bool shipHasTarget = ship.HasCombatActivation && HasAnyShipInArc(ship);
+            bool hasActivated = !ship.HasCombatActivation;
+            if (!hasActivated && shipHasTarget && ship.Tokens.HasToken<DepleteToken>())
+            {
+                // This could also factor in expectation of living to fire.
+                return 100;
+            }
+            bool shipIsTarget = AnyShipCanFireOnThis(ship);
+            if (shipIsTarget && ship.Tokens.HasToken<StrainToken>())
+            {
+                return 50;
+            }
+            if (ship.Tokens.HasToken<StressToken>())
+            {
+                // Token will be cleared by a blue maneuver next turn.
+                return 10;
+            }
+            return 20;
+        }
+        
+        private static bool HasAnyShipInArc(GenericShip ship)
+        {
+            return ship.GetAllWeapons().Any(weapon => Roster.AllShips.Values.Any(a => new ShotInfo(ship,a,weapon).InArc));
+        }
+
+        private static bool AnyShipCanFireOnThis(GenericShip ship)
+        {
+            return Roster.AllShips.Values.Any(a => a.HasCombatActivation && a.GetAllWeapons().Any(weapon => new ShotInfo(a,ship,weapon).InArc));
         }
         
         private class ForTheCauseTokenDecisionSubPhase : DecisionSubPhase { }
@@ -162,6 +196,10 @@ namespace ActionsList.SecondEdition
 
         public override int GetDiceModificationPriority()
         {
+            if (Board.GetShipsAtRange(HostShip, new Vector2(1,2),Team.Type.Friendly).Any(a => a.Tokens.HasToken<StrainToken>() || a.Tokens.HasToken<DepleteToken>()))
+            {
+                return 10;
+            }
             return 0;
         }
     }
