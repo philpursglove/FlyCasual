@@ -196,7 +196,11 @@ namespace ActionsList.SecondEdition
 
         public override int GetDiceModificationPriority()
         {
-            if (Board.GetShipsAtRange(HostShip, new Vector2(1,2),Team.Type.Friendly).Any(a => a.Tokens.HasToken<StrainToken>() || a.Tokens.HasToken<DepleteToken>()))
+            if (Board.GetShipsAtRange(HostShip, new Vector2(1,2),Team.Type.Friendly).Any(a => a.Tokens.HasToken<StrainToken>() || a.Tokens.HasToken<DepleteToken>())
+                && (Combat.CurrentDiceRoll.HasResult(DieSide.Focus)
+                || Combat.Defender == HostShip
+                    && Combat.DiceRollDefence.Successes > Combat.DiceRollAttack.SuccessesCancelable))
+                // Don't spend extra hits for attack unless also checking for dice-adding abilities.
             {
                 return 10;
             }
