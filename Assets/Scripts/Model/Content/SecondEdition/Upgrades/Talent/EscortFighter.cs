@@ -64,7 +64,7 @@ namespace ActionsList.SecondEdition
         {
             HostUpgrade.State.SpendCharge();
             Combat.DiceRollDefence.AddDiceAndShow(DieSide.Focus);
-            HostShip.Tokens.AssignToken(new StrainToken(HostShip),()=>{});
+            HostShip.Tokens.AssignToken(new StrainToken(HostShip),callBack);
         }
 
         public override bool IsDiceModificationAvailable()
@@ -83,7 +83,7 @@ namespace ActionsList.SecondEdition
 
         public override int GetDiceModificationPriority()
         {
-            throw new System.NotImplementedException();
+            return 89;
         }
     }
 }
