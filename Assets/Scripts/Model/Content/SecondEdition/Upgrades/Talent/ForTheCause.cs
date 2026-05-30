@@ -99,7 +99,7 @@ namespace Abilities.SecondEdition
                 subphase.AddDecision("Deplete", RemoveDeplete);
                 subphase.AddDecision("Strain", RemoveStrain);
 
-                subphase.DefaultDecisionName = "Deplete";
+                subphase.DefaultDecisionName = AiChooseTokenToRemove(TargetShip);
                 subphase.ShowSkipButton = false;
 
                 subphase.Start();
@@ -112,6 +112,16 @@ namespace Abilities.SecondEdition
             {
                 TargetShip.Tokens.RemoveToken(typeof(StrainToken),SelectShipSubPhase.FinishSelection);
             }
+        }
+
+        private string AiChooseTokenToRemove(GenericShip ship)
+        {
+            bool shipHasTarget = ship.HasCombatActivation && HasAnyShipInArc(ship);
+            if (ship.HasCombatActivation && shipHasTarget && ship.Tokens.HasToken<DepleteToken>())
+            {
+                return "Deplete";
+            }
+            return "Strain";
         }
 
         private void RemoveStrain(object sender, EventArgs e)
