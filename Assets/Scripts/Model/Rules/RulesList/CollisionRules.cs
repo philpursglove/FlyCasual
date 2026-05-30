@@ -38,7 +38,7 @@ namespace RulesList
                     new Trigger()
                     {
                         Name = "Collision: Roll for damage",
-                        TriggerType = TriggerTypes.OnMovementExecuted,
+                        TriggerType = TriggerTypes.OnMovementFinish,
                         TriggerOwner = Selection.ThisShip.Owner.PlayerNo,
                         EventHandler = StartRollForDamage,
                         IsPriority = true
@@ -54,7 +54,7 @@ namespace RulesList
                     new Trigger()
                     {
                         Name = "Collision: Perform Red Action",
-                        TriggerType = TriggerTypes.OnMovementExecuted,
+                        TriggerType = TriggerTypes.OnMovementFinish,
                         TriggerOwner = Selection.ThisShip.Owner.PlayerNo,
                         EventHandler = AskPerformRedAction,
                         IsPriority = true
