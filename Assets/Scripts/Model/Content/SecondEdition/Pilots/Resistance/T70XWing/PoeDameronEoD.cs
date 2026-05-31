@@ -1,4 +1,3 @@
-using Actions;
 using ActionsList;
 using Content;
 using System.Collections.Generic;
@@ -40,12 +39,11 @@ namespace Ship.SecondEdition.T70XWing
             );
 
             ShipInfo.ActionIcons.RemoveLinkedAction(typeof(BoostAction), typeof(FocusAction));
-            ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(SlamAction)));
 
             MustHaveUpgrades.Add(typeof(Heroic));
-            MustHaveUpgrades.Add(typeof(BB8PoeDameronEoD));
+            MustHaveUpgrades.Add(typeof(BB8EoD));
             MustHaveUpgrades.Add(typeof(PrimedOverdriveThruster));
-            MustHaveUpgrades.Add(typeof(BlackOnePoeDameronEoD));
+            MustHaveUpgrades.Add(typeof(BlackOneEoD));
 
             PilotNameCanonical = "poedameron-evacuationofdqar";
         }

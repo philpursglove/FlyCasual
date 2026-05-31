@@ -1,3 +1,4 @@
+using Actions;
 using ActionsList;
 using Ship;
 using Upgrade;
@@ -13,12 +14,9 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Title,
                 cost: 0,
                 isLimited: true,
-                restrictions: new UpgradeCardRestrictions(
-                    new ShipRestriction(typeof(Ship.SecondEdition.T70XWing.T70XWing)),
-                    new FactionRestriction(Faction.Resistance)
-                ),
                 charges: 2,
-                abilityType: typeof(Abilities.SecondEdition.BlackOnePoeDameronEoDAbility)
+                addAction: new ActionInfo(typeof(SlamAction)),
+                abilityType: typeof(Abilities.SecondEdition.BlackOneEoDAbility)
             );
 
             IsHidden = true;
@@ -29,7 +27,7 @@ namespace UpgradesList.SecondEdition
 
 namespace Abilities.SecondEdition
 {
-    public class BlackOnePoeDameronEoDAbility : GenericAbility
+    public class BlackOneEoDAbility : GenericAbility
     {
         public override void ActivateAbility()
         {
@@ -47,7 +45,7 @@ namespace Abilities.SecondEdition
         {
             if (action is SlamAction)
             {
-                if (canBeUsed) canBeUsed = HostUpgrade.State.Charges > 0;
+                canBeUsed = canBeUsed && HostUpgrade.State.Charges > 0;
             }
         }
 

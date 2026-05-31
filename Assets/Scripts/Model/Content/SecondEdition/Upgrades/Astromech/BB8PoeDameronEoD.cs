@@ -9,9 +9,9 @@ using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
-    public class BB8PoeDameronEoD : GenericUpgrade
+    public class BB8EoD : GenericUpgrade
     {
-        public BB8PoeDameronEoD() : base()
+        public BB8EoD() : base()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "BB-8",
@@ -20,7 +20,7 @@ namespace UpgradesList.SecondEdition
                 cost: 0,
                 isLimited: true,
                 restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.BB8PoeDameronEoDAbility),
+                abilityType: typeof(Abilities.SecondEdition.BB8EoDAbility),
                 legalityInfo: new() { Legality.XWA }
             );
 
@@ -34,7 +34,7 @@ namespace Abilities.SecondEdition
 {
     // During the System Phase, you may spend 1 charge to perform a barrel roll or boost action.
     // Before you engage, you may spend 1 charge and gain a strain token. If you do, you may remove 1 disarm token.
-    public class BB8PoeDameronEoDAbility : GenericAbility
+    public class BB8EoDAbility : GenericAbility
     {
         protected List<GenericAction> AbilityActions = new() { new BarrelRollAction(), new BoostAction() };
         protected GenericShip selectedShip;
@@ -72,7 +72,7 @@ namespace Abilities.SecondEdition
                 AbilityActions,
                 CleanUp,
                 HostUpgrade.UpgradeInfo.Name,
-                "You may spend 1 Charge to perform a Barrel Roll action",
+                "You may spend 1 Charge to perform a Barrel Roll or Boost action",
                 HostUpgrade
             );
         }
@@ -101,8 +101,8 @@ namespace Abilities.SecondEdition
                 AskToUseAbility(
                     HostUpgrade.UpgradeInfo.Name,
                     AlwaysUseByDefault,
-                    UseAbility,
-                    descriptionLong: "Do you want to spend 1 charge and receive 1 Strain Token to remove Disarm Token?",
+                    TradeDisarmForStrain,
+                    descriptionLong: "Do you want to spend 1 charge and receive 1 Strain Token to remove 1 Disarm Token?",
                     imageHolder: HostUpgrade
                 );
             } else
@@ -111,17 +111,16 @@ namespace Abilities.SecondEdition
             }
         }
 
-        private void UseAbility(object sender, System.EventArgs e)
+        private void TradeDisarmForStrain(object sender, EventArgs e)
         {
             Messages.ShowInfo(HostShip.PilotInfo.PilotName + " recieved Strain token to remove a Disarm Token");
 
-            HostShip.Tokens.RemoveToken(
-                typeof(WeaponsDisabledToken),
+            HostShip.Tokens.AssignToken(
+                typeof(StrainToken),
                 delegate
                 {
-                    // Do we want to play a sound here? todo!()
                     HostUpgrade.State.SpendCharge();
-                    HostShip.Tokens.AssignToken(typeof(StrainToken), DecisionSubPhase.ConfirmDecision);
+                    HostShip.Tokens.RemoveToken(typeof(WeaponsDisabledToken), DecisionSubPhase.ConfirmDecision);
                 }
             );
         }
