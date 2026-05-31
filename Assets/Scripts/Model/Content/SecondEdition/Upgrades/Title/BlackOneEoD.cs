@@ -5,9 +5,9 @@ using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
-    public class BlackOnePoeDameronEoD : GenericUpgrade
+    public class BlackOneEoD : GenericUpgrade
     {
-        public BlackOnePoeDameronEoD() : base()
+        public BlackOneEoD() : base()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Black One",
