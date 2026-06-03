@@ -16,7 +16,7 @@ public static partial class Roster
 {
     //Players
 
-    public static List<GenericPlayer> Players;
+    public static List<GenericPlayer> Players = new();
 
     public static GenericPlayer Player1 { get { return Players.Find(n => n.PlayerNo == PlayerNo.Player1); } }
     public static GenericPlayer Player2 { get { return Players.Find(n => n.PlayerNo == PlayerNo.Player2); } }
