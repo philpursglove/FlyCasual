@@ -206,6 +206,7 @@ namespace SquadBuilderNS
                         shipNameGeneral = shipRecord.ShipName;
 
                         string pilotNameXws = pilotJson["id"].str;
+                        pilotNameXws = pilotNameXws.Replace("-btanr2wywing", "-wartime"); // fix for old Wartime Loadout ship names
                         PilotRecord pilotRecord = SquadBuilder.Instance.Database.AllPilots.FirstOrDefault(n => n.PilotNameCanonical == pilotNameXws && n.Ship.ShipName == shipNameGeneral && n.PilotFaction == faction && n.AllowableFormats.Contains(squad.Format));
                         if (pilotRecord == null)
                         {
