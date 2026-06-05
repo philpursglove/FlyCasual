@@ -98,7 +98,7 @@ namespace SquadBuilderNS
                 string shipIcons = "";
                 foreach (JSONObject ship in archetype["ships"].list)
                 {
-                    ShipRecord shipRecord = Global.SquadBuilder.Database.AllShips.FirstOrDefault(n => n.ShipName == ship["name"].str);
+                    ShipRecord shipRecord = Global.SquadBuilder.Database.AllShips.FirstOrDefault(n => n.ShipNameCanonical.Equals(ship["xws"].str, System.StringComparison.OrdinalIgnoreCase));
 
                     if (shipRecord != null)
                     {
