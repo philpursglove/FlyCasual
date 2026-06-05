@@ -38,7 +38,7 @@ namespace Ship.SecondEdition.UpsilonClassCommandShuttle
 
             PilotNameCanonical = "pettyofficerthanisson-evacuationofdqar";
 
-            MustHaveUpgrades.Add(typeof(GeneralHux));
+            MustHaveUpgrades.Add(typeof(GeneralHuxEoD));
             MustHaveUpgrades.Add(typeof(AdvancedSensors));
             MustHaveUpgrades.Add(typeof(InterferenceArray));
         }
