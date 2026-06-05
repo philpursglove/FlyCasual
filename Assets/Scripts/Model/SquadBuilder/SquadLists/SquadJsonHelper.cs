@@ -103,7 +103,7 @@ namespace SquadBuilderNS
             }
             catch (Exception)
             {
-                Messages.ShowError("Error during creation of description os squadron");
+                Messages.ShowError("Error during creation of description of squadron");
             }
 
             return result;
@@ -164,9 +164,8 @@ namespace SquadBuilderNS
                     squad.Name = squadJson["name"].str;
                 }
 
-                if (squad.PlayerNo == Players.PlayerNo.Player1)
+                if (squad.PlayerNo == Players.PlayerNo.Player1 || squad.PlayerNo == Players.PlayerNo.PlayerNone)
                 {
-
                     if (squadJson.HasField("ruleset"))
                     {
                         squad.Format = Options.GetFormatAsLegality(squadJson["ruleset"].str);
