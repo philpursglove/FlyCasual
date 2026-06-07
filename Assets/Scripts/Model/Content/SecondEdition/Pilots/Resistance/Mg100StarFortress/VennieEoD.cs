@@ -44,7 +44,6 @@ namespace Ship.SecondEdition.Mg100StarFortress
             MustHaveUpgrades.Add(typeof(ProtonBombs));
             MustHaveUpgrades.Add(typeof(DedicatedGunners));
 
-
             ModelInfo.SkinName = "Crimson";
             PilotNameCanonical = "vennie-evacuationofdqar";
         }
