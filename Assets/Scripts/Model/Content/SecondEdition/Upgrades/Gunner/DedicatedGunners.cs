@@ -28,8 +28,9 @@ namespace UpgradesList.SecondEdition
             );
 
             IsHidden = true;
-            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/vennie-evacuationofdqar.png";
-        }
+            // todo: investigate why the correct imageUrl thows an error in sprite creation.
+            // ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/vennie-evacuationofdqar.png";
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/kyloren-evacuationofdqar.png";        }
     }
 }
 namespace Abilities.SecondEdition
@@ -75,7 +76,7 @@ namespace Abilities.SecondEdition
                     AiSpendFocusForExtraDie,
                     SpendFocusToAddDiceToRoll,
                     descriptionLong: "Do you want to spend 1 Focus Token to roll 1 additional attack die?",
-                    imageHolder: HostShip,
+                    imageHolder: HostUpgrade,
                     callback: Triggers.FinishTrigger
                 );
             }

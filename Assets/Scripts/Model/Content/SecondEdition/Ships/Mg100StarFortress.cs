@@ -118,7 +118,8 @@ namespace Abilities.SecondEdition
                 imageHolder: HostShip,
                 decisions: new() {
                     { "Left", UseDeviceAbilityLeft },
-                    { "Right", UseDeviceAbilityRight }
+                    { "Right", UseDeviceAbilityRight },
+                    { "No", SkipUseAbility }
                 },
                 tooltips: new(),
                 defaultDecision: "No",
@@ -130,6 +131,11 @@ namespace Abilities.SecondEdition
         private void UseDeviceAbility()
         {
             HostShip.OnGetBombTemplateDirection += GetDeviceDirection;
+            Triggers.FinishTrigger();
+        }
+
+        private void SkipUseAbility(object sender, EventArgs e)
+        {
             Triggers.FinishTrigger();
         }
 
