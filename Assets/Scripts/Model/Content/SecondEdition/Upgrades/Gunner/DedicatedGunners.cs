@@ -30,13 +30,13 @@ namespace UpgradesList.SecondEdition
             IsHidden = true;
             // todo: investigate why the correct imageUrl thows an error in sprite creation.
             // ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/vennie-evacuationofdqar.png";
-            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/kyloren-evacuationofdqar.png";        }
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/kyloren-evacuationofdqar.png";
+        }
     }
 }
 namespace Abilities.SecondEdition
 {
     // While you perform a primary attack, if the defender is in your turret arc, you may spend 1 focus token to roll 1 additional attack die.
-
     // After you perform a primary attack, you may perform a bonus turret arc attack using a turret arc you did not already attack from this round.
     public class DedicatedGunnersAbility : GenericAbility
     {
@@ -47,7 +47,6 @@ namespace Abilities.SecondEdition
             HostShip.Ai.OnGetWeaponPriority += ModifyWeaponPriority;
             HostShip.Ai.OnGetActionPriority += ModifyRotateArcActionPriority;
             HostShip.Ai.OnGetRotateArcFacingPriority += ModifyRotateArcFacingPriority;
-
         }
 
         public override void DeactivateAbility()
@@ -57,7 +56,6 @@ namespace Abilities.SecondEdition
             HostShip.Ai.OnGetWeaponPriority -= ModifyWeaponPriority;
             HostShip.Ai.OnGetActionPriority -= ModifyRotateArcActionPriority;
             HostShip.Ai.OnGetRotateArcFacingPriority -= ModifyRotateArcFacingPriority;
-
         }
 
         private void CheckAddDieOption()
