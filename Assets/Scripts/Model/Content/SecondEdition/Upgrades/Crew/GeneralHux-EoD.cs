@@ -64,7 +64,7 @@ namespace Abilities.SecondEdition
                 HostUpgrade.UpgradeInfo.Name,
                 NeverUseByDefault,
                 TreatActionAsRed,
-                descriptionLong: "Do you want to treat your Coorindate?\nIf you do, you may coordinate up to 3 TIE/fo or TIE/sf Fighters. Each ship you coordinate must perform the same action, treating that action as red.",
+                descriptionLong: "Do you want to treat your Coordinate as Red?\nIf you do, you may coordinate up to 3 TIE/fo or TIE/sf Fighters. Each ship you coordinate must perform the same action, treating that action as red.",
                 imageHolder: HostUpgrade
             );
         }
