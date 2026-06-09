@@ -28,9 +28,7 @@ namespace UpgradesList.SecondEdition
             );
 
             IsHidden = true;
-            // todo: investigate why the correct imageUrl thows an error in sprite creation.
-            // ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/vennie-evacuationofdqar.png";
-            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/kyloren-evacuationofdqar.png";
+            ImageUrl = "https://infinitearenas.com/xw2xwa/images/pilots/vennie-evacuationofdqar.png";
         }
     }
 }
