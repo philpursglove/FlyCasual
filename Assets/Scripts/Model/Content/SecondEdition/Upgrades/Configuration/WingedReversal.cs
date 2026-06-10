@@ -55,7 +55,7 @@ namespace Abilities.SecondEdition
             if (HostUpgrade.State.Charges > 0 &&
                 ship.AssignedManeuver.Bearing == ManeuverBearing.Turn &&
                 (HostShip.AssignedManeuver.ColorComplexity == MovementComplexity.Easy ||
-                (!HostShip.IsStressed && HostShip.AssignedManeuver.ColorComplexity != MovementComplexity.Complex)))
+                !HostShip.IsStressed))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnManeuverIsRevealed, RegisterAbility);
             }
@@ -93,7 +93,13 @@ namespace Abilities.SecondEdition
             maneuverKey = HostShip.AssignedManeuver.ToString()[..4] + "E";
             originalColor = HostShip.Maneuvers.ContainsKey(maneuverKey) ? HostShip.Maneuvers[maneuverKey] : MovementComplexity.None;
 
-            HostShip.Maneuvers[maneuverKey] = HostShip.AssignedManeuver.ColorComplexity + 1;
+            if (HostShip.AssignedManeuver.ColorComplexity != MovementComplexity.Complex) {
+                HostShip.Maneuvers[maneuverKey] = HostShip.AssignedManeuver.ColorComplexity + 1;
+            }
+            else
+            {
+                HostShip.Maneuvers[maneuverKey] = MovementComplexity.Complex;
+            }
 
             HostShip.SetAssignedManeuver(ShipMovementScript.MovementFromString(maneuverKey));
 
