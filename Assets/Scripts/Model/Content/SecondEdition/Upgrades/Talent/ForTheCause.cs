@@ -160,12 +160,12 @@ namespace Abilities.SecondEdition
         
         private static bool HasAnyShipInArc(GenericShip ship)
         {
-            return ship.GetAllWeapons().Any(weapon => Roster.AllShips.Values.Any(a => new ShotInfo(ship,a,weapon).InArc));
+            return ship.GetAllWeapons().Any(weapon => Roster.AllShips.Values.Any(a => Tools.IsAnotherTeam(ship, a) && new ShotInfo(ship,a,weapon).InArc));
         }
 
         private static bool AnyShipCanFireOnThis(GenericShip ship)
         {
-            return Roster.AllShips.Values.Any(a => a.HasCombatActivation && a.GetAllWeapons().Any(weapon => new ShotInfo(a,ship,weapon).InArc));
+            return Roster.AllShips.Values.Any(a => Tools.IsAnotherTeam(ship, a) && a.HasCombatActivation && a.GetAllWeapons().Any(weapon => new ShotInfo(a,ship,weapon).InArc));
         }
         
         private class ForTheCauseTokenDecisionSubPhase : DecisionSubPhase { }
