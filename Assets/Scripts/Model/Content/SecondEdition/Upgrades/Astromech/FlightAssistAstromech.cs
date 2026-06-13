@@ -84,7 +84,7 @@ namespace Abilities.SecondEdition
                 HostShip.OnActionIsSkipped += Cleanup;
                 HostShip.OnActionIsPerformed += SpendCharge;
 
-                HostShip.OnGetAvailableBarrelRollTemplates += ReplaceBarrelRollTemplates;
+                HostShip.OnGetAvailableBarrelRollActionTemplates += ReplaceBarrelRollTemplates;
                 HostShip.OnGetAvailableBoostTemplates += ReplaceBoostTemplates;
             }
 
