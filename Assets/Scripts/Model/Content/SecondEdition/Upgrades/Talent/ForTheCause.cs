@@ -117,7 +117,7 @@ namespace Abilities.SecondEdition
         private string AiChooseTokenToRemove(GenericShip ship)
         {
             bool shipHasTarget = ship.HasCombatActivation && HasAnyShipInArc(ship);
-            if (ship.HasCombatActivation && shipHasTarget && ship.Tokens.HasToken<DepleteToken>())
+            if (ship.Tokens.HasToken<DepleteToken>())
             {
                 return "Deplete";
             }
@@ -141,16 +141,14 @@ namespace Abilities.SecondEdition
                 return 0;
             }
             bool shipHasTarget = ship.HasCombatActivation && HasAnyShipInArc(ship);
-            bool hasActivated = !ship.HasCombatActivation;
-            if (!hasActivated && shipHasTarget && ship.Tokens.HasToken<DepleteToken>())
+            if (shipHasTarget && ship.Tokens.HasToken<DepleteToken>())
             {
-                // This could also factor in expectation of living to fire.
                 return 100;
             }
             bool shipIsTarget = AnyShipCanFireOnThis(ship);
             if (shipIsTarget && ship.Tokens.HasToken<StrainToken>())
             {
-                return 50;
+                return 50 + ship.PilotInfo.Cost;
             }
             if (ship.Tokens.HasToken<StressToken>())
             {
