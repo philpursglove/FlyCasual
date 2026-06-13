@@ -117,7 +117,7 @@ namespace Abilities.SecondEdition
         private string AiChooseTokenToRemove(GenericShip ship)
         {
             bool shipHasTarget = ship.HasCombatActivation && HasAnyShipInArc(ship);
-            if (ship.Tokens.HasToken<DepleteToken>())
+            if (shipHasTarget && ship.Tokens.HasToken<DepleteToken>())
             {
                 return "Deplete";
             }
