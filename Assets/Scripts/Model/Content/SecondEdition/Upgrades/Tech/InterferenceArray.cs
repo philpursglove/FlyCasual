@@ -3,7 +3,6 @@ using ActionsList;
 using Ship;
 using SubPhases;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Tokens;
 using Upgrade;
@@ -47,7 +46,7 @@ namespace Abilities.SecondEdition
 
         private void RegisterAfterCoordinateAbility(GenericAction action)
         {
-            if(action is CoordinateAction && HostUpgrade.State.Charges > 0)
+            if (action is CoordinateAction && HostUpgrade.State.Charges > 0)
             {
                 coordinateTarget = action.HostShip;
 
@@ -87,7 +86,8 @@ namespace Abilities.SecondEdition
                 name: HostUpgrade.UpgradeInfo.Name,
                 description: $"Select a target to assign a Jam token.",
                 imageSource: HostUpgrade,
-                onSkip: DecisionSubPhase.ConfirmDecision
+                onSkip: DecisionSubPhase.ConfirmDecision,
+                callback: DecisionSubPhase.ConfirmDecision
             );
         }
 
@@ -107,7 +107,7 @@ namespace Abilities.SecondEdition
         {
             int priority = 0;
 
-            foreach(GenericToken token in ship.Tokens.GetAllTokens())
+            foreach (GenericToken token in ship.Tokens.GetAllTokens())
             {
                 priority += token switch
                 {
