@@ -86,7 +86,6 @@ namespace Abilities.SecondEdition
                 name: HostUpgrade.UpgradeInfo.Name,
                 description: $"Select a target to assign a Jam token.",
                 imageSource: HostUpgrade,
-                onSkip: DecisionSubPhase.ConfirmDecision,
                 callback: DecisionSubPhase.ConfirmDecision
             );
         }
