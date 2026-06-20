@@ -12,7 +12,8 @@ namespace SquadBuilderNS
     {
         public static void SetRandomAiSquad()
         {
-            var json = GetRandomAiSquad();
+            JSONObject json = GetRandomAiSquad();
+
             if (json != null)
             {
                 Global.SquadBuilder.CurrentPlayer = PlayerNo.Player2;
@@ -27,16 +28,6 @@ namespace SquadBuilderNS
 
         private static JSONObject GetRandomAiSquad()
         {
-            string oldDirectoryPath = Application.persistentDataPath + "/" + Edition.Current.Name + "/RandomAiSquadrons";
-            try
-            {
-                if (Directory.Exists(oldDirectoryPath)) Directory.Move(oldDirectoryPath, oldDirectoryPath + "-IsNotUsedAnymore");
-            }
-            catch
-            {
-                Messages.ShowError("Backup of old directory is failed: " + oldDirectoryPath);
-            }
-
             string directoryPathPrefix = Application.persistentDataPath + "/" + Edition.Current.Name + "/AiSquadrons";
             if (!Directory.Exists(directoryPathPrefix)) Directory.CreateDirectory(directoryPathPrefix);
             string directoryPathDefault = directoryPathPrefix + "/Default";
@@ -47,22 +38,21 @@ namespace SquadBuilderNS
             string directoryPathCustom = directoryPathPrefix + "/Custom";
             if (!Directory.Exists(directoryPathCustom)) Directory.CreateDirectory(directoryPathCustom);
 
-            List<string> filePaths = new List<string>();
+            List<string> filePaths = new ();
 
             if (!ExtraOptions.ExtraOptionsManager.ExtraOptions[typeof(NoDefaultAiSquadronsExtraOption)].IsOn)
             {
                 filePaths.AddRange(Directory.GetFiles(directoryPathDefault).ToList());
             }
+
             filePaths.AddRange(Directory.GetFiles(directoryPathCustom).ToList());
 
             if (filePaths.Count != 0)
             {
-                int randomFileIndex = UnityEngine.Random.Range(0, filePaths.Count);
+                int randomFileIndex = Random.Range(0, filePaths.Count);
 
                 string content = File.ReadAllText(filePaths[randomFileIndex]);
-                JSONObject squadJson = new JSONObject(content);
-
-                // filename = Path.GetFileName(filePaths[randomFileIndex]);
+                JSONObject squadJson = new (content);
 
                 return squadJson;
             }
@@ -76,7 +66,7 @@ namespace SquadBuilderNS
         {
             string directoryPath = Application.persistentDataPath + "/" + Edition.Current.Name + "/AiSquadrons/Default";
 
-            foreach (var squadron in Edition.Current.PreGeneratedAiSquadrons)
+            foreach (KeyValuePair<string, string> squadron in Edition.Current.PreGeneratedAiSquadrons)
             {
                 string filePath = directoryPath + "/" + squadron.Key + ".json";
                 if (!DebugManager.NoDefaultAiSquads)
