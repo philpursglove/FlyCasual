@@ -32,6 +32,7 @@ namespace UpgradesList.SecondEdition
         }
     }
 }
+
 namespace Abilities.SecondEdition
 {
     // While you perform a primary attack, if the defender is in your turret arc, you may spend 1 focus token to roll 1 additional attack die.
