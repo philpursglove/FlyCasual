@@ -88,7 +88,7 @@ namespace Abilities.SecondEdition
 
             public override bool IsDiceModificationAvailable()
             {
-                if (Combat.AttackStep == CombatStep.Defence)
+                if (Combat.AttackStep == CombatStep.Defence && Combat.CurrentDiceRoll.HasResult(DieSide.Focus))
                 {
                     foreach (GenericShip friendlyShip in Combat.Defender.Owner.Ships.Values)
                     {
