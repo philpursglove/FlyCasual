@@ -27,13 +27,12 @@ namespace SquadBuilderNS
 
         private bool ValidateShipsCount(SquadList squad)
         {
-            if (!DebugManager.DebugNoSquadBuilderLimits)
+            int minShipsCount = DebugManager.DebugNoSquadBuilderLimits ? 1 : Edition.Current.MinShipsCount;
+
+            if (squad.Ships.Count < minShipsCount)
             {
-                if (squad.Ships.Count < Edition.Current.MinShipsCount)
-                {
-                    Messages.ShowError($"The minimum number of pilots required is: {Edition.Current.MinShipsCount}");
-                    return false;
-                }
+                Messages.ShowError($"You must have at least {minShipsCount} pilots.");
+                return false;
             }
 
             if (squad.Ships.Count > 10)
