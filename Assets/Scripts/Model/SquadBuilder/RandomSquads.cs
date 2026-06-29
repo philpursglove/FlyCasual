@@ -1,5 +1,4 @@
 ﻿using Editions;
-using ExtraOptions.ExtraOptionsList;
 using Players;
 using System.Collections.Generic;
 using System.IO;
@@ -20,64 +19,52 @@ namespace SquadBuilderNS
 
                 Global.SquadBuilder.CurrentSquad.SetPlayerSquadFromImportedJson(json);
             }
-            else
-            {
-                Messages.ShowError("Squadrons for AI aren't found");
-            }
         }
 
         private static JSONObject GetRandomAiSquad()
         {
-            string directoryPathPrefix = Application.persistentDataPath + "/" + Edition.Current.Name + "/AiSquadrons";
-            if (!Directory.Exists(directoryPathPrefix)) Directory.CreateDirectory(directoryPathPrefix);
-            string directoryPathDefault = directoryPathPrefix + "/Default";
-            if (!Directory.Exists(directoryPathDefault)) Directory.CreateDirectory(directoryPathDefault);
+            List<string> preGeneratedSquadrons = new();
 
-            ManagePreGeneratedRandomAiSquads();
+            preGeneratedSquadrons.AddRange(GetDefaultAiSquads());
 
-            string directoryPathCustom = directoryPathPrefix + "/Custom";
-            if (!Directory.Exists(directoryPathCustom)) Directory.CreateDirectory(directoryPathCustom);
+            preGeneratedSquadrons.AddRange(GetCustomAiSquads());
 
-            List<string> filePaths = new ();
-
-            if (!ExtraOptions.ExtraOptionsManager.ExtraOptions[typeof(NoDefaultAiSquadronsExtraOption)].IsOn)
-            {
-                filePaths.AddRange(Directory.GetFiles(directoryPathDefault).ToList());
-            }
-
-            filePaths.AddRange(Directory.GetFiles(directoryPathCustom).ToList());
-
-            if (filePaths.Count != 0)
-            {
-                int randomFileIndex = Random.Range(0, filePaths.Count);
-
-                string content = File.ReadAllText(filePaths[randomFileIndex]);
-                JSONObject squadJson = new (content);
-
-                return squadJson;
-            }
-            else
+            if (preGeneratedSquadrons.Count == 0)
             {
                 return null;
             }
+
+            return new (preGeneratedSquadrons.ElementAt(Random.Range(0, preGeneratedSquadrons.Count)));
         }
 
-        private static void ManagePreGeneratedRandomAiSquads()
+        private static List<string> GetDefaultAiSquads()
         {
-            string directoryPath = Application.persistentDataPath + "/" + Edition.Current.Name + "/AiSquadrons/Default";
+            List<string> defaultSquads = new();
 
-            foreach (KeyValuePair<string, string> squadron in Edition.Current.PreGeneratedAiSquadrons)
+            if (!DebugManager.NoDefaultAiSquads)
             {
-                string filePath = directoryPath + "/" + squadron.Key + ".json";
-                if (!DebugManager.NoDefaultAiSquads)
+                defaultSquads.AddRange(Edition.Current.PreGeneratedAiSquadrons.Values);
+            }
+
+            return defaultSquads;
+        }
+
+
+        private static List<string> GetCustomAiSquads()
+        {
+            List<string> customSquads = new();
+
+            string directory = Application.persistentDataPath + "/" + Edition.Current.Name + "/AiSquadrons";
+
+            if (Directory.Exists(directory) && Directory.GetFiles(directory).Count() > 0)
+            {
+                foreach(string file in Directory.GetFiles(directory))
                 {
-                    File.WriteAllText(filePath, squadron.Value);
-                }
-                else
-                {
-                    if (File.Exists(filePath)) File.Delete(filePath);
+                    customSquads.Add(File.ReadAllText(file));
                 }
             }
+
+            return customSquads;
         }
     }
 }
