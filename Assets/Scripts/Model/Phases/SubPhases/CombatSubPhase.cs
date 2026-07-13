@@ -221,7 +221,7 @@ namespace SubPhases
 
         private static void StartTargetSelection()
         {
-            if (!(Selection.ThisShip is GenericRemote))
+            if (Selection.ThisShip.PrimaryWeapons.Count > 0)
             {
                 Combat.StartSelectAttackTarget(
                     Selection.ThisShip,

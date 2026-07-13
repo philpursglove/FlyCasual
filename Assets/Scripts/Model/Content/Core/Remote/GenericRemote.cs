@@ -69,15 +69,18 @@ namespace Remote
             );
 
             ImageUrl = RemoteInfo.ImageUrl;
+
+            SoundInfo = RemoteInfo is RemoteInfo25 ? (RemoteInfo as RemoteInfo25).SoundInfo : new ShipSoundInfo(new(), "TIE-Fire", 2);
         }
 
         private void GenerateModel(Vector3 position, Quaternion rotation)
         {
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/Remotes/" + RemoteInfo.Name);
-            Model = MonoBehaviour.Instantiate(prefab, position, rotation, BoardTools.Board.GetBoard());
+            GameObject prefab = Resources.Load<GameObject>($"Prefabs/Remotes/{RemoteInfo.Name}");
+            Model = MonoBehaviour.Instantiate(prefab, position, rotation, Board.GetBoard());
             ShipAllParts = Model.transform.Find("RotationHelper/RotationHelper2/ShipAllParts").transform;
+            modelCenter = ShipAllParts.Find($"ShipModels/{RemoteInfo.Name}/ModelCenter").transform;
 
-            SetTagOfChildrenRecursive(Model.transform, "ShipId:" + ShipId.ToString());
+            SetTagOfChildrenRecursive(Model.transform, $"ShipId:{ShipId}");
             SetRaycastTarget(true);
             SetSpotlightMask();
             SetShipIdText(Model);
@@ -106,6 +109,15 @@ namespace Remote
             InitializeState();
             InitializeSectors();
             InitializeShipBaseArc();
+            InitializePrimaryWeapons();
+        }
+
+        private void InitializePrimaryWeapons()
+        {
+            foreach (ShipArcInfo arcInfo in ShipInfo.ArcInfo.Arcs)
+            {
+                if (arcInfo.Firepower > 0) PrimaryWeapons.Add(new PrimaryWeaponClass(this, arcInfo));
+            }
         }
 
         public void ToggleJointArrow(int jointIndex, bool isVisible)

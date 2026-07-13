@@ -13,7 +13,7 @@ namespace Ship
     public partial class GenericShip
     {
         protected Transform ShipAllParts;
-        private Transform modelCenter;
+        protected Transform modelCenter;
 
         private string originalSkinName;
 
