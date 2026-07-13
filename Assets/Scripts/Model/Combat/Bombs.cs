@@ -421,10 +421,10 @@ namespace Bombs
         public static List<GenericUpgrade> GetBombsToDrop(GenericShip ship, UpgradeSubType subType = UpgradeSubType.None, Type type = null)
         {
             return ship.UpgradeBar.GetUpgradesOnlyFaceup()
-                .Where(n => typeof(GenericBomb).IsAssignableFrom(n.GetType()) || n.UpgradeInfo.SubType == UpgradeSubType.Remote)
+                .Where(n => typeof(GenericBomb).IsAssignableFrom(n.GetType()) || n.UpgradeInfo.SubType == subType)
                 .Where(n => !n.State.UsesCharges || n.State.Charges >= n.UpgradeInfo.ChargesCost)
                 .Where(n => subType == UpgradeSubType.None || n.UpgradeInfo.SubType == subType)
-                .Where(n => type == null || n.GetType() == type).ToList();
+                .Where(n => type == null || n.UpgradeInfo.RemoteType == type).ToList();
         }
 
         public static bool HasBombsToDrop(GenericShip ship, UpgradeSubType subType = UpgradeSubType.None, Type type = null)
