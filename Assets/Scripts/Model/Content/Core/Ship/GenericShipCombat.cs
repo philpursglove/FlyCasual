@@ -131,6 +131,7 @@ namespace Ship
         public static event EventHandlerShip OnAttackFinishGlobal;
 
         public event EventHandlerUpgradeRefInt OnGetReloadChargesCount;
+        public event EventHandlerUpgradeRefBool OnAllowBombDropFrontGuides;
         public event EventHandlerBombDropTemplates OnGetAvailableBombDropTemplatesTwoConditions;
         public event EventHandlerBombDropTemplates OnGetAvailableBombDropTemplatesOneCondition;
         public event EventHandlerBombDropTemplates OnGetAvailableBombDropTemplatesNoConditions;
@@ -841,6 +842,15 @@ namespace Ship
             return availableTemplates;
         }
 
+        public bool AllowBombDropFrontGuides(GenericUpgrade upgrade)
+        {
+            bool allowFrontGuides = false;
+
+            OnAllowBombDropFrontGuides?.Invoke(upgrade, ref allowFrontGuides);
+
+            return allowFrontGuides;
+        }
+
         public void CallOnGetBombTemplateDirection(ref Direction direction)
         {
             OnGetBombTemplateDirection?.Invoke(ref direction);
@@ -866,7 +876,7 @@ namespace Ship
 
         public List<ManeuverTemplate> GetAvailableDecloakBoostTemplates()
         {
-            List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>(ShipBase.DecloakBoostTemplatesAvailable);
+            List<ManeuverTemplate> availableTemplates = new(ShipBase.DecloakBoostTemplatesAvailable);
 
             OnGetAvailableDecloakBoostTemplates?.Invoke(availableTemplates);
 
