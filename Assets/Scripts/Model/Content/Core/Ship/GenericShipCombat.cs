@@ -183,6 +183,7 @@ namespace Ship
         public event EventHandler OnBombWasDropped;
         public event EventHandler OnBombWasLaunched;
         public event EventHandler OnRemoteWasDropped;
+        public event EventHandlerUpgrade OnRemoteWasDroppedUpgrade;
         public static event EventHandler OnRemoteWasDroppedGlobal;
         public event EventHandler OnRemoteWasLaunched;
         public static event EventHandler OnRemoteWasLaunchedGlobal;
@@ -1047,6 +1048,7 @@ namespace Ship
             {
                 OnRemoteWasDropped?.Invoke();
                 OnRemoteWasDroppedGlobal?.Invoke();
+                OnRemoteWasDroppedUpgrade?.Invoke(Bombs.BombsManager.CurrentDevice);
 
                 Triggers.ResolveTriggers(TriggerTypes.OnRemoteWasDropped, callback);
             }
