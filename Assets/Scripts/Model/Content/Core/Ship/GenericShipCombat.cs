@@ -427,8 +427,6 @@ namespace Ship
 
         public void CallCombatActivation(Action callback)
         {
-            //Messages.ShowInfo("Ship is activated! " + this.ShipId);
-
             OnCombatActivation?.Invoke(this);
             OnCombatActivationGlobal?.Invoke(this);
 
@@ -437,8 +435,6 @@ namespace Ship
 
         public void CallCombatDeactivation(Action callback)
         {
-            //Messages.ShowInfo("Ship is deactivated! " + this.ShipId);
-
             OnCombatDeactivation?.Invoke(this);
 
             Triggers.ResolveTriggers(TriggerTypes.OnCombatDeactivation, callback);
@@ -462,7 +458,7 @@ namespace Ship
             return result;
         }
 
-        public int GetNumberOfDefenceDice(GenericShip attackerShip)
+        public int GetNumberOfDefenceDice()
         {
             int result = State.Agility;
 
