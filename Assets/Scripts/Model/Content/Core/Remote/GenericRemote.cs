@@ -12,11 +12,10 @@ namespace Remote
     {
         public override bool HasCombatActivation { get { return false; } }
         public RemoteInfo RemoteInfo { get; protected set; }
-        public new RemoteTokensHolder Tokens { get; protected set; } // Assign only Red TLs
         public abstract Dictionary<string, Vector3> BaseEdges { get; }
         public new BoardObjectType BoardObjectType => BoardObjectType.Remote;
 
-        public GenericRemote(GenericPlayer owner)
+        public GenericRemote(GenericPlayer owner) : base()
         {
             Owner = owner;
         }
@@ -27,8 +26,9 @@ namespace Remote
 
             GeneratePilotInfo();
             GenerateModel(position, rotation);
-            GeneratePseudoShip();
             GeneratePseudoBase();
+            GeneratePseudoShip();
+            SetChargesToMax();
             InitializeRosterPanel();
 
             ActivatePilotAbilities();
@@ -36,6 +36,8 @@ namespace Remote
             Board.RegisterRemote(this);
 
             Roster.AddShipToLists(this);
+
+            Roster.UpdateTokensIndicator(this, null);
         }
 
         private void GeneratePseudoBase()
@@ -49,7 +51,7 @@ namespace Remote
                 "Remote",
                 BaseSize.None,
                 Faction.None,
-                new ShipArcsInfo(ArcType.None, 0),
+                RemoteInfo is RemoteInfo25 ? (RemoteInfo as RemoteInfo25).ArcInfo : new ShipArcsInfo(ArcType.None, 0),
                 RemoteInfo.Agility,
                 RemoteInfo.Hull,
                 0,
@@ -61,7 +63,9 @@ namespace Remote
                 RemoteInfo.Name,
                 RemoteInfo.Initiative,
                 0,
-                abilityType: RemoteInfo.AbilityType
+                abilityType: RemoteInfo.AbilityType,
+                charges: RemoteInfo.Charges,
+                regensCharges: RemoteInfo.RegensCharges
             );
 
             ImageUrl = RemoteInfo.ImageUrl;
@@ -129,6 +133,14 @@ namespace Remote
             public RemoteShipBase(GenericShip host) : base(host)
             {
                 baseEdges = new Dictionary<string, Vector3>((host as GenericRemote).BaseEdges);
+
+                Size = BaseSize.Small;
+
+                HALF_OF_SHIPSTAND_SIZE = 0.5f;
+                SHIPSTAND_SIZE = 1f;
+                SHIPSTAND_SIZE_CM = 4f;
+
+                HALF_OF_FIRINGARC_SIZE = 0.425f;
             }
 
             public override List<ManeuverTemplate> BoostTemplatesAvailable => throw new NotImplementedException();
