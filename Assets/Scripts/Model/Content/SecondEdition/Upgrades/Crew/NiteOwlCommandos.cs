@@ -1,4 +1,5 @@
 ﻿using BoardTools;
+using Content;
 using Movement;
 using Ship;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace UpgradesList.SecondEdition
                     UpgradeType.Crew
                 },
                 subType: UpgradeSubType.Remote,
-                cost: 10,
+                cost: 8,
                 isLimited: true,
                 charges: 2,
                 cannotBeRecharged: true,
@@ -27,7 +28,8 @@ namespace UpgradesList.SecondEdition
                     new BaseSizeRestriction(BaseSize.Medium, BaseSize.Large)
                 ),
                 abilityType: typeof(Abilities.SecondEdition.DeployCommandoTeam),
-                remoteType: typeof(Remote.CommandoTeam)
+                remoteType: typeof(Remote.CommandoTeam),
+                legalityInfo: new List<Legality>() { Legality.StandardLegal, Legality.ExtendedLegal, Legality.XWA }
             );
         }
 
