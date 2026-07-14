@@ -108,6 +108,7 @@ namespace Abilities.SecondEdition
         private void FinishAbility()
         {
             Selection.DeselectThisShip();
+            Triggers.FinishTrigger();
         }
     }
 }
