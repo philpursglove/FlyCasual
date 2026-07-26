@@ -50,7 +50,8 @@ namespace Ship
         public delegate void EventHandlerTokenBool(GenericToken token, ref bool data);
         public delegate void EventHandlerShipTokenBool(GenericShip ship, GenericToken token, ref bool data);
         public delegate void EventHandlerBombDropTemplates(List<ManeuverTemplate> availableTemplates, GenericUpgrade upgrade);
-        public delegate void EventHandlerBarrelRollTemplates(List<ManeuverTemplate> availableTemplates, GenericAction action);
+        public delegate void EventHandlerBarrelRollTemplates(List<ManeuverTemplate> availableTemplates);
+        public delegate void EventHandlerBarrelRollActionTemplates(List<ManeuverTemplate> availableTemplates, GenericAction action);
         public delegate void EventHandlerDecloakTemplates(List<ManeuverTemplate> availableTemplates);
         public delegate void EventHandlerBoostTemplates(List<BoostMove> availableTemplates, GenericAction action);
         public delegate void EventHandlerRefString(ref string name);

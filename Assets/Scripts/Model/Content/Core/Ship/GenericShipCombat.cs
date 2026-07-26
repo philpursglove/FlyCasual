@@ -140,6 +140,7 @@ namespace Ship
         public event EventHandlerDirection OnGetBombTemplateDirection;
 
         public event EventHandlerBarrelRollTemplates OnGetAvailableBarrelRollTemplates;
+        public event EventHandlerBarrelRollActionTemplates OnGetAvailableBarrelRollActionTemplates;
         public event EventHandlerDecloakTemplates OnGetAvailableDecloakBarrelRollTemplates;
         public event EventHandlerDecloakTemplates OnGetAvailableDecloakBoostTemplates;
         public event EventHandlerBoostTemplates OnGetAvailableBoostTemplates;
@@ -846,11 +847,21 @@ namespace Ship
             OnGetBombTemplateDirection?.Invoke(ref direction);
         }
 
-        public List<ManeuverTemplate> GetAvailableBarrelRollTemplates(GenericAction action)
+        public List<ManeuverTemplate> GetAvailableBarrelRollActionTemplates(GenericAction action)
         {
             List<ManeuverTemplate> availableTemplates = new(ShipBase.BarrelRollTemplatesAvailable);
 
-            OnGetAvailableBarrelRollTemplates?.Invoke(availableTemplates, action);
+            OnGetAvailableBarrelRollActionTemplates?.Invoke(availableTemplates, action);
+            OnGetAvailableBarrelRollTemplates?.Invoke(availableTemplates);
+
+            return availableTemplates;
+        }
+
+        public List<ManeuverTemplate> GetAvailableBarrelRollTemplates()
+        {
+            List<ManeuverTemplate> availableTemplates = new(ShipBase.BarrelRollTemplatesAvailable);
+
+            OnGetAvailableBarrelRollTemplates?.Invoke(availableTemplates);
 
             return availableTemplates;
         }
