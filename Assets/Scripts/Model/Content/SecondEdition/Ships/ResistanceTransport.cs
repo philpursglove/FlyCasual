@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Actions;
 using ActionsList;
 using Arcs;
@@ -104,7 +105,7 @@ namespace Abilities.SecondEdition
 
         private void RegisterLeaveNoOneBehindAbility(GenericAction action)
         {
-            if (HostShip.Tokens.CountTokensByType<StressToken>() < 2)
+            if (HostShip.Tokens.CountTokensByType<StressToken>() < 2 && HostShip.Owner.Ships.Values.Any(AnotherFriendlySmallShipInRange))
             {
                 RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, AskGainStress);
             }
@@ -115,16 +116,15 @@ namespace Abilities.SecondEdition
             AskToUseAbility(
                 "Leave No One Behind",
                 NeverUseByDefault,
-                GainStressToCoordinateLike,
-                dontUseAbility: delegate { Triggers.FinishTrigger(); },
+                GainStressToAllowFriendlyBoost,
                 showAlwaysUseOption: false,
-                descriptionLong: "Do you want to gain 1 Stress Token to allow another friendly ship at range 0-1 to perform a Boost Action and gain 1 Deplete?",
+                descriptionLong: "Do you want to gain 1 Stress Token to allow another friendly ship at range 0-1 to gain 1 Deplete and perform a Boost Action?",
                 imageHolder: HostShip,
                 showSkipButton: true
             );
         }
 
-        private void GainStressToCoordinateLike(object sender, EventArgs e)
+        private void GainStressToAllowFriendlyBoost(object sender, EventArgs e)
         {
             HostShip.Tokens.AssignToken(new StressToken(HostShip), ChooseTargetShip);
         }
@@ -140,7 +140,7 @@ namespace Abilities.SecondEdition
                 "Choose a ship to gain 1 Deplete Token and perform a Boost Action.",
                 HostShip,
                 true,
-                onSkip: Triggers.FinishTrigger
+                callback: DecisionSubPhase.ConfirmDecision
             );
         }
 
@@ -151,13 +151,14 @@ namespace Abilities.SecondEdition
 
         private void Boost()
         {
+            Selection.ThisShip = TargetShip;
+
             TargetShip.AskPerformFreeAction(
                 new BoostAction(),
-                Triggers.FinishTrigger,
+                BoostCleanup,
                 descriptionShort: "Leave No One Behind",
-                descriptionLong: "Peform a free boost action",
-                imageHolder: HostShip,
-                isForced: true
+                descriptionLong: $"{TargetShip.PilotInfo.PilotName} may perform Peform a free boost action",
+                imageHolder: HostShip
             );
         }
 
@@ -171,6 +172,12 @@ namespace Abilities.SecondEdition
         private int AiShipPriority(GenericShip ship)
         {
             return 1;
+        }
+
+        private void BoostCleanup()
+        {
+            Selection.ThisShip = HostShip;
+            SelectShipSubPhase.FinishSelection();
         }
     }
 }

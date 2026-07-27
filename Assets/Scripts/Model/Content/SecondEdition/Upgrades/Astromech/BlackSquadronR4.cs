@@ -1,5 +1,6 @@
 using System;
 using Abilities.SecondEdition;
+using SubPhases;
 using Tokens;
 using Upgrade;
 
@@ -73,6 +74,7 @@ namespace Abilities.SecondEdition
         private void SpendCharge()
         {
             HostUpgrade.State.SpendCharge();
+            DecisionSubPhase.ConfirmDecision();
         }
     }
 }
