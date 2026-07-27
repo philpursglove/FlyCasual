@@ -115,20 +115,18 @@ namespace Abilities.SecondEdition
 
         private bool AnotherTargetsPresent()
         {
-            bool result = false;
-
             foreach (GenericShip ship in HostShip.Owner.EnemyShips.Values)
             {
                 if (Tools.IsSameShip(ship, OriginalDefender)) continue;
 
                 foreach (IShipWeapon weapon in HostShip.GetAllWeapons())
                 {
-                    ShotInfo shotInfo = new ShotInfo(HostShip, ship, weapon);
+                    ShotInfo shotInfo = new (HostShip, ship, weapon);
                     if (shotInfo.IsShotAvailable) return true;
                 }
             }
 
-            return result;
+            return false;
         }
 
         private void UseWrathAbility(object sender, EventArgs e)
