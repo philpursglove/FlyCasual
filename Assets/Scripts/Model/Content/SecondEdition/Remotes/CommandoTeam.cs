@@ -182,7 +182,7 @@ namespace Abilities.SecondEdition
 
             if (outsidePlayArea)
             {
-                Messages.ShowInfo(HostShip.PilotInfo.PilotName + " fled the play area.");
+                Messages.ShowInfo($"{HostShip.PilotInfo.PilotName} fled the play area.");
                 HostShip.DestroyShipForced(callback, true);
             }
             else if (overlapsShip)
@@ -194,7 +194,7 @@ namespace Abilities.SecondEdition
                         ship.RemotesOverlapped.Add((GenericRemote)HostShip);
                         if (!Tools.IsFriendly(ship, HostShip))
                         {
-                            Messages.ShowInfo(ship.PilotInfo.PilotName + " gains 1 strain due to overlapping " + HostShip.PilotInfo.PilotName);
+                            Messages.ShowInfo($"{ship.PilotInfo.PilotName} gains 1 strain due to overlapping {HostShip.PilotInfo.PilotName}");
                             ship.Tokens.AssignToken(new Tokens.StrainToken(ship), callback);
                         }
                     }
@@ -210,7 +210,7 @@ namespace Abilities.SecondEdition
 
             if (ship.RemotesOverlapped.Contains(HostShip))
             {
-                Messages.ShowInfo(ship.PilotInfo.PilotName + " gains 1 strain due to overlapping " + HostShip.PilotInfo.PilotName);
+                Messages.ShowInfo($"{ship.PilotInfo.PilotName} gains 1 strain due to overlapping {HostShip.PilotInfo.PilotName}");
                 ship.Tokens.AssignToken(new Tokens.StrainToken(ship), delegate { });
             }
         }

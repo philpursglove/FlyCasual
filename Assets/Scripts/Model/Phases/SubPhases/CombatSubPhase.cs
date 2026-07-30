@@ -252,12 +252,12 @@ namespace SubPhases
                     }
                     else
                     {
-                        Messages.ShowErrorToHuman(targetShip.PilotInfo.PilotName + " cannot be selected as a target, it is a friendly ship");
+                        Messages.ShowErrorToHuman($"{targetShip.PilotInfo.PilotName} cannot be selected as a target, it is a friendly ship");
                     }
                 }
                 else
                 {
-                    Messages.ShowErrorToHuman(targetShip.PilotInfo.PilotName + " cannot be selected as a target, first select the attacking ship");
+                    Messages.ShowErrorToHuman($"{targetShip.PilotInfo.PilotName} cannot be selected as a target, first select the attacking ship");
                 }
             }
 
