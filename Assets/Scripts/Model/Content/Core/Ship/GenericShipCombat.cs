@@ -131,6 +131,7 @@ namespace Ship
         public static event EventHandlerShip OnAttackFinishGlobal;
 
         public event EventHandlerUpgradeRefInt OnGetReloadChargesCount;
+        public event EventHandlerUpgradeRefBool OnAllowBombDropFrontGuides;
         public event EventHandlerBombDropTemplates OnGetAvailableBombDropTemplatesTwoConditions;
         public event EventHandlerBombDropTemplates OnGetAvailableBombDropTemplatesOneCondition;
         public event EventHandlerBombDropTemplates OnGetAvailableBombDropTemplatesNoConditions;
@@ -183,6 +184,7 @@ namespace Ship
         public event EventHandler OnBombWasDropped;
         public event EventHandler OnBombWasLaunched;
         public event EventHandler OnRemoteWasDropped;
+        public event EventHandlerUpgrade OnRemoteWasDroppedUpgrade;
         public static event EventHandler OnRemoteWasDroppedGlobal;
         public event EventHandler OnRemoteWasLaunched;
         public static event EventHandler OnRemoteWasLaunchedGlobal;
@@ -427,8 +429,6 @@ namespace Ship
 
         public void CallCombatActivation(Action callback)
         {
-            //Messages.ShowInfo("Ship is activated! " + this.ShipId);
-
             OnCombatActivation?.Invoke(this);
             OnCombatActivationGlobal?.Invoke(this);
 
@@ -437,8 +437,6 @@ namespace Ship
 
         public void CallCombatDeactivation(Action callback)
         {
-            //Messages.ShowInfo("Ship is deactivated! " + this.ShipId);
-
             OnCombatDeactivation?.Invoke(this);
 
             Triggers.ResolveTriggers(TriggerTypes.OnCombatDeactivation, callback);
@@ -462,7 +460,7 @@ namespace Ship
             return result;
         }
 
-        public int GetNumberOfDefenceDice(GenericShip attackerShip)
+        public int GetNumberOfDefenceDice()
         {
             int result = State.Agility;
 
@@ -842,6 +840,15 @@ namespace Ship
             return availableTemplates;
         }
 
+        public bool AllowBombDropFrontGuides(GenericUpgrade upgrade)
+        {
+            bool allowFrontGuides = false;
+
+            OnAllowBombDropFrontGuides?.Invoke(upgrade, ref allowFrontGuides);
+
+            return allowFrontGuides;
+        }
+
         public void CallOnGetBombTemplateDirection(ref Direction direction)
         {
             OnGetBombTemplateDirection?.Invoke(ref direction);
@@ -877,7 +884,7 @@ namespace Ship
 
         public List<ManeuverTemplate> GetAvailableDecloakBoostTemplates()
         {
-            List<ManeuverTemplate> availableTemplates = new List<ManeuverTemplate>(ShipBase.DecloakBoostTemplatesAvailable);
+            List<ManeuverTemplate> availableTemplates = new(ShipBase.DecloakBoostTemplatesAvailable);
 
             OnGetAvailableDecloakBoostTemplates?.Invoke(availableTemplates);
 
@@ -1052,6 +1059,7 @@ namespace Ship
             {
                 OnRemoteWasDropped?.Invoke();
                 OnRemoteWasDroppedGlobal?.Invoke();
+                OnRemoteWasDroppedUpgrade?.Invoke(Bombs.BombsManager.CurrentDevice);
 
                 Triggers.ResolveTriggers(TriggerTypes.OnRemoteWasDropped, callback);
             }
