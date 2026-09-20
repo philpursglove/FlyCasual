@@ -81,7 +81,6 @@ namespace Abilities.SecondEdition
                 HostShip.PilotInfo.PilotName,
                 NeverUseByDefault,
                 UseTurnTemplates,
-                dontUseAbility: CleanUp,
                 requiredPlayer: HostShip.Owner.PlayerNo,
                 descriptionLong: "You may gain 1 stress token to use a left bank or right bank template of the same speed instead as straight."
             );
@@ -109,11 +108,6 @@ namespace Abilities.SecondEdition
             }
 
             availableTemplates.AddRange(newTemplates);
-        }
-
-        private void CleanUp(object sender, EventArgs e)
-        {
-            Triggers.FinishTrigger();
         }
     }
 }
