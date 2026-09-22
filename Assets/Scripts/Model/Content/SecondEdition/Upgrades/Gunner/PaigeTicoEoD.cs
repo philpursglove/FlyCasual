@@ -1,66 +1,86 @@
 ﻿using ActionsList;
 using Bombs;
+using Content;
 using Ship;
 using SubPhases;
 using System;
 using System.Linq;
-using UnityEngine;
+using Tokens;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition
 {
-    public class PaigeTico : GenericUpgrade
+    public class PaigeTicoEoD : GenericUpgrade
     {
-        public PaigeTico() : base()
+        public PaigeTicoEoD() : base()
         {
             UpgradeInfo = new UpgradeCardInfo(
                 "Paige Tico",
                 UpgradeType.Gunner,
-                cost: 6,
+                cost: 0,
                 isLimited: true,
-                restriction: new FactionRestriction(Faction.Resistance),
-                abilityType: typeof(Abilities.SecondEdition.PaigeTicoAbility)
+                abilityType: typeof(Abilities.SecondEdition.PaigeTicoEoDAbility),
+                legalityInfo: new() { Legality.XWA }
             );
 
-            Avatar = new AvatarInfo(
-                Faction.Resistance,
-                new Vector2(295, 1)
-            );
+            IsHidden = true;
         }
     }
 }
 
 namespace Abilities.SecondEdition
 {
-    public class PaigeTicoAbility : GenericAbility
+    public class PaigeTicoEoDAbility : GenericAbility
     {
         public override void ActivateAbility()
         {
-            HostShip.OnShipIsDestroyed += TryRegisterDestructionAbility;
-            HostShip.OnAttackFinishAsAttacker += RegisterFirstAbility;
+            HostShip.OnWeaponsDisabledCheck += AllowTurretAttacks;
+            HostShip.OnAttackFinishAsAttacker += RegisterDropOrRotateAbility;
             Phases.Events.OnRoundEnd += ClearIsAbilityUsedFlag;
         }
 
         public override void DeactivateAbility()
         {
-            HostShip.OnAttackFinishAsAttacker -= RegisterFirstAbility;
-            HostShip.OnShipIsDestroyed -= TryRegisterDestructionAbility;
+            HostShip.OnWeaponsDisabledCheck -= AllowTurretAttacks;
+            HostShip.OnAttackFinishAsAttacker -= RegisterDropOrRotateAbility;
             Phases.Events.OnRoundEnd -= ClearIsAbilityUsedFlag;
         }
 
-        private void RegisterFirstAbility(GenericShip ship)
+        private void RegisterDropOrRotateAbility(GenericShip ship)
         {
             if (!IsAbilityUsed)
             {
-                RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskRotateOrDrop);
+                RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskDropOrRotate);
             }
         }
 
-        private void AskRotateOrDrop(object sender, EventArgs e)
+        private void AllowTurretAttacks(ref bool result)
+        {
+            if (HostShip.Tokens.GetTokens<WeaponsDisabledToken>().Count == 1)
+            {
+                result = false;
+                HostShip.OnCheckIsForbiddenWeapon += AllowTurretsOnly;
+                Phases.Events.OnCombatPhaseEnd_NoTriggers += ClearWeaponLocks;
+            }
+        }
+
+        private void AllowTurretsOnly(GenericShip ship, IShipWeapon weapon, ref bool isAllowed)
+        {
+            // TODO: Confirm this works on PrimaryWeapon turrets as well
+            isAllowed = weapon.WeaponType == WeaponTypes.Turret;
+        }
+
+        private void ClearWeaponLocks()
+        {
+            HostShip.OnCheckIsForbiddenWeapon -= AllowTurretsOnly;
+            Phases.Events.OnCombatPhaseEnd_NoTriggers -= ClearWeaponLocks;
+        }
+
+        private void AskDropOrRotate(object sender, EventArgs e)
         {
             Selection.ChangeActiveShip(HostShip);
 
-            PageTicoAbilityDecision subphase = Phases.StartTemporarySubPhaseNew<PageTicoAbilityDecision>("Paige Tico's ability", Triggers.FinishTrigger);
+            PageTicoAbilityEoDDecision subphase = Phases.StartTemporarySubPhaseNew<PageTicoAbilityEoDDecision>("Paige Tico's ability", Triggers.FinishTrigger);
 
             subphase.DescriptionShort = "Paige Tico";
             subphase.DescriptionLong = "You may drop a bomb or rotate arc";
@@ -83,14 +103,6 @@ namespace Abilities.SecondEdition
             IsAbilityUsed = true;
 
             new RotateArcAction().DoOnlyEffect(Triggers.FinishTrigger);
-        }
-
-        private void TryRegisterDestructionAbility(GenericShip ship, bool isFled)
-        {
-            if (!isFled && HasBombsToDrop())
-            {
-                RegisterAbilityTrigger(TriggerTypes.OnShipIsDestroyed, AskDropBomb);
-            }
         }
 
         private bool HasBombsToDrop()
@@ -132,6 +144,6 @@ namespace Abilities.SecondEdition
             Triggers.ResolveTriggers(TriggerTypes.OnAbilityDirect, Triggers.FinishTrigger);
         }
 
-        private class PageTicoAbilityDecision : DecisionSubPhase { };
+        private class PageTicoAbilityEoDDecision : DecisionSubPhase { };
     }
 };
