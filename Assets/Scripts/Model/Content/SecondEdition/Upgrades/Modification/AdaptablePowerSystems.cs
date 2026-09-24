@@ -93,11 +93,9 @@ namespace Abilities.SecondEdition
 
         private void RemoveStressTokenAndAddDeplete(object sender, EventArgs e)
         {
-            HostShip.Tokens.RemoveToken(typeof(StressToken), null);
-            HostShip.Tokens.AssignToken(new DepleteToken(HostShip), null);
+            HostShip.Tokens.RemoveToken(typeof(StressToken), 
+                delegate { HostShip.Tokens.AssignToken(new DepleteToken(HostShip), DecisionSubPhase.ConfirmDecision); });
             HostUpgrade.State.SpendCharge();
-
-            DecisionSubPhase.ConfirmDecision();
         }
 
         private void CheckAbilityAttack()
@@ -127,11 +125,9 @@ namespace Abilities.SecondEdition
 
         private void RemoveDepleteTokenAndAddStrain(object sender, EventArgs e)
         {
-            HostShip.Tokens.RemoveToken(typeof(DepleteToken), null);
-            HostShip.Tokens.AssignToken(new StrainToken(HostShip), null);
+            HostShip.Tokens.RemoveToken(typeof(DepleteToken), 
+                delegate {HostShip.Tokens.AssignToken(new StrainToken(HostShip), DecisionSubPhase.ConfirmDecision);});
             HostUpgrade.State.SpendCharge();
-
-            DecisionSubPhase.ConfirmDecision();
         }
     }
 }
