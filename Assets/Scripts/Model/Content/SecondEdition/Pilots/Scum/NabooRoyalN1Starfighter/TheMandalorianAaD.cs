@@ -41,7 +41,7 @@ namespace Ship.SecondEdition.NabooRoyalN1Starfighter
                 regensCharges: 0,
                 isStandardLayout: true,
                 legality: new List<Legality> { Legality.XWA },
-                abilityText: "While you defend or perform an attack, if you are in the  at range 1-2 of 2 or more enemy ships, you may change 1 of your blank results to a  result.",
+                abilityText: "While you defend or perform an attack, if you are in the front arc at range 1-2 of 2 or more enemy ships, you may change 1 of your blank results to a focus result.",
                 skinName: "Silver"
 
                 );
