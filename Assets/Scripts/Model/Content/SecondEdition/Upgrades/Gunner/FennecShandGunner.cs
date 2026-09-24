@@ -1,9 +1,5 @@
-﻿using System;
+﻿using Content;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Content;
 using Upgrade;
 
 namespace UpgradesList.SecondEdition

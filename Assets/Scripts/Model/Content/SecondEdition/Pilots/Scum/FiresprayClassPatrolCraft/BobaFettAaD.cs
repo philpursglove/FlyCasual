@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Abilities.SecondEdition;
+﻿using Abilities.SecondEdition;
 using Content;
-using Ship;
+using System.Collections.Generic;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -18,7 +13,7 @@ namespace Ship
             public BobaFettAaD() : base()
             {
                 PilotCardInfo pilotInfo = new PilotCardInfo25(
-                    pilotName: "Boba Fett", 
+                    pilotName: "Boba Fett",
                     pilotTitle: "Armed and Dangerous",
                     faction: Faction.Scum,
                     initiative: 5,
@@ -33,8 +28,8 @@ namespace Ship
                         UpgradeType.Device,
                         UpgradeType.Title
                     },
-                    isStandardLayout:true,
-                    tags: new List<Tags>{Tags.BountyHunter},
+                    isStandardLayout: true,
+                    tags: new List<Tags> { Tags.BountyHunter },
                     skinName: "Boba Fett",
                     legality: new List<Legality> { Legality.XWA }
                 );
