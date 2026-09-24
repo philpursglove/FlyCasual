@@ -80,16 +80,14 @@ namespace Abilities.SecondEdition
             HostShip.OnWeaponsDisabledCheck -= AllowBullseyeAttacksWhileDisarmed;
         }
 
-        private void AllowBullseyeAttacksWhileDisarmed(ref bool allowed)
+        private void AllowBullseyeAttacksWhileDisarmed(ref bool isDisarmed)
         {
-            ShotInfo shotInformation = new(HostShip, Selection.AnotherShip, HostShip.PrimaryWeapons.First());
-
             if (HostShip.Tokens.GetTokens<WeaponsDisabledToken>().Count == 1
                 && Combat.ChosenWeapon is PrimaryWeaponClass
-                && shotInformation.InArcByType(Arcs.ArcType.Bullseye))
+                && HostShip.SectorsInfo.IsShipInSector(Selection.AnotherShip, Arcs.ArcType.Bullseye))
             {
-                Messages.ShowInfo($"{HostUpgrade.UpgradeInfo.Name}: Primary weapon attacks in the bullseye arc are allowed while disarmed.");
-                allowed = false;
+                Messages.ShowInfo($"Restored Speedster: Primary weapon attacks in the bullseye arc are isDisarmed while disarmed.");
+                isDisarmed = false;
             }
         }
     }
