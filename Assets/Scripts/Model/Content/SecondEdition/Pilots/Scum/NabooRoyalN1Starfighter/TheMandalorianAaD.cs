@@ -1,12 +1,9 @@
 ﻿using Abilities.SecondEdition;
 using Actions;
 using ActionsList;
-using BoardTools;
 using Content;
-using Ship;
 using System.Collections.Generic;
 using System.Linq;
-using Tokens;
 using Upgrade;
 using UpgradesList.SecondEdition;
 
@@ -25,7 +22,7 @@ namespace Ship.SecondEdition.NabooRoyalN1Starfighter
                 cost: 10,
                 loadoutValue: 0,
                 isLimited: true,
-                abilityType: typeof(Abilities.SecondEdition.TheMandalorianAbility),
+                abilityType: typeof(TheMandalorianAbility),
                 force: 0,
                 extraUpgradeIcons: new List<UpgradeType>
                 {
@@ -62,33 +59,6 @@ namespace Ship.SecondEdition.NabooRoyalN1Starfighter
 
             ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(SlamAction)));
             ShipInfo.ActionIcons.AddLinkedAction(new LinkedActionInfo(typeof(SlamAction), typeof(TargetLockAction), ActionColor.Red));
-        }
-    }
-}
-
-namespace Abilities.SecondEdition
-{
-    public class RestoredSpeedsterAbility : GenericAbility
-    {
-        public override void ActivateAbility()
-        {
-            HostShip.OnWeaponsDisabledCheck += AllowBullseyeAttacksWhileDisarmed;
-        }
-
-        public override void DeactivateAbility()
-        {
-            HostShip.OnWeaponsDisabledCheck -= AllowBullseyeAttacksWhileDisarmed;
-        }
-
-        private void AllowBullseyeAttacksWhileDisarmed(ref bool isDisarmed)
-        {
-            if (HostShip.Tokens.GetTokens<WeaponsDisabledToken>().Count == 1
-                && Combat.ChosenWeapon is PrimaryWeaponClass
-                && HostShip.SectorsInfo.IsShipInSector(Selection.AnotherShip, Arcs.ArcType.Bullseye))
-            {
-                Messages.ShowInfo($"Restored Speedster: Primary weapon attacks in the bullseye arc are isDisarmed while disarmed.");
-                isDisarmed = false;
-            }
         }
     }
 }
