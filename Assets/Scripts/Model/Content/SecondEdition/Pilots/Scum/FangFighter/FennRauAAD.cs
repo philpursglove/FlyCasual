@@ -19,7 +19,6 @@ namespace Ship.SecondEdition.FangFighter
                 0,
                 isLimited: true,
                 abilityType: typeof(Abilities.SecondEdition.FennRauScumAbility),
-
                 tags: new List<Tags>
                 {
                     Tags.Mandalorian
@@ -41,6 +40,8 @@ namespace Ship.SecondEdition.FangFighter
             MustHaveUpgrades.Add(typeof(AdaptablePowerSystems));
 
             PilotNameCanonical = "fennrau-armedanddangerous";
+
+            ShipInfo.Hull++;
         }
     }
 }
