@@ -57,7 +57,7 @@ namespace Abilities.SecondEdition
         {
             if (Combat.ShotInfo.Weapon.WeaponType != WeaponTypes.PrimaryWeapon) return;
 
-            if (HostUpgrade.UpgradeInfo.Charges > 0 && HostShip.UpgradeBar.GetRechargableUpgrades().Any())
+            if (HostUpgrade.State.Charges > 0 && HostShip.UpgradeBar.GetRechargableUpgrades().Any())
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackFinish, AskUseAbility);
             }

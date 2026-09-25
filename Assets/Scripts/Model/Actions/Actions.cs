@@ -709,7 +709,7 @@ public static partial class ActionsHolder
         GenericTargetLockToken otherToken = assignedTargetLockToken.OtherTargetLockTokenOwner.GetAnotherToken(oppositeType, letter);
 
         otherToken.OtherTargetLockTokenOwner = newOwner;
-        newOwner.Tokens.AssignToken(assignedTargetLockToken, callback, letter);
+        newOwner.Tokens.AssignToken(assignedTargetLockToken, callback);
     }
 
     public static void RemoveTokens(List<GenericToken> tokensList, Action callback)

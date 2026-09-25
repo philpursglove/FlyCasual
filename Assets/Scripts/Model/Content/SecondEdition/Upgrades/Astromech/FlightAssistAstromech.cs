@@ -20,7 +20,7 @@ namespace UpgradesList.SecondEdition
                 "Flight-Assist Astromech",
                 UpgradeType.Astromech,
                 charges: 2,
-                cost: 3,
+                cost: 4,
                 restriction: new BaseSizeRestriction(BaseSize.Small),
                 abilityType: typeof(FlightAssistAstromechAbility),
                 legalityInfo: new List<Legality> { Legality.XWA }
@@ -84,7 +84,7 @@ namespace Abilities.SecondEdition
                 HostShip.OnActionIsSkipped += Cleanup;
                 HostShip.OnActionIsPerformed += SpendCharge;
 
-                HostShip.OnGetAvailableBarrelRollTemplates += ReplaceBarrelRollTemplates;
+                HostShip.OnGetAvailableBarrelRollActionTemplates += ReplaceBarrelRollTemplates;
                 HostShip.OnGetAvailableBoostTemplates += ReplaceBoostTemplates;
             }
 
@@ -141,7 +141,7 @@ namespace Abilities.SecondEdition
             HostShip.OnActionIsSkipped -= Cleanup;
             HostShip.OnActionIsPerformed -= SpendCharge;
 
-            HostShip.OnGetAvailableBarrelRollTemplates -= ReplaceBarrelRollTemplates;
+            HostShip.OnGetAvailableBarrelRollActionTemplates -= ReplaceBarrelRollTemplates;
             HostShip.OnGetAvailableBoostTemplates -= ReplaceBoostTemplates;
 
             savedAction.Color = ActionColor.White; // Reset color or it will persist

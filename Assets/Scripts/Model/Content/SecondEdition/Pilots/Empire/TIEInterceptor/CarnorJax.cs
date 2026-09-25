@@ -21,8 +21,8 @@ namespace Ship.SecondEdition.TIEInterceptor
                 "Royal Guard",
                 Faction.Imperial,
                 5,
-                12,
-                4,
+                13,
+                16,
                 isLimited: true,
                 force: 1,
                 regensForce: 1,
@@ -30,6 +30,7 @@ namespace Ship.SecondEdition.TIEInterceptor
                 extraUpgradeIcons: new List<UpgradeType>()
                 {
                     UpgradeType.ForcePower,
+                    UpgradeType.Modification,
                     UpgradeType.Modification,
                     UpgradeType.Configuration
                 },
@@ -101,7 +102,7 @@ namespace Abilities.SecondEdition
         {
             savedShip = targetShip;
             savedShip.OnTryAddAvailableDiceModification += PreventOwnDiceModification;
-            Phases.Events.OnCombatPhaseEnd_NoTriggers += RemovePreventOwnDiceModification;
+            GenericShip.OnAttackFinishGlobal += RemovePreventOwnDiceModification;
             HostShip.State.SpendForce(1, DecisionSubPhase.ConfirmDecision);
         }
 
@@ -115,9 +116,9 @@ namespace Abilities.SecondEdition
             }
         }
 
-        private void RemovePreventOwnDiceModification()
+        private void RemovePreventOwnDiceModification(GenericShip ship)
         {
-            Phases.Events.OnCombatPhaseEnd_NoTriggers -= RemovePreventOwnDiceModification;
+            GenericShip.OnAttackFinishGlobal -= RemovePreventOwnDiceModification;
             targetShip.OnTryAddAvailableDiceModification -= PreventOwnDiceModification;
             savedShip = null;
         }

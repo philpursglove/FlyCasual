@@ -80,6 +80,7 @@ namespace Ship
         public EventHandlerShipTokenBool BeforeRemovingTokenInEndPhase;
         public static EventHandlerShipTokenBool BeforeRemovingTokenInEndPhaseGlobal;
 
+        public event EventHandler OnBeforeDecloak;
         public event EventHandler OnDecloak;
         public event EventHandler OnSlam;
 
@@ -704,6 +705,14 @@ namespace Ship
 
         // Decloak
 
+        public void CallOnBeforeDecloak(Action callback)
+        {
+            OnBeforeDecloak?.Invoke();
+
+            Triggers.ResolveTriggers(TriggerTypes.OnBeforeDecloak, callback);
+        }
+
+
         public void CallDecloak(Action callback)
         {
             OnDecloak?.Invoke();
@@ -895,6 +904,11 @@ namespace Ship
             bool canPerformActionsWhileStressed = false;
             OnCheckCanPerformActionsWhileStressed?.Invoke(ref canPerformActionsWhileStressed);
             return canPerformActionsWhileStressed;
+        }
+
+        public TokensManager GetTokens()
+        {
+            return this.Tokens;
         }
     }
 }

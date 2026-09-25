@@ -16,7 +16,7 @@ namespace UpgradesList.SecondEdition
             UpgradeInfo = new UpgradeCardInfo(
                 "Burst Laser Turret",
                 UpgradeType.Turret,
-                cost: 4,
+                cost: 5,
                 weaponInfo: new SpecialWeaponInfo(
                     attackValue: 2,
                     minRange: 1,
@@ -54,7 +54,7 @@ namespace Abilities.SecondEdition
         private void RegisterAbility()
         {
             // One charge used on attack by default, check if charges still exist to add an extra die.
-            if (HostUpgrade.State.Charges > 0 && Combat.ChosenWeapon == HostUpgrade && HostShip.GetNumberOfAttackDice(Combat.Defender) < 3)
+            if (HostUpgrade.State.Charges > 0 && Combat.ChosenWeapon == HostUpgrade && Combat.Attacker.GetNumberOfAttackDice() < 3)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnAttackStart, AskToUseAbility);
             }

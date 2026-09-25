@@ -1,5 +1,4 @@
-﻿using ActionsList;
-using BoardTools;
+﻿using BoardTools;
 using Content;
 using Movement;
 using System.Collections.Generic;
@@ -45,7 +44,7 @@ namespace Ship
             public LieutenantLorrirXWA() : base()
             {
                 (PilotInfo as PilotCardInfo25).Cost = 9;
-                (PilotInfo as PilotCardInfo25).LoadoutValue = 7;
+                (PilotInfo as PilotCardInfo25).LoadoutValue = 9;
                 (PilotInfo as PilotCardInfo25).LegalityInfo = new List<Legality> { Legality.XWA };
             }
         }
@@ -66,7 +65,7 @@ namespace Abilities.SecondEdition
             HostShip.OnGetAvailableBarrelRollTemplates -= ChangeBarrelRollTemplates;
         }
 
-        private void ChangeBarrelRollTemplates(List<ManeuverTemplate> availableTemplates, GenericAction action)
+        private void ChangeBarrelRollTemplates(List<ManeuverTemplate> availableTemplates)
         {
             availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Bank, ManeuverDirection.Left, ManeuverSpeed.Speed1));
             availableTemplates.Add(new ManeuverTemplate(ManeuverBearing.Bank, ManeuverDirection.Right, ManeuverSpeed.Speed1));

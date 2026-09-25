@@ -32,6 +32,14 @@ namespace Abilities.SecondEdition
 {
     public class RetrofittedAutothrustersAbility : GenericAbility
     {
+        readonly List<ManeuverBearing> acceptedBearings = new()
+            {
+                ManeuverBearing.Turn,
+                ManeuverBearing.Bank,
+                ManeuverBearing.TallonRoll,
+                ManeuverBearing.SegnorsLoop
+            };
+
         public override void ActivateAbility()
         {
             HostShip.OnMovementFinishSuccessfully += CheckAbility;
@@ -44,14 +52,6 @@ namespace Abilities.SecondEdition
 
         private void CheckAbility(GenericShip ship)
         {
-            List<ManeuverBearing> acceptedBearings = new()
-            {
-                ManeuverBearing.Turn,
-                ManeuverBearing.Bank,
-                ManeuverBearing.TallonRoll,
-                ManeuverBearing.SegnorsLoop
-            };
-
             if (HostUpgrade.State.Charges > 0 && acceptedBearings.Contains(HostShip.AssignedManeuver.Bearing) && HostShip.AssignedManeuver.Speed == 3)
             {
                 RegisterAbilityTrigger(TriggerTypes.OnMovementFinish, AskUseAbility);
@@ -61,25 +61,33 @@ namespace Abilities.SecondEdition
         private void AskUseAbility(object sender, EventArgs e)
         {
             HostShip.OnCanPerformActionWhileStressed += AllowBarrelRollWhileStressed;
+            HostShip.OnActionIsPerformed += PayCost;
+            HostShip.OnActionIsSkipped += CleanUp;
 
             HostShip.AskPerformFreeAction(
                 new BarrelRollAction(),
-                CleanUp,
+                Triggers.FinishTrigger,
                 HostUpgrade.UpgradeInfo.Name,
                 descriptionLong: $"Spend a charge to perform a barrel roll action, even while stressed?"
             );
         }
 
-        private void CleanUp()
+        private void PayCost(GenericAction action)
         {
-            HostShip.OnCanPerformActionWhileStressed -= AllowBarrelRollWhileStressed;
             HostUpgrade.State.SpendCharge();
-            Triggers.FinishTrigger();
+            CleanUp(HostShip);
         }
 
         private void AllowBarrelRollWhileStressed(GenericAction action, ref bool canPerform)
         {
             if (action is BarrelRollAction) canPerform = true;
+        }
+
+        private void CleanUp(GenericShip ship)
+        {
+            HostShip.OnCanPerformActionWhileStressed -= AllowBarrelRollWhileStressed;
+            HostShip.OnActionIsPerformed -= PayCost;
+            HostShip.OnActionIsSkipped -= CleanUp;
         }
     }
 }
