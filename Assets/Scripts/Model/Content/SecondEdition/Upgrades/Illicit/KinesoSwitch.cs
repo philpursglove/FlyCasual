@@ -1,6 +1,8 @@
 ﻿using ActionsList;
 using SubPhases;
 using System;
+using System.Collections.Generic;
+using Content;
 using Tokens;
 using Upgrade;
 
@@ -15,8 +17,10 @@ namespace UpgradesList.SecondEdition
                 UpgradeType.Illicit,
                 cost: 0,
                 charges: 2,
-                abilityType: typeof(Abilities.SecondEdition.KinesoSwitchAbility)
+                abilityType: typeof(Abilities.SecondEdition.KinesoSwitchAbility),
+                legalityInfo: new List<Legality> { Legality.XWA }
             );
+            IsHidden = true;
         }
     }
 }
