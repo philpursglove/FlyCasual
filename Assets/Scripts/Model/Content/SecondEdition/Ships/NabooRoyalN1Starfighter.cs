@@ -110,7 +110,7 @@ namespace Abilities.SecondEdition
                 && Combat.ChosenWeapon is PrimaryWeaponClass
                 && HostShip.SectorsInfo.IsShipInSector(Selection.AnotherShip, Arcs.ArcType.Bullseye))
             {
-                Messages.ShowInfo($"Restored Speedster: Primary weapon attacks in the bullseye arc are isDisarmed while disarmed.");
+                Messages.ShowInfo($"Restored Speedster: Primary weapon attacks in the bullseye arc are allowed while disarmed.");
                 isDisarmed = false;
             }
         }
