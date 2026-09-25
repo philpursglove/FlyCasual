@@ -38,13 +38,13 @@ namespace Abilities.SecondEdition
         {
             HostShip.OnActionIsPerformed += CheckAbilityAction;
             HostShip.OnMovementFinishSuccessfully += CheckAbilityMovement;
-            HostShip.OnAttackStartAsAttacker += CheckAbilityAttack;
+            HostShip.OnCombatActivation += CheckAbilityAttack;
         }
         public override void DeactivateAbility()
         {
             HostShip.OnActionIsPerformed -= CheckAbilityAction;
             HostShip.OnMovementFinishSuccessfully -= CheckAbilityMovement;
-            HostShip.OnAttackStartAsAttacker -= CheckAbilityAttack;
+            HostShip.OnCombatActivation -= CheckAbilityAttack;
         }
 
         private void CheckAbilityAction(GenericAction action)
@@ -98,7 +98,7 @@ namespace Abilities.SecondEdition
                 delegate { HostShip.Tokens.AssignToken(new DepleteToken(HostShip), DecisionSubPhase.ConfirmDecision); });
         }
 
-        private void CheckAbilityAttack()
+        private void CheckAbilityAttack(GenericShip ship)
         {
             if (HostUpgrade.State.Charges > 0 && HostShip.Tokens.HasToken<DepleteToken>())
             {
