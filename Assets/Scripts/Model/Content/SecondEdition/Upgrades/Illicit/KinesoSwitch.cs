@@ -46,13 +46,16 @@ namespace Abilities.SecondEdition
                 && !HostShip.IsBumped
                 && HostShip.Tokens.HasToken<RedTargetLockToken>())
             {
-                AskToUseAbility(
-                    descriptionShort: HostUpgrade.UpgradeInfo.Name,
-                    descriptionLong: "Do you want to spend 1 charge to break all target locks on you?",
-                    useByDefault: AlwaysUseByDefault,
-                    useAbility: BreakLocks,
-                    imageHolder: HostUpgrade
-                );
+                RegisterAbilityTrigger(TriggerTypes.OnActionIsPerformed, delegate
+                {
+                    AskToUseAbility(
+                        descriptionShort: HostUpgrade.UpgradeInfo.Name,
+                        descriptionLong: "Do you want to spend 1 charge to break all target locks on you?",
+                        useByDefault: AlwaysUseByDefault,
+                        useAbility: BreakLocks,
+                        imageHolder: HostUpgrade
+                    );
+                });
             }
         }
 
