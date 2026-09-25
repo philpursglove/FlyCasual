@@ -47,7 +47,7 @@ namespace Ship.SecondEdition.NabooRoyalN1Starfighter
                 );
 
             MustHaveUpgrades.Add(typeof(Outmaneuver));
-            MustHaveUpgrades.Add(typeof(TheChild));
+            MustHaveUpgrades.Add(typeof(TheChildAaD));
             MustHaveUpgrades.Add(typeof(CalibratedLaserTargeting));
             MustHaveUpgrades.Add(typeof(KinesoSwitch));
 
