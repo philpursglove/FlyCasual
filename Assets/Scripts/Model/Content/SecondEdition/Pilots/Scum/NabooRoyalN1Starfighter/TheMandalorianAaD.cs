@@ -19,7 +19,7 @@ namespace Ship.SecondEdition.NabooRoyalN1Starfighter
                 pilotTitle: "Armed and Dangerous",
                 faction: Faction.Scum,
                 initiative: 5,
-                cost: 10,
+                cost: 11,
                 loadoutValue: 0,
                 isLimited: true,
                 abilityType: typeof(TheMandalorianAbility),
