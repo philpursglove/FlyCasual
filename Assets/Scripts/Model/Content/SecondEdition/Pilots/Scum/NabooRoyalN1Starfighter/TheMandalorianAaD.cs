@@ -53,8 +53,7 @@ namespace Ship.SecondEdition.NabooRoyalN1Starfighter
 
             PilotNameCanonical = "themandalorian-armedanddangerous";
 
-            FullThrottleAbility fullThrottleAbility = ShipAbilities.First(a => a is FullThrottleAbility) as FullThrottleAbility;
-            ShipAbilities.Remove(fullThrottleAbility);
+            ShipAbilities.Remove(ShipAbilities.First(a => a is FullThrottleAbility));
             ShipAbilities.Add(new RestoredSpeedsterAbility());
 
             ShipInfo.ActionIcons.AddActions(new ActionInfo(typeof(SlamAction)));
