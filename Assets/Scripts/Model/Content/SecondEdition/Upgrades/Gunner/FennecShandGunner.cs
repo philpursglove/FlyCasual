@@ -25,10 +25,33 @@ namespace Abilities.SecondEdition
     {
         public override void ActivateAbility()
         {
+            HostShip.OnAttackStartAsAttacker += RegisterFennecShandGunnerAttackAbility;
+            HostShip.OnAttackStartAsDefender += RegisterFennecShandGunnerDefenceAbility;
+            //TODO does this need corresponding OnAttackEnd handlers to restore agility? 
+        }
+
+        private void RegisterFennecShandGunnerDefenceAbility()
+        {
+            if (ActionsHolder.HasTargetLockOn(HostShip, Selection.AnotherShip))
+            {
+                Messages.ShowInfo($"Fennec Shand: {Selection.AnotherShip.PilotInfo.PilotName} loses 1 attack die");
+                Combat.ChosenWeapon.WeaponInfo.AttackValue--;
+            }
+        }
+
+        private void RegisterFennecShandGunnerAttackAbility()
+        {
+            if (ActionsHolder.HasTargetLockOn(HostShip, Selection.AnotherShip))
+            {
+                Messages.ShowInfo($"Fennec Shand: {Selection.AnotherShip.PilotInfo.PilotName} loses 1 agility");
+                Selection.AnotherShip.ShipInfo.Agility--;
+            }
         }
 
         public override void DeactivateAbility()
         {
+            HostShip.OnAttackStartAsAttacker -= RegisterFennecShandGunnerAttackAbility;
+            HostShip.OnAttackStartAsDefender -= RegisterFennecShandGunnerDefenceAbility;
         }
     }
 }
