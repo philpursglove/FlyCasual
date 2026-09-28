@@ -47,9 +47,7 @@ namespace Abilities.SecondEdition
             {
                 ManeuverBearing move = HostShip.GetLastManeuverBearing();
 
-                if (move is ManeuverBearing.KoiogranTurn or ManeuverBearing.TallonRoll or ManeuverBearing.SegnorsLoop
-                    or ManeuverBearing.Stationary or ManeuverBearing.ReverseStraight or ManeuverBearing.ReverseBank
-                    or ManeuverBearing.SideslipAny)
+                if (move.IsAdvancedManeuver())
                 {
                     Triggers.RegisterTrigger(new Trigger()
                     {

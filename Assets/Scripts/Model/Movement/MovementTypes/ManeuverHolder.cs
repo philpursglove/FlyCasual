@@ -39,6 +39,21 @@ namespace Movement
         SideslipAny
     }
 
+    public static class ManeuverExtensions
+    {
+        public static bool IsAdvancedManeuver(this ManeuverBearing bearing)
+        {
+            return bearing switch
+            {
+                ManeuverBearing.KoiogranTurn or ManeuverBearing.SegnorsLoop or ManeuverBearing.TallonRoll
+                    or ManeuverBearing.ReverseStraight or ManeuverBearing.ReverseBank
+                    or ManeuverBearing.SegnorsLoopUsingTurnTemplate or ManeuverBearing.SideslipBank
+                    or ManeuverBearing.SideslipTurn or ManeuverBearing.SideslipAny => true,
+                _ => false
+            };
+        }
+    }
+
     public enum MovementComplexity
     {
         None,
