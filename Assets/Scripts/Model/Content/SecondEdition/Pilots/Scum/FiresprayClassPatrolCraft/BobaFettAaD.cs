@@ -70,6 +70,7 @@ namespace Abilities.SecondEdition
             if (Combat.Defender.Owner.PlayerNo == HostShip.Owner.PlayerNo &&
                 Combat.Attacker.Owner.PlayerNo != HostShip.Owner.PlayerNo &&
                 ActionsHolder.HasTargetLockOn(HostShip, Combat.Attacker) &&
+                Combat.Defender != HostShip &&
                 !hasActivated && !hasPerformedBonusAttack &&
                 !HostShip.IsCannotAttackSecondTime)
             {
