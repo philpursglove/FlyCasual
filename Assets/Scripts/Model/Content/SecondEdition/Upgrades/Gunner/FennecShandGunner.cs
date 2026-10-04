@@ -41,11 +41,19 @@ namespace Abilities.SecondEdition
 
         private void RegisterFennecShandGunnerAttackAbility()
         {
-            if (ActionsHolder.HasTargetLockOn(HostShip, Selection.AnotherShip))
+            if (ActionsHolder.HasTargetLockOn(HostShip, Selection.AnotherShip) && Combat.ShotInfo.Range > 0)
             {
-                Messages.ShowInfo($"Fennec Shand: {Selection.AnotherShip.PilotInfo.PilotName} loses 1 agility");
-                Selection.AnotherShip.ShipInfo.Agility--;
+                Combat.Defender.AfterGotNumberOfDefenceDice += ReduceDefenseDice;
             }
+        }
+
+        protected void ReduceDefenseDice(ref int count)
+        {
+            Combat.Defender.AfterGotNumberOfDefenceDice -= ReduceDefenseDice;
+
+            Messages.ShowInfo($"Fennec Shand: {Selection.AnotherShip.PilotInfo.PilotName} loses 1 agility");
+
+            count--;
         }
 
         public override void DeactivateAbility()
