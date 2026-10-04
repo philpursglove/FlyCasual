@@ -3,6 +3,7 @@ using Arcs;
 using Content;
 using Movement;
 using Ship;
+using SubPhases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,8 +75,9 @@ namespace Abilities.SecondEdition
 
         private void UseHomingBeaconTargetLock()
         {
-            AskToUseAbility("Homing Beacon", AlwaysUseByDefault,
-                UseHomingBeaconRanges,
+            AskToUseAbility(descriptionShort: "Homing Beacon",
+                useByDefault: AlwaysUseByDefault,
+                useAbility: UseHomingBeaconRanges,
                 descriptionLong: "You may spend a charge to ignore range restrictions",
                 imageHolder: HostShip,
                 callback: delegate { ResetTargetLockRanges(); Triggers.FinishTrigger(); });
@@ -86,6 +88,8 @@ namespace Abilities.SecondEdition
             HostUpgrade.State.SpendCharge();
 
             HostShip.SetTargetLockRange(0, int.MaxValue);
+
+            DecisionSubPhase.ConfirmDecision();
         }
 
         private void UseHomingBeaconAcquireTargetLock()
@@ -94,7 +98,7 @@ namespace Abilities.SecondEdition
             {
                 HostShip.SetTargetLockRange(1, 2);
 
-                HostShip.AskPerformFreeAction(new TargetLockAction(),
+                HostShip.AskPerformFreeAction(new TargetLockAction() { CanBePerformedWhileStressed = true },
                     delegate { HostUpgrade.State.SpendCharge(); ResetTargetLockRanges(); Triggers.FinishTrigger(); },
                     descriptionShort: "Homing Beacon",
                     descriptionLong: "You may acquire a target lock on an enemy ship in your front arc",
