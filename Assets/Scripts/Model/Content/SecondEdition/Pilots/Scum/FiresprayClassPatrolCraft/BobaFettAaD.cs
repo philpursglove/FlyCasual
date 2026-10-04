@@ -38,7 +38,7 @@ namespace Ship.SecondEdition.FiresprayClassPatrolCraft
             MustHaveUpgrades.Add(typeof(HomingBeacon));
             MustHaveUpgrades.Add(typeof(FennecShandGunner));
             MustHaveUpgrades.Add(typeof(SeismicCharges));
-            MustHaveUpgrades.Add(typeof(SlaveISeparatistsAbility));
+            MustHaveUpgrades.Add(typeof(SlaveISep));
 
             PilotNameCanonical = "bobafett-armedanddangerous";
         }
