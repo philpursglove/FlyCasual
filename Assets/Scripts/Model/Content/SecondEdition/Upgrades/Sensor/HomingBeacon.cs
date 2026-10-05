@@ -94,14 +94,19 @@ namespace Abilities.SecondEdition
 
         private void UseHomingBeaconAcquireTargetLock()
         {
-            if (HostShip.SectorsInfo.GetEnemiesInAllSectors().Any(a => a.Key == ArcFacing.Front))
+            List<GenericShip> enemiesInFrontArc = HostShip.SectorsInfo.GetEnemiesInAllSectors()
+                .Single(a => a.Key == ArcFacing.Front).Value;
+
+            if (enemiesInFrontArc.Any() &&
+                enemiesInFrontArc.Any(a => HostShip.SectorsInfo.RangeToShipBySector(a, ArcType.Front) >= 1
+                                           && HostShip.SectorsInfo.RangeToShipBySector(a, ArcType.Front) <= 2))
             {
                 HostShip.SetTargetLockRange(1, 2);
 
                 HostShip.AskPerformFreeAction(new TargetLockAction() { CanBePerformedWhileStressed = true },
                     delegate { HostUpgrade.State.SpendCharge(); ResetTargetLockRanges(); Triggers.FinishTrigger(); },
                     descriptionShort: "Homing Beacon",
-                    descriptionLong: "You may acquire a target lock on an enemy ship in your front arc",
+                    descriptionLong: "You may acquire a target lock on an enemy ship in your front arc at range 1-2",
                     imageHolder: HostShip);
             }
         }
@@ -110,5 +115,9 @@ namespace Abilities.SecondEdition
         {
             HostShip.SetTargetLockRange(1, 3);
         }
+    }
+
+    public class HomingBeaconTargetLockAction : TargetLockAction
+    {
     }
 }
